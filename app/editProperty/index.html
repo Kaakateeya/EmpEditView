@@ -1,0 +1,138 @@
+<div class="edit_pages_content_main clearfix">
+
+    <page-review dispaly-name="'Property details'" sectionid="'34'" custid="page.model.CustID"></page-review>
+
+    <div class="edit_page_item">
+        <div id="upppp">
+
+            <div class="edit_page_item_head clearfix">
+                <h4>Property Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" visible="false" runat="server" id="spanEduModID">ModifiedBy :{{page.model.propertymodifiedby}}</span>
+                </h4>
+                <div class="edit_page_item_ui clearfix" ng-if="page.model.propertyArr.length===0">
+                    <a class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.populateProperty()">Add</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="edit_page_details_item">
+
+            <div id="reviewdiv" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'" ng-repeat="item in page.model.propertyArr">
+
+                <div>
+                    <div id="uplFamilyStatus" class="edit_page_details_item_desc clearfix">
+
+                        <h6>
+                            <span id="lblfamilystatus" style="font-weight: bold;">Family Status</span></h6>
+                        <h5>
+                            <span id="lblfmstatus">{{(item.FamilyStatus!=null && item.FamilyStatus!="")?item.FamilyStatus:"Not Specified" }}</span></h5>
+                    </div>
+                    <div ng-if="page.model.propertyArr.length>0" class="edit_page_item_ui clearfix">
+                        <a id="lnkedittt" class="edit_page_edit_button" href="javascript:void(0);" ng-click="page.model.populateProperty(item)">Edit</a>
+                    </div>
+                </div>
+                <div class="edit_page_details_item_desc clearfix">
+                    <h6>
+                        <span id="lblproperty" style="font-weight: bold;">Property Value</span></h6>
+                    <h5>
+                        <span id="lblpropertyval">{{((item.PropertyValue!=null && item.PropertyValue!="")?item.PropertyValue+" Lakhs":"")}}</span>
+                    </h5>
+                </div>
+
+                <div id="isproperty" class="edit_page_details_item_desc clearfix">
+
+                    <h6>
+                        <label id="lblpropertysharedproperty" style="font-weight: bold;">Property Type</label></h6>
+                    <h5>
+                        <span id="lblisProperty">{{((item.isProperty!=null && item.isProperty!="")?item.isProperty:"Not Specified") }}</span></h5>
+                </div>
+                <div class="edit_page_details_item_desc clearfix">
+                    <h6>
+                        <span id="lblpropdet" style="font-weight: bold;">Property Details</span></h6>
+                    <h5>
+                        <span id="lblpropertydetails">{{(item.PropertyDetails!=null && (item.PropertyDetails!=""))?item.PropertyDetails:""}}</span></h5>
+
+                </div>
+
+            </div>
+            <hr>
+        </div>
+    </div>
+
+    <script type="text/ng-template" id="propertyContent.html">
+        <form name="propertyForm" novalidate role="form" ng-submit="page.model.propertySubmit(page.model.proObj)">
+            <div class="modal-header">
+                <h3 class="modal-title text-center">Property Details
+                    <a href="javascript:void(0);" ng-click="cancel();">
+                        <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="20">Delete</ng-md-icon>
+                    </a>
+                </h3>
+            </div>
+            <div class="modal-body clearfix pop_content_my" id="modal-body">
+
+                <ul id="ulproperty">
+                    <li class="clearfix form-group">
+                        <label for="lblfamilyStatus" class="pop_label_left">Family Status</label>
+                        <div class="pop_controls_right select-box-my">
+                            <select multiselectdropdown ng-model="page.model.proObj.ddlFamilyStatus" typeofdata="'familyStatus'"></select>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <label for="lblSharedProperty" style="padding-top: 2%;" class="pop_label_left">Is shared property</label>
+
+                        <md-input-container style="font-weight: 700;color:black;">
+                            <md-radio-group name="rdlSharedProperty" layout="row" ng-model="page.model.proObj.rdlSharedProperty" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                                <md-radio-button value="0"> No </md-radio-button>
+                            </md-radio-group>
+                        </md-input-container>
+
+                    </li>
+                    <li class="clearfix form-group" style="display: none;">
+                        <label for="lblQuantity" class="pop_label_left">Quantity</label>
+                        <div class="pop_controls_right select-box-my">
+                            <input ng-model="page.model.proObj.txtQuantity" class="form-control col-lg-3" />
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblValueofproperty" class="pop_label_left">Value of property</label>
+                        <div class="pop_controls_right select-box-my select-box-my-double">
+                            <input ng-model="page.model.proObj.txtValueofproperty" class="form-control" maxlength="5" onkeydown="return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));"
+                            />
+                            <span font-bold="true">Lakhs</span>
+
+                        </div>
+
+                    </li>
+
+                    <li class="clearfix form-group">
+
+                        <label for="lblQuantity" class="pop_label_left">Property description</label>
+                        <div class="">
+                            <textarea ng-model="page.model.proObj.txtPropertydesc" style="width:100%;" maxlength="500" rows="5" width="515"></textarea>
+
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <div style="display: none;">
+                            <label for="lblShowingviewprofile" class="pop_label_left">Showing view profile</label>
+                            <div class="pop_controls_right pop_radios_list">
+                                <label class="">
+                    <input ng-model="page.model.proObj.rbtShowViewProfile" value="1" type="radio" checked><span>&nbsp;Yes</span>
+                </label> &nbsp;
+                                <label class=""><input ng-model="page.model.proObj.rbtShowViewProfile" value="0" type="radio"><span>&nbsp;No</span>
+                </label>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="row ">
+                        <edit-footer></edit-footer>
+                    </li>
+                </ul>
+
+            </div>
+
+        </form>
+    </script>
+
+</div>

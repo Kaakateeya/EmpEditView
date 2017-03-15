@@ -1,0 +1,287 @@
+<!--<div class="header_inner" id="divInnerMaster" ng-init="headerinit()">
+
+    <div class="container_my clearfix">
+
+        <a id="IbtnLogodisplay" href="javascript:void(0)" ng-click="redirecthomeordashboard()" class="logo3 pull-left" />
+        <input type="button" value="Login" ng-show="loginstatus" id="btnLoginsubmit" class="pull-right button_custom login_show" ng-click="divloginblock();" />
+        <input type="button" value="Logout" ng-show="loginoutstatus" id="btnLogOut" class="pull-right button_custom" ng-click="ClearlocalStorage();" />
+
+
+        <div class="login_block_header" ng-style="loginpopup===true?{'display':'block'}:{'display':'none'}" id="divLogin">
+            <form name="myForms">
+                <input type="text" id="txtUserName" ng-keyup="myForms.$valid && $event.keyCode == 13 && loginsubmit()" placeholder="ProfileID/EmailID" style="height: 38px;border: 1px solid #cbc0c0 !important;" ng-model="username" required/>
+                <input type="password" id="txtPassword" ng-keyup="myForms.$valid && $event.keyCode == 13 && loginsubmit()" placeholder="Password" style="height: 38px;border: 1px solid #cbc0c0 !important;" ng-model="password" required/>
+                <span class="clear">&nbsp;</span>
+                <div class="login_help">
+                    <a id="lnkForgotPassword" href="javascript:void(0)" ng-click="showforgetpasswordpopup()">Forgot Password</a>
+                    <a href="registration">New User Sign Up</a>
+                </div>
+                <md-button id="btnUserLogin" ng-click="loginsubmit()" ng-disabled="myForms.$invalid" class="md-raised md-warn">Login</md-button>
+            </form>
+            <span class="clear">&nbsp;</span>
+        </div>
+
+        <div class="header_inner_rt clearfix">
+            <h3>
+                <a id="lnkFeedbackMenu" href="feedback">Feedback</a>
+            </h3>
+            <h4>make a missed call<span><em>+91-9390999999</em></span>
+            </h4>
+
+            <h4>Support No<span>+1-734-926-1011</span></h4>
+        </div>
+    </div>
+    <div class="navbar_inner" id="divMemberName" ng-show="withlogin" set-class-when-at-top="fix-to-top">
+
+        <div class="container_my clearfix">
+            <div class="profile_own_name pull-left clearfix">
+                <img id="IMasterpic" ng-src="{{profilepic}}" style="width: 31px !important; height: 31px !important; border: solid 2px #fc6a1b;border-radius: 3px;display: inline-block; float: left;" />
+                <h2>
+                    <label id="lblCustFName">{{usernamepersonal}}</label> &nbsp;&nbsp;(
+
+                    <label id="lblprofile">{{profileid}}</label>)
+                    <br />
+                    <span>Accout type :</span>
+                    <a id="lblpaid" ng-href="{{hrefpaid}}" style="color:White;">{{paidstatus}}</a>
+                </h2>
+            </div>
+            <div class="profile_own_menu profile_own_menu2 pull-right" id="MenuDiv">
+                <a class="menu_toggle pull-right">Menu</a>
+                <ul class="pull-right">
+
+                    <li>
+                        <a id="lnkMyHome" href="javascript:void(0)" ng-click="homepagelinks('myhome')">My Home</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">my account</a>
+
+                        <ul>
+                            <li>
+                                <a id="linkviewmyprofile" href="javascript:void(0);" ng-click="viewfullmyprofile()">View My Profile</a>
+                            </li>
+                            <li>
+                                <a id="linkeditprofile" href="editview">Edit Profile</a>
+                            </li>
+                            <li>
+                                <a id="linkmanagephoto" href="editview/editManagePhoto">Manage Photo</a>
+                            </li>
+                            <li>
+                                <a id="linkmanagehoroscope" href="editview/editAstro">Manage Horoscope</a>
+                            </li>
+                            <li>
+                                <a id="linkprofilesettings" href="profilesettings">Profile Settings</a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a id="lnksearch" href="javascript:void(0)" ng-click="searchpage('profile')">Search</a>
+                        <ul>
+                            <li>
+                                <a id="linkgenaralsearch" href="javascript:void(0)" ng-click="searchpage('general')">General Search</a>
+                            </li>
+                            <li>
+                                <a id="linkAdvancedSearch" href="javascript:void(0)" ng-click="searchpage('advanced')">Advanced Search</a>
+                            </li>
+                            <li>
+                                <a id="linkprofileidsearch" href="javascript:void(0)" ng-click="searchpage('profile')">Profileid Search</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0)">my package</a>
+                        <ul>
+                            <li>
+                                <a id="linkupgrademembership" href="UpgradeMembership">Upgrade Membership</a>
+                            </li>
+                            <li>
+                                <a id="linkmyorders" href="myorders">My Orders and Statistics</a>
+                            </li>
+                            <li>
+                                <a id="linkmembershipfaqs" href="faqs">Membership Faqs</a>
+                            </li>
+                            <li>
+                                <a id="linkAddOnPacks" href="AddOnPacks" ng-hide="true">Add On Packs</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">matches</a>
+                        <ul>
+                            <li>
+                                <a id="linkmybookmarks" href="javascript:void(0)" ng-click="homepagelinks('BookMarked')">My BookMarked Profiles</a>
+                            </li>
+                            <li>
+                                <a id="linkwhobookmarkedme" href="javascript:void(0)" ng-click="homepagelinks('BookMarkedme')">Who BookMarked Me</a>
+                            </li>
+                            <li>
+                                <a id="linkigonredprofile" href="javascript:void(0)" ng-click="homepagelinks('Ignored')">Ignored Profiles</a>
+                            </li>
+                            <li>
+                                <a id="linkviewedbutnotexpress" href="javascript:void(0)" ng-click="homepagelinks('myprofile')">My profile viewed by others</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">messages</a>
+                        <ul>
+                            <li>
+                                <a id="linkPersonalizedmsg" href="javascript:void(0)" ng-click="homepagelinks('Chats')">Chats</a>
+                            </li>
+                            <li>
+                                <a id="linkrequests" href="javascript:void(0)" ng-click="homepagelinks('Requests')">Requests</a>
+                            </li>
+                            <li>
+                                <a id="linkMyContact" href="javascript:void(0)" ng-click="homepagelinks('Express')">Express interest</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="help">Help</a>
+                        <ul>
+                            <li>
+                                <a id="lnkcontactus" href="help">Contact Us</a>
+                            </li>
+                            <li>
+                                <a id="linkmysupportickets" href="MySupportTickets">My Support Tickets</a>
+                            </li>
+                            <li>
+                                <a id="lnkfeedback" href="feedback">Feed Back</a>
+                            </li>
+                            <li>
+                                <a id="lnktakeatour" href="takeatour">Take A Tour</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar_inner" id="divwithoutlogin" ng-show="withoutlogin">
+        <div class="container_my clearfix">
+
+            <div class="profile_own_menu pull-right">
+                <a class="menu_toggle pull-right">Menu</a>
+                <ul class="pull-right">
+
+                    <li><a href="registration">Register free</a></li>
+                    <li><a href="javascript:void(0)" ng-click="searchpage('profile')">Search <span></span></a></li>
+                    <li><a href="javascript:void(0);" ng-click="divloginblock()">Upgrade</a></li>
+                    <li>
+                        <a id="lnkSucessstoreiesFooter" href="successstories">success stories <span></span></a>
+                    </li>
+                    <li>
+                        <a id="linkfooterhelp" href="help">Help</a>
+                    </li>
+                    <li><a href="javascript:void(0);" ng-click="redirecthomeordashboard()">Home</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<div class="edit_pages_sidebar clearfix" ng-controller="personalCtrl">
+    <div class="edit_page_profile_pic">
+        <img id="imgphoto" ng-src="{{imgsrc}}">
+        <span id="lblcust_Id" style="display: none;"></span>
+    </div>
+
+    <div class="edit_pages_sidebar_profile_details">
+        <h6>
+            <span id="lstPersolnalDetails_ctrl0_lblCustNamewithProfileID">{{model.PersonalObj.Name+" ("+model.PersonalObj.ProfileID+")"}}</span></h6>
+        <div class="edit_pages_sidebar_profile_details_in">
+
+            <p>
+                <span id="lstPersolnalDetails_ctrl0_lblMaritalDOBHeight">{{model.PersonalObj.MartialStatus+" ,"+model.PersonalObj.DateofBirth+((model.PersonalObj.Age!="" && model.PersonalObj.Age!=null)?" ("+model.PersonalObj.Age+")":model.PersonalObj.Age)+((model.PersonalObj.Height!="" && model.PersonalObj.Height!=null)?" ,"+model.PersonalObj.Height:model.PersonalObj.Height)+((model.PersonalObj.Complexion!="")?" ,"+model.PersonalObj.Complexion:model.PersonalObj.Complexion)}}</span>
+            </p>
+            <p>
+                <span id="lstPersolnalDetails_ctrl0_lblReligionMTCaste">{{model.PersonalObj.Religion+" ,"+model.PersonalObj.Mothertongue+", "+model.PersonalObj.Caste+((model.PersonalObj.SubCaste!="" && model.PersonalObj.SubCaste!=null)? " ("+SubCaste+")":SubCaste)}}</span>
+            </p>
+            <p>
+                <span>
+                <span id="lstPersolnalDetails_ctrl0_lblcitizen" style="font-weight:bold;"> {{(model.PersonalObj.Borncountry!=null && model.PersonalObj.Borncountry!="")?" Born Citizen:"+model.PersonalObj.Borncountry:Borncountry}}</span>
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="edit_pages_sidebar_menu clearfix">
+        <ul>
+            <li>
+                <a id="lnkeducationandprof" href="editview/editEducationAndProfession" ng-style="{color:model.lnkeducationandprofReview==true?'Red':''}">Education & Profession</a></li>
+            <li>
+                <a id="lnkmanagephoto" href="editview/editManagePhoto">Manage Photo</a></li>
+            <li>
+                <a id="lnkparents" href="editview/editparent" ng-style="{color:model.lnkparentsReview==true?'Red':''}">Parent Details</a></li>
+            <li>
+                <a id="lnkpartner" href="editview/editPartnerPreferences" ng-style="{color:model.lnkpartnerReview==true?'Red':''}">Partner Preferences</a></li>
+            <li>
+                <a id="lnksiblings" href="editview/editSiblingDetails" ng-style="{color:model.lnksiblingsReview==true?'Red':''}">Sibling Details</a></li>
+            <li>
+                <a id="lnkastro" href="editview/editAstro" ng-style="{color:model.lnkastroReview==true?'Red':''}">Astro Details</a></li>
+            <li>
+                <a id="lnkproperty" href="editview/editProperty" ng-style="{color:model.lnkpropertyReview==true?'Red':''}">Property Details</a>
+            </li>
+            <li>
+                <a id="lnkrelatives" href="editview/editRelative" ng-style="{color:model.lnkrelativesReview==true?'Red':''}">Relative Details</a>
+            </li>
+            <li>
+                <a id="lnkreference" href="editview/editReferences" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">References</a>
+            </li>
+
+            <li>
+                <a href="editview/editSpouse" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">Spouse Details</a>
+            </li>
+
+            <li>
+                <a href="editview/editContact" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">Contact Details</a>
+            </li>
+            <li>
+                <a href="editview/officePurpose" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">Office Purpose</a>
+            </li>
+            <li>
+                <a href="editview/profileSettings" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">Profile Settings</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<div ui-view="lazyLoadView">
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    .nav-sm .container.body .right_col {
+        padding: 0;
+        margin-left: 70px;
+        z-index: 2;
+    }
+</style>-->

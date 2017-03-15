@@ -1,0 +1,595 @@
+<div class="edit_pages_content_main clearfix">
+
+    <div class="edit_page_item">
+        <div class="edit_page_item_head clearfix">
+            <h4>Spouse Details</h4>
+            <div class="edit_page_item_ui clearfix">
+
+                <a href="javascrip:void(0);" class="edit_page_add_button" ng-click="page.model.populatepopup('Spouse');">Add
+            </a>
+
+            </div>
+        </div>
+
+        <div class="edit_page_details_item">
+            <div id="fullSpouseDetails" ng-repeat="item in page.model.spouseArray">
+
+                <div id="reviewdiv" class="edit_page_details_item_desc clearfix">
+
+
+                    <div id="updatespousename" class="edit_page_details_item_desc clearfix">
+
+                        <h6>
+                            <span id="spouseName" font-bold="true">Name</span></h6>
+                        <h5>
+                            <span id="lblspouseName">{{item.NAME}}</span></h5>
+
+                    </div>
+                    <div id="UpdatePanellnkspouseedit" class="edit_page_item_ui clearfix">
+
+                        <a class="edit_page_edit_button" href="javascrip:void(0);" ng-click="page.model.populatepopup('Spouse',item);">Edit
+                    </a>
+
+
+                    </div>
+
+
+                    <div id="UpdatePanelspouseProfession" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="spouseEducation" font-bold="true">Education</span></h6>
+                            <h5>
+                                <span id="lblspouseEducation">{{item.EducationDetails}}</span></h5>
+
+                        </div>
+
+                    </div>
+                    <div id="UpdatePanelspouseProfessionDetails" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="spouseProfessionDetails" font-bold="true">Profession</span></h6>
+                            <h5>
+                                <span id="lblspouseProfessionDetails">{{item.ProfessionDetails}}</span></h5>
+
+                        </div>
+
+                    </div>
+
+                    <div id="UpdatePanelMarriedon" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="Marriedon" font-bold="true">Married on</span></h6>
+                            <h5>
+                                <span id="lblMarriedon">{{item.MarriageDate}}</span></h5>
+
+                        </div>
+
+                    </div>
+                    <div id="UpdatePanelSeparateddate" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="Separateddate" font-bold="true">Separated date</span></h6>
+                            <h5>
+                                <span id="lblSeparateddate">
+                                {{item.SeperatedDate}}</span></h5>
+
+                        </div>
+
+                    </div>
+                    <div id="UpdatePanelLegallydivorced" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="Legallydivorced" font-bold="true">Legally divorced</span></h6>
+                            <h5>
+                                <span id="lblLegallydivorced"></span> {{item.LeagallyDivorce}}
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+                    <div id="UpdatePanelFamilyplanning" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="LabelFamilyplanning" font-bold="true">Family planning</span></h6>
+                            <h5>
+                                <span id="Familyplanning">{{item.MyFamilyPlanning}}</span></h5>
+
+                        </div>
+
+                    </div>
+                    <div id="UpdatePanelDateofegallydivorce" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="Dateoflegallydivorce" font-bold="true">Date of legally divorce</span></h6>
+                            <h5>
+                                <span id="lblDateoflegallydivorce">{{item.DateofLegallDivorce}}</span></h5>
+
+                        </div>
+
+                    </div>
+
+                    <div id="UpdatePanelReasonfordivorce" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="Reasonfordivorce" font-bold="true">Reason for divorce</span></h6>
+                            <h5>
+                                <span id="lblReasonfordivorce">{{item.ReasonforDivorce}}</span></h5>
+
+                        </div>
+
+                    </div>
+                    <div id="UpdatePanelFathername" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="Fathername" font-bold="true">Father name</span></h6>
+                            <h5>
+                                <span id="lblFathername">{{item.FatherFirstName+" "+item.FatherLastName}}</span></h5>
+
+                        </div>
+
+                    </div>
+
+                    <div id="UpdatePanellblNoOfChildrens" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="lblnoofchildrenss" font-bold="true">No Of Children</span></h6>
+                            <h5>
+                                <span id="lblNoOfChildrens">{{item.NoOfChildrens}}</span></h5>
+
+
+                        </div>
+
+                    </div>
+                    <div id="UpdatePanelHouseFlatnumber" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="HouseFlatnumber" font-bold="true">House/Flat number</span></h6>
+                            <h5>
+                                <span id="lblHouseFlatnumber">{{item.HouseFlatNumberID}}</span></h5>
+
+                        </div>
+
+                    </div>
+                    <div id="UpdatePanelApartmentname" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="Apartmentname" font-bold="true">Apartmentname</span></h6>
+                            <h5>
+                                <span id="lblApartmentname">{{item.AppartmentName}}</span></h5>
+
+                        </div>
+
+                    </div>
+                    <div id="UpdatePanelStreetname" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="Streetname" font-bold="true">Street name</span></h6>
+                            <h5>
+                                <span id="lblStreetname">{{item.StreetName}}</span></h5>
+
+                        </div>
+
+                    </div>
+                    <div id="UpdatePanelAreaname" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="Areaname" font-bold="true">Area name</span></h6>
+                            <h5>
+                                <span id="lblAreaname">{{item.AreaName}}</span></h5>
+
+                        </div>
+
+                    </div>
+                    <div id="UpdatePanelLandmark" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="lblLandark" font-bold="true">Land mark</span></h6>
+                            <h5>
+                                <span id="lblLandmark">{{item.LandMark}}</span></h5>
+
+                        </div>
+
+                    </div>
+                    <div id="UpdatePanelCountry" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="Country" font-bold="true">Country</span></h6>
+                            <h5>
+                                <span id="lblCountry">{{item.CountryName}}</span></h5>
+
+                        </div>
+
+                    </div>
+                    <div id="UpdatePanelState" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="State" font-bold="true">State</span></h6>
+                            <h5>
+                                <span id="lblState">{{item.StateName}}</span></h5>
+
+                        </div>
+
+                    </div>
+                    <div id="UpdatePanelDistrict" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="District" font-bold="true">District</span></h6>
+                            <h5>
+                                <span id="lblDistrict">{{item.DistrictName}}</span></h5>
+
+                        </div>
+
+                    </div>
+                    <div id="UpdatePanelCity" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="City" font-bold="true">City</span></h6>
+                            <h5>
+                                <span id="lblCity">{{item.CityName}}</span></h5>
+
+                        </div>
+
+                    </div>
+                </div>
+                <hr />
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="edit_page_item">
+        <div class="edit_page_item_head clearfix">
+            <h4>Children Details </h4>
+            <div class="edit_page_item_ui clearfix">
+                <div ID="UpdatePanelChildrenDetails">
+
+                    <a href="javascrip:void(0);" ng-click="page.model.populatepopup('Child');" class="edit_page_add_button">Add
+                    </a>
+
+                </div>
+            </div>
+        </div>
+        <div class="edit_page_details_item">
+            <div ID="UpdatePanelfullChildrenDetails">
+
+                <div ID="listChildrenDetails" ng-repeat="item in page.model.ChildArray">
+
+                    <div id="reviewdiv" class="edit_page_details_item_desc clearfix">
+
+
+                        <div class="edit_page_details_item_desc clearfix">
+
+                            <h6>
+                                <span ID="Nameofthechild" Font-Bold="true" ForeColor="Red">Name of the child</span></h6>
+                            <h5>
+                                <span ID="lblNameofthechild">{{item.ChildName}}</span></h5>
+
+                        </div>
+                        <div ID="UpdatePanellnkchidrensedit" class="edit_page_item_ui clearfix">
+
+                            <a href="javascrip:void(0);" ng-click="page.model.populatepopup('Child',item);" class="edit_page_edit_button">Edit
+                                    </a>
+                            <a title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Delete chidrens Details" class="edit_page_del_button">delete
+                                           
+                                    </a>
+
+                        </div>
+
+
+                        <div class="edit_page_details_item_desc clearfix">
+
+                            <div>
+
+                                <h6>
+                                    <span ID="Genderofthechild" Font-Bold="true">Gender of the child</span></h6>
+                                <h5>
+                                    <span ID="lblGenderofthechild">{{item.GenderName}}</span></h5>
+
+                            </div>
+
+                        </div>
+                        <div class="edit_page_details_item_desc clearfix">
+
+                            <div>
+
+                                <h6>
+                                    <span ID="Dateofbirthofthechild" Font-Bold="true">DOB of the child</span></h6>
+                                <h5>
+                                    <span ID="lblDateofbirthofthechild">{{item.ChildDOB}}</span></h5>
+
+                            </div>
+
+                        </div>
+
+                        <divclass="edit_page_details_item_desc clearfix">
+
+                            <div>
+
+                                <h6>
+                                    <span ID="Childstayingwith" Font-Bold="true">Child staying with</span></h6>
+                                <h5>
+                                    <span ID="lblChildstayingwith">{{item.ChildStayingWith}}</span></h5>
+
+                            </div>
+
+                    </div>
+                    <div class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span ID="Childstayingwithrelation" Font-Bold="true">Child staying with relation</span></h6>
+                            <h5>
+                                <span ID="lblChildstayingwithrelation">{{item.ChildernRelationName}}</span></h5>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <hr />
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/ng-template" id="SpouseContent.html">
+    <form name="profForm" novalidate role="form" ng-submit="page.model.spouseSubmit(page.model.spouObj);" accessible-form>
+        <div class="modal-header">
+            <h3 class="modal-title text-center" id="modal-title">Spouse Details
+                <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                    <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="25">Delete</ng-md-icon>
+                </a>
+            </h3>
+        </div>
+        <div class="modal-body clearfix pop_content_my" id="modal-body">
+            <ul>
+                <li class="clearfix">
+                    <label for="Fathersistername" class="pop_label_left">Name</label>
+                    <div class="pop_controls_right">
+                        <input type="text" ng-model="page.model.spouObj.txtSpousename" class="form-control" maxlength="150" tabindex="1" />
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="spouceEducation" class="pop_label_left">Education</label>
+                    <div class="pop_controls_right">
+                        <input type="text" ng-model="page.model.spouObj.txtSpoueEducation" class="form-control" maxlength="150" tabindex="2" />
+                        <label id="identityspouse" visible="false"></label>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="spouseProfession" class="pop_label_left">Profession</label>
+                    <div class="pop_controls_right">
+                        <input type="text" ng-model="page.model.spouObj.txtspouseProfession" class="form-control" maxlength="200" tabindex="3" />
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="lblspouseHouseFlatnumber" class="pop_label_left">House/Flat number</label>
+                    <div class="pop_controls_right">
+                        <input type="text" ng-model="page.model.spouObj.txtHouseFlatnumber" class="form-control" maxlength="100" tabindex="4" />
+                    </div>
+
+                </li>
+                <li class="clearfix">
+                    <label for="lblApartmentname" class="pop_label_left">Apartment name</label>
+                    <div class="pop_controls_right select-box-my">
+                        <input type="text" ng-model="page.model.spouObj.txtApartmentname" class="form-control" maxlength="100" tabindex="5" />
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="Streetname" class="pop_label_left">Street name</label>
+                    <div class="pop_controls_right">
+                        <input type="text" ng-model="page.model.spouObj.txtStreetname" class="form-control" maxlength="100" tabindex="6" />
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="lblAreaname" class="pop_label_left">Area name</label>
+                    <div class="pop_controls_right">
+                        <input type="text" ng-model="page.model.spouObj.txtAreaname" class="form-control" maxlength="100" tabindex="7" />
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="lblLandmark" class="pop_label_left">Landmark</label>
+                    <div class="pop_controls_right">
+                        <input type="text" ng-model="page.model.spouObj.txtLandmark" class="form-control" maxlength="100" tabindex="8" />
+                    </div>
+                </li>
+
+                <country-directive countryshow="true" cityshow="true" dcountry="page.model.spouObj.ddlspouseCountry" dstate="page.model.spouObj.ddlspouseState" ddistrict="page.model.spouObj.ddlspouseDistrict" dcity="page.model.spouObj.ddlspouseCity"></country-directive>
+
+                <li class="clearfix">
+                    <label for="lblZip" class="pop_label_left">Zip</label>
+                    <div class="pop_controls_right select-box-my">
+                        <input type="text" ng-model="page.model.spouObj.txtspouseZip" class="form-control" maxlength="8" tabindex="13" />
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="lblMarriedon" class="pop_label_left">Married on</label>
+                    <div class="pop_controls_right">
+                        <date-picker strdate="page.model.spouObj.txtMarriedon"></date-picker>
+
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="lblSeparateddate" class="pop_label_left">Separated date</label>
+                    <div class="pop_controls_right">
+
+                        <date-picker strdate="page.model.spouObj.txtSeparateddate"></date-picker>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="divorse" class="pop_label_left">Legally divorced</label>
+                    <div class="pop_controls_right pop_radios_list">
+                        <md-radio-group ng-required="true" name="IsHighestDegree" layout="row" ng-model="page.model.spouObj.rbtspousediverse" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                            <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                            <md-radio-button value="0"> No </md-radio-button>
+                        </md-radio-group>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="lblLegalDivorsedate" class="pop_label_left">Legally Divorced date</label>
+                    <div class="pop_controls_right">
+                        <date-picker strdate="page.model.spouObj.txtLegalDivorsedate"></date-picker>
+
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="lblfatherspouse" class="pop_label_left">Father first name</label>
+                    <div class="pop_controls_right">
+                        <input type="text" ng-model="page.model.spouObj.txtspousefather" class="form-control" maxlength="100" tabindex="18" />
+                    </div>
+
+                </li>
+                <li class="clearfix">
+                    <label for="lblfatherspouselastname" class="pop_label_left">Father last name</label>
+                    <div class="pop_controls_right">
+                        <input type="text" ng-model="page.model.spouObj.txtspouselastname" class="form-control" maxlength="50" tabindex="19" />
+                    </div>
+
+                </li>
+                <li class="clearfix">
+                    <label for="lblpreviousmarriage" class="pop_label_left">Notes about previous marriage</label>
+                    <div class="pop_controls_right">
+                        <input type="text" ng-model="page.model.spouObj.txtpreviousmarriage" class="form-control" maxlength="500" tabindex="20" />
+                    </div>
+
+                </li>
+                <li class="clearfix">
+                    <label for="spousefamily" class="pop_label_left">Family planning</label>
+                    <div class="pop_controls_right pop_radios_list">
+                        <md-radio-group ng-required="true" name="rbtnspousefamily" layout="row" ng-model="page.model.spouObj.rbtnspousefamily" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                            <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                            <md-radio-button value="0"> No </md-radio-button>
+                        </md-radio-group>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="lblspousechidrens" class="pop_label_left">No of children</label>
+                    <div class="pop_controls_right select-box-my">
+                        <select multiselectdropdown id="Select4" ng-model="page.model.spouObj.ddlspousechidrens" ng-options="item1.value as item1.label for item1 in page.model.noofChldrenAray"></select>
+                    </div>
+                </li>
+                <li class="row">
+                    <edit-footer></edit-footer>
+                </li>
+            </ul>
+        </div>
+
+    </form>
+</script>
+
+<script type="text/ng-template" id="spouseChildContent.html">
+    <form name="profForm" novalidate role="form" ng-submit="page.model.childSubmit(page.model.childObj);" accessible-form>
+        <div class="modal-header">
+            <h3 class="modal-title text-center" id="modal-title">Children Details
+                <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                    <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="25">Delete</ng-md-icon>
+                </a>
+            </h3>
+        </div>
+        <div class="modal-body clearfix pop_content_my" id="modal-body">
+            <ul>
+                <li class="clearfix">
+                    <label for="childname" class="pop_label_left">Name of the child </label>
+                    <div class="pop_controls_right select-box-my">
+                        <input type="text" ng-model="page.model.childObj.txtchildname" class="form-control" maxlength="150" tabindex="1" />
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="genderchild" class="pop_label_left">Gender of the child</label>
+                    <div class="pop_controls_right pop_radios_list">
+                        <md-radio-group ng-required="true" name="rdlgenderchild" layout="row" ng-model="page.model.childObj.rdlgenderchild" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                            <md-radio-button value="1" class="md-primary">Male</md-radio-button>
+                            <md-radio-button value="2"> Female </md-radio-button>
+                        </md-radio-group>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="lbldobchild" class="pop_label_left">DOB of the child</label>
+                    <div class="pop_controls_right select-box-my">
+                        <date-picker strdate="page.model.childObj.txtdobchild"></date-picker>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="genderchild" class="pop_label_left">Child staying with</label>
+                    <div class="pop_controls_right pop_radios_list">
+                        <md-radio-group ng-required="true" name="rbtChildstayingWith" layout="row" ng-model="page.model.childObj.rbtChildstayingWith" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                            <md-radio-button value="1" class="md-primary">Father Side</md-radio-button>
+                            <md-radio-button value="2"> Mother Side </md-radio-button>
+                        </md-radio-group>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <label for="lblspouserelation" class="pop_label_left">Child staying with Relation</label>
+                    <div class="pop_controls_right select-box-my">
+                        <select multiselectdropdown ng-model="page.model.childObj.ddlrelation" typeofdata="'childStayingWith'"></select>
+                    </div>
+                </li>
+                <li class="row">
+                    <edit-footer></edit-footer>
+                </li>
+            </ul>
+        </div>
+
+    </form>
+</script>

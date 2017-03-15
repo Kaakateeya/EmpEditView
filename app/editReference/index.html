@@ -1,0 +1,207 @@
+<div class="edit_pages_content_main clearfix">
+
+    <page-review dispaly-name="'Reference details'" sectionid="'29'" custid="page.model.CustID"></page-review>
+    <div class="edit_page_item">
+        <div class="edit_page_item_head clearfix">
+            <h4>Reference Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" visible="false" runat="server" id="spanEduModID">ModifiedBy :{{page.model.referencemodifiedby}}</span></h4>
+
+
+            <div class="edit_page_item_ui clearfix">
+                <a class="edit_page_add_button" href="javascript:void(0)" ng-click="page.model.referencePopulate();">Add</a>
+            </div>
+        </div>
+
+
+        <div class="edit_page_details_item">
+            <div id="fullupdate">
+                <div ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'" ng-repeat="item in page.model.ReferenceArr">
+                    <div>
+                        <div id="uplRelationShipType">
+
+                            <div class="edit_page_details_item_desc clearfix">
+                                <h6>
+                                    <span id="RelationShipType" style="font-weight:bold;">RelationShip Type</span></h6>
+                                <h5>
+                                    <span id="lblRelationShipType">{{item.Relatioshiptype }}</span></h5>
+                            </div>
+
+                        </div>
+                        <div ng-if="page.model.ReferenceArr.length>0" class="edit_page_item_ui clearfix">
+                            <a class="edit_page_edit_button" href="javascript:void(0);" ng-click="page.model.referencePopulate(item);">Edit</a>
+                            <a href="javascript:void(0);" class="edit_page_del_button" ng-click="page.model.DeletePopup(item.RefrenceCust_Reference_ID)">Delete</a>
+                        </div>
+                    </div>
+                    <div class="edit_page_details_item_desc clearfix">
+
+                        <h6>
+                            <span id="Name" style="font-weight:bold;">Name</span></h6>
+                        <h5>
+                            <span id="lblName">{{item.RefrenceName }}</span></h5>
+
+                    </div>
+                    <div id="uplEducationRef">
+                    </div>
+                    <div id="uplProfessionDetails">
+
+                        <div class="edit_page_details_item_desc clearfix">
+                            <h6>
+                                <span id="ProfessionDetails" style="font-weight:bold;">Profession</span></h6>
+                            <h5>
+                                <span id="lblProfessionDetails">{{item.RefrenceProfessionDetails }}</span>
+                            </h5>
+                        </div>
+
+                    </div>
+                    <div id="uplNativePlace">
+
+                        <div class="edit_page_details_item_desc clearfix">
+                            <h6>
+                                <span id="NativePlace" style="font-weight:bold;">Native Place</span></h6>
+                            <h5>
+                                <span id="lblNativePlace">{{item.RefrenceNativePlace }}</span></h5>
+                        </div>
+
+                    </div>
+                    <div id="uplCurrentLocation">
+
+                        <div class="edit_page_details_item_desc clearfix">
+
+                            <h6>
+                                <span id="CurrentLocation" style="font-weight:bold;">Current Location</span></h6>
+                            <h5>
+                                <span id="lblCurrentLocation">{{item.RefenceCurrentLocation }}</span></h5>
+
+                        </div>
+
+                    </div>
+                    <div id="update0">
+
+                        <div id="ownerdiv0">
+
+                            <div id="uplContacts">
+
+                                <div class="edit_page_details_item_desc clearfix">
+                                    <h6>
+                                        <span id="Contacts" style="font-weight:bold;">Contacts</span></h6>
+                                    <h5>
+                                        <span id="lblContacts">{{item.RefrenceMobileNumberWithcode+(item.RefrenceLandNumberwithCode!=null&&item.RefrenceLandNumberwithCode!=""?"&"+item.RefrenceLandNumberwithCode:"") }}</span></h5>
+                                </div>
+
+                            </div>
+                            <div id="uplEmail">
+
+                                <div class="edit_page_details_item_desc clearfix">
+                                    <h6>
+                                        <span id="Email" style="font-weight:bold;">Email</span></h6>
+                                    <h5>
+                                        <span id="lblEmail">{{item.RefrenceEmail }}</span></h5>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="uplNarration">
+
+                        <div class="edit_page_details_item_desc clearfix">
+                            <h6>
+                                <span id="Narration" style="font-weight:bold;">Narration</span></h6>
+                            <h5>
+                                <span id="lblNarration">{{item.RefrenceNarration }}</span></h5>
+                        </div>
+
+                    </div>
+                    <hr>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/ng-template" id="referenceContent.html">
+        <form name="refForm" novalidate role="form" ng-submit="page.model.refenceSubmit(page.model.refObj)" accessible-form>
+            <div class="modal-header">
+                <h3 class="modal-title text-center">Reference Details
+                    <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                        <ng-md-icon icon="close" style="fill:#665454" class="pull-right" size="25">Delete</ng-md-icon>
+                    </a>
+                </h3>
+            </div>
+            <div class="modal-body clearfix pop_content_my" id="modal-body">
+                <ul>
+                    <li class="clearfix form-group">
+                        <label for="Relationshiptype" class="pop_label_left">Relationship type<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my input-group">
+                            <select multiselectdropdown ng-model="page.model.refObj.ddlRelationshiptype" typeofdata="'RelationshipType'" required></select>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="Firstname" class="pop_label_left">First name<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my">
+                            <input ng-model="page.model.refObj.txtFname" class="form-control" tabindex="2" maxlength="100" required/>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="Lastname" class="pop_label_left">Last name<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my">
+                            <input ng-model="page.model.refObj.txtLname" class="form-control" tabindex="3" maxlength="50" required/>
+                        </div>
+                    </li>
+
+                    <li class="clearfix form-group">
+                        <label for="Professiondetails" class="pop_label_left">Profession</label>
+                        <div class="pop_controls_right select-box-my">
+                            <input ng-model="page.model.refObj.txtProfessiondetails" class="form-control" tabindex="4" maxlength="200" />
+                        </div>
+
+                    </li>
+
+                    <country-directive countryshow="true" cityshow="false" othercity="false" dcountry="page.model.refObj.ddlCountry" dstate="page.model.refObj.ddlState" ddistrict="page.model.refObj.ddlDistrict"></country-directive>
+
+                    <li class="clearfix form-group">
+                        <label for="NativePlace" class="pop_label_left">Native Place</label>
+                        <div class="pop_controls_right select-box-my">
+                            <input ng-model="page.model.refObj.txtNativePlace" class="form-control" tabindex="8" maxlength="100" />
+
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblPresentlocation" class="pop_label_left">Present location </label>
+                        <div class="pop_controls_right select-box-my">
+                            <input ng-model="page.model.refObj.txtPresentlocation" class="form-control" tabindex="9" maxlength="100" />
+                        </div>
+                    </li>
+                    <contact-directive emailhide="true" dmobile="page.model.refObj.ddlMobileCountryID" strmobile="page.model.refObj.txtMobileNumber" dalternative="page.model.refObj.ddlMobileCountryID2" stralternative="page.model.refObj.txtMobileNumber2" dland="page.model.refObj.ddlLandLineCountryID"
+                        strareacode="page.model.refObj.txtAreCode" strland="page.model.refObj.txtLandNumber" strmail="page.model.refObj.txtEmails"></contact-directive>
+
+                    <li class="clearfix form-group">
+                        <label for="lblNarration" class="pop_label_left">Narration</label>
+                        <div class="">
+                            <textarea ng-model="page.model.refObj.txtNarrations" class="form-control" textmode="MultiLine" tabindex="21" rows="4" width="515" maxlength="500"></textarea>
+
+                            <label style="color: #1e1c1c; font-size: 13px;"></label>
+                        </div>
+                    </li>
+                    <li class="row ">
+
+                        <edit-footer></edit-footer>
+                    </li>
+                </ul>
+
+            </div>
+
+        </form>
+    </script>
+</div>
+
+<style>
+    .md-dialog-container {
+        z-index: 99999999999;
+    }
+    
+    .reviewCls {
+        background-image: url(src/images/img_kaaka_Seal_b.png);
+        background-repeat: no-repeat;
+    }
+</style>

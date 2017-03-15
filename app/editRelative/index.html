@@ -1,0 +1,789 @@
+<div class="edit_pages_content_main clearfix">
+    <page-review dispaly-name="'Relatives details'" sectionid="'27,28,32,33'" custid="page.model.CustID"></page-review>
+    <div class="edit_page_item">
+        <div class="edit_page_item_head clearfix">
+            <h4>Father's Brother Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" visible="false" runat="server" id="spanEduModID">ModifiedBy :{{page.model.FBemodifiedby}}</span>
+            </h4>
+            <div class="edit_page_item_ui clearfix" ng-if="page.model.FBArr.length===0">
+                <a href="javascript:void(0);" ng-click="page.model.relativePopulatePopulate('FB');" class="edit_page_add_button" tabindex="0">Add</a>
+            </div>
+        </div>
+        <div class="edit_page_details_item">
+            <div id="fullupdatefatherbrother" ng-repeat="item in page.model.FBArr">
+                <div id="reviewdiv" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
+                    <div>
+                        <div>
+                            <div id="upFatherBrother" class="edit_page_details_item_desc clearfix">
+
+                                <h6>
+                                    <span id="FBName" style="font-weight:bold;">FB Name</span></h6>
+                                <h5>
+                                    <span id="lblFBName">{{item.FatherbrotherName+"("+item.FatherBrotherElderyounger+")"}}</span></h5>
+                            </div>
+                            <div ng-if="page.model.FBArr.length>0" class="edit_page_item_ui clearfix">
+
+                                <a href="javascript:void(0);" ng-click="page.model.relativePopulatePopulate('FB',item);" class="edit_page_edit_button" href="javascript:void(0);">Edit</a>
+                                <a href="javascript:void(0);" class="edit_page_del_button" ng-click="page.model.DeletePopup('father brother',item.FatherbrotherCustfamilyID);">Delete</a>
+                            </div>
+
+                        </div>
+                        <div id="UpdatePanelFBProfession" class="edit_page_details_item_desc clearfix">
+
+                            <div>
+
+                                <h6>
+                                    <span id="FBEducation" style="font-weight:bold;">Education</span></h6>
+                                <h5>
+                                    <span id="lblFBEducation">{{item.FatherBrotherEducationDetails}}</span></h5>
+                            </div>
+                        </div>
+                        <div id="UpdatePanelFBProfessionDetails" class="edit_page_details_item_desc clearfix">
+
+                            <div>
+
+                                <h6>
+                                    <span id="FBProfessionDetails" style="font-weight:bold;">Profession</span></h6>
+                                <h5>
+                                    <span id="lblProfessionDetails">{{item.FatherbrotherProfessionDetails }}</span></h5>
+
+                            </div>
+
+                        </div>
+
+                        <div id="UpdatePanelFBCurrentLocation" class="edit_page_details_item_desc clearfix">
+
+                            <div>
+
+                                <h6>
+                                    <span id="FBCurrentLocation" style="font-weight:bold;">Current Location</span></h6>
+                                <h5>
+                                    <span id="lblCurrentLocation">{{item.FatherbrotherCurrentLocation }}</span></h5>
+
+                            </div>
+
+                        </div>
+                        <div id="update0">
+
+                            <div id="ownerdiv0">
+                                <div id="UpdatePanelFBcontacts" class="edit_page_details_item_desc clearfix">
+
+                                    <div>
+
+                                        <h6>
+                                            <span id="FBcontacts" style="font-weight:bold;">FB contacts</span></h6>
+                                        <h5>
+                                            <span id="lblFBcontacts">{{(item.FatherbrotherMobileNumberWithCode!=null?item.FatherbrotherMobileNumberWithCode:'')+" "
+                                        +(item.FatherbrotherLandnumberwithcode!=null&&item.FatherbrotherLandnumberwithcode.ToString()!=""?"&"+
+                                        item.FatherbrotherLandnumberwithcode:" ") }}</span></h5>
+
+                                    </div>
+
+                                </div>
+                                <div id="UpdatePanelFBEmail" class="edit_page_details_item_desc clearfix">
+
+                                    <div>
+
+                                        <h6>
+                                            <span id="FBEmail" style="font-weight:bold;">FB Email</span></h6>
+                                        <h5>
+                                            <span id="lblFBEmail">{{item.FatherbrotherEmail }}</span></h5>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="edit_page_item">
+        <div class="edit_page_item_head clearfix">
+            <h4>Father's Sister Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" visible="false" runat="server" id="spanEduModID">ModifiedBy :{{page.model.FSmodifiedby}}</span>
+            </h4>
+            <div class="edit_page_item_ui clearfix" ng-if="page.model.FSArr.length===0">
+                <a class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.relativePopulatePopulate('FS');" tabindex="0">Add</a>
+            </div>
+        </div>
+        <div class="edit_page_details_item">
+            <div id="fullupdatefathersister" ng-repeat="item in page.model.FSArr">
+                <div id="reviewdiv" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
+                    <div>
+                        <div>
+                            <div id="upFathersister" class="edit_page_details_item_desc clearfix">
+
+                                <h6>
+                                    <span id="FsName" style="font-weight:bold;">FsName</span></h6>
+                                <h5>
+                                    <span id="lblFsName">{{item.FatherSisterName+"("+item.FatherSisterElderyounger+")" }}</span>
+                                </h5>
+
+                            </div>
+                            <div ng-if="page.model.FSArr.length>0" class="edit_page_item_ui clearfix">
+                                <a ng-click="page.model.relativePopulatePopulate('FS',item);" class="edit_page_edit_button" href="javascript:void(0);">Edit</a>
+                                <a href="javascript:void(0);" class="edit_page_del_button" ng-click="page.model.DeletePopup('father sister',item.FatherSisterCustfamilyID);">Delete</a>
+                            </div>
+
+                        </div>
+                        <div id="UpdatePanelFshName" class="edit_page_details_item_desc clearfix">
+
+                            <div>
+
+                                <h6>
+                                    <span id="FshName" style="font-weight:bold;">Fsh Name</span></h6>
+                                <h5>
+                                    <span id="lblFshName">{{item.FatherSisterSpouseName }}</span></h5>
+
+                            </div>
+
+                        </div>
+                        <div id="UpdatePanelFshEducation" class="edit_page_details_item_desc clearfix">
+
+                            <div>
+
+                                <h6>
+                                    <span id="lblEducationfsh" style="font-weight:bold;">Fsh Education</span></h6>
+                                <h5>
+                                    <span id="lblFshEducation">{{item.FatherSisterSpouseEducationDetails }}</span></h5>
+                            </div>
+
+                        </div>
+                        <div id="UpdatePanelFshprofessiondetails" class="edit_page_details_item_desc clearfix">
+
+                            <div>
+                                <h6>
+                                    <span id="Fshprofessiondetails" style="font-weight:bold;">Fsh Profession</span></h6>
+                                <h5>
+                                    <span id="lblFshprofessiondetails">{{item.FathersisterSpouseProfessionDetails }}</span></h5>
+                            </div>
+
+                        </div>
+
+                        <div id="UpdatePanelFshCurrentLocation" class="edit_page_details_item_desc clearfix">
+
+                            <div>
+
+                                <h6>
+                                    <span id="FshCurrentLocation" style="font-weight:bold;">Fsh Current Location</span></h6>
+                                <h5>
+                                    <span id="lblFshCurrentLocation">{{item.FatherSisterCurrentLocation }}</span></h5>
+
+                            </div>
+
+                        </div>
+                        <div id="UpdatePanelFshNativeplace" class="edit_page_details_item_desc clearfix">
+
+                            <div>
+
+                                <h6>
+                                    <span id="FshNativeplace" style="font-weight:bold;">Fsh Native Place</span></h6>
+                                <h5>
+                                    <span id="lblFshNativeplace">{{(item.FathersisterSpouseNativePlace!=null?item.FathersisterSpouseNativePlace:'')+" "+(item.FatherSisterSpousDistrict!=null && 
+                                                item.FatherSisterSpousDistrict.ToString()!=""? ","+item.FatherSisterSpousDistrict:"")+" "+(item.FatherSisterSpousestate!=null && 
+                                                item.FatherSisterSpousestate.ToString()!=""? ","+item.FatherSisterSpousestate:"")+" "+(item.FatherSisterSpousecountry!=null && 
+                                                item.FatherSisterSpousecountry.ToString()!=""? ","+item.FatherSisterSpousecountry:"")  }}</span></h5>
+
+                            </div>
+
+                        </div>
+                        <div id="update1">
+
+                            <div id="ownerdiv1">
+                                <div id="UpdatePanelFShcontactnos" class="edit_page_details_item_desc clearfix">
+
+                                    <div>
+
+                                        <h6>
+                                            <span id="FShcontactnos" style="font-weight:bold;">FSh contact nos</span></h6>
+                                        <h5>
+                                            <span id="lblFSHcontacts">{{(item.FatherSisterspouseMobileNumberWithCode!=null?item.FatherSisterspouseMobileNumberWithCode:'')+" "+(item.FatherSisterspouseLandnumberwithcode!=null&&
+                                    item.FatherSisterspouseLandnumberwithcode.ToString()!=""?"&"+item.FatherSisterspouseLandnumberwithcode:"") }}</span></h5>
+                                    </div>
+
+                                </div>
+                                <div id="UpdatePanelFSHEmail" class="edit_page_details_item_desc clearfix">
+
+                                    <div>
+
+                                        <h6>
+                                            <span id="FSHEmail" style="font-weight:bold;">Fsh Email</span></h6>
+                                        <h5>
+                                            <span id="lblFSHEmail">{{item.FatherSisterspouseEmail }}</span></h5>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="edit_page_item">
+        <div class="edit_page_item_head clearfix">
+            <h4>Mother's Brother Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" visible="false" runat="server" id="spanEduModID">ModifiedBy :{{page.model.MBmodifiedby}}</span></h4>
+            <div class="edit_page_item_ui clearfix" ng-if="page.model.MBrr.length===0">
+                <a class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.relativePopulatePopulate('MB');" tabindex="0">Add</a>
+            </div>
+        </div>
+        <div class="edit_page_details_item">
+            <div id="fullupdatemotherbrother" ng-repeat="item in page.model.MBrr">
+
+                <div id="reviewdiv" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
+                    <div>
+                        <div>
+                            <div id="upmotherbrother" class="edit_page_details_item_desc clearfix">
+
+                                <h6>
+                                    <span id="MBName" style="font-weight:bold;">MB Name</span></h6>
+                                <h5>
+                                    <span id="lblMBName">{{item.MotherBrotherName+"("+item.MotherBrotherElderyounger+")" }}</span>
+                                </h5>
+                            </div>
+                            <div ng-if="page.model.MBrr.length>0" class="edit_page_item_ui clearfix">
+                                <a href="javascript:void(0);" ng-click="page.model.relativePopulatePopulate('MB',item);" class="edit_page_edit_button">Edit</a>
+                                <a href="javascript:void(0);" class="edit_page_del_button" ng-click="page.model.DeletePopup('mother brother',item.MotherBrotherCustfamilyID);">Delete</a>
+                            </div>
+
+                            <div class="edit_page_details_item_desc clearfix">
+
+                                <div>
+
+                                    <h6>
+                                        <span id="lblMotherbrithereducation" style="font-weight:bold;">Education</span></h6>
+                                    <h5>
+                                        <span id="lblMotherbrithereducationdetails">{{item.MotherBrotherEducationDetails }}</span></h5>
+
+                                </div>
+
+                            </div>
+                            <div class="edit_page_details_item_desc clearfix">
+
+                                <div>
+
+                                    <h6>
+                                        <span id="MBProfessionDetails" style="font-weight:bold;">Profession</span></h6>
+                                    <h5>
+                                        <span id="lblMBProfessionDetails">{{item.MotherBrotherProfessionDetails }}</span></h5>
+
+                                </div>
+
+                            </div>
+                            <div class="edit_page_details_item_desc clearfix">
+
+                                <div>
+
+                                    <h6>
+                                        <span id="MBCurrentLocation" style="font-weight:bold;">Current Location</span></h6>
+                                    <h5>
+                                        <span id="lblMBCurrentLocation">{{item.MotherBrotherCurrentLocation }}</span></h5>
+
+                                </div>
+
+                            </div>
+                            <div id="update2">
+
+                                <div id="ownerdiv2">
+                                    <div id="UpdatePanelMBcontacts" class="edit_page_details_item_desc clearfix">
+
+                                        <div>
+
+                                            <h6>
+                                                <span id="MBcontacts" style="font-weight:bold;">MB contacts</span></h6>
+                                            <h5>
+                                                <span id="lblMBcontacts">{{(item.MotherBrotherMobileNumberWithCode!=null?item.MotherBrotherMobileNumberWithCode:'')+" "+(item.MotherBrotherLandnumberwithcode!=null&& 
+                                                    item.MotherBrotherLandnumberwithcode.ToString()!=""?"&"+item.MotherBrotherLandnumberwithcode:"") }}</span></h5>
+                                        </div>
+
+                                    </div>
+                                    <div id="UpdatePanelMBEmail" class="edit_page_details_item_desc clearfix">
+
+                                        <div>
+
+                                            <h6>
+                                                <span id="MBEmail" style="font-weight:bold;">MB Email</span></h6>
+                                            <h5>
+                                                <span id="lblMBEmail">{{item.MotherBrotherEmail }}</span></h5>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="edit_page_item">
+        <div class="edit_page_item_head clearfix">
+            <h4>Mother's Sister Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" visible="false" runat="server" id="spanEduModID">ModifiedBy :{{page.model.MSmodifiedby}}</span>
+            </h4>
+            <div class="edit_page_item_ui clearfix" ng-if="page.model.MSArr.length===0">
+                <a class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.relativePopulatePopulate('MS');" tabindex="0">Add</a>
+            </div>
+        </div>
+        <div class="edit_page_details_item">
+            <div id="fullupdatemothersister" ng-repeat="item in page.model.MSArr">
+
+                <div id="reviewdiv" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
+                    <div>
+                        <div>
+                            <div id="upMothersister" class="edit_page_details_item_desc clearfix">
+
+                                <h6>
+                                    <span id="MsName" style="font-weight:bold;">MsName</span></h6>
+                                <h5>
+                                    <span id="lblMsName">{{item.MotherSisterName+"("+item.MotherSisterElderyounger+")" }}</span>
+                                </h5>
+                            </div>
+                            <div ng-if="page.model.MSArr.length>0" class="edit_page_item_ui clearfix">
+                                <a href="javascript:void(0);" ng-click="page.model.relativePopulatePopulate('MS',item);" class="edit_page_edit_button">Edit</a>
+                                <a href="javascript:void(0);" class="edit_page_del_button" ng-click="page.model.DeletePopup('mother sister',item.MotherSisterCustfamilyID);">Delete</a>
+                            </div>
+                        </div>
+                        <div class="edit_page_details_item_desc clearfix">
+                            <h6>
+                                <span id="MshName" style="font-weight:bold;">Msh Name</span></h6>
+                            <h5>
+                                <span id="lblMshName">{{item.MotherSisterSpouseName}}</span></h5>
+                        </div>
+                    </div>
+
+                    <div class="edit_page_details_item_desc clearfix">
+
+                        <h6>
+                            <span id="lblMshEducation" style="font-weight:bold;">Msh Education</span></h6>
+                        <h5>
+                            <span id="lblMshEducationdetails">{{item.MothersisterspouseEducationdetails }}</span></h5>
+                    </div>
+                    <div class="edit_page_details_item_desc clearfix">
+                        <div>
+                            <h6>
+                                <span style="font-weight:bold;">Msh profession</span></h6>
+                            <h5>
+                                <span>{{item.MotherSisterProfessionDetails }}</span></h5>
+                        </div>
+                    </div>
+
+                    <div id="UpdatePanelMshCurrentLocation" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="MshCurrentLocation" style="font-weight:bold;">Msh Current Location</span></h6>
+                            <h5>
+                                <span id="lblMshCurrentLocation">{{item.MotherSisterCurrentLocation }}</span></h5>
+
+                        </div>
+
+                    </div>
+                    <div id="UpdatePanelMshNativeplace" class="edit_page_details_item_desc clearfix">
+
+                        <div>
+
+                            <h6>
+                                <span id="MshNativeplace" style="font-weight:bold;">Msh Native Place</span></h6>
+                            <h5>
+                                <span id="lblMshNativeplace">{{(item.MotherSisterSpouseNativePlace!=null?item.MotherSisterSpouseNativePlace:'')+" "+(item.Mothersisterspousedistrict!=null && 
+                                                item.Mothersisterspousedistrict.ToString()!=""? ","+item.Mothersisterspousedistrict:"")+" "+(item.Motherssisterspousestate!=null && 
+                                                item.Motherssisterspousestate.ToString()!=""? ","+item.Motherssisterspousestate:"")+" "+(item.MothersisterspouseCountry!=null && 
+                                                item.MothersisterspouseCountry.ToString()!=""? ","+item.MothersisterspouseCountry:"")  }}    </span></h5>
+
+                        </div>
+                    </div>
+                    <div id="update3">
+
+                        <div id="ownerdiv3">
+                            <div id="UpdatePanelMshcontactnos" class="edit_page_details_item_desc clearfix">
+
+                                <div>
+
+                                    <h6>
+                                        <span id="Mshcontactnos" style="font-weight:bold;">Msh contact nos</span></h6>
+                                    <h5>
+                                        <span id="lblMshcontactnos">{{(item.MotherSisterspouseMobileNumberWithCode!=null?item.MotherSisterspouseMobileNumberWithCode:'')+" "+(item.MotherSisterspouseLandnumberwithcode!=null 
+                                            && item.MotherSisterspouseLandnumberwithcode.ToString()!="" ?
+                                            "&"+item.MotherSisterspouseLandnumberwithcode:"") }}</span></h5>
+                                </div>
+
+                            </div>
+                            <div id="UpdatePanelMsHEmail" class="edit_page_details_item_desc clearfix">
+
+                                <div>
+
+                                    <h6>
+                                        <span id="MsHEmail" style="font-weight:bold;">Msh Email</span></h6>
+                                    <h5>
+                                        <span id="lblMsHEmail">{{item.MotherSisterspouseEmail }}</span></h5>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/ng-template" id="FBModalContent.html">
+    <form name="FBForm" novalidate role="form" ng-submit="FBForm.$valid  && page.model.FBSubmit(page.model.fbObj)">
+        <div class="modal-header">
+            <h3 class="modal-title text-center" id="modal-title">Father's Brother Details
+                <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                    <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="20">Delete</ng-md-icon>
+                </a>
+            </h3>
+        </div>
+        <div class="modal-body clearfix pop_content_my" id="modal-body">
+            <ul id="ulFatherBrother">
+                <li class="clearfix">
+                    <label for="ElderYounger" style="padding-top: 2%;" class="pop_label_left">Elder/Younger<span style="color: red; margin-left: 3px;">*</span></label>
+
+                    <md-input-container style="font-weight: 700;color:black;">
+                        <md-radio-group ng-required="true" name="rdlFBElderORyounger" layout="row" ng-model="page.model.fbObj.rdlFBElderORyounger" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                            <md-radio-button value="324" class="md-primary">Elder</md-radio-button>
+                            <md-radio-button value="323"> Younger </md-radio-button>
+                        </md-radio-group>
+                        <div ng-messages="FBForm.rdlFBElderORyounger.$invalid">
+                            <div ng-if="FBForm.rdlFBElderORyounger.$invalid && (FBForm.$submitted)">This field is required.</div>
+                        </div>
+                    </md-input-container>
+                </li>
+
+                <li class="clearfix form-group">
+                    <label for="Fatherbrothername" class="pop_label_left">Father's brother name<span style="color: red; margin-left: 3px;">*</span></label>
+                    <div class="pop_controls_right select-box-my">
+                        <input ng-model="page.model.fbObj.txtFatherbrothername" class="form-control" maxlength="100" tabindex="2" required/>
+
+                    </div>
+                </li>
+
+                <li class="clearfix form-group">
+                    <label for="Educationdetails" class="pop_label_left">Education</label>
+                    <div class="pop_controls_right select-box-my">
+                        <input ng-model="page.model.fbObj.txtFBEducationdetails" class="form-control" tabindex="3" maxlength="150" />
+                    </div>
+                </li>
+                <li class="clearfix form-group">
+                    <label for="Professiondetails" class="pop_label_left">Profession</label>
+                    <div class="pop_controls_right select-box-my">
+                        <input ng-model="page.model.fbObj.txtFBProfessiondetails" class="form-control" tabindex="4" maxlength="200" />
+                    </div>
+                </li>
+
+
+                <contact-directive emailhide="true" dmobile="page.model.fbObj.ddlFBMobileCountryID" strmobile="page.model.fbObj.txtFBMobileNumber" dalternative="page.model.fbObj.ddlFBMobileCountryID2" stralternative="page.model.fbObj.txtFBMobileNumber2" dland="page.model.fbObj.ddlFBLandLineCountry"
+                    strareacode="page.model.fbObj.txtFBAreCode" strland="page.model.fbObj.txtFBLandNumber" strmail="page.model.fbObj.txtFBEmails"></contact-directive>
+
+                <li class="clearfix form-group">
+                    <label for="lblCurrentLocation" class="pop_label_left">Current Location</label>
+                    <div class="pop_controls_right select-box-my">
+                        <input ng-model="page.model.fbObj.txtCurrentLocation" class="form-control" maxlength="150" tabindex="16" />
+                    </div>
+                </li>
+                <li class="row ">
+
+                    <edit-footer></edit-footer>
+                </li>
+            </ul>
+
+        </div>
+
+    </form>
+</script>
+<script type="text/ng-template" id="FSModalContent.html">
+    <form name="FSForm" novalidate role="form" ng-submit="FSForm.$valid  && page.model.FSSubmit(page.model.fsObj)">
+        <div class="modal-header">
+            <h3 class="modal-title text-center" id="modal-title">Father's Sister Details
+                <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                    <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="20">Delete</ng-md-icon>
+                </a>
+            </h3>
+        </div>
+        <div class="modal-body clearfix pop_content_my" id="modal-body">
+            <ul>
+                <li class="clearfix">
+                    <label for="FSElderYounger" style="padding-top: 2%;" class="pop_label_left">Elder/Younger<span style="color: red; margin-left: 3px;">*</span></label>
+
+                    <md-input-container style="font-weight: 700;color:black;">
+                        <md-radio-group ng-required="true" name="rdlFSElderYounger" layout="row" ng-model="page.model.fsObj.rdlFSElderYounger" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                            <md-radio-button value="326" class="md-primary">Elder</md-radio-button>
+                            <md-radio-button value="325"> Younger </md-radio-button>
+                        </md-radio-group>
+                        <div ng-messages="FSForm.rdlFSElderYounger.$invalid">
+                            <div ng-if="FSForm.rdlFSElderYounger.$invalid && (FSForm.$submitted)">This field is required.</div>
+                        </div>
+                    </md-input-container>
+                </li>
+                <li class="clearfix form-group">
+                    <label for="Fathersistername" class="pop_label_left">Father's sister name<span style="color: red; margin-left: 3px;">*</span></label>
+                    <div class="pop_controls_right select-box-my">
+                        <input ng-model="page.model.fsObj.txtFathersistername" class="form-control" maxlength="100" tabindex="2" required/>
+                    </div>
+                </li>
+
+                <li class="clearfix form-group">
+                    <label for="Husbandfirstname" class="pop_label_left">Husband first name</label>
+                    <div class="pop_controls_right select-box-my">
+                        <input ng-model="page.model.fsObj.txtFSHusbandfirstname" class="form-control" maxlength="100" tabindex="3" />
+
+                    </div>
+                </li>
+                <li class="clearfix form-group">
+                    <label for="Husbandlastname" class="pop_label_left">Husband last name </label>
+                    <div class="pop_controls_right select-box-my">
+                        <input ng-model="page.model.fsObj.txtFSHusbandlastname" class="form-control" maxlength="50" tabindex="4" />
+                    </div>
+                </li>
+                <li class="clearfix form-group">
+                    <label for="FSHEDucation" class="pop_label_left">FSH Education</label>
+                    <div class="pop_controls_right select-box-my">
+                        <input ng-model="page.model.fsObj.txtFSHEDucation" class="form-control" tabindex="5" maxlength="150" />
+                    </div>
+                </li>
+                <li class="clearfix form-group">
+                    <label for="Professiondetails" class="pop_label_left">FSH Profession</label>
+                    <div class="pop_controls_right select-box-my">
+                        <input ng-model="page.model.fsObj.txtFSProfessiondetails" class="form-control" tabindex="6" maxlength="200" />
+                    </div>
+                </li>
+
+                <country-directive countryshow="false" dcountry="'1'" cityshow="false" othercity="false" dstate="page.model.fsObj.ddlFSHStateID" ddistrict="page.model.fsObj.ddlFSHDistrictID"></country-directive>
+
+                <li class="clearfix form-group">
+                    <label for="FSHNativePlace" class="pop_label_left">Native place </label>
+                    <div class="pop_controls_right select-box-my">
+
+
+                        <input ng-model="page.model.fsObj.txtFSHNativePlace" class="form-control" tabindex="9" maxlength="100" />
+
+
+                    </div>
+                </li>
+
+
+
+
+
+                <contact-directive emailhide="true" dmobile="page.model.fsObj.ddlFSMObileCountryID" strmobile="page.model.fsObj.txtFSMobileNumber" dalternative="page.model.fsObj.ddlFSMObileCountryID2" stralternative="page.model.fsObj.txtFSMobileNumber2" dland="page.model.fsObj.ddlFSHLandCountryID"
+                    strareacode="page.model.fsObj.txtFSHAreaNumber" strland="page.model.fsObj.txtFSHNUmber" strmail="page.model.fsObj.txtFSHEmails"></contact-directive>
+
+                <li class="clearfix form-group">
+                    <label for="lblCurrentLocation" class="pop_label_left">Current Location</label>
+                    <div class="pop_controls_right select-box-my">
+                        <input ng-model="page.model.fsObj.txtFSHCurrentLocation" class="form-control" tabindex="21" maxlength="100" />
+
+                    </div>
+                </li>
+                <li class="row ">
+
+                    <edit-footer></edit-footer>
+                </li>
+            </ul>
+
+        </div>
+
+    </form>
+</script>
+<script type="text/ng-template" id="MBModalContent.html">
+    <form name="MBForm" novalidate role="form" ng-submit="MBForm.$valid  && page.model.MBSubmit(page.model.mbObj)">
+        <div class="modal-header">
+            <h3 class="modal-title text-center" id="modal-title">Mother's Brother Details
+                <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                    <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="20">Delete</ng-md-icon>
+                </a>
+            </h3>
+        </div>
+        <div class="modal-body clearfix pop_content_my" id="modal-body">
+            <ul id="ulmotherbrother">
+                <li class="clearfix">
+                    <label for="MotherElderYounger" style="padding-top: 2%;" class="pop_label_left">Elder/Younger<span style="color: red; margin-left: 3px;">*</span></label>
+                    <md-input-container style="font-weight: 700;color:black;">
+                        <md-radio-group ng-required="true" name="rdlMBElderYounger" layout="row" ng-model="page.model.mbObj.rdlMBElderYounger" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                            <md-radio-button value="328" class="md-primary">Elder</md-radio-button>
+                            <md-radio-button value="327"> Younger </md-radio-button>
+                        </md-radio-group>
+                        <div ng-messages="MBForm.rdlMBElderYounger.$invalid">
+                            <div ng-if="MBForm.rdlMBElderYounger.$invalid && (MBForm.$submitted)">This field is required.</div>
+                        </div>
+                    </md-input-container>
+
+                </li>
+                <li class="clearfix form-group">
+                    <label for="Motherbrothername" class="pop_label_left">Mother's brother name<span style="color: red; margin-left: 3px;">*</span></label>
+                    <div class="pop_controls_right">
+                        <input ng-model="page.model.mbObj.txtMBName" class="form-control" maxlength="100" tabindex="2" required/>
+                    </div>
+                </li>
+
+
+                <li class="clearfix form-group">
+                    <label for="MBEducation" class="pop_label_left">Education</label>
+                    <div class="pop_controls_right">
+                        <input ng-model="page.model.mbObj.txtMBEducation" class="form-control" tabindex="3" maxlength="150" />
+                    </div>
+                </li>
+                <li class="clearfix form-group">
+                    <label for="MBProfessiondetails" class="pop_label_left">Profession</label>
+                    <div class="pop_controls_right">
+
+
+                        <input ng-model="page.model.mbObj.txtMBProfessiondetails" class="form-control" tabindex="4" maxlength="200" />
+
+
+                    </div>
+
+                </li>
+
+
+
+
+                <contact-directive emailhide="true" dmobile="page.model.mbObj.ddlMBCountriCode" strmobile="page.model.mbObj.txtMBMobileNum" dalternative="page.model.mbObj.ddlMBCountriCode2" stralternative="page.model.mbObj.txtMBMobileNum2" dland="page.model.mbObj.ddlMBLandLineCountryCode"
+                    strareacode="page.model.mbObj.txtMBAreaCode" strland="page.model.mbObj.txtMBLandLineNum" strmail="page.model.mbObj.txtMBEmails"></contact-directive>
+
+                <li class="clearfix form-group">
+                    <label for="MBCurrentLocation" class="pop_label_left">Current Location</label>
+                    <div class="pop_controls_right">
+                        <input ng-model="page.model.mbObj.txtMBCurrentLocation" class="form-control" tabindex="16" maxlength="100" />
+
+                    </div>
+                </li>
+                <li class="row ">
+                    <!--<div class="col-lg-9">
+                        <input value="Submit" class="button_custom  pull-right" type="submit">
+                    </div>
+                    <div class="col-lg-3">
+                        <input value="Cancel" class="button_custom button_custom_reset pull-right" ng-click="page.model.cancel();" type="button">
+                    </div>-->
+
+                    <edit-footer></edit-footer>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </form>
+</script>
+<script type="text/ng-template" id="MSModalContent.html">
+    <form name="MSForm" novalidate="true" ng-submit="MSForm.$valid  && page.model.MSSubmit(page.model.msObj)">
+        <div class="modal-header">
+            <h3 class="modal-title text-center" id="modal-title">Mother's Sister Details
+                <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                    <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="20">Delete</ng-md-icon>
+                </a>
+            </h3>
+        </div>
+        <div class="modal-body clearfix pop_content_my" id="modal-body">
+            <ul id="ulmothersister">
+                <li class="clearfix">
+                    <label for="MsElderYounger" style="padding-top: 2%;" class="pop_label_left">Elder/Younger<span style="color: red; margin-left: 3px;">*</span></label>
+
+                    <md-input-container style="font-weight: 700;color:black;">
+                        <md-radio-group ng-required="true" name="rdlMSElderYounger" layout="row" ng-model="page.model.msObj.rdlMSElderYounger" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                            <md-radio-button value="330" class="md-primary">Elder</md-radio-button>
+                            <md-radio-button value="329"> Younger </md-radio-button>
+                        </md-radio-group>
+                        <div ng-messages="MSForm.rdlMSElderYounger.$invalid">
+                            <div ng-if="MSForm.rdlMSElderYounger.$invalid && (MSForm.$submitted)">This field is required.</div>
+                        </div>
+                    </md-input-container>
+                </li>
+                <li class="clearfix form-group">
+                    <label for="Fathersistername" class="pop_label_left">Mother's sister name<span style="color: red; margin-left: 3px;">*</span></label>
+                    <div class="pop_controls_right">
+                        <input ng-model="page.model.msObj.txtMSName" class="form-control" maxlength="100" tabindex="2" required/>
+
+                    </div>
+                </li>
+
+                <li class="clearfix form-group">
+                    <label for="MsHusbandfirstname" class="pop_label_left">Husband first name</label>
+                    <div class="pop_controls_right">
+
+
+                        <input ng-model="page.model.msObj.txtMsHusbandfirstname" class="form-control" maxlength="100" tabindex="3" />
+
+                    </div>
+                </li>
+                <li class="clearfix form-group">
+                    <label for="MsHusbandlastname" class="pop_label_left">Husband last name </label>
+                    <div class="pop_controls_right">
+
+
+                        <input ng-model="page.model.msObj.txtMsHusbandlastname" class="form-control" maxlength="50" tabindex="4" />
+
+                    </div>
+                </li>
+
+                <country-directive countryshow="false" dcountry="'1'" cityshow="false" othercity="false" dstate="page.model.msObj.ddlMSisState" ddistrict="page.model.msObj.ddlMsDistrict"></country-directive>
+
+                <li class="clearfix form-group">
+                    <label for="MSHNativePlace" class="pop_label_left">Native place </label>
+                    <div class="pop_controls_right">
+                        <input ng-model="page.model.msObj.txtMSNativePlace" class="form-control" tabindex="7" maxlength="100" />
+                    </div>
+                </li>
+
+                <li class="clearfix form-group">
+                    <label for="MSHEducationdet" class="pop_label_left">Education</label>
+                    <div class="pop_controls_right">
+                        <input ng-model="page.model.msObj.txtMSHEducation" class="form-control" tabindex="8" maxlength="150" />
+                    </div>
+                </li>
+                <li class="clearfix form-group">
+                    <label for="MSProfessiondetails" class="pop_label_left">Profession</label>
+                    <div class="pop_controls_right">
+                        <input ng-model="page.model.msObj.txtMSProfessiondetails" class="form-control" tabindex="9" maxlength="200" />
+                    </div>
+
+                </li>
+
+                <contact-directive emailhide="true" dmobile="page.model.msObj.ddlMSCounCodeID" strmobile="page.model.msObj.txtMSMObileNum" dalternative="page.model.msObj.ddlMSCounCodeID2" stralternative="page.model.msObj.txtMSMObileNum2" dland="page.model.msObj.ddlMSLLCounCode"
+                    strareacode="page.model.msObj.txtMSArea" strland="page.model.msObj.txtLLNum" strmail="page.model.msObj.txtMSEmail"></contact-directive>
+
+                <li class="clearfix form-group">
+                    <label for="lblMSCurrentLocation" class="pop_label_left">Current Location</label>
+                    <div class="pop_controls_right">
+                        <input ng-model="page.model.msObj.txtMSCurrentLocation" class="form-control" maxlength="100" tabindex="21" />
+
+                    </div>
+                </li>
+                <li class="row ">
+                    <edit-footer></edit-footer>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </form>
+</script>
+
+<style>
+    .md-dialog-container {
+        z-index: 99999999999;
+    }
+</style>
