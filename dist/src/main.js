@@ -80,6 +80,172 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
  (function(angular) {
      'use strict';
 
+     function controller(baseModel, scope) {
+         /* jshint validthis:true */
+         var vm = this,
+             model;
+         vm.init = function() {
+             scope.model = model = baseModel;
+             model.scope = scope;
+         };
+         vm.init();
+     }
+     angular
+         .module('KaakateeyaEmpEdit')
+         .controller('baseCtrl', controller)
+
+     controller.$inject = ['baseModel', '$scope'];
+ })(angular);
+(function(angular) {
+    'use strict';
+
+
+    function factory(baseService, authSvc, uibModal, commonFactory) {
+        var model = {};
+        var logincustid = authSvc.getCustId();
+        var CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        model.scope = {};
+        model.init = function() {
+            baseService.personalDetails(CustID).then(function(response) {
+                debugger;
+                model.PersonalObj = response.data;
+                model.imgsrc = authSvc.getprofilepic();
+
+                console.log(response.data);
+
+                if (model.PersonalObj != null && model.PersonalObj != undefined) {
+                    baseService.nodatastatus(model.PersonalObj.ProfileID).then(function(res) {
+                        model.rev = res.data;
+                        console.log(model.rev);
+                    });
+                }
+            });
+
+            model.unreviewedLinks();
+            return model;
+        };
+
+        model.unreviewedLinks = function() {
+            baseService.menuReviewstatus(CustID, '0', '').then(function(response) {
+
+                model.menuReviewdata = JSON.parse(response.data);
+                _.each(model.menuReviewdata, function(item) {
+                    var SectionID = item.SectionID;
+
+                    if (SectionID === 11 || SectionID === 12 || SectionID === 13 || SectionID == 15) {
+                        model.lnkparentsReview = true;
+                    }
+                    if (SectionID === 14 || SectionID === 25 || SectionID === 26) {
+                        model.lnksiblingsReview = true;
+                    }
+                    if (SectionID === 27 || SectionID === 28 || SectionID === 32 || SectionID === 33) {
+                        model.lnkrelativesReview = true;
+                    }
+                    if (SectionID === 6 || SectionID === 7 || SectionID === 8) {
+                        model.lnkeducationandprofReview = true;
+                    }
+                    if (SectionID === 16 || SectionID === 22) {
+                        model.lnkpartnerReview = true;
+                    }
+                    if (SectionID === 23) {
+                        model.lnkastroReview = true;
+                    }
+                    if (SectionID === 29) {
+                        model.lnkreferenceReview = true;
+                    }
+                    if (SectionID === 34) {
+                        model.lnkpropertyReview = true;
+                    }
+                });
+            });
+        };
+
+        model.photorequestAndshow = function() {
+
+            if (model.PersonalObj.ProfilePic.indexOf('Fnoimage.jpg') !== -1 || model.PersonalObj.ProfilePic.indexOf('Mnoimage.jpg') !== -1) {
+                //photo request
+
+                baseService.PhotoRequest(model.PersonalObj.ProfileID, '2').then(function(response) {
+
+                    if (response.data != undefined && response.data.length > 0) {
+
+                    }
+                });
+
+            } else {
+
+                baseService.getPhotoInfn(CustID).then(function(response) {
+
+                    if (response.data != undefined && response.data.length > 0) {
+                        model.SlideArr = [];
+                        model.FPobj = JSON.parse(response.data[0]);
+                        console.log(model.FPobj);
+                        _.each(model.FPobj, function(item) {
+                            debugger;
+                            model.SlideArr.push({ FullPhotoPath: editviewapp.GlobalImgPath + "Images/ProfilePics/KMPL_" + CustID + "_Images/" + (item.PhotoName.slice(0, 4)).replace("i", "I") + "_Images/" + model.PersonalObj.ProfileID + "_FullPhoto.jpg" });
+                        });
+
+                        commonFactory.open('common/templates/Photopopup.html', model.scope, uibModal);
+                    }
+
+                });
+
+                //photo show popup
+            }
+
+
+        };
+
+        model.cancel = function() {
+            commonFactory.closepopup();
+        };
+
+        return model.init();
+    }
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .factory('baseModel', factory)
+    factory.$inject = ['baseService', 'authSvc', '$uibModal', 'commonFactory'];
+
+})(angular);
+(function(angular) {
+    'use strict';
+
+    function factory(http) {
+        return {
+            personalDetails: function(obj) {
+                return http.get(editviewapp.apipath + 'CustomerPersonal/getpersonalMenuDetails', { params: { CustID: obj } });
+            },
+            menuReviewstatus: function(Custid, type, sectionid) {
+                return http.get(editviewapp.apipath + 'CustomerPersonal/getCustomerPersonalMenuReviewStatus', { params: { CustID: Custid, iReview: type, SectionID: sectionid } });
+            },
+            nodatastatus: function(id) {
+                return http.get(editviewapp.apipath + 'CustomerPersonalUpdate/getNoDataInformationLinkDisplay', { params: { ProfileID: id } });
+            },
+            getPhotoInfn: function(custid) {
+                return http.get(editviewapp.apipath + 'CustomerPersonal/getCustomerPersonaloffice_purpose', {
+                    params: { flag: '8', ID: custid, AboutProfile: '', IsConfidential: '', HighConfendential: '' }
+                });
+            },
+            PhotoRequest: function(ProfileID, empid) {
+                return http.get(editviewapp.apipath + 'CustomerPersonal/getCustomerphotoRequestDisplay', {
+                    params: { profileid: ProfileID, EMPID: empid, ticketIDs: '' }
+                });
+            }
+
+        };
+    }
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .factory('baseService', factory)
+
+    factory.$inject = ['$http'];
+})(angular);
+ (function(angular) {
+     'use strict';
+
      function controller(editAstroModel, scope) {
          /* jshint validthis:true */
          var vm = this;
@@ -4522,6 +4688,1559 @@ function(angular) {
     factory.$inject = ['$http'];
 })(angular);
 !function(angular){"use strict";function controller(editSpouseModel,scope){var vm=this;vm.init=function(){vm.model=editSpouseModel,vm.model.scope=scope},vm.init()}angular.module("KaakateeyaEmpEdit").controller("editSpouseCtrl",controller),controller.$inject=["editSpouseModel","$scope"]}(angular),function(angular){"use strict";function factory(editSpouseService,authSvc,alertss,commonFactory,uibModal,filter){var model={};model.scope={};var logincustid=authSvc.getCustId(),custID=void 0!==logincustid&&null!==logincustid&&""!==logincustid?logincustid:null;return model.spouseArray=[],model.ChildArray=[],model.spouObj={},model.childObj={},model.noofChldrenAray=commonFactory.numbersBind("",0,10),model.childCount=0,model.init=function(){return model.pageload(),model},model.pageload=function(){editSpouseService.getSpouseData(custID).then(function(response){response.data.length>0&&(model.spouseArray=response.data[0].length>0?JSON.parse(response.data[0]):[],model.ChildArray=response.data[1].length>0?JSON.parse(response.data[1]):[],model.childCount=void 0!==response.data&&response.data[0].length>0&&null!==response.data[0].NoOfChildrens?JSON.parse(response.data[0])[0].NoOfChildrens:[],console.log(model.spouseArray),console.log(model.ChildArray))})},model.populatepopup=function(type,item){switch(type){case"Spouse":model.spouObj.Cust_Spouse_ID=null,model.spouObj={},void 0!==item&&(model.spouObj.Cust_Spouse_ID=item.Cust_Spouse_ID,model.spouObj.txtSpousename=item.NAME,model.spouObj.txtSpoueEducation=item.EducationDetails,model.spouObj.txtspouseProfession=item.ProfessionDetails,model.spouObj.txtHouseFlatnumber=item.HouseFlatNumberID,model.spouObj.txtApartmentname=item.AppartmentName,model.spouObj.txtStreetname=item.StreetName,model.spouObj.txtAreaname=item.AreaName,model.spouObj.txtLandmark=item.LandMark,model.spouObj.ddlspouseCountry=item.Country,model.spouObj.ddlspouseState=item.STATE,model.spouObj.ddlspouseDistrict=item.District,model.spouObj.ddlspouseCity=item.City,model.spouObj.txtspouseZip=item.Zip,model.spouObj.txtMarriedon=item.MarriageDate,model.spouObj.txtSeparateddate=item.SeperatedDate,model.spouObj.rbtspousediverse=item.LeagallyDivorceID,model.spouObj.txtLegalDivorsedate=item.DateofLegallDivorce,model.spouObj.txtspousefather=item.FatherFirstName,model.spouObj.txtspouselastname=item.FatherLastName,model.spouObj.txtpreviousmarriage=item.ReasonforDivorce,model.spouObj.rbtnspousefamily=item.MyFamilyPlanningID,model.spouObj.ddlspousechidrens=item.NoOfChildrens),commonFactory.open("SpouseContent.html",model.scope,uibModal);break;case"Child":model.childObj.Cust_Children_ID=null,model.childObj={},void 0!==item?(model.childObj.Cust_Children_ID=item.Cust_Children_ID,model.childObj.txtchildname=item.ChildName,model.childObj.rdlgenderchild=item.ChildGender,model.childObj.txtdobchild=commonFactory.convertDateFormat(item.ChildDOB,"DD-MM-YYYY"),model.childObj.rbtChildstayingWith=item.ChildStayingWithID,model.childObj.ddlrelation=item.ChildStayingWithRelation,commonFactory.open("spouseChildContent.html",model.scope,uibModal)):void 0!==model.childCount&&null!==model.childCount&&0!==model.childCount&&model.ChildArray.length<model.childCount?commonFactory.open("spouseChildContent.html",model.scope,uibModal):alertss.timeoutoldalerts(model.scope,"alert-danger","cannot add more children",4500)}},model.cancel=function(){commonFactory.closepopup()},model.spouseSubmit=function(obj){model.SpouseData={GetDetails:{CustID:custID,NAME:obj.txtSpousename,Education:obj.txtSpoueEducation,Profession:obj.txtspouseProfession,HouseFlatnumber:obj.txtHouseFlatnumber,Apartmentname:obj.txtApartmentname,Streetname:obj.txtStreetname,Areaname:obj.txtAreaname,Landmark:obj.txtLandmark,Country:obj.ddlspouseCountry,STATE:obj.ddlspouseState,District:obj.ddlspouseDistrict,City:obj.ddlspouseCity,Zip:obj.txtspouseZip,Marriedon:""!==obj.txtMarriedon&&"Invalid date"!==obj.txtMarriedon?filter("date")(obj.txtMarriedon,"yyyy-MM-dd"):null,Separateddate:""!==obj.txtSeparateddate&&"Invalid date"!==obj.txtSeparateddate?filter("date")(obj.txtSeparateddate,"yyyy-MM-dd"):null,Legallydivorced:obj.rbtspousediverse,Dateoflegaldivorce:""!==obj.txtLegalDivorsedate&&"Invalid date"!==obj.txtLegalDivorsedate?filter("date")(obj.txtLegalDivorsedate,"yyyy-MM-dd"):null,Uploaddivorcedocument:null,Fatherfirstname:obj.txtspousefather,Fatherlastname:obj.txtspouselastname,Notesaboutpreviousmarriage:obj.txtpreviousmarriage,Familyplanning:obj.rbtnspousefamily,Noofchildren:obj.ddlspousechidrens,Cust_Spouse_ID:model.spouObj.Cust_Spouse_ID},customerpersonaldetails:{intCusID:custID,EmpID:null,Admin:null}},model.childCount=obj.ddlspousechidrens,editSpouseService.submitSpouseData(model.SpouseData).then(function(response){console.log(response),commonFactory.closepopup(),1===response.data?(model.pageload(),alertss.timeoutoldalerts(model.scope,"alert-success","submitted Succesfully",4500)):alertss.timeoutoldalerts(model.scope,"alert-danger","Updation failed",4500)})},model.childSubmit=function(obj){model.childData={GetDetails:{CustID:custID,Nameofthechild:obj.txtchildname,Genderofthechild:obj.rdlgenderchild,DOB:""!==obj.txtdobchild&&"Invalid date"!==obj.txtdobchild?filter("date")(obj.txtdobchild,"yyyy-MM-dd"):null,Childstayingwith:obj.rbtChildstayingWith,Childstayingwithrelation:obj.ddlrelation,Cust_Children_ID:model.childObj.Cust_Children_ID},customerpersonaldetails:{intCusID:custID,EmpID:null,Admin:null}},editSpouseService.submitChildeData(model.childData).then(function(response){console.log(response),commonFactory.closepopup(),1===response.data?(model.pageload(),alertss.timeoutoldalerts(model.scope,"alert-success","submitted Succesfully",4500)):alertss.timeoutoldalerts(model.scope,"alert-danger","Updation failed",4500)})},model.init()}angular.module("KaakateeyaEmpEdit").factory("editSpouseModel",factory),factory.$inject=["editSpouseService","authSvc","alert","commonFactory","$uibModal","$filter"]}(angular),function(angular){"use strict";function factory(http){return{getSpouseData:function(obj){return http.get(editviewapp.apipath+"CustomerPersonal/getCustomerPersonalSpouse_Details",{params:{CustID:obj}})},submitSpouseData:function(obj1){return http.post(editviewapp.apipath+"CustomerPersonalUpdate/UpdateSpoucedetails_Customersetails",JSON.stringify(obj1))},submitChildeData:function(obj1){return http.post(editviewapp.apipath+"CustomerPersonalUpdate/UpdateSpouseChildDetails",JSON.stringify(obj1))}}}angular.module("KaakateeyaEmpEdit").factory("editSpouseService",factory),factory.$inject=["$http"]}(angular);
+(function() {
+    'use strict';
+    angular
+        .module('KaakateeyaEmpEdit')
+        .constant('arrayConstantsEdit', {
+            'MaritalStatus': [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "Unmarried", "title": "Unmarried", "value": 43 },
+                { "label": "Divorce", "title": "Divorce", "value": 44 },
+                { "label": "Widow/Widower", "title": "Widow/Widower", "value": 45 },
+                { "label": "Separated", "title": "Separated", "value": 46 }
+            ],
+            "height": [
+                { "label": "--Select--", "title": "--select--", "value": "" },
+                { "label": "4'0 in - 122 cms", "title": "4'0 in - 122 cms", "value": 1 }, { "label": "4'1 in - 124 cms", "title": "4'1 in - 124 cms", "value": 2 },
+                { "label": "4'2 in - 127 cms", "title": "4'2 in - 127 cms", "value": 3 },
+                { "label": "4'3 in - 130 cms", "title": "4'3 in - 130 cms", "value": 4 }, { "label": "4'4 in - 132 cms", "title": "4'4 in - 132 cms", "value": 5 },
+                { "label": "4'5 in - 135 cms", "title": "4'5 in - 135 cms", "value": 6 }, { "label": "4'6 in - 137 cms", "title": "4'6 in - 137 cms", "value": 7 },
+                { "label": "4'7 in - 140 cms", "title": "4'7 in - 140 cms", "value": 8 },
+                { "label": "4'8 in - 142 cms", "title": "4'8 in - 142 cms", "value": 9 },
+                { "label": "4'9 in - 144 cms", "title": "4'9 in - 144 cms", "value": 10 }, { "label": "4'10 in - 147 cms", "title": "4'10 in - 147 cms", "value": 11 },
+                { "label": "4'11 in - 150 cms", "title": "4'11 in - 150 cms", "value": 12 }, { "label": "5'0 in - 152 cms", "title": "5'0 in - 152 cms", "value": 13 },
+                { "label": "5'1 in - 155 cms", "title": "5'1 in - 155 cms", "value": 14 }, { "label": "5'2 in - 157 cms", "title": "5'2 in - 157 cms", "value": 15 },
+                { "label": "5'3 in - 160 cms", "title": "5'3 in - 160 cms", "value": 16 }, { "label": "5'4 in - 162 cms", "title": "5'4 in - 162 cms", "value": 17 },
+                { "label": "5'5 in - 165 cms", "title": "5'5 in - 165 cms", "value": 18 }, { "label": "5'6 in - 167 cms", "title": "5'6 in - 167 cms", "value": 19 },
+                { "label": "5'7 in - 170 cms", "title": "5'7 in - 170 cms", "value": 20 }, { "label": "5'8 in - 172 cms", "title": "5'8 in - 172 cms", "value": 21 },
+                { "label": "5'9 in - 175 cms", "title": "5'9 in - 175 cms", "value": 22 }, { "label": "5'10 in - 177 cms", "title": "5'10 in - 177 cms", "value": 23 },
+                { "label": "5'11 in - 180 cms", "title": "5'11 in - 180 cms", "value": 24 }, { "label": "6'0 in - 183 cms", "title": "6'0 in - 183 cms", "value": 25 },
+                { "label": "6'1 in - 185 cms", "title": "6'1 in - 185 cms", "value": 26 }, { "label": "6'2 in - 188 cms", "title": "6'2 in - 188 cms", "value": 27 },
+                { "label": "6'3 in - 190 cms", "title": "6'3 in - 190 cms", "value": 28 }, { "label": "6'4 in - 193 cms", "title": "6'4 in - 193 cms", "value": 29 },
+                { "label": "6'5 in - 195 cms", "title": "6'5 in - 195 cms", "value": 30 }, { "label": "6'6 in - 198 cms", "title": "6'6 in - 198 cms", "value": 31 },
+                { "label": "6'7 in - 200 cms", "title": "6'7 in - 200 cms", "value": 32 }, { "label": "6'8 in - 203 cms", "title": "6'8 in - 203 cms", "value": 33 },
+                { "label": "6'9 in - 205 cms", "title": "6'9 in - 205 cms", "value": 34 }, { "label": "6'10 in - 208 cms", "title": "6'10 in - 208 cms", "value": 35 },
+                { "label": "6'11 in - 210 cms", "title": "6'11 in - 210 cms", "value": 36 }, { "label": "7'0 in - 213 cms\t", "title": "7'0 in - 213 cms\t", "value": 37 },
+                { "label": "7'1 in - 215 cms\t", "title": "7'1 in - 215 cms\t", "value": 38 }, { "label": "7'2 in - 218 cms\t", "title": "7'2 in - 218 cms\t", "value": 39 }
+            ],
+            "Religion": [
+                { "label": "--Select--", "title": "--select--", "value": "" },
+                { "label": "Hindu", "title": "Hindu", "value": 1 },
+                { "label": "Christian", "title": "Christian", "value": 2 },
+                { "label": "Muslim", "title": "Muslim", "value": 3 },
+                { "label": "Other", "title": "Other", "value": 6 },
+                { "label": "Catholic", "title": "Catholic", "value": 9 },
+                { "label": "Roma Catholic", "title": "Roma Catholic", "value": 15 },
+                { "label": "ROMAN CATHOLIC", "title": "ROMAN CATHOLIC", "value": 16 }
+            ],
+            "Mothertongue": [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "Telugu", "title": "Telugu", "value": 1 },
+                { "label": "Tamil", "title": "Tamil", "value": 2 },
+                { "label": "Kannada", "title": "Kannada", "value": 3 },
+                { "label": "Hindi", "title": "Hindi", "value": 4 },
+                { "label": "Punjabi", "title": "Punjabi", "value": 5 },
+                { "label": "Urdu", "title": "Urdu", "value": 6 },
+                { "label": "Lambadi", "title": "Lambadi", "value": 7 },
+                { "label": "Marati", "title": "Marati", "value": 8 },
+                { "label": "Gujaraathi", "title": "Gujaraathi", "value": 9 },
+                { "label": "English", "title": "English", "value": 10 },
+                { "label": "Malayalam", "title": "Malayalam", "value": 11 },
+                { "label": "Saurashtra", "title": "Saurashtra", "value": 12 }, { "label": "Orea", "title": "Orea", "value": 13 },
+                { "label": "telugu", "title": "telugu", "value": 14 }
+            ],
+            "educationcategory": [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "Bachelors in Engineering", "title": "Bachelors in Engineering", "value": 1 },
+                { "label": "Bachelors in Degree", "title": "Bachelors in Degree", "value": 2 },
+                { "label": "Diploma", "title": "Diploma", "value": 3 },
+                { "label": "Doctorate/phd", "title": "Doctorate/phd", "value": 4 },
+                { "label": "Masters in Engineering", "title": "Masters in Engineering", "value": 5 },
+                { "label": "Bachelors in Medicine", "title": "Bachelors in Medicine", "value": 6 },
+                { "label": "Masters in Degree", "title": "Masters in Degree", "value": 7 },
+                { "label": "Finance - ICWAI/CA/CS", "title": "Finance - ICWAI/CA/CS", "value": 10 },
+                { "label": "Union Public Service Commision-Civil Services", "title": "Union Public Service Commision-Civil Services", "value": 11 },
+                { "label": "Masters in Medicine", "title": "Masters in Medicine", "value": 13 },
+                { "label": "Below Graduation", "title": "Below Graduation", "value": 15 },
+                { "label": "Not given", "title": "Not given", "value": 21 },
+                { "label": "Other", "title": "Other", "value": 22 }
+            ],
+            "visastatus": [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "Student Visa", "title": "Student Visa", "value": 284 },
+                { "label": "Work Permit", "title": "Work Permit", "value": 285 },
+                { "label": "Temporary Visa", "title": "Temporary Visa", "value": 286 },
+                { "label": "Citizen", "title": "Citizen", "value": 521 },
+                { "label": "Permanent Resident", "title": "Permanent Resident", "value": 522 },
+                { "label": "Green Card", "title": "Green Card", "value": 553 }
+            ],
+            "stars": [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "Bharani", "title": "Bharani", "value": 2 },
+                { "label": "Krithika", "title": "Krithika", "value": 3 },
+                { "label": "Rohini", "title": "Rohini", "value": 4 },
+                { "label": "Mrigasira", "title": "Mrigasira", "value": 5 },
+                { "label": "Arudra", "title": "Arudra", "value": 6 },
+                { "label": "Punarvasu", "title": "Punarvasu", "value": 7 },
+                { "label": "Pushyami", "title": "Pushyami", "value": 8 },
+                { "label": "Aslesha", "title": "Aslesha", "value": 9 },
+                { "label": "Makha", "title": "Makha", "value": 10 },
+                { "label": "Pubba", "title": "Pubba", "value": 11 },
+                { "label": "Utharapalguni", "title": "Utharapalguni", "value": 12 },
+                { "label": "Hastham", "title": "Hastham", "value": 13 },
+                { "label": "Chitta", "title": "Chitta", "value": 14 },
+                { "label": "Swathi", "title": "Swathi", "value": 15 },
+                { "label": "Vishaka", "title": "Vishaka", "value": 16 },
+                { "label": "Anuradha", "title": "Anuradha", "value": 18 },
+                { "label": "Jesta", "title": "Jesta", "value": 19 },
+                { "label": "Moola", "title": "Moola", "value": 20 },
+                { "label": "Poorvashada", "title": "Poorvashada", "value": 21 },
+                { "label": "Utharashada", "title": "Utharashada", "value": 22 },
+                { "label": "Sravanam", "title": "Sravanam", "value": 23 },
+                { "label": "Dhanishta", "title": "Dhanishta", "value": 24 },
+                { "label": "Sathabisham", "title": "Sathabisham", "value": 25 },
+                { "label": "Poorvabadra", "title": "Poorvabadra", "value": 26 },
+                { "label": "Uthirabadra", "title": "Uthirabadra", "value": 27 },
+                { "label": "Revathi", "title": "Revathi", "value": 28 },
+                { "label": "Anuradha", "title": "Anuradha", "value": 30 },
+                { "label": "Arudra", "title": "Arudra", "value": 31 },
+                { "label": "Ashwini", "title": "Ashwini", "value": 32 },
+                { "label": "Aslesha", "title": "Aslesha", "value": 33 },
+                { "label": "Chitra", "title": "Chitra", "value": 34 },
+                { "label": "Dhanshita", "title": "Dhanshita", "value": 35 },
+                { "label": "Hasta", "title": "Hasta", "value": 36 },
+                { "label": "Jyehsta", "title": "Jyehsta", "value": 37 },
+                { "label": "Kritika", "title": "Kritika", "value": 38 },
+                { "label": "Magha", "title": "Magha", "value": 39 },
+                { "label": "Moola", "title": "Moola", "value": 40 },
+                { "label": "Mrigasira", "title": "Mrigasira", "value": 41 },
+                { "label": "Poorvabhadra", "title": "Poorvabhadra", "value": 42 },
+                { "label": "Poorvashadha", "title": "Poorvashadha", "value": 43 },
+                { "label": "Punarvasu", "title": "Punarvasu", "value": 44 },
+                { "label": "Poorvaphalguni", "title": "Poorvaphalguni", "value": 45 },
+                { "label": "Pushya", "title": "Pushya", "value": 46 },
+                { "label": "Satabisha", "title": "Satabisha", "value": 47 },
+                { "label": "Sravana", "title": "Sravana", "value": 48 },
+                { "label": "Swati", "title": "Swati", "value": 49 },
+                { "label": "Uttarashadha", "title": "Uttarashadha", "value": 50 },
+                { "label": "Uttarabhadrapada", "title": "Uttarabhadrapada", "value": 51 },
+                { "label": "Uttaraphalguni", "title": "Uttaraphalguni", "value": 52 },
+                { "label": "Visakha", "title": "Visakha", "value": 53 },
+                { "label": "Uttara", "title": "Uttara", "value": 54 },
+                { "label": "Uttarabhadra", "title": "Uttarabhadra", "value": 55 }
+            ],
+            'starLanguage': [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "Telugu", "title": "Telugu", "value": 1 },
+                { "label": "Tamil", "title": "Tamil", "value": 2 },
+                { "label": "Kannada", "title": "Kannada", "value": 3 },
+            ],
+            'region': [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "AP", "title": "AP", "value": 408 },
+                { "label": "TN", "title": "TN", "value": 409 },
+                { "label": "KT", "title": "KT", "value": 410 }
+            ],
+            'bodyType': [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "Athletic", "title": "Athletic", "value": 21 },
+                { "label": "Average", "title": "Average", "value": 22 },
+                { "label": "Slim", "title": "Slim", "value": 23 },
+                { "label": "Heavy", "title": "Heavy", "value": 24 },
+                { "label": "Doesn't Matter", "title": "Doesn't Matter", "value": 37 }
+            ],
+            'bloodGroup': [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "O+", "title": "O+", "value": 61 },
+                { "label": "A+", "title": "A+", "value": 63 },
+                { "label": "B+", "title": "B+", "value": 64 },
+                { "label": "AB+", "title": "AB+", "value": 65 },
+                { "label": "O-", "title": "O-", "value": 66 },
+                { "label": "A-", "title": "A-", "value": 67 },
+                { "label": "B-", "title": "B-", "value": 68 }
+            ],
+            'healthCondition': [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "No Health Problems", "title": "No Health Problems", "value": 220 },
+                { "label": "HIV", "title": "HIV", "value": 222 },
+                { "label": "Diabetes", "title": "Diabetes", "value": 223 },
+                { "label": "LowBP", "title": "LowBP", "value": 224 },
+                { "label": "HighBP", "title": "HighBP", "value": 225 },
+                { "label": "Heart Ailments", "title": "Heart Ailments", "value": 226 }
+            ],
+            'lagnam': [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "Dhansu", "title": "Dhansu", "value": 1 },
+                { "label": "Kanya", "title": "Kanya", "value": 2 },
+                { "label": "Karkatakam", "title": "Karkatakam", "value": 3 },
+                { "label": "Khumbam", "title": "Khumbam", "value": 4 },
+                { "label": "Makhram", "title": "Makhram", "value": 5 },
+                { "label": "Meenam", "title": "Meenam", "value": 6 },
+                { "label": "Mesham", "title": "Mesham", "value": 7 },
+                { "label": "Midhunam", "title": "Midhunam", "value": 8 },
+                { "label": "Simham", "title": "Simham", "value": 9 },
+                { "label": "Thula", "title": "Thula", "value": 10 },
+                { "label": "Vrichikam", "title": "Vrichikam", "value": 11 },
+                { "label": "Vrushabam", "title": "Vrushabam", "value": 12 }
+            ],
+            'ZodaicSign': [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "mesha", "title": "mesha", "value": 527 },
+                { "label": "vrushaba", "title": "vrushaba", "value": 528 },
+                { "label": "midhuna", "title": "midhuna", "value": 529 },
+                { "label": "karkataka", "title": "karkataka", "value": 530 },
+                { "label": "Simha", "title": "Simha", "value": 531 },
+                { "label": "Kanya", "title": "Kanya", "value": 532 },
+                { "label": "Thula", "title": "Thula", "value": 533 },
+                { "label": "Vruchika", "title": "Vruchika", "value": 534 },
+                { "label": "Dhanu", "title": "Dhanu", "value": 535 },
+                { "label": "Makara", "title": "Makara", "value": 536 },
+                { "label": "Kumbha", "title": "Kumbha", "value": 537 },
+                { "label": "Meena", "title": "Meena", "value": 538 },
+            ],
+            'paadam': [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "1", "title": "1", "value": 304 },
+                { "label": "2", "title": "2", "value": 305 },
+                { "label": "3", "title": "3", "value": 306 },
+                { "label": "4", "title": "4", "value": 539 },
+            ],
+            'familyStatus': [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "Lower Middle Class", "title": "Lower Middle Class", "value": 290 },
+                { "label": "Middle Class", "title": "Middle Class", "value": 291 },
+                { "label": "Upper Middle Class", "title": "Upper Middle Class", "value": 292 },
+                { "label": "Rich", "title": "Rich", "value": 293 },
+                { "label": "Affluent", "title": "Affluent", "value": 294 },
+                { "label": "Others", "title": "Others", "value": 516 },
+                { "label": "High Class", "title": "High Class", "value": 517 }
+            ],
+            'RelationshipType': [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "Friend", "title": "Friend", "value": 318 },
+                { "label": "Relative", "title": "Relative", "value": 319 },
+                { "label": "Not Given", "title": "Not Given", "value": 549 },
+
+            ],
+            "childStayingWith": [
+                { "label": "--select-- ", "title": "--select--", "value": 0 },
+                { "label": "Father", "title": "Father", "value": 39 },
+                { "label": "Mother", "title": "Mother", "value": 40 },
+                { "label": "YoungerBrother", "title": "YoungerBrother", "value": 41 },
+                { "label": "ElderBrother", "title": "ElderBrother", "value": 42 },
+                { "label": "Self", "title": "Self", "value": 283 },
+                { "label": "YoungerSister", "title": "YoungerSister", "value": 321 },
+                { "label": "ElderSister", "title": "ElderSister", "value": 322 },
+                { "label": "FatherYoungerBrother", "title": "FatherYoungerBrother", "value": 323 },
+                { "label": "FatherElderBrother", "title": "FatherElderBrother", "value": 324 },
+                { "label": "FatherYoungerSister", "title": "FatherYoungerSister", "value": 325 },
+                { "label": "FatherElderSister", "title": "FatherElderSister", "value": 326 },
+                { "label": "MotherYoungerBrother", "title": "MotherYoungerBrother", "value": 327 },
+                { "label": "MotherElderBrother", "title": "MotherElderBrother", "value": 328 },
+                { "label": "MotherYoungerSister", "title": "MotherYoungerSister", "value": 329 },
+                { "label": "MotherElderSister", "title": "MotherElderSister", "value": 320 },
+                { "label": "Spouse", "title": "Spouse", "value": 334 },
+                { "label": "XRelation", "title": "XRelation", "value": 554 },
+                { "label": "GrandFather", "title": "GrandFather", "value": 556 },
+                { "label": "GrandMother", "title": "GrandMother", "value": 557 },
+                { "label": "SisterHusband", "title": "SisterHusband", "value": 558 },
+                { "label": "Friend", "title": "Friend", "value": 559 },
+                { "label": "Relative", "title": "Relative", "value": 560 },
+                { "label": "Uncle", "title": "Uncle", "value": 561 },
+                { "label": "Aunt", "title": "Aunt", "value": 562 }
+
+            ],
+            'newProfessionCatgory': [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "state govt job", "title": "state govt job", "value": 567 },
+                { "label": "central govt job", "title": "central govt job", "value": 568 },
+                { "label": "private job", "title": "private job", "value": 569 },
+                { "label": "doctor", "title": "doctor", "value": 570 },
+                { "label": "business", "title": "business", "value": 571 }
+            ],
+            'gradeSelection': [
+                { "label": "--Select--", "title": "--Select--", "value": "" },
+                { "label": "A", "title": "A", "value": 216 },
+                { "label": "B", "title": "B", "value": 217 },
+                { "label": "C", "title": "C", "value": 218 },
+                { "label": "D", "title": "D", "value": 219 }
+            ],
+            'Complexion': [
+                { "label": "--select-- ", "title": "--select--", "value": "" },
+                { "label": "Very Fair", "title": "Very Fair", "value": 17 },
+                { "label": "Fair", "title": "Fair", "value": 18 },
+                { "label": "Medium", "title": "Medium", "value": 19 },
+                { "label": "Dark", "title": "Dark", "value": 20 },
+                { "label": "Doesn't Matter", "title": "Doesn't Matter", "value": 38 }
+            ]
+
+        });
+
+}());
+
+// (function(){
+//     'use strict';
+
+//     angular
+//         .module('module')
+//         .constant('constant', constant);
+
+// }());
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .factory('commonFactory', factory)
+
+    factory.$inject = ['SelectBindService'];
+
+    function factory(SelectBindService) {
+        var modalpopupopen;
+
+        return {
+            open: function(url, scope, uibModal, size) {
+                modalpopupopen = uibModal.open({
+                    ariaLabelledBy: 'modal-title',
+                    ariaDescribedBy: 'modal-body',
+                    templateUrl: url,
+                    scope: scope,
+                    size: size,
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            },
+            closepopup: function() {
+                modalpopupopen.close();
+            },
+            listSelectedVal: function(val) {
+                var str = null;
+                if (val !== undefined && val !== null && val !== '') {
+                    if (angular.isString(val)) {
+                        str = val === '' ? null : val;
+                    } else {
+                        str = val.join(',');
+                    }
+                }
+                return str;
+            },
+            StateBind: function(parentval) {
+                debugger;
+                var stateArr = [];
+                if (parentval !== undefined && parentval !== null && parentval !== '') {
+                    stateArr.push({ "label": "--select--", "title": "--select--", "value": "" });
+                    SelectBindService.stateSelect(parentval).then(function(response) {
+                        _.each(response.data, function(item) {
+                            stateArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                    });
+                }
+                return stateArr;
+            },
+            districtBind: function(parentval) {
+                var disttrictArr = [];
+                if (parentval !== undefined && parentval !== null && parentval !== '') {
+                    disttrictArr.push({ "label": "--select--", "title": "--select--", "value": "" });
+
+                    SelectBindService.districtSelect(parentval).then(function(response) {
+                        _.each(response.data, function(item) {
+                            disttrictArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                    });
+                }
+                return disttrictArr;
+            },
+            cityBind: function(parentval) {
+                var cityeArr = [];
+                if (parentval !== undefined && parentval !== null && parentval !== '') {
+                    cityeArr.push({ "label": "--select--", "title": "--select--", "value": "" });
+
+                    SelectBindService.citySelect(parentval).then(function(response) {
+                        _.each(response.data, function(item) {
+                            cityeArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                    });
+                }
+                return cityeArr;
+            },
+
+            professionBind: function(parentval) {
+                var professionArr = [];
+                if (parentval !== undefined && parentval !== null && parentval !== '') {
+                    professionArr.push({ "label": "--select--", "title": "--select--", "value": "" });
+
+                    SelectBindService.ProfessionSpecialisation(parentval).then(function(response) {
+                        _.each(response.data, function(item) {
+                            professionArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                    });
+                }
+                return professionArr;
+            },
+            educationGroupBind: function(parentval) {
+
+                var educationGroupArr = [];
+                if (parentval !== undefined && parentval !== null && parentval !== '') {
+                    if (parentval !== undefined && parentval !== null && parentval !== '') {
+                        educationGroupArr.push({ "label": "--select--", "title": "--select--", "value": "" });
+                        SelectBindService.EducationGroup(parentval).then(function(response) {
+                            _.each(response.data, function(item) {
+                                educationGroupArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            });
+                        });
+                    }
+                }
+                return educationGroupArr;
+            },
+            educationSpeciakisationBind: function(parentval) {
+                var educationSpecialArr = [];
+
+                if (parentval !== undefined && parentval !== null && parentval !== '') {
+                    educationSpecialArr.push({ "label": "--select--", "title": "--select--", "value": "" });
+                    SelectBindService.EducationSpecialisation(parentval).then(function(response) {
+                        _.each(response.data, function(item) {
+                            educationSpecialArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                    });
+                }
+                return educationSpecialArr;
+            },
+
+            numbersBind: function(str, from, to) {
+                var numArr = [];
+
+                numArr.push({ "label": "--select--", "title": "--select--", "value": "" });
+                for (var i = from; i <= to; i++) {
+                    numArr.push({ "label": i + " " + str, "title": i + " " + str, "value": i });
+                }
+                return numArr;
+            },
+            numberBindWithZeros: function(str, from, to) {
+                var numArr = [];
+                var y;
+                numArr.push({ "label": str, "title": str, "value": "" });
+                for (var x = from; x <= to; x++) {
+                    if (x < 10)
+                        y = ("0" + x);
+                    else
+                        y = x;
+                    numArr.push({ "label": y, "title": y, "value": parseInt(y) });
+                }
+                return numArr;
+            },
+            starBind: function(parentval) {
+                var starArr = [];
+                if (parentval !== undefined && parentval !== null && parentval !== '') {
+                    starArr.push({ "label": "--select--", "title": "--select--", "value": "" });
+                    SelectBindService.stars(parentval).then(function(response) {
+                        _.each(response.data, function(item) {
+                            starArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                    });
+                }
+                return starArr;
+            },
+            casteDepedency: function(parentval1, parentval2) {
+                var casteArr = [];
+                parentval1 = parentval1 === null || parentval1 === undefined ? '' : parentval1;
+                parentval2 = parentval2 === null || parentval2 === undefined ? '' : parentval2;
+                casteArr.push({ "label": "--select--", "title": "--select--", "value": "" });
+                SelectBindService.castedependency(parentval1, parentval2).then(function(response) {
+                    _.each(response.data, function(item) {
+                        casteArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                    });
+                });
+                return casteArr;
+            },
+            subCaste: function(parentval1) {
+                var subcasteArr = [];
+                if (parentval1 !== undefined && parentval1 !== null && parentval1 !== '') {
+                    subcasteArr.push({ "label": "--select--", "title": "--select--", "value": "" });
+                    SelectBindService.subCasteBind(parentval1).then(function(response) {
+                        _.each(response.data, function(item) {
+                            subcasteArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                    });
+                }
+                return subcasteArr;
+            },
+            branch: function(parentval1) {
+                var branchArr = [];
+                if (parentval1 !== undefined && parentval1 !== null && parentval1 !== '') {
+                    branchArr.push({ "label": "--select--", "title": "--select--", "value": "" });
+                    SelectBindService.branch(parentval1).then(function(response) {
+                        _.each(response.data, function(item) {
+                            branchArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                        });
+                    });
+                }
+                return branchArr;
+            },
+            showConfirm: function(ev, mdDialog, header, okTxt, cancelTxt) {
+
+                var status = false;
+                var confirm = mdDialog.confirm()
+                    .title(header)
+                    //.textContent('All of the banks have agreed to forgive you your debts.')
+                    .ariaLabel('Lucky day')
+                    //.targetEvent(ev)
+                    .cancel(cancelTxt)
+                    .ok(okTxt);
+
+                return confirm;
+
+            },
+            checkvals: function(val) {
+                return (val !== undefined && val !== null && val !== '') ? true : false;
+            },
+            convertDateFormat: function(val, format) {
+
+                format = format || 'DD-MM-YYYY';
+                if (val !== undefined && val !== null && val !== '') {
+                    return moment(val, format).format();
+                } else {
+                    return '';
+                }
+            },
+
+            AstroCity: function(countryName, stateName) {
+
+                var AstrocityArr = [];
+                AstrocityArr.push({ "label": "--select--", "title": "--select--", "value": "" });
+                SelectBindService.AstroCities(countryName, stateName).then(function(response) {
+                    debugger;
+                    _.each(response.data, function(item) {
+                        AstrocityArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                    });
+                });
+                return AstrocityArr;
+            }
+
+
+
+
+        };
+
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .directive('contactDirective', directive);
+
+    directive.$inject = ['SelectBindService', 'commonFactory', '$mdDialog'];
+
+    function directive(SelectBindService, commonFactory, mdDialog) {
+
+        var directive = {
+            link: link,
+            restrict: 'EA',
+            scope: {
+                dmobile: '=',
+                strmobile: '=',
+                dalternative: '=',
+                stralternative: '=',
+                dland: '=',
+                strareacode: '=',
+                strland: '=',
+                strmail: '=',
+                emailhide: '='
+            },
+            templateUrl: 'common/templates/contacttemplate.html'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+
+            scope.amob = (scope.stralternative !== null && scope.stralternative !== '' && scope.stralternative !== undefined) ? true : false;
+            scope.land = (scope.strareacode !== null && scope.strareacode !== '' && scope.strareacode !== undefined) ? true : false;
+            scope.mail = (scope.strmail !== null && scope.strmail !== '' && scope.strmail !== undefined) ? true : false;
+            scope.pmob = (scope.strmobile !== null && scope.strmobile !== '' && scope.strmobile !== undefined) ? true : false;
+
+            scope.showhidemob = function(ev, type) {
+
+                scope.confirm = null;
+                switch (type) {
+                    case 'mob':
+                        if (scope.pmob === false) {
+                            scope.pmob = true;
+                        } else {
+                            var lNaumber = scope.strland;
+                            scope.checkMobile(ev, lNaumber, 'land', 'landline');
+                        }
+                        break;
+
+                    case 'land':
+
+                        var lNaumber1 = scope.stralternative;
+                        scope.checkMobile(ev, lNaumber1, 'mob', 'alternative');
+                        break;
+
+                    case 'mail':
+                        scope.mail = true;
+                        break;
+                }
+
+            };
+
+            scope.checkMobile = function(ev, strval, type, strdisplay) {
+                if (strval !== "" && strval !== undefined && strval !== null) {
+                    scope.confirm = commonFactory.showConfirm(ev, mdDialog, 'Are You Sure To Delete ' + strdisplay + ' Number', 'delete', 'cancel');
+                    scope.test(type);
+
+                } else {
+                    scope.clear(type);
+                }
+            };
+            scope.clear = function(type) {
+
+                if (type === 'mob') {
+                    scope.amob = false;
+                    scope.land = true;
+                    scope.dalternative = "";
+                    scope.stralternative = "";
+                } else {
+                    scope.amob = true;
+                    scope.land = false;
+                    scope.dland = "";
+                    scope.strareacode = "";
+                    scope.strland = "";
+
+                }
+            };
+
+            scope.test = function(type) {
+
+                mdDialog.show(scope.confirm).then(function() {
+
+                    scope.clear(type);
+
+                }, function() {
+
+                });
+            };
+        }
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .directive('countryDirective', directive);
+
+    directive.$inject = ['SelectBindService', 'commonFactory'];
+
+    function directive(SelectBindService, commonFactory) {
+
+        var directive = {
+            link: link,
+            restrict: 'EA',
+            scope: {
+                countryshow: '=',
+                cityshow: '=',
+                dcountry: '=',
+                dstate: '=',
+                ddistrict: '=',
+                dcity: '=',
+                othercity: '=',
+                strothercity: '=',
+                require: '='
+            },
+            templateUrl: 'common/templates/countryTemplate.html'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+
+            // scope.model = countryArrayModel;
+            if (scope.countryshow === true) {
+
+                if (scope.dcountry !== undefined) {
+                    scope.stateArr = commonFactory.StateBind(scope.dcountry);
+                }
+            } else {
+                scope.dcountry = '1';
+                SelectBindService.stateSelect('1').then(function(response) {
+                    scope.stateArr = [];
+                    scope.stateArr.push({ "label": "--select--", "title": "--select--", "value": "" });
+                    _.each(response.data, function(item) {
+                        scope.stateArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                    });
+                });
+            }
+            if ((scope.dcountry === '1' || scope.dcountry === 1) && scope.dstate !== undefined) {
+                scope.districtArr = commonFactory.districtBind(scope.dstate);
+            } else {
+                if (scope.dstate !== undefined) {
+                    scope.cityeArr = commonFactory.districtBind(scope.dstate);
+                }
+            }
+
+            if (scope.cityshow === true && scope.cityeArr === undefined) {
+                if (scope.ddistrict !== undefined) {
+                    scope.cityeArr = commonFactory.cityBind(scope.ddistrict);
+                }
+            }
+
+            scope.changeBind = function(type, parentval, countryVal) {
+
+                switch (type) {
+                    case 'Country':
+                        scope.stateArr = commonFactory.StateBind(parentval);
+                        break;
+
+                    case 'State':
+                        if (countryVal === '1' || countryVal === 1) {
+                            scope.districtArr = commonFactory.districtBind(parentval);
+                        } else {
+                            scope.districtArr = [];
+                            scope.cityeArr = commonFactory.districtBind(parentval);
+                        }
+                        break;
+
+                    case 'District':
+                        if (scope.cityshow === true) {
+                            scope.cityeArr = commonFactory.cityBind(parentval);
+                        }
+                        break;
+                }
+
+            };
+            scope.ShowCity = function() {
+                scope.cityinput = true;
+                scope.dcity = '';
+            };
+
+
+
+        }
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .directive('datePicker', directive);
+
+    function directive() {
+
+        var directive = {
+            link: link,
+            restrict: 'EA',
+            scope: {
+                strdate: '='
+            },
+            template: '<p class="input-group">' +
+                '<input type="text" class="form-control" style="width:84%;"  uib-datepicker-popup="MM/dd/yyyy"  ng-model="strdate" is-open="showdate"  show-button-bar="false" close-text="Close" />' +
+                '<span class="input-group-btn">' +
+                '<button type="button" class="btn btn-default" style="position: relative;height: 5%;height: 30px;display:block;" ng-click="open2()"><ng-md-icon icon="perm_contact_calendar" style="fill:#665454" size="20"></ng-md-icon></button>' +
+                '</span></p>'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+
+            if (scope.strdate !== '' && scope.strdate !== undefined && scope.strdate !== null)
+                scope.strdate = new Date(scope.strdate); //moment(new Date()).format();
+            scope.showdate = false;
+
+            scope.open2 = function() {
+                scope.showdate = true;
+            };
+
+        }
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .factory('alert', factory)
+
+    factory.$inject = ['$mdDialog', '$uibModal', '$timeout'];
+
+    function factory($mdDialog, uibModal, timeout) {
+        var modalinstance, forgetpassword;
+
+        return {
+            open: function(msg, classname) {
+                classname = classname || "success";
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": true,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": app.global.alertType,
+                    "preventDuplicates": false,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": 3000,
+                    "extendedTimeOut": 2000,
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut",
+                    "onclick": null
+                };
+                switch (classname) {
+                    case 'success':
+                        toastr.success(msg, "done");
+                        break;
+                    case 'error':
+                        toastr.error(msg, 'Oops');
+                        break;
+                    case 'warning':
+                        toastr.warning(msg, 'Alert');
+                        break;
+                    case 'info':
+                        toastr.info(msg, 'Info');
+                        break;
+                    default:
+                        toastr.success(msg, 'Done');
+                        break;
+                }
+            },
+            dynamicpopup: function(url, $scope, uibModal, size) {
+                modalinstance = uibModal.open({
+                    ariaLabelledBy: 'modal-title',
+                    ariaDescribedBy: 'modal-body',
+                    templateUrl: url,
+                    scope: $scope,
+                    size: size || 'lg',
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            },
+            dynamicpopupclose: function() {
+                modalinstance.close();
+            },
+
+            mddiologcancel: function() {
+                $mdDialog.hide();
+            },
+            timeoutoldalerts: function($scope, cls, msg, time) {
+                debugger;
+                $scope.typecls = cls;
+                $scope.msgs = msg;
+                modalinstance = uibModal.open({
+                    ariaLabelledBy: 'modal-title',
+                    ariaDescribedBy: 'modal-body',
+                    template: '<div class=' + cls + '><div class="modal-header"><a href="javascript:void(0);" ng-click="close();"><ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="20"></ng-md-icon></a><h4 class="modal-title"><center>Alert</center></h4></div></div><div class="modal-body" id="modalbodyID"><p class="text-center" style="color:black;">' + msg + '</p></div><div class="modal-footer"><button type="button" class="btn btn-default" ng-click="close();">Close</button></div>',
+                    $scope: $scope
+                });
+
+                timeout(function() {
+                    modalinstance.close();
+                }, time || 9500);
+
+                $scope.close = function() {
+                    modalinstance.close();
+                };
+            }
+
+
+        };
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .directive('editFooter', directive);
+
+    function directive() {
+
+        var directive = {
+            link: link,
+            restrict: 'EA',
+            template: '<div class="col-lg-9">' +
+                '<button class="button_custom  pull-right"  ng-disabled="loading"  type="submit" promise-btn="page.model.submitPromise">Submit</button>' +
+                '</div>' +
+                ' <div class="col-lg-3">' +
+                '<input value="Cancel"  class="button_custom button_custom_reset pull-right" ng-click="page.model.cancel();" type="button">' +
+                ' </div>'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {}
+    }
+
+})();
+// AngularJS: 1.3.15
+// bootstrap-multiselect: 0.9.6
+//var statticdata=require('./staticArrayBindings.json');
+
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .directive('multiselectdropdown', directive);
+
+    directive.$inject = ['arrayConstantsEdit', '$timeout', 'eduprofArrayModel', 'countryArrayModel', 'otherArrayModel'];
+
+    function directive(cons, timeout, eduprofArrayModel, countryArrayModel, otherArrayModel) {
+
+        var directive = {
+            link: link,
+            restrict: 'EA',
+            require: 'ng-model',
+            scope: {
+                ngModel: '=',
+                typeofdata: "=",
+                parentVal: "="
+            }
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+            scope.options = [];
+            var profmodel = eduprofArrayModel,
+                countrymodel = countryArrayModel,
+                othermodel = otherArrayModel;
+            scope.databind = function(data) {
+                timeout(function() {
+                    scope.status = 'multiple' in attrs;
+                    if (scope.status === true && data[0] !== undefined && angular.lowercase(data[0].title) === '--select--') {
+                        data.splice(0, 1);
+                    }
+                    element.multiselect('dataprovider', data);
+                }, 500);
+            };
+            timeout(function() {
+                element.multiselect('select', scope.ngModel);
+
+            }, 500);
+            timeout(function() {
+                switch (scope.typeofdata) {
+                    case 'MaritalStatus':
+                        scope.databind(cons.MaritalStatus);
+                        break;
+                    case 'height':
+                        scope.databind(cons.height);
+                        break;
+                    case 'Religion':
+                        scope.databind(cons.Religion);
+                        break;
+                    case 'Mothertongue':
+                        scope.databind(cons.Mothertongue);
+                        break;
+                    case 'Mothertongueselect':
+                        scope.databind(cons.Mothertongueselect);
+                        break;
+                    case 'educationcategory':
+                        scope.databind(cons.educationcategory);
+                        break;
+                    case 'visastatus':
+                        scope.databind(cons.visastatus);
+                        break;
+                    case 'stars':
+                        scope.databind(cons.stars);
+                        break;
+                    case 'region':
+                        scope.databind(cons.region);
+                        break;
+                    case 'bodyType':
+                        scope.databind(cons.bodyType);
+                        break;
+                    case 'bloodGroup':
+                        scope.databind(cons.bloodGroup);
+                        break;
+                    case 'healthCondition':
+                        scope.databind(cons.healthCondition);
+                        break;
+                    case 'starLanguage':
+                        scope.databind(cons.starLanguage);
+                        break;
+                    case 'lagnam':
+                        scope.databind(cons.lagnam);
+                        break;
+                    case 'ZodaicSign':
+                        scope.databind(cons.ZodaicSign);
+                        break;
+                    case 'paadam':
+                        scope.databind(cons.paadam);
+                        break;
+                    case 'familyStatus':
+                        scope.databind(cons.familyStatus);
+                        break;
+                    case 'RelationshipType':
+                        scope.databind(cons.RelationshipType);
+                        break;
+                    case "childStayingWith":
+                        scope.databind(cons.childStayingWith);
+                        break;
+                    case 'hereabout':
+                        scope.databind(cons.hereabout);
+                        break;
+                    case 'improveourwebsite':
+                        scope.databind(cons.improveourwebsite);
+                        break;
+                    case 'prices':
+                        scope.databind(cons.prices);
+                        break;
+                    case 'downloadtime':
+                        scope.databind(cons.downloadtime);
+                        break;
+                    case 'yourratethesearch':
+                        scope.databind(cons.yourratethesearch);
+                        break;
+                    case 'comparesites':
+                        scope.databind(cons.comparesites);
+                        break;
+                    case 'recomendedtofriends':
+                        scope.databind(cons.recomendedtofriends);
+                        break;
+
+                    case 'newProfessionCatgory':
+                        scope.databind(cons.newProfessionCatgory);
+                        break;
+                    case 'gradeSelection':
+                        scope.databind(cons.gradeSelection);
+                        break;
+                    case 'Country':
+                        scope.databind(countrymodel.Country);
+                        break;
+                    case 'ProfCatgory':
+
+                        scope.databind(profmodel.ProfCatgory);
+                        break;
+
+                    case 'ProfGroup':
+                        scope.databind(profmodel.ProfGroup);
+                        break;
+
+                    case 'indiaStates':
+                        scope.databind(countrymodel.IndiaStates);
+                        break;
+
+                    case 'countryCode':
+                        scope.databind(countrymodel.countryCode);
+                        break;
+
+                    case 'caste':
+                    case 'Caste':
+                        scope.databind(othermodel.caste);
+                        break;
+
+                    case 'currency':
+                        scope.databind(countrymodel.currency);
+                        break;
+
+                    case 'catgory':
+                        scope.databind(cons.catgory);
+                        break;
+
+                    case 'Priority':
+                        scope.databind(cons.Priority);
+                        break;
+                    case 'Age':
+                    case 'Ageselect':
+                        var test = [];
+                        test.push({ label: "--select--", title: "--select--", value: "0" });
+                        for (var i = 18; i < 78; i++) {
+                            if (scope.typeofdata === "Ageselect") {
+                                test.push({ "label": i + ' years', "title": i + ' years', "value": i });
+                            } else {
+                                test.push({ "label": i, "title": i, "value": i });
+                            }
+                        }
+                        scope.databind(test);
+                        break;
+
+                    case "Complexion":
+                        scope.databind(cons.Complexion);
+                        break;
+                }
+            }, 1000);
+            element.multiselect({
+                buttonClass: 'btn',
+                buttonWidth: 'auto',
+                inheritClass: true,
+                includeSelectAllOption: true,
+                disableIfEmpty: true,
+                nonSelectedText: 'Any',
+                allSelectedText: 'All Selected',
+                selectAllText: 'Check all!',
+                enableFiltering: true,
+                enableCaseInsensitiveFiltering: true,
+                filterPlaceholder: 'Type To Search',
+                buttonContainer: '<div class="btn-group" />',
+                maxHeight: false
+            });
+
+            scope.$watch(function() {
+                return element[0].length;
+            }, function() {
+                scope.$applyAsync(element.multiselect('rebuild'));
+                element.multiselect('select', scope.ngModel);
+            });
+            // Watch for any changes from outside the directive and refresh
+            scope.$watch(attrs.ngModel, function() {
+                element.multiselect('refresh');
+            });
+
+
+        }
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .directive('pageReview', directive);
+
+    directive.$inject = ['commonFactory', '$uibModal', 'baseService'];
+
+    function directive(commonFactory, uibModal, baseService) {
+
+        var directive = {
+            link: link,
+            restrict: 'E',
+            scope: {
+                sectionid: '=',
+                dispalyName: '=',
+                custid: '='
+            },
+            template: "<div class='employee_review_check clearfix' ng-show='showChk'>" +
+                "<md-checkbox ng-model='val' page-Review style='padding: 9px 13px 0px 0px;' ng-change='reviewonchange(val);' class='pull-right' name='chkboxedu' ><span style='color: black;'>Review</span>" +
+                "</md-checkbox>" +
+                "<div class='clearfix'></div>" +
+                "</div>",
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+            scope.showChk = true;
+            scope.reviewonchange = function(booltype) {
+
+                if (booltype === true) {
+                    scope.reviewdisplay = scope.dispalyName;
+                    commonFactory.open('common/templates/reviewConfirmationPopup.html', scope, uibModal, 'sm');
+
+                }
+            };
+
+            scope.reviewSubmit = function() {
+                baseService.menuReviewstatus(scope.custid, '1', scope.sectionid).then(function(response) {
+
+                    if (response.data != undefined && response.data.length > 0) {
+                        if (JSON.parse(response.data[0])[0].Status === 1) {
+                            commonFactory.closepopup();
+                            scope.showChk = false;
+                        }
+                    }
+                });
+            };
+            scope.cancel = function() {
+                commonFactory.closepopup();
+            };
+
+        }
+    }
+
+})();
+(function(angular) {
+    'use strict';
+
+
+    function factory($http, service) {
+        var model = {};
+
+        model.init = function() {
+            model.Countryf();
+            model.stateSelectf();
+            model.countryCodeselectf();
+            model.currencyf();
+            return model;
+        };
+
+        model.Countryf = function() {
+            service.countrySelect().then(function(response) {
+                var option = [];
+                option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                _.each(response.data, function(item) {
+                    option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                });
+                model.Country = option;
+            });
+        };
+
+        model.stateSelectf = function() {
+            service.stateSelect('1').then(function(response) {
+                var option = [];
+                option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                _.each(response.data, function(item) {
+                    option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                });
+                model.IndiaStates = option;
+            });
+        };
+
+        model.countryCodeselectf = function() {
+            service.countryCodeselect().then(function(response) {
+                var option = [];
+                option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                _.each(response.data, function(item) {
+                    option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                });
+                model.countryCode = option;
+            });
+        };
+
+        model.currencyf = function() {
+            service.currency().then(function(response) {
+                var option = [];
+                option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                _.each(response.data, function(item) {
+                    option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                });
+                model.currency = option;
+            });
+        };
+
+
+        return model.init();
+    }
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .factory('countryArrayModel', factory)
+
+    factory.$inject = ['$http', 'SelectBindService'];
+
+})(angular);
+(function(angular) {
+    'use strict';
+
+
+    function factory($http, service) {
+        var model = {};
+
+        model.init = function() {
+            model.ProfCatgoryf();
+            model.ProfessionGroupf();
+            return model;
+        };
+
+        model.ProfCatgoryf = function() {
+            service.ProfessionCatgory().then(function(response) {
+                var option = [];
+                option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                _.each(response.data, function(item) {
+                    option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                });
+                model.ProfCatgory = option;
+            });
+        };
+
+        model.ProfessionGroupf = function() {
+            service.ProfessionGroup().then(function(response) {
+                var option = [];
+                option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                _.each(response.data, function(item) {
+                    option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                });
+                model.ProfGroup = option;
+            });
+        };
+
+        return model.init();
+    }
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .factory('eduprofArrayModel', factory)
+
+    factory.$inject = ['$http', 'SelectBindService'];
+
+})(angular);
+(function(angular) {
+    'use strict';
+
+
+    function factory($http, service) {
+        var model = {};
+
+        model.init = function() {
+            model.casteselectf();
+            return model;
+        };
+
+
+        model.casteselectf = function() {
+            service.casteselect().then(function(response) {
+                var option = [];
+                option.push({ "label": "--select--", "title": "--select--", "value": "" });
+                _.each(response.data, function(item) {
+                    option.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                });
+                model.caste = option;
+            });
+        };
+
+        return model.init();
+    }
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .factory('otherArrayModel', factory)
+
+    factory.$inject = ['$http', 'SelectBindService'];
+
+})(angular);
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .factory('authSvc', factory)
+
+    factory.$inject = ['$injector'];
+
+    function factory($injector) {
+        function setUser(value) {
+            //console.log(value);
+            setSession('cust.id', value.CustID);
+            setSession('cust.username', (value.FirstName + ' ' + value.LastName));
+            setSession('cust.profileid', (value.ProfileID));
+            setSession('cust.paidstatus', (value.PaidStatus));
+            setSession('cust.profilepic', (value.ProfilePic));
+        }
+
+        function getSession(key) {
+            return sessionStorage.getItem(key);
+        }
+
+        function setSession(key, value) {
+            if (value === undefined || value === null) {
+                clearSession(key);
+            } else {
+                sessionStorage.setItem(key, value);
+            }
+        }
+
+        function clearSession(key) {
+            sessionStorage.removeItem(key);
+        }
+
+        function clearUserSession() {
+
+            clearSession('cust.id');
+            clearSession('cust.username');
+            clearSession('cust.profileid');
+            clearSession('cust.paidstatus');
+            clearSession('cust.profilepic');
+            clearSession('cust.GenderID');
+        }
+
+        function getUser() {
+            return {
+                custid: 91022,
+                //111070,
+                username: getSession('cust.username'),
+                profileid: getSession('cust.profileid'),
+                paidstatus: getSession('cust.paidstatus'),
+                profilepic: getSession('cust.profilepic'),
+                GenderID: getSession('cust.GenderID')
+            };
+        }
+
+        return {
+            user: function(value) {
+                if (value) {
+                    setUser(value);
+                }
+                return getUser();
+            },
+            isAuthenticated: function() {
+                return !!getSession('cust.id');
+            },
+            getCustId: function() {
+                return 91022;
+            },
+            getProfileid: function() {
+                return getSession('cust.profileid');
+            },
+            getpaidstatus: function() {
+                return getSession('cust.paidstatus');
+            },
+            getprofilepic: function() {
+                return getSession('cust.profilepic');
+            },
+            getGenderID: function() {
+                return getSession('cust.GenderID');
+            },
+            clearUserSessionDetails: function() {
+                return clearUserSession();
+            },
+            logout: function() {
+                clearUserSession();
+                window.location = "#/";
+            },
+            login: function(username, password) {
+
+                var body = {
+                    Username: username,
+                    Password: password
+                };
+                return $injector.invoke(function($http) {
+                    return $http.post(app.apiroot + 'DB/userLogin/person', body)
+                        .then(function(response) {
+                            if (response.status === 200) {
+
+                                return { success: true, response: response.data };
+                            }
+                            return { success: false, response: response.data };
+                        });
+                });
+            }
+        };
+    }
+})();
+(function(editviewapp) {
+    'use strict';
+    editviewapp.factory('errorInterceptor', ['$rootScope', '$q', function($rootScope, $q) {
+        return {
+            request: function(config) {
+                $rootScope.$broadcast('request-start');
+                config.headers = config.headers || {};
+                return config;
+            },
+            responseError: function(rejection) {
+                $rootScope.$broadcast('request-fail');
+                $rootScope.$broadcast('notify-error', rejection);
+                return $q.reject(rejection);
+            },
+            response: function(config) {
+                $rootScope.$broadcast('request-end');
+                var deferred = $q.defer();
+                deferred.resolve(config);
+                return deferred.promise;
+            }
+        };
+    }]);
+    angular.module('KaakateeyaEmpEdit').config(['$httpProvider', function($httpProvider) {
+        $httpProvider.interceptors.push('errorInterceptor');
+    }]);
+}(window.editviewapp));
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .service('fileUpload', service)
+
+    service.$inject = ['$http'];
+
+    function service($http) {
+        this.uploadFileToUrl = function(file, uploadUrl, keyname) {
+            var fd = new FormData();
+            fd.append('file', file);
+            fd.append('keyname', keyname);
+            return $http.post(uploadUrl, fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            });
+        };
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .factory('SelectBindService', factory)
+
+    factory.$inject = ['$http'];
+
+    function factory(http) {
+        return {
+            countrySelect: function() {
+                return http.get(editviewapp.apipath + 'Dependency/getCountryDependency', { params: { dependencyName: "", dependencyValue: "" } });
+            },
+            stateSelect: function(dependencyVal) {
+
+                return http.get(editviewapp.apipath + 'Dependency/getCountryDependency', { params: { dependencyName: "state", dependencyValue: dependencyVal } });
+            },
+            districtSelect: function(dependencyVal1) {
+                return http.get(editviewapp.apipath + 'Dependency/getCountryDependency', { params: { dependencyName: "distric", dependencyValue: dependencyVal1 } });
+            },
+            citySelect: function(dependencyVal2) {
+
+                return http.get(editviewapp.apipath + 'Dependency/getCountryDependency', { params: { dependencyName: "city", dependencyValue: dependencyVal2 } });
+            },
+            EducationCatgory: function() {
+                return http.get(editviewapp.apipath + 'Dependency/getEducationDependency', { params: { dependencyName: "", dependencyValue: "" } });
+            },
+            EducationGroup: function(dependencyVal2) {
+
+                return http.get(editviewapp.apipath + 'Dependency/getEducationDependency', { params: { dependencyName: "educationGroup", dependencyValue: dependencyVal2 } });
+            },
+            EducationSpecialisation: function(dependencyVal2) {
+
+                return http.get(editviewapp.apipath + 'Dependency/getEducationDependency', { params: { dependencyName: "educationSpeacialisation", dependencyValue: dependencyVal2 } });
+            },
+            ProfessionCatgory: function() {
+                return http.get(editviewapp.apipath + 'Dependency/getProfessionDependency', { params: { dependencyName: "ProfessionCategory", dependencyValue: "" } });
+            },
+            ProfessionGroup: function() {
+                return http.get(editviewapp.apipath + 'Dependency/getProfessionDependency', { params: { dependencyName: "", dependencyValue: "" } });
+            },
+            ProfessionSpecialisation: function(dependencyVal2) {
+
+                return http.get(editviewapp.apipath + 'Dependency/getProfessionDependency', { params: { dependencyName: "ProfessionSpecialisation", dependencyValue: dependencyVal2 } });
+            },
+            casteselect: function() {
+
+                return http.get(editviewapp.apipath + 'Dependency/getDropdown_filling_values', { params: { strDropdownname: "CasteName" } });
+            },
+            countryCodeselect: function() {
+
+                return http.get(editviewapp.apipath + 'Dependency/getDropdown_filling_values', { params: { strDropdownname: "CountryCode" } });
+            },
+            currency: function() {
+
+                return http.get(editviewapp.apipath + 'Dependency/getDropdownValues_dependency_injection', { params: { dependencyName: 'Currency', dependencyValue: '', dependencyflagID: '' } });
+            },
+            stars: function(obj) {
+                return http.get(editviewapp.apipath + 'Dependency/getDropdownValues_dependency_injection', { params: { dependencyName: 'StarType', dependencyValue: obj, dependencyflagID: '' } });
+            },
+            castedependency: function(obj1, obj2) {
+
+                return http.get(editviewapp.apipath + 'Dependency/getDropdownValues_dependency_injection', { params: { dependencyName: 'Caste', dependencyValue: obj1, dependencyflagID: obj2 } });
+            },
+            subCasteBind: function(obj1) {
+
+                return http.get(editviewapp.apipath + 'Dependency/getDropdownValues_dependency_injection', { params: { dependencyName: 'SubCaste', dependencyValue: obj1, dependencyflagID: '' } });
+            },
+            branch: function(obj1) {
+
+                return http.get(editviewapp.apipath + 'Dependency/getDropdownValues_dependency_injection', { params: { dependencyName: 'Region', dependencyValue: obj1, dependencyflagID: '' } });
+            },
+            AstroCities: function(countryName, statename) {
+                return http.get(editviewapp.apipath + 'Dependency/getDropdownValues_dependency_injection', { params: { dependencyName: 'Horo', dependencyValue: countryName, dependencyflagID: statename } });
+            },
+            DeleteSection: function(obj) {
+                console.log(JSON.stringify(obj));
+                return http.get(editviewapp.apipath + 'CustomerPersonalUpdate/getCustomerSectionsDeletions', { params: { sectioname: obj.sectioname, CustID: obj.CustID, identityid: obj.identityid } });
+            }
+
+        };
+    }
+})();
 angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCache) {
   'use strict';
 
@@ -4830,6 +6549,8 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <!-- jQuery -->\r" +
     "\n" +
+    "    <!-- SCRIPTS DATA --#>\r" +
+    "\n" +
     "    <script src=\"node_modules/jquery/dist/jquery.min.js\"></script>\r" +
     "\n" +
     "    <script src=\"bower_components/bootstrap/dist/js/bootstrap.min.js\"></script>\r" +
@@ -4884,10 +6605,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script src=\"commonpage.js\" type=\"text/javascript\"></script>\r" +
     "\n" +
-    "    <!--<script src=\"directives\\dynamicSlideshow.js\" type=\"text/javascript\"></script>\r" +
-    "\n" +
-    "    <script src=\"directives\\photosSlideshowService.js\" type=\"text/javascript\"></script>-->\r" +
-    "\n" +
     "\r" +
     "\n" +
     "    <script src=\"https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js\" type=\"text/javascript\"></script>\r" +
@@ -4896,13 +6613,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <!--<script src=\"common/controllers/LoaderCtrl.js\" type=\"text/javascript\"></script>-->\r" +
+    "\r" +
     "\n" +
     "    <script src=\"common/services/errorInterceptor.js\" type=\"text/javascript\"></script>\r" +
-    "\n" +
-    "    <!--<script src=\"common\\services\\route.js\" type=\"text/javascript\"></script>\r" +
-    "\n" +
-    "    <script src=\"directives\\testingslide.js\" type=\"text/javascript\"></script>-->\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -4948,11 +6661,21 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script src=\"common/directives/pageReviewDirective.js\" type=\"text/javascript\"></script>\r" +
     "\n" +
+    "    <!--SCRIPTS END-->\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
+    "\n" +
+    "    <!-- SCRIPTSP DATA -->\r" +
+    "\n" +
+    "    <script src=\"dist/js/main.min.js\"></script>\r" +
+    "\n" +
+    "    <!--SCRIPTSP END-->\r" +
     "\n" +
     "\r" +
     "\n" +

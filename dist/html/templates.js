@@ -306,6 +306,8 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <!-- jQuery -->\r" +
     "\n" +
+    "    <!-- SCRIPTS DATA --#>\r" +
+    "\n" +
     "    <script src=\"node_modules/jquery/dist/jquery.min.js\"></script>\r" +
     "\n" +
     "    <script src=\"bower_components/bootstrap/dist/js/bootstrap.min.js\"></script>\r" +
@@ -360,10 +362,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script src=\"commonpage.js\" type=\"text/javascript\"></script>\r" +
     "\n" +
-    "    <!--<script src=\"directives\\dynamicSlideshow.js\" type=\"text/javascript\"></script>\r" +
-    "\n" +
-    "    <script src=\"directives\\photosSlideshowService.js\" type=\"text/javascript\"></script>-->\r" +
-    "\n" +
     "\r" +
     "\n" +
     "    <script src=\"https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js\" type=\"text/javascript\"></script>\r" +
@@ -372,13 +370,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <!--<script src=\"common/controllers/LoaderCtrl.js\" type=\"text/javascript\"></script>-->\r" +
+    "\r" +
     "\n" +
     "    <script src=\"common/services/errorInterceptor.js\" type=\"text/javascript\"></script>\r" +
-    "\n" +
-    "    <!--<script src=\"common\\services\\route.js\" type=\"text/javascript\"></script>\r" +
-    "\n" +
-    "    <script src=\"directives\\testingslide.js\" type=\"text/javascript\"></script>-->\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -424,11 +418,21 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script src=\"common/directives/pageReviewDirective.js\" type=\"text/javascript\"></script>\r" +
     "\n" +
+    "    <!--SCRIPTS END-->\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
+    "\n" +
+    "    <!-- SCRIPTSP DATA -->\r" +
+    "\n" +
+    "    <script src=\"dist/js/main.min.js\"></script>\r" +
+    "\n" +
+    "    <!--SCRIPTSP END-->\r" +
     "\n" +
     "\r" +
     "\n" +
