@@ -1,4 +1,6 @@
-<div class="edit_pages_content_main clearfix">
+<div ng-include="'templates/sideMenu.html'">
+</div>
+<div class="edit_pages_content_main clearfix" class="right_col">
 
     <page-review dispaly-name="'Astro details'" sectionid="'23'" custid="page.model.CustID"></page-review>
 
@@ -9,6 +11,7 @@
                 <div ng-if="page.model.AstroArr.length==0" cssclass="edit_page_add_button">
                     <a ng-click="page.model.populateAstro();" class="edit_page_add_button" href="javascript:void(0);">Add</a>
                 </div>
+
             </div>
         </div>
         <div class="edit_page_details_item">
