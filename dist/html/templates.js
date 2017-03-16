@@ -110,6 +110,16 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div ui-view=\"lazyLoadView\">\r" +
     "\n" +
+    "                <div ng-include=\"'templates/sideMenu.html'\">\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ui-view=\"content\">\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "            </div>\r" +
     "\n" +
     "            <div ui-view=\"bottompanel\">\r" +
@@ -254,11 +264,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <!-- SCRIPTSP DATA -->\r" +
-    "\n" +
-    "    <script src=\"dist/js/main.min.js\"></script>\r" +
-    "\n" +
-    "    <!--SCRIPTSP END-->\r" +
+    "    <!-- SCRIPTSP DATA --><script src=\"dist/js/main.min.js\"></script><!--SCRIPTSP END-->\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -3015,9 +3021,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
   $templateCache.put('app/editEducation/index.html',
     "<div class=\"edit_pages_content_main clearfix\" class=\"right_col\">\r" +
     "\n" +
-    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
-    "\n" +
-    "    </div>\r" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
