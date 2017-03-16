@@ -6376,7 +6376,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <!-- jQuery -->\r" +
     "\n" +
-    "    <!-- SCRIPTS DATA -->\r" +
+    "    <!-- SCRIPTS DATA --#>\r" +
     "\n" +
     "    <script src=\"node_modules/jquery/dist/jquery.min.js\"></script>\r" +
     "\n" +
@@ -6504,7 +6504,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <!-- SCRIPTSP DATA --#><script src=\"dist/js/main.min.js\"></script><!--SCRIPTSP END-->\r" +
+    "    <!-- SCRIPTSP DATA -->\r" +
+    "\n" +
+    "    <script src=\"dist/js/main.min.js\"></script>\r" +
+    "\n" +
+    "    <!--SCRIPTSP END-->\r" +
     "\n" +
     "\r" +
     "\n" +
