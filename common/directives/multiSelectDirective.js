@@ -162,7 +162,8 @@
                     case 'catgory':
                         scope.databind(cons.catgory);
                         break;
-
+                    case 'getrelationships':
+                        scope.databind(scope.parentVal);
                     case 'Priority':
                         scope.databind(cons.Priority);
                         break;
@@ -183,6 +184,9 @@
                     case "Complexion":
                         scope.databind(cons.Complexion);
                         break;
+
+                    case 'getrelationships':
+                        scope.databind(scope.parentVal);
                 }
             }, 1000);
             element.multiselect({

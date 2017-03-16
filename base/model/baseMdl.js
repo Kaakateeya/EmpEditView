@@ -6,13 +6,14 @@
         var model = {};
         // var logincustid = authSvc.getCustId();
         var CustID = stateParams.CustID;
-
+        model.lnkeducationandprofReview = false;
         model.scope = {};
         model.init = function() {
+            model.unreviewedLinks();
             baseService.personalDetails(CustID).then(function(response) {
                 debugger;
                 model.PersonalObj = response.data;
-                model.imgsrc = authSvc.getprofilepic();
+                // model.imgsrc = authSvc.getprofilepic();
 
                 console.log(response.data);
 
@@ -24,7 +25,7 @@
                 }
             });
 
-            model.unreviewedLinks();
+
             return model;
         };
 

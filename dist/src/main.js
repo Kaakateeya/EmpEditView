@@ -96,11 +96,6 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
              model.scope = scope;
          };
 
-         scope.redirect = function(type) {
-
-             $state.go("editview." + type, { CustID: stateParams.CustID });
-             //  window.location = "/" + type + "/" + stateParams.CustID;
-         };
 
          vm.init();
      }
@@ -118,13 +113,14 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         var model = {};
         // var logincustid = authSvc.getCustId();
         var CustID = stateParams.CustID;
-
+        model.lnkeducationandprofReview = false;
         model.scope = {};
         model.init = function() {
+            model.unreviewedLinks();
             baseService.personalDetails(CustID).then(function(response) {
                 debugger;
                 model.PersonalObj = response.data;
-                model.imgsrc = authSvc.getprofilepic();
+                // model.imgsrc = authSvc.getprofilepic();
 
                 console.log(response.data);
 
@@ -136,7 +132,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 }
             });
 
-            model.unreviewedLinks();
+
             return model;
         };
 
@@ -1148,7 +1144,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
  (function(angular) {
      'use strict';
 
-     function controller(editEducationModel, scope) {
+     function controller(editEducationModel, scope, baseModel) {
          var vm = this,
              model;
          vm.scope = scope;
@@ -1157,13 +1153,17 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
              model.scope = scope;
          };
 
+         vm.vallll = baseModel.lnkeducationandprofReview
+
+
+
          vm.init();
      }
      angular
          .module('KaakateeyaEmpEdit')
          .controller('editEducationCtrl', controller)
 
-     controller.$inject = ['editEducationModel', '$scope'];
+     controller.$inject = ['editEducationModel', '$scope', 'baseModel'];
  })(angular);
 (function(angular) {
     'use strict';
@@ -5393,43 +5393,6 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
     angular
         .module('KaakateeyaEmpEdit')
-        .directive('datePicker', directive);
-
-    function directive() {
-
-        var directive = {
-            link: link,
-            restrict: 'EA',
-            scope: {
-                strdate: '='
-            },
-            template: '<p class="input-group">' +
-                '<input type="text" class="form-control" style="width:82%;"  uib-datepicker-popup="MM/dd/yyyy"  ng-model="strdate" is-open="showdate"  show-button-bar="false" close-text="Close" />' +
-                '<span class="input-group-btn">' +
-                '<button type="button" class="btn btn-default" style="position: relative;height: 5%;height: 30px;display:block;" ng-click="open2()"><ng-md-icon icon="perm_contact_calendar" style="fill:#665454" size="20"></ng-md-icon></button>' +
-                '</span></p>'
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-
-            if (scope.strdate !== '' && scope.strdate !== undefined && scope.strdate !== null)
-                scope.strdate = new Date(scope.strdate); //moment(new Date()).format();
-            scope.showdate = false;
-
-            scope.open2 = function() {
-                scope.showdate = true;
-            };
-
-        }
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('KaakateeyaEmpEdit')
         .factory('alert', factory)
 
     factory.$inject = ['$mdDialog', '$uibModal', '$timeout'];
@@ -5706,7 +5669,8 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     case 'catgory':
                         scope.databind(cons.catgory);
                         break;
-
+                    case 'getrelationships':
+                        scope.databind(scope.parentVal);
                     case 'Priority':
                         scope.databind(cons.Priority);
                         break;
@@ -5727,6 +5691,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     case "Complexion":
                         scope.databind(cons.Complexion);
                         break;
+
+                    case 'getrelationships':
+                        scope.databind(scope.parentVal);
                 }
             }, 1000);
             element.multiselect({
@@ -5768,10 +5735,10 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         .module('KaakateeyaEmpEdit')
         .directive('pageReview', directive);
 
-    directive.$inject = ['commonFactory', '$uibModal', 'baseService'];
+    directive.$inject = ['commonFactory', '$uibModal', 'baseService', 'baseModel'];
 
-    function directive(commonFactory, uibModal, baseService) {
-
+    function directive(commonFactory, uibModal, baseService, baseModel) {
+        var model = baseModel;
         var directive = {
             link: link,
             restrict: 'E',
@@ -5813,6 +5780,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             scope.cancel = function() {
                 commonFactory.closepopup();
             };
+
 
         }
     }
@@ -6476,8 +6444,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "    <script src=\"base/model/baseMdl.js\" type=\"text/javascript\"></script>\r" +
     "\n" +
     "    <script src=\"base/service/baseservice.js\" type=\"text/javascript\"></script>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -9552,7 +9518,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "                <h4>Education Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\">ModifiedBy :{{page.model.eduEmpLastModificationDate}}</span></h4>\r" +
+    "                <h4>Education Details {{page.vallll}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\">ModifiedBy :{{page.model.eduEmpLastModificationDate}}</span></h4>\r" +
     "\n" +
     "                <div class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +

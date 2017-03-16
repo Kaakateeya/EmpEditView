@@ -129,7 +129,7 @@ module.exports = function(grunt) {
                 // separator: ';'
             },
             js: { //target
-                src: ['index.js', 'base/**/*.js', 'app/**/**/*.js', 'common/**/*.js', 'dist/html/templates.js'],
+                src: ['index.js', 'base/**/*.js', 'app/**/**/*.js', 'common/**/*.js', 'dist/html/templates.js', '!common/directives/datePickerDirective.js'],
                 dest: 'dist/src/main.js'
             },
             // css: {

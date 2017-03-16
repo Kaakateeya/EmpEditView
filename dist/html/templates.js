@@ -240,8 +240,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
-    "\n" +
     "    <script src=\"common/model/eduprofArrayModel.js\" type=\"text/javascript\"></script>\r" +
     "\n" +
     "    <script src=\"common/model/otherArrayModel.js\" type=\"text/javascript\"></script>\r" +
@@ -3313,7 +3311,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "                <h4>Education Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\">ModifiedBy :{{page.model.eduEmpLastModificationDate}}</span></h4>\r" +
+    "                <h4>Education Details {{page.vallll}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\">ModifiedBy :{{page.model.eduEmpLastModificationDate}}</span></h4>\r" +
     "\n" +
     "                <div class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +

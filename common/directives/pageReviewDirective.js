@@ -5,10 +5,10 @@
         .module('KaakateeyaEmpEdit')
         .directive('pageReview', directive);
 
-    directive.$inject = ['commonFactory', '$uibModal', 'baseService'];
+    directive.$inject = ['commonFactory', '$uibModal', 'baseService', 'baseModel'];
 
-    function directive(commonFactory, uibModal, baseService) {
-
+    function directive(commonFactory, uibModal, baseService, baseModel) {
+        var model = baseModel;
         var directive = {
             link: link,
             restrict: 'E',
@@ -50,6 +50,7 @@
             scope.cancel = function() {
                 commonFactory.closepopup();
             };
+
 
         }
     }

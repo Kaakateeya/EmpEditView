@@ -1,7 +1,7 @@
  (function(angular) {
      'use strict';
 
-     function controller(editEducationModel, scope) {
+     function controller(editEducationModel, scope, baseModel) {
          var vm = this,
              model;
          vm.scope = scope;
@@ -10,11 +10,15 @@
              model.scope = scope;
          };
 
+         vm.vallll = baseModel.lnkeducationandprofReview
+
+
+
          vm.init();
      }
      angular
          .module('KaakateeyaEmpEdit')
          .controller('editEducationCtrl', controller)
 
-     controller.$inject = ['editEducationModel', '$scope'];
+     controller.$inject = ['editEducationModel', '$scope', 'baseModel'];
  })(angular);
