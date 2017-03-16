@@ -2,7 +2,7 @@
     'use strict';
 
 
-    function factory(editAstroService, authSvc, alertss, commonFactory, uibModal, fileUpload, http) {
+    function factory(editAstroService, authSvc, alertss, commonFactory, uibModal, fileUpload, http, stateParams) {
 
         var model = {};
         model.scope = {};
@@ -15,8 +15,10 @@
         model.iframeShow = false;
         var s3obj = {};
 
-        var logincustid = authSvc.getCustId();
-        var custID = model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = model.CustID = stateParams.CustID;
+
+        // model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         var isSubmit = true;
 
         model.loginpaidstatus = authSvc.getpaidstatus();
@@ -338,6 +340,6 @@
         .module('KaakateeyaEmpEdit')
         .factory('editAstroModel', factory)
 
-    factory.$inject = ['editAstroService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'fileUpload', '$http'];
+    factory.$inject = ['editAstroService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'fileUpload', '$http', '$stateParams'];
 
 })(angular);

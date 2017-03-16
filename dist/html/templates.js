@@ -32,6 +32,8 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <!-- Bootstrap -->\r" +
     "\n" +
+    "\r" +
+    "\n" +
     "    <link href=\"node_modules/bootstrap/dist/css/bootstrap.min.css\" rel=\"stylesheet\">\r" +
     "\n" +
     "    <!-- Font Awesome -->\r" +
@@ -54,9 +56,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <link href=\"stylesreg.css\" rel=\"stylesheet\" />\r" +
     "\n" +
-    "\r" +
-    "\n" +
     "    <link href=\"build/css/custom_styles.css\" rel=\"stylesheet\" />\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -101,6 +103,10 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "    <div class=\"container body\">\r" +
     "\n" +
     "        <div class=\"main_container\">\r" +
+    "\n" +
+    "            <!--<div ui-view=\"topbar\">\r" +
+    "\n" +
+    "            </div>-->\r" +
     "\n" +
     "            <div class=\"edit_pages_sidebar clearfix\" ng-controller=\"baseCtrl\">\r" +
     "\n" +
@@ -162,7 +168,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a id=\"lnkeducationandprof\" href=\"Education\" ng-style=\"{color:model.lnkeducationandprofReview==true?'Red':''}\">Education & Profession\r" +
+    "                            <a id=\"lnkeducationandprof\" href=\"javascript:void(0);\" ng-click=\"redirect('editEducation');\" ng-style=\"{color:model.lnkeducationandprofReview==true?'Red':''}\">Education & Profession\r" +
     "\n" +
     "                                <span class=\"pull-right nodatacls\"> {{model.rev.iCustomerPersonalDetails===0?'NoData':''}}</span>\r" +
     "\n" +
@@ -174,7 +180,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a href=\"ManagePhoto\">Manage Photo\r" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editManagePhoto');\">Manage Photo\r" +
     "\n" +
     "                                <span class=\"pull-right nodatacls\"> {{model.rev.iManagePhoto===0?'NoPhoto':''}}</span></a></a>\r" +
     "\n" +
@@ -182,7 +188,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a href=\"Parent\" ng-style=\"{color:model.lnkparentsReview==true?'Red':''}\">Parent Details\r" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editParent');\" ng-style=\"{color:model.lnkparentsReview==true?'Red':''}\">Parent Details\r" +
     "\n" +
     "                                <span class=\"pull-right nodatacls\"> {{model.rev.iParentDetails===0?'NoData':''}}</span>\r" +
     "\n" +
@@ -192,7 +198,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a id=\"lnkpartner\" href=\"Partnerpreference\" ng-style=\"{color:model.lnkpartnerReview==true?'Red':''}\">Partner Preferences\r" +
+    "                            <a id=\"lnkpartner\" href=\"javascript:void(0);\" ng-click=\"redirect('editPartnerpreference');\" ng-style=\"{color:model.lnkpartnerReview==true?'Red':''}\">Partner Preferences\r" +
     "\n" +
     "                                <span class=\"pull-right nodatacls\"> {{model.rev.iPartnerPreference===0?'NoData':''}}</span>\r" +
     "\n" +
@@ -202,7 +208,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a id=\"lnksiblings\" href=\"Sibbling\" ng-style=\"{color:model.lnksiblingsReview==true?'Red':''}\">Sibling Details\r" +
+    "                            <a id=\"lnksiblings\" href=\"javascript:void(0);\" ng-click=\"redirect('editSibbling');\" ng-style=\"{color:model.lnksiblingsReview==true?'Red':''}\">Sibling Details\r" +
     "\n" +
     "                                <span class=\"pull-right nodatacls\"> {{model.rev.iSiblingDetails===0?'NoData':''}}</span>\r" +
     "\n" +
@@ -212,7 +218,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a id=\"lnkastro\" href=\"Astro\" ng-style=\"{color:model.lnkastroReview==true?'Red':''}\">Astro Details\r" +
+    "                            <a id=\"lnkastro\" href=\"javascript:void(0);\" ng-click=\"redirect('editAstro');\" ng-style=\"{color:model.lnkastroReview==true?'Red':''}\">Astro Details\r" +
     "\n" +
     "                                <span class=\"pull-right nodatacls\"> {{model.rev.iAstroDetails===0?'NoData':''}}</span>\r" +
     "\n" +
@@ -224,7 +230,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a id=\"lnkproperty\" href=\"Property\" ng-style=\"{color:model.lnkpropertyReview==true?'Red':''}\">Property Details\r" +
+    "                            <a id=\"lnkproperty\" href=\"javascript:void(0);\" ng-click=\"redirect('editProperty');\" ng-style=\"{color:model.lnkpropertyReview==true?'Red':''}\">Property Details\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -236,13 +242,13 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a id=\"lnkrelatives\" href=\"Relative\" ng-style=\"{color:model.lnkrelativesReview==true?'Red':''}\">Relative Details</a>\r" +
+    "                            <a id=\"lnkrelatives\" href=\"javascript:void(0);\" ng-click=\"redirect('editRelative');\" ng-style=\"{color:model.lnkrelativesReview==true?'Red':''}\">Relative Details</a>\r" +
     "\n" +
     "                        </li>\r" +
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a id=\"lnkreference\" href=\"Reference\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">References\r" +
+    "                            <a id=\"lnkreference\" href=\"javascript:void(0);\" ng-click=\"redirect('editReference');\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">References\r" +
     "\n" +
     "                                <span class=\"pull-right nodatacls\"> {{model.rev.iReferenceDetails===0?'NoData':''}}</span>\r" +
     "\n" +
@@ -254,7 +260,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a href=\"Spouse\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Spouse Details\r" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editSpouse');\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Spouse Details\r" +
     "\n" +
     "                            </a>\r" +
     "\n" +
@@ -264,7 +270,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a href=\"Contact\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Contact Details\r" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editContact');\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Contact Details\r" +
     "\n" +
     "                            </a>\r" +
     "\n" +
@@ -272,7 +278,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a href=\"OfcePurpose\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Office Purpose\r" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editOfcePurpose');\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Office Purpose\r" +
     "\n" +
     "                            </a>\r" +
     "\n" +
@@ -280,7 +286,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a href=\"ProfileSetting\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Profile Settings\r" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editProfileSetting');\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Profile Settings\r" +
     "\n" +
     "                            </a>\r" +
     "\n" +
@@ -299,6 +305,10 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\r" +
     "\n" +
     "            </div>\r" +
+    "\n" +
+    "            <!--<div ui-view=\"bottompanel\">\r" +
+    "\n" +
+    "            </div>-->\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
@@ -426,9 +436,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
+    "    <!-- SCRIPTSP DATA -->\r" +
     "\n" +
-    "    <!-- SCRIPTSP DATA --><script src=\"dist/js/main.min.js\"></script><!--SCRIPTSP END-->\r" +
+    "    <script src=\"dist/js/main.min.js\"></script>\r" +
+    "\n" +
+    "    <!--SCRIPTSP END-->\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -4321,7 +4333,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        <div class=\"modal-header\">\r" +
     "\n" +
-    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Alert\r" +
+    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Customer details\r" +
     "\n" +
     "                <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
     "\n" +
@@ -4596,7 +4608,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        <div class=\"my_photos_main my_photos_main_edit\">\r" +
     "\n" +
-    "            <h6>Upload your recent Photos for better response</h6>\r" +
+    "            <!--<h6>Upload your recent Photos for better response</h6>-->\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -15223,7 +15235,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <select multiselectdropdown ng-model=\"dmobile\" typeofdata=\"'countryCode'\"></select>\r" +
     "\n" +
-    "                <input type=text ng-model=\"strmobile\" style=\"float:right;\" class=\"form-control\" maxlength=\"10\" tabindex=\"10\" />\r" +
+    "                <input type=text ng-model=\"strmobile\" class=\"form-control\" maxlength=\"10\" tabindex=\"10\" />\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
@@ -15241,7 +15253,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <select multiselectdropdown ng-model=\"dalternative\" typeofdata=\"'countryCode'\"></select>\r" +
     "\n" +
-    "                <input type=text class=\"form-control\" style=\"float:right;\" ng-model=\"stralternative\" maxlength=\"10\" tabindex=\"12\" />\r" +
+    "                <input type=text class=\"form-control\" ng-model=\"stralternative\" maxlength=\"10\" tabindex=\"12\" />\r" +
     "\n" +
     "            </div>\r" +
     "\n" +

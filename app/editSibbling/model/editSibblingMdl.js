@@ -2,7 +2,7 @@
     'use strict';
 
 
-    function factory(editSibblingService, authSvc, alertss, commonFactory, uibModal, SelectBindService) {
+    function factory(editSibblingService, authSvc, alertss, commonFactory, uibModal, SelectBindService, stateParams) {
         var model = {};
         model.scope = {};
         //start declaration block
@@ -21,8 +21,9 @@
 
         var isSubmit = true;
 
-        var logincustid = authSvc.getCustId();
-        var custID = model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = model.CustID = stateParams.CustID;
+        //  model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
 
         //end declaration block
 
@@ -517,6 +518,6 @@
         .module('KaakateeyaEmpEdit')
         .factory('editSibblingModel', factory)
 
-    factory.$inject = ['editSibblingService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'SelectBindService'];
+    factory.$inject = ['editSibblingService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'SelectBindService', '$stateParams'];
 
 })(angular);

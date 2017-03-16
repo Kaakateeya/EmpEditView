@@ -2,7 +2,7 @@
     'use strict';
 
 
-    function factory(editRelativeService, authSvc, alertss, commonFactory, uibModal, SelectBindService) {
+    function factory(editRelativeService, authSvc, alertss, commonFactory, uibModal, SelectBindService, stateParams) {
         var model = {};
         model.scope = {};
 
@@ -14,8 +14,9 @@
         var isSubmit = true;
         model.deleteDisplayTxt = '';
         model.identityID = 0;
-        var logincustid = authSvc.getCustId();
-        var custid = model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custid = model.CustID = stateParams.CustID;
+        //  model. = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
 
 
         //end declaration block
@@ -394,6 +395,6 @@
         .module('KaakateeyaEmpEdit')
         .factory('editRelativeModel', factory)
 
-    factory.$inject = ['editRelativeService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'SelectBindService'];
+    factory.$inject = ['editRelativeService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'SelectBindService', '$stateParams'];
 
 })(angular);

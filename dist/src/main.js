@@ -25,19 +25,19 @@ editviewapp.editName = 'edit/:custId/';
 editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$ocLazyLoadProvider', function($stateProvider, $urlRouterProvider, $locationProvider, $ocLazyLoadProvider) {
     var states = [
         { name: 'editview', url: '', subname: [], abstract: true },
-        { name: 'editview.editEducation', url: '/Education', subname: ['common/directives/datePickerDirective.js'] },
-        { name: 'editview.editManagePhoto', url: '/ManagePhoto', subname: ['common/services/selectBindServices.js'] },
-        { name: 'editview.editParent', url: '/Parent', subname: [] },
-        { name: 'editview.editPartnerpreference', url: '/Partnerpreference', subname: [] },
-        { name: 'editview.editSibbling', url: '/Sibbling', subname: [] },
-        { name: 'editview.editAstro', url: '/Astro', subname: [] },
-        { name: 'editview.editProperty', url: '/Property', subname: [] },
-        { name: 'editview.editRelative', url: '/Relative', subname: [] },
-        { name: 'editview.editReference', url: '/Reference', subname: [] },
-        { name: 'editview.editSpouse', url: '/Spouse', subname: ['common/directives/datePickerDirective.js'] },
-        { name: 'editview.editContact', url: '/Contact', subname: [] },
-        { name: 'editview.editOfcePurpose', url: '/OfcePurpose', subname: [] },
-        { name: 'editview.editProfileSetting', url: '/ProfileSetting', subname: [] }
+        { name: 'editview.editEducation', url: '/Education/:CustID', subname: ['common/directives/datePickerDirective.js'] },
+        { name: 'editview.editManagePhoto', url: '/ManagePhoto/:CustID', subname: ['common/services/selectBindServices.js'] },
+        { name: 'editview.editParent', url: '/Parent/:CustID', subname: [] },
+        { name: 'editview.editPartnerpreference', url: '/Partnerpreference/:CustID', subname: [] },
+        { name: 'editview.editSibbling', url: '/Sibbling/:CustID', subname: [] },
+        { name: 'editview.editAstro', url: '/Astro/:CustID', subname: [] },
+        { name: 'editview.editProperty', url: '/Property/:CustID', subname: [] },
+        { name: 'editview.editRelative', url: '/Relative/:CustID', subname: [] },
+        { name: 'editview.editReference', url: '/Reference/:CustID', subname: [] },
+        { name: 'editview.editSpouse', url: '/Spouse/:CustID', subname: ['common/directives/datePickerDirective.js'] },
+        { name: 'editview.editContact', url: '/Contact/:CustID', subname: [] },
+        { name: 'editview.editOfcePurpose', url: '/OfcePurpose/:CustID', subname: [] },
+        { name: 'editview.editProfileSetting', url: '/ProfileSetting/:CustID', subname: [] }
     ];
     $ocLazyLoadProvider.config({
         debug: true
@@ -49,29 +49,35 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         var innerView = {};
         var edititem = item.name.slice(9);
         innerView = {
+            "topbar@": {
+                templateUrl: "templates/topheader.html"
+            },
             "lazyLoadView@": {
                 templateUrl: 'app/' + edititem + '/index.html',
                 controller: edititem + 'Ctrl as page'
+            },
+            "bottompanel@": {
+                templateUrl: "templates/footer.html"
             }
         };
 
         $stateProvider.state(item.name, {
             url: item.url,
-            views: innerView
-                // resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-                //     loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                //         // you can lazy load files for an existing module
-                //         var edit = item.name.slice(9);
-                //         if (editviewapp.env === 'dev') {
-                //             return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+            views: innerView,
+            resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+                loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                    // you can lazy load files for an existing module
+                    var edit = item.name.slice(9);
+                    if (editviewapp.env === 'dev') {
+                        return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
 
-            //         } else {
-            //             return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
-            //         }
+                    } else {
+                        return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
+                    }
 
-            //         // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-            //     }]
-            // }
+                    // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+                }]
+            }
         });
         $locationProvider.html5Mode(true);
     });
@@ -80,7 +86,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
  (function(angular) {
      'use strict';
 
-     function controller(baseModel, scope) {
+     function controller(baseModel, scope, $state, stateParams) {
          /* jshint validthis:true */
          var vm = this,
              model;
@@ -88,22 +94,31 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
              scope.model = model = baseModel;
              model.scope = scope;
          };
+
+         scope.redirect = function(type) {
+
+             $state.go("editview." + type, { CustID: stateParams.CustID });
+             //  window.location = "/" + type + "/" + stateParams.CustID;
+         };
+
          vm.init();
      }
      angular
          .module('KaakateeyaEmpEdit')
          .controller('baseCtrl', controller)
 
-     controller.$inject = ['baseModel', '$scope'];
+     controller.$inject = ['baseModel', '$scope', '$state', '$stateParams'];
  })(angular);
 (function(angular) {
     'use strict';
 
 
-    function factory(baseService, authSvc, uibModal, commonFactory) {
+    function factory(baseService, authSvc, uibModal, commonFactory, stateParams) {
         var model = {};
-        var logincustid = authSvc.getCustId();
-        var CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var CustID = 91022;
+        // stateParams.CustID;
+
         model.scope = {};
         model.init = function() {
             baseService.personalDetails(CustID).then(function(response) {
@@ -200,13 +215,21 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             commonFactory.closepopup();
         };
 
+
+
+
+
+
+
+
+
         return model.init();
     }
 
     angular
         .module('KaakateeyaEmpEdit')
         .factory('baseModel', factory)
-    factory.$inject = ['baseService', 'authSvc', '$uibModal', 'commonFactory'];
+    factory.$inject = ['baseService', 'authSvc', '$uibModal', 'commonFactory', '$stateParams'];
 
 })(angular);
 (function(angular) {
@@ -252,6 +275,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          vm.scope = scope;
          vm.init = function() {
              vm.model = editAstroModel;
+             editAstroModel.init();
              vm.model.scope = scope;
          };
 
@@ -267,7 +291,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     'use strict';
 
 
-    function factory(editAstroService, authSvc, alertss, commonFactory, uibModal, fileUpload, http) {
+    function factory(editAstroService, authSvc, alertss, commonFactory, uibModal, fileUpload, http, stateParams) {
 
         var model = {};
         model.scope = {};
@@ -280,8 +304,10 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.iframeShow = false;
         var s3obj = {};
 
-        var logincustid = authSvc.getCustId();
-        var custID = model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = model.CustID = stateParams.CustID;
+
+        // model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         var isSubmit = true;
 
         model.loginpaidstatus = authSvc.getpaidstatus();
@@ -603,7 +629,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         .module('KaakateeyaEmpEdit')
         .factory('editAstroModel', factory)
 
-    factory.$inject = ['editAstroService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'fileUpload', '$http'];
+    factory.$inject = ['editAstroService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'fileUpload', '$http', '$stateParams'];
 
 })(angular);
 (function(angular) {
@@ -645,6 +671,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          var vm = this;
          vm.init = function() {
              vm.model = editContactModel;
+             editContactModel.init();
              vm.model.scope = scope;
          };
 
@@ -660,12 +687,13 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     'use strict';
 
 
-    function factory(editContactService, authSvc, alertss, commonFactory, uibModal) {
+    function factory(editContactService, authSvc, alertss, commonFactory, uibModal, stateParams) {
         var model = {};
         model.scope = {};
 
-        var logincustid = authSvc.getCustId();
-        var custID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = model.CustID = stateParams.CustID;
+        //logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.candidateContactArr = [];
         model.candidateAddrArr = [];
         model.parentContactArr = [];
@@ -1071,7 +1099,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         .module('KaakateeyaEmpEdit')
         .factory('editContactModel', factory)
 
-    factory.$inject = ['editContactService', 'authSvc', 'alert', 'commonFactory', '$uibModal'];
+    factory.$inject = ['editContactService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 
 })(angular);
 (function(angular) {
@@ -1141,9 +1169,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     'use strict';
 
 
-    function factory($http, authSvc, editEducationService, commonFactory, uibModal, filter, alertss, baseService) {
+    function factory($http, authSvc, editEducationService, commonFactory, uibModal, filter, alertss, baseService, stateParams) {
         var model = {};
-        var logincustid = authSvc.getCustId();
+        // var logincustid = authSvc.getCustId();
 
         model.scope = {};
 
@@ -1170,7 +1198,8 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         //end declaration block
 
 
-        var CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        var CustID = stateParams.CustID;
+        // logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.CustID = CustID;
         model.init = function() {
             model.getdata();
@@ -1559,7 +1588,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         .module('KaakateeyaEmpEdit')
         .factory('editEducationModel', factory)
 
-    factory.$inject = ['$http', 'authSvc', 'editEducationService', 'commonFactory', '$uibModal', '$filter', 'alert', 'baseService'];
+    factory.$inject = ['$http', 'authSvc', 'editEducationService', 'commonFactory', '$uibModal', '$filter', 'alert', 'baseService', '$stateParams'];
 
 })(angular);
 (function(angular) {
@@ -1612,6 +1641,8 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          vm.init = function() {
 
              vm.model = editManagePhotoModel;
+
+             editManagePhotoModel.init();
              vm.model.scope = scope;
          };
 
@@ -1628,12 +1659,13 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     'use strict';
 
 
-    function factory(editManagePhotoService, authSvc, alertss, commonFactory, uibModal, http, fileUpload) {
+    function factory(editManagePhotoService, authSvc, alertss, commonFactory, uibModal, http, fileUpload, stateParams) {
         var model = {};
         model.scope = {};
         //start declaration block
-        var logincustid = authSvc.getCustId();
-        var CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var CustID = stateParams.CustID;
+        // logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.loginpaidstatus = authSvc.getpaidstatus();
         var genderID = authSvc.getGenderID();
 
@@ -1852,7 +1884,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         .module('KaakateeyaEmpEdit')
         .factory('editManagePhotoModel', factory)
 
-    factory.$inject = ['editManagePhotoService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$http', 'fileUpload'];
+    factory.$inject = ['editManagePhotoService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$http', 'fileUpload', '$stateParams'];
 
 })(angular);
 (function(angular) {
@@ -1885,7 +1917,8 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
-             vm.model = editOfcePurposeModel;
+             vm.model = editOfcePurposeModel.init();
+
              vm.model.scope = scope;
          };
 
@@ -1901,11 +1934,12 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     'use strict';
 
 
-    function factory(editOfcePurposeService, authSvc, alertss, commonFactory, uibModal) {
+    function factory(editOfcePurposeService, authSvc, alertss, commonFactory, uibModal, stateParams) {
         var model = {};
         model.scope = {};
-        var logincustid = authSvc.getCustId();
-        var custID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = stateParams.CustID;
+        //  logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.dataval = '';
         model.aboutObj = {};
 
@@ -1958,7 +1992,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         .module('KaakateeyaEmpEdit')
         .factory('editOfcePurposeModel', factory)
 
-    factory.$inject = ['editOfcePurposeService', 'authSvc', 'alert', 'commonFactory', '$uibModal'];
+    factory.$inject = ['editOfcePurposeService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 
 })(angular);
 (function(angular) {
@@ -1986,7 +2020,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          var vm = this;
 
          vm.init = function() {
-             vm.model = editParentModel;
+             vm.model = editParentModel.init();
              vm.model.scope = scope;
          };
 
@@ -2002,7 +2036,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     'use strict';
 
 
-    function factory(editParentService, authSvc, alertss, commonFactory, uibModal) {
+    function factory(editParentService, authSvc, alertss, commonFactory, uibModal, stateParams) {
         var model = {};
         model.model = {};
         //start declarion block
@@ -2018,8 +2052,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         //end declarion block
 
-        var logincustid = authSvc.getCustId();
-        var custID = model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = model.CustID = stateParams.CustID;
+        //  model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
 
 
         model.init = function() {
@@ -2458,16 +2493,6 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
 
 
-
-
-
-
-
-
-
-
-
-
         return model.init();
 
     }
@@ -2476,7 +2501,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         .module('KaakateeyaEmpEdit')
         .factory('editParentModel', factory)
 
-    factory.$inject = ['editParentService', 'authSvc', 'alert', 'commonFactory', '$uibModal'];
+    factory.$inject = ['editParentService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 
 })(angular);
 (function(angular) {
@@ -2519,7 +2544,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
-             vm.model = editPartnerpreferenceModel;
+             vm.model = editPartnerpreferenceModel.init();
              vm.model.scope = scope;
          };
 
@@ -2535,7 +2560,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 (function(angular) {
     'use strict';
 
-    function factory(editPartnerpreferenceService, authSvc, alertss, commonFactory, uibModal) {
+    function factory(editPartnerpreferenceService, authSvc, alertss, commonFactory, uibModal, stateParams) {
         var model = {};
         model.scope = {};
 
@@ -2546,8 +2571,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.partnerDescObj = {};
         var isSubmit = true;
 
-        var logincustid = authSvc.getCustId();
-        var custID = model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = model.CustID = stateParams.CustID;
+        //  model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.partnerDescription = '';
 
         //end declaration block
@@ -2755,7 +2781,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         .module('KaakateeyaEmpEdit')
         .factory('editPartnerpreferenceModel', factory)
 
-    factory.$inject = ['editPartnerpreferenceService', 'authSvc', 'alert', 'commonFactory', '$uibModal'];
+    factory.$inject = ['editPartnerpreferenceService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 
 })(angular);
 (function(angular) {
@@ -2788,7 +2814,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
-             vm.model = editProfileSettingModel;
+             vm.model = editProfileSettingModel.init();
              vm.model.scope = scope;
          };
 
@@ -2804,13 +2830,14 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     'use strict';
 
 
-    function factory(editProfileSettingService, authSvc, alertss, commonFactory, uibModal) {
+    function factory(editProfileSettingService, authSvc, alertss, commonFactory, uibModal, stateParams) {
 
         var model = {};
         model.scope = {};
 
-        var logincustid = authSvc.getCustId();
-        var custID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = stateParams.CustID;
+        //  logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
 
         model.profileSettingArr = [];
         model.ConfidentialArr = [];
@@ -3007,7 +3034,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         .module('KaakateeyaEmpEdit')
         .factory('editProfileSettingModel', factory)
 
-    factory.$inject = ['editProfileSettingService', 'authSvc', 'alert', 'commonFactory', '$uibModal'];
+    factory.$inject = ['editProfileSettingService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 
 })(angular);
 (function(angular) {
@@ -3045,7 +3072,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
-             vm.model = editPropertyModel;
+             vm.model = editPropertyModel.init();
              vm.model.scope = scope;
          };
 
@@ -3061,7 +3088,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     'use strict';
 
 
-    function factory(editPropertyService, authSvc, alertss, commonFactory, uibModal) {
+    function factory(editPropertyService, authSvc, alertss, commonFactory, uibModal, stateParams) {
         var model = {};
         model.scope = {};
 
@@ -3071,8 +3098,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.proObj = {};
 
         var isSubmit = true;
-        var logincustid = authSvc.getCustId();
-        var custID = model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = model.CustID = stateParams.CustID;
+        //  model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
 
         //end declaration block
 
@@ -3155,7 +3183,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         .module('KaakateeyaEmpEdit')
         .factory('editPropertyModel', factory)
 
-    factory.$inject = ['editPropertyService', 'authSvc', 'alert', 'commonFactory', '$uibModal'];
+    factory.$inject = ['editPropertyService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 
 })(angular);
 (function(angular) {
@@ -3185,7 +3213,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
-             vm.model = editReferenceModel;
+             vm.model = editReferenceModel.init();
              vm.model.scope = scope;
          };
 
@@ -3201,7 +3229,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     'use strict';
 
 
-    function factory(editReferenceService, authSvc, alertss, commonFactory, uibModal, SelectBindService) {
+    function factory(editReferenceService, authSvc, alertss, commonFactory, uibModal, SelectBindService, stateParams) {
         var model = {};
         model.scope = {};
 
@@ -3213,8 +3241,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.deleteDisplayTxt = 'reference';
         var isSubmit = true;
         model.identityID = 0;
-        var logincustid = authSvc.getCustId();
-        var custID = model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = model.CustID = stateParams.CustID;
+        //  model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
 
         //end declaration block
         model.init = function() {
@@ -3346,7 +3375,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         .module('KaakateeyaEmpEdit')
         .factory('editReferenceModel', factory)
 
-    factory.$inject = ['editReferenceService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'SelectBindService'];
+    factory.$inject = ['editReferenceService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'SelectBindService', '$stateParams'];
 
 })(angular);
 (function(angular) {
@@ -3376,7 +3405,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
-             vm.model = editRelativeModel;
+             vm.model = editRelativeModel.init();
              vm.model.scope = scope;
          };
 
@@ -3392,7 +3421,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     'use strict';
 
 
-    function factory(editRelativeService, authSvc, alertss, commonFactory, uibModal, SelectBindService) {
+    function factory(editRelativeService, authSvc, alertss, commonFactory, uibModal, SelectBindService, stateParams) {
         var model = {};
         model.scope = {};
 
@@ -3404,8 +3433,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         var isSubmit = true;
         model.deleteDisplayTxt = '';
         model.identityID = 0;
-        var logincustid = authSvc.getCustId();
-        var custid = model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custid = model.CustID = stateParams.CustID;
+        //  model. = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
 
 
         //end declaration block
@@ -3784,7 +3814,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         .module('KaakateeyaEmpEdit')
         .factory('editRelativeModel', factory)
 
-    factory.$inject = ['editRelativeService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'SelectBindService'];
+    factory.$inject = ['editRelativeService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'SelectBindService', '$stateParams'];
 
 })(angular);
 (function(angular) {
@@ -3823,7 +3853,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
-             vm.model = editSibblingModel;
+             vm.model = editSibblingModel.init();
              vm.model.scope = scope;
          };
 
@@ -3840,7 +3870,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     'use strict';
 
 
-    function factory(editSibblingService, authSvc, alertss, commonFactory, uibModal, SelectBindService) {
+    function factory(editSibblingService, authSvc, alertss, commonFactory, uibModal, SelectBindService, stateParams) {
         var model = {};
         model.scope = {};
         //start declaration block
@@ -3859,8 +3889,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         var isSubmit = true;
 
-        var logincustid = authSvc.getCustId();
-        var custID = model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = model.CustID = stateParams.CustID;
+        //  model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
 
         //end declaration block
 
@@ -4355,7 +4386,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         .module('KaakateeyaEmpEdit')
         .factory('editSibblingModel', factory)
 
-    factory.$inject = ['editSibblingService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'SelectBindService'];
+    factory.$inject = ['editSibblingService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'SelectBindService', '$stateParams'];
 
 })(angular);
 (function(angular) {
@@ -4396,7 +4427,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
-             vm.model = editSpouseModel;
+             vm.model = editSpouseModel.init();
              vm.model.scope = scope;
          };
 
@@ -4412,11 +4443,12 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     'use strict';
 
 
-    function factory(editSpouseService, authSvc, alertss, commonFactory, uibModal, filter) {
+    function factory(editSpouseService, authSvc, alertss, commonFactory, uibModal, filter, stateParams) {
         var model = {};
         model.scope = {};
-        var logincustid = authSvc.getCustId();
-        var custID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = stateParams.CustID;
+        //  logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.spouseArray = [];
         model.ChildArray = [];
         model.spouObj = {};
@@ -4596,7 +4628,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         .module('KaakateeyaEmpEdit')
         .factory('editSpouseModel', factory)
 
-    factory.$inject = ['editSpouseService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$filter'];
+    factory.$inject = ['editSpouseService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$filter', '$stateParams'];
 
 })(angular);
 (function(angular) {
@@ -5372,7 +5404,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 strdate: '='
             },
             template: '<p class="input-group">' +
-                '<input type="text" class="form-control" style="width:84%;"  uib-datepicker-popup="MM/dd/yyyy"  ng-model="strdate" is-open="showdate"  show-button-bar="false" close-text="Close" />' +
+                '<input type="text" class="form-control" style="width:82%;"  uib-datepicker-popup="MM/dd/yyyy"  ng-model="strdate" is-open="showdate"  show-button-bar="false" close-text="Close" />' +
                 '<span class="input-group-btn">' +
                 '<button type="button" class="btn btn-default" style="position: relative;height: 5%;height: 30px;display:block;" ng-click="open2()"><ng-md-icon icon="perm_contact_calendar" style="fill:#665454" size="20"></ng-md-icon></button>' +
                 '</span></p>'
@@ -6209,6 +6241,8 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <!-- Bootstrap -->\r" +
     "\n" +
+    "\r" +
+    "\n" +
     "    <link href=\"node_modules/bootstrap/dist/css/bootstrap.min.css\" rel=\"stylesheet\">\r" +
     "\n" +
     "    <!-- Font Awesome -->\r" +
@@ -6231,9 +6265,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <link href=\"stylesreg.css\" rel=\"stylesheet\" />\r" +
     "\n" +
-    "\r" +
-    "\n" +
     "    <link href=\"build/css/custom_styles.css\" rel=\"stylesheet\" />\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -6278,6 +6312,10 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "    <div class=\"container body\">\r" +
     "\n" +
     "        <div class=\"main_container\">\r" +
+    "\n" +
+    "            <!--<div ui-view=\"topbar\">\r" +
+    "\n" +
+    "            </div>-->\r" +
     "\n" +
     "            <div class=\"edit_pages_sidebar clearfix\" ng-controller=\"baseCtrl\">\r" +
     "\n" +
@@ -6339,7 +6377,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a id=\"lnkeducationandprof\" href=\"Education\" ng-style=\"{color:model.lnkeducationandprofReview==true?'Red':''}\">Education & Profession\r" +
+    "                            <a id=\"lnkeducationandprof\" href=\"javascript:void(0);\" ng-click=\"redirect('editEducation');\" ng-style=\"{color:model.lnkeducationandprofReview==true?'Red':''}\">Education & Profession\r" +
     "\n" +
     "                                <span class=\"pull-right nodatacls\"> {{model.rev.iCustomerPersonalDetails===0?'NoData':''}}</span>\r" +
     "\n" +
@@ -6351,7 +6389,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a href=\"ManagePhoto\">Manage Photo\r" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editManagePhoto');\">Manage Photo\r" +
     "\n" +
     "                                <span class=\"pull-right nodatacls\"> {{model.rev.iManagePhoto===0?'NoPhoto':''}}</span></a></a>\r" +
     "\n" +
@@ -6359,7 +6397,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a href=\"Parent\" ng-style=\"{color:model.lnkparentsReview==true?'Red':''}\">Parent Details\r" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editParent');\" ng-style=\"{color:model.lnkparentsReview==true?'Red':''}\">Parent Details\r" +
     "\n" +
     "                                <span class=\"pull-right nodatacls\"> {{model.rev.iParentDetails===0?'NoData':''}}</span>\r" +
     "\n" +
@@ -6369,7 +6407,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a id=\"lnkpartner\" href=\"Partnerpreference\" ng-style=\"{color:model.lnkpartnerReview==true?'Red':''}\">Partner Preferences\r" +
+    "                            <a id=\"lnkpartner\" href=\"javascript:void(0);\" ng-click=\"redirect('editPartnerpreference');\" ng-style=\"{color:model.lnkpartnerReview==true?'Red':''}\">Partner Preferences\r" +
     "\n" +
     "                                <span class=\"pull-right nodatacls\"> {{model.rev.iPartnerPreference===0?'NoData':''}}</span>\r" +
     "\n" +
@@ -6379,7 +6417,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a id=\"lnksiblings\" href=\"Sibbling\" ng-style=\"{color:model.lnksiblingsReview==true?'Red':''}\">Sibling Details\r" +
+    "                            <a id=\"lnksiblings\" href=\"javascript:void(0);\" ng-click=\"redirect('editSibbling');\" ng-style=\"{color:model.lnksiblingsReview==true?'Red':''}\">Sibling Details\r" +
     "\n" +
     "                                <span class=\"pull-right nodatacls\"> {{model.rev.iSiblingDetails===0?'NoData':''}}</span>\r" +
     "\n" +
@@ -6389,7 +6427,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a id=\"lnkastro\" href=\"Astro\" ng-style=\"{color:model.lnkastroReview==true?'Red':''}\">Astro Details\r" +
+    "                            <a id=\"lnkastro\" href=\"javascript:void(0);\" ng-click=\"redirect('editAstro');\" ng-style=\"{color:model.lnkastroReview==true?'Red':''}\">Astro Details\r" +
     "\n" +
     "                                <span class=\"pull-right nodatacls\"> {{model.rev.iAstroDetails===0?'NoData':''}}</span>\r" +
     "\n" +
@@ -6401,7 +6439,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a id=\"lnkproperty\" href=\"Property\" ng-style=\"{color:model.lnkpropertyReview==true?'Red':''}\">Property Details\r" +
+    "                            <a id=\"lnkproperty\" href=\"javascript:void(0);\" ng-click=\"redirect('editProperty');\" ng-style=\"{color:model.lnkpropertyReview==true?'Red':''}\">Property Details\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -6413,13 +6451,13 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a id=\"lnkrelatives\" href=\"Relative\" ng-style=\"{color:model.lnkrelativesReview==true?'Red':''}\">Relative Details</a>\r" +
+    "                            <a id=\"lnkrelatives\" href=\"javascript:void(0);\" ng-click=\"redirect('editRelative');\" ng-style=\"{color:model.lnkrelativesReview==true?'Red':''}\">Relative Details</a>\r" +
     "\n" +
     "                        </li>\r" +
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a id=\"lnkreference\" href=\"Reference\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">References\r" +
+    "                            <a id=\"lnkreference\" href=\"javascript:void(0);\" ng-click=\"redirect('editReference');\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">References\r" +
     "\n" +
     "                                <span class=\"pull-right nodatacls\"> {{model.rev.iReferenceDetails===0?'NoData':''}}</span>\r" +
     "\n" +
@@ -6431,7 +6469,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a href=\"Spouse\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Spouse Details\r" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editSpouse');\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Spouse Details\r" +
     "\n" +
     "                            </a>\r" +
     "\n" +
@@ -6441,7 +6479,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a href=\"Contact\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Contact Details\r" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editContact');\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Contact Details\r" +
     "\n" +
     "                            </a>\r" +
     "\n" +
@@ -6449,7 +6487,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a href=\"OfcePurpose\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Office Purpose\r" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editOfcePurpose');\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Office Purpose\r" +
     "\n" +
     "                            </a>\r" +
     "\n" +
@@ -6457,7 +6495,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <li>\r" +
     "\n" +
-    "                            <a href=\"ProfileSetting\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Profile Settings\r" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editProfileSetting');\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Profile Settings\r" +
     "\n" +
     "                            </a>\r" +
     "\n" +
@@ -6476,6 +6514,10 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\r" +
     "\n" +
     "            </div>\r" +
+    "\n" +
+    "            <!--<div ui-view=\"bottompanel\">\r" +
+    "\n" +
+    "            </div>-->\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
@@ -6603,9 +6645,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
+    "    <!-- SCRIPTSP DATA -->\r" +
     "\n" +
-    "    <!-- SCRIPTSP DATA --><script src=\"dist/js/main.min.js\"></script><!--SCRIPTSP END-->\r" +
+    "    <script src=\"dist/js/main.min.js\"></script>\r" +
+    "\n" +
+    "    <!--SCRIPTSP END-->\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -10498,7 +10542,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        <div class=\"modal-header\">\r" +
     "\n" +
-    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Alert\r" +
+    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Customer details\r" +
     "\n" +
     "                <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
     "\n" +
@@ -10773,7 +10817,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        <div class=\"my_photos_main my_photos_main_edit\">\r" +
     "\n" +
-    "            <h6>Upload your recent Photos for better response</h6>\r" +
+    "            <!--<h6>Upload your recent Photos for better response</h6>-->\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -21400,7 +21444,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <select multiselectdropdown ng-model=\"dmobile\" typeofdata=\"'countryCode'\"></select>\r" +
     "\n" +
-    "                <input type=text ng-model=\"strmobile\" style=\"float:right;\" class=\"form-control\" maxlength=\"10\" tabindex=\"10\" />\r" +
+    "                <input type=text ng-model=\"strmobile\" class=\"form-control\" maxlength=\"10\" tabindex=\"10\" />\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
@@ -21418,7 +21462,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <select multiselectdropdown ng-model=\"dalternative\" typeofdata=\"'countryCode'\"></select>\r" +
     "\n" +
-    "                <input type=text class=\"form-control\" style=\"float:right;\" ng-model=\"stralternative\" maxlength=\"10\" tabindex=\"12\" />\r" +
+    "                <input type=text class=\"form-control\" ng-model=\"stralternative\" maxlength=\"10\" tabindex=\"12\" />\r" +
     "\n" +
     "            </div>\r" +
     "\n" +

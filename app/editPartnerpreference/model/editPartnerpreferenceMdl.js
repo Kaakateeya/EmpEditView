@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    function factory(editPartnerpreferenceService, authSvc, alertss, commonFactory, uibModal) {
+    function factory(editPartnerpreferenceService, authSvc, alertss, commonFactory, uibModal, stateParams) {
         var model = {};
         model.scope = {};
 
@@ -12,8 +12,9 @@
         model.partnerDescObj = {};
         var isSubmit = true;
 
-        var logincustid = authSvc.getCustId();
-        var custID = model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = model.CustID = stateParams.CustID;
+        //  model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.partnerDescription = '';
 
         //end declaration block
@@ -221,6 +222,6 @@
         .module('KaakateeyaEmpEdit')
         .factory('editPartnerpreferenceModel', factory)
 
-    factory.$inject = ['editPartnerpreferenceService', 'authSvc', 'alert', 'commonFactory', '$uibModal'];
+    factory.$inject = ['editPartnerpreferenceService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 
 })(angular);

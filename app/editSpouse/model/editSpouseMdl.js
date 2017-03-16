@@ -2,11 +2,12 @@
     'use strict';
 
 
-    function factory(editSpouseService, authSvc, alertss, commonFactory, uibModal, filter) {
+    function factory(editSpouseService, authSvc, alertss, commonFactory, uibModal, filter, stateParams) {
         var model = {};
         model.scope = {};
-        var logincustid = authSvc.getCustId();
-        var custID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = stateParams.CustID;
+        //  logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.spouseArray = [];
         model.ChildArray = [];
         model.spouObj = {};
@@ -186,6 +187,6 @@
         .module('KaakateeyaEmpEdit')
         .factory('editSpouseModel', factory)
 
-    factory.$inject = ['editSpouseService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$filter'];
+    factory.$inject = ['editSpouseService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$filter', '$stateParams'];
 
 })(angular);

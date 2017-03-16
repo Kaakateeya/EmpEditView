@@ -7,6 +7,8 @@
          vm.init = function() {
 
              vm.model = editManagePhotoModel;
+
+             editManagePhotoModel.init();
              vm.model.scope = scope;
          };
 

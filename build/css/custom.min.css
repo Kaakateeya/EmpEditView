@@ -4900,3 +4900,231 @@ ul.notifications {
 .dataTables_wrapper>.row {
     overflow: auto!important
 }
+
+.button_custom {
+    border: 0 none;
+    display: block;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    background: #d42e02;
+    border-radius: 3px;
+    padding: 12px 24px;
+    transition: all 0.4s ease-in-out;
+}
+
+.button_custom:hover,
+.button_custom:focus {
+    background: #c89d07;
+    color: #fff;
+}
+
+.button_custom_reset {
+    background: #959595;
+}
+
+.button_custom_reset:hover,
+.button_custom_reset:focus {
+    background: #706868;
+}
+
+.multiselect-container {
+    position: absolute;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 95% !important;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.multiselect-container .input-group {
+    margin: 5px;
+}
+
+.multiselect-container>li {
+    margin: -4px 0 0 0 !important;
+    padding: 0 !important;
+}
+
+.multiselect-container>li.active,
+.multiselect-container>li:hover {
+    background: #d42e02 !important;
+}
+
+.multiselect-container>li>a {
+    display: block;
+    padding: 0 !important;
+    background: none !important;
+}
+
+.multiselect-container>li>a label {
+    padding: 8px 14px !important;
+    color: #717171 !important;
+    font-size: 12px !important;
+    text-transform: uppercase;
+    font-weight: 400 !important;
+}
+
+.multiselect-container>li>a label.checkbox input[type="checkbox"] {
+    margin: 4px 10px 0 0 !important;
+    width: auto !important;
+}
+
+.multiselect-container>li:hover a label,
+.multiselect-container>li.active a label {
+    color: #fff !important;
+}
+
+.lblCastIDsdisplay {
+    display: inline-block;
+    padding: 8px 14px 0 0 !important;
+    color: #717171 !important;
+    font-size: 12px !important;
+    text-transform: uppercase;
+    font-weight: 700 !important;
+}
+
+.multiselect {
+    margin: 4px 0 0 0;
+    border-radius: 3px !important;
+    height: 34px;
+    background: none !important;
+    text-align: left;
+    box-shadow: none !important;
+    display: block;
+    width: 96% !important;
+    border: solid 1px #ccc !important;
+}
+
+.btn-group {
+    display: block;
+}
+
+.caret {
+    position: absolute;
+    right: 8px;
+    top: 44%;
+}
+
+.select-box-my-trible {}
+
+.select-box-my-trible .chzn-container {
+    width: 34% !important;
+    float: left;
+}
+
+.select-box-my-trible input {
+    width: 18%;
+    float: left;
+    box-shadow: none;
+    margin: 3px 0 0 4px;
+    font-size: 14px;
+    padding: 7px 8px;
+    font-weight: 700;
+    border-radius: 3px !important;
+}
+
+.select-box-my-trible input+span {
+    float: left;
+    font-size: 14px;
+    padding: 10px 0 0 4px;
+    font-weight: 700;
+}
+
+.radio-group-my+.radio-group-my {
+    padding: 0 20px 0 40px;
+}
+
+.multiselect.dropdown-toggle.btn.btn-default {
+    margin: 0 !important;
+}
+
+.chzn-container-single .chzn-drop {
+    width: 100% !important;
+    min-width: 168px !important;
+}
+
+.modal .radio label {
+    font-size: 12px !important;
+    color: #000 !important;
+}
+
+.modal>.radio {
+    display: block !important;
+    width: 100% !important;
+}
+
+.modal .radio {
+    display: block !important;
+}
+
+.modal .radio .radio {
+    float: left;
+}
+
+.modal .radio tbody {
+    display: block !important;
+    width: 100% !important;
+}
+
+.modal .radio tbody tr label {
+    width: auto !important;
+    float: left !important;
+    padding: 0px 0px 0px 10px !important;
+}
+
+.modal .radio tbody tr {
+    display: block !important;
+    width: auto !important;
+}
+
+.modal .radio tbody tr td {
+    width: auto !important;
+    padding: 0 15px 0 0 !important;
+}
+
+.help_form .select-box-my-trible>div {
+    width: 100% !important;
+}
+
+.help_form .select-box-my-trible input[type="text"] {
+    width: 31% !important;
+}
+
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"] {
+    color: #000 !important;
+}
+
+textarea,
+select,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input,
+.fileupload-new .input-append .btn-file {
+    border: 1px solid #ADA2A2 !important;
+}

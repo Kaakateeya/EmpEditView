@@ -2,13 +2,14 @@
     'use strict';
 
 
-    function factory(editProfileSettingService, authSvc, alertss, commonFactory, uibModal) {
+    function factory(editProfileSettingService, authSvc, alertss, commonFactory, uibModal, stateParams) {
 
         var model = {};
         model.scope = {};
 
-        var logincustid = authSvc.getCustId();
-        var custID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = stateParams.CustID;
+        //  logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
 
         model.profileSettingArr = [];
         model.ConfidentialArr = [];
@@ -205,6 +206,6 @@
         .module('KaakateeyaEmpEdit')
         .factory('editProfileSettingModel', factory)
 
-    factory.$inject = ['editProfileSettingService', 'authSvc', 'alert', 'commonFactory', '$uibModal'];
+    factory.$inject = ['editProfileSettingService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 
 })(angular);

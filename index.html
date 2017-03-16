@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap -->
+
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -24,8 +25,8 @@
     <link href="bower_components/angular-loading-bar/build/loading-bar.min.css" rel="stylesheet" />
     <link href="css/scss/mainstyles.css" rel="stylesheet" />
     <link href="stylesreg.css" rel="stylesheet" />
-
     <link href="build/css/custom_styles.css" rel="stylesheet" />
+
 
     <style>
         .edit_pages_content_main {
@@ -48,6 +49,8 @@
 <body class="nav-sm" ng-app="KaakateeyaEmpEdit" ui-router-styles>
     <div class="container body">
         <div class="main_container">
+            <!--<div ui-view="topbar">
+            </div>-->
             <div class="edit_pages_sidebar clearfix" ng-controller="baseCtrl">
                 <div class="edit_page_profile_pic">
                     <img id="imgphoto" ng-src="{{model.PersonalObj.ProfilePic}}">
@@ -78,66 +81,66 @@
                 <div class="edit_pages_sidebar_menu clearfix">
                     <ul>
                         <li>
-                            <a id="lnkeducationandprof" href="Education" ng-style="{color:model.lnkeducationandprofReview==true?'Red':''}">Education & Profession
+                            <a id="lnkeducationandprof" href="javascript:void(0);" ng-click="redirect('editEducation');" ng-style="{color:model.lnkeducationandprofReview==true?'Red':''}">Education & Profession
                                 <span class="pull-right nodatacls"> {{model.rev.iCustomerPersonalDetails===0?'NoData':''}}</span>
                             </a>
 
                         </li>
                         <li>
-                            <a href="ManagePhoto">Manage Photo
+                            <a href="javascript:void(0);" ng-click="redirect('editManagePhoto');">Manage Photo
                                 <span class="pull-right nodatacls"> {{model.rev.iManagePhoto===0?'NoPhoto':''}}</span></a></a>
                         </li>
                         <li>
-                            <a href="Parent" ng-style="{color:model.lnkparentsReview==true?'Red':''}">Parent Details
+                            <a href="javascript:void(0);" ng-click="redirect('editParent');" ng-style="{color:model.lnkparentsReview==true?'Red':''}">Parent Details
                                 <span class="pull-right nodatacls"> {{model.rev.iParentDetails===0?'NoData':''}}</span>
                             </a>
                         </li>
                         <li>
-                            <a id="lnkpartner" href="Partnerpreference" ng-style="{color:model.lnkpartnerReview==true?'Red':''}">Partner Preferences
+                            <a id="lnkpartner" href="javascript:void(0);" ng-click="redirect('editPartnerpreference');" ng-style="{color:model.lnkpartnerReview==true?'Red':''}">Partner Preferences
                                 <span class="pull-right nodatacls"> {{model.rev.iPartnerPreference===0?'NoData':''}}</span>
                             </a>
                         </li>
                         <li>
-                            <a id="lnksiblings" href="Sibbling" ng-style="{color:model.lnksiblingsReview==true?'Red':''}">Sibling Details
+                            <a id="lnksiblings" href="javascript:void(0);" ng-click="redirect('editSibbling');" ng-style="{color:model.lnksiblingsReview==true?'Red':''}">Sibling Details
                                 <span class="pull-right nodatacls"> {{model.rev.iSiblingDetails===0?'NoData':''}}</span>
                             </a>
                         </li>
                         <li>
-                            <a id="lnkastro" href="Astro" ng-style="{color:model.lnkastroReview==true?'Red':''}">Astro Details
+                            <a id="lnkastro" href="javascript:void(0);" ng-click="redirect('editAstro');" ng-style="{color:model.lnkastroReview==true?'Red':''}">Astro Details
                                 <span class="pull-right nodatacls"> {{model.rev.iAstroDetails===0?'NoData':''}}</span>
                                 
                             </a>
                         </li>
                         <li>
-                            <a id="lnkproperty" href="Property" ng-style="{color:model.lnkpropertyReview==true?'Red':''}">Property Details
+                            <a id="lnkproperty" href="javascript:void(0);" ng-click="redirect('editProperty');" ng-style="{color:model.lnkpropertyReview==true?'Red':''}">Property Details
 
                                  <span class="pull-right nodatacls"> {{model.rev.iPropertyDetails===0?'NoData':''}}</span>
                             </a>
                         </li>
                         <li>
-                            <a id="lnkrelatives" href="Relative" ng-style="{color:model.lnkrelativesReview==true?'Red':''}">Relative Details</a>
+                            <a id="lnkrelatives" href="javascript:void(0);" ng-click="redirect('editRelative');" ng-style="{color:model.lnkrelativesReview==true?'Red':''}">Relative Details</a>
                         </li>
                         <li>
-                            <a id="lnkreference" href="Reference" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">References
+                            <a id="lnkreference" href="javascript:void(0);" ng-click="redirect('editReference');" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">References
                                 <span class="pull-right nodatacls"> {{model.rev.iReferenceDetails===0?'NoData':''}}</span>
                                 </a>
                         </li>
 
                         <li>
-                            <a href="Spouse" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">Spouse Details
+                            <a href="javascript:void(0);" ng-click="redirect('editSpouse');" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">Spouse Details
                             </a>
                         </li>
 
                         <li>
-                            <a href="Contact" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">Contact Details
+                            <a href="javascript:void(0);" ng-click="redirect('editContact');" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">Contact Details
                             </a>
                         </li>
                         <li>
-                            <a href="OfcePurpose" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">Office Purpose
+                            <a href="javascript:void(0);" ng-click="redirect('editOfcePurpose');" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">Office Purpose
                             </a>
                         </li>
                         <li>
-                            <a href="ProfileSetting" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">Profile Settings
+                            <a href="javascript:void(0);" ng-click="redirect('editProfileSetting');" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">Profile Settings
                             </a>
                         </li>
                     </ul>
@@ -147,6 +150,8 @@
             <div ui-view="lazyLoadView" class="right_col">
 
             </div>
+            <!--<div ui-view="bottompanel">
+            </div>-->
         </div>
     </div>
     <!-- jQuery -->
@@ -207,7 +212,6 @@
 
     <script src="common/directives/pageReviewDirective.js" type="text/javascript"></script>
     <!--SCRIPTS END-->
-
 
 
 

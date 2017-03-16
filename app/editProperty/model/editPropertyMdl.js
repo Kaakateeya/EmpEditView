@@ -2,7 +2,7 @@
     'use strict';
 
 
-    function factory(editPropertyService, authSvc, alertss, commonFactory, uibModal) {
+    function factory(editPropertyService, authSvc, alertss, commonFactory, uibModal, stateParams) {
         var model = {};
         model.scope = {};
 
@@ -12,8 +12,9 @@
         model.proObj = {};
 
         var isSubmit = true;
-        var logincustid = authSvc.getCustId();
-        var custID = model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = model.CustID = stateParams.CustID;
+        //  model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
 
         //end declaration block
 
@@ -96,6 +97,6 @@
         .module('KaakateeyaEmpEdit')
         .factory('editPropertyModel', factory)
 
-    factory.$inject = ['editPropertyService', 'authSvc', 'alert', 'commonFactory', '$uibModal'];
+    factory.$inject = ['editPropertyService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 
 })(angular);

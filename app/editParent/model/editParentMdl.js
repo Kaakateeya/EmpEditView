@@ -2,7 +2,7 @@
     'use strict';
 
 
-    function factory(editParentService, authSvc, alertss, commonFactory, uibModal) {
+    function factory(editParentService, authSvc, alertss, commonFactory, uibModal, stateParams) {
         var model = {};
         model.model = {};
         //start declarion block
@@ -18,8 +18,9 @@
 
         //end declarion block
 
-        var logincustid = authSvc.getCustId();
-        var custID = model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = model.CustID = stateParams.CustID;
+        //  model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
 
 
         model.init = function() {
@@ -458,16 +459,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
         return model.init();
 
     }
@@ -476,6 +467,6 @@
         .module('KaakateeyaEmpEdit')
         .factory('editParentModel', factory)
 
-    factory.$inject = ['editParentService', 'authSvc', 'alert', 'commonFactory', '$uibModal'];
+    factory.$inject = ['editParentService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 
 })(angular);

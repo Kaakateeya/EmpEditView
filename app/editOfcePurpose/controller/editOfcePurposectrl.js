@@ -5,7 +5,8 @@
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
-             vm.model = editOfcePurposeModel;
+             vm.model = editOfcePurposeModel.init();
+
              vm.model.scope = scope;
          };
 

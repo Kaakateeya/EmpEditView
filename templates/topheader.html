@@ -1,287 +1,287 @@
-<!--<div class="header_inner" id="divInnerMaster" ng-init="headerinit()">
+<div>
+    <div class="col-md-3 left_col">
+        <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+                <a href="/" class="site_title smalllogo"><img src="src/images/kaakateeyalogo_001.jpg" style="width:50px;height:50px;"></img>
+                </a>
 
-    <div class="container_my clearfix">
+                <a href="/" class="site_title kaakateeyalogo"><img src="src/images/logo3.png" style="width: 158px;
+                      height: 61px;"></img>
+                </a>
+            </div>
 
-        <a id="IbtnLogodisplay" href="javascript:void(0)" ng-click="redirecthomeordashboard()" class="logo3 pull-left" />
-        <input type="button" value="Login" ng-show="loginstatus" id="btnLoginsubmit" class="pull-right button_custom login_show" ng-click="divloginblock();" />
-        <input type="button" value="Logout" ng-show="loginoutstatus" id="btnLogOut" class="pull-right button_custom" ng-click="ClearlocalStorage();" />
+            <div class="clearfix"></div>
 
-
-        <div class="login_block_header" ng-style="loginpopup===true?{'display':'block'}:{'display':'none'}" id="divLogin">
-            <form name="myForms">
-                <input type="text" id="txtUserName" ng-keyup="myForms.$valid && $event.keyCode == 13 && loginsubmit()" placeholder="ProfileID/EmailID" style="height: 38px;border: 1px solid #cbc0c0 !important;" ng-model="username" required/>
-                <input type="password" id="txtPassword" ng-keyup="myForms.$valid && $event.keyCode == 13 && loginsubmit()" placeholder="Password" style="height: 38px;border: 1px solid #cbc0c0 !important;" ng-model="password" required/>
-                <span class="clear">&nbsp;</span>
-                <div class="login_help">
-                    <a id="lnkForgotPassword" href="javascript:void(0)" ng-click="showforgetpasswordpopup()">Forgot Password</a>
-                    <a href="registration">New User Sign Up</a>
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+                <div class="profile_pic">
+                    <img src="src/images/img_notavail.jpg" alt="..." class="img-circle profile_img">
                 </div>
-                <md-button id="btnUserLogin" ng-click="loginsubmit()" ng-disabled="myForms.$invalid" class="md-raised md-warn">Login</md-button>
-            </form>
-            <span class="clear">&nbsp;</span>
+                <div class="profile_info">
+                    <span>Welcome,</span>
+                    <h2 style="color:#0d1aca;">{{head.name}}</h2>
+                </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                <div class="menu_section">
+                    <h3>General</h3>
+                    <ul class="nav side-menu">
+                        <li><a><i class="fa fa-video-camera"></i> Demo <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="mg">BootstrapslidePopup</a></li>
+                                <li><a href="bootstrapslide">Bootstrapslide</a></li>
+                                <li><a href="bootstrapTable">BootstrapTable</a></li>
+                            </ul>
+                        </li>
+                        <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="/home">Dashboard</a></li>
+                                <li><a href="dashboard2">Dashboard2</a></li>
+                                <li><a href="dashboard3">Dashboard3</a></li>
+                                <li><a href="dashBoardNew">dashBoardNew</a></li>
+
+
+                            </ul>
+                        </li>
+                        <li><a><i class="fa fa-edit"></i> Edit <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="Education">Education</a></li>
+                                <li><a href="javascript:void(0)">Parents</a></li>
+                                <li><a href="javascript:void(0)">siblings</a></li>
+                                <li><a href="javascript:void(0)">Relatives</a></li>
+                                <li><a href="javascript:void(0)">Astro</a></li>
+                                <li><a href="javascript:void(0)">Managephoto</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="search"><i class="fa fa-search"></i> Search <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="javascript:void(0)">General Search</a></li>
+                                <li><a href="javascript:void(0)">Advanced search</a></li>
+                            </ul>
+                        </li>
+                        <li><a><i class="fa fa-table"></i> Reports <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="javascript:void(0)">Myprofile</a></li>
+
+                            </ul>
+                        </li>
+
+                        <li><a><i class="fa fa-clone"></i>Slide shows <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="javascript:void(0)">marketing</a></li>
+                                <li><a href="javascript:void(0)">Matchfollowup</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="menu_section">
+                    <h3>Live On</h3>
+                    <ul class="nav side-menu">
+                        <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="javascript:void(0)">E-commerce</a></li>
+                                <li><a href="javascript:void(0)">Projects</a></li>
+                                <li><a href="javascript:void(0)">Project Detail</a></li>
+                                <li><a href="javascript:void(0)">Contacts</a></li>
+                                <li><a href="javascript:void(0)">Profile</a></li>
+                            </ul>
+                        </li>
+                        <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="javascript:void(0)">403 Error</a></li>
+                                <li><a href="javascript:void(0)">404 Error</a></li>
+                                <li><a href="javascript:void(0)">500 Error</a></li>
+                                <li><a href="javascript:void(0)">Plain Page</a></li>
+                                <li><a href="javascript:void(0)">Login Page</a></li>
+                                <li><a href="javascript:void(0)">Pricing Tables</a></li>
+                            </ul>
+                        </li>
+                        <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="javascript:void(0)">Level One</a>
+                                    <li><a>Level One<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li class="sub_menu"><a href="javascript:void(0)">Level Two</a>
+                                            </li>
+                                            <li><a href="javascript:void(0);">Level Two</a>
+                                            </li>
+                                            <li><a href="javascript:void(0);">Level Two</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="javascript:void(0);">Level One</a>
+                                    </li>
+                            </ul>
+                            </li>
+                            <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page
+                         <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="/">Dashboard</a></li>
+                                </ul>
+                            </li>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+
+                <a data-toggle="tooltip" data-placement="top" title="Lock" href="javascript:void(0)" ng-click="head.lockscreen()">
+                    <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Logout" href="javascript:void(0)" ng-click="head.logout()">
+                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                </a>
+            </div>
+            <!-- /menu footer buttons -->
         </div>
-
-        <div class="header_inner_rt clearfix">
-            <h3>
-                <a id="lnkFeedbackMenu" href="feedback">Feedback</a>
-            </h3>
-            <h4>make a missed call<span><em>+91-9390999999</em></span>
-            </h4>
-
-            <h4>Support No<span>+1-734-926-1011</span></h4>
+        <div class="row" ng-show="isLoader">
+            <md-progress-circular class="md-accent md-hue-1 col-lg-offset-5" md-diameter="60"></md-progress-circular>
         </div>
     </div>
-    <div class="navbar_inner" id="divMemberName" ng-show="withlogin" set-class-when-at-top="fix-to-top">
 
-        <div class="container_my clearfix">
-            <div class="profile_own_name pull-left clearfix">
-                <img id="IMasterpic" ng-src="{{profilepic}}" style="width: 31px !important; height: 31px !important; border: solid 2px #fc6a1b;border-radius: 3px;display: inline-block; float: left;" />
-                <h2>
-                    <label id="lblCustFName">{{usernamepersonal}}</label> &nbsp;&nbsp;(
+    <!-- top navigation -->
+    <div class="top_nav" id="top_navdiv">
+        <div class="nav_menu">
+            <nav>
+                <div class="nav toggle">
+                    <a id="menu_toggle" style="color:white;"><i class="fa fa-bars"></i></a>
+                </div>
 
-                    <label id="lblprofile">{{profileid}}</label>)
-                    <br />
-                    <span>Accout type :</span>
-                    <a id="lblpaid" ng-href="{{hrefpaid}}" style="color:White;">{{paidstatus}}</a>
-                </h2>
-            </div>
-            <div class="profile_own_menu profile_own_menu2 pull-right" id="MenuDiv">
-                <a class="menu_toggle pull-right">Menu</a>
-                <ul class="pull-right">
-
-                    <li>
-                        <a id="lnkMyHome" href="javascript:void(0)" ng-click="homepagelinks('myhome')">My Home</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">my account</a>
-
-                        <ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="">
+                        <a href="javascript:void(0)" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <img src="src/images/img_notavail.jpg" alt="">{{head.name}}
+                            <span class="fa fa-angle-down"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-usermenu pull-right">
+                            <li><a href="javascript:void(0)" ng-click="head.logout()"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                             <li>
-                                <a id="linkviewmyprofile" href="javascript:void(0);" ng-click="viewfullmyprofile()">View My Profile</a>
+                                <a data-toggle="tooltip" data-placement="top" title="Lock" href="javascript:void(0)" ng-click="head.lockscreen()">
+                                    <span class="glyphicon glyphicon-eye-close pull-right" aria-hidden="true"></span>Lock
+                                </a>
                             </li>
-                            <li>
-                                <a id="linkeditprofile" href="editview">Edit Profile</a>
-                            </li>
-                            <li>
-                                <a id="linkmanagephoto" href="editview/editManagePhoto">Manage Photo</a>
-                            </li>
-                            <li>
-                                <a id="linkmanagehoroscope" href="editview/editAstro">Manage Horoscope</a>
-                            </li>
-                            <li>
-                                <a id="linkprofilesettings" href="profilesettings">Profile Settings</a>
-                            </li>
-
-                        </ul>
-
-                    </li>
-                    <li>
-                        <a id="lnksearch" href="javascript:void(0)" ng-click="searchpage('profile')">Search</a>
-                        <ul>
-                            <li>
-                                <a id="linkgenaralsearch" href="javascript:void(0)" ng-click="searchpage('general')">General Search</a>
-                            </li>
-                            <li>
-                                <a id="linkAdvancedSearch" href="javascript:void(0)" ng-click="searchpage('advanced')">Advanced Search</a>
-                            </li>
-                            <li>
-                                <a id="linkprofileidsearch" href="javascript:void(0)" ng-click="searchpage('profile')">Profileid Search</a>
-                            </li>
-
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="javascript:void(0)">my package</a>
-                        <ul>
+                    <li role="presentation" class="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                            <span>Notifications</span>
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="badge bg-green">6</span>
+                        </a>
+                        <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                             <li>
-                                <a id="linkupgrademembership" href="UpgradeMembership">Upgrade Membership</a>
+                                <a>
+                                    <span class="image"><img src="src/images/profilepic.png" alt="Profile Image" /></span>
+                                    <span>
+                          <span>210910352</span>
+                                    <span class="time">3 mins ago</span>
+                                    </span>
+                                    <span class="message">
+                          bookmarked By 310910220
+                        </span>
+                                </a>
                             </li>
                             <li>
-                                <a id="linkmyorders" href="myorders">My Orders and Statistics</a>
+                                <a>
+                                    <span class="image"><img src="src/images/profilepic.png" alt="Profile Image" /></span>
+                                    <span>
+                          <span>210910352</span>
+                                    <span class="time">3 mins ago</span>
+                                    </span>
+                                    <span class="message">
+                          bookmarked By 310910220
+                        </span>
+                                </a>
                             </li>
                             <li>
-                                <a id="linkmembershipfaqs" href="faqs">Membership Faqs</a>
+                                <a>
+                                    <span class="image"><img src="src/images/profilepic.png" alt="Profile Image" /></span>
+                                    <span>
+                          <span>210910352</span>
+                                    <span class="time">3 mins ago</span>
+                                    </span>
+                                    <span class="message">
+                          bookmarked By 310910220
+                        </span>
+                                </a>
                             </li>
                             <li>
-                                <a id="linkAddOnPacks" href="AddOnPacks" ng-hide="true">Add On Packs</a>
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">matches</a>
-                        <ul>
-                            <li>
-                                <a id="linkmybookmarks" href="javascript:void(0)" ng-click="homepagelinks('BookMarked')">My BookMarked Profiles</a>
-                            </li>
-                            <li>
-                                <a id="linkwhobookmarkedme" href="javascript:void(0)" ng-click="homepagelinks('BookMarkedme')">Who BookMarked Me</a>
+                                <a>
+                                    <span class="image"><img src="src/images/profilepic.png" alt="Profile Image" /></span>
+                                    <span>
+                          <span>210910352</span>
+                                    <span class="time">3 mins ago</span>
+                                    </span>
+                                    <span class="message">
+                          bookmarked By 310910220
+                        </span>
+                                </a>
                             </li>
                             <li>
-                                <a id="linkigonredprofile" href="javascript:void(0)" ng-click="homepagelinks('Ignored')">Ignored Profiles</a>
-                            </li>
-                            <li>
-                                <a id="linkviewedbutnotexpress" href="javascript:void(0)" ng-click="homepagelinks('myprofile')">My profile viewed by others</a>
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">messages</a>
-                        <ul>
-                            <li>
-                                <a id="linkPersonalizedmsg" href="javascript:void(0)" ng-click="homepagelinks('Chats')">Chats</a>
-                            </li>
-                            <li>
-                                <a id="linkrequests" href="javascript:void(0)" ng-click="homepagelinks('Requests')">Requests</a>
-                            </li>
-                            <li>
-                                <a id="linkMyContact" href="javascript:void(0)" ng-click="homepagelinks('Express')">Express interest</a>
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="help">Help</a>
-                        <ul>
-                            <li>
-                                <a id="lnkcontactus" href="help">Contact Us</a>
-                            </li>
-                            <li>
-                                <a id="linkmysupportickets" href="MySupportTickets">My Support Tickets</a>
-                            </li>
-                            <li>
-                                <a id="lnkfeedback" href="feedback">Feed Back</a>
-                            </li>
-                            <li>
-                                <a id="lnktakeatour" href="takeatour">Take A Tour</a>
+                                <div class="text-center">
+                                    <a>
+                                        <strong>See All Alerts</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>
                             </li>
                         </ul>
                     </li>
                 </ul>
+            </nav>
+        </div>
+    </div>
+
+
+    <script type="text/ng-template" id="loginContent.html">
+        <form name="loginForm" novalidate role="form" style='z-index: 99999'>
+            <div class="modal-body clearfix pop_content_my" id="modal-body">
+                <div class='row'>
+                    <h3 class='text-center'>Employee login</h3>
+                    <div class='col-lg-4'>
+                        <br>
+                        <img src="src\images\logo3.png" alt="">
+                    </div>
+                    <div class='col-lg-7'>
+
+                        <md-input-container class="md-block" flex-gt-sm ng-show="!head.lock">
+                            <label for="username" lass='col-lg-4'>User name </label>
+                            <input type="text" class="usernameemployee" ng-model="head.usernameemployee" name="usernameemployee" required md-no-asterisk>
+                            <div ng-messages="loginForm.usernameemployee.$error">
+                                <div ng-message="required">This is required.</div>
+                            </div>
+                        </md-input-container>
+
+                        <label ng-show="head.lock" class="form-label">{{head.usernameemployee}}</label>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label for="username" class='col-lg-4'>Password 	</label>
+                            <input type="Password" class="usernameemployee" ng-model="head.passwordemployee" name="passwordemployee" required md-no-asterisk>
+                            <div ng-messages="loginForm.passwordemployee.$error">
+                                <div ng-message="required">This is required.</div>
+                                <div ng-message="pattern">username is invalid</div>
+                            </div>
+                        </md-input-container>
+                        <label class="labelred">{{head.errormessage}}</label>
+                        <div class='col-lg-offset-3'>
+                            <md-button class="md-raised md-warn md-hue-2" ng-disabled="loginForm.$invalid" ng-click="head.loginsubmit(head)">Login
+                            </md-button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
-    </div>
-
-    <div class="navbar_inner" id="divwithoutlogin" ng-show="withoutlogin">
-        <div class="container_my clearfix">
-
-            <div class="profile_own_menu pull-right">
-                <a class="menu_toggle pull-right">Menu</a>
-                <ul class="pull-right">
-
-                    <li><a href="registration">Register free</a></li>
-                    <li><a href="javascript:void(0)" ng-click="searchpage('profile')">Search <span></span></a></li>
-                    <li><a href="javascript:void(0);" ng-click="divloginblock()">Upgrade</a></li>
-                    <li>
-                        <a id="lnkSucessstoreiesFooter" href="successstories">success stories <span></span></a>
-                    </li>
-                    <li>
-                        <a id="linkfooterhelp" href="help">Help</a>
-                    </li>
-                    <li><a href="javascript:void(0);" ng-click="redirecthomeordashboard()">Home</a></li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
+        </form>
+    </script>
 
 
 </div>
-
-
-
-<div class="edit_pages_sidebar clearfix" ng-controller="personalCtrl">
-    <div class="edit_page_profile_pic">
-        <img id="imgphoto" ng-src="{{imgsrc}}">
-        <span id="lblcust_Id" style="display: none;"></span>
-    </div>
-
-    <div class="edit_pages_sidebar_profile_details">
-        <h6>
-            <span id="lstPersolnalDetails_ctrl0_lblCustNamewithProfileID">{{model.PersonalObj.Name+" ("+model.PersonalObj.ProfileID+")"}}</span></h6>
-        <div class="edit_pages_sidebar_profile_details_in">
-
-            <p>
-                <span id="lstPersolnalDetails_ctrl0_lblMaritalDOBHeight">{{model.PersonalObj.MartialStatus+" ,"+model.PersonalObj.DateofBirth+((model.PersonalObj.Age!="" && model.PersonalObj.Age!=null)?" ("+model.PersonalObj.Age+")":model.PersonalObj.Age)+((model.PersonalObj.Height!="" && model.PersonalObj.Height!=null)?" ,"+model.PersonalObj.Height:model.PersonalObj.Height)+((model.PersonalObj.Complexion!="")?" ,"+model.PersonalObj.Complexion:model.PersonalObj.Complexion)}}</span>
-            </p>
-            <p>
-                <span id="lstPersolnalDetails_ctrl0_lblReligionMTCaste">{{model.PersonalObj.Religion+" ,"+model.PersonalObj.Mothertongue+", "+model.PersonalObj.Caste+((model.PersonalObj.SubCaste!="" && model.PersonalObj.SubCaste!=null)? " ("+SubCaste+")":SubCaste)}}</span>
-            </p>
-            <p>
-                <span>
-                <span id="lstPersolnalDetails_ctrl0_lblcitizen" style="font-weight:bold;"> {{(model.PersonalObj.Borncountry!=null && model.PersonalObj.Borncountry!="")?" Born Citizen:"+model.PersonalObj.Borncountry:Borncountry}}</span>
-                </span>
-            </p>
-        </div>
-    </div>
-
-    <div class="clear"></div>
-
-    <div class="edit_pages_sidebar_menu clearfix">
-        <ul>
-            <li>
-                <a id="lnkeducationandprof" href="editview/editEducationAndProfession" ng-style="{color:model.lnkeducationandprofReview==true?'Red':''}">Education & Profession</a></li>
-            <li>
-                <a id="lnkmanagephoto" href="editview/editManagePhoto">Manage Photo</a></li>
-            <li>
-                <a id="lnkparents" href="editview/editparent" ng-style="{color:model.lnkparentsReview==true?'Red':''}">Parent Details</a></li>
-            <li>
-                <a id="lnkpartner" href="editview/editPartnerPreferences" ng-style="{color:model.lnkpartnerReview==true?'Red':''}">Partner Preferences</a></li>
-            <li>
-                <a id="lnksiblings" href="editview/editSiblingDetails" ng-style="{color:model.lnksiblingsReview==true?'Red':''}">Sibling Details</a></li>
-            <li>
-                <a id="lnkastro" href="editview/editAstro" ng-style="{color:model.lnkastroReview==true?'Red':''}">Astro Details</a></li>
-            <li>
-                <a id="lnkproperty" href="editview/editProperty" ng-style="{color:model.lnkpropertyReview==true?'Red':''}">Property Details</a>
-            </li>
-            <li>
-                <a id="lnkrelatives" href="editview/editRelative" ng-style="{color:model.lnkrelativesReview==true?'Red':''}">Relative Details</a>
-            </li>
-            <li>
-                <a id="lnkreference" href="editview/editReferences" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">References</a>
-            </li>
-
-            <li>
-                <a href="editview/editSpouse" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">Spouse Details</a>
-            </li>
-
-            <li>
-                <a href="editview/editContact" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">Contact Details</a>
-            </li>
-            <li>
-                <a href="editview/officePurpose" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">Office Purpose</a>
-            </li>
-            <li>
-                <a href="editview/profileSettings" ng-style="{color:model.lnkreferenceReview==true?'Red':''}">Profile Settings</a>
-            </li>
-        </ul>
-    </div>
-
-</div>
-
-<div ui-view="lazyLoadView">
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-<style>
-    .nav-sm .container.body .right_col {
-        padding: 0;
-        margin-left: 70px;
-        z-index: 2;
-    }
-</style>-->

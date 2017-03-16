@@ -2,7 +2,7 @@
     'use strict';
 
 
-    function factory(editReferenceService, authSvc, alertss, commonFactory, uibModal, SelectBindService) {
+    function factory(editReferenceService, authSvc, alertss, commonFactory, uibModal, SelectBindService, stateParams) {
         var model = {};
         model.scope = {};
 
@@ -14,8 +14,9 @@
         model.deleteDisplayTxt = 'reference';
         var isSubmit = true;
         model.identityID = 0;
-        var logincustid = authSvc.getCustId();
-        var custID = model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = model.CustID = stateParams.CustID;
+        //  model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
 
         //end declaration block
         model.init = function() {
@@ -147,6 +148,6 @@
         .module('KaakateeyaEmpEdit')
         .factory('editReferenceModel', factory)
 
-    factory.$inject = ['editReferenceService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'SelectBindService'];
+    factory.$inject = ['editReferenceService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'SelectBindService', '$stateParams'];
 
 })(angular);

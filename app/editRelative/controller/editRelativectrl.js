@@ -5,7 +5,7 @@
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
-             vm.model = editRelativeModel;
+             vm.model = editRelativeModel.init();
              vm.model.scope = scope;
          };
 

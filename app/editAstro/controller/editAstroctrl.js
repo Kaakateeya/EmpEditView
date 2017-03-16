@@ -7,6 +7,7 @@
          vm.scope = scope;
          vm.init = function() {
              vm.model = editAstroModel;
+             editAstroModel.init();
              vm.model.scope = scope;
          };
 

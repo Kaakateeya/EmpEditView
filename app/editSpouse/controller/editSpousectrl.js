@@ -5,7 +5,7 @@
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
-             vm.model = editSpouseModel;
+             vm.model = editSpouseModel.init();
              vm.model.scope = scope;
          };
 

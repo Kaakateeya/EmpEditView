@@ -5,7 +5,7 @@
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
-             vm.model = editReferenceModel;
+             vm.model = editReferenceModel.init();
              vm.model.scope = scope;
          };
 

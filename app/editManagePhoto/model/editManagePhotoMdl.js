@@ -2,12 +2,13 @@
     'use strict';
 
 
-    function factory(editManagePhotoService, authSvc, alertss, commonFactory, uibModal, http, fileUpload) {
+    function factory(editManagePhotoService, authSvc, alertss, commonFactory, uibModal, http, fileUpload, stateParams) {
         var model = {};
         model.scope = {};
         //start declaration block
-        var logincustid = authSvc.getCustId();
-        var CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var CustID = stateParams.CustID;
+        // logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.loginpaidstatus = authSvc.getpaidstatus();
         var genderID = authSvc.getGenderID();
 
@@ -226,6 +227,6 @@
         .module('KaakateeyaEmpEdit')
         .factory('editManagePhotoModel', factory)
 
-    factory.$inject = ['editManagePhotoService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$http', 'fileUpload'];
+    factory.$inject = ['editManagePhotoService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$http', 'fileUpload', '$stateParams'];
 
 })(angular);

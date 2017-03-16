@@ -2,9 +2,9 @@
     'use strict';
 
 
-    function factory($http, authSvc, editEducationService, commonFactory, uibModal, filter, alertss, baseService) {
+    function factory($http, authSvc, editEducationService, commonFactory, uibModal, filter, alertss, baseService, stateParams) {
         var model = {};
-        var logincustid = authSvc.getCustId();
+        // var logincustid = authSvc.getCustId();
 
         model.scope = {};
 
@@ -31,7 +31,8 @@
         //end declaration block
 
 
-        var CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        var CustID = stateParams.CustID;
+        // logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.CustID = CustID;
         model.init = function() {
             model.getdata();
@@ -420,6 +421,6 @@
         .module('KaakateeyaEmpEdit')
         .factory('editEducationModel', factory)
 
-    factory.$inject = ['$http', 'authSvc', 'editEducationService', 'commonFactory', '$uibModal', '$filter', 'alert', 'baseService'];
+    factory.$inject = ['$http', 'authSvc', 'editEducationService', 'commonFactory', '$uibModal', '$filter', 'alert', 'baseService', '$stateParams'];
 
 })(angular);

@@ -2,11 +2,12 @@
     'use strict';
 
 
-    function factory(editOfcePurposeService, authSvc, alertss, commonFactory, uibModal) {
+    function factory(editOfcePurposeService, authSvc, alertss, commonFactory, uibModal, stateParams) {
         var model = {};
         model.scope = {};
-        var logincustid = authSvc.getCustId();
-        var custID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = stateParams.CustID;
+        //  logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.dataval = '';
         model.aboutObj = {};
 
@@ -59,6 +60,6 @@
         .module('KaakateeyaEmpEdit')
         .factory('editOfcePurposeModel', factory)
 
-    factory.$inject = ['editOfcePurposeService', 'authSvc', 'alert', 'commonFactory', '$uibModal'];
+    factory.$inject = ['editOfcePurposeService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 
 })(angular);

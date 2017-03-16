@@ -2,12 +2,13 @@
     'use strict';
 
 
-    function factory(editContactService, authSvc, alertss, commonFactory, uibModal) {
+    function factory(editContactService, authSvc, alertss, commonFactory, uibModal, stateParams) {
         var model = {};
         model.scope = {};
 
-        var logincustid = authSvc.getCustId();
-        var custID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var custID = model.CustID = stateParams.CustID;
+        //logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.candidateContactArr = [];
         model.candidateAddrArr = [];
         model.parentContactArr = [];
@@ -413,6 +414,6 @@
         .module('KaakateeyaEmpEdit')
         .factory('editContactModel', factory)
 
-    factory.$inject = ['editContactService', 'authSvc', 'alert', 'commonFactory', '$uibModal'];
+    factory.$inject = ['editContactService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 
 })(angular);

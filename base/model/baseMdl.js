@@ -2,10 +2,12 @@
     'use strict';
 
 
-    function factory(baseService, authSvc, uibModal, commonFactory) {
+    function factory(baseService, authSvc, uibModal, commonFactory, stateParams) {
         var model = {};
-        var logincustid = authSvc.getCustId();
-        var CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+        // var logincustid = authSvc.getCustId();
+        var CustID = 91022;
+        // stateParams.CustID;
+
         model.scope = {};
         model.init = function() {
             baseService.personalDetails(CustID).then(function(response) {
@@ -102,12 +104,20 @@
             commonFactory.closepopup();
         };
 
+
+
+
+
+
+
+
+
         return model.init();
     }
 
     angular
         .module('KaakateeyaEmpEdit')
         .factory('baseModel', factory)
-    factory.$inject = ['baseService', 'authSvc', '$uibModal', 'commonFactory'];
+    factory.$inject = ['baseService', 'authSvc', '$uibModal', 'commonFactory', '$stateParams'];
 
 })(angular);

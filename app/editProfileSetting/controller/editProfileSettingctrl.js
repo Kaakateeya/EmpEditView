@@ -5,7 +5,7 @@
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
-             vm.model = editProfileSettingModel;
+             vm.model = editProfileSettingModel.init();
              vm.model.scope = scope;
          };
 

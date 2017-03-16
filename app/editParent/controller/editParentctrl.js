@@ -6,7 +6,7 @@
          var vm = this;
 
          vm.init = function() {
-             vm.model = editParentModel;
+             vm.model = editParentModel.init();
              vm.model.scope = scope;
          };
 

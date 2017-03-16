@@ -5,7 +5,7 @@
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
-             vm.model = editPartnerpreferenceModel;
+             vm.model = editPartnerpreferenceModel.init();
              vm.model.scope = scope;
          };
 

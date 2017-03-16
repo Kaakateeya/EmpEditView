@@ -6,6 +6,7 @@
          var vm = this;
          vm.init = function() {
              vm.model = editContactModel;
+             editContactModel.init();
              vm.model.scope = scope;
          };
 
