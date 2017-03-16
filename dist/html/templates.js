@@ -52,11 +52,17 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <link href=\"bower_components/angular-loading-bar/build/loading-bar.min.css\" rel=\"stylesheet\" />\r" +
     "\n" +
+    "    <link href=\"build/css/custom_styles.css\" rel=\"stylesheet\" />\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "    <link href=\"css/scss/mainstyles.css\" rel=\"stylesheet\" />\r" +
     "\n" +
     "    <link href=\"stylesreg.css\" rel=\"stylesheet\" />\r" +
-    "\n" +
-    "    <link href=\"build/css/custom_styles.css\" rel=\"stylesheet\" />\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -4465,12 +4471,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
     "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "    <div class=\"edit_pages_content_main clearfix\">\r" +
     "\n" +

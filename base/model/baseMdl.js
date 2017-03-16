@@ -5,8 +5,7 @@
     function factory(baseService, authSvc, uibModal, commonFactory, stateParams) {
         var model = {};
         // var logincustid = authSvc.getCustId();
-        var CustID = 91022;
-        // stateParams.CustID;
+        var CustID = stateParams.CustID;
 
         model.scope = {};
         model.init = function() {
