@@ -6348,9 +6348,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div ng-include=\"'templates/sideMenu.html'\">\r" +
-    "\n" +
-    "            </div>\r" +
+    "\r" +
     "\n" +
     "            <div ui-view=\"lazyLoadView\">\r" +
     "\n" +
@@ -6376,7 +6374,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <!-- jQuery -->\r" +
     "\n" +
-    "    <!-- SCRIPTS DATA --#>\r" +
+    "    <!-- SCRIPTS DATA -->\r" +
     "\n" +
     "    <script src=\"node_modules/jquery/dist/jquery.min.js\"></script>\r" +
     "\n" +
@@ -6504,7 +6502,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <!-- SCRIPTSP DATA -->\r" +
+    "    <!-- SCRIPTSP DATA --#>\r" +
     "\n" +
     "    <script src=\"dist/js/main.min.js\"></script>\r" +
     "\n" +
@@ -9263,87 +9261,87 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editEducation/index.html',
-    "<div class=\"edit_pages_content_main clearfix\" class=\"right_col\">\r" +
+    "<div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
+    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
-    "    <!--<side-menu></side-menu>-->\r" +
-    "\n" +
-    "\r" +
+    "    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <page-review dispaly-name=\"'Education details'\" sectionid=\"'6,7,8'\" custid=\"page.model.CustID\"></page-review>\r" +
+    "    <div class=\"edit_pages_content_main clearfix\">\r" +
     "\n" +
-    "    <div class=\"edit_page_item\">\r" +
+    "        <page-review dispaly-name=\"'Education details'\" sectionid=\"'6,7,8'\" custid=\"page.model.CustID\"></page-review>\r" +
     "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
+    "        <div class=\"edit_page_item\">\r" +
     "\n" +
-    "            <h4>Customer Personal Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" id=\"spanEduModID\">ModifiedBy :{{page.model.custEmpLastModificationDate}}</span>\r" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "            </h4>\r" +
+    "                <h4>Customer Personal Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" id=\"spanEduModID\">ModifiedBy :{{page.model.custEmpLastModificationDate}}</span>\r" +
     "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\">\r" +
+    "                </h4>\r" +
     "\n" +
-    "                <a id=\"lnkpersonaldetailsadd\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('custData');\">Add</a>\r" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                    <a id=\"lnkpersonaldetailsadd\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('custData');\">Add</a>\r" +
+    "\n" +
+    "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "        </div>\r" +
+    "\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                <div id=\"listpersonaldetails\" ng-repeat=\"item in page.model.CustomerDataArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
+    "                    <div id=\"reviewdivpersonal\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "            <div id=\"listpersonaldetails\" ng-repeat=\"item in page.model.CustomerDataArr\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div id=\"reviewdivpersonal\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanel6\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div id=\"UpdatePanel6\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                            <span id=\"gender\">Gender</span></h6>\r" +
+    "                                <span id=\"gender\">Gender</span></h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                            <span id=\"lblGender\">\r" +
+    "                                <span id=\"lblGender\">\r" +
     "\n" +
     "                            {{item.Gender}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
-    "                    <div id=\"UpdatePanellblMaritalStatus\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div id=\"UpdatePanellblMaritalStatus\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                            <span id=\"MaritalStatus\">Marital Status</span></h6>\r" +
+    "                                <span id=\"MaritalStatus\">Marital Status</span></h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                            <span id=\"lblMaritalStatus\">\r" +
+    "                                <span id=\"lblMaritalStatus\">\r" +
     "\n" +
     "                            {{item.MartialStatus}}</span></h5>\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div id=\"UpdatePanelLnkpersonaledit\" class=\"edit_page_item_ui clearfix\">\r" +
+    "                        <div id=\"UpdatePanelLnkpersonaledit\" class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('custData',item);\" visible='<%# Request.QueryString[\"Admin\"] == \"1\" %>' class=\"edit_page_edit_button\">Edit\r" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('custData',item);\" visible='<%# Request.QueryString[\"Admin\"] == \"1\" %>' class=\"edit_page_edit_button\">Edit\r" +
     "\n" +
     "                    </a>\r" +
     "\n" +
@@ -9351,489 +9349,173 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
-    "                    <div id=\"UpdatePaneldateofbirth\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"divdateofbirth\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"dateofbirth\" font-bold=\"true\">Date Of Birth</span></h6>\r" +
+    "                        <div id=\"UpdatePaneldateofbirth\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                            <div id=\"divdateofbirth\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                                <span id=\"lbldateofbirth\">{{item.DateofBirth}}</span></h5>\r" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"dateofbirth\" font-bold=\"true\">Date Of Birth</span></h6>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lbldateofbirth\">{{item.DateofBirth}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelheight\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"divcandidateheight\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblcandidateheight\" font-bold=\"true\">Height</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblheight\">{{item.Height}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelcolor\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\" id=\"divcomplexion\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblcolor\" font-bold=\"true\">Complexion</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblcomplexion\">{{item.Complexion}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelreligion\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"divreligion\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"religion\" font-bold=\"true\">Religion</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblReligion\">{{item.Religion}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanel1\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"div1\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"span1\" font-bold=\"true\">Mother Tongue</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblmothertongue\">{{item.Mothertongue}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelpersonalcaste\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"divpersonalcaste\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblcaste\" font-bold=\"true\">Caste</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblcandidatecaste\">{{item.Caste}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelSubcaste\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"divSubcaste\" class=\"edit_page_details_item_desc clearfix\" visible='<%#(Eval(\"SubCaste\").ToString()!=\"\" && Eval(\"SubCaste\").ToString()!=null)?true:false %>'>\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblsubcaste\" font-bold=\"true\">SubCaste</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblsubcastecandidate\">{{item.SubCaste}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelBorncitizenship\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"divBorncitizenship\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblcitizenship\" font-bold=\"true\">BornCitizenship</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblborncitizenship\">{{item.Citizenship}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelheight\">\r" +
-    "\n" +
     "\r" +
-    "\n" +
-    "                        <div id=\"divcandidateheight\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblcandidateheight\" font-bold=\"true\">Height</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblheight\">{{item.Height}}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelcolor\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\" id=\"divcomplexion\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblcolor\" font-bold=\"true\">Complexion</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblcomplexion\">{{item.Complexion}}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelreligion\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"divreligion\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"religion\" font-bold=\"true\">Religion</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblReligion\">{{item.Religion}}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanel1\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"div1\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"span1\" font-bold=\"true\">Mother Tongue</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblmothertongue\">{{item.Mothertongue}}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelpersonalcaste\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"divpersonalcaste\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblcaste\" font-bold=\"true\">Caste</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblcandidatecaste\">{{item.Caste}}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelSubcaste\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"divSubcaste\" class=\"edit_page_details_item_desc clearfix\" visible='<%#(Eval(\"SubCaste\").ToString()!=\"\" && Eval(\"SubCaste\").ToString()!=null)?true:false %>'>\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblsubcaste\" font-bold=\"true\">SubCaste</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblsubcastecandidate\">{{item.SubCaste}}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelBorncitizenship\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"divBorncitizenship\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblcitizenship\" font-bold=\"true\">BornCitizenship</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblborncitizenship\">{{item.Citizenship}}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"edit_page_item\" id=\"divEducation\">\r" +
-    "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "            <h4>Education Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\">ModifiedBy :{{page.model.eduEmpLastModificationDate}}</span></h4>\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "                <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showEduModal');\">Add</a>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "            <div ng-repeat=\"item in page.model.educationSelectArray\">\r" +
-    "\n" +
-    "                <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
-    "\n" +
-    "                    <div id=\"lbleducationgroup\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <label id=\"lbleducationgroup\" ng-style=\"{color: item.EduHighestDegree==1?'Red':'Black'}\">{{item.EducationCategory!=null?(item.EducationCategory==\"Below Graduation\"?\"Under Graduation\":\"Education\"):\"Education\"}}</label>\r" +
-    "\n" +
-    "                        </h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <label id=\"edgoup\" ng-style=\"{color: item.EduHighestDegree==1?'Red':''}\">{{item.EducationGroup+\" \"+((item.EducationSpecialization!=null?\"(\" +item.EducationSpecialization+\")\":\"\"))+\" \"+((item.EduPassOfYear!=null?\",Completed\"+\"-\"+item.EduPassOfYear:\"\"))}} </label>\r" +
-    "\n" +
-    "                        </h5>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"editeducationbutton\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "                        <a id=\"LinkButton1dfd\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showEduModal',item)\">Edit</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeleteEduPopup(item.EducationID);\">Delete</a>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"divuniversityhiding\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.EduUniversity===null\">\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"Label1\">University</span>\r" +
-    "\n" +
-    "                        </h6>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"lblTuniversity\">{{item.EduUniversity}}</span>\r" +
-    "\n" +
-    "                        </h5>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"divCollege\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.EduCollege===null\">\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"Label9\">College</span>\r" +
-    "\n" +
-    "                        </h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"lblTcollege\">{{item.EduCollege}}</span>\r" +
-    "\n" +
-    "                        </h5>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\" id=\"divcityviewhiding\" ng-hide=\"item.EduCityIn===null\">\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"Label3\" font-bold=\"true\">City Study In</span>\r" +
-    "\n" +
-    "                        </h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"lblcountry\">{{item.EduCityIn+\",\"+item.EduDistrictIn+\",\"+item.EduStateIn+\",\"+item.EduCountryIn}}</span>\r" +
-    "\n" +
-    "                        </h5>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"divmerit\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.Educationdesc==null\">\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"Label5\" font-bold=\"true\">Education Merits</span>\r" +
-    "\n" +
-    "                        </h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"lblmerits\">{{item.Educationdesc}}</span>\r" +
-    "\n" +
-    "                        </h5>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"edit_page_item\">\r" +
-    "\n" +
-    "        <div id=\"divlnkAddProfession\" class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "            <h4>Professional Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style=\"color: #08CFD2\">ModifiedBy :{{page.model.profEmpLastModificationDate}}</span></h4>\r" +
-    "\n" +
-    "            </h4>\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "                <div ng-if=\"page.model.ProfessionSelectArray.length==0\">\r" +
-    "\n" +
-    "                    <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showProfModal')\">Add</a>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "            <div id=\"lstProfession\" ng-repeat=\"item in page.model.ProfessionSelectArray\">\r" +
-    "\n" +
-    "                <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'reviewCls':''\">\r" +
-    "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"lblprofession\" style=\"font-weight:bold;\">Profession</span></h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"txtProfession\">{{item.Professional+\" \"+(item.CompanyName !=null && item.CompanyName !=\"\"?\"in\"+\" \"+item.CompanyName:'')}}</span></h5>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.ProfessionSelectArray.length>0\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <a id=\"Linkedit\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showProfModal',item)\">Edit</a>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"divcitywork\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.CityWorkingIn==null\">\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"lblcitywork\" style=\"font-weight:bold;\">City working in </span></h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"lblcityworkingg\">{{(item.CityWorkingIn!=null?\" \"+item.CityWorkingIn:\" \")+ \" \" +(item.StateWorkingIn!=null && item.StateWorkingIn!=\" \"?\",\"+item.StateWorkingIn:\"\")+\" \"+(item.CountryWorkingIn!=null && item.CountryWorkingIn!=\"\"? \", \"+item.CountryWorkingIn:\" \")}}</span></h5>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"Div1\">\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.Salary===null\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblsal\" style=\"font-weight:bold;\">Monthly salary</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblsalaryy\">{{item.Currency+\" \"+(item.Salary!=null && item.Salary!=\"\"?\" \"+item.Salary+\"/-\":\"\")}}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"Div2\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.WorkingFromDate===null\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblworkfrom\" style=\"font-weight:bold;\">Working from date</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblworkingfrom\">{{item.WorkingFromDate}}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"Div3\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.VisaStatus===null\">\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <label id=\"lblvisa\">visa status</label>\r" +
-    "\n" +
-    "                        </h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"txtvisa\">{{item.VisaStatus}}</span>\r" +
-    "\n" +
-    "                        </h5>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"Div4\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.ResidingSince===null\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"lblsincedate\">Since date</span>\r" +
-    "\n" +
-    "                        </h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"txtsincedate\">{{item.ResidingSince}}</span>\r" +
-    "\n" +
-    "                        </h5>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"Div5\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.ArrivingDate===null\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"lblarrival\">Arrival Date</span>\r" +
-    "\n" +
-    "                        </h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"txtarrival\">{{item.ArrivingDate}}</span>\r" +
-    "\n" +
-    "                        </h5>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"Div6\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.DepartureDate===null\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"lbldepartture\">Departure Date</span>\r" +
-    "\n" +
-    "                        </h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"txtdaparture\"> {{item.DepartureDate}}</span>\r" +
-    "\n" +
-    "                        </h5>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"Div7\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.OccupationDetails===null\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"lblOccupation\" style=\"font-weight:bold;\">Occupation Details</span></h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span>{{item.OccupationDetails}} </span></h5>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
@@ -9845,21 +9527,129 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        </div>\r" +
     "\n" +
-    "    </div>\r" +
+    "\r" +
+    "\n" +
+    "        <div class=\"edit_page_item\" id=\"divEducation\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Education Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\">ModifiedBy :{{page.model.eduEmpLastModificationDate}}</span></h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                    <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showEduModal');\">Add</a>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                <div ng-repeat=\"item in page.model.educationSelectArray\">\r" +
+    "\n" +
+    "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
+    "\n" +
+    "                        <div id=\"lbleducationgroup\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <label id=\"lbleducationgroup\" ng-style=\"{color: item.EduHighestDegree==1?'Red':'Black'}\">{{item.EducationCategory!=null?(item.EducationCategory==\"Below Graduation\"?\"Under Graduation\":\"Education\"):\"Education\"}}</label>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <label id=\"edgoup\" ng-style=\"{color: item.EduHighestDegree==1?'Red':''}\">{{item.EducationGroup+\" \"+((item.EducationSpecialization!=null?\"(\" +item.EducationSpecialization+\")\":\"\"))+\" \"+((item.EduPassOfYear!=null?\",Completed\"+\"-\"+item.EduPassOfYear:\"\"))}} </label>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <div id=\"divlnkadd\" class=\"edit_page_item\">\r" +
+    "                        <div id=\"editeducationbutton\" class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
+    "                            <a id=\"LinkButton1dfd\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showEduModal',item)\">Edit</a>\r" +
     "\n" +
-    "            <h4>Mention your goals, interests and hobbies etc</h4>\r" +
+    "\r" +
     "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\">\r" +
+    "                            <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeleteEduPopup(item.EducationID);\">Delete</a>\r" +
     "\n" +
-    "                <div id=\"upAboutAdd\" ng-if=\"page.model.lblaboutUrself==='' || page.model.lblaboutUrself===null\">\r" +
+    "                        </div>\r" +
     "\n" +
-    "                    <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showAboutModal')\">Add</a>\r" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"divuniversityhiding\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.EduUniversity===null\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"Label1\">University</span>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblTuniversity\">{{item.EduUniversity}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"divCollege\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.EduCollege===null\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"Label9\">College</span>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblTcollege\">{{item.EduCollege}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\" id=\"divcityviewhiding\" ng-hide=\"item.EduCityIn===null\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"Label3\" font-bold=\"true\">City Study In</span>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblcountry\">{{item.EduCityIn+\",\"+item.EduDistrictIn+\",\"+item.EduStateIn+\",\"+item.EduCountryIn}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"divmerit\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.Educationdesc==null\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"Label5\" font-bold=\"true\">Education Merits</span>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblmerits\">{{item.Educationdesc}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </div>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -9867,31 +9657,187 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        </div>\r" +
     "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "            <div id=\"reviewdiv\" ng-class=\"AboutReviewStatusID===0?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
-    "\n" +
-    "                <div class=\"form-group\">\r" +
-    "\n" +
-    "                    <div id=\"uplblAbout\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
     "\r" +
     "\n" +
-    "                        <h5 style=\"float: none; width: 92%; display: block;\">\r" +
+    "        <div class=\"edit_page_item\">\r" +
     "\n" +
-    "                            <span>{{page.model.lblaboutUrself}}</span>\r" +
+    "            <div id=\"divlnkAddProfession\" class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "                        </h5>\r" +
+    "                <h4>Professional Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style=\"color: #08CFD2\">ModifiedBy :{{page.model.profEmpLastModificationDate}}</span></h4>\r" +
+    "\n" +
+    "                </h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                    <div ng-if=\"page.model.ProfessionSelectArray.length==0\">\r" +
+    "\n" +
+    "                        <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showProfModal')\">Add</a>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "                    <div ng-if=\"page.model.lblaboutUrself!='' && page.model.lblaboutUrself!=null\" class=\"edit_page_item_ui clearfix\">\r" +
+    "                </div>\r" +
     "\n" +
-    "                        <a class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showAboutModal',page.model.lblaboutUrself)\">Edit</a>\r" +
-    "\n" +
-    "                    </div>\r" +
+    "            </div>\r" +
     "\n" +
     "\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                <div id=\"lstProfession\" ng-repeat=\"item in page.model.ProfessionSelectArray\">\r" +
+    "\n" +
+    "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'reviewCls':''\">\r" +
+    "\n" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"lblprofession\" style=\"font-weight:bold;\">Profession</span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"txtProfession\">{{item.Professional+\" \"+(item.CompanyName !=null && item.CompanyName !=\"\"?\"in\"+\" \"+item.CompanyName:'')}}</span></h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.ProfessionSelectArray.length>0\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <a id=\"Linkedit\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showProfModal',item)\">Edit</a>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"divcitywork\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.CityWorkingIn==null\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"lblcitywork\" style=\"font-weight:bold;\">City working in </span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblcityworkingg\">{{(item.CityWorkingIn!=null?\" \"+item.CityWorkingIn:\" \")+ \" \" +(item.StateWorkingIn!=null && item.StateWorkingIn!=\" \"?\",\"+item.StateWorkingIn:\"\")+\" \"+(item.CountryWorkingIn!=null && item.CountryWorkingIn!=\"\"? \", \"+item.CountryWorkingIn:\" \")}}</span></h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"Div1\">\r" +
+    "\n" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.Salary===null\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblsal\" style=\"font-weight:bold;\">Monthly salary</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblsalaryy\">{{item.Currency+\" \"+(item.Salary!=null && item.Salary!=\"\"?\" \"+item.Salary+\"/-\":\"\")}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"Div2\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.WorkingFromDate===null\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblworkfrom\" style=\"font-weight:bold;\">Working from date</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblworkingfrom\">{{item.WorkingFromDate}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"Div3\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.VisaStatus===null\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <label id=\"lblvisa\">visa status</label>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"txtvisa\">{{item.VisaStatus}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"Div4\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.ResidingSince===null\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"lblsincedate\">Since date</span>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"txtsincedate\">{{item.ResidingSince}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"Div5\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.ArrivingDate===null\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"lblarrival\">Arrival Date</span>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"txtarrival\">{{item.ArrivingDate}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"Div6\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.DepartureDate===null\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"lbldepartture\">Departure Date</span>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"txtdaparture\"> {{item.DepartureDate}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"Div7\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.OccupationDetails===null\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"lblOccupation\" style=\"font-weight:bold;\">Occupation Details</span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span>{{item.OccupationDetails}} </span></h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -9899,467 +9845,525 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        </div>\r" +
     "\n" +
-    "    </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
-    "    <div id=\"edupopupdiv\">\r" +
+    "        <div id=\"divlnkadd\" class=\"edit_page_item\">\r" +
     "\n" +
-    "        <script type=\"text/ng-template\" id=\"EduModalContent.html\">\r" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "            <form name=\"eduForm\" novalidate role=\"form\" ng-submit=\"eduForm.$valid  && page.model.eduSubmit(page.model.edoObj);\" accessible-form>\r" +
+    "                <h4>Mention your goals, interests and hobbies etc</h4>\r" +
     "\n" +
-    "                <div class=\"modal-header\">\r" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
-    "                    <h3 class=\"modal-title text-center\" id=\"modal-title\">Education Details\r" +
+    "                    <div id=\"upAboutAdd\" ng-if=\"page.model.lblaboutUrself==='' || page.model.lblaboutUrself===null\">\r" +
     "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "                        <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showAboutModal')\">Add</a>\r" +
     "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </h3>\r" +
+    "                    </div>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
-    "                <div class=\"modal-body\" id=\"modal-body\">\r" +
+    "            </div>\r" +
     "\n" +
-    "                    <ul id=\"uleducation\" class='modal-body clearfix pop_content_my'>\r" +
+    "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                        <li class=\"clearfix\">\r" +
+    "                <div id=\"reviewdiv\" ng-class=\"AboutReviewStatusID===0?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
-    "                            <label for=\"lblIsHighestDegree\" class=\"pop_label_left\" style=\"padding-top: 2%;\">Is Highest Degree<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "                    <div class=\"form-group\">\r" +
     "\n" +
-    "                            <div class=\"radio-group-my\">\r" +
-    "\n" +
-    "                                <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                                    <md-radio-group ng-required=\"true\" name=\"IsHighestDegree\" layout=\"row\" ng-model=\"page.model.edoObj.IsHighestDegree\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"0\"> No </md-radio-button>\r" +
-    "\n" +
-    "                                    </md-radio-group>\r" +
-    "\n" +
-    "                                    <div ng-messages=\"eduForm.IsHighestDegree.$invalid\">\r" +
-    "\n" +
-    "                                        <div ng-if=\"eduForm.IsHighestDegree.$invalid && (eduForm.$submitted)\">This field is required.</div>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </md-input-container>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lbleducationGroup\" class=\"pop_label_left\">Education category<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                <select multiselectdropdown id=\"estt\" ng-model=\"page.model.edoObj.ddlEduCatgory\" typeofdata=\"'educationcategory'\" ng-change=\"page.model.changeBind('EducationCatgory',page.model.edoObj.ddlEduCatgory);\" required></select>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lbleducationGroup\" class=\"pop_label_left\">Education group<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                <select multiselectdropdown ng-model=\"page.model.edoObj.ddlEdugroup\" ng-options=\"item.value as item.label for item in page.model.eduGroupArr\" ng-change=\"page.model.changeBind('EducationGroup',page.model.edoObj.ddlEdugroup);\" required></select>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lbleducationGroup\" class=\"pop_label_left\">Edu specialization<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                <select multiselectdropdown ng-model=\"page.model.edoObj.ddlEduspecialization\" ng-options=\"item.value as item.label for item in page.model.eduSpecialisationArr\" required></select>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\" id=\"divuniversity\">\r" +
-    "\n" +
-    "                            <label for=\"lbluniversity\" class=\"pop_label_left\">University</label>\r" +
+    "                        <div id=\"uplblAbout\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div class=\"pop_controls_right\">\r" +
+    "                            <h5 style=\"float: none; width: 92%; display: block;\">\r" +
     "\n" +
-    "                                <input type=\"text\" ng-model=\"page.model.edoObj.txtuniversity\" maxlength=\"100\" class=\"form-control\" />\r" +
+    "                                <span>{{page.model.lblaboutUrself}}</span>\r" +
     "\n" +
-    "                            </div>\r" +
+    "                            </h5>\r" +
     "\n" +
-    "                        </li>\r" +
+    "                        </div>\r" +
     "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
+    "                        <div ng-if=\"page.model.lblaboutUrself!='' && page.model.lblaboutUrself!=null\" class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
-    "                            <label for=\"lblcollege\" class=\"pop_label_left\">College</label>\r" +
+    "                            <a class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showAboutModal',page.model.lblaboutUrself)\">Edit</a>\r" +
     "\n" +
-    "                            <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                <input type=\"text\" ng-model=\"page.model.edoObj.txtcollege\" maxlength=\"150\" class=\"form-control\" />\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lblPassOfYear\" class=\"pop_label_left\">Pass of year</label>\r" +
+    "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                <select multiselectdropdown ng-model=\"page.model.edoObj.ddlpassOfyear\" ng-options=\"item1.value as item1.label for item1 in page.model.passOfyearArr\"></select>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <country-directive countryshow=\"true\" cityshow=\"true\" othercity=\"true\" dcountry=\"page.model.edoObj.ddlCountry\" dstate=\"page.model.edoObj.ddlState\" ddistrict=\"page.model.edoObj.ddlDistrict\" dcity=\"page.model.edoObj.ddlcity\" strothercity=\"page.model.edoObj.txtcity\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lblEduMerits\" class=\"pop_label_left\">Educational merits</label>\r" +
-    "\n" +
-    "                            <div class=\"\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <textarea ng-model=\"page.model.edoObj.txtEdumerits\" maxlength=\"500\" rows=\"4\" cols=\"20\" style=\"max-width:515px;width:100%;\" tabindex=\"12\" onkeydown=\"return CharacterCountedu()\" onkeyup=\"return CharacterCountedu()\"></textarea>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"row\">\r" +
-    "\n" +
-    "                            <br/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </ul>\r" +
-    "\n" +
-    "\r" +
+    "                    </div>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
-    "\r" +
+    "            </div>\r" +
     "\n" +
-    "            </form>\r" +
-    "\n" +
-    "        </script>\r" +
+    "        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    </div>\r" +
+    "        <div id=\"edupopupdiv\">\r" +
     "\n" +
-    "    <div id=profpopupdiv>\r" +
+    "            <script type=\"text/ng-template\" id=\"EduModalContent.html\">\r" +
     "\n" +
-    "        <script type=\"text/ng-template\" id=\"profModalContent.html\">\r" +
+    "                <form name=\"eduForm\" novalidate role=\"form\" ng-submit=\"eduForm.$valid  && page.model.eduSubmit(page.model.edoObj);\" accessible-form>\r" +
     "\n" +
-    "            <form name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.ProfSubmit(page.model.profObj);\" accessible-form>\r" +
+    "                    <div class=\"modal-header\">\r" +
     "\n" +
-    "                <div class=\"modal-header\">\r" +
+    "                        <h3 class=\"modal-title text-center\" id=\"modal-title\">Education Details\r" +
     "\n" +
-    "                    <h3 class=\"modal-title text-center\" id=\"modal-title\">Profession details\r" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
     "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "                                <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
     "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
+    "                            </a>\r" +
     "\n" +
-    "                        </a>\r" +
+    "                        </h3>\r" +
     "\n" +
-    "                    </h3>\r" +
+    "                    </div>\r" +
     "\n" +
-    "                </div>\r" +
+    "                    <div class=\"modal-body\" id=\"modal-body\">\r" +
     "\n" +
-    "                <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "                        <ul id=\"uleducation\" class='modal-body clearfix pop_content_my'>\r" +
     "\n" +
-    "                    <ul>\r" +
+    "                            <li class=\"clearfix\">\r" +
     "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
+    "                                <label for=\"lblIsHighestDegree\" class=\"pop_label_left\" style=\"padding-top: 2%;\">Is Highest Degree<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
     "\n" +
-    "                            <label for=\"lblempin\" class=\"pop_label_left\">Employed In<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "                                <div class=\"radio-group-my\">\r" +
     "\n" +
-    "                            <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "                                    <md-input-container style=\"font-weight: 700;color:black;\">\r" +
     "\n" +
-    "                                <select multiselectdropdown ng-model=\"page.model.profObj.ddlemployedin\" typeofdata=\"'ProfCatgory'\" required></select>\r" +
+    "                                        <md-radio-group ng-required=\"true\" name=\"IsHighestDegree\" layout=\"row\" ng-model=\"page.model.edoObj.IsHighestDegree\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
     "\n" +
-    "                            </div>\r" +
+    "                                            <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
     "\n" +
-    "                        </li>\r" +
+    "                                            <md-radio-button value=\"0\"> No </md-radio-button>\r" +
     "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
+    "                                        </md-radio-group>\r" +
     "\n" +
-    "                            <label for=\"lblprofessiongroup\" class=\"pop_label_left\">Professional group<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "                                        <div ng-messages=\"eduForm.IsHighestDegree.$invalid\">\r" +
     "\n" +
-    "                            <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "                                            <div ng-if=\"eduForm.IsHighestDegree.$invalid && (eduForm.$submitted)\">This field is required.</div>\r" +
     "\n" +
-    "                                <select multiselectdropdown ng-model=\"page.model.profObj.ddlprofgroup\" typeofdata=\"'ProfGroup'\" ng-change=\"page.model.ProfchangeBind('ProfessionGroup',page.model.profObj.ddlprofgroup);\" required></select>\r" +
+    "                                        </div>\r" +
     "\n" +
-    "                            </div>\r" +
+    "                                    </md-input-container>\r" +
     "\n" +
-    "                        </li>\r" +
+    "                                </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lblprofession\" class=\"pop_label_left\">Profession<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                <select multiselectdropdown ng-model=\"page.model.profObj.ddlprofession\" ng-options=\"item.value as item.label for item in page.model.ProfSpecialisationArr\" required></select>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lblcmpyname\" class=\"pop_label_left\">Company name</label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                <input ng-model=\"page.model.profObj.txtcmpyname\" class=\"form-control\" tabindex=\"4\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lblsal\" class=\"pop_label_left\">Monthly salary</label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
-    "\n" +
-    "                                <select multiselectdropdown ng-model=\"page.model.profObj.ddlcurreny\" typeofdata=\"'currency'\"></select>\r" +
-    "\n" +
-    "                                <input ng-model=\"page.model.profObj.txtsalary\" style=\"float:right\" class=\"form-control\" onchange=\"currency();\" maxlength=\"7\" tabindex=\"6\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));\"\r" +
-    "\n" +
-    "                                />\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <country-directive countryshow=\"true\" cityshow=\"true\" othercity=\"true\" dcountry=\"page.model.profObj.ddlCountryProf\" dstate=\"page.model.profObj.ddlStateProf\" ddistrict=\"page.model.profObj.ddlDistrictProf\" dcity=\"page.model.profObj.ddlcityworkingprofession\"\r" +
-    "\n" +
-    "                            strothercity=\"page.model.profObj.txtcityprofession\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lblworkingfrome\" class=\"pop_label_left\">Working from date</label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <date-picker strdate=\"page.model.profObj.txtworkingfrom\"></date-picker>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <div id=\"divfalseVisa\" ng-if=\"page.model.profObj.ddlCountryProf!=1\">\r" +
+    "                            </li>\r" +
     "\n" +
     "                            <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                                <label for=\"lblvisastatus\" class=\"pop_label_left\">visa status</label>\r" +
+    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\">Education category<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                                    <select multiselectdropdown id=\"estt\" ng-model=\"page.model.edoObj.ddlEduCatgory\" typeofdata=\"'educationcategory'\" ng-change=\"page.model.changeBind('EducationCatgory',page.model.edoObj.ddlEduCatgory);\" required></select>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\">Education group<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.edoObj.ddlEdugroup\" ng-options=\"item.value as item.label for item in page.model.eduGroupArr\" ng-change=\"page.model.changeBind('EducationGroup',page.model.edoObj.ddlEdugroup);\" required></select>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\">Edu specialization<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.edoObj.ddlEduspecialization\" ng-options=\"item.value as item.label for item in page.model.eduSpecialisationArr\" required></select>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\" id=\"divuniversity\">\r" +
+    "\n" +
+    "                                <label for=\"lbluniversity\" class=\"pop_label_left\">University</label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                    <input type=\"text\" ng-model=\"page.model.edoObj.txtuniversity\" maxlength=\"100\" class=\"form-control\" />\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblcollege\" class=\"pop_label_left\">College</label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                    <input type=\"text\" ng-model=\"page.model.edoObj.txtcollege\" maxlength=\"150\" class=\"form-control\" />\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblPassOfYear\" class=\"pop_label_left\">Pass of year</label>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                <div class=\"pop_controls_right select-box-my\">\r" +
     "\n" +
-    "                                    <div class=\"select-box-my\">\r" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.edoObj.ddlpassOfyear\" ng-options=\"item1.value as item1.label for item1 in page.model.passOfyearArr\"></select>\r" +
     "\n" +
-    "                                        <select multiselectdropdown ng-model=\"page.model.profObj.ddlvisastatus\"></select>\r" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <country-directive countryshow=\"true\" cityshow=\"true\" othercity=\"true\" dcountry=\"page.model.edoObj.ddlCountry\" dstate=\"page.model.edoObj.ddlState\" ddistrict=\"page.model.edoObj.ddlDistrict\" dcity=\"page.model.edoObj.ddlcity\" strothercity=\"page.model.edoObj.txtcity\"></country-directive>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblEduMerits\" class=\"pop_label_left\">Educational merits</label>\r" +
+    "\n" +
+    "                                <div class=\"\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <textarea ng-model=\"page.model.edoObj.txtEdumerits\" maxlength=\"500\" rows=\"4\" cols=\"20\" style=\"max-width:515px;width:100%;\" tabindex=\"12\" onkeydown=\"return CharacterCountedu()\" onkeyup=\"return CharacterCountedu()\"></textarea>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"row\">\r" +
+    "\n" +
+    "                                <br/>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </ul>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </form>\r" +
+    "\n" +
+    "            </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div id=profpopupdiv>\r" +
+    "\n" +
+    "            <script type=\"text/ng-template\" id=\"profModalContent.html\">\r" +
+    "\n" +
+    "                <form name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.ProfSubmit(page.model.profObj);\" accessible-form>\r" +
+    "\n" +
+    "                    <div class=\"modal-header\">\r" +
+    "\n" +
+    "                        <h3 class=\"modal-title text-center\" id=\"modal-title\">Profession details\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                                <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
+    "\n" +
+    "                            </a>\r" +
+    "\n" +
+    "                        </h3>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "                        <ul>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblempin\" class=\"pop_label_left\">Employed In<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.profObj.ddlemployedin\" typeofdata=\"'ProfCatgory'\" required></select>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblprofessiongroup\" class=\"pop_label_left\">Professional group<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.profObj.ddlprofgroup\" typeofdata=\"'ProfGroup'\" ng-change=\"page.model.ProfchangeBind('ProfessionGroup',page.model.profObj.ddlprofgroup);\" required></select>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblprofession\" class=\"pop_label_left\">Profession<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.profObj.ddlprofession\" ng-options=\"item.value as item.label for item in page.model.ProfSpecialisationArr\" required></select>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblcmpyname\" class=\"pop_label_left\">Company name</label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                                    <input ng-model=\"page.model.profObj.txtcmpyname\" class=\"form-control\" tabindex=\"4\" maxlength=\"100\" />\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblsal\" class=\"pop_label_left\">Monthly salary</label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
+    "\n" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.profObj.ddlcurreny\" typeofdata=\"'currency'\"></select>\r" +
+    "\n" +
+    "                                    <input ng-model=\"page.model.profObj.txtsalary\" style=\"float:right\" class=\"form-control\" onchange=\"currency();\" maxlength=\"7\" tabindex=\"6\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));\"\r" +
+    "\n" +
+    "                                    />\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <country-directive countryshow=\"true\" cityshow=\"true\" othercity=\"true\" dcountry=\"page.model.profObj.ddlCountryProf\" dstate=\"page.model.profObj.ddlStateProf\" ddistrict=\"page.model.profObj.ddlDistrictProf\" dcity=\"page.model.profObj.ddlcityworkingprofession\"\r" +
+    "\n" +
+    "                                strothercity=\"page.model.profObj.txtcityprofession\"></country-directive>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblworkingfrome\" class=\"pop_label_left\">Working from date</label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <date-picker strdate=\"page.model.profObj.txtworkingfrom\"></date-picker>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <div id=\"divfalseVisa\" ng-if=\"page.model.profObj.ddlCountryProf!=1\">\r" +
+    "\n" +
+    "                                <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                    <label for=\"lblvisastatus\" class=\"pop_label_left\">visa status</label>\r" +
+    "\n" +
+    "                                    <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                                        <div class=\"select-box-my\">\r" +
+    "\n" +
+    "                                            <select multiselectdropdown ng-model=\"page.model.profObj.ddlvisastatus\"></select>\r" +
+    "\n" +
+    "                                        </div>\r" +
     "\n" +
     "                                    </div>\r" +
     "\n" +
-    "                                </div>\r" +
+    "                                </li>\r" +
     "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
+    "                                <li class=\"clearfix form-group\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <label class=\"pop_label_left\" for=\"lblsincedate\">Since date</label>\r" +
+    "                                    <label class=\"pop_label_left\" for=\"lblsincedate\">Since date</label>\r" +
     "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
+    "                                    <div class=\"pop_controls_right\">\r" +
     "\n" +
-    "                                    <date-picker strdate=\"page.model.profObj.txtssincedate\"></date-picker>\r" +
+    "                                        <date-picker strdate=\"page.model.profObj.txtssincedate\"></date-picker>\r" +
     "\n" +
-    "                                </div>\r" +
+    "                                    </div>\r" +
     "\n" +
-    "                            </li>\r" +
+    "                                </li>\r" +
     "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
+    "                                <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                                <label for=\"lblarrivaldate\" class=\"pop_label_left\">Arrival Date</label>\r" +
+    "                                    <label for=\"lblarrivaldate\" class=\"pop_label_left\">Arrival Date</label>\r" +
     "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
+    "                                    <div class=\"pop_controls_right\">\r" +
     "\n" +
-    "                                    <date-picker strdate=\"page.model.profObj.txtarrivaldate\"></date-picker>\r" +
+    "                                        <date-picker strdate=\"page.model.profObj.txtarrivaldate\"></date-picker>\r" +
     "\n" +
-    "                                </div>\r" +
+    "                                    </div>\r" +
     "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lbldeaparturedate\" class=\"pop_label_left\">Departure Date</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <date-picker strdate=\"page.model.profObj.txtdeparture\"></date-picker>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                        </div>\r" +
+    "                                </li>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
+    "                                <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
+    "                                    <label for=\"lbldeaparturedate\" class=\"pop_label_left\">Departure Date</label>\r" +
     "\n" +
-    "                            <label for=\"lbloccupation\" class=\"pop_label_left\">Occupation Details</label>\r" +
+    "                                    <div class=\"pop_controls_right\">\r" +
     "\n" +
-    "                            <div class=\"\">\r" +
+    "                                        <date-picker strdate=\"page.model.profObj.txtdeparture\"></date-picker>\r" +
     "\n" +
-    "                                <textarea ng-model=\"page.model.profObj.txtoccupation\" style=\"width:515px;\" rows=\"4\" tabindex=\"16\" maxlength=\"500\" onkeydown=\"return CharacterCount()\"></textarea>\r" +
+    "                                    </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                                <label id=\"lbloccupationcount\" style=\"color: #1e1c1c; font-size: 13px;\"></label>\r" +
+    "                                </li>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"row\">\r" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <edit-footer></edit-footer>\r" +
+    "                            <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                        </li>\r" +
+    "                                <label for=\"lbloccupation\" class=\"pop_label_left\">Occupation Details</label>\r" +
     "\n" +
-    "                    </ul>\r" +
+    "                                <div class=\"\">\r" +
     "\n" +
-    "                </div>\r" +
+    "                                    <textarea ng-model=\"page.model.profObj.txtoccupation\" style=\"width:515px;\" rows=\"4\" tabindex=\"16\" maxlength=\"500\" onkeydown=\"return CharacterCount()\"></textarea>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "            </form>\r" +
+    "                                    <label id=\"lbloccupationcount\" style=\"color: #1e1c1c; font-size: 13px;\"></label>\r" +
     "\n" +
-    "        </script>\r" +
+    "                                </div>\r" +
     "\n" +
-    "    </div>\r" +
+    "                            </li>\r" +
     "\n" +
-    "    <div id=\"AboutPopup\">\r" +
+    "                            <li class=\"row\">\r" +
     "\n" +
-    "        <script type=\"text/ng-template\" id=\"AboutModalContent.html\">\r" +
+    "\r" +
     "\n" +
-    "            <form name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutUrselfSubmit(page.model.aboutObj)\">\r" +
+    "                                <edit-footer></edit-footer>\r" +
     "\n" +
-    "                <div class=\"modal-header\">\r" +
+    "                            </li>\r" +
     "\n" +
-    "                    <h3 class=\"modal-title text-center\" id=\"modal-title\">About your self\r" +
+    "                        </ul>\r" +
     "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "                    </div>\r" +
     "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
+    "\r" +
     "\n" +
-    "                        </a>\r" +
+    "                </form>\r" +
     "\n" +
-    "                    </h3>\r" +
+    "            </script>\r" +
     "\n" +
-    "                </div>\r" +
+    "        </div>\r" +
     "\n" +
-    "                <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "        <div id=\"AboutPopup\">\r" +
     "\n" +
-    "                    <ul>\r" +
+    "            <script type=\"text/ng-template\" id=\"AboutModalContent.html\">\r" +
     "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
+    "                <form name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutUrselfSubmit(page.model.aboutObj)\">\r" +
     "\n" +
-    "                            <label id=\"lblabout\" style=\"color: #9b2828; font-size: 13px;\">\r" +
+    "                    <div class=\"modal-header\">\r" +
+    "\n" +
+    "                        <h3 class=\"modal-title text-center\" id=\"modal-title\">About your self\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                                <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
+    "\n" +
+    "                            </a>\r" +
+    "\n" +
+    "                        </h3>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "                        <ul>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label id=\"lblabout\" style=\"color: #9b2828; font-size: 13px;\">\r" +
     "\n" +
     "            				(Please don't write phone numbers/emails/any junk characters)*</label>\r" +
     "\n" +
-    "                            <textarea ng-model=\"page.model.aboutObj.txtAboutUS\" style=\"width: 500px; height: 150px;\" class=\"col-lg-10\" maxlength=\"1000\" required ng-class=\"form-control\" required />\r" +
+    "                                <textarea ng-model=\"page.model.aboutObj.txtAboutUS\" style=\"width: 500px; height: 150px;\" class=\"col-lg-10\" maxlength=\"1000\" required ng-class=\"form-control\" required />\r" +
     "\n" +
-    "                            <div>\r" +
+    "                                <div>\r" +
     "\n" +
-    "                            </div>\r" +
+    "                                </div>\r" +
     "\n" +
-    "                            <label id=\"Label1\" style=\"color: red; font-size: 13px;\" class=\"pull-right\">(max 1000 characters)</label>\r" +
+    "                                <label id=\"Label1\" style=\"color: red; font-size: 13px;\" class=\"pull-right\">(max 1000 characters)</label>\r" +
     "\n" +
-    "                            <label id=\"lblaboutcount\" style=\"color: #1e1c1c; font-size: 13px;\">{{aboutForm.txtAboutUS.length}}</label>\r" +
+    "                                <label id=\"lblaboutcount\" style=\"color: #1e1c1c; font-size: 13px;\">{{aboutForm.txtAboutUS.length}}</label>\r" +
     "\n" +
-    "                        </li>\r" +
+    "                            </li>\r" +
     "\n" +
-    "                        <li class=\"row\">\r" +
+    "                            <li class=\"row\">\r" +
     "\n" +
-    "                            <edit-footer></edit-footer>\r" +
+    "                                <edit-footer></edit-footer>\r" +
     "\n" +
-    "                        </li>\r" +
+    "                            </li>\r" +
     "\n" +
-    "                    </ul>\r" +
+    "                        </ul>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                </div>\r" +
+    "                    </div>\r" +
     "\n" +
-    "            </form>\r" +
+    "                </form>\r" +
     "\n" +
-    "        </script>\r" +
+    "            </script>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
+    "</div>\r" +
+    "\n" +
     "\r" +
     "\n" +
-    "</div>\r" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
