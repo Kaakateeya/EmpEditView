@@ -7,7 +7,7 @@ var editviewapp = angular.module('KaakateeyaEmpEdit', ['ui.router', 'ngAnimate',
     'ngMessages', 'ngAria', 'ngPassword', 'jcs-autoValidate', 'angularPromiseButtons', 'KaakateeyaRegistration', 'oc.lazyLoad'
 ]);
 editviewapp.apipath = 'http://183.82.0.58:8025/Api/';
-// editviewapp.apipath = 'http://183.82.0.58:8010/Api/';
+editviewapp.apipathold = 'http://183.82.0.58:8010/Api/';
 editviewapp.env = 'dev';
 
 editviewapp.GlobalImgPath = 'http://d16o2fcjgzj2wp.cloudfront.net/';
@@ -304,7 +304,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.iframeShow = false;
         var s3obj = {};
 
-        // var logincustid = authSvc.getCustId();
+        var loginEmpid = authSvc.LoginEmpid();
         var custID = model.CustID = stateParams.CustID;
 
         // model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
@@ -442,7 +442,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -1178,7 +1178,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         // var logincustid = authSvc.getCustId();
 
         model.scope = {};
-
+        var loginEmpid = authSvc.LoginEmpid();
         //start declaration block
         model.stateArr = [];
         model.districtArr = [];
@@ -1430,7 +1430,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     },
                     customerpersonaldetails: {
                         intCusID: CustID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -1483,7 +1483,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     },
                     customerpersonaldetails: {
                         intCusID: CustID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -1557,7 +1557,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 },
                 customerpersonaldetails: {
                     intCusID: CustID,
-                    EmpID: null,
+                    EmpID: loginEmpid,
                     Admin: null
                 }
             };
@@ -1671,8 +1671,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         var CustID = stateParams.CustID;
         // logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.loginpaidstatus = authSvc.getpaidstatus();
-        var genderID = authSvc.getGenderID();
-
+        var genderID = 1;
+        //authSvc.getGenderID();
+        var loginEmpid = authSvc.LoginEmpid();
         model.photorowID = 0;
 
         //end declaration block
@@ -1792,7 +1793,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                                 },
                                 customerpersonaldetails: {
                                     intCusID: CustID,
-                                    EmpID: null,
+                                    EmpID: loginEmpid,
                                     Admin: null
                                 }
                             };
@@ -1869,13 +1870,13 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
             switch (type) {
                 case 'PhotoGuideLines':
-                    window.open('#/registration/photoGuideLines', '_blank');
+                    window.open('registration/photoGuideLines', '_blank');
                     break;
                 case 'Faqs':
-                    window.open('#/faqs', '_blank');
+                    window.open('registration/faqs', '_blank');
                     break;
                 case 'uploadTips':
-                    window.open('#/registration/uploadTips', '_blank');
+                    window.open('registration/uploadTips', '_blank');
                     break;
             }
         };
@@ -2053,7 +2054,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.parentArr = [];
         model.AboutFamilyReviewStatus = null;
         var isSubmit = true;
-
+        var loginEmpid = authSvc.LoginEmpid();
         //end declarion block
 
         // var logincustid = authSvc.getCustId();
@@ -2327,7 +2328,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
 
@@ -2379,7 +2380,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
 
@@ -2419,7 +2420,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
 
@@ -2514,23 +2515,23 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     function factory(http) {
         return {
             getParentData: function(obj) {
-                return http.get(editviewapp.apipath + 'CustomerPersonal/getParentDetailsDisplay', { params: { CustID: obj } });
+                return http.get(editviewapp.apipathold + 'CustomerPersonal/getParentDetailsDisplay', { params: { CustID: obj } });
             },
             getAboutFamilyData: function(obj) {
-                return http.get(editviewapp.apipath + 'CustomerPersonal/getParents_AboutMyFamily', { params: { CustID: obj, AboutYourself: '', flag: 0 } });
+                return http.get(editviewapp.apipathold + 'CustomerPersonal/getParents_AboutMyFamily', { params: { CustID: obj, AboutYourself: '', flag: 0 } });
             },
             submitParentData: function(obj1) {
-                return http.post(editviewapp.apipath + 'CustomerPersonalUpdate/CustomerParentUpdatedetails', JSON.stringify(obj1));
+                return http.post(editviewapp.apipathold + 'CustomerPersonalUpdate/CustomerParentUpdatedetails', JSON.stringify(obj1));
             },
             submitAddressData: function(obj1) {
                 console.log(JSON.stringify(obj1));
-                return http.post(editviewapp.apipath + 'CustomerPersonalUpdate/CustomerContactAddressUpdatedetails', JSON.stringify(obj1));
+                return http.post(editviewapp.apipathold + 'CustomerPersonalUpdate/CustomerContactAddressUpdatedetails', JSON.stringify(obj1));
             },
             submitPhysicalData: function(obj1) {
-                return http.post(editviewapp.apipath + 'CustomerPersonalUpdate/CustomerPhysicalAttributesUpdatedetails', JSON.stringify(obj1));
+                return http.post(editviewapp.apipathold + 'CustomerPersonalUpdate/CustomerPhysicalAttributesUpdatedetails', JSON.stringify(obj1));
             },
             submitAboutFamilyData: function(obj) {
-                return http.get(editviewapp.apipath + 'CustomerPersonal/getParents_AboutMyFamily', { params: obj });
+                return http.get(editviewapp.apipathold + 'CustomerPersonal/getParents_AboutMyFamily', { params: obj });
             }
         };
     }
@@ -2574,7 +2575,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.ageGapArr = [];
         model.partnerDescObj = {};
         var isSubmit = true;
-
+        var loginEmpid = authSvc.LoginEmpid();
         // var logincustid = authSvc.getCustId();
         var custID = model.CustID = stateParams.CustID;
         //  model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
@@ -2737,7 +2738,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -2794,13 +2795,13 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     function factory(http) {
         return {
             getPartnerPreferenceData: function(obj) {
-                return http.get(editviewapp.apipath + 'CustomerPersonal/getCustomerpartnerpreferencesDetailsDisplay', { params: { CustID: obj } });
+                return http.get(editviewapp.apipathold + 'CustomerPersonal/getCustomerpartnerpreferencesDetailsDisplay', { params: { CustID: obj } });
             },
             submitPartnerPrefData: function(obj1) {
-                return http.post(editviewapp.apipath + 'CustomerPersonalUpdate/CustomerPartnerPreferencesUpdatedetails', JSON.stringify(obj1));
+                return http.post(editviewapp.apipathold + 'CustomerPersonalUpdate/CustomerPartnerPreferencesUpdatedetails', JSON.stringify(obj1));
             },
             submitPartnerDescData: function(obj) {
-                return http.get(editviewapp.apipath + 'CustomerPersonal/getPartnerpreference_DiscribeYourPartner', { params: obj });
+                return http.get(editviewapp.apipathold + 'CustomerPersonal/getPartnerpreference_DiscribeYourPartner', { params: obj });
             }
         };
     }
@@ -3097,7 +3098,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.scope = {};
 
         //declaration part
-
+        var loginEmpid = authSvc.LoginEmpid();
         model.propertyArr = [];
         model.proObj = {};
 
@@ -3155,7 +3156,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -3241,7 +3242,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         model.ReferenceArr = [];
         model.refObj = {};
-
+        var loginEmpid = authSvc.LoginEmpid();
         model.deleteDisplayTxt = 'reference';
         var isSubmit = true;
         model.identityID = 0;
@@ -3334,7 +3335,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -3440,7 +3441,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         // var logincustid = authSvc.getCustId();
         var custid = model.CustID = stateParams.CustID;
         //  model. = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
-
+        var loginEmpid = authSvc.LoginEmpid();
 
         //end declaration block
         model.init = function() {
@@ -3630,7 +3631,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     },
                     customerpersonaldetails: {
                         intCusID: custid,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -3680,7 +3681,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     },
                     customerpersonaldetails: {
                         intCusID: custid,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -3724,7 +3725,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     },
                     customerpersonaldetails: {
                         intCusID: custid,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -3774,7 +3775,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     },
                     customerpersonaldetails: {
                         intCusID: custid,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -3890,7 +3891,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.SisCount = null;
         model.CountryVal = '1';
         model.identityID = 0;
-
+        var loginEmpid = authSvc.LoginEmpid();
         var isSubmit = true;
 
         // var logincustid = authSvc.getCustId();
@@ -4288,7 +4289,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -4363,7 +4364,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -4399,20 +4400,19 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     function factory(http) {
         return {
             getSibblingeData: function(obj) {
-                return http.get(editviewapp.apipath + 'CustomerPersonal/getsiblingsDetailsDisplay', { params: { CustID: obj } });
+                return http.get(editviewapp.apipathold + 'CustomerPersonal/getsiblingsDetailsDisplay', { params: { CustID: obj } });
             },
             submitSibBroData: function(obj1) {
-                return http.post(editviewapp.apipath + 'CustomerPersonalUpdate/CustomerSibBrotherUpdatedetails', JSON.stringify(obj1));
+                return http.post(editviewapp.apipathold + 'CustomerPersonalUpdate/CustomerSibBrotherUpdatedetails', JSON.stringify(obj1));
             },
             submitSibSisData: function(obj1) {
-                return http.post(editviewapp.apipath + 'CustomerPersonalUpdate/CustomerSibSisterUpdatedetails', JSON.stringify(obj1));
+                return http.post(editviewapp.apipathold + 'CustomerPersonalUpdate/CustomerSibSisterUpdatedetails', JSON.stringify(obj1));
             },
             submitSibCountsData: function(obj1) {
-                return http.post(editviewapp.apipath + 'CustomerPersonalUpdate/UpdateSibblingCounts', JSON.stringify(obj1));
+                return http.post(editviewapp.apipathold + 'CustomerPersonalUpdate/UpdateSibblingCounts', JSON.stringify(obj1));
             },
             allowblockWebusers: function(custid) {
-
-                return http.get(editviewapp.apipath + 'StaticPages/getRegisteredBranchStatus', { params: { StrCustID: custid } });
+                return http.get(editviewapp.apipathold + 'StaticPages/getRegisteredBranchStatus', { params: { StrCustID: custid } });
             }
 
         };
@@ -4459,7 +4459,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.childObj = {};
         model.noofChldrenAray = commonFactory.numbersBind('', 0, 10);
         model.childCount = 0;
-
+        var loginEmpid = authSvc.LoginEmpid();
         model.init = function() {
             model.pageload();
             return model;
@@ -4574,7 +4574,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 },
                 customerpersonaldetails: {
                     intCusID: custID,
-                    EmpID: null,
+                    EmpID: loginEmpid,
                     Admin: null
                 }
             };
@@ -4606,7 +4606,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 },
                 customerpersonaldetails: {
                     intCusID: custID,
-                    EmpID: null,
+                    EmpID: loginEmpid,
                     Admin: null
                 }
             };
@@ -5980,12 +5980,14 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
     function factory($injector) {
         function setUser(value) {
-            //console.log(value);
-            setSession('cust.id', value.CustID);
-            setSession('cust.username', (value.FirstName + ' ' + value.LastName));
-            setSession('cust.profileid', (value.ProfileID));
-            setSession('cust.paidstatus', (value.PaidStatus));
-            setSession('cust.profilepic', (value.ProfilePic));
+
+            setSession("LoginEmpid", value.EmpID);
+            setSession("LoginEmpName", value.FirstName + " " + value.LastName);
+            setSession("empBranchID", value.BranchID);
+            setSession("isAdmin", value.isAdmin);
+            setSession("isManagement", value.isManagement);
+            setSession("empRegionID", value.RegionID);
+            setSession("empphoto", value.EmpPhotoPath);
         }
 
         function getSession(key) {
@@ -6005,24 +6007,25 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         }
 
         function clearUserSession() {
-
-            clearSession('cust.id');
-            clearSession('cust.username');
-            clearSession('cust.profileid');
-            clearSession('cust.paidstatus');
-            clearSession('cust.profilepic');
-            clearSession('cust.GenderID');
+            clearSession('LoginEmpid');
+            clearSession('LoginEmpName');
+            clearSession('empBranchID');
+            clearSession('isAdmin');
+            clearSession('isManagement');
+            clearSession('empRegionID');
+            clearSession('macAddress');
+            clearSession('empphoto');
         }
 
         function getUser() {
             return {
-                custid: 91022,
-                //111070,
-                username: getSession('cust.username'),
-                profileid: getSession('cust.profileid'),
-                paidstatus: getSession('cust.paidstatus'),
-                profilepic: getSession('cust.profilepic'),
-                GenderID: getSession('cust.GenderID')
+                LoginEmpid: getSession('LoginEmpid'),
+                LoginEmpName: getSession('LoginEmpName'),
+                empBranchID: getSession('empBranchID'),
+                isAdmin: getSession('isAdmin'),
+                isManagement: getSession('isManagement'),
+                empRegionID: getSession('empRegionID')
+
             };
         }
 
@@ -6036,44 +6039,66 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             isAuthenticated: function() {
                 return !!getSession('cust.id');
             },
-            getCustId: function() {
-                return 91022;
-            },
-            getProfileid: function() {
-                return getSession('cust.profileid');
-            },
-            getpaidstatus: function() {
-                return getSession('cust.paidstatus');
-            },
-            getprofilepic: function() {
-                return getSession('cust.profilepic');
-            },
-            getGenderID: function() {
-                return getSession('cust.GenderID');
-            },
             clearUserSessionDetails: function() {
                 return clearUserSession();
             },
             logout: function() {
                 clearUserSession();
-                window.location = "#/";
+                //route.go('home', {});
             },
-            login: function(username, password) {
-
-                var body = {
-                    Username: username,
-                    Password: password
-                };
-                return $injector.invoke(function($http) {
-                    return $http.post(app.apiroot + 'DB/userLogin/person', body)
-                        .then(function(response) {
-                            if (response.status === 200) {
-
-                                return { success: true, response: response.data };
-                            }
-                            return { success: false, response: response.data };
-                        });
+            LoginEmpid: function() {
+                return getSession('LoginEmpid');
+            },
+            LoginEmpName: function() {
+                return getSession('LoginEmpName');
+            },
+            empBranchID: function() {
+                return getSession('empBranchID');
+            },
+            isAdmin: function() {
+                return getSession('isAdmin');
+            },
+            isManagement: function() {
+                return getSession('isManagement');
+            },
+            empRegionID: function() {
+                return getSession('empRegionID');
+            },
+            empphoto: function() {
+                return getSession('empphoto');
+            },
+            macAddress: function() {
+                return getSession('macAddress');
+            },
+            clientIp: function() {
+                return getSession('getClientIp');
+            },
+            getmacaddress: function() {
+                return $http.get('/getmac').then(function(res) {
+                    console.log(res);
+                    setSession("macAddress", res.data);
+                    return res.data;
                 });
+            },
+            getClientIp: function() {
+                return $http.get('/getClientIp').then(function(res) {
+                    console.log(res);
+                    console.log(((res.data).indexOf("::1") !== -1));
+                    console.log(((res.data).indexOf("127.0.0.1") !== -1));
+                    var response;
+                    if ((res.data).indexOf("::1") !== -1 || (res.data).indexOf("127.0.0.1") !== -1) {
+                        response = "183.82.98.109";
+                        setSession("getClientIp", response);
+                    } else {
+                        response = res.data;
+                        setSession("getClientIp", response);
+                    }
+                    return response;
+                    //(((res.data).indexOf("::1") !== -1) ? "183.82.98.109" : res.data);
+                });
+            },
+            getpaidstatus: function() {
+                return getSession('cust.paidstatus');
             }
         };
     }
@@ -6473,10 +6498,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "    <!-- SCRIPTSP DATA -->\r" +
     "\n" +
     "    <script src=\"dist/js/main.min.js\"></script>\r" +
@@ -6494,219 +6515,223 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editAstro/index.html',
-    "<div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "<div class=\"EditViewClass\">\r" +
+    "\n" +
+    "    <div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
+    "        <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
-    "    </div>\r" +
+    "        </div>\r" +
     "\n" +
-    "    <div class=\"edit_pages_content_main clearfix\" class=\"right_col\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <page-review dispaly-name=\"'Astro details'\" sectionid=\"'23'\" custid=\"page.model.CustID\"></page-review>\r" +
+    "        <div class=\"edit_pages_content_main clearfix\" class=\"right_col\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        <div id=\"divlnkasro\" class=\"edit_page_item\">\r" +
+    "            <page-review dispaly-name=\"'Astro details'\" sectionid=\"'23'\" custid=\"page.model.CustID\"></page-review>\r" +
     "\n" +
-    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\r" +
     "\n" +
-    "                <h4>Astro Details </h4>\r" +
+    "            <div id=\"divlnkasro\" class=\"edit_page_item\">\r" +
     "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "                <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "                    <div ng-if=\"page.model.AstroArr.length==0\" cssclass=\"edit_page_add_button\">\r" +
+    "                    <h4>Astro Details </h4>\r" +
     "\n" +
-    "                        <a ng-click=\"page.model.populateAstro();\" class=\"edit_page_add_button\" href=\"javascript:void(0);\">Add</a>\r" +
+    "                    <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                        <div ng-if=\"page.model.AstroArr.length==0\" cssclass=\"edit_page_add_button\">\r" +
+    "\n" +
+    "                            <a ng-click=\"page.model.populateAstro();\" class=\"edit_page_add_button\" href=\"javascript:void(0);\">Add</a>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
     "                </div>\r" +
     "\n" +
-    "            </div>\r" +
+    "                <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "            <div class=\"edit_page_details_item\">\r" +
+    "                    <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.AstroArr track by $index\">\r" +
     "\n" +
-    "                <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.AstroArr track by $index\">\r" +
+    "                        <div>\r" +
     "\n" +
-    "                    <div>\r" +
+    "                            <div ng-hide=\"item.TimeOfBirth===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                        <div ng-hide=\"item.TimeOfBirth===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                    <span id=\"TimeofBirth\" style=\"font-weight:bold;\">Time of Birth</span></h6>\r" +
     "\n" +
-    "                                <span id=\"TimeofBirth\" style=\"font-weight:bold;\">Time of Birth</span></h6>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                    <span id=\"lblTimeofBirth\">{{item.TimeOfBirth}}</span></h5>\r" +
     "\n" +
-    "                                <span id=\"lblTimeofBirth\">{{item.TimeOfBirth}}</span></h5>\r" +
+    "                            </div>\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span id=\"PlaceofBirth\" style=\"font-weight:bold;\">Place of Birth</span></h6>\r" +
+    "                                    <span id=\"PlaceofBirth\" style=\"font-weight:bold;\">Place of Birth</span></h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span id=\"lblPlaceofBirth\">{{ item.CityOfBirth +\",\"+item.DistrictOfBirth+\",\"+item.StateOfBirth+\",\"+item.CountryOfBirth}}</span>\r" +
+    "                                    <span id=\"lblPlaceofBirth\">{{ item.CityOfBirth +\",\"+item.DistrictOfBirth+\",\"+item.StateOfBirth+\",\"+item.CountryOfBirth}}</span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
     "\n" +
-    "                        </div>\r" +
+    "                            </div>\r" +
     "\n" +
-    "                        <div ng-hide=\"item.TypeofStar===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <div ng-hide=\"item.TypeofStar===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span id=\"Telugustar\" style=\"font-weight:bold;\">Star Language</span></h6>\r" +
+    "                                    <span id=\"Telugustar\" style=\"font-weight:bold;\">Star Language</span></h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span id=\"lblTelugustar\">{{ item.TypeofStar+((item.StarName!=\"\" &&  item.StarName!=null)?\" - \"+\r" +
+    "                                    <span id=\"lblTelugustar\">{{ item.TypeofStar+((item.StarName!=\"\" &&  item.StarName!=null)?\" - \"+\r" +
     "\n" +
     "                                            item.StarName:\"\")+((item.Paadam!=\"\" &&  item.Paadam!=null)?\" (\"+item.Paadam+\")\":\"\") }}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
+    "                            </div>\r" +
     "\n" +
-    "                        <div ng-hide=\"item.Rassi===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <div ng-hide=\"item.Rassi===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span id=\"raasimoonsign\" style=\"font-weight:bold;\">Raasi/moon sign</span></h6>\r" +
+    "                                    <span id=\"raasimoonsign\" style=\"font-weight:bold;\">Raasi/moon sign</span></h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span id=\"lblraasimoonsign\">{{ item.Rassi}}</span></h5>\r" +
+    "                                    <span id=\"lblraasimoonsign\">{{ item.Rassi}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ng-hide=\"item.Lagnam===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"Lagnam\" style=\"font-weight:bold;\">Lagnam</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblLagnam\">  {{ item.Lagnam }}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ng-hide=\"item.Gothram===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"GothramGotra\" style=\"font-weight:bold;\">Gothram/Gotra</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblGothramGotra\">  {{ item.Gothram}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ng-hide=\"item.MeternalGothramID===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"MaternalGothram\" style=\"font-weight:bold;\">Maternal Gothram</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblMaternalGothram\">{{ item.MeternalGothramID }}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ng-hide=\"item.manglikkujadosham===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"manglikkujadosham\" style=\"font-weight:bold;\">manglik/kuja dosham</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblmanglikkujadosham\">{{ item.manglikkujadosham }}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "                        <div ng-hide=\"item.Lagnam===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.AstroArr.length>0\">\r" +
     "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"Lagnam\" style=\"font-weight:bold;\">Lagnam</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblLagnam\">  {{ item.Lagnam }}</span></h5>\r" +
+    "                            <a ng-click=\"page.model.populateAstro(item);\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\">Edit</a>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "                        <div ng-hide=\"item.Gothram===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"GothramGotra\" style=\"font-weight:bold;\">Gothram/Gotra</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblGothramGotra\">  {{ item.Gothram}}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ng-hide=\"item.MeternalGothramID===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"MaternalGothram\" style=\"font-weight:bold;\">Maternal Gothram</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblMaternalGothram\">{{ item.MeternalGothramID }}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ng-hide=\"item.manglikkujadosham===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"manglikkujadosham\" style=\"font-weight:bold;\">manglik/kuja dosham</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblmanglikkujadosham\">{{ item.manglikkujadosham }}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
+    "                        <br>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "                    <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.AstroArr.length>0\">\r" +
-    "\n" +
-    "                        <a ng-click=\"page.model.populateAstro(item);\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\">Edit</a>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <br>\r" +
-    "\n" +
     "                </div>\r" +
     "\n" +
-    "            </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
     "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item_desc clearfix\" style=\"padding: 0 0 0 20px;\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            <div class=\"radio-group-my input-group\" ng-show=\"page.model.ImageUrl==='' || page.model.ImageUrl===null\">\r" +
-    "\n" +
-    "                <md-radio-group ng-required=\"true\" name=\"rdlUploadGenerate\" layout=\"row\" ng-model=\"page.model.atroObj.rdlUploadGenerate\" ng-change=\"page.model.uploadGenerateHoro(page.model.atroObj.rdlUploadGenerate);\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                    <md-radio-button value=\"0\">Upload Horoscope</md-radio-button>\r" +
-    "\n" +
-    "                    <md-radio-button value=\"1\"> Generate Horoscope </md-radio-button>\r" +
-    "\n" +
-    "                </md-radio-group>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div ng-hide=\"page.model.ImageUrl==='' || page.model.ImageUrl===null\">\r" +
-    "\n" +
-    "            <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                    <img ng-model=\"page.model.imghoroName\" ng-src=\"{{page.model.ImageUrl}}\" Style=\"width: 250px; height: 250px;\" ng-show=\"!page.model.iframeShow\" />\r" +
-    "\n" +
-    "                    <iframe border=\"0\" id=\"iframe\" frameborder=\"0\" height=\"300\" width=\"800\" ng-show=\"page.model.iframeShow\"></iframe>\r" +
-    "\n" +
-    "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
     "            <div class=\"edit_page_details_item_desc clearfix\" style=\"padding: 0 0 0 20px;\">\r" +
     "\n" +
-    "                <div class=\"edit_page_item_ui clearfix  pull-left\">\r" +
+    "\r" +
     "\n" +
-    "                    <a ID=\"btndeletehoro\" class=\"edit_page_del_button\" href=\"javascript:void(0);\" ng-click=\"page.model.shoedeletePopup();\" data-placement=\"bottom\" data-toggle=\"tooltip\" data-original-title=\"Delete Astro Details\">\r" +
+    "                <div class=\"radio-group-my input-group\" ng-show=\"page.model.ImageUrl==='' || page.model.ImageUrl===null\">\r" +
+    "\n" +
+    "                    <md-radio-group ng-required=\"true\" name=\"rdlUploadGenerate\" layout=\"row\" ng-model=\"page.model.atroObj.rdlUploadGenerate\" ng-change=\"page.model.uploadGenerateHoro(page.model.atroObj.rdlUploadGenerate);\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "\n" +
+    "                        <md-radio-button value=\"0\">Upload Horoscope</md-radio-button>\r" +
+    "\n" +
+    "                        <md-radio-button value=\"1\"> Generate Horoscope </md-radio-button>\r" +
+    "\n" +
+    "                    </md-radio-group>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div ng-hide=\"page.model.ImageUrl==='' || page.model.ImageUrl===null\">\r" +
+    "\n" +
+    "                <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                        <img ng-model=\"page.model.imghoroName\" ng-src=\"{{page.model.ImageUrl}}\" Style=\"width: 250px; height: 250px;\" ng-show=\"!page.model.iframeShow\" />\r" +
+    "\n" +
+    "                        <iframe border=\"0\" id=\"iframe\" frameborder=\"0\" height=\"300\" width=\"800\" ng-show=\"page.model.iframeShow\"></iframe>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"edit_page_details_item_desc clearfix\" style=\"padding: 0 0 0 20px;\">\r" +
+    "\n" +
+    "                    <div class=\"edit_page_item_ui clearfix  pull-left\">\r" +
+    "\n" +
+    "                        <a ID=\"btndeletehoro\" class=\"edit_page_del_button\" href=\"javascript:void(0);\" ng-click=\"page.model.shoedeletePopup();\" data-placement=\"bottom\" data-toggle=\"tooltip\" data-original-title=\"Delete Astro Details\">\r" +
     "\n" +
     "               Delete <ng-md-icon icon=\"delete\" style=\"fill:#665454\" size=\"18\">Delete</ng-md-icon></a>\r" +
     "\n" +
-    "                    <a Style=\"padding-left: 100px;\" class=\"btn btn-link\" ng-click=\"page.model.vewHoro();\">View<span class=\"glyphicon glyphicon-eye-open\"></span></a>\r" +
+    "                        <a Style=\"padding-left: 100px;\" class=\"btn btn-link\" ng-click=\"page.model.vewHoro();\">View<span class=\"glyphicon glyphicon-eye-open\"></span></a>\r" +
+    "\n" +
+    "                    </div>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -6716,2172 +6741,61 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    </div>\r" +
     "\n" +
-    "</div>\r" +
-    "\n" +
     "\r" +
     "\n" +
-    "<script type=\"text/ng-template\" id=\"astroContent.html\">\r" +
+    "    <script type=\"text/ng-template\" id=\"astroContent.html\">\r" +
     "\n" +
-    "    <form name=\"astroForm\" novalidate role=\"form\" ng-submit=\"page.model.astroSubmit(page.model.atroObj);\" accessible-form>\r" +
+    "        <form name=\"astroForm\" novalidate role=\"form\" ng-submit=\"page.model.astroSubmit(page.model.atroObj);\" accessible-form>\r" +
     "\n" +
-    "        <div class=\"modal-header\">\r" +
+    "            <div class=\"modal-header\">\r" +
     "\n" +
-    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Astro details\r" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Astro details\r" +
     "\n" +
-    "                <a href=\"javascript:void(0);\" ng-click=\"cancel();\">\r" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"cancel();\">\r" +
     "\n" +
-    "                    <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
-    "\n" +
-    "                </a>\r" +
-    "\n" +
-    "            </h3>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "            <ul id=\"ulastro\">\r" +
-    "\n" +
-    "                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                    <label for=\"lbltimebirth\" class=\"pop_label_left\">Time of Birth<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                    <div class=\"pop_controls_right select-box-my select-box-my-trible select-box-my-trible3 input-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromHours\" ng-options=\"item.value as item.label for item in page.model.hrsbindArr\" required></select>\r" +
-    "\n" +
-    "                        <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromMinutes\" ng-options=\"item.value as item.label for item in page.model.minbindArr\" required></select>\r" +
-    "\n" +
-    "                        <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromSeconds\" ng-options=\"item.value as item.label for item in page.model.secbindArr\" required></select>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <country-directive require=\"true\" countryshow=\"true\" cityshow=\"true\" othercity=\"false\" dcountry=\"page.model.atroObj.ddlCountryOfBirthID\" dstate=\"page.model.atroObj.ddlStateOfBirthID\" ddistrict=\"page.model.atroObj.ddlDistrictOfBirthID\" dcity=\"page.model.atroObj.ddlcity\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                    <label for=\"lblstarlan\" class=\"pop_label_left\">Star language</label>\r" +
-    "\n" +
-    "                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                        <select multiselectdropdown ng-model=\"page.model.atroObj.ddlstarlanguage\" typeofdata=\"'starLanguage'\" ng-change=\"page.model.changeBind('star',page.model.atroObj.ddlstarlanguage);\"></select>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                    <label for=\"lblstar\" class=\"pop_label_left\">Star</label>\r" +
-    "\n" +
-    "                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <select multiselectdropdown ng-model=\"page.model.atroObj.ddlstar\" ng-options=\"item.value as item.label for item in page.model.starArr\"></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                    <label for=\"lblpaadam\" class=\"pop_label_left\">Paadam</label>\r" +
-    "\n" +
-    "                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                        <select multiselectdropdown ng-model=\"page.model.atroObj.ddlpaadam\" typeofdata=\"'paadam'\"></select>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                    <label for=\"lblLagnam\" class=\"pop_label_left\">Lagnam</label>\r" +
-    "\n" +
-    "                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                        <select multiselectdropdown ng-model=\"page.model.atroObj.ddlLagnam\" typeofdata=\"'lagnam'\"></select>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                    <label for=\"lblRaasiMoonsign\" class=\"pop_label_left\">Raasi/Moon sign</label>\r" +
-    "\n" +
-    "                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                        <select multiselectdropdown ng-model=\"page.model.atroObj.ddlRaasiMoonsign\" typeofdata=\"'ZodaicSign'\"></select>\r" +
-    "\n" +
-    "                        </select>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                    <label for=\"lblGothramGotra\" class=\"pop_label_left\">Gothram/Gotra</label>\r" +
-    "\n" +
-    "                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                        <input ng-model=\"page.model.atroObj.txtGothramGotra\" class=\"form-control\" tabindex=\"13\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "                <li class=\"clearfix\">\r" +
-    "\n" +
-    "                    <label for=\"lblMaternalgothram\" class=\"pop_label_left\">Maternal gothram</label>\r" +
-    "\n" +
-    "                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                        <input ng-model=\"page.model.atroObj.txtMaternalgothram\" class=\"form-control\" tabindex=\"14\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "                <li class=\"clearfix\">\r" +
-    "\n" +
-    "                    <label for=\"lblManglikKujadosham\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Manglik/Kuja dosham</label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                        <md-radio-group name=\"rdlkujaDosham\" layout=\"row\" ng-model=\"page.model.atroObj.rdlkujaDosham\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                            <md-radio-button value=\"0\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                            <md-radio-button value=\"1\"> No </md-radio-button>\r" +
-    "\n" +
-    "                            <md-radio-button value=\"2\"> Dont't Know </md-radio-button>\r" +
-    "\n" +
-    "                        </md-radio-group>\r" +
-    "\n" +
-    "                    </md-input-container>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
-    "\n" +
-    "                    <label for=\"lbllongitude\" class=\"pop_label_left\">Place of birth longitude</label>\r" +
-    "\n" +
-    "                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                        <input id=\"txtlogitude\" class=\"form-control\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <select multiselectdropdown ng-model=\"page.model.atroObj.ddllongitude\"></select>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "                <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
-    "\n" +
-    "                    <label for=\"lbllatitude\" class=\"pop_label_left\">Place of birth latitude</label>\r" +
-    "\n" +
-    "                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                        <input id=\"txtlatitude\" class=\"form-control col-lg-3\" />\r" +
-    "\n" +
-    "                        <select multiselectdropdown ng-model=\"page.model.atroObj.ddllatitude\"></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "                <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
-    "\n" +
-    "                    <label for=\"lbllatitude\">Place of birth latitude</label>\r" +
-    "\n" +
-    "                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                        <input type=\"checkbox\" ng-model=\"page.model.atroObj.Chkgenertehoro\" value=\"Generate HoroScope\" />\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "                <li class=\"row\">\r" +
-    "\n" +
-    "                    <edit-footer></edit-footer>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "            </ul>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    </form>\r" +
-    "\n" +
-    "</script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "<script type=\"text/ng-template\" id=\"AddHoroPopup.html\">\r" +
-    "\n" +
-    "    <form name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.upload(up);\">\r" +
-    "\n" +
-    "        <div class=\"modal-header\">\r" +
-    "\n" +
-    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Upload Horoscope </h3>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"modal-body\" id=\"modal-body\">\r" +
-    "\n" +
-    "            <label class=\"control-label\">Use this file formats like gif, jpeg, png,jpg</label>\r" +
-    "\n" +
-    "            <br>\r" +
-    "\n" +
-    "            <ul id=\"ulprofession\">\r" +
-    "\n" +
-    "                <input type=\"file\" file-model=\"up.myFile\" />\r" +
-    "\n" +
-    "            </ul>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"modal-footer\">\r" +
-    "\n" +
-    "            <input value=\"Cancel\" class=\"button_custom button_custom_reset\" ng-click=\"page.model.cancel();\" type=\"button\">\r" +
-    "\n" +
-    "            <input value=\"Upload\" class=\"button_custom\" type=\"submit\">\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </form>\r" +
-    "\n" +
-    "</script>\r" +
-    "\n" +
-    "<script type=\"text/ng-template\" id=\"deletehoroPopup.html\">\r" +
-    "\n" +
-    "    <form name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.deleteHoroImage();\">\r" +
-    "\n" +
-    "        <div class=\"modal-header\">\r" +
-    "\n" +
-    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Delete Horoscope </h3>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"modal-body\" id=\"modal-body\">\r" +
-    "\n" +
-    "            <div class=\"text-center\">Are you sure to delete horoscope?</div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"modal-footer\">\r" +
-    "\n" +
-    "            <input value=\"Close\" class=\"button_custom button_custom_reset\" ng-click=\"page.model.cancel();\" type=\"button\">\r" +
-    "\n" +
-    "            <input value=\"Delete\" class=\"button_custom\" type=\"submit\">\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </form>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "</script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "<script type=\"text/ng-template\" id=\"AstroCityPopup.html\">\r" +
-    "\n" +
-    "    <div class=\"modal-header alert alert-danger\" id=\"div2\">\r" +
-    "\n" +
-    "        <button type=\"button\" class=\"close\" ng-click=\"page.model.cancel();\">&times;</button>\r" +
-    "\n" +
-    "        <h4 class=\"modal-title\">\r" +
-    "\n" +
-    "            <span id=\"lblcityheader\">we are unable to genearte horoscope with your given city <b style=\"color: green\"> Administrative Buildings </b>,so please select Nearest city to your place of birth</span>\r" +
-    "\n" +
-    "        </h4>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "    <div class=\"modal-body\" id=\"modalbodyIDnew\">\r" +
-    "\n" +
-    "        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "            <select multiselectdropdown ng-model=\"page.model.ddlAstrocity\" ng-options=\"item.value as item.label for item in page.model.AstrocityArr\" ng-change=\"page.model.AstroCityChange(page.model.ddlAstrocity);\"></select>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "    <div class=\"modal-footer\">\r" +
-    "\n" +
-    "        <button type=\"button\" class=\"btn btn-default\" ng-click=\"page.model.cancel();\">Close</button>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "</script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "<script type=\"text/ng-template\" id=\"AstroimagePopup.html\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"modal-header\">\r" +
-    "\n" +
-    "        <h3 class=\"modal-title text-center\" id=\"modal-title\">Horoscope\r" +
-    "\n" +
-    "            <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\"></ng-md-icon>\r" +
-    "\n" +
-    "            </a>\r" +
-    "\n" +
-    "        </h3>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "    <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "        <img ng-src=\"{{page.model.ImageUrl}}\" style=\"width:500px;height:500px;\" />\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "    <div class=\"modal-footer\">\r" +
-    "\n" +
-    "        <div class=\"pull-right\">\r" +
-    "\n" +
-    "            <input value=\"Cancel\" class=\"button_custom button_custom_reset  pull-right\" ng-click=\"page.model.cancel();\" type=\"button\">\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "</script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "<script type=\"text/ng-template\" id=\"RefreshPopup.html\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"modal-body clearfix\" id=\"modal-body\">\r" +
-    "\n" +
-    "        <button ng-click=\"page.model.generatedhoroS3Upload();\" class=\"btn btn-success center-block\">Refresh Page<span class=\"fa fa-refresh\"></span></button>&nbsp;&nbsp;\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "</script>"
-  );
-
-
-  $templateCache.put('app/editContact/index.html',
-    "<div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"edit_pages_content_main clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"edit_page_item\">\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "                <div ID=\"updatevvv\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <h4>Candidate Contact details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
-    "\n" +
-    "                        <span style=\"color: #08CFD2;\">RelationName :Mobile :{{page.model.primaryRel.PrimaryMobileRelName}} & Email :{{page.model.primaryRel.PrimaryEmailRelName}}</span></h4>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div ID=\"updatecabndidatecontactDetails\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" class=\"edit_page_add_button\" ng-click=\"page.model.showContactPopup('Candidate');\">Add\r" +
+    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
     "\n" +
     "                    </a>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
+    "                </h3>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div class=\"edit_page_details_item\">\r" +
+    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
     "\n" +
-    "                <div ng-repeat=\"item in page.model.candidateContactArr\">\r" +
+    "                <ul id=\"ulastro\">\r" +
     "\n" +
-    "\r" +
+    "                    <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                    <div id=\"reviewdiv\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <label for=\"lbltimebirth\" class=\"pop_label_left\">Time of Birth<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
     "\n" +
-    "                        <div ID=\"updatecandMoblie\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span ID=\"candMoblie\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span ID=\"lblcandMoblie\">{{item.CandidateMobilewithcode}}</span>\r" +
+    "                        <div class=\"pop_controls_right select-box-my select-box-my-trible select-box-my-trible3 input-group\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <label ng-show=\"(item.primarymobile===1)|| (item.mobileisverfied) ?true:false \">\r" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromHours\" ng-options=\"item.value as item.label for item in page.model.hrsbindArr\" required></select>\r" +
     "\n" +
-    "    <span  ng-class=\"item.mobileisverfied==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\">\r" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromMinutes\" ng-options=\"item.value as item.label for item in page.model.minbindArr\" required></select>\r" +
     "\n" +
-    "    </span></label>\r" +
-    "\n" +
-    "                                <a href=\"javascript:void(0);\" ng-show=\"(item.primarymobile)&&(((item.mobileisverfied))==true?false:true) ?true:false\" ng-click=\"page.model.sendMobileCode(item.Candidatemobilecountrycode,item.Candidatemobilecountrycode,item.CandidateMobileNumber,item.emaILcust_family_id);\"> &nbsp;&nbsp;&nbsp;&nbsp;verify mobile</a>                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
-    "\n" +
-    "                                <a href=\"javascript:void(0);\" ng-click=\"page.model.setprimaryrelationPopup();\">RelationName</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "\r" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromSeconds\" ng-options=\"item.value as item.label for item in page.model.secbindArr\" required></select>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "                        <div ID=\"UpdatePanellnkcandmobilesedit\" class=\"edit_page_item_ui clearfix\">\r" +
+    "                    </li>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('Candidate',item);\">Edit\r" +
+    "                    <country-directive require=\"true\" countryshow=\"true\" cityshow=\"true\" othercity=\"false\" dcountry=\"page.model.atroObj.ddlCountryOfBirthID\" dstate=\"page.model.atroObj.ddlStateOfBirthID\" ddistrict=\"page.model.atroObj.ddlDistrictOfBirthID\" dcity=\"page.model.atroObj.ddlcity\"></country-directive>\r" +
     "\n" +
-    "                                    </a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelcandidatelandnum\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"candidatelandnum\" Font-Bold=\"true\">Land line #</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblcandidatelandnum\">{{item.Candidatelandlinewithcode}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label ng-show=\"(item.primarylandline==1)|| (item.Landisverfied) ?true:false\">\r" +
-    "\n" +
-    "     <span  ng-class=\"(item.Landisverfied)==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"  style=\"color:#00FF00;\"></span>\r" +
-    "\n" +
-    " </label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelcandidateemail\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"candidateemail\" Font-Bold=\"true\">Email</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblcandidateemail\">{{item.CandidateEmail}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label ng-show=\"(item.primaryemail || item.isemailVerified) ?true:false\">\r" +
-    "\n" +
-    "    <span  ng-class=\"item.isemailVerified==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"></span>\r" +
-    "\n" +
-    "</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
-    "\n" +
-    "                                    <a href=\"javascript:void(0);\" ng-show=\"(item.primaryemail)&&(((item.isemailVerified))==true?false:true) ?true:false\" ng-click=\"page.model.verifymail();\">verify email</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"edit_page_item\">\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "                <h4>Candidate Address Details</h4>\r" +
-    "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "                <div ID=\"listcontactadressDetails\" ng-repeat=\"item in page.model.candidateAddrArr\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"Div1\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelFlatno\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\" id=\"flatdiv\">\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"Flatno\" Font-Bold=\"true\">Flat no</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblFlatno\">{{item.Flatno}}</span></h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanellnkaddresssedit\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('candidateAddr',item);\">Edit\r" +
-    "\n" +
-    "                                    </a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelApartmentno\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div id=\"divapartment\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"Apartmentno\" Font-Bold=\"true\">Apartment no</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblApartmentno\">{{item.Apartmentno}}</span></h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelAreaname\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div id=\"divareaname\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"Areaname\" Font-Bold=\"true\">Area name</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblAreaname\">{{item.Areaname}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelStreetnames\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\" id=\"streetname\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"Streetnamecand\" Font-Bold=\"true\">Street name</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblStreetnamecand\">{{item.Streetname}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelLandmark\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\" id=\"landmarkdiv\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"Landmark\" Font-Bold=\"true\">Landmark</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblLandmark\">{{item.Landmark}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelCountry\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\" id=\"CountryNamediv\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"Country\" Font-Bold=\"true\">Country</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblfulladdress\">{{item.fulladdress}}</span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"edit_page_item\">\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "                <h4>Parent Contact Details</h4>\r" +
-    "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelparentcontacts\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "                <div ID=\"listparentsinfo\" ng-repeat=\"item in page.model.parentContactArr\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"Div2\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelparentcontactsDetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanellnkparentcontactsDetailst\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('parent',item);\">Edit\r" +
-    "\n" +
-    "                                    </a>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelFathername\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"Fathername\" Font-Bold=\"true\">{{item.Motheremailreletionship===\"39\"?\"Father Name\":\"Mother Name\"}}</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblFathername\">{{item.NAME}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelfathermobile\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"fathermobile\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblfathermobile\">{{item.Mobilewithcode}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label ng-show=\"(item.primarymobile===1)|| (item.Mothermobileisverfied) ?true:false \">\r" +
-    "\n" +
-    "    <span  ng-class=\"item.Mothermobileisverfied==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\">\r" +
-    "\n" +
-    "    </span></label>\r" +
-    "\n" +
-    "                                    <a href=\"javascript:void(0);\" ng-show=\"(item.primarymobile)&&(((item.Mothermobileisverfied))==true?false:true) ?true:false\" ng-click=\"page.model.sendMobileCode(item.mobilecountrycode,item.mobilecountrycode,item.mobilenumber,item.MotheremaILcust_family_id);\"> &nbsp;&nbsp;&nbsp;&nbsp;verify mobile</a>                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelfatherland\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"fatherlandnum\" Font-Bold=\"true\">Land line #</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblfatherlandnum\">{{item.landlinewithcode}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <label ng-show=\"(item.primarylandline==1)|| (item.MotherLandisverfied) ?true:false\">\r" +
-    "\n" +
-    "     <span  ng-class=\"(item.MotherLandisverfied)==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"  style=\"color:#00FF00;\"></span>\r" +
-    "\n" +
-    " </label>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"Email\" Font-Bold=\"true\">Email</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblmotherEmail\">{{item.Email}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label ng-show=\"(item.Motherprimaryemail || item.MotherisemailVerified) ?true:false\">\r" +
-    "\n" +
-    "    <span  ng-class=\"item.MotherisemailVerified==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"></span>\r" +
-    "\n" +
-    "</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
-    "\n" +
-    "                                    <a href=\"javascript:void(0);\" ng-show=\"(item.Motherprimaryemail)&&(((item.MotherisemailVerified))==true?false:true) ?true:false\" ng-click=\"page.model.verifymail();\">verify email</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"edit_page_item\">\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <h4>Siblings Contact Details</h4>\r" +
-    "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelBrotherContactDetails\">\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div ID=\"listSiblingsContac\" ng-repeat=\"item in page.model.SiiblingContactArr\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"Div3\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelsiblingcontactsDetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanellnksiblingDetailst\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('sibbling',item,'SelfFlag');\">Edit\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelbrothername\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"brothername\" Font-Bold=\"true\">{{(item.Siblingemailreletionship===\"41\" || item.Siblingemailreletionship===\"42\" )?\"Brother Name\":\"Sister Name\"}}</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblbrothername\">{{item.SiblingName}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelbrothermobile\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"brothermobile\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblbrothermobile\">{{item.SiblingMobilewithcode}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label ng-show=\"(item.primarymobile===1)|| (item.Siblingmobileisverfied) ?true:false \">\r" +
-    "\n" +
-    "    <span  ng-class=\"item.Siblingmobileisverfied==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\">\r" +
-    "\n" +
-    "    </span></label>\r" +
-    "\n" +
-    "                                    <a href=\"javascript:void(0);\" ng-show=\"(item.primarymobile)&&(((item.Siblingmobileisverfied))==true?false:true) ?true:false\" ng-click=\"page.model.sendMobileCode(item.Siblingmobilecountrycode,item.Siblingmobilecountrycode,item.Siblingmobilenumber,item.SiblingemaILcust_family_id);\"> &nbsp;&nbsp;&nbsp;&nbsp;verify mobile</a>                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelbrotherland \" class=\"edit_page_details_item_desc clearfix \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span Font-Bold=\"true \">Land line #</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span>{{item.Siblinglandlinewithcode}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label ng-show=\"(item.primarylandline==1)|| (item.SiblingLandisverfied) ?true:false\">\r" +
-    "\n" +
-    "     <span  ng-class=\"(item.SiblingLandisverfied)==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"  style=\"color:#00FF00;\"></span>\r" +
-    "\n" +
-    " </label>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelbrotherEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"brotherEmail\" Font-Bold=\"true\">Email</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblbrotherEmail\">{{item.SiblingEmail}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label ng-show=\"(item.Siblingprimaryemail || item.SiblingisemailVerified) ?true:false\">\r" +
-    "\n" +
-    "    <span  ng-class=\"item.SiblingisemailVerified==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"></span>\r" +
-    "\n" +
-    "</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
-    "\n" +
-    "                                    <a href=\"javascript:void(0);\" ng-show=\"(item.Siblingprimaryemail)&&(((item.SiblingisemailVerified))==true?false:true) ?true:false\" ng-click=\"page.model.verifymail();\">verify email</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdateEditSpouse \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix \">\r" +
-    "\n" +
-    "                                <div id=\"nowife \">\r" +
-    "\n" +
-    "                                    <div ID=\"updatenowifr \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <div ID=\"UpdatePSpouse \" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('sibbling',item,'SpouseFlag');\">Edit\r" +
-    "\n" +
-    "                                                            </a>\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <div ID=\"UpdatePanelbrotherwifename \" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            <div>\r" +
-    "\n" +
-    "                                                <h6>\r" +
-    "\n" +
-    "                                                    <span ID=\"brotherwifename \" Font-Bold=\"true \">{{item.Siblingemailreletionship===41 || item.Siblingemailreletionship==42 ?\"Brother Wife \":\"Sister Husband\"}}</span></h6>\r" +
-    "\n" +
-    "                                                <h5>\r" +
-    "\n" +
-    "                                                    <span ID=\"lblbrotherwifename\">{{item.SiblingSpouseNAme}}</span></h5>\r" +
-    "\n" +
-    "                                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <div ID=\"UpdatePanelbrotherwifemobile\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                                <h6>\r" +
-    "\n" +
-    "                                                    <span ID=\"brotherwifemobilenum\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
-    "\n" +
-    "                                                <h5>\r" +
-    "\n" +
-    "                                                    <span ID=\"lblbrotherwifemobilenum\">{{item.SiblingSpouseMobilenumberwithcode}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <div ID=\"UpdatePanelbrotherwifeland\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                                <h6>\r" +
-    "\n" +
-    "                                                    <span ID=\"brotherwifelandnum\" Font-Bold=\"true\">Land line #</span></h6>\r" +
-    "\n" +
-    "                                                <h5>\r" +
-    "\n" +
-    "                                                    <span ID=\"lblbrotherwifelandnum\">{{item.SiblingSpouseLandnumberwithcode}}</span>\r" +
-    "\n" +
-    "                                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "                                        <div ID=\"upSpouseEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                                <h6>\r" +
-    "\n" +
-    "                                                    <span ID=\"SpouseEmail\" Font-Bold=\"true\">Email</span></h6>\r" +
-    "\n" +
-    "                                                <h5>\r" +
-    "\n" +
-    "                                                    <span ID=\"lblSpouseEmail\">{{item.SiblingSpouseEmail}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"edit_page_item\">\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "                <h4>Relative Contact Details</h4>\r" +
-    "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "                <div ID=\"listRelativecontacts\" ng-repeat=\"item in page.model.relativeContactArr\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"Div4\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelRelativecontactsDetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanellnkFatherBrothercontactsDetailst\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('relative',item);\">Edit\r" +
-    "\n" +
-    "                                    </a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelFatherBrothername\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"FatherBrothername\" Font-Bold=\"true\">{{item.lblname}}</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblFatherBrothername\">{{item.NAME}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelFatherBrothermobile\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"FatherBrothermobile\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblFatherBrothermobile\">{{item.Mobilewithcode}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label ng-show=\"(item.primarymobile===1)|| (item.mobileisverfied) ?true:false \">\r" +
-    "\n" +
-    "    <span  ng-class=\"item.mobileisverfied==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\">\r" +
-    "\n" +
-    "    </span></label>\r" +
-    "\n" +
-    "                                    <a href=\"javascript:void(0);\" ng-show=\"(item.primarymobile)&&(((item.mobileisverfied))==true?false:true) ?true:false\" ng-click=\"page.model.sendMobileCode(item.mobilecountrycode,item.mobilecountrycode,item.mobilenumber,item.emaILcust_family_id);\"> &nbsp;&nbsp;&nbsp;&nbsp;verify mobile</a>                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelFatherBrotherland \" class=\"edit_page_details_item_desc clearfix \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"FatherBrotherlandnum \" Font-Bold=\"true \">Land line #</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblFatherBrotherlandnum \">{{item.landlinewithcode}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label ng-show=\"(item.primarylandline==1)|| (item.Landisverfied) ?true:false\">\r" +
-    "\n" +
-    "     <span  ng-class=\"(item.Landisverfied)==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"  style=\"color:#00FF00;\"></span>\r" +
-    "\n" +
-    " </label>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelFatherBrotherEmail \" class=\"edit_page_details_item_desc clearfix \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"FatherBrotherEmail \" Font-Bold=\"true \">Email</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblFatherBrotherEmail \">{{item.Email}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label ng-show=\"(item.primaryemail || item.isemailVerified) ?true:false\">\r" +
-    "\n" +
-    "    <span  ng-class=\"item.isemailVerified==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"></span>\r" +
-    "\n" +
-    "</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
-    "\n" +
-    "                                    <a href=\"javascript:void(0);\" ng-show=\"(item.primaryemail)&&(((item.isemailVerified))==true?false:true) ?true:false\" ng-click=\"page.model.verifymail();\">verify email</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"edit_page_item \">\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_head clearfix \">\r" +
-    "\n" +
-    "                <h4>Reference Contact details</h4>\r" +
-    "\n" +
-    "                <div class=\"edit_page_item_ui clearfix \">\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelreference \">\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"edit_page_details_item \">\r" +
-    "\n" +
-    "                <div ID=\"listreference\" ng-repeat=\"item in page.model.referenceContactArr\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"Div5 \" class=\"edit_page_details_item_desc clearfix \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelreferencername \" class=\"edit_page_details_item_desc clearfix \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"referencename \" Font-Bold=\"true \">Name</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblreferencename \">{{item.CandidateName}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"updatereferenceMoblie \" class=\"edit_page_details_item_desc clearfix \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span ID=\"referenceMoblie \" Font-Bold=\"true \">Moblie #</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span ID=\"lblreferenceMoblie \">{{item.CandidateMobilewithcode}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanellnkreferencemobilesedit \" class=\"edit_page_item_ui clearfix \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <a class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showContactPopup('reference',item);\">Edit\r" +
-    "\n" +
-    "                                    </a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelreferencelandnum \" class=\"edit_page_details_item_desc clearfix \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"referencelandnum \" Font-Bold=\"true \">Land line #</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblreferencelandnum \">{{item.Candidatelandlinewithcode}}</span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ID=\"UpdatePanelreferenceemail \" class=\"edit_page_details_item_desc clearfix \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span ID=\"referenceemail \" Font-Bold=\"true \">Email</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span ID=\"lblreferenceemail \">{{item.CandidateEmail}}</span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "</div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "<script type=\"text/ng-template\" id=\"SibContactContent.html\">\r" +
-    "\n" +
-    "    <form name=\"sibForm\" novalidate role=\"form\" ng-submit=\"page.model.commonContactSubmit(page.model.sibobj.SiblingemaILcust_family_id,page.model.sibobj.txtsiblingname,\r" +
-    "\n" +
-    "    page.model.sibobj.ddlSiblingmob,page.model.sibobj.txtSiblingmob,page.model.sibobj.ddlsiblingmob2,page.model.sibobj.txtsiblingmob2,page.model.sibobj.ddlsiblinglandcode,\r" +
-    "\n" +
-    "    page.model.sibobj.txtsiblinglandarea,page.model.sibobj.txtsiblinglandnumber,page.model.sibobj.txtsiblinglemail,page.model.sibFlag)\">\r" +
-    "\n" +
-    "        <div class=\"modal-header\">\r" +
-    "\n" +
-    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Siblings Contact Details\r" +
-    "\n" +
-    "                <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                    <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                </a>\r" +
-    "\n" +
-    "            </h3>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "            <ul>\r" +
-    "\n" +
-    "                <li class=\"clearfix\">\r" +
-    "\n" +
-    "                    <label for=\"lblsiblingname\" class=\"pop_label_left\">Name</label>\r" +
-    "\n" +
-    "                    <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                        <input type=\"text\" ng-model=\"page.model.sibobj.txtsiblingname\" class=\"form-control\" readonly=\"true\" tabindex=\"1\" />\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "                <contact-directive emailhide=\"true\" dmobile=\"page.model.sibobj.ddlSiblingmob\" strmobile=\"page.model.sibobj.txtSiblingmob\" dalternative=\"page.model.sibobj.ddlsiblingmob2\" stralternative=\"page.model.sibobj.txtsiblingmob2\" dland=\"page.model.sibobj.ddlsiblinglandcode\"\r" +
-    "\n" +
-    "                    strareacode=\"page.model.sibobj.txtsiblinglandarea\" strland=\"page.model.sibobj.txtsiblinglandnumber\" strmail=\"page.model.sibobj.txtsiblinglemail\"></contact-directive>\r" +
-    "\n" +
-    "                <li class=\"row\">\r" +
-    "\n" +
-    "                    <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "            </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </form>\r" +
-    "\n" +
-    "</script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "<script type=\"text/ng-template\" id=\"parentContactContent.html\">\r" +
-    "\n" +
-    "    <form name=\"parentForm\" novalidate role=\"form\" ng-submit=\"page.model.commonContactSubmit(page.model.parentobj.MotheremaILcust_family_id,\r" +
-    "\n" +
-    "    page.model.parentobj.txtFathername,page.model.parentobj.ddlcandidatefathermobcode,page.model.parentobj.txtcandidatefathermob,page.model.parentobj.ddlcandidatefathermob2code,\r" +
-    "\n" +
-    "    page.model.parentobj.txtcandidatefathermob2,page.model.parentobj.ddlcandidatefathelandcode,page.model.parentobj.txtcandidatefathelandareacode\r" +
-    "\n" +
-    "    ,page.model.parentobj.txtcandidatefathelandnumber,page.model.parentobj.txtcandidatefatheremail,'Parent')\">\r" +
-    "\n" +
-    "        <div class=\"modal-header\">\r" +
-    "\n" +
-    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Parent contact details\r" +
-    "\n" +
-    "                <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                    <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                </a>\r" +
-    "\n" +
-    "            </h3>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "            <ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <li class=\"clearfix\">\r" +
-    "\n" +
-    "                    <label for=\"lblFathername\" class=\"pop_label_left\">Name</label>\r" +
-    "\n" +
-    "                    <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                        <input type=\"text\" ng-model=\"page.model.parentobj.txtFathername\" class=\"form-control\" readonly=\"true\" tabindex=\"1\" />\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <contact-directive emailhide=\"true\" dmobile=\"page.model.parentobj.ddlcandidatefathermobcode\" strmobile=\"page.model.parentobj.txtcandidatefathermob\" dalternative=\"page.model.parentobj.ddlcandidatefathermob2code\" stralternative=\"page.model.parentobj.txtcandidatefathermob2\"\r" +
-    "\n" +
-    "                    dland=\"page.model.parentobj.ddlcandidatefathelandcode\" strareacode=\"page.model.parentobj.txtcandidatefathelandareacode\" strland=\"page.model.parentobj.txtcandidatefathelandnumber\" strmail=\"page.model.parentobj.txtcandidatefatheremail\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <li class=\"row\">\r" +
-    "\n" +
-    "                    <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "            </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </form>\r" +
-    "\n" +
-    "</script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "<script type=\"text/ng-template\" id=\"relativeContactContent.html\">\r" +
-    "\n" +
-    "    <form name=\"relativeForm\" novalidate role=\"form\" ng-submit=\"page.model.commonContactSubmit(page.model.relativeobj.emaILcust_family_id,page.model.relativeobj.txtrelativename\r" +
-    "\n" +
-    "    ,page.model.relativeobj.ddlRelativemob,\r" +
-    "\n" +
-    "    page.model.relativeobj.txtRelativemob,page.model.relativeobj.ddlRelativemob2,page.model.relativeobj.txtRelativemob2,page.model.relativeobj.ddllandRelativecode,page.model.relativeobj.txtRelativeareacode\r" +
-    "\n" +
-    "    ,page.model.relativeobj.txtlandnumberRelative,page.model.relativeobj.txtRelativeemail,'relative')\">\r" +
-    "\n" +
-    "        <div class=\"modal-header\">\r" +
-    "\n" +
-    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Relative Contact Details\r" +
-    "\n" +
-    "                <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                    <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                </a>\r" +
-    "\n" +
-    "            </h3>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "            <ul>\r" +
-    "\n" +
-    "                <li class=\"clearfix\">\r" +
-    "\n" +
-    "                    <label for=\"lblrelativename\" class=\"pop_label_left\">Name</label>\r" +
-    "\n" +
-    "                    <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                        <input type=\"text\" ng-model=\"page.model.relativeobj.txtrelativename\" class=\"form-control\" readonly=\"true\" tabindex=\"1\" />\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <contact-directive emailhide=\"true\" dmobile=\"page.model.relativeobj.ddlRelativemob\" strmobile=\"page.model.relativeobj.txtRelativemob\" dalternative=\"page.model.relativeobj.ddlRelativemob2\" stralternative=\"page.model.relativeobj.txtRelativemob2\" dland=\"page.model.relativeobj.ddllandRelativecode\"\r" +
-    "\n" +
-    "                    strareacode=\"page.model.relativeobj.txtRelativeareacode\" strland=\"page.model.relativeobj.txtlandnumberRelative\" strmail=\"page.model.relativeobj.txtRelativeemail\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <li class=\"row\">\r" +
-    "\n" +
-    "                    <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "            </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </form>\r" +
-    "\n" +
-    "</script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "<script type=\"text/ng-template\" id=\"candidateContactContent.html\">\r" +
-    "\n" +
-    "    <form name=\"candidateForm\" novalidate role=\"form\" ng-submit=\"page.model.commonContactSubmit(page.model.candidateobj.emaILcust_family_id,'',\r" +
-    "\n" +
-    "    page.model.candidateobj.ddlcandidateMobileCountryID,\r" +
-    "\n" +
-    "    page.model.candidateobj.txtcandidatemobilenumber,page.model.candidateobj.ddlcandidateMobileCountryID2,\r" +
-    "\n" +
-    "    page.model.candidateobj.txtFBMobileNumber2,page.model.candidateobj.ddlcandidateLandLineCountry,page.model.candidateobj.txtcandidateAreCode,\r" +
-    "\n" +
-    "    page.model.candidateobj.txttxtcandidateAreCodeLandNumber,\r" +
-    "\n" +
-    "    page.model.candidateobj.txtcandidateEmails,'Candidate')\">\r" +
-    "\n" +
-    "        <div class=\"modal-header\">\r" +
-    "\n" +
-    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Candidate Contact details\r" +
-    "\n" +
-    "                <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                    <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                </a>\r" +
-    "\n" +
-    "            </h3>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "            <ul>\r" +
-    "\n" +
     "\r" +
-    "\n" +
-    "                <li class=\"clearfix\">\r" +
     "\n" +
-    "                    <div id=\"divrelationer\">\r" +
+    "                    <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                        <label for=\"lblreationName\" class=\"pop_label_left\">Details of</label>\r" +
+    "                        <label for=\"lblstarlan\" class=\"pop_label_left\">Star language</label>\r" +
     "\n" +
     "                        <div class=\"pop_controls_right select-box-my\">\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <contact-directive emailhide=\"true\" dmobile=\"page.model.candidateobj.ddlcandidateMobileCountryID\" strmobile=\"page.model.candidateobj.txtcandidatemobilenumber\" dalternative=\"page.model.candidateobj.ddlcandidateMobileCountryID2\" stralternative=\"page.model.candidateobj.txtFBMobileNumber2\"\r" +
-    "\n" +
-    "                    dland=\"page.model.candidateobj.ddlcandidateLandLineCountry\" strareacode=\"page.model.candidateobj.txtcandidateAreCode\" strland=\"page.model.candidateobj.txttxtcandidateAreCodeLandNumber\" strmail=\"page.model.candidateobj.txtcandidateEmails\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <li class=\"row\">\r" +
-    "\n" +
-    "                    <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "            </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </form>\r" +
-    "\n" +
-    "</script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "<script type=\"text/ng-template\" id=\"referenceContactContent.html\">\r" +
-    "\n" +
-    "    <form name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.submitContactReference(page.model.referenceobj)\">\r" +
-    "\n" +
-    "        <div class=\"modal-header\">\r" +
-    "\n" +
-    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Reference Contact details\r" +
-    "\n" +
-    "                <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                    <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                </a>\r" +
-    "\n" +
-    "            </h3>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "            <ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <li class=\"clearfix\">\r" +
-    "\n" +
-    "                    <label for=\"lblreferencename\" class=\"pop_label_left\">Name</label>\r" +
-    "\n" +
-    "                    <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                        <input type=\"text\" ng-model=\"page.model.referenceobj.txtreferencename\" class=\"form-control\" readonly=\"true\" tabindex=\"1\" />\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <contact-directive emailhide=\"true\" dmobile=\"page.model.referenceobj.ddlreferencemobile\" strmobile=\"page.model.referenceobj.txtreferencemobile\" dalternative=\"page.model.referenceobj.ddlreferencemobile2\" stralternative=\"page.model.referenceobj.txtreferencemobile2\"\r" +
-    "\n" +
-    "                    dland=\"page.model.referenceobj.ddlreferencelandnumber\" strareacode=\"page.model.referenceobj.txtreferenceAreCode\" strland=\"page.model.referenceobj.txtreferencelandnumber\" strmail=\"page.model.referenceobj.txtreferenceemail\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <li class=\"row\">\r" +
-    "\n" +
-    "                    <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "            </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </form>\r" +
-    "\n" +
-    "</script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "<script type=\"text/ng-template\" id=\"candidateAddrContent.html\">\r" +
-    "\n" +
-    "    <form name=\"addrForm\" novalidate role=\"form\" ng-submit=\"page.model.CandidateAddressSubmit(page.model.canAddrobj)\">\r" +
-    "\n" +
-    "        <div class=\"modal-header\">\r" +
-    "\n" +
-    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Candidate Address Details\r" +
-    "\n" +
-    "                <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                    <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                </a>\r" +
-    "\n" +
-    "            </h3>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "            <ul>\r" +
-    "\n" +
-    "                <ul>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblCandidateHouseflat\" class=\"pop_label_left\">House/Flat number</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.canAddrobj.txtCandidateHouse_flat\" class=\"form-control\" maxlength=\"100\" tabindex=\"1\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <label for=\"lblCandidateApartmentName\" class=\"pop_label_left\">Apartment name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.canAddrobj.txtCandidateApartmentName\" class=\"form-control\" maxlength=\"100\" tabindex=\"2\" />\r" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlstarlanguage\" typeofdata=\"'starLanguage'\" ng-change=\"page.model.changeBind('star',page.model.atroObj.ddlstarlanguage);\"></select>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
@@ -8889,37 +6803,15 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                    <li class=\"clearfix\">\r" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblstar\" class=\"pop_label_left\">Star</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <label for=\"lblCandidateStreetName\" class=\"pop_label_left\">Street name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.canAddrobj.txtCandidateStreetName\" class=\"form-control\" maxlength=\"100\" tabindex=\"3\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <label for=\"lblCandidateAreaName\" class=\"pop_label_left\">Area Name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.canAddrobj.txtCandidateAreaName\" class=\"form-control\" maxlength=\"100\" tabindex=\"4\" />\r" +
-    "\n" +
-    "\r" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlstar\" ng-options=\"item.value as item.label for item in page.model.starArr\"></select>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -8927,41 +6819,117 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    </li>\r" +
     "\n" +
-    "\r" +
+    "                    <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                    <li class=\"clearfix\">\r" +
+    "                        <label for=\"lblpaadam\" class=\"pop_label_left\">Paadam</label>\r" +
     "\n" +
-    "\r" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
     "\n" +
-    "                        <label for=\"lblCandidateeLandmark\" class=\"pop_label_left\">Landmark</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.canAddrobj.txtCandidateLandmark\" class=\"form-control\" maxlength=\"100\" tabindex=\"5\" />\r" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlpaadam\" typeofdata=\"'paadam'\"></select>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
     "                    </li>\r" +
     "\n" +
-    "\r" +
+    "                    <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                    <country-directive countryshow=\"true\" cityshow=\"false\" othercity=\"false\" dcountry=\"page.model.canAddrobj.ddlCandidateCountryContact\" dstate=\"page.model.canAddrobj.ddlCandidateStateContact\" ddistrict=\"page.model.canAddrobj.ddlCandidateDistricContact\" require=true></country-directive>\r" +
+    "                        <label for=\"lblLagnam\" class=\"pop_label_left\">Lagnam</label>\r" +
     "\n" +
-    "\r" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlLagnam\" typeofdata=\"'lagnam'\"></select>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblRaasiMoonsign\" class=\"pop_label_left\">Raasi/Moon sign</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlRaasiMoonsign\" typeofdata=\"'ZodaicSign'\"></select>\r" +
+    "\n" +
+    "                            </select>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblGothramGotra\" class=\"pop_label_left\">Gothram/Gotra</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                            <input ng-model=\"page.model.atroObj.txtGothramGotra\" class=\"form-control\" tabindex=\"13\" maxlength=\"100\" />\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
     "\n" +
     "                    <li class=\"clearfix\">\r" +
     "\n" +
-    "\r" +
+    "                        <label for=\"lblMaternalgothram\" class=\"pop_label_left\">Maternal gothram</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                            <input ng-model=\"page.model.atroObj.txtMaternalgothram\" class=\"form-control\" tabindex=\"14\" maxlength=\"100\" />\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix\">\r" +
+    "\n" +
+    "                        <label for=\"lblManglikKujadosham\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Manglik/Kuja dosham</label>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <label for=\"lblCityCandidate\" class=\"pop_label_left\">City<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "                        <md-input-container style=\"font-weight: 700;color:black;\">\r" +
     "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
+    "                            <md-radio-group name=\"rdlkujaDosham\" layout=\"row\" ng-model=\"page.model.atroObj.rdlkujaDosham\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "\n" +
+    "                                <md-radio-button value=\"0\" class=\"md-primary\">Yes</md-radio-button>\r" +
+    "\n" +
+    "                                <md-radio-button value=\"1\"> No </md-radio-button>\r" +
+    "\n" +
+    "                                <md-radio-button value=\"2\"> Dont't Know </md-radio-button>\r" +
+    "\n" +
+    "                            </md-radio-group>\r" +
+    "\n" +
+    "                        </md-input-container>\r" +
+    "\n" +
+    "                    </li>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.canAddrobj.txtCandidateCity\" class=\"form-control\" maxlength=\"100\" tabindex=\"9\" />\r" +
+    "                    <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
+    "\n" +
+    "                        <label for=\"lbllongitude\" class=\"pop_label_left\">Place of birth longitude</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                            <input id=\"txtlogitude\" class=\"form-control\" />\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddllongitude\"></select>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
+    "\n" +
+    "                        <label for=\"lbllatitude\" class=\"pop_label_left\">Place of birth latitude</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                            <input id=\"txtlatitude\" class=\"form-control col-lg-3\" />\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddllatitude\"></select>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -8969,169 +6937,149 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    </li>\r" +
     "\n" +
-    "\r" +
+    "                    <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
     "\n" +
-    "                    <li class=\"clearfix\">\r" +
+    "                        <label for=\"lbllatitude\">Place of birth latitude</label>\r" +
     "\n" +
-    "\r" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
     "\n" +
-    "                        <label for=\"lblCandidateZip_pin\" class=\"pop_label_left\">Zip/Pin</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.canAddrobj.txtCandidateZip_no\" class=\"form-control\" maxlength=\"8\" onkeydown=\"return checkwhitespace(event,this.id);\" tabindex=\"10\" />\r" +
-    "\n" +
-    "\r" +
+    "                            <input type=\"checkbox\" ng-model=\"page.model.atroObj.Chkgenertehoro\" value=\"Generate HoroScope\" />\r" +
     "\n" +
     "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"row\">\r" +
+    "\n" +
+    "                        <edit-footer></edit-footer>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                    </li>\r" +
     "\n" +
     "                </ul>\r" +
     "\n" +
-    "                <li class=\"row\">\r" +
-    "\n" +
-    "                    <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "            </ul>\r" +
+    "            </div>\r" +
     "\n" +
     "\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"AddHoroPopup.html\">\r" +
+    "\n" +
+    "        <form name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.upload(up);\">\r" +
+    "\n" +
+    "            <div class=\"modal-header\">\r" +
+    "\n" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Upload Horoscope </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body\" id=\"modal-body\">\r" +
+    "\n" +
+    "                <label class=\"control-label\">Use this file formats like gif, jpeg, png,jpg</label>\r" +
+    "\n" +
+    "                <br>\r" +
+    "\n" +
+    "                <ul id=\"ulprofession\">\r" +
+    "\n" +
+    "                    <input type=\"file\" file-model=\"up.myFile\" />\r" +
+    "\n" +
+    "                </ul>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-footer\">\r" +
+    "\n" +
+    "                <input value=\"Cancel\" class=\"button_custom button_custom_reset\" ng-click=\"page.model.cancel();\" type=\"button\">\r" +
+    "\n" +
+    "                <input value=\"Upload\" class=\"button_custom\" type=\"submit\">\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"deletehoroPopup.html\">\r" +
+    "\n" +
+    "        <form name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.deleteHoroImage();\">\r" +
+    "\n" +
+    "            <div class=\"modal-header\">\r" +
+    "\n" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Delete Horoscope </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body\" id=\"modal-body\">\r" +
+    "\n" +
+    "                <div class=\"text-center\">Are you sure to delete horoscope?</div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-footer\">\r" +
+    "\n" +
+    "                <input value=\"Close\" class=\"button_custom button_custom_reset\" ng-click=\"page.model.cancel();\" type=\"button\">\r" +
+    "\n" +
+    "                <input value=\"Delete\" class=\"button_custom\" type=\"submit\">\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"AstroCityPopup.html\">\r" +
+    "\n" +
+    "        <div class=\"modal-header alert alert-danger\" id=\"div2\">\r" +
+    "\n" +
+    "            <button type=\"button\" class=\"close\" ng-click=\"page.model.cancel();\">&times;</button>\r" +
+    "\n" +
+    "            <h4 class=\"modal-title\">\r" +
+    "\n" +
+    "                <span id=\"lblcityheader\">we are unable to genearte horoscope with your given city <b style=\"color: green\"> Administrative Buildings </b>,so please select Nearest city to your place of birth</span>\r" +
+    "\n" +
+    "            </h4>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
-    "    </form>\r" +
+    "        <div class=\"modal-body\" id=\"modalbodyIDnew\">\r" +
     "\n" +
-    "</script>\r" +
+    "            <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                <select multiselectdropdown ng-model=\"page.model.ddlAstrocity\" ng-options=\"item.value as item.label for item in page.model.AstrocityArr\" ng-change=\"page.model.AstroCityChange(page.model.ddlAstrocity);\"></select>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"modal-footer\">\r" +
+    "\n" +
+    "            <button type=\"button\" class=\"btn btn-default\" ng-click=\"page.model.cancel();\">Close</button>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </script>\r" +
     "\n" +
     "\r" +
     "\n" +
+    "    <script type=\"text/ng-template\" id=\"AstroimagePopup.html\">\r" +
+    "\n" +
     "\r" +
-    "\n" +
-    "<script type=\"text/ng-template\" id=\"primaryRelationContent.html\">\r" +
-    "\n" +
-    "    <form name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.primaryRelationSubmit(page.model.setrelObj.ddlPrimaryMobileRel,page.model.setrelObj.ddlPrimaryEmailRel,'1')\">\r" +
     "\n" +
     "        <div class=\"modal-header\">\r" +
     "\n" +
-    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Candidate Primary Contact relation\r" +
-    "\n" +
-    "                <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                    <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                </a>\r" +
-    "\n" +
-    "            </h3>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "            <ul>\r" +
-    "\n" +
-    "                <li>\r" +
-    "\n" +
-    "                    <div class=\"row\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"col-lg-6\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div id=\"Div4\">\r" +
-    "\n" +
-    "                                <label for=\"lblMobile\" class=\"pop_label_left\">Mobile #  </label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.setrelObj.ddlPrimaryMobileRel\" typeofdata=\"'childStayingWith'\"></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div class=\"col-lg-6\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div id=\"Div1\">\r" +
-    "\n" +
-    "                                <label for=\"lblMobile\" class=\"pop_label_left\">Email #  </label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.setrelObj.ddlPrimaryEmailRel\" typeofdata=\"'childStayingWith'\"></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <br/>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <li class=\"row\">\r" +
-    "\n" +
-    "                    <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "            </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </form>\r" +
-    "\n" +
-    "</script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "<script type=\"text/ng-template\" id=\"verifyMobileContent.html\">\r" +
-    "\n" +
-    "    <form name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.verifyMobCode(page.model.verifymobObj.txtVerificationcode)\">\r" +
-    "\n" +
-    "        <div class=\"modal-header\">\r" +
-    "\n" +
-    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Mobile verification code sent successfully to {{page.model.popupMobilenumber}}\r" +
+    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Horoscope\r" +
     "\n" +
     "                <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
     "\n" +
@@ -9145,27 +7093,2108 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
     "\n" +
-    "            <ul>\r" +
+    "            <img ng-src=\"{{page.model.ImageUrl}}\" style=\"width:500px;height:500px;\" />\r" +
     "\n" +
-    "                <li class=\"clearfix\">\r" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"modal-footer\">\r" +
+    "\n" +
+    "            <div class=\"pull-right\">\r" +
+    "\n" +
+    "                <input value=\"Cancel\" class=\"button_custom button_custom_reset  pull-right\" ng-click=\"page.model.cancel();\" type=\"button\">\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </script>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div class=\"row\">\r" +
+    "\r" +
     "\n" +
-    "                        <span style=\"color: #000; font-size: 13px; margin-left: 20px; font-weight: bold;\">Click yes, If you want to verify by you \r" +
+    "    <script type=\"text/ng-template\" id=\"RefreshPopup.html\">\r" +
     "\n" +
-    "                        </span>\r" +
+    "\r" +
+    "\n" +
+    "        <div class=\"modal-body clearfix\" id=\"modal-body\">\r" +
+    "\n" +
+    "            <button ng-click=\"page.model.generatedhoroS3Upload();\" class=\"btn btn-success center-block\">Refresh Page<span class=\"fa fa-refresh\"></span></button>&nbsp;&nbsp;\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('app/editContact/index.html',
+    "<div class=\"EditViewClass\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div ng-include=\"'templates/sideMenu.html'\">\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"edit_pages_content_main clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                    <div ID=\"updatevvv\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <h4>Candidate Contact details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "\n" +
+    "                            <span style=\"color: #08CFD2;\">RelationName :Mobile :{{page.model.primaryRel.PrimaryMobileRelName}} & Email :{{page.model.primaryRel.PrimaryEmailRelName}}</span></h4>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "                    <br />\r" +
+    "\r" +
+    "\n" +
+    "                    <div class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div id=\"Divrbt\" class=\"radio-group-my\" runat=\"server\">\r" +
+    "                        <div ID=\"updatecabndidatecontactDetails\">\r" +
     "\n" +
-    "                        <label class=\"control-label\">\r" +
+    "\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" class=\"edit_page_add_button\" ng-click=\"page.model.showContactPopup('Candidate');\">Add\r" +
+    "\n" +
+    "                    </a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                    <div ng-repeat=\"item in page.model.candidateContactArr\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"reviewdiv\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                            <div ID=\"updatecandMoblie\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span ID=\"candMoblie\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span ID=\"lblcandMoblie\">{{item.CandidateMobilewithcode}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <label ng-show=\"(item.primarymobile===1)|| (item.mobileisverfied) ?true:false \">\r" +
+    "\n" +
+    "    <span  ng-class=\"item.mobileisverfied==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\">\r" +
+    "\n" +
+    "    </span></label>\r" +
+    "\n" +
+    "                                    <a href=\"javascript:void(0);\" ng-show=\"(item.primarymobile)&&(((item.mobileisverfied))==true?false:true) ?true:false\" ng-click=\"page.model.sendMobileCode(item.Candidatemobilecountrycode,item.Candidatemobilecountrycode,item.CandidateMobileNumber,item.emaILcust_family_id);\"> &nbsp;&nbsp;&nbsp;&nbsp;verify mobile</a>                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "\n" +
+    "                                    <a href=\"javascript:void(0);\" ng-click=\"page.model.setprimaryrelationPopup();\">RelationName</a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanellnkcandmobilesedit\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('Candidate',item);\">Edit\r" +
+    "\n" +
+    "                                    </a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelcandidatelandnum\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"candidatelandnum\" Font-Bold=\"true\">Land line #</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblcandidatelandnum\">{{item.Candidatelandlinewithcode}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <label ng-show=\"(item.primarylandline==1)|| (item.Landisverfied) ?true:false\">\r" +
+    "\n" +
+    "     <span  ng-class=\"(item.Landisverfied)==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"  style=\"color:#00FF00;\"></span>\r" +
+    "\n" +
+    " </label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelcandidateemail\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"candidateemail\" Font-Bold=\"true\">Email</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblcandidateemail\">{{item.CandidateEmail}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <label ng-show=\"(item.primaryemail || item.isemailVerified) ?true:false\">\r" +
+    "\n" +
+    "    <span  ng-class=\"item.isemailVerified==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"></span>\r" +
+    "\n" +
+    "</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "\n" +
+    "                                        <a href=\"javascript:void(0);\" ng-show=\"(item.primaryemail)&&(((item.isemailVerified))==true?false:true) ?true:false\" ng-click=\"page.model.verifymail();\">verify email</a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                    <h4>Candidate Address Details</h4>\r" +
+    "\n" +
+    "                    <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                    <div ID=\"listcontactadressDetails\" ng-repeat=\"item in page.model.candidateAddrArr\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"Div1\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelFlatno\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\" id=\"flatdiv\">\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"Flatno\" Font-Bold=\"true\">Flat no</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblFlatno\">{{item.Flatno}}</span></h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanellnkaddresssedit\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('candidateAddr',item);\">Edit\r" +
+    "\n" +
+    "                                    </a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelApartmentno\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div id=\"divapartment\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"Apartmentno\" Font-Bold=\"true\">Apartment no</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblApartmentno\">{{item.Apartmentno}}</span></h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelAreaname\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div id=\"divareaname\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"Areaname\" Font-Bold=\"true\">Area name</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblAreaname\">{{item.Areaname}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelStreetnames\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\" id=\"streetname\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"Streetnamecand\" Font-Bold=\"true\">Street name</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblStreetnamecand\">{{item.Streetname}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelLandmark\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\" id=\"landmarkdiv\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"Landmark\" Font-Bold=\"true\">Landmark</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblLandmark\">{{item.Landmark}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelCountry\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\" id=\"CountryNamediv\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"Country\" Font-Bold=\"true\">Country</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblfulladdress\">{{item.fulladdress}}</span>\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                    <h4>Parent Contact Details</h4>\r" +
+    "\n" +
+    "                    <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanelparentcontacts\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                    <div ID=\"listparentsinfo\" ng-repeat=\"item in page.model.parentContactArr\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"Div2\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelparentcontactsDetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanellnkparentcontactsDetailst\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('parent',item);\">Edit\r" +
+    "\n" +
+    "                                    </a>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelFathername\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"Fathername\" Font-Bold=\"true\">{{item.Motheremailreletionship===\"39\"?\"Father Name\":\"Mother Name\"}}</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblFathername\">{{item.NAME}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelfathermobile\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"fathermobile\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblfathermobile\">{{item.Mobilewithcode}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <label ng-show=\"(item.primarymobile===1)|| (item.Mothermobileisverfied) ?true:false \">\r" +
+    "\n" +
+    "    <span  ng-class=\"item.Mothermobileisverfied==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\">\r" +
+    "\n" +
+    "    </span></label>\r" +
+    "\n" +
+    "                                        <a href=\"javascript:void(0);\" ng-show=\"(item.primarymobile)&&(((item.Mothermobileisverfied))==true?false:true) ?true:false\" ng-click=\"page.model.sendMobileCode(item.mobilecountrycode,item.mobilecountrycode,item.mobilenumber,item.MotheremaILcust_family_id);\"> &nbsp;&nbsp;&nbsp;&nbsp;verify mobile</a>                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelfatherland\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"fatherlandnum\" Font-Bold=\"true\">Land line #</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblfatherlandnum\">{{item.landlinewithcode}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <label ng-show=\"(item.primarylandline==1)|| (item.MotherLandisverfied) ?true:false\">\r" +
+    "\n" +
+    "     <span  ng-class=\"(item.MotherLandisverfied)==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"  style=\"color:#00FF00;\"></span>\r" +
+    "\n" +
+    " </label>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"Email\" Font-Bold=\"true\">Email</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblmotherEmail\">{{item.Email}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <label ng-show=\"(item.Motherprimaryemail || item.MotherisemailVerified) ?true:false\">\r" +
+    "\n" +
+    "    <span  ng-class=\"item.MotherisemailVerified==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"></span>\r" +
+    "\n" +
+    "</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "\n" +
+    "                                        <a href=\"javascript:void(0);\" ng-show=\"(item.Motherprimaryemail)&&(((item.MotherisemailVerified))==true?false:true) ?true:false\" ng-click=\"page.model.verifymail();\">verify email</a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <h4>Siblings Contact Details</h4>\r" +
+    "\n" +
+    "                    <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanelBrotherContactDetails\">\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div ID=\"listSiblingsContac\" ng-repeat=\"item in page.model.SiiblingContactArr\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"Div3\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelsiblingcontactsDetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanellnksiblingDetailst\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('sibbling',item,'SelfFlag');\">Edit\r" +
+    "\n" +
+    "                        </a>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelbrothername\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"brothername\" Font-Bold=\"true\">{{(item.Siblingemailreletionship===\"41\" || item.Siblingemailreletionship===\"42\" )?\"Brother Name\":\"Sister Name\"}}</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblbrothername\">{{item.SiblingName}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelbrothermobile\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"brothermobile\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblbrothermobile\">{{item.SiblingMobilewithcode}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <label ng-show=\"(item.primarymobile===1)|| (item.Siblingmobileisverfied) ?true:false \">\r" +
+    "\n" +
+    "    <span  ng-class=\"item.Siblingmobileisverfied==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\">\r" +
+    "\n" +
+    "    </span></label>\r" +
+    "\n" +
+    "                                        <a href=\"javascript:void(0);\" ng-show=\"(item.primarymobile)&&(((item.Siblingmobileisverfied))==true?false:true) ?true:false\" ng-click=\"page.model.sendMobileCode(item.Siblingmobilecountrycode,item.Siblingmobilecountrycode,item.Siblingmobilenumber,item.SiblingemaILcust_family_id);\"> &nbsp;&nbsp;&nbsp;&nbsp;verify mobile</a>                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelbrotherland \" class=\"edit_page_details_item_desc clearfix \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span Font-Bold=\"true \">Land line #</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span>{{item.Siblinglandlinewithcode}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <label ng-show=\"(item.primarylandline==1)|| (item.SiblingLandisverfied) ?true:false\">\r" +
+    "\n" +
+    "     <span  ng-class=\"(item.SiblingLandisverfied)==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"  style=\"color:#00FF00;\"></span>\r" +
+    "\n" +
+    " </label>\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelbrotherEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"brotherEmail\" Font-Bold=\"true\">Email</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblbrotherEmail\">{{item.SiblingEmail}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <label ng-show=\"(item.Siblingprimaryemail || item.SiblingisemailVerified) ?true:false\">\r" +
+    "\n" +
+    "    <span  ng-class=\"item.SiblingisemailVerified==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"></span>\r" +
+    "\n" +
+    "</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "\n" +
+    "                                        <a href=\"javascript:void(0);\" ng-show=\"(item.Siblingprimaryemail)&&(((item.SiblingisemailVerified))==true?false:true) ?true:false\" ng-click=\"page.model.verifymail();\">verify email</a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdateEditSpouse \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"edit_page_details_item_desc clearfix \">\r" +
+    "\n" +
+    "                                    <div id=\"nowife \">\r" +
+    "\n" +
+    "                                        <div ID=\"updatenowifr \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <div ID=\"UpdatePSpouse \" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('sibbling',item,'SpouseFlag');\">Edit\r" +
+    "\n" +
+    "                                                            </a>\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <div ID=\"UpdatePanelbrotherwifename \" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                <div>\r" +
+    "\n" +
+    "                                                    <h6>\r" +
+    "\n" +
+    "                                                        <span ID=\"brotherwifename \" Font-Bold=\"true \">{{item.Siblingemailreletionship===41 || item.Siblingemailreletionship==42 ?\"Brother Wife \":\"Sister Husband\"}}</span></h6>\r" +
+    "\n" +
+    "                                                    <h5>\r" +
+    "\n" +
+    "                                                        <span ID=\"lblbrotherwifename\">{{item.SiblingSpouseNAme}}</span></h5>\r" +
+    "\n" +
+    "                                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <div ID=\"UpdatePanelbrotherwifemobile\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                    <h6>\r" +
+    "\n" +
+    "                                                        <span ID=\"brotherwifemobilenum\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
+    "\n" +
+    "                                                    <h5>\r" +
+    "\n" +
+    "                                                        <span ID=\"lblbrotherwifemobilenum\">{{item.SiblingSpouseMobilenumberwithcode}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <div ID=\"UpdatePanelbrotherwifeland\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                    <h6>\r" +
+    "\n" +
+    "                                                        <span ID=\"brotherwifelandnum\" Font-Bold=\"true\">Land line #</span></h6>\r" +
+    "\n" +
+    "                                                    <h5>\r" +
+    "\n" +
+    "                                                        <span ID=\"lblbrotherwifelandnum\">{{item.SiblingSpouseLandnumberwithcode}}</span>\r" +
+    "\n" +
+    "                                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "                                            <div ID=\"upSpouseEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                    <h6>\r" +
+    "\n" +
+    "                                                        <span ID=\"SpouseEmail\" Font-Bold=\"true\">Email</span></h6>\r" +
+    "\n" +
+    "                                                    <h5>\r" +
+    "\n" +
+    "                                                        <span ID=\"lblSpouseEmail\">{{item.SiblingSpouseEmail}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                    <h4>Relative Contact Details</h4>\r" +
+    "\n" +
+    "                    <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                    <div ID=\"listRelativecontacts\" ng-repeat=\"item in page.model.relativeContactArr\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"Div4\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelRelativecontactsDetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanellnkFatherBrothercontactsDetailst\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('relative',item);\">Edit\r" +
+    "\n" +
+    "                                    </a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelFatherBrothername\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"FatherBrothername\" Font-Bold=\"true\">{{item.lblname}}</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblFatherBrothername\">{{item.NAME}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelFatherBrothermobile\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"FatherBrothermobile\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblFatherBrothermobile\">{{item.Mobilewithcode}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <label ng-show=\"(item.primarymobile===1)|| (item.mobileisverfied) ?true:false \">\r" +
+    "\n" +
+    "    <span  ng-class=\"item.mobileisverfied==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\">\r" +
+    "\n" +
+    "    </span></label>\r" +
+    "\n" +
+    "                                        <a href=\"javascript:void(0);\" ng-show=\"(item.primarymobile)&&(((item.mobileisverfied))==true?false:true) ?true:false\" ng-click=\"page.model.sendMobileCode(item.mobilecountrycode,item.mobilecountrycode,item.mobilenumber,item.emaILcust_family_id);\"> &nbsp;&nbsp;&nbsp;&nbsp;verify mobile</a>                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelFatherBrotherland \" class=\"edit_page_details_item_desc clearfix \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"FatherBrotherlandnum \" Font-Bold=\"true \">Land line #</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblFatherBrotherlandnum \">{{item.landlinewithcode}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <label ng-show=\"(item.primarylandline==1)|| (item.Landisverfied) ?true:false\">\r" +
+    "\n" +
+    "     <span  ng-class=\"(item.Landisverfied)==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"  style=\"color:#00FF00;\"></span>\r" +
+    "\n" +
+    " </label>\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelFatherBrotherEmail \" class=\"edit_page_details_item_desc clearfix \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"FatherBrotherEmail \" Font-Bold=\"true \">Email</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblFatherBrotherEmail \">{{item.Email}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <label ng-show=\"(item.primaryemail || item.isemailVerified) ?true:false\">\r" +
+    "\n" +
+    "    <span  ng-class=\"item.isemailVerified==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"></span>\r" +
+    "\n" +
+    "</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "\n" +
+    "                                        <a href=\"javascript:void(0);\" ng-show=\"(item.primaryemail)&&(((item.isemailVerified))==true?false:true) ?true:false\" ng-click=\"page.model.verifymail();\">verify email</a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"edit_page_item \">\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_head clearfix \">\r" +
+    "\n" +
+    "                    <h4>Reference Contact details</h4>\r" +
+    "\n" +
+    "                    <div class=\"edit_page_item_ui clearfix \">\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanelreference \">\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"edit_page_details_item \">\r" +
+    "\n" +
+    "                    <div ID=\"listreference\" ng-repeat=\"item in page.model.referenceContactArr\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"Div5 \" class=\"edit_page_details_item_desc clearfix \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelreferencername \" class=\"edit_page_details_item_desc clearfix \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"referencename \" Font-Bold=\"true \">Name</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblreferencename \">{{item.CandidateName}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"updatereferenceMoblie \" class=\"edit_page_details_item_desc clearfix \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span ID=\"referenceMoblie \" Font-Bold=\"true \">Moblie #</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span ID=\"lblreferenceMoblie \">{{item.CandidateMobilewithcode}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanellnkreferencemobilesedit \" class=\"edit_page_item_ui clearfix \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <a class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showContactPopup('reference',item);\">Edit\r" +
+    "\n" +
+    "                                    </a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelreferencelandnum \" class=\"edit_page_details_item_desc clearfix \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"referencelandnum \" Font-Bold=\"true \">Land line #</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblreferencelandnum \">{{item.Candidatelandlinewithcode}}</span>\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanelreferenceemail \" class=\"edit_page_details_item_desc clearfix \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"referenceemail \" Font-Bold=\"true \">Email</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblreferenceemail \">{{item.CandidateEmail}}</span>\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"SibContactContent.html\">\r" +
+    "\n" +
+    "        <form name=\"sibForm\" novalidate role=\"form\" ng-submit=\"page.model.commonContactSubmit(page.model.sibobj.SiblingemaILcust_family_id,page.model.sibobj.txtsiblingname,\r" +
+    "\n" +
+    "    page.model.sibobj.ddlSiblingmob,page.model.sibobj.txtSiblingmob,page.model.sibobj.ddlsiblingmob2,page.model.sibobj.txtsiblingmob2,page.model.sibobj.ddlsiblinglandcode,\r" +
+    "\n" +
+    "    page.model.sibobj.txtsiblinglandarea,page.model.sibobj.txtsiblinglandnumber,page.model.sibobj.txtsiblinglemail,page.model.sibFlag)\">\r" +
+    "\n" +
+    "            <div class=\"modal-header\">\r" +
+    "\n" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Siblings Contact Details\r" +
+    "\n" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
+    "\n" +
+    "                    </a>\r" +
+    "\n" +
+    "                </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "                <ul>\r" +
+    "\n" +
+    "                    <li class=\"clearfix\">\r" +
+    "\n" +
+    "                        <label for=\"lblsiblingname\" class=\"pop_label_left\">Name</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                            <input type=\"text\" ng-model=\"page.model.sibobj.txtsiblingname\" class=\"form-control\" readonly=\"true\" tabindex=\"1\" />\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <contact-directive emailhide=\"true\" dmobile=\"page.model.sibobj.ddlSiblingmob\" strmobile=\"page.model.sibobj.txtSiblingmob\" dalternative=\"page.model.sibobj.ddlsiblingmob2\" stralternative=\"page.model.sibobj.txtsiblingmob2\" dland=\"page.model.sibobj.ddlsiblinglandcode\"\r" +
+    "\n" +
+    "                        strareacode=\"page.model.sibobj.txtsiblinglandarea\" strland=\"page.model.sibobj.txtsiblinglandnumber\" strmail=\"page.model.sibobj.txtsiblinglemail\"></contact-directive>\r" +
+    "\n" +
+    "                    <li class=\"row\">\r" +
+    "\n" +
+    "                        <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                </ul>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"parentContactContent.html\">\r" +
+    "\n" +
+    "        <form name=\"parentForm\" novalidate role=\"form\" ng-submit=\"page.model.commonContactSubmit(page.model.parentobj.MotheremaILcust_family_id,\r" +
+    "\n" +
+    "    page.model.parentobj.txtFathername,page.model.parentobj.ddlcandidatefathermobcode,page.model.parentobj.txtcandidatefathermob,page.model.parentobj.ddlcandidatefathermob2code,\r" +
+    "\n" +
+    "    page.model.parentobj.txtcandidatefathermob2,page.model.parentobj.ddlcandidatefathelandcode,page.model.parentobj.txtcandidatefathelandareacode\r" +
+    "\n" +
+    "    ,page.model.parentobj.txtcandidatefathelandnumber,page.model.parentobj.txtcandidatefatheremail,'Parent')\">\r" +
+    "\n" +
+    "            <div class=\"modal-header\">\r" +
+    "\n" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Parent contact details\r" +
+    "\n" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
+    "\n" +
+    "                    </a>\r" +
+    "\n" +
+    "                </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "                <ul>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <li class=\"clearfix\">\r" +
+    "\n" +
+    "                        <label for=\"lblFathername\" class=\"pop_label_left\">Name</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                            <input type=\"text\" ng-model=\"page.model.parentobj.txtFathername\" class=\"form-control\" readonly=\"true\" tabindex=\"1\" />\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <contact-directive emailhide=\"true\" dmobile=\"page.model.parentobj.ddlcandidatefathermobcode\" strmobile=\"page.model.parentobj.txtcandidatefathermob\" dalternative=\"page.model.parentobj.ddlcandidatefathermob2code\" stralternative=\"page.model.parentobj.txtcandidatefathermob2\"\r" +
+    "\n" +
+    "                        dland=\"page.model.parentobj.ddlcandidatefathelandcode\" strareacode=\"page.model.parentobj.txtcandidatefathelandareacode\" strland=\"page.model.parentobj.txtcandidatefathelandnumber\" strmail=\"page.model.parentobj.txtcandidatefatheremail\"></contact-directive>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <li class=\"row\">\r" +
+    "\n" +
+    "                        <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                </ul>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"relativeContactContent.html\">\r" +
+    "\n" +
+    "        <form name=\"relativeForm\" novalidate role=\"form\" ng-submit=\"page.model.commonContactSubmit(page.model.relativeobj.emaILcust_family_id,page.model.relativeobj.txtrelativename\r" +
+    "\n" +
+    "    ,page.model.relativeobj.ddlRelativemob,\r" +
+    "\n" +
+    "    page.model.relativeobj.txtRelativemob,page.model.relativeobj.ddlRelativemob2,page.model.relativeobj.txtRelativemob2,page.model.relativeobj.ddllandRelativecode,page.model.relativeobj.txtRelativeareacode\r" +
+    "\n" +
+    "    ,page.model.relativeobj.txtlandnumberRelative,page.model.relativeobj.txtRelativeemail,'relative')\">\r" +
+    "\n" +
+    "            <div class=\"modal-header\">\r" +
+    "\n" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Relative Contact Details\r" +
+    "\n" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
+    "\n" +
+    "                    </a>\r" +
+    "\n" +
+    "                </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "                <ul>\r" +
+    "\n" +
+    "                    <li class=\"clearfix\">\r" +
+    "\n" +
+    "                        <label for=\"lblrelativename\" class=\"pop_label_left\">Name</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                            <input type=\"text\" ng-model=\"page.model.relativeobj.txtrelativename\" class=\"form-control\" readonly=\"true\" tabindex=\"1\" />\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <contact-directive emailhide=\"true\" dmobile=\"page.model.relativeobj.ddlRelativemob\" strmobile=\"page.model.relativeobj.txtRelativemob\" dalternative=\"page.model.relativeobj.ddlRelativemob2\" stralternative=\"page.model.relativeobj.txtRelativemob2\" dland=\"page.model.relativeobj.ddllandRelativecode\"\r" +
+    "\n" +
+    "                        strareacode=\"page.model.relativeobj.txtRelativeareacode\" strland=\"page.model.relativeobj.txtlandnumberRelative\" strmail=\"page.model.relativeobj.txtRelativeemail\"></contact-directive>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <li class=\"row\">\r" +
+    "\n" +
+    "                        <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                </ul>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"candidateContactContent.html\">\r" +
+    "\n" +
+    "        <form name=\"candidateForm\" novalidate role=\"form\" ng-submit=\"page.model.commonContactSubmit(page.model.candidateobj.emaILcust_family_id,'',\r" +
+    "\n" +
+    "    page.model.candidateobj.ddlcandidateMobileCountryID,\r" +
+    "\n" +
+    "    page.model.candidateobj.txtcandidatemobilenumber,page.model.candidateobj.ddlcandidateMobileCountryID2,\r" +
+    "\n" +
+    "    page.model.candidateobj.txtFBMobileNumber2,page.model.candidateobj.ddlcandidateLandLineCountry,page.model.candidateobj.txtcandidateAreCode,\r" +
+    "\n" +
+    "    page.model.candidateobj.txttxtcandidateAreCodeLandNumber,\r" +
+    "\n" +
+    "    page.model.candidateobj.txtcandidateEmails,'Candidate')\">\r" +
+    "\n" +
+    "            <div class=\"modal-header\">\r" +
+    "\n" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Candidate Contact details\r" +
+    "\n" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
+    "\n" +
+    "                    </a>\r" +
+    "\n" +
+    "                </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "                <ul>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <li class=\"clearfix\">\r" +
+    "\n" +
+    "                        <div id=\"divrelationer\">\r" +
+    "\n" +
+    "                            <label for=\"lblreationName\" class=\"pop_label_left\">Details of</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <contact-directive emailhide=\"true\" dmobile=\"page.model.candidateobj.ddlcandidateMobileCountryID\" strmobile=\"page.model.candidateobj.txtcandidatemobilenumber\" dalternative=\"page.model.candidateobj.ddlcandidateMobileCountryID2\" stralternative=\"page.model.candidateobj.txtFBMobileNumber2\"\r" +
+    "\n" +
+    "                        dland=\"page.model.candidateobj.ddlcandidateLandLineCountry\" strareacode=\"page.model.candidateobj.txtcandidateAreCode\" strland=\"page.model.candidateobj.txttxtcandidateAreCodeLandNumber\" strmail=\"page.model.candidateobj.txtcandidateEmails\"></contact-directive>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <li class=\"row\">\r" +
+    "\n" +
+    "                        <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                </ul>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"referenceContactContent.html\">\r" +
+    "\n" +
+    "        <form name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.submitContactReference(page.model.referenceobj)\">\r" +
+    "\n" +
+    "            <div class=\"modal-header\">\r" +
+    "\n" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Reference Contact details\r" +
+    "\n" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
+    "\n" +
+    "                    </a>\r" +
+    "\n" +
+    "                </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "                <ul>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <li class=\"clearfix\">\r" +
+    "\n" +
+    "                        <label for=\"lblreferencename\" class=\"pop_label_left\">Name</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                            <input type=\"text\" ng-model=\"page.model.referenceobj.txtreferencename\" class=\"form-control\" readonly=\"true\" tabindex=\"1\" />\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <contact-directive emailhide=\"true\" dmobile=\"page.model.referenceobj.ddlreferencemobile\" strmobile=\"page.model.referenceobj.txtreferencemobile\" dalternative=\"page.model.referenceobj.ddlreferencemobile2\" stralternative=\"page.model.referenceobj.txtreferencemobile2\"\r" +
+    "\n" +
+    "                        dland=\"page.model.referenceobj.ddlreferencelandnumber\" strareacode=\"page.model.referenceobj.txtreferenceAreCode\" strland=\"page.model.referenceobj.txtreferencelandnumber\" strmail=\"page.model.referenceobj.txtreferenceemail\"></contact-directive>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <li class=\"row\">\r" +
+    "\n" +
+    "                        <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                </ul>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"candidateAddrContent.html\">\r" +
+    "\n" +
+    "        <form name=\"addrForm\" novalidate role=\"form\" ng-submit=\"page.model.CandidateAddressSubmit(page.model.canAddrobj)\">\r" +
+    "\n" +
+    "            <div class=\"modal-header\">\r" +
+    "\n" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Candidate Address Details\r" +
+    "\n" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
+    "\n" +
+    "                    </a>\r" +
+    "\n" +
+    "                </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "                <ul>\r" +
+    "\n" +
+    "                    <ul>\r" +
+    "\n" +
+    "                        <li class=\"clearfix\">\r" +
+    "\n" +
+    "                            <label for=\"lblCandidateHouseflat\" class=\"pop_label_left\">House/Flat number</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <input type=\"text\" ng-model=\"page.model.canAddrobj.txtCandidateHouse_flat\" class=\"form-control\" maxlength=\"100\" tabindex=\"1\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <label for=\"lblCandidateApartmentName\" class=\"pop_label_left\">Apartment name</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <input type=\"text\" ng-model=\"page.model.canAddrobj.txtCandidateApartmentName\" class=\"form-control\" maxlength=\"100\" tabindex=\"2\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <li class=\"clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <label for=\"lblCandidateStreetName\" class=\"pop_label_left\">Street name</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <input type=\"text\" ng-model=\"page.model.canAddrobj.txtCandidateStreetName\" class=\"form-control\" maxlength=\"100\" tabindex=\"3\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <li class=\"clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <label for=\"lblCandidateAreaName\" class=\"pop_label_left\">Area Name</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <input type=\"text\" ng-model=\"page.model.canAddrobj.txtCandidateAreaName\" class=\"form-control\" maxlength=\"100\" tabindex=\"4\" />\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <li class=\"clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <label for=\"lblCandidateeLandmark\" class=\"pop_label_left\">Landmark</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <input type=\"text\" ng-model=\"page.model.canAddrobj.txtCandidateLandmark\" class=\"form-control\" maxlength=\"100\" tabindex=\"5\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <country-directive countryshow=\"true\" cityshow=\"false\" othercity=\"false\" dcountry=\"page.model.canAddrobj.ddlCandidateCountryContact\" dstate=\"page.model.canAddrobj.ddlCandidateStateContact\" ddistrict=\"page.model.canAddrobj.ddlCandidateDistricContact\" require=true></country-directive>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <li class=\"clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <label for=\"lblCityCandidate\" class=\"pop_label_left\">City<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <input type=\"text\" ng-model=\"page.model.canAddrobj.txtCandidateCity\" class=\"form-control\" maxlength=\"100\" tabindex=\"9\" />\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <li class=\"clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <label for=\"lblCandidateZip_pin\" class=\"pop_label_left\">Zip/Pin</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <input type=\"text\" ng-model=\"page.model.canAddrobj.txtCandidateZip_no\" class=\"form-control\" maxlength=\"8\" onkeydown=\"return checkwhitespace(event,this.id);\" tabindex=\"10\" />\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                    </ul>\r" +
+    "\n" +
+    "                    <li class=\"row\">\r" +
+    "\n" +
+    "                        <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                </ul>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"primaryRelationContent.html\">\r" +
+    "\n" +
+    "        <form name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.primaryRelationSubmit(page.model.setrelObj.ddlPrimaryMobileRel,page.model.setrelObj.ddlPrimaryEmailRel,'1')\">\r" +
+    "\n" +
+    "            <div class=\"modal-header\">\r" +
+    "\n" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Candidate Primary Contact relation\r" +
+    "\n" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
+    "\n" +
+    "                    </a>\r" +
+    "\n" +
+    "                </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "                <ul>\r" +
+    "\n" +
+    "                    <li>\r" +
+    "\n" +
+    "                        <div class=\"row\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div class=\"col-lg-6\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div id=\"Div4\">\r" +
+    "\n" +
+    "                                    <label for=\"lblMobile\" class=\"pop_label_left\">Mobile #  </label>\r" +
+    "\n" +
+    "                                    <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                                        <select multiselectdropdown ng-model=\"page.model.setrelObj.ddlPrimaryMobileRel\" typeofdata=\"'childStayingWith'\"></select>\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div class=\"col-lg-6\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div id=\"Div1\">\r" +
+    "\n" +
+    "                                    <label for=\"lblMobile\" class=\"pop_label_left\">Email #  </label>\r" +
+    "\n" +
+    "                                    <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <select multiselectdropdown ng-model=\"page.model.setrelObj.ddlPrimaryEmailRel\" typeofdata=\"'childStayingWith'\"></select>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <br/>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <li class=\"row\">\r" +
+    "\n" +
+    "                        <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                </ul>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"verifyMobileContent.html\">\r" +
+    "\n" +
+    "        <form name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.verifyMobCode(page.model.verifymobObj.txtVerificationcode)\">\r" +
+    "\n" +
+    "            <div class=\"modal-header\">\r" +
+    "\n" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Mobile verification code sent successfully to {{page.model.popupMobilenumber}}\r" +
+    "\n" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\"></ng-md-icon>\r" +
+    "\n" +
+    "                    </a>\r" +
+    "\n" +
+    "                </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "                <ul>\r" +
+    "\n" +
+    "                    <li class=\"clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div class=\"row\">\r" +
+    "\n" +
+    "                            <span style=\"color: #000; font-size: 13px; margin-left: 20px; font-weight: bold;\">Click yes, If you want to verify by you \r" +
+    "\n" +
+    "                        </span>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <br />\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"Divrbt\" class=\"radio-group-my\" runat=\"server\">\r" +
+    "\n" +
+    "                            <label class=\"control-label\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -9181,53 +9210,53 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    </label>\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
-    "                    <br />\r" +
+    "                        <br />\r" +
     "\n" +
-    "                    <br />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div ng-if=\"page.model.verifymobObj.rbtnVerf==='1'\">\r" +
-    "\n" +
-    "                        <b>Mobile verify Code : </b><input type=\"text\" height=\"40\" ng-model=\"page.model.verifymobObj.txtVerificationcode\" maxlength=\"6\" class=\"form-control\" style=\"width:50%;\" />\r" +
+    "                        <br />\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        <div ng-if=\"page.model.verifymobObj.rbtnVerf==='1'\">\r" +
+    "\n" +
+    "                            <b>Mobile verify Code : </b><input type=\"text\" height=\"40\" ng-model=\"page.model.verifymobObj.txtVerificationcode\" maxlength=\"6\" class=\"form-control\" style=\"width:50%;\" />\r" +
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </li>\r" +
+    "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                <li class=\"row\">\r" +
-    "\n" +
-    "                    <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "            </ul>\r" +
-    "\n" +
     "\r" +
     "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </form>\r" +
-    "\n" +
-    "</script>\r" +
+    "                    </li>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
+    "\n" +
+    "                    <li class=\"row\">\r" +
+    "\n" +
+    "                        <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                </ul>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "</div>\r" +
     "\n" +
     "\r" +
     "\n" +

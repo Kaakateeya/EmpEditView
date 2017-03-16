@@ -11,7 +11,7 @@
         model.ageGapArr = [];
         model.partnerDescObj = {};
         var isSubmit = true;
-
+        var loginEmpid = authSvc.LoginEmpid();
         // var logincustid = authSvc.getCustId();
         var custID = model.CustID = stateParams.CustID;
         //  model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
@@ -174,7 +174,7 @@
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };

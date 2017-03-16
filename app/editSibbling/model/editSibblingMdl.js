@@ -18,7 +18,7 @@
         model.SisCount = null;
         model.CountryVal = '1';
         model.identityID = 0;
-
+        var loginEmpid = authSvc.LoginEmpid();
         var isSubmit = true;
 
         // var logincustid = authSvc.getCustId();
@@ -416,7 +416,7 @@
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -491,7 +491,7 @@
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };

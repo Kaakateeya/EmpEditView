@@ -9,12 +9,14 @@
 
     function factory($injector) {
         function setUser(value) {
-            //console.log(value);
-            setSession('cust.id', value.CustID);
-            setSession('cust.username', (value.FirstName + ' ' + value.LastName));
-            setSession('cust.profileid', (value.ProfileID));
-            setSession('cust.paidstatus', (value.PaidStatus));
-            setSession('cust.profilepic', (value.ProfilePic));
+
+            setSession("LoginEmpid", value.EmpID);
+            setSession("LoginEmpName", value.FirstName + " " + value.LastName);
+            setSession("empBranchID", value.BranchID);
+            setSession("isAdmin", value.isAdmin);
+            setSession("isManagement", value.isManagement);
+            setSession("empRegionID", value.RegionID);
+            setSession("empphoto", value.EmpPhotoPath);
         }
 
         function getSession(key) {
@@ -34,24 +36,25 @@
         }
 
         function clearUserSession() {
-
-            clearSession('cust.id');
-            clearSession('cust.username');
-            clearSession('cust.profileid');
-            clearSession('cust.paidstatus');
-            clearSession('cust.profilepic');
-            clearSession('cust.GenderID');
+            clearSession('LoginEmpid');
+            clearSession('LoginEmpName');
+            clearSession('empBranchID');
+            clearSession('isAdmin');
+            clearSession('isManagement');
+            clearSession('empRegionID');
+            clearSession('macAddress');
+            clearSession('empphoto');
         }
 
         function getUser() {
             return {
-                custid: 91022,
-                //111070,
-                username: getSession('cust.username'),
-                profileid: getSession('cust.profileid'),
-                paidstatus: getSession('cust.paidstatus'),
-                profilepic: getSession('cust.profilepic'),
-                GenderID: getSession('cust.GenderID')
+                LoginEmpid: getSession('LoginEmpid'),
+                LoginEmpName: getSession('LoginEmpName'),
+                empBranchID: getSession('empBranchID'),
+                isAdmin: getSession('isAdmin'),
+                isManagement: getSession('isManagement'),
+                empRegionID: getSession('empRegionID')
+
             };
         }
 
@@ -65,44 +68,66 @@
             isAuthenticated: function() {
                 return !!getSession('cust.id');
             },
-            getCustId: function() {
-                return 91022;
-            },
-            getProfileid: function() {
-                return getSession('cust.profileid');
-            },
-            getpaidstatus: function() {
-                return getSession('cust.paidstatus');
-            },
-            getprofilepic: function() {
-                return getSession('cust.profilepic');
-            },
-            getGenderID: function() {
-                return getSession('cust.GenderID');
-            },
             clearUserSessionDetails: function() {
                 return clearUserSession();
             },
             logout: function() {
                 clearUserSession();
-                window.location = "#/";
+                //route.go('home', {});
             },
-            login: function(username, password) {
-
-                var body = {
-                    Username: username,
-                    Password: password
-                };
-                return $injector.invoke(function($http) {
-                    return $http.post(app.apiroot + 'DB/userLogin/person', body)
-                        .then(function(response) {
-                            if (response.status === 200) {
-
-                                return { success: true, response: response.data };
-                            }
-                            return { success: false, response: response.data };
-                        });
+            LoginEmpid: function() {
+                return getSession('LoginEmpid');
+            },
+            LoginEmpName: function() {
+                return getSession('LoginEmpName');
+            },
+            empBranchID: function() {
+                return getSession('empBranchID');
+            },
+            isAdmin: function() {
+                return getSession('isAdmin');
+            },
+            isManagement: function() {
+                return getSession('isManagement');
+            },
+            empRegionID: function() {
+                return getSession('empRegionID');
+            },
+            empphoto: function() {
+                return getSession('empphoto');
+            },
+            macAddress: function() {
+                return getSession('macAddress');
+            },
+            clientIp: function() {
+                return getSession('getClientIp');
+            },
+            getmacaddress: function() {
+                return $http.get('/getmac').then(function(res) {
+                    console.log(res);
+                    setSession("macAddress", res.data);
+                    return res.data;
                 });
+            },
+            getClientIp: function() {
+                return $http.get('/getClientIp').then(function(res) {
+                    console.log(res);
+                    console.log(((res.data).indexOf("::1") !== -1));
+                    console.log(((res.data).indexOf("127.0.0.1") !== -1));
+                    var response;
+                    if ((res.data).indexOf("::1") !== -1 || (res.data).indexOf("127.0.0.1") !== -1) {
+                        response = "183.82.98.109";
+                        setSession("getClientIp", response);
+                    } else {
+                        response = res.data;
+                        setSession("getClientIp", response);
+                    }
+                    return response;
+                    //(((res.data).indexOf("::1") !== -1) ? "183.82.98.109" : res.data);
+                });
+            },
+            getpaidstatus: function() {
+                return getSession('cust.paidstatus');
             }
         };
     }

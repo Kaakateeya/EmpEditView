@@ -7,7 +7,7 @@
         model.scope = {};
 
         //declaration part
-
+        var loginEmpid = authSvc.LoginEmpid();
         model.propertyArr = [];
         model.proObj = {};
 
@@ -65,7 +65,7 @@
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };

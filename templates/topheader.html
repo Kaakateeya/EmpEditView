@@ -1,8 +1,8 @@
-<div>
+<div ng-controller="headerctrl as head" id="logindivheader">
     <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-                <a href="/" class="site_title smalllogo"><img src="src/images/kaakateeyalogo_001.jpg" style="width:50px;height:50px;"></img>
+                <a href="/" class="site_title smalllogo"><img src="src/images/kaakateeya logo yello_001.jpg" style="width:50px;height:50px;"></img>
                 </a>
 
                 <a href="/" class="site_title kaakateeyalogo"><img src="src/images/logo3.png" style="width: 158px;
@@ -15,7 +15,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
                 <div class="profile_pic">
-                    <img src="src/images/img_notavail.jpg" alt="..." class="img-circle profile_img">
+                    <img ng-src="{{head.empphoto}}" alt="..." class="img-circle profile_img">
                 </div>
                 <div class="profile_info">
                     <span>Welcome,</span>
@@ -23,110 +23,65 @@
                 </div>
             </div>
             <!-- /menu profile quick info -->
-
-            <br />
-
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                 <div class="menu_section">
                     <h3>General</h3>
                     <ul class="nav side-menu">
-                        <li><a><i class="fa fa-video-camera"></i> Demo <span class="fa fa-chevron-down"></span></a>
+                        <li><a href="registration"><i class="fa fa-file-text"></i> Registration <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="mg">BootstrapslidePopup</a></li>
-                                <li><a href="bootstrapslide">Bootstrapslide</a></li>
-                                <li><a href="bootstrapTable">BootstrapTable</a></li>
-                            </ul>
-                        </li>
-                        <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="/home">Dashboard</a></li>
-                                <li><a href="dashboard2">Dashboard2</a></li>
-                                <li><a href="dashboard3">Dashboard3</a></li>
-                                <li><a href="dashBoardNew">dashBoardNew</a></li>
-
-
-                            </ul>
-                        </li>
-                        <li><a><i class="fa fa-edit"></i> Edit <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="Education">Education</a></li>
-                                <li><a href="javascript:void(0)">Parents</a></li>
-                                <li><a href="javascript:void(0)">siblings</a></li>
-                                <li><a href="javascript:void(0)">Relatives</a></li>
-                                <li><a href="javascript:void(0)">Astro</a></li>
-                                <li><a href="javascript:void(0)">Managephoto</a></li>
+                                <li><a href="registration">Customer New Registration</a></li>
+                                <li><a href="bootstrapslide">Edit/View Profile</a></li>
+                                <li><a href="bootstrapTable">Registration Validation</a></li>
+                                <li><a href="bootstrapTable">Payment Details</a></li>
+                                <li><a href="bootstrapTable">Customer New Admin Profile</a></li>
                             </ul>
                         </li>
                         <li><a href="search"><i class="fa fa-search"></i> Search <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="javascript:void(0)">General Search</a></li>
-                                <li><a href="javascript:void(0)">Advanced search</a></li>
+                                <li><a href="search">General Search</a></li>
+                                <li><a href="search">Advanced search</a></li>
+                                <li><a href="searchdd">Keyword Search</a></li>
+                                <li><a href="searchdd">Keyword Search_Kmpl</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="searchss"><i class="fa fa-user-circle-o"></i> My Account <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="searchdd">My Profiles</a></li>
+                                <li><a href="searchss">Marketing Tickets</a></li>
+                                <li><a href="searchsss">Match Followup Tickets</a></li>
+                                <li><a href="searchss">My Assigned Photos</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="searchss"><i class="fa fa-folder"></i>Maintance Work <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="searchss">Unassigned Profiles</a></li>
+                                <li><a href="searchss">Unassigned Photos</a></li>
+                                <li><a href="searchss">Match Meeting Report</a></li>
+                                <li><a href="searchss">Upload Success Stories</a></li>
+                                <li><a href="searchss">View Success Stories</a></li>
+                                <li><a href="searchss">Customer Message Verification</a></li>
+                                <li><a href="searchss">Re Assign Employee</a></li>
+                                <li><a href="searchss">Book Marks</a></li>
+                                <li><a href="searchss">Customer/Employee Config</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="searchss"><i class="fa fa-clone"></i>Admin Forms <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="searchss">Branch Creation</a></li>
+                                <li><a href="searchss">List Branches</a></li>
+                                <li><a href="searchss">Add/Edit Faqs</a></li>
                             </ul>
                         </li>
                         <li><a><i class="fa fa-table"></i> Reports <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="javascript:void(0)">Myprofile</a></li>
-
-                            </ul>
-                        </li>
-
-                        <li><a><i class="fa fa-clone"></i>Slide shows <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="javascript:void(0)">marketing</a></li>
-                                <li><a href="javascript:void(0)">Matchfollowup</a></li>
+                                <li><a href="javascript:void(0)">Payment Report</a></li>
+                                <li><a href="javascript:void(0)">Summary Profile Report</a></li>
+                                <li><a href="javascript:void(0)">Profile Modification </a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-                <div class="menu_section">
-                    <h3>Live On</h3>
-                    <ul class="nav side-menu">
-                        <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="javascript:void(0)">E-commerce</a></li>
-                                <li><a href="javascript:void(0)">Projects</a></li>
-                                <li><a href="javascript:void(0)">Project Detail</a></li>
-                                <li><a href="javascript:void(0)">Contacts</a></li>
-                                <li><a href="javascript:void(0)">Profile</a></li>
-                            </ul>
-                        </li>
-                        <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="javascript:void(0)">403 Error</a></li>
-                                <li><a href="javascript:void(0)">404 Error</a></li>
-                                <li><a href="javascript:void(0)">500 Error</a></li>
-                                <li><a href="javascript:void(0)">Plain Page</a></li>
-                                <li><a href="javascript:void(0)">Login Page</a></li>
-                                <li><a href="javascript:void(0)">Pricing Tables</a></li>
-                            </ul>
-                        </li>
-                        <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="javascript:void(0)">Level One</a>
-                                    <li><a>Level One<span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li class="sub_menu"><a href="javascript:void(0)">Level Two</a>
-                                            </li>
-                                            <li><a href="javascript:void(0);">Level Two</a>
-                                            </li>
-                                            <li><a href="javascript:void(0);">Level Two</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="javascript:void(0);">Level One</a>
-                                    </li>
-                            </ul>
-                            </li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page
-                         <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="/">Dashboard</a></li>
-                                </ul>
-                            </li>
-                    </ul>
-                </div>
-
             </div>
             <!-- /sidebar menu -->
 
@@ -158,7 +113,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="">
                         <a href="javascript:void(0)" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            <img src="src/images/img_notavail.jpg" alt="">{{head.name}}
+                            <img ng-src="{{head.empphoto}}" alt="">{{head.name}}
                             <span class="fa fa-angle-down"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -242,46 +197,62 @@
     </div>
 
 
-    <script type="text/ng-template" id="loginContent.html">
+    <!--  <script type="text/ng-template" id="loginContent.html">
         <form name="loginForm" novalidate role="form" style='z-index: 99999'>
             <div class="modal-body clearfix pop_content_my" id="modal-body">
-                <div class='row'>
-                    <h3 class='text-center'>Employee login</h3>
-                    <div class='col-lg-4'>
-                        <br>
-                        <img src="src\images\logo3.png" alt="">
+                <p class="currendate row" style="margin: 0 0 0px;"> {{head.CurrentDate | date:'dd MMMM yyyy hh.mm.ss'}},{{head.CurrentDate |date:'EEEE'}}</p>
+                <div class="row">
+                    <div class='col-lg-6 col-lg-offset-3'>
+                        <h3 class='colorlogin row' style="margin-top: 0px;">Employee Login <img src="src/images/kaakateeyalogo_001.jpg" style="width:50px;height:50px;"></img>
+                        </h3>
                     </div>
-                    <div class='col-lg-7'>
 
-                        <md-input-container class="md-block" flex-gt-sm ng-show="!head.lock">
-                            <label for="username" lass='col-lg-4'>User name </label>
-                            <input type="text" class="usernameemployee" ng-model="head.usernameemployee" name="usernameemployee" required md-no-asterisk>
-                            <div ng-messages="loginForm.usernameemployee.$error">
-                                <div ng-message="required">This is required.</div>
-                            </div>
-                        </md-input-container>
-
-                        <label ng-show="head.lock" class="form-label">{{head.usernameemployee}}</label>
-
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label for="username" class='col-lg-4'>Password 	</label>
-                            <input type="Password" class="usernameemployee" ng-model="head.passwordemployee" name="passwordemployee" required md-no-asterisk>
-                            <div ng-messages="loginForm.passwordemployee.$error">
-                                <div ng-message="required">This is required.</div>
-                                <div ng-message="pattern">username is invalid</div>
-                            </div>
-                        </md-input-container>
-                        <label class="labelred">{{head.errormessage}}</label>
-                        <div class='col-lg-offset-3'>
+                </div>
+                <div class='row'>
+                    <div class="col-lg-offset-2">
+                        <div class="row">
+                            <label for="username" style="color:black;" class='col-lg-3'>User Name</label>
+                            <md-input-container class="inputcontainer col-lg-6" ng-show="!head.lock">
+                                <input ng-keyup="loginForm.$valid && $event.keyCode == 13 && head.loginsubmit(head)" type="text" class="usernameemployee" ng-model="head.usernameemployee" name="usernameemployee" required md-no-asterisk>
+                                <div ng-messages="loginForm.usernameemployee.$error">
+                                    <div ng-message="required">This is required.</div>
+                                </div>
+                            </md-input-container>
+                            <label ng-show="head.lock" class="form-label">{{head.usernameemployee}}</label>
+                        </div>
+                        <div class="row">
+                            <label for="Password" style="color:black;" class='col-lg-3'>Pass Word</label>
+                            <md-input-container class="inputcontainer col-lg-6">
+                                <input ng-keyup="loginForm.$valid && $event.keyCode == 13 && head.loginsubmit(head)" type="Password" class="usernameemployee" ng-model="head.passwordemployee" name="passwordemployee" required md-no-asterisk>
+                                <div ng-messages="loginForm.passwordemployee.$error">
+                                    <div ng-message="required">This is required.</div>
+                                    <div ng-message="pattern">username is invalid</div>
+                                </div>
+                            </md-input-container>
+                            <label class="labelred">{{head.errormessage}}</label>
+                        </div>
+                        <div class='col-lg-offset-4'>
                             <md-button class="md-raised md-warn md-hue-2" ng-disabled="loginForm.$invalid" ng-click="head.loginsubmit(head)">Login
                             </md-button>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <br>
+                        <div class="col-lg-3  col-lg-offset-1">
+                            <label style="color:black;">AP:</label>
+                            <label style="color:maroon;">{{head.logincounts[0].LoggedCount!==undefind?head.logincounts[0].LoggedCount:0}}/{{head.logincounts[0].EmpCount!==undefined?head.logincounts[0].EmpCount:0}}</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <label style="color:black;">TN:</label>
+                            <label style="color:maroon;">{{head.logincounts[1].LoggedCount!==undefined?head.logincounts[1].LoggedCount:0}}/{{head.logincounts[1].EmpCount!==undefined?head.logincounts[1].EmpCount:0}}</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <label style="color:black;">KA:</label>
+                            <label style="color:maroon;">{{head.logincounts[2].LoggedCount!==undefined?head.logincounts[2].LoggedCount:0}}/{{head.logincounts[2].EmpCount!==undefined?head.logincounts[2].EmpCount:0}}</label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
-    </script>
-
-
+    </script>-->
 </div>

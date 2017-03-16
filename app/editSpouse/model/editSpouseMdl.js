@@ -14,7 +14,7 @@
         model.childObj = {};
         model.noofChldrenAray = commonFactory.numbersBind('', 0, 10);
         model.childCount = 0;
-
+        var loginEmpid = authSvc.LoginEmpid();
         model.init = function() {
             model.pageload();
             return model;
@@ -129,7 +129,7 @@
                 },
                 customerpersonaldetails: {
                     intCusID: custID,
-                    EmpID: null,
+                    EmpID: loginEmpid,
                     Admin: null
                 }
             };
@@ -161,7 +161,7 @@
                 },
                 customerpersonaldetails: {
                     intCusID: custID,
-                    EmpID: null,
+                    EmpID: loginEmpid,
                     Admin: null
                 }
             };

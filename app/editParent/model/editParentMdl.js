@@ -15,7 +15,7 @@
         model.parentArr = [];
         model.AboutFamilyReviewStatus = null;
         var isSubmit = true;
-
+        var loginEmpid = authSvc.LoginEmpid();
         //end declarion block
 
         // var logincustid = authSvc.getCustId();
@@ -289,7 +289,7 @@
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
 
@@ -341,7 +341,7 @@
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
 
@@ -381,7 +381,7 @@
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
 

@@ -10,8 +10,9 @@
         var CustID = stateParams.CustID;
         // logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.loginpaidstatus = authSvc.getpaidstatus();
-        var genderID = authSvc.getGenderID();
-
+        var genderID = 1;
+        //authSvc.getGenderID();
+        var loginEmpid = authSvc.LoginEmpid();
         model.photorowID = 0;
 
         //end declaration block
@@ -131,7 +132,7 @@
                                 },
                                 customerpersonaldetails: {
                                     intCusID: CustID,
-                                    EmpID: null,
+                                    EmpID: loginEmpid,
                                     Admin: null
                                 }
                             };
@@ -208,13 +209,13 @@
 
             switch (type) {
                 case 'PhotoGuideLines':
-                    window.open('#/registration/photoGuideLines', '_blank');
+                    window.open('registration/photoGuideLines', '_blank');
                     break;
                 case 'Faqs':
-                    window.open('#/faqs', '_blank');
+                    window.open('registration/faqs', '_blank');
                     break;
                 case 'uploadTips':
-                    window.open('#/registration/uploadTips', '_blank');
+                    window.open('registration/uploadTips', '_blank');
                     break;
             }
         };

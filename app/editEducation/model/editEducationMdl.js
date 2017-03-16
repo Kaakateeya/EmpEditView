@@ -7,7 +7,7 @@
         // var logincustid = authSvc.getCustId();
 
         model.scope = {};
-
+        var loginEmpid = authSvc.LoginEmpid();
         //start declaration block
         model.stateArr = [];
         model.districtArr = [];
@@ -259,7 +259,7 @@
                     },
                     customerpersonaldetails: {
                         intCusID: CustID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -312,7 +312,7 @@
                     },
                     customerpersonaldetails: {
                         intCusID: CustID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -386,7 +386,7 @@
                 },
                 customerpersonaldetails: {
                     intCusID: CustID,
-                    EmpID: null,
+                    EmpID: loginEmpid,
                     Admin: null
                 }
             };

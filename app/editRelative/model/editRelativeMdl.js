@@ -17,7 +17,7 @@
         // var logincustid = authSvc.getCustId();
         var custid = model.CustID = stateParams.CustID;
         //  model. = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
-
+        var loginEmpid = authSvc.LoginEmpid();
 
         //end declaration block
         model.init = function() {
@@ -207,7 +207,7 @@
                     },
                     customerpersonaldetails: {
                         intCusID: custid,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -257,7 +257,7 @@
                     },
                     customerpersonaldetails: {
                         intCusID: custid,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -301,7 +301,7 @@
                     },
                     customerpersonaldetails: {
                         intCusID: custid,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };
@@ -351,7 +351,7 @@
                     },
                     customerpersonaldetails: {
                         intCusID: custid,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };

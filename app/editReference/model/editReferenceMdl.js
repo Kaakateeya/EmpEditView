@@ -10,7 +10,7 @@
 
         model.ReferenceArr = [];
         model.refObj = {};
-
+        var loginEmpid = authSvc.LoginEmpid();
         model.deleteDisplayTxt = 'reference';
         var isSubmit = true;
         model.identityID = 0;
@@ -103,7 +103,7 @@
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };

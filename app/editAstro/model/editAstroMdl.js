@@ -15,7 +15,7 @@
         model.iframeShow = false;
         var s3obj = {};
 
-        // var logincustid = authSvc.getCustId();
+        var loginEmpid = authSvc.LoginEmpid();
         var custID = model.CustID = stateParams.CustID;
 
         // model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
@@ -153,7 +153,7 @@
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
-                        EmpID: null,
+                        EmpID: loginEmpid,
                         Admin: null
                     }
                 };

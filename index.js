@@ -11,7 +11,7 @@ var editviewapp = angular.module('KaakateeyaEmpEdit', ['ui.router', 'ngAnimate',
     'ngMessages', 'ngAria', 'ngPassword', 'jcs-autoValidate', 'angularPromiseButtons', 'KaakateeyaRegistration', 'oc.lazyLoad'
 ]);
 editviewapp.apipath = 'http://183.82.0.58:8025/Api/';
-// editviewapp.apipath = 'http://183.82.0.58:8010/Api/';
+editviewapp.apipathold = 'http://183.82.0.58:8010/Api/';
 editviewapp.env = 'dev';
 
 editviewapp.GlobalImgPath = 'http://d16o2fcjgzj2wp.cloudfront.net/';
