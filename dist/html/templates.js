@@ -126,7 +126,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <!-- jQuery -->\r" +
     "\n" +
-    "    <!-- SCRIPTS DATA -->\r" +
+    "    <!-- SCRIPTS DATA --#>\r" +
     "\n" +
     "    <script src=\"node_modules/jquery/dist/jquery.min.js\"></script>\r" +
     "\n" +
@@ -254,7 +254,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <!-- SCRIPTSP DATA --#>\r" +
+    "    <!-- SCRIPTSP DATA -->\r" +
     "\n" +
     "    <script src=\"dist/js/main.min.js\"></script>\r" +
     "\n" +
@@ -3015,9 +3015,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
   $templateCache.put('app/editEducation/index.html',
     "<div class=\"edit_pages_content_main clearfix\" class=\"right_col\">\r" +
     "\n" +
-    "    <!--<div ng-include=\"'templates/sideMenu.html'\">\r" +
+    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
-    "    </div>-->\r" +
+    "    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
