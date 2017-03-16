@@ -10,7 +10,11 @@
              model.scope = scope;
          };
 
+         scope.redirect = function(type) {
 
+             $state.go('editview.' + type, { CustID: stateParams.CustID });
+
+         };
          vm.init();
      }
      angular
