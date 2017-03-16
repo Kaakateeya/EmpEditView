@@ -56,7 +56,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             "topbar@": {
                 templateUrl: "templates/topheader.html"
             },
-            "content@": {
+            "lazyLoadView@": {
                 templateUrl: 'app/' + edititem + '/index.html',
                 controller: edititem + 'Ctrl as page'
             },

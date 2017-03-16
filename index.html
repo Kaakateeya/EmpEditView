@@ -51,11 +51,11 @@
         <div class="main_container">
             <div ui-view="topbar">
             </div>
+            <div ng-include="'templates/sideMenu.html'">
+            </div>
             <div ui-view="lazyLoadView">
-                <div ng-include="'templates/sideMenu.html'">
-                </div>
-                <div ui-view="content">
-                </div>
+
+
 
             </div>
             <div ui-view="bottompanel">
@@ -65,7 +65,7 @@
     </div>
     </div>
     <!-- jQuery -->
-    <!-- SCRIPTS DATA --#>
+    <!-- SCRIPTS DATA -->
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/angular/angular.min.js"></script>
@@ -129,7 +129,7 @@
 
 
 
-    <!-- SCRIPTSP DATA --><script src="dist/js/main.min.js"></script><!--SCRIPTSP END-->
+    <!-- SCRIPTSP DATA --#><script src="dist/js/main.min.js"></script><!--SCRIPTSP END-->
 
 </body>
 

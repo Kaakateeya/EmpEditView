@@ -52,7 +52,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             "topbar@": {
                 templateUrl: "templates/topheader.html"
             },
-            "content@": {
+            "lazyLoadView@": {
                 templateUrl: 'app/' + edititem + '/index.html',
                 controller: edititem + 'Ctrl as page'
             },
@@ -6348,15 +6348,15 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            </div>\r" +
     "\n" +
+    "            <div ng-include=\"'templates/sideMenu.html'\">\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
     "            <div ui-view=\"lazyLoadView\">\r" +
     "\n" +
-    "                <div ng-include=\"'templates/sideMenu.html'\">\r" +
+    "\r" +
     "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div ui-view=\"content\">\r" +
-    "\n" +
-    "                </div>\r" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -6376,7 +6376,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <!-- jQuery -->\r" +
     "\n" +
-    "    <!-- SCRIPTS DATA --#>\r" +
+    "    <!-- SCRIPTS DATA -->\r" +
     "\n" +
     "    <script src=\"node_modules/jquery/dist/jquery.min.js\"></script>\r" +
     "\n" +
@@ -6504,7 +6504,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <!-- SCRIPTSP DATA --><script src=\"dist/js/main.min.js\"></script><!--SCRIPTSP END-->\r" +
+    "    <!-- SCRIPTSP DATA --#><script src=\"dist/js/main.min.js\"></script><!--SCRIPTSP END-->\r" +
     "\n" +
     "\r" +
     "\n" +
