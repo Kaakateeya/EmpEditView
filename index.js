@@ -60,6 +60,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 templateUrl: 'app/' + edititem + '/index.html',
                 controller: edititem + 'Ctrl as page'
             },
+
             "bottompanel@": {
                 templateUrl: "templates/footer.html"
             }
