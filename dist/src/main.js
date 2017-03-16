@@ -56,6 +56,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 templateUrl: 'app/' + edititem + '/index.html',
                 controller: edititem + 'Ctrl as page'
             },
+
             "bottompanel@": {
                 templateUrl: "templates/footer.html"
             }
@@ -5818,6 +5819,36 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     }
 
 })();
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .directive('sideMenu', directive);
+
+    directive.$inject = [];
+
+    function directive() {
+
+        var directive = {
+            link: link,
+            restrict: 'E',
+            scope: {
+                sectionid: '=',
+                dispalyName: '=',
+                custid: '='
+            },
+            templateUrl: "templates/sideMenu.html",
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+
+
+        }
+    }
+
+})();
 (function(angular) {
     'use strict';
 
@@ -6313,219 +6344,29 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        <div class=\"main_container\">\r" +
     "\n" +
-    "            <!--<div ui-view=\"topbar\">\r" +
-    "\n" +
-    "            </div>-->\r" +
-    "\n" +
-    "            <div class=\"edit_pages_sidebar clearfix\" ng-controller=\"baseCtrl\">\r" +
-    "\n" +
-    "                <div class=\"edit_page_profile_pic\">\r" +
-    "\n" +
-    "                    <img id=\"imgphoto\" ng-src=\"{{model.PersonalObj.ProfilePic}}\">\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" style=\"font-weight: bold;\" ng-click=\"model.photorequestAndshow();\"> {{model.PersonalObj.ProfilePic.indexOf('Fnoimage.jpg')!==-1 || model.PersonalObj.ProfilePic.indexOf('Mnoimage.jpg')!==-1?'Photo Request':'View Photo' }}         </a>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div class=\"edit_pages_sidebar_profile_details\">\r" +
-    "\n" +
-    "                    <h6>\r" +
-    "\n" +
-    "                        <span>{{model.PersonalObj.Name+\" (\"+model.PersonalObj.ProfileID+\")\"}}</span></h6>\r" +
-    "\n" +
-    "                    <div class=\"edit_pages_sidebar_profile_details_in\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <p>\r" +
-    "\n" +
-    "                            <span>{{model.PersonalObj.MartialStatus+\" ,\"+model.PersonalObj.DateofBirth+((model.PersonalObj.Age!=\"\" && model.PersonalObj.Age!=null)?\" (\"+model.PersonalObj.Age+\")\":model.PersonalObj.Age)+((model.PersonalObj.Height!=\"\" && model.PersonalObj.Height!=null)?\" ,\"+model.PersonalObj.Height:model.PersonalObj.Height)+((model.PersonalObj.Complexion!=\"\")?\" ,\"+model.PersonalObj.Complexion:model.PersonalObj.Complexion)}}</span>\r" +
-    "\n" +
-    "                        </p>\r" +
-    "\n" +
-    "                        <p>\r" +
-    "\n" +
-    "                            <span>{{model.PersonalObj.Religion+\" ,\"+model.PersonalObj.Mothertongue+\", \"+model.PersonalObj.Caste+((model.PersonalObj.SubCaste!=\"\" && model.PersonalObj.SubCaste!=null)? \" (\"+SubCaste+\")\":SubCaste)}}</span>\r" +
-    "\n" +
-    "                        </p>\r" +
-    "\n" +
-    "                        <p>\r" +
-    "\n" +
-    "                            <span>\r" +
-    "\n" +
-    "                <span  style=\"font-weight:bold;\"> {{(model.PersonalObj.Borncountry!=null && model.PersonalObj.Borncountry!=\"\")?\" Born Citizen:\"+model.PersonalObj.Borncountry:Borncountry}}</span>\r" +
-    "\n" +
-    "                            </span>\r" +
-    "\n" +
-    "                        </p>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div class=\"clear\"></div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div class=\"edit_pages_sidebar_menu clearfix\">\r" +
-    "\n" +
-    "                    <ul>\r" +
-    "\n" +
-    "                        <li>\r" +
-    "\n" +
-    "                            <a id=\"lnkeducationandprof\" href=\"javascript:void(0);\" ng-click=\"redirect('editEducation');\" ng-style=\"{color:model.lnkeducationandprofReview==true?'Red':''}\">Education & Profession\r" +
-    "\n" +
-    "                                <span class=\"pull-right nodatacls\"> {{model.rev.iCustomerPersonalDetails===0?'NoData':''}}</span>\r" +
-    "\n" +
-    "                            </a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li>\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editManagePhoto');\">Manage Photo\r" +
-    "\n" +
-    "                                <span class=\"pull-right nodatacls\"> {{model.rev.iManagePhoto===0?'NoPhoto':''}}</span></a></a>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li>\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editParent');\" ng-style=\"{color:model.lnkparentsReview==true?'Red':''}\">Parent Details\r" +
-    "\n" +
-    "                                <span class=\"pull-right nodatacls\"> {{model.rev.iParentDetails===0?'NoData':''}}</span>\r" +
-    "\n" +
-    "                            </a>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li>\r" +
-    "\n" +
-    "                            <a id=\"lnkpartner\" href=\"javascript:void(0);\" ng-click=\"redirect('editPartnerpreference');\" ng-style=\"{color:model.lnkpartnerReview==true?'Red':''}\">Partner Preferences\r" +
-    "\n" +
-    "                                <span class=\"pull-right nodatacls\"> {{model.rev.iPartnerPreference===0?'NoData':''}}</span>\r" +
-    "\n" +
-    "                            </a>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li>\r" +
-    "\n" +
-    "                            <a id=\"lnksiblings\" href=\"javascript:void(0);\" ng-click=\"redirect('editSibbling');\" ng-style=\"{color:model.lnksiblingsReview==true?'Red':''}\">Sibling Details\r" +
-    "\n" +
-    "                                <span class=\"pull-right nodatacls\"> {{model.rev.iSiblingDetails===0?'NoData':''}}</span>\r" +
-    "\n" +
-    "                            </a>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li>\r" +
-    "\n" +
-    "                            <a id=\"lnkastro\" href=\"javascript:void(0);\" ng-click=\"redirect('editAstro');\" ng-style=\"{color:model.lnkastroReview==true?'Red':''}\">Astro Details\r" +
-    "\n" +
-    "                                <span class=\"pull-right nodatacls\"> {{model.rev.iAstroDetails===0?'NoData':''}}</span>\r" +
-    "\n" +
-    "                                \r" +
-    "\n" +
-    "                            </a>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li>\r" +
-    "\n" +
-    "                            <a id=\"lnkproperty\" href=\"javascript:void(0);\" ng-click=\"redirect('editProperty');\" ng-style=\"{color:model.lnkpropertyReview==true?'Red':''}\">Property Details\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                 <span class=\"pull-right nodatacls\"> {{model.rev.iPropertyDetails===0?'NoData':''}}</span>\r" +
-    "\n" +
-    "                            </a>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li>\r" +
-    "\n" +
-    "                            <a id=\"lnkrelatives\" href=\"javascript:void(0);\" ng-click=\"redirect('editRelative');\" ng-style=\"{color:model.lnkrelativesReview==true?'Red':''}\">Relative Details</a>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li>\r" +
-    "\n" +
-    "                            <a id=\"lnkreference\" href=\"javascript:void(0);\" ng-click=\"redirect('editReference');\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">References\r" +
-    "\n" +
-    "                                <span class=\"pull-right nodatacls\"> {{model.rev.iReferenceDetails===0?'NoData':''}}</span>\r" +
-    "\n" +
-    "                                </a>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <li>\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editSpouse');\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Spouse Details\r" +
-    "\n" +
-    "                            </a>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <li>\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editContact');\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Contact Details\r" +
-    "\n" +
-    "                            </a>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li>\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editOfcePurpose');\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Office Purpose\r" +
-    "\n" +
-    "                            </a>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li>\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" ng-click=\"redirect('editProfileSetting');\" ng-style=\"{color:model.lnkreferenceReview==true?'Red':''}\">Profile Settings\r" +
-    "\n" +
-    "                            </a>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                    </ul>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
+    "            <div ui-view=\"topbar\">\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div ui-view=\"lazyLoadView\" class=\"right_col\">\r" +
-    "\n" +
-    "\r" +
+    "            <div ui-view=\"lazyLoadView\">\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <!--<div ui-view=\"bottompanel\">\r" +
+    "            <div ui-view=\"bottompanel\">\r" +
     "\n" +
-    "            </div>-->\r" +
+    "            </div>\r" +
     "\n" +
     "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    </div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
     "    <!-- jQuery -->\r" +
     "\n" +
-    "    <!-- SCRIPTS DATA --#>\r" +
+    "    <!-- SCRIPTS DATA -->\r" +
     "\n" +
     "    <script src=\"node_modules/jquery/dist/jquery.min.js\"></script>\r" +
     "\n" +
@@ -6637,6 +6478,14 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script src=\"common/directives/pageReviewDirective.js\" type=\"text/javascript\"></script>\r" +
     "\n" +
+    "\r" +
+    "\n" +
+    "    <script src=\"common/directives/sideMenuDirective.js\" type=\"text/javascript\"></script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "    <!--SCRIPTS END-->\r" +
     "\n" +
     "\r" +
@@ -6645,7 +6494,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <!-- SCRIPTSP DATA -->\r" +
+    "    <!-- SCRIPTSP DATA --#>\r" +
     "\n" +
     "    <script src=\"dist/js/main.min.js\"></script>\r" +
     "\n" +
@@ -6662,7 +6511,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editAstro/index.html',
-    "<div class=\"edit_pages_content_main clearfix\">\r" +
+    "<div ng-include=\"'templates/sideMenu.html'\">\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "<div class=\"edit_pages_content_main clearfix\" class=\"right_col\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -6683,6 +6536,8 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "                    <a ng-click=\"page.model.populateAstro();\" class=\"edit_page_add_button\" href=\"javascript:void(0);\">Add</a>\r" +
     "\n" +
     "                </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
@@ -9398,7 +9253,17 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editEducation/index.html',
-    "<div class=\"edit_pages_content_main clearfix\">\r" +
+    "<div class=\"edit_pages_content_main clearfix\" class=\"right_col\">\r" +
+    "\n" +
+    "    <!--<div ng-include=\"'templates/sideMenu.html'\">\r" +
+    "\n" +
+    "    </div>-->\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <!--<side-menu></side-menu>-->\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
