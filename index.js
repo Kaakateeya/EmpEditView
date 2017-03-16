@@ -54,7 +54,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         var edititem = item.name.slice(9);
         innerView = {
             "topbar@": {
-                templateUrl: "templates/topheader.html"
+                templateUrl: "templates/topheader1.html"
             },
             "lazyLoadView@": {
                 templateUrl: 'app/' + edititem + '/index.html',
