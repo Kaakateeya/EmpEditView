@@ -134,7 +134,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <!-- jQuery -->\r" +
     "\n" +
-    "    <!-- SCRIPTS DATA -->\r" +
+    "    <!-- SCRIPTS DATA --#>\r" +
     "\n" +
     "    <script src=\"node_modules/jquery/dist/jquery.min.js\"></script>\r" +
     "\n" +
@@ -262,7 +262,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <!-- SCRIPTSP DATA --#>\r" +
+    "    <!-- SCRIPTSP DATA -->\r" +
     "\n" +
     "    <script src=\"dist/js/main.min.js\"></script>\r" +
     "\n" +
@@ -279,215 +279,221 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editAstro/index.html',
-    "<div ng-include=\"'templates/sideMenu.html'\">\r" +
-    "\n" +
-    "</div>\r" +
-    "\n" +
-    "<div class=\"edit_pages_content_main clearfix\" class=\"right_col\">\r" +
+    "<div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <page-review dispaly-name=\"'Astro details'\" sectionid=\"'23'\" custid=\"page.model.CustID\"></page-review>\r" +
+    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div class=\"edit_pages_content_main clearfix\" class=\"right_col\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <div id=\"divlnkasro\" class=\"edit_page_item\">\r" +
+    "        <page-review dispaly-name=\"'Astro details'\" sectionid=\"'23'\" custid=\"page.model.CustID\"></page-review>\r" +
     "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
+    "\r" +
     "\n" +
-    "            <h4>Astro Details </h4>\r" +
+    "        <div id=\"divlnkasro\" class=\"edit_page_item\">\r" +
     "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\">\r" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "                <div ng-if=\"page.model.AstroArr.length==0\" cssclass=\"edit_page_add_button\">\r" +
+    "                <h4>Astro Details </h4>\r" +
     "\n" +
-    "                    <a ng-click=\"page.model.populateAstro();\" class=\"edit_page_add_button\" href=\"javascript:void(0);\">Add</a>\r" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                    <div ng-if=\"page.model.AstroArr.length==0\" cssclass=\"edit_page_add_button\">\r" +
+    "\n" +
+    "                        <a ng-click=\"page.model.populateAstro();\" class=\"edit_page_add_button\" href=\"javascript:void(0);\">Add</a>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
     "            </div>\r" +
     "\n" +
-    "        </div>\r" +
+    "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
+    "                <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.AstroArr track by $index\">\r" +
     "\n" +
-    "            <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.AstroArr track by $index\">\r" +
+    "                    <div>\r" +
     "\n" +
-    "                <div>\r" +
+    "                        <div ng-hide=\"item.TimeOfBirth===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                    <div ng-hide=\"item.TimeOfBirth===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                                <span id=\"TimeofBirth\" style=\"font-weight:bold;\">Time of Birth</span></h6>\r" +
     "\n" +
-    "                            <span id=\"TimeofBirth\" style=\"font-weight:bold;\">Time of Birth</span></h6>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                                <span id=\"lblTimeofBirth\">{{item.TimeOfBirth}}</span></h5>\r" +
     "\n" +
-    "                            <span id=\"lblTimeofBirth\">{{item.TimeOfBirth}}</span></h5>\r" +
+    "                        </div>\r" +
     "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                            <span id=\"PlaceofBirth\" style=\"font-weight:bold;\">Place of Birth</span></h6>\r" +
+    "                                <span id=\"PlaceofBirth\" style=\"font-weight:bold;\">Place of Birth</span></h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                            <span id=\"lblPlaceofBirth\">{{ item.CityOfBirth +\",\"+item.DistrictOfBirth+\",\"+item.StateOfBirth+\",\"+item.CountryOfBirth}}</span>\r" +
+    "                                <span id=\"lblPlaceofBirth\">{{ item.CityOfBirth +\",\"+item.DistrictOfBirth+\",\"+item.StateOfBirth+\",\"+item.CountryOfBirth}}</span>\r" +
     "\n" +
-    "                        </h5>\r" +
+    "                            </h5>\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
-    "                    <div ng-hide=\"item.TypeofStar===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div ng-hide=\"item.TypeofStar===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                            <span id=\"Telugustar\" style=\"font-weight:bold;\">Star Language</span></h6>\r" +
+    "                                <span id=\"Telugustar\" style=\"font-weight:bold;\">Star Language</span></h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                            <span id=\"lblTelugustar\">{{ item.TypeofStar+((item.StarName!=\"\" &&  item.StarName!=null)?\" - \"+\r" +
+    "                                <span id=\"lblTelugustar\">{{ item.TypeofStar+((item.StarName!=\"\" &&  item.StarName!=null)?\" - \"+\r" +
     "\n" +
     "                                            item.StarName:\"\")+((item.Paadam!=\"\" &&  item.Paadam!=null)?\" (\"+item.Paadam+\")\":\"\") }}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
-    "                    <div ng-hide=\"item.Rassi===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div ng-hide=\"item.Rassi===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                            <span id=\"raasimoonsign\" style=\"font-weight:bold;\">Raasi/moon sign</span></h6>\r" +
+    "                                <span id=\"raasimoonsign\" style=\"font-weight:bold;\">Raasi/moon sign</span></h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                            <span id=\"lblraasimoonsign\">{{ item.Rassi}}</span></h5>\r" +
+    "                                <span id=\"lblraasimoonsign\">{{ item.Rassi}}</span></h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ng-hide=\"item.Lagnam===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"Lagnam\" style=\"font-weight:bold;\">Lagnam</span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblLagnam\">  {{ item.Lagnam }}</span></h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ng-hide=\"item.Gothram===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"GothramGotra\" style=\"font-weight:bold;\">Gothram/Gotra</span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblGothramGotra\">  {{ item.Gothram}}</span></h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ng-hide=\"item.MeternalGothramID===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"MaternalGothram\" style=\"font-weight:bold;\">Maternal Gothram</span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblMaternalGothram\">{{ item.MeternalGothramID }}</span></h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ng-hide=\"item.manglikkujadosham===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"manglikkujadosham\" style=\"font-weight:bold;\">manglik/kuja dosham</span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblmanglikkujadosham\">{{ item.manglikkujadosham }}</span></h5>\r" +
+    "\n" +
+    "                        </div>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "                    <div ng-hide=\"item.Lagnam===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                    <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.AstroArr.length>0\">\r" +
     "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"Lagnam\" style=\"font-weight:bold;\">Lagnam</span></h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"lblLagnam\">  {{ item.Lagnam }}</span></h5>\r" +
+    "                        <a ng-click=\"page.model.populateAstro(item);\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\">Edit</a>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "                    <div ng-hide=\"item.Gothram===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"GothramGotra\" style=\"font-weight:bold;\">Gothram/Gotra</span></h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"lblGothramGotra\">  {{ item.Gothram}}</span></h5>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ng-hide=\"item.MeternalGothramID===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"MaternalGothram\" style=\"font-weight:bold;\">Maternal Gothram</span></h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"lblMaternalGothram\">{{ item.MeternalGothramID }}</span></h5>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ng-hide=\"item.manglikkujadosham===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"manglikkujadosham\" style=\"font-weight:bold;\">manglik/kuja dosham</span></h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"lblmanglikkujadosham\">{{ item.manglikkujadosham }}</span></h5>\r" +
-    "\n" +
-    "                    </div>\r" +
+    "                    <br>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.AstroArr.length>0\">\r" +
-    "\n" +
-    "                    <a ng-click=\"page.model.populateAstro(item);\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\">Edit</a>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <br>\r" +
-    "\n" +
     "            </div>\r" +
     "\n" +
-    "        </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
     "\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "    <div class=\"edit_page_details_item_desc clearfix\" style=\"padding: 0 0 0 20px;\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"radio-group-my input-group\" ng-show=\"page.model.ImageUrl==='' || page.model.ImageUrl===null\">\r" +
-    "\n" +
-    "            <md-radio-group ng-required=\"true\" name=\"rdlUploadGenerate\" layout=\"row\" ng-model=\"page.model.atroObj.rdlUploadGenerate\" ng-change=\"page.model.uploadGenerateHoro(page.model.atroObj.rdlUploadGenerate);\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                <md-radio-button value=\"0\">Upload Horoscope</md-radio-button>\r" +
-    "\n" +
-    "                <md-radio-button value=\"1\"> Generate Horoscope </md-radio-button>\r" +
-    "\n" +
-    "            </md-radio-group>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div ng-hide=\"page.model.ImageUrl==='' || page.model.ImageUrl===null\">\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "            <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                <img ng-model=\"page.model.imghoroName\" ng-src=\"{{page.model.ImageUrl}}\" Style=\"width: 250px; height: 250px;\" ng-show=\"!page.model.iframeShow\" />\r" +
-    "\n" +
-    "                <iframe border=\"0\" id=\"iframe\" frameborder=\"0\" height=\"300\" width=\"800\" ng-show=\"page.model.iframeShow\"></iframe>\r" +
-    "\n" +
-    "            </div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
     "        <div class=\"edit_page_details_item_desc clearfix\" style=\"padding: 0 0 0 20px;\">\r" +
     "\n" +
-    "            <div class=\"edit_page_item_ui clearfix  pull-left\">\r" +
+    "\r" +
     "\n" +
-    "                <a ID=\"btndeletehoro\" class=\"edit_page_del_button\" href=\"javascript:void(0);\" ng-click=\"page.model.shoedeletePopup();\" data-placement=\"bottom\" data-toggle=\"tooltip\" data-original-title=\"Delete Astro Details\">\r" +
+    "            <div class=\"radio-group-my input-group\" ng-show=\"page.model.ImageUrl==='' || page.model.ImageUrl===null\">\r" +
+    "\n" +
+    "                <md-radio-group ng-required=\"true\" name=\"rdlUploadGenerate\" layout=\"row\" ng-model=\"page.model.atroObj.rdlUploadGenerate\" ng-change=\"page.model.uploadGenerateHoro(page.model.atroObj.rdlUploadGenerate);\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "\n" +
+    "                    <md-radio-button value=\"0\">Upload Horoscope</md-radio-button>\r" +
+    "\n" +
+    "                    <md-radio-button value=\"1\"> Generate Horoscope </md-radio-button>\r" +
+    "\n" +
+    "                </md-radio-group>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div ng-hide=\"page.model.ImageUrl==='' || page.model.ImageUrl===null\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                    <img ng-model=\"page.model.imghoroName\" ng-src=\"{{page.model.ImageUrl}}\" Style=\"width: 250px; height: 250px;\" ng-show=\"!page.model.iframeShow\" />\r" +
+    "\n" +
+    "                    <iframe border=\"0\" id=\"iframe\" frameborder=\"0\" height=\"300\" width=\"800\" ng-show=\"page.model.iframeShow\"></iframe>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item_desc clearfix\" style=\"padding: 0 0 0 20px;\">\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix  pull-left\">\r" +
+    "\n" +
+    "                    <a ID=\"btndeletehoro\" class=\"edit_page_del_button\" href=\"javascript:void(0);\" ng-click=\"page.model.shoedeletePopup();\" data-placement=\"bottom\" data-toggle=\"tooltip\" data-original-title=\"Delete Astro Details\">\r" +
     "\n" +
     "               Delete <ng-md-icon icon=\"delete\" style=\"fill:#665454\" size=\"18\">Delete</ng-md-icon></a>\r" +
     "\n" +
-    "                <a Style=\"padding-left: 100px;\" class=\"btn btn-link\" ng-click=\"page.model.vewHoro();\">View<span class=\"glyphicon glyphicon-eye-open\"></span></a>\r" +
+    "                    <a Style=\"padding-left: 100px;\" class=\"btn btn-link\" ng-click=\"page.model.vewHoro();\">View<span class=\"glyphicon glyphicon-eye-open\"></span></a>\r" +
+    "\n" +
+    "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
@@ -496,8 +502,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "    </div>\r" +
     "\n" +
     "</div>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -890,121 +894,131 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editContact/index.html',
-    "<div class=\"edit_pages_content_main clearfix\">\r" +
+    "<div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <div class=\"edit_page_item\">\r" +
+    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "            <div ID=\"updatevvv\">\r" +
+    "    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                <h4>Candidate Contact details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
-    "\n" +
-    "                    <span style=\"color: #08CFD2;\">RelationName :Mobile :{{page.model.primaryRel.PrimaryMobileRelName}} & Email :{{page.model.primaryRel.PrimaryEmailRelName}}</span></h4>\r" +
-    "\n" +
-    "            </div>\r" +
+    "    <div class=\"edit_pages_content_main clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\">\r" +
+    "        <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <div ID=\"updatevvv\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                <div ID=\"updatecabndidatecontactDetails\">\r" +
+    "                    <h4>Candidate Contact details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "\n" +
+    "                        <span style=\"color: #08CFD2;\">RelationName :Mobile :{{page.model.primaryRel.PrimaryMobileRelName}} & Email :{{page.model.primaryRel.PrimaryEmailRelName}}</span></h4>\r" +
+    "\n" +
+    "                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <a href=\"javascript:void(0);\" class=\"edit_page_add_button\" ng-click=\"page.model.showContactPopup('Candidate');\">Add\r" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div ID=\"updatecabndidatecontactDetails\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <a href=\"javascript:void(0);\" class=\"edit_page_add_button\" ng-click=\"page.model.showContactPopup('Candidate');\">Add\r" +
     "\n" +
     "                    </a>\r" +
     "\n" +
     "\r" +
     "\n" +
+    "                    </div>\r" +
+    "\n" +
     "                </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "\r" +
+    "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "            <div ng-repeat=\"item in page.model.candidateContactArr\">\r" +
+    "                <div ng-repeat=\"item in page.model.candidateContactArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                <div id=\"reviewdiv\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                    <div id=\"reviewdiv\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                    <div ID=\"updatecandMoblie\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span ID=\"candMoblie\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span ID=\"lblcandMoblie\">{{item.CandidateMobilewithcode}}</span>\r" +
+    "                        <div ID=\"updatecandMoblie\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <label ng-show=\"(item.primarymobile===1)|| (item.mobileisverfied) ?true:false \">\r" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span ID=\"candMoblie\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span ID=\"lblcandMoblie\">{{item.CandidateMobilewithcode}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <label ng-show=\"(item.primarymobile===1)|| (item.mobileisverfied) ?true:false \">\r" +
     "\n" +
     "    <span  ng-class=\"item.mobileisverfied==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\">\r" +
     "\n" +
     "    </span></label>\r" +
     "\n" +
-    "                            <a href=\"javascript:void(0);\" ng-show=\"(item.primarymobile)&&(((item.mobileisverfied))==true?false:true) ?true:false\" ng-click=\"page.model.sendMobileCode(item.Candidatemobilecountrycode,item.Candidatemobilecountrycode,item.CandidateMobileNumber,item.emaILcust_family_id);\"> &nbsp;&nbsp;&nbsp;&nbsp;verify mobile</a>                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "                                <a href=\"javascript:void(0);\" ng-show=\"(item.primarymobile)&&(((item.mobileisverfied))==true?false:true) ?true:false\" ng-click=\"page.model.sendMobileCode(item.Candidatemobilecountrycode,item.Candidatemobilecountrycode,item.CandidateMobileNumber,item.emaILcust_family_id);\"> &nbsp;&nbsp;&nbsp;&nbsp;verify mobile</a>                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
     "\n" +
-    "                            <a href=\"javascript:void(0);\" ng-click=\"page.model.setprimaryrelationPopup();\">RelationName</a>\r" +
-    "\n" +
-    "\r" +
+    "                                <a href=\"javascript:void(0);\" ng-click=\"page.model.setprimaryrelationPopup();\">RelationName</a>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        </h5>\r" +
+    "\r" +
+    "\n" +
+    "                            </h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
-    "                    <div ID=\"UpdatePanellnkcandmobilesedit\" class=\"edit_page_item_ui clearfix\">\r" +
+    "                        <div ID=\"UpdatePanellnkcandmobilesedit\" class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('Candidate',item);\">Edit\r" +
+    "                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('Candidate',item);\">Edit\r" +
     "\n" +
     "                                    </a>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div ID=\"UpdatePanelcandidatelandnum\">\r" +
+    "                        <div ID=\"UpdatePanelcandidatelandnum\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span ID=\"candidatelandnum\" Font-Bold=\"true\">Land line #</span></h6>\r" +
+    "                                    <span ID=\"candidatelandnum\" Font-Bold=\"true\">Land line #</span></h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span ID=\"lblcandidatelandnum\">{{item.Candidatelandlinewithcode}}</span>\r" +
+    "                                    <span ID=\"lblcandidatelandnum\">{{item.Candidatelandlinewithcode}}</span>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <label ng-show=\"(item.primarylandline==1)|| (item.Landisverfied) ?true:false\">\r" +
+    "                                    <label ng-show=\"(item.primarylandline==1)|| (item.Landisverfied) ?true:false\">\r" +
     "\n" +
     "     <span  ng-class=\"(item.Landisverfied)==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"  style=\"color:#00FF00;\"></span>\r" +
     "\n" +
@@ -1012,31 +1026,31 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelcandidateemail\">\r" +
+    "                        <div ID=\"UpdatePanelcandidateemail\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span ID=\"candidateemail\" Font-Bold=\"true\">Email</span></h6>\r" +
+    "                                    <span ID=\"candidateemail\" Font-Bold=\"true\">Email</span></h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span ID=\"lblcandidateemail\">{{item.CandidateEmail}}</span>\r" +
+    "                                    <span ID=\"lblcandidateemail\">{{item.CandidateEmail}}</span>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -1044,13 +1058,13 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                                <label ng-show=\"(item.primaryemail || item.isemailVerified) ?true:false\">\r" +
+    "                                    <label ng-show=\"(item.primaryemail || item.isemailVerified) ?true:false\">\r" +
     "\n" +
     "    <span  ng-class=\"item.isemailVerified==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"></span>\r" +
     "\n" +
     "</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
     "\n" +
-    "                                <a href=\"javascript:void(0);\" ng-show=\"(item.primaryemail)&&(((item.isemailVerified))==true?false:true) ?true:false\" ng-click=\"page.model.verifymail();\">verify email</a>\r" +
+    "                                    <a href=\"javascript:void(0);\" ng-show=\"(item.primaryemail)&&(((item.isemailVerified))==true?false:true) ?true:false\" ng-click=\"page.model.verifymail();\">verify email</a>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -1060,7 +1074,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -1068,7 +1086,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
+    "\r" +
+    "\n" +
     "                    </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -1076,75 +1098,67 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "            </div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
-    "    </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <div class=\"edit_page_item\">\r" +
+    "        <div class=\"edit_page_item\">\r" +
     "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "            <h4>Candidate Address Details</h4>\r" +
+    "                <h4>Candidate Address Details</h4>\r" +
     "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\">\r" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
     "\r" +
+    "\n" +
+    "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "        </div>\r" +
+    "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "            <div ID=\"listcontactadressDetails\" ng-repeat=\"item in page.model.candidateAddrArr\">\r" +
+    "                <div ID=\"listcontactadressDetails\" ng-repeat=\"item in page.model.candidateAddrArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                <div id=\"Div1\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                    <div id=\"Div1\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div ID=\"UpdatePanelFlatno\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div ID=\"UpdatePanelFlatno\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\" id=\"flatdiv\">\r" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\" id=\"flatdiv\">\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span ID=\"Flatno\" Font-Bold=\"true\">Flat no</span></h6>\r" +
+    "                                    <span ID=\"Flatno\" Font-Bold=\"true\">Flat no</span></h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span ID=\"lblFlatno\">{{item.Flatno}}</span></h5>\r" +
+    "                                    <span ID=\"lblFlatno\">{{item.Flatno}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanellnkaddresssedit\" class=\"edit_page_item_ui clearfix\">\r" +
+    "                        <div ID=\"UpdatePanellnkaddresssedit\" class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('candidateAddr',item);\">Edit\r" +
+    "                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('candidateAddr',item);\">Edit\r" +
     "\n" +
     "                                    </a>\r" +
     "\n" +
@@ -1152,683 +1166,121 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelApartmentno\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"divapartment\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span ID=\"Apartmentno\" Font-Bold=\"true\">Apartment no</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span ID=\"lblApartmentno\">{{item.Apartmentno}}</span></h5>\r" +
-    "\n" +
     "                        </div>\r" +
     "\n" +
-    "\r" +
+    "                        <div ID=\"UpdatePanelApartmentno\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelAreaname\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
     "\r" +
     "\n" +
-    "                        <div id=\"divareaname\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <div id=\"divapartment\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span ID=\"Apartmentno\" Font-Bold=\"true\">Apartment no</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span ID=\"lblApartmentno\">{{item.Apartmentno}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span ID=\"Areaname\" Font-Bold=\"true\">Area name</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span ID=\"lblAreaname\">{{item.Areaname}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelStreetnames\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div ID=\"UpdatePanelAreaname\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\" id=\"streetname\">\r" +
+    "                            <div id=\"divareaname\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span ID=\"Streetnamecand\" Font-Bold=\"true\">Street name</span></h6>\r" +
+    "                                    <span ID=\"Areaname\" Font-Bold=\"true\">Area name</span></h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span ID=\"lblStreetnamecand\">{{item.Streetname}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
+    "                                    <span ID=\"lblAreaname\">{{item.Areaname}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelLandmark\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\" id=\"landmarkdiv\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span ID=\"Landmark\" Font-Bold=\"true\">Landmark</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span ID=\"lblLandmark\">{{item.Landmark}}</span></h5>\r" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelCountry\">\r" +
+    "                        <div ID=\"UpdatePanelStreetnames\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\" id=\"CountryNamediv\">\r" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\" id=\"streetname\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span ID=\"Country\" Font-Bold=\"true\">Country</span></h6>\r" +
+    "                                    <span ID=\"Streetnamecand\" Font-Bold=\"true\">Street name</span></h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span ID=\"lblfulladdress\">{{item.fulladdress}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
+    "                                    <span ID=\"lblStreetnamecand\">{{item.Streetname}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"edit_page_item\">\r" +
-    "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "            <h4>Parent Contact Details</h4>\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "                <div ID=\"UpdatePanelparentcontacts\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "            <div ID=\"listparentsinfo\" ng-repeat=\"item in page.model.parentContactArr\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div id=\"Div2\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelparentcontactsDetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanellnkparentcontactsDetailst\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('parent',item);\">Edit\r" +
-    "\n" +
-    "                                    </a>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelFathername\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span ID=\"Fathername\" Font-Bold=\"true\">{{item.Motheremailreletionship===\"39\"?\"Father Name\":\"Mother Name\"}}</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span ID=\"lblFathername\">{{item.NAME}}</span></h5>\r" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelfathermobile\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div ID=\"UpdatePanelLandmark\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div>\r" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\" id=\"landmarkdiv\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span ID=\"fathermobile\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
+    "                                    <span ID=\"Landmark\" Font-Bold=\"true\">Landmark</span></h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span ID=\"lblfathermobile\">{{item.Mobilewithcode}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <label ng-show=\"(item.primarymobile===1)|| (item.Mothermobileisverfied) ?true:false \">\r" +
-    "\n" +
-    "    <span  ng-class=\"item.Mothermobileisverfied==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\">\r" +
-    "\n" +
-    "    </span></label>\r" +
-    "\n" +
-    "                                <a href=\"javascript:void(0);\" ng-show=\"(item.primarymobile)&&(((item.Mothermobileisverfied))==true?false:true) ?true:false\" ng-click=\"page.model.sendMobileCode(item.mobilecountrycode,item.mobilecountrycode,item.mobilenumber,item.MotheremaILcust_family_id);\"> &nbsp;&nbsp;&nbsp;&nbsp;verify mobile</a>                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "                                    <span ID=\"lblLandmark\">{{item.Landmark}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelfatherland\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span ID=\"fatherlandnum\" Font-Bold=\"true\">Land line #</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span ID=\"lblfatherlandnum\">{{item.landlinewithcode}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <label ng-show=\"(item.primarylandline==1)|| (item.MotherLandisverfied) ?true:false\">\r" +
-    "\n" +
-    "     <span  ng-class=\"(item.MotherLandisverfied)==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"  style=\"color:#00FF00;\"></span>\r" +
-    "\n" +
-    " </label>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span ID=\"Email\" Font-Bold=\"true\">Email</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span ID=\"lblmotherEmail\">{{item.Email}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <label ng-show=\"(item.Motherprimaryemail || item.MotherisemailVerified) ?true:false\">\r" +
-    "\n" +
-    "    <span  ng-class=\"item.MotherisemailVerified==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"></span>\r" +
-    "\n" +
-    "</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
-    "\n" +
-    "                                <a href=\"javascript:void(0);\" ng-show=\"(item.Motherprimaryemail)&&(((item.MotherisemailVerified))==true?false:true) ?true:false\" ng-click=\"page.model.verifymail();\">verify email</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"edit_page_item\">\r" +
-    "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            <h4>Siblings Contact Details</h4>\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div ID=\"UpdatePanelBrotherContactDetails\">\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            <div ID=\"listSiblingsContac\" ng-repeat=\"item in page.model.SiiblingContactArr\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div id=\"Div3\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelsiblingcontactsDetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanellnksiblingDetailst\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('sibbling',item,'SelfFlag');\">Edit\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelbrothername\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span ID=\"brothername\" Font-Bold=\"true\">{{(item.Siblingemailreletionship===\"41\" || item.Siblingemailreletionship===\"42\" )?\"Brother Name\":\"Sister Name\"}}</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span ID=\"lblbrothername\">{{item.SiblingName}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelbrothermobile\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span ID=\"brothermobile\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span ID=\"lblbrothermobile\">{{item.SiblingMobilewithcode}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <label ng-show=\"(item.primarymobile===1)|| (item.Siblingmobileisverfied) ?true:false \">\r" +
-    "\n" +
-    "    <span  ng-class=\"item.Siblingmobileisverfied==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\">\r" +
-    "\n" +
-    "    </span></label>\r" +
-    "\n" +
-    "                                <a href=\"javascript:void(0);\" ng-show=\"(item.primarymobile)&&(((item.Siblingmobileisverfied))==true?false:true) ?true:false\" ng-click=\"page.model.sendMobileCode(item.Siblingmobilecountrycode,item.Siblingmobilecountrycode,item.Siblingmobilenumber,item.SiblingemaILcust_family_id);\"> &nbsp;&nbsp;&nbsp;&nbsp;verify mobile</a>                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelbrotherland \" class=\"edit_page_details_item_desc clearfix \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span Font-Bold=\"true \">Land line #</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span>{{item.Siblinglandlinewithcode}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <label ng-show=\"(item.primarylandline==1)|| (item.SiblingLandisverfied) ?true:false\">\r" +
-    "\n" +
-    "     <span  ng-class=\"(item.SiblingLandisverfied)==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"  style=\"color:#00FF00;\"></span>\r" +
-    "\n" +
-    " </label>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelbrotherEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span ID=\"brotherEmail\" Font-Bold=\"true\">Email</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span ID=\"lblbrotherEmail\">{{item.SiblingEmail}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <label ng-show=\"(item.Siblingprimaryemail || item.SiblingisemailVerified) ?true:false\">\r" +
-    "\n" +
-    "    <span  ng-class=\"item.SiblingisemailVerified==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"></span>\r" +
-    "\n" +
-    "</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
-    "\n" +
-    "                                <a href=\"javascript:void(0);\" ng-show=\"(item.Siblingprimaryemail)&&(((item.SiblingisemailVerified))==true?false:true) ?true:false\" ng-click=\"page.model.verifymail();\">verify email</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdateEditSpouse \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix \">\r" +
-    "\n" +
-    "                            <div id=\"nowife \">\r" +
-    "\n" +
-    "                                <div ID=\"updatenowifr \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <div ID=\"UpdatePSpouse \" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('sibbling',item,'SpouseFlag');\">Edit\r" +
-    "\n" +
-    "                                                            </a>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <div ID=\"UpdatePanelbrotherwifename \" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <div>\r" +
-    "\n" +
-    "                                            <h6>\r" +
-    "\n" +
-    "                                                <span ID=\"brotherwifename \" Font-Bold=\"true \">{{item.Siblingemailreletionship===41 || item.Siblingemailreletionship==42 ?\"Brother Wife \":\"Sister Husband\"}}</span></h6>\r" +
-    "\n" +
-    "                                            <h5>\r" +
-    "\n" +
-    "                                                <span ID=\"lblbrotherwifename\">{{item.SiblingSpouseNAme}}</span></h5>\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <div ID=\"UpdatePanelbrotherwifemobile\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            <h6>\r" +
-    "\n" +
-    "                                                <span ID=\"brotherwifemobilenum\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
-    "\n" +
-    "                                            <h5>\r" +
-    "\n" +
-    "                                                <span ID=\"lblbrotherwifemobilenum\">{{item.SiblingSpouseMobilenumberwithcode}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            </h5>\r" +
+    "                        <div ID=\"UpdatePanelCountry\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                        </div>\r" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\" id=\"CountryNamediv\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    </div>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                                    <div ID=\"UpdatePanelbrotherwifeland\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            <h6>\r" +
-    "\n" +
-    "                                                <span ID=\"brotherwifelandnum\" Font-Bold=\"true\">Land line #</span></h6>\r" +
-    "\n" +
-    "                                            <h5>\r" +
-    "\n" +
-    "                                                <span ID=\"lblbrotherwifelandnum\">{{item.SiblingSpouseLandnumberwithcode}}</span>\r" +
-    "\n" +
-    "                                            </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
+    "                                    <span ID=\"Country\" Font-Bold=\"true\">Country</span></h6>\r" +
     "\n" +
-    "                                    <div ID=\"upSpouseEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                <h5>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            <h6>\r" +
-    "\n" +
-    "                                                <span ID=\"SpouseEmail\" Font-Bold=\"true\">Email</span></h6>\r" +
-    "\n" +
-    "                                            <h5>\r" +
-    "\n" +
-    "                                                <span ID=\"lblSpouseEmail\">{{item.SiblingSpouseEmail}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        </div>\r" +
+    "                                    <span ID=\"lblfulladdress\">{{item.fulladdress}}</span>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
+    "                                </h5>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
@@ -1842,6 +1294,576 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Parent Contact Details</h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                    <div ID=\"UpdatePanelparentcontacts\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                <div ID=\"listparentsinfo\" ng-repeat=\"item in page.model.parentContactArr\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div id=\"Div2\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanelparentcontactsDetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanellnkparentcontactsDetailst\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('parent',item);\">Edit\r" +
+    "\n" +
+    "                                    </a>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanelFathername\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span ID=\"Fathername\" Font-Bold=\"true\">{{item.Motheremailreletionship===\"39\"?\"Father Name\":\"Mother Name\"}}</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span ID=\"lblFathername\">{{item.NAME}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanelfathermobile\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span ID=\"fathermobile\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span ID=\"lblfathermobile\">{{item.Mobilewithcode}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <label ng-show=\"(item.primarymobile===1)|| (item.Mothermobileisverfied) ?true:false \">\r" +
+    "\n" +
+    "    <span  ng-class=\"item.Mothermobileisverfied==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\">\r" +
+    "\n" +
+    "    </span></label>\r" +
+    "\n" +
+    "                                    <a href=\"javascript:void(0);\" ng-show=\"(item.primarymobile)&&(((item.Mothermobileisverfied))==true?false:true) ?true:false\" ng-click=\"page.model.sendMobileCode(item.mobilecountrycode,item.mobilecountrycode,item.mobilenumber,item.MotheremaILcust_family_id);\"> &nbsp;&nbsp;&nbsp;&nbsp;verify mobile</a>                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanelfatherland\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span ID=\"fatherlandnum\" Font-Bold=\"true\">Land line #</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span ID=\"lblfatherlandnum\">{{item.landlinewithcode}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <label ng-show=\"(item.primarylandline==1)|| (item.MotherLandisverfied) ?true:false\">\r" +
+    "\n" +
+    "     <span  ng-class=\"(item.MotherLandisverfied)==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"  style=\"color:#00FF00;\"></span>\r" +
+    "\n" +
+    " </label>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanelEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span ID=\"Email\" Font-Bold=\"true\">Email</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span ID=\"lblmotherEmail\">{{item.Email}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <label ng-show=\"(item.Motherprimaryemail || item.MotherisemailVerified) ?true:false\">\r" +
+    "\n" +
+    "    <span  ng-class=\"item.MotherisemailVerified==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"></span>\r" +
+    "\n" +
+    "</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "\n" +
+    "                                    <a href=\"javascript:void(0);\" ng-show=\"(item.Motherprimaryemail)&&(((item.MotherisemailVerified))==true?false:true) ?true:false\" ng-click=\"page.model.verifymail();\">verify email</a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <h4>Siblings Contact Details</h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div ID=\"UpdatePanelBrotherContactDetails\">\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ID=\"listSiblingsContac\" ng-repeat=\"item in page.model.SiiblingContactArr\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div id=\"Div3\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanelsiblingcontactsDetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanellnksiblingDetailst\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('sibbling',item,'SelfFlag');\">Edit\r" +
+    "\n" +
+    "                        </a>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanelbrothername\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span ID=\"brothername\" Font-Bold=\"true\">{{(item.Siblingemailreletionship===\"41\" || item.Siblingemailreletionship===\"42\" )?\"Brother Name\":\"Sister Name\"}}</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span ID=\"lblbrothername\">{{item.SiblingName}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanelbrothermobile\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span ID=\"brothermobile\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span ID=\"lblbrothermobile\">{{item.SiblingMobilewithcode}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <label ng-show=\"(item.primarymobile===1)|| (item.Siblingmobileisverfied) ?true:false \">\r" +
+    "\n" +
+    "    <span  ng-class=\"item.Siblingmobileisverfied==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\">\r" +
+    "\n" +
+    "    </span></label>\r" +
+    "\n" +
+    "                                    <a href=\"javascript:void(0);\" ng-show=\"(item.primarymobile)&&(((item.Siblingmobileisverfied))==true?false:true) ?true:false\" ng-click=\"page.model.sendMobileCode(item.Siblingmobilecountrycode,item.Siblingmobilecountrycode,item.Siblingmobilenumber,item.SiblingemaILcust_family_id);\"> &nbsp;&nbsp;&nbsp;&nbsp;verify mobile</a>                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanelbrotherland \" class=\"edit_page_details_item_desc clearfix \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span Font-Bold=\"true \">Land line #</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span>{{item.Siblinglandlinewithcode}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <label ng-show=\"(item.primarylandline==1)|| (item.SiblingLandisverfied) ?true:false\">\r" +
+    "\n" +
+    "     <span  ng-class=\"(item.SiblingLandisverfied)==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"  style=\"color:#00FF00;\"></span>\r" +
+    "\n" +
+    " </label>\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanelbrotherEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span ID=\"brotherEmail\" Font-Bold=\"true\">Email</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span ID=\"lblbrotherEmail\">{{item.SiblingEmail}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <label ng-show=\"(item.Siblingprimaryemail || item.SiblingisemailVerified) ?true:false\">\r" +
+    "\n" +
+    "    <span  ng-class=\"item.SiblingisemailVerified==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"></span>\r" +
+    "\n" +
+    "</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "\n" +
+    "                                    <a href=\"javascript:void(0);\" ng-show=\"(item.Siblingprimaryemail)&&(((item.SiblingisemailVerified))==true?false:true) ?true:false\" ng-click=\"page.model.verifymail();\">verify email</a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ID=\"UpdateEditSpouse \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div class=\"edit_page_details_item_desc clearfix \">\r" +
+    "\n" +
+    "                                <div id=\"nowife \">\r" +
+    "\n" +
+    "                                    <div ID=\"updatenowifr \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <div ID=\"UpdatePSpouse \" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('sibbling',item,'SpouseFlag');\">Edit\r" +
+    "\n" +
+    "                                                            </a>\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <div ID=\"UpdatePanelbrotherwifename \" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <div>\r" +
+    "\n" +
+    "                                                <h6>\r" +
+    "\n" +
+    "                                                    <span ID=\"brotherwifename \" Font-Bold=\"true \">{{item.Siblingemailreletionship===41 || item.Siblingemailreletionship==42 ?\"Brother Wife \":\"Sister Husband\"}}</span></h6>\r" +
+    "\n" +
+    "                                                <h5>\r" +
+    "\n" +
+    "                                                    <span ID=\"lblbrotherwifename\">{{item.SiblingSpouseNAme}}</span></h5>\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <div ID=\"UpdatePanelbrotherwifemobile\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                <h6>\r" +
+    "\n" +
+    "                                                    <span ID=\"brotherwifemobilenum\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
+    "\n" +
+    "                                                <h5>\r" +
+    "\n" +
+    "                                                    <span ID=\"lblbrotherwifemobilenum\">{{item.SiblingSpouseMobilenumberwithcode}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <div ID=\"UpdatePanelbrotherwifeland\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                <h6>\r" +
+    "\n" +
+    "                                                    <span ID=\"brotherwifelandnum\" Font-Bold=\"true\">Land line #</span></h6>\r" +
+    "\n" +
+    "                                                <h5>\r" +
+    "\n" +
+    "                                                    <span ID=\"lblbrotherwifelandnum\">{{item.SiblingSpouseLandnumberwithcode}}</span>\r" +
+    "\n" +
+    "                                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                        <div ID=\"upSpouseEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                <h6>\r" +
+    "\n" +
+    "                                                    <span ID=\"SpouseEmail\" Font-Bold=\"true\">Email</span></h6>\r" +
+    "\n" +
+    "                                                <h5>\r" +
+    "\n" +
+    "                                                    <span ID=\"lblSpouseEmail\">{{item.SiblingSpouseEmail}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "\r" +
     "\n" +
     "                </div>\r" +
@@ -1850,115 +1872,107 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"edit_page_item\">\r" +
-    "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "            <h4>Relative Contact Details</h4>\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "            </div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "            <div ID=\"listRelativecontacts\" ng-repeat=\"item in page.model.relativeContactArr\">\r" +
-    "\n" +
     "\r" +
-    "\n" +
-    "                <div id=\"Div4\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div ID=\"UpdatePanelRelativecontactsDetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "        <div class=\"edit_page_item\">\r" +
     "\n" +
-    "                    </div>\r" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "                    <div ID=\"UpdatePanellnkFatherBrothercontactsDetailst\" class=\"edit_page_item_ui clearfix\">\r" +
+    "                <h4>Relative Contact Details</h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('relative',item);\">Edit\r" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                <div ID=\"listRelativecontacts\" ng-repeat=\"item in page.model.relativeContactArr\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div id=\"Div4\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanelRelativecontactsDetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanellnkFatherBrothercontactsDetailst\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showContactPopup('relative',item);\">Edit\r" +
     "\n" +
     "                                    </a>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
-    "                    <div ID=\"UpdatePanelFatherBrothername\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
+    "                        <div ID=\"UpdatePanelFatherBrothername\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                            <div>\r" +
     "\n" +
-    "                                <span ID=\"FatherBrothername\" Font-Bold=\"true\">{{item.lblname}}</span></h6>\r" +
+    "\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span ID=\"lblFatherBrothername\">{{item.NAME}}</span></h5>\r" +
+    "                                    <span ID=\"FatherBrothername\" Font-Bold=\"true\">{{item.lblname}}</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span ID=\"lblFatherBrothername\">{{item.NAME}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelFatherBrothermobile\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div ID=\"UpdatePanelFatherBrothermobile\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div>\r" +
+    "                            <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span ID=\"FatherBrothermobile\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
+    "                                    <span ID=\"FatherBrothermobile\" Font-Bold=\"true\">Moblie #</span></h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span ID=\"lblFatherBrothermobile\">{{item.Mobilewithcode}}</span>\r" +
+    "                                    <span ID=\"lblFatherBrothermobile\">{{item.Mobilewithcode}}</span>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <label ng-show=\"(item.primarymobile===1)|| (item.mobileisverfied) ?true:false \">\r" +
+    "                                    <label ng-show=\"(item.primarymobile===1)|| (item.mobileisverfied) ?true:false \">\r" +
     "\n" +
     "    <span  ng-class=\"item.mobileisverfied==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\">\r" +
     "\n" +
     "    </span></label>\r" +
     "\n" +
-    "                                <a href=\"javascript:void(0);\" ng-show=\"(item.primarymobile)&&(((item.mobileisverfied))==true?false:true) ?true:false\" ng-click=\"page.model.sendMobileCode(item.mobilecountrycode,item.mobilecountrycode,item.mobilenumber,item.emaILcust_family_id);\"> &nbsp;&nbsp;&nbsp;&nbsp;verify mobile</a>                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "                                    <a href=\"javascript:void(0);\" ng-show=\"(item.primarymobile)&&(((item.mobileisverfied))==true?false:true) ?true:false\" ng-click=\"page.model.sendMobileCode(item.mobilecountrycode,item.mobilecountrycode,item.mobilenumber,item.emaILcust_family_id);\"> &nbsp;&nbsp;&nbsp;&nbsp;verify mobile</a>                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -1968,7 +1982,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -1976,25 +1994,21 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        <div ID=\"UpdatePanelFatherBrotherland \" class=\"edit_page_details_item_desc clearfix \">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div ID=\"UpdatePanelFatherBrotherland \" class=\"edit_page_details_item_desc clearfix \">\r" +
+    "                            <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "\r" +
+    "                                    <span ID=\"FatherBrotherlandnum \" Font-Bold=\"true \">Land line #</span></h6>\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span ID=\"FatherBrotherlandnum \" Font-Bold=\"true \">Land line #</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span ID=\"lblFatherBrotherlandnum \">{{item.landlinewithcode}}</span>\r" +
+    "                                    <span ID=\"lblFatherBrotherlandnum \">{{item.landlinewithcode}}</span>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -2002,49 +2016,157 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                                <label ng-show=\"(item.primarylandline==1)|| (item.Landisverfied) ?true:false\">\r" +
+    "                                    <label ng-show=\"(item.primarylandline==1)|| (item.Landisverfied) ?true:false\">\r" +
     "\n" +
     "     <span  ng-class=\"(item.Landisverfied)==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"  style=\"color:#00FF00;\"></span>\r" +
     "\n" +
     " </label>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelFatherBrotherEmail \" class=\"edit_page_details_item_desc clearfix \">\r" +
+    "                        <div ID=\"UpdatePanelFatherBrotherEmail \" class=\"edit_page_details_item_desc clearfix \">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div>\r" +
+    "                            <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span ID=\"FatherBrotherEmail \" Font-Bold=\"true \">Email</span></h6>\r" +
+    "                                    <span ID=\"FatherBrotherEmail \" Font-Bold=\"true \">Email</span></h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span ID=\"lblFatherBrotherEmail \">{{item.Email}}</span>\r" +
+    "                                    <span ID=\"lblFatherBrotherEmail \">{{item.Email}}</span>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <label ng-show=\"(item.primaryemail || item.isemailVerified) ?true:false\">\r" +
+    "                                    <label ng-show=\"(item.primaryemail || item.isemailVerified) ?true:false\">\r" +
     "\n" +
     "    <span  ng-class=\"item.isemailVerified==true?'glyphicon glyphicon-check':'glyphicon glyphicon-ok'\"></span>\r" +
     "\n" +
     "</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
     "\n" +
-    "                                <a href=\"javascript:void(0);\" ng-show=\"(item.primaryemail)&&(((item.isemailVerified))==true?false:true) ?true:false\" ng-click=\"page.model.verifymail();\">verify email</a>\r" +
+    "                                    <a href=\"javascript:void(0);\" ng-show=\"(item.primaryemail)&&(((item.isemailVerified))==true?false:true) ?true:false\" ng-click=\"page.model.verifymail();\">verify email</a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"edit_page_item \">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix \">\r" +
+    "\n" +
+    "                <h4>Reference Contact details</h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix \">\r" +
+    "\n" +
+    "                    <div ID=\"UpdatePanelreference \">\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item \">\r" +
+    "\n" +
+    "                <div ID=\"listreference\" ng-repeat=\"item in page.model.referenceContactArr\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div id=\"Div5 \" class=\"edit_page_details_item_desc clearfix \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanelreferencername \" class=\"edit_page_details_item_desc clearfix \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span ID=\"referencename \" Font-Bold=\"true \">Name</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span ID=\"lblreferencename \">{{item.CandidateName}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ID=\"updatereferenceMoblie \" class=\"edit_page_details_item_desc clearfix \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span ID=\"referenceMoblie \" Font-Bold=\"true \">Moblie #</span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span ID=\"lblreferenceMoblie \">{{item.CandidateMobilewithcode}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -2054,119 +2176,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
+    "                        <div ID=\"UpdatePanellnkreferencemobilesedit \" class=\"edit_page_item_ui clearfix \">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"edit_page_item \">\r" +
-    "\n" +
-    "        <div class=\"edit_page_item_head clearfix \">\r" +
-    "\n" +
-    "            <h4>Reference Contact details</h4>\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_ui clearfix \">\r" +
-    "\n" +
-    "                <div ID=\"UpdatePanelreference \">\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item \">\r" +
-    "\n" +
-    "            <div ID=\"listreference\" ng-repeat=\"item in page.model.referenceContactArr\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div id=\"Div5 \" class=\"edit_page_details_item_desc clearfix \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelreferencername \" class=\"edit_page_details_item_desc clearfix \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span ID=\"referencename \" Font-Bold=\"true \">Name</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span ID=\"lblreferencename \">{{item.CandidateName}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"updatereferenceMoblie \" class=\"edit_page_details_item_desc clearfix \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span ID=\"referenceMoblie \" Font-Bold=\"true \">Moblie #</span></h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span ID=\"lblreferenceMoblie \">{{item.CandidateMobilewithcode}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanellnkreferencemobilesedit \" class=\"edit_page_item_ui clearfix \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <a class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showContactPopup('reference',item);\">Edit\r" +
+    "                            <a class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showContactPopup('reference',item);\">Edit\r" +
     "\n" +
     "                                    </a>\r" +
     "\n" +
@@ -2174,29 +2188,59 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div ID=\"UpdatePanelreferencelandnum \" class=\"edit_page_details_item_desc clearfix \">\r" +
+    "                        <div ID=\"UpdatePanelreferencelandnum \" class=\"edit_page_details_item_desc clearfix \">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div>\r" +
+    "                            <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span ID=\"referencelandnum \" Font-Bold=\"true \">Land line #</span></h6>\r" +
+    "                                    <span ID=\"referencelandnum \" Font-Bold=\"true \">Land line #</span></h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span ID=\"lblreferencelandnum \">{{item.Candidatelandlinewithcode}}</span>\r" +
+    "                                    <span ID=\"lblreferencelandnum \">{{item.Candidatelandlinewithcode}}</span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ID=\"UpdatePanelreferenceemail \" class=\"edit_page_details_item_desc clearfix \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span ID=\"referenceemail \" Font-Bold=\"true \">Email</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span ID=\"lblreferenceemail \">{{item.CandidateEmail}}</span>\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -2204,33 +2248,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ID=\"UpdatePanelreferenceemail \" class=\"edit_page_details_item_desc clearfix \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span ID=\"referenceemail \" Font-Bold=\"true \">Email</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span ID=\"lblreferenceemail \">{{item.CandidateEmail}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
     "                    </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -2238,23 +2260,15 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "            </div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
+    "\r" +
+    "\n" +
     "    </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
     "</div>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -4444,69 +4458,85 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editManagePhoto/index.html',
-    "<div class=\"edit_pages_content_main clearfix\">\r" +
+    "<div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <div class=\"register_page_main\">\r" +
+    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
+    "\n" +
+    "    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        <div class=\"my_photos_main my_photos_main_edit\">\r" +
-    "\n" +
-    "            <!--<h6>Upload your recent Photos for better response</h6>-->\r" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "            <div class=\"clear\">&nbsp;</div>\r" +
+    "    <div class=\"edit_pages_content_main clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "            <br />\r" +
-    "\n" +
-    "            <div class=\"dragzone\">\r" +
-    "\n" +
-    "                <div class=\"pics_selected_list_main clearfix\">\r" +
-    "\n" +
-    "                    <div class=\"pics_selected_list_main_lt clearfix\">\r" +
-    "\n" +
-    "                        <p class=\"clearfix\"><span>Upload your three different photos</span></p>\r" +
-    "\n" +
-    "                        <div id=\"dtimagephoto\" class=\"clearfix\" ng-repeat=\"item in page.model.manageArr\" style=\"width:33%;float:left;\">\r" +
-    "\n" +
-    "                            <div class=\"photos\">\r" +
-    "\n" +
-    "                                <div class=\"pics_selected_list_item clearfix\">\r" +
-    "\n" +
-    "                                    <div ng-class=\"item.IsActive == 0 && item.PhotoName !== null?'cssMaskdiv clearfix':''\">\r" +
-    "\n" +
-    "                                        <img ng-model=\"imgPhotoName\" ng-src=\"{{item.ImageUrl}}\" />\r" +
-    "\n" +
-    "                                    </div>\r" +
+    "        <div class=\"register_page_main\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    <div class=\"pics_selected_list_item_ui clearfix\">\r" +
+    "            <div class=\"my_photos_main my_photos_main_edit\">\r" +
     "\n" +
-    "                                        <div class=\"photos_icon\">\r" +
+    "                <!--<h6>Upload your recent Photos for better response</h6>-->\r" +
     "\n" +
-    "                                            <a href=\"javascript:void(0);\" ng-click=\"page.model.AddImage($index+1,item.Cust_Photos_ID,item.DisplayOrder,item.IsActive);\" ng-show=\"{{item.addButtonvisible}}\">\r" +
+    "\r" +
     "\n" +
-    "                                                <ng-md-icon icon=\"add_a_photo\" style=\"fill:#665454\" size=\"25\">Add</ng-md-icon>\r" +
+    "                <div class=\"clear\">&nbsp;</div>\r" +
     "\n" +
-    "                                            </a>\r" +
+    "\r" +
     "\n" +
-    "                                            <a href=\"javascript:void(0);\" ng-show=\"{{item.IsMain==1?false:(item.PhotoName!=null?true:false)}}\" ng-click=\"page.model.DeleteImage(item.keyname,item.Cust_Photos_ID);\">\r" +
+    "                <br />\r" +
     "\n" +
-    "                                                <ng-md-icon icon=\"delete\" style=\"fill:#665454\" size=\"25\">Delete</ng-md-icon>\r" +
+    "                <div class=\"dragzone\">\r" +
     "\n" +
-    "                                            </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "                    <div class=\"pics_selected_list_main clearfix\">\r" +
     "\n" +
-    "                                            <a href=\"javascript:void(0);\" class=\"set_pic\" ng-click=\"page.model.setAsProfilePic(item.Cust_Photos_ID);\" style=\"color:#665454;font-weight:bold;\" ng-show='{{item.IsMain==\"1\"?false:(item.PhotoName!=null?true:false) }}'>\r" +
+    "                        <div class=\"pics_selected_list_main_lt clearfix\">\r" +
+    "\n" +
+    "                            <p class=\"clearfix\"><span>Upload your three different photos</span></p>\r" +
+    "\n" +
+    "                            <div id=\"dtimagephoto\" class=\"clearfix\" ng-repeat=\"item in page.model.manageArr\" style=\"width:33%;float:left;\">\r" +
+    "\n" +
+    "                                <div class=\"photos\">\r" +
+    "\n" +
+    "                                    <div class=\"pics_selected_list_item clearfix\">\r" +
+    "\n" +
+    "                                        <div ng-class=\"item.IsActive == 0 && item.PhotoName !== null?'cssMaskdiv clearfix':''\">\r" +
+    "\n" +
+    "                                            <img ng-model=\"imgPhotoName\" ng-src=\"{{item.ImageUrl}}\" />\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <div class=\"pics_selected_list_item_ui clearfix\">\r" +
+    "\n" +
+    "                                            <div class=\"photos_icon\">\r" +
+    "\n" +
+    "                                                <a href=\"javascript:void(0);\" ng-click=\"page.model.AddImage($index+1,item.Cust_Photos_ID,item.DisplayOrder,item.IsActive);\" ng-show=\"{{item.addButtonvisible}}\">\r" +
+    "\n" +
+    "                                                    <ng-md-icon icon=\"add_a_photo\" style=\"fill:#665454\" size=\"25\">Add</ng-md-icon>\r" +
+    "\n" +
+    "                                                </a>\r" +
+    "\n" +
+    "                                                <a href=\"javascript:void(0);\" ng-show=\"{{item.IsMain==1?false:(item.PhotoName!=null?true:false)}}\" ng-click=\"page.model.DeleteImage(item.keyname,item.Cust_Photos_ID);\">\r" +
+    "\n" +
+    "                                                    <ng-md-icon icon=\"delete\" style=\"fill:#665454\" size=\"25\">Delete</ng-md-icon>\r" +
+    "\n" +
+    "                                                </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r" +
+    "\n" +
+    "                                                <a href=\"javascript:void(0);\" class=\"set_pic\" ng-click=\"page.model.setAsProfilePic(item.Cust_Photos_ID);\" style=\"color:#665454;font-weight:bold;\" ng-show='{{item.IsMain==\"1\"?false:(item.PhotoName!=null?true:false) }}'>\r" +
     "\n" +
     "                                            Set as Profilepic\r" +
     "\n" +
     "                                            </a>\r" +
+    "\n" +
+    "                                            </div>\r" +
     "\n" +
     "                                        </div>\r" +
     "\n" +
@@ -4516,17 +4546,15 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"clear\"></div>\r" +
+    "                            <div class=\"clear\"></div>\r" +
     "\n" +
-    "                        <div class=\"edit_page_photo_manage_submit\">\r" +
+    "                            <div class=\"edit_page_photo_manage_submit\">\r" +
     "\n" +
-    "                            <div class=\"edit_page_photo_manage_protect pull-left clearfix\" ng-show=\"{{loginpaidstatus===1}}\">\r" +
+    "                                <div class=\"edit_page_photo_manage_protect pull-left clearfix\" ng-show=\"{{loginpaidstatus===1}}\">\r" +
     "\n" +
-    "                                <label class=\"\">\r" +
+    "                                    <label class=\"\">\r" +
     "\n" +
     "                                \r" +
     "\n" +
@@ -4534,41 +4562,45 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <label style=\"font-size: 14px !important; font-weight: 400;\"> Protect with Password :</label> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;\r" +
     "\n" +
-    "                                <md-radio-group layout=\"row\" ng-model=\"rbtProtectPassword\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\" ng-change=\"page.model.setPhotoPassword(rbtProtectPassword);\">\r" +
+    "                                    <md-radio-group layout=\"row\" ng-model=\"rbtProtectPassword\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\" ng-change=\"page.model.setPhotoPassword(rbtProtectPassword);\">\r" +
     "\n" +
-    "                                    <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
+    "                                        <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
     "\n" +
-    "                                    <md-radio-button value=\"0\"> No </md-radio-button>\r" +
+    "                                        <md-radio-button value=\"0\"> No </md-radio-button>\r" +
     "\n" +
-    "                                </md-radio-group>\r" +
+    "                                    </md-radio-group>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                                </label>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "                            </label>\r" +
+    "                        </div>\r" +
+    "\n" +
+    "                        </br>\r" +
+    "\n" +
+    "                        <div class=\"photo_upload_instrctns_list clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <a ID=\"phtoguide\" href=\"javascript:void(0);\" ng-click=\"page.model.redirectPage('PhotoGuideLines');\">Photo guidelines\r" +
+    "\n" +
+    "                        </a>\r" +
+    "\n" +
+    "                            <a ID=\"photofaq\" href=\"javascript:void(0);\" ng-click=\"page.model.redirectPage('Faqs');\">Photo faq’s\r" +
+    "\n" +
+    "                        </a>\r" +
+    "\n" +
+    "                            <a ID=\"photoupload\" href=\"javascript:void(0);\" ng-click=\"page.model.redirectPage('uploadTips');\">Photo upload tips\r" +
+    "\n" +
+    "                        </a>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "                    </br>\r" +
-    "\n" +
-    "                    <div class=\"photo_upload_instrctns_list clearfix\">\r" +
-    "\n" +
     "\r" +
-    "\n" +
-    "                        <a ID=\"phtoguide\" href=\"javascript:void(0);\" ng-click=\"page.model.redirectPage('PhotoGuideLines');\">Photo guidelines\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                        <a ID=\"photofaq\" href=\"javascript:void(0);\" ng-click=\"page.model.redirectPage('Faqs');\">Photo faq’s\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                        <a ID=\"photoupload\" href=\"javascript:void(0);\" ng-click=\"page.model.redirectPage('uploadTips');\">Photo upload tips\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </div>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -4578,161 +4610,157 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "        </div>\r" +
+    "            <div class=\"my_photos_main_block2 clearfix\">\r" +
+    "\n" +
+    "                <div class=\"clearfix pics_incorrect_list\">\r" +
+    "\n" +
+    "                    <h3>Such Photos cannot be Uploaded</h3>\r" +
+    "\n" +
+    "                    <table id=\"DataList3\" class=\"clearfix\" style=\"border-collapse: collapse;\" cellspacing=\"0\">\r" +
+    "\n" +
+    "                        <tbody>\r" +
+    "\n" +
+    "                            <tr>\r" +
+    "\n" +
+    "                                <td>\r" +
+    "\n" +
+    "                                    <img id=\"DataList3_ctl00_images\" src=\"src\\images/Side-face.png\">\r" +
+    "\n" +
+    "                                    <p>\r" +
+    "\n" +
+    "                                        Side Face\r" +
+    "\n" +
+    "                                    </p>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        <div class=\"my_photos_main_block2 clearfix\">\r" +
+    "                                </td>\r" +
     "\n" +
-    "            <div class=\"clearfix pics_incorrect_list\">\r" +
+    "                                <td>\r" +
     "\n" +
-    "                <h3>Such Photos cannot be Uploaded</h3>\r" +
+    "                                    <img id=\"DataList3_ctl01_images\" src=\"src\\images/Blir.png\">\r" +
     "\n" +
-    "                <table id=\"DataList3\" class=\"clearfix\" style=\"border-collapse: collapse;\" cellspacing=\"0\">\r" +
+    "                                    <p>\r" +
     "\n" +
-    "                    <tbody>\r" +
+    "                                        Blur\r" +
     "\n" +
-    "                        <tr>\r" +
-    "\n" +
-    "                            <td>\r" +
-    "\n" +
-    "                                <img id=\"DataList3_ctl00_images\" src=\"src\\images/Side-face.png\">\r" +
-    "\n" +
-    "                                <p>\r" +
-    "\n" +
-    "                                    Side Face\r" +
-    "\n" +
-    "                                </p>\r" +
+    "                                    </p>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            </td>\r" +
+    "                                </td>\r" +
     "\n" +
-    "                            <td>\r" +
+    "                                <td>\r" +
     "\n" +
-    "                                <img id=\"DataList3_ctl01_images\" src=\"src\\images/Blir.png\">\r" +
+    "                                    <img id=\"DataList3_ctl02_images\" src=\"src\\images/Group-photos.png\">\r" +
     "\n" +
-    "                                <p>\r" +
+    "                                    <p>\r" +
     "\n" +
-    "                                    Blur\r" +
+    "                                        Group Photo\r" +
     "\n" +
-    "                                </p>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </td>\r" +
-    "\n" +
-    "                            <td>\r" +
-    "\n" +
-    "                                <img id=\"DataList3_ctl02_images\" src=\"src\\images/Group-photos.png\">\r" +
-    "\n" +
-    "                                <p>\r" +
-    "\n" +
-    "                                    Group Photo\r" +
-    "\n" +
-    "                                </p>\r" +
+    "                                    </p>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            </td>\r" +
+    "                                </td>\r" +
     "\n" +
-    "                            <td>\r" +
+    "                                <td>\r" +
     "\n" +
-    "                                <img id=\"DataList3_ctl03_images\" src=\"src\\images/Water-mark.png\">\r" +
+    "                                    <img id=\"DataList3_ctl03_images\" src=\"src\\images/Water-mark.png\">\r" +
     "\n" +
-    "                                <p>\r" +
+    "                                    <p>\r" +
     "\n" +
-    "                                    Watermark\r" +
+    "                                        Watermark\r" +
     "\n" +
-    "                                </p>\r" +
+    "                                    </p>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            </td>\r" +
+    "                                </td>\r" +
     "\n" +
-    "                        </tr>\r" +
+    "                            </tr>\r" +
     "\n" +
-    "                    </tbody>\r" +
+    "                        </tbody>\r" +
     "\n" +
-    "                </table>\r" +
+    "                    </table>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"pics_selected_list_main_rt clearfix pics_correct_list\">\r" +
+    "\n" +
+    "                    <h3>Photos that can be uploaded</h3>\r" +
+    "\n" +
+    "                    <table id=\"DataList2\" class=\"clearfix\" style=\"border-collapse: collapse;\" cellspacing=\"0\">\r" +
+    "\n" +
+    "                        <tbody>\r" +
+    "\n" +
+    "                            <tr>\r" +
+    "\n" +
+    "                                <td>\r" +
+    "\n" +
+    "                                    <img id=\"DataList2_ctl00_images\" src=\"src\\images/Close-up.png\">\r" +
+    "\n" +
+    "                                    <p>\r" +
+    "\n" +
+    "                                        Close Up\r" +
+    "\n" +
+    "                                    </p>\r" +
+    "\n" +
+    "                                </td>\r" +
+    "\n" +
+    "                                <td>\r" +
+    "\n" +
+    "                                    <img id=\"DataList2_ctl01_images\" src=\"src\\images/Fulsize.png\">\r" +
+    "\n" +
+    "                                    <p>\r" +
+    "\n" +
+    "                                        Full Size\r" +
+    "\n" +
+    "                                    </p>\r" +
+    "\n" +
+    "                                </td>\r" +
+    "\n" +
+    "                            </tr>\r" +
+    "\n" +
+    "                        </tbody>\r" +
+    "\n" +
+    "                    </table>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"clear\">&nbsp;</div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
+    "            <div class=\"my_photos_main_block3\">\r" +
+    "\n" +
     "\r" +
     "\n" +
-    "            <div class=\"pics_selected_list_main_rt clearfix pics_correct_list\">\r" +
+    "                <p>\r" +
     "\n" +
-    "                <h3>Photos that can be uploaded</h3>\r" +
+    "                    <img src=\"src/images/whatsup.png\" alt=\"Mail\" style=\"width: 50px; height: 40px;\">Whatsup your photos to\r" +
     "\n" +
-    "                <table id=\"DataList2\" class=\"clearfix\" style=\"border-collapse: collapse;\" cellspacing=\"0\">\r" +
+    "                    <span>91-9848535373</span> - Kindly mention your Profile ID and name\r" +
     "\n" +
-    "                    <tbody>\r" +
+    "                </p>\r" +
     "\n" +
-    "                        <tr>\r" +
+    "                <p>\r" +
     "\n" +
-    "                            <td>\r" +
+    "                    <img src=\"src/images/icon_email.png\" alt=\"Mail\">Can also Email your photos to <span>photos@telugumarriages.com</span> - Kindly mention your Profile ID and name\r" +
     "\n" +
-    "                                <img id=\"DataList2_ctl00_images\" src=\"src\\images/Close-up.png\">\r" +
+    "                </p>\r" +
     "\n" +
-    "                                <p>\r" +
-    "\n" +
-    "                                    Close Up\r" +
-    "\n" +
-    "                                </p>\r" +
-    "\n" +
-    "                            </td>\r" +
-    "\n" +
-    "                            <td>\r" +
-    "\n" +
-    "                                <img id=\"DataList2_ctl01_images\" src=\"src\\images/Fulsize.png\">\r" +
-    "\n" +
-    "                                <p>\r" +
-    "\n" +
-    "                                    Full Size\r" +
-    "\n" +
-    "                                </p>\r" +
-    "\n" +
-    "                            </td>\r" +
-    "\n" +
-    "                        </tr>\r" +
-    "\n" +
-    "                    </tbody>\r" +
-    "\n" +
-    "                </table>\r" +
+    "\r" +
     "\n" +
     "            </div>\r" +
-    "\n" +
-    "            <div class=\"clear\">&nbsp;</div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"my_photos_main_block3\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            <p>\r" +
-    "\n" +
-    "                <img src=\"src/images/whatsup.png\" alt=\"Mail\" style=\"width: 50px; height: 40px;\">Whatsup your photos to\r" +
-    "\n" +
-    "                <span>91-9848535373</span> - Kindly mention your Profile ID and name\r" +
-    "\n" +
-    "            </p>\r" +
-    "\n" +
-    "            <p>\r" +
-    "\n" +
-    "                <img src=\"src/images/icon_email.png\" alt=\"Mail\">Can also Email your photos to <span>photos@telugumarriages.com</span> - Kindly mention your Profile ID and name\r" +
-    "\n" +
-    "            </p>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
     "</div>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -4851,41 +4879,55 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editOfcePurpose/index.html',
-    "<div class=\"edit_pages_content_main clearfix\">\r" +
+    "<div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
-    "    <div class=\"edit_page_item\">\r" +
+    "\r" +
     "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
+    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
-    "            <h4>About Profile Details</h4>\r" +
+    "    </div>\r" +
     "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\r" +
     "\n" +
-    "                <a id=\"lnkAboutProfile\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showPopup();\" ng-show=\"dataval===''?true:false\">Add\r" +
+    "\r" +
+    "\n" +
+    "    <div class=\"edit_pages_content_main clearfix\">\r" +
+    "\n" +
+    "        <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>About Profile Details</h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                    <a id=\"lnkAboutProfile\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showPopup();\" ng-show=\"dataval===''?true:false\">Add\r" +
     "\n" +
     "                    \r" +
     "\n" +
     "                </a>\r" +
     "\n" +
+    "                </div>\r" +
+    "\n" +
     "            </div>\r" +
     "\n" +
-    "        </div>\r" +
+    "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
+    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                    <h5>\r" +
     "\n" +
-    "                <h5>\r" +
+    "                        <span id=\"lblAboutProfile\">{{page.model.dataval}}</span>\r" +
     "\n" +
-    "                    <span id=\"lblAboutProfile\">{{page.model.dataval}}</span>\r" +
+    "                    </h5>\r" +
     "\n" +
-    "                </h5>\r" +
+    "                    <div class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "                    <a id=\"LinkButton1dfd\" data-placement=\"bottom\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showPopup(page.model.dataval);\" ng-hide=\"dataval===''?true:false\">Edit\r" +
+    "                        <a id=\"LinkButton1dfd\" data-placement=\"bottom\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showPopup(page.model.dataval);\" ng-hide=\"dataval===''?true:false\">Edit\r" +
     "\n" +
     "                    </a>\r" +
+    "\n" +
+    "                    </div>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -4896,8 +4938,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "    </div>\r" +
     "\n" +
     "</div>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -4960,163 +5000,175 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editParent/index.html',
-    "<div class=\"edit_pages_content_main clearfix\">\r" +
+    "<div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
+    "\n" +
+    "    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <page-review dispaly-name=\"'Parent details'\" sectionid=\"'11,12,13,15'\" custid=\"page.model.CustID\"></page-review>\r" +
+    "    <div class=\"edit_pages_content_main clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <div class=\"edit_page_item\" id=\"divlnkaddparents\">\r" +
+    "\r" +
     "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
+    "        <page-review dispaly-name=\"'Parent details'\" sectionid=\"'11,12,13,15'\" custid=\"page.model.CustID\"></page-review>\r" +
     "\n" +
-    "            <h4>Parents Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" id=\"spanEduModID\">ModifiedBy :{{page.model.parentmodifiedby}}</span>\r" +
+    "\r" +
     "\n" +
-    "                <span style=\"color: #08CFD2\" id=\"spanEduModID\" visible=\"false\">\r" +
+    "        <div class=\"edit_page_item\" id=\"divlnkaddparents\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Parents Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" id=\"spanEduModID\">ModifiedBy :{{page.model.parentmodifiedby}}</span>\r" +
+    "\n" +
+    "                    <span style=\"color: #08CFD2\" id=\"spanEduModID\" visible=\"false\">\r" +
     "\n" +
     "                    <label id=\"lblParentsDetailsmodby\" forecolor=\"#08CFD2\"></label>\r" +
     "\n" +
     "                    </span>\r" +
     "\n" +
-    "            </h4>\r" +
+    "                </h4>\r" +
     "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.parentArr.length===0\">\r" +
+    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.parentArr.length===0\">\r" +
     "\n" +
-    "                <a data-toggle=\"tooltip\" data-original-title=\"Add Parents Details\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.populateModel('parent');\">Add</a>\r" +
+    "                    <a data-toggle=\"tooltip\" data-original-title=\"Add Parents Details\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.populateModel('parent');\">Add</a>\r" +
+    "\n" +
+    "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "        </div>\r" +
+    "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
+    "                <div id=\"listparents\" ng-repeat=\"item in page.model.parentArr\">\r" +
     "\n" +
-    "            <div id=\"listparents\" ng-repeat=\"item in page.model.parentArr\">\r" +
-    "\n" +
-    "                <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
-    "\n" +
-    "                    <div>\r" +
+    "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
     "                        <div>\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <label id=\"lfathername\" font-bold=\"true\"></label>Father Name</h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"LBfathername\">{{item.FatherName}}</span>\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.parentArr.length>0\">\r" +
+    "\n" +
+    "                                    <a id=\"LinkButton1dfd\" href=\"javascript:void(0):\" data-original-title=\"Edit Parents Details\" class=\"edit_page_edit_button\" ng-click=\"page.model.populateModel('parent',item);\">Edit</a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <label id=\"lfathername\" font-bold=\"true\"></label>Father Name</h6>\r" +
+    "                                    <label id=\"lblfathereducation\" font-bold=\"true\">Education</label>\r" +
+    "\n" +
+    "                                </h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"LBfathername\">{{item.FatherName}}</span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.parentArr.length>0\">\r" +
-    "\n" +
-    "                                <a id=\"LinkButton1dfd\" href=\"javascript:void(0):\" data-original-title=\"Edit Parents Details\" class=\"edit_page_edit_button\" ng-click=\"page.model.populateModel('parent',item);\">Edit</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <label id=\"lblfathereducation\" font-bold=\"true\">Education</label>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblfathereducationdetails\">\r" +
+    "                                    <span id=\"lblfathereducationdetails\">\r" +
     "\n" +
     "                                    {{item.FatherEducationDetails }}\r" +
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                                <label font-bold=\"true\">Profession Category</label>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                            </h6>\r" +
+    "                                    <label font-bold=\"true\">Profession Category</label>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                </h6>\r" +
     "\n" +
-    "                                <span>\r" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span>\r" +
     "\n" +
     "                                    {{item.FatherProfessionCategory }}\r" +
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <label id=\"lblFatherprofession\" font-bold=\"true\">Designation</label>\r" +
-    "\n" +
-    "                            </h6>\r" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span id=\"lblfatherprofessiondetails\">\r" +
+    "                                    <label id=\"lblFatherprofession\" font-bold=\"true\">Designation</label>\r" +
+    "\n" +
+    "                                </h6>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblfatherprofessiondetails\">\r" +
     "\n" +
     "                                   {{item.FatherProfDetails }}\r" +
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\" id=\"fathercompnay\">\r" +
+    "\r" +
+    "\n" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\" id=\"fathercompnay\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <label id=\"lblfatherprofessionloc\" font-bold=\"true\">Company & JobLocation</label>\r" +
+    "                                    <label id=\"lblfatherprofessionloc\" font-bold=\"true\">Company & JobLocation</label>\r" +
     "\n" +
-    "                            </h6>\r" +
+    "                                </h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span id=\"lblfatherprofandloc\">\r" +
+    "                                    <span id=\"lblfatherprofandloc\">\r" +
     "\n" +
     "                                   {{((item.FathercompanyName!=null && (item.FathercompanyName!=\"\")?item.FathercompanyName:\"NotSpecified\"))\r" +
     "\n" +
@@ -5124,27 +5176,27 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"ownerdiv0\">\r" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <div id=\"ownerdiv0\">\r" +
     "\n" +
-    "                                <h6>\r" +
+    "\r" +
     "\n" +
-    "                                    <label id=\"lblfathernumber\" font-bold=\"true\">Father contact nos</label>\r" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                                </h6>\r" +
+    "                                    <h6>\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                                        <label id=\"lblfathernumber\" font-bold=\"true\">Father contact nos</label>\r" +
     "\n" +
-    "                                    <span id=\"lblfathermobile\">\r" +
+    "                                    </h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblfathermobile\">\r" +
     "\n" +
     "                                       {{((item.FatherMobilenumber!=null && (item.FatherMobilenumber!=\"\")?item.FatherMobilenumber:\"\"))\r" +
     "\n" +
@@ -5152,7 +5204,37 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                </span>\r" +
     "\n" +
-    "                                </h5>\r" +
+    "                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <label id=\"fatheremail\" font-bold=\"true\">Father Email</label>\r" +
+    "\n" +
+    "                                    </h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblFatherEmail\">\r" +
+    "\n" +
+    "                                       {{ item.FatherEmail }}\r" +
+    "\n" +
+    "                                </span>\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "                                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -5166,45 +5248,15 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
+    "\r" +
+    "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <label id=\"fatheremail\" font-bold=\"true\">Father Email</label>\r" +
-    "\n" +
-    "                                </h6>\r" +
+    "                                    <label id=\"lblfathersfather\">Father's Father Name</label></h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblFatherEmail\">\r" +
-    "\n" +
-    "                                       {{ item.FatherEmail }}\r" +
-    "\n" +
-    "                                </span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <label id=\"lblfathersfather\">Father's Father Name</label></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblfathersfath\">\r" +
+    "                                    <span id=\"lblfathersfath\">\r" +
     "\n" +
     "                                  {{  ((item.FatherFathername!=null && (item.FatherFathername!=\"\")?item.FatherFathername:\"\"))\r" +
     "\n" +
@@ -5212,13 +5264,41 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
     "\n" +
-    "                        </div>\r" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div id=\"ownerdiv1\">\r" +
+    "                            <div id=\"ownerdiv1\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <label id=\"FFContactNos\">FF contact nos</label></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblFFContactNos\">\r" +
+    "\n" +
+    "                                       {{((item.FFMobileNumberWithcode!=null && (item.FFMobileNumberWithcode!=\"\")?item.FFMobileNumberWithcode:\"\"))\r" +
+    "\n" +
+    "                                       + ((item.FFLandNumberwithCode!=null && item.FFLandNumberwithCode!=\"\")?\" & \"+item.FFLandNumberwithCode:\"\") }}\r" +
+    "\n" +
+    "                                </span>\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -5228,41 +5308,13 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <label id=\"FFContactNos\">FF contact nos</label></h6>\r" +
+    "                                    <label id=\"FnativePlace\" font-bold=\"true\">Native Place</label>\r" +
+    "\n" +
+    "                                </h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblFFContactNos\">\r" +
-    "\n" +
-    "                                       {{((item.FFMobileNumberWithcode!=null && (item.FFMobileNumberWithcode!=\"\")?item.FFMobileNumberWithcode:\"\"))\r" +
-    "\n" +
-    "                                       + ((item.FFLandNumberwithCode!=null && item.FFLandNumberwithCode!=\"\")?\" & \"+item.FFLandNumberwithCode:\"\") }}\r" +
-    "\n" +
-    "                                </span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <label id=\"FnativePlace\" font-bold=\"true\">Native Place</label>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblFnativePlace\">\r" +
+    "                                    <span id=\"lblFnativePlace\">\r" +
     "\n" +
     "                                   {{\r" +
     "\n" +
@@ -5276,83 +5328,81 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
+    "                        <div>\r" +
+    "\n" +
+    "                            <hr />\r" +
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                        <hr />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <label id=\"lblmothername\" font-bold=\"true\" forecolor=\"Red\">\r" +
+    "                                    <label id=\"lblmothername\" font-bold=\"true\" forecolor=\"Red\">\r" +
     "\n" +
     "                                Mother Name\r" +
     "\n" +
     "                            </label>\r" +
     "\n" +
-    "                            </h6>\r" +
+    "                                </h6>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span id=\"lblmothernameandedu\">\r" +
+    "                                    <span id=\"lblmothernameandedu\">\r" +
     "\n" +
     "                                    {{item.MotherName}}\r" +
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\r" +
+    "\n" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <label id=\"lbleducationmother\">Education</label></h6>\r" +
+    "                                    <label id=\"lbleducationmother\">Education</label></h6>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span id=\"lblmotherducation\">\r" +
+    "                                    <span id=\"lblmotherducation\">\r" +
     "\n" +
     "                                   {{ ((item.MotherEducationDetails!=null && item.MotherEducationDetails!=\"\")?item.MotherEducationDetails:\"\" )}}\r" +
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -5360,43 +5410,45 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                                <label font-bold=\"true\">Profession Category</label>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                            </h6>\r" +
+    "                                    <label font-bold=\"true\">Profession Category</label>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                </h6>\r" +
     "\n" +
-    "                                <span>\r" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span>\r" +
     "\n" +
     "                                    {{item.MotherProfessionCategory }}\r" +
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <label id=\"lblprofessionmotherr\" font-bold=\"true\">Designation</label>\r" +
-    "\n" +
-    "                            </h6>\r" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span id=\"lblmotherprofdetails\">\r" +
+    "                                    <label id=\"lblprofessionmotherr\" font-bold=\"true\">Designation</label>\r" +
+    "\n" +
+    "                                </h6>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblmotherprofdetails\">\r" +
     "\n" +
     "                                  {{((item.MotherProfedetails!=null && item.MotherProfedetails!=\"\")?\r" +
     "\n" +
@@ -5404,23 +5456,23 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"mothercompany\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.MotherProfedetails=='HouseWife'\">\r" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                            <div id=\"mothercompany\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.MotherProfedetails=='HouseWife'\">\r" +
     "\n" +
-    "                                <label id=\"lblmotherprofession\">Company & JobLocation</label></h6>\r" +
+    "\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span id=\"lblmotherprofandloc\">\r" +
+    "                                    <label id=\"lblmotherprofession\">Company & JobLocation</label></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblmotherprofandloc\">\r" +
     "\n" +
     "                                   {{((item.MothercompanyName!=null && (item.MothercompanyName!=\"\")?item.MothercompanyName:\"\"))+\" \"+\r" +
     "\n" +
@@ -5430,121 +5482,65 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"ownerdiv2\">\r" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <div id=\"ownerdiv2\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <h6>\r" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                                    <label id=\"lblmothercontacts\">Mother contact nos</label></h6>\r" +
+    "\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                                    <h6>\r" +
     "\n" +
-    "                                    <span id=\"lblmompmobile\">\r" +
+    "                                        <label id=\"lblmothercontacts\">Mother contact nos</label></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblmompmobile\">\r" +
     "\n" +
     "                                       {{((item.MotherMobilenumber!=null && item.MotherMobilenumber!=\"\")?item.MotherMobilenumber:\"\" )+\" \"+((item.MotherLandNumber!=null && (item.MotherLandNumber!=\"\")?\"&\"+\" \"+item.MotherLandNumber:\"\"))}}\r" +
     "\n" +
     "                                </span>\r" +
     "\n" +
-    "                                </h5>\r" +
+    "                                    </h5>\r" +
     "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <h6>\r" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                                    <label id=\"lblmotheremail\" font-bold=\"true\">Mother Email</label>\r" +
+    "\r" +
     "\n" +
-    "                                </h6>\r" +
+    "                                    <h6>\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                                        <label id=\"lblmotheremail\" font-bold=\"true\">Mother Email</label>\r" +
     "\n" +
-    "                                    <span id=\"lblmomemail\">\r" +
+    "                                    </h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblmomemail\">\r" +
     "\n" +
     "                                        {{ item.MotherEmail }}\r" +
     "\n" +
     "                                </span>\r" +
     "\n" +
-    "                                </h5>\r" +
+    "                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <label id=\"lblmotherfatherupp\" font-bold=\"true\">Mother's Father Name</label>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblMotherFatherName\">\r" +
-    "\n" +
-    "                                   {{item.MotherFatherName }}\r" +
-    "\n" +
-    "                            </span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                            </label>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <label id=\"MotherFatherLastName\" font-bold=\"true\">Mother's Father SurName</label>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblMotherFatherLastName\">\r" +
-    "\n" +
-    "                                  {{item.MotherFatherLastName}}\r" +
-    "\n" +
-    "                            </span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"ownerdiv3\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -5554,13 +5550,69 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <label id=\"mContactNos\" font-bold=\"true\">MF Contact nos</label>\r" +
+    "                                    <label id=\"lblmotherfatherupp\" font-bold=\"true\">Mother's Father Name</label>\r" +
     "\n" +
     "                                </h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblmContactNos\">\r" +
+    "                                    <span id=\"lblMotherFatherName\">\r" +
+    "\n" +
+    "                                   {{item.MotherFatherName }}\r" +
+    "\n" +
+    "                            </span>\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "                                </label>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <label id=\"MotherFatherLastName\" font-bold=\"true\">Mother's Father SurName</label>\r" +
+    "\n" +
+    "                                </h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblMotherFatherLastName\">\r" +
+    "\n" +
+    "                                  {{item.MotherFatherLastName}}\r" +
+    "\n" +
+    "                            </span>\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"ownerdiv3\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <label id=\"mContactNos\" font-bold=\"true\">MF Contact nos</label>\r" +
+    "\n" +
+    "                                    </h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblmContactNos\">\r" +
     "\n" +
     "                                       {{ item.MMMobileNumberWithcode+\r" +
     "\n" +
@@ -5568,29 +5620,29 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                </span>\r" +
     "\n" +
-    "                                </h5>\r" +
+    "                                    </h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                <h6>\r" +
     "\n" +
-    "\r" +
+    "                                    <label id=\"MNativePlace\" font-bold=\"true\">Native Place</label>\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                </h6>\r" +
     "\n" +
-    "                                <label id=\"MNativePlace\" font-bold=\"true\">Native Place</label>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblMNativePlace\">\r" +
+    "                                    <span id=\"lblMNativePlace\">\r" +
     "\n" +
     "                                   {{((item.MotherNativeplace!=null && item.MotherNativeplace!=\"\")?item.MotherNativeplace:\"\") +\r" +
     "\n" +
@@ -5602,75 +5654,77 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "\r" +
+    "                        <div>\r" +
     "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div>\r" +
-    "\n" +
-    "                        <div id=\"divParentIntercasteHide\">\r" +
+    "                            <div id=\"divParentIntercasteHide\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <h6>\r" +
+    "                                    <h6>\r" +
     "\n" +
-    "                                    <label id=\"ParentsInterCaste\">Are Parents InterCaste</label></h6>\r" +
+    "                                        <label id=\"ParentsInterCaste\">Are Parents InterCaste</label></h6>\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                                    <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblParentsInterCaste\">{{item.Intercaste }}</span>\r" +
+    "                                        <span id=\"lblParentsInterCaste\">{{item.Intercaste }}</span>\r" +
     "\n" +
-    "                                </h5>\r" +
+    "                                    </h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <label id=\"lFatherCaste\">Father Caste</label></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblFatherCaste\">{{item.FatherCaste }}</span>\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <label id=\"lMotherCaste\">Mother Caste</label>\r" +
+    "\n" +
+    "                                    </h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblMotherCaste\">{{item.MotherCaste }}</span>\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <label id=\"lFatherCaste\">Father Caste</label></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblFatherCaste\">{{item.FatherCaste }}</span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <label id=\"lMotherCaste\">Mother Caste</label>\r" +
-    "\n" +
-    "                                </h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblMotherCaste\">{{item.MotherCaste }}</span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
@@ -5678,33 +5732,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                </div>\r" +
     "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <hr />\r" +
+    "                <hr />\r" +
     "\n" +
     "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "    <div class=\"edit_page_item\" id=\"divlnkAddcontactaddress\">\r" +
-    "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "            <h4>Contact Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\">ModifiedBy :{{page.model.addrmodifiedby}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </h4>\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.addressArr.length===0\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <a ng-click=\"page.model.populateModel('Address',item);\" href=\"javascript:void(0);\" data-original-title=\"Add Contact Address\" class=\"edit_page_add_button\">Add</a>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -5712,167 +5742,191 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        </div>\r" +
     "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
+    "        <div class=\"edit_page_item\" id=\"divlnkAddcontactaddress\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Contact Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\">ModifiedBy :{{page.model.addrmodifiedby}}</span>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "            <div ng-repeat=\"item in page.model.addressArr\">\r" +
+    "                </h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.addressArr.length===0\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                <div id=\"Div1\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
+    "                    <a ng-click=\"page.model.populateModel('Address',item);\" href=\"javascript:void(0);\" data-original-title=\"Add Contact Address\" class=\"edit_page_add_button\">Add</a>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                <div ng-repeat=\"item in page.model.addressArr\">\r" +
     "\n" +
-    "                            <label id=\"lblhousenum\" font-bold=\"true\">House/Flat No</label>\r" +
+    "\r" +
     "\n" +
-    "                        </h6>\r" +
+    "                    <div id=\"Div1\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
-    "                        <h5>\r" +
+    "\r" +
     "\n" +
-    "                            <span id=\"lblhouseflat\">\r" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <label id=\"lblhousenum\" font-bold=\"true\">House/Flat No</label>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblhouseflat\">\r" +
     "\n" +
     "                                {{ item.FlatNumber}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                        </h5>\r" +
+    "                            </h5>\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div id=\"divapartment\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div id=\"divapartment\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                            <label id=\"lblapartmentname\" font-bold=\"true\">Apt Name</label>\r" +
+    "                                <label id=\"lblapartmentname\" font-bold=\"true\">Apt Name</label>\r" +
     "\n" +
-    "                        </h6>\r" +
+    "                            </h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                            <span id=\"lblapartment\">\r" +
+    "                                <span id=\"lblapartment\">\r" +
     "\n" +
     "                                {{ item.ApartmentName}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                        </h5>\r" +
+    "                            </h5>\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
-    "                    <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.addressArr.length>0\">\r" +
+    "                        <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.addressArr.length>0\">\r" +
     "\n" +
-    "                        <a ng-click=\"page.model.populateModel('Address',item);\" href=\"javascript:void(0);\">Edit</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"divareaname\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <a ng-click=\"page.model.populateModel('Address',item);\" href=\"javascript:void(0);\">Edit</a>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                        </div>\r" +
     "\n" +
-    "                            <label id=\"lblareaname\" font-bold=\"true\">Area Name</label>\r" +
+    "                        <div id=\"divareaname\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                        </h6>\r" +
+    "\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                            <span id=\"lblareanamee\">\r" +
+    "                                <label id=\"lblareaname\" font-bold=\"true\">Area Name</label>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblareanamee\">\r" +
     "\n" +
     "                                {{ item.AreaName}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                        </h5>\r" +
+    "                            </h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                            <label id=\"lblstreet\" font-bold=\"true\">Street Name</label>\r" +
+    "                                <label id=\"lblstreet\" font-bold=\"true\">Street Name</label>\r" +
     "\n" +
-    "                        </h6>\r" +
+    "                            </h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                            <span id=\"lblstreetname\">\r" +
+    "                                <span id=\"lblstreetname\">\r" +
     "\n" +
     "                                {{ item.StreetName}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                        </h5>\r" +
+    "                            </h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                            <label id=\"lblland\" font-bold=\"true\">Land Mark</label>\r" +
+    "                                <label id=\"lblland\" font-bold=\"true\">Land Mark</label>\r" +
     "\n" +
-    "                        </h6>\r" +
+    "                            </h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                            <span id=\"lbllandmark\">\r" +
+    "                                <span id=\"lbllandmark\">\r" +
     "\n" +
     "                                {{ item.LandMark}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                        </h5>\r" +
+    "                            </h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                            <label id=\"lblcityy\" font-bold=\"true\">City</label>\r" +
+    "                                <label id=\"lblcityy\" font-bold=\"true\">City</label>\r" +
     "\n" +
-    "                        </h6>\r" +
+    "                            </h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                            <span id=\"lblcityname\">\r" +
+    "                                <span id=\"lblcityname\">\r" +
     "\n" +
     "                                {{ item.CityName+\" \"+(item.DistrictName!=null?\",\"+ item.DistrictName:\"\")+(item.StateName!=null?\",\"+ item.StateName:\"\")+(item.CountryName!=null?\",\"+item.CountryName:\"\")+(item.Zip!=null?\"-\"+item.Zip:\"\") }}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                        </h5>\r" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
@@ -5882,277 +5936,277 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        </div>\r" +
     "\n" +
-    "    </div>\r" +
+    "        <div class=\"edit_page_item\" id=\"divlnkAddphsysicall\">\r" +
     "\n" +
-    "    <div class=\"edit_page_item\" id=\"divlnkAddphsysicall\">\r" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
+    "                <h4>Physical Attribute & Health Details of Candidate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" id=\"spanEduModID\">ModifiedBy :{{page.model.physicalmodifiedby}}</span></h4>\r" +
     "\n" +
-    "            <h4>Physical Attribute & Health Details of Candidate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" id=\"spanEduModID\">ModifiedBy :{{page.model.physicalmodifiedby}}</span></h4>\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.physicalArr.length===0\">\r" +
+    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.physicalArr.length===0\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                <a href=\"javascript:void(0);\" ng-click=\"page.model.populateModel('physicalAttributes',item);\" data-original-title=\"Add Physical Attribute & Health Details\" class=\"edit_page_add_button\">Add</a>\r" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.populateModel('physicalAttributes',item);\" data-original-title=\"Add Physical Attribute & Health Details\" class=\"edit_page_add_button\">Add</a>\r" +
+    "\n" +
+    "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
+    "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "            <div ng-repeat=\"item in page.model.physicalArr\">\r" +
+    "                <div ng-repeat=\"item in page.model.physicalArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                <div id=\"Div2\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
+    "                    <div id=\"Div2\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                            <label id=\"lbllDiet\" font-bold=\"true\">Diet</label></h6>\r" +
+    "                                <label id=\"lbllDiet\" font-bold=\"true\">Diet</label></h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                            <span id=\"lblDiet\">\r" +
+    "                                <span id=\"lblDiet\">\r" +
     "\n" +
     "                                {{ item.Diet}}\r" +
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                        </h5>\r" +
+    "                            </h5>\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                            <label id=\"lbllDrink\">Drink</label></h6>\r" +
+    "                                <label id=\"lbllDrink\">Drink</label></h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                            <span id=\"lblDrink\">\r" +
+    "                                <span id=\"lblDrink\">\r" +
     "\n" +
     "                                {{ item.Drink}}\r" +
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                        </h5>\r" +
+    "                            </h5>\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                            <label id=\"lbllSmoke\">Smoke</label>\r" +
+    "                                <label id=\"lbllSmoke\">Smoke</label>\r" +
     "\n" +
-    "                        </h6>\r" +
+    "                            </h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                            <span id=\"lblSmoke\">\r" +
+    "                                <span id=\"lblSmoke\">\r" +
     "\n" +
     "                                {{ item.Smoke}}\r" +
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                        </h5>\r" +
+    "                            </h5>\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                            <label id=\"lbllBodyType\">Body Type</label></h6>\r" +
+    "                                <label id=\"lbllBodyType\">Body Type</label></h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                            <span id=\"lblBodyType\">\r" +
+    "                                <span id=\"lblBodyType\">\r" +
     "\n" +
     "                                {{ item.BodyType}}\r" +
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                        </h5>\r" +
+    "                            </h5>\r" +
     "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            <label id=\"lblbodyweight\" font-bold=\"true\">Body Weight</label>\r" +
+    "\r" +
     "\n" +
-    "                        </h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                                <label id=\"lblbodyweight\" font-bold=\"true\">Body Weight</label>\r" +
     "\n" +
-    "                            <span id=\"lblweight\">\r" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblweight\">\r" +
     "\n" +
     "                                {{ item.BodyWeight}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                        </h5>\r" +
+    "                            </h5>\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                            <label id=\"lblbloodgroup\" font-bold=\"true\">Blood Group</label>\r" +
+    "                                <label id=\"lblbloodgroup\" font-bold=\"true\">Blood Group</label>\r" +
     "\n" +
-    "                        </h6>\r" +
+    "                            </h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                            <span id=\"lblbloodgrop\">\r" +
+    "                                <span id=\"lblbloodgrop\">\r" +
     "\n" +
     "                                {{ item.BloodGroupName}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                        </h5>\r" +
+    "                            </h5>\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                            <label id=\"lblhealthconditions\" font-bold=\"true\">Health Conditions</label>\r" +
+    "                                <label id=\"lblhealthconditions\" font-bold=\"true\">Health Conditions</label>\r" +
     "\n" +
-    "                        </h6>\r" +
+    "                            </h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                            <span id=\"lblhealthcondition\">\r" +
+    "                                <span id=\"lblhealthcondition\">\r" +
     "\n" +
     "                                {{ item.Healthcondition}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                        </h5>\r" +
+    "                            </h5>\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        </div>\r" +
     "\n" +
-    "                    <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.physicalArr.length>0\">\r" +
+    "                        <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.physicalArr.length>0\">\r" +
     "\n" +
-    "                        <a data-original-title=\"Edit Physical Attribute & Health Details\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.populateModel('physicalAttributes',item);\">Edit</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
+    "                            <a data-original-title=\"Edit Physical Attribute & Health Details\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.populateModel('physicalAttributes',item);\">Edit</a>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        </div>\r" +
     "\n" +
-    "                        <h6>\r" +
+    "\r" +
     "\n" +
-    "                            <label id=\"lblhealthdescription\" font-bold=\"true\">Health Condition Description</label>\r" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                        </h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                                <label id=\"lblhealthdescription\" font-bold=\"true\">Health Condition Description</label>\r" +
     "\n" +
-    "                            <span id=\"lblhealthdescriptions\">\r" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblhealthdescriptions\">\r" +
     "\n" +
     "                                {{ item.HealthConditionDescription}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                        </h5>\r" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
-    "            </div>\r" +
-    "\n" +
     "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "    <div class=\"edit_page_item\" id=\"divlnkaboutt\">\r" +
-    "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "            <h4>About My Family </h4>\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.lblaboutMyfamily==='' || page.model.lblaboutMyfamily===null\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <a data-original-title=\"Add About My Family\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.populateModel('AboutFamily');\">Add</a>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
+    "        <div class=\"edit_page_item\" id=\"divlnkaboutt\">\r" +
     "\n" +
-    "            <div id=\"lstAboutMyFamily\">\r" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "                <div id=\"Div3\" ng-class=\"AboutFamilyReviewStatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
+    "                <h4>About My Family </h4>\r" +
     "\n" +
-    "                    <div>\r" +
+    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.lblaboutMyfamily==='' || page.model.lblaboutMyfamily===null\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <a data-original-title=\"Add About My Family\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.populateModel('AboutFamily');\">Add</a>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                <div id=\"lstAboutMyFamily\">\r" +
+    "\n" +
+    "                    <div id=\"Div3\" ng-class=\"AboutFamilyReviewStatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
     "                        <div>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                            <div>\r" +
     "\n" +
-    "                                <span id=\"lblAboutMyFamily\">\r" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblAboutMyFamily\">\r" +
     "\n" +
     "                                    {{page.model.lblaboutMyfamily}}\r" +
     "\n" +
     "                                </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                                </h5>\r" +
     "\n" +
-    "                            <label id=\"Label5\" visible=\"false\"></label>\r" +
+    "                                <label id=\"Label5\" visible=\"false\"></label>\r" +
     "\n" +
-    "                        </div>\r" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.lblaboutMyfamily!='' && page.model.lblaboutMyfamily!=null\">\r" +
+    "\n" +
+    "                                <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" data-original-title=\"Edit About My Family\" ng-click=\"page.model.populateModel('AboutFamily',page.model.lblaboutMyfamily);\">Edit</a>\r" +
+    "\n" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.lblaboutMyfamily!='' && page.model.lblaboutMyfamily!=null\">\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" data-original-title=\"Edit About My Family\" ng-click=\"page.model.populateModel('AboutFamily',page.model.lblaboutMyfamily);\">Edit</a>\r" +
-    "\n" +
     "                        </div>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "                </div>\r" +
-    "\n" +
     "\r" +
+    "\n" +
+    "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
@@ -6161,8 +6215,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "    </div>\r" +
     "\n" +
     "</div>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "<div id=\"popupDiv\">\r" +
     "\n" +
@@ -7015,269 +7067,227 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editPartnerpreference/index.html',
-    "<div class=\"edit_pages_content_main clearfix\">\r" +
-    "\n" +
-    "    <!--<div class=\"employee_review_check clearfix\">\r" +
-    "\n" +
-    "        <md-checkbox ng-model=\"chkboxedu\" style=\"padding: 9px 13px 0px 0px;\" class=\"pull-right\" name=\"chkboxedu\" aria-label=\"Checkbox 1\"><span style=\"color: black;\">Review</span>\r" +
-    "\n" +
-    "        </md-checkbox>\r" +
-    "\n" +
-    "        <div class=\"clearfix\"></div>\r" +
-    "\n" +
-    "    </div>-->\r" +
-    "\n" +
-    "    <page-review dispaly-name=\"'PartnerPreference details'\" sectionid=\"'16,17,18,20,21,22'\" custid=\"page.model.CustID\"></page-review>\r" +
-    "\n" +
-    "    <div ng-repeat=\"item in page.model.partnerPrefArr\">\r" +
+    "<div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        <div class=\"edit_page_item\">\r" +
+    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
-    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "    </div>\r" +
     "\n" +
-    "                <h4>PartnerPreference Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" runat=\"server\" id=\"spanEduModID\">ModifiedBy :{{page.model.partnermodifiedby}}</span>\r" +
+    "\r" +
     "\n" +
-    "                </h4>\r" +
+    "\r" +
     "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.partnerPrefArr.length===0\">\r" +
+    "    <div class=\"edit_pages_content_main clearfix\">\r" +
     "\n" +
-    "                    <a ng-click=\"page.model.partnerprefPopulate();\" class=\"edit_page_add_button\" href=\"javascript:void(0);\">Add</a>\r" +
+    "\r" +
+    "\n" +
+    "        <page-review dispaly-name=\"'PartnerPreference details'\" sectionid=\"'16,17,18,20,21,22'\" custid=\"page.model.CustID\"></page-review>\r" +
+    "\n" +
+    "        <div ng-repeat=\"item in page.model.partnerPrefArr\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                    <h4>PartnerPreference Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" runat=\"server\" id=\"spanEduModID\">ModifiedBy :{{page.model.partnermodifiedby}}</span>\r" +
+    "\n" +
+    "                    </h4>\r" +
+    "\n" +
+    "                    <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.partnerPrefArr.length===0\">\r" +
+    "\n" +
+    "                        <a ng-click=\"page.model.partnerprefPopulate();\" class=\"edit_page_add_button\" href=\"javascript:void(0);\">Add</a>\r" +
+    "\n" +
+    "                    </div>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
-    "            </div>\r" +
+    "                <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "            <div class=\"edit_page_details_item\">\r" +
+    "                    <div id=\"uppartner\">\r" +
     "\n" +
-    "                <div id=\"uppartner\">\r" +
-    "\n" +
-    "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
+    "                        <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div id=\"UpdatePanel21\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"partnergen\" style=\"color:Red;font-weight:bold;\">Gender</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblpartnergen\" style=\"color:Red;\">{{ item.Gender}}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div ng-if=\"page.model.partnerPrefArr.length>0\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "                            <a ng-click=\"page.model.partnerprefPopulate(item);\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\">Edit</a>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanel10\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"agegap\" style=\"font-weight:bold;\">Age Gap</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblagegap\">{{ item.AgeGap}}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanel13\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"height\" style=\"font-weight:bold;\">Height</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblheight\">{{ item.Height}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanel15\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"mothertongue\" style=\"font-weight:bold;\">mother tongue</span></h6>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblmothertongue\">{{ item.Mothertongue }}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanel16\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
+    "                            <div id=\"UpdatePanel21\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <span id=\"Religion\" style=\"font-weight:bold;\">Religion</span></h6>\r" +
+    "                                    <span id=\"partnergen\" style=\"color:Red;font-weight:bold;\">Gender</span></h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblReligion\">{{ item.Religion}}</span></h5>\r" +
+    "                                    <span id=\"lblpartnergen\" style=\"color:Red;\">{{ item.Gender}}</span></h5>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "\r" +
+    "                            <div ng-if=\"page.model.partnerPrefArr.length>0\" class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanel17\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"caste\" style=\"font-weight:bold;\">caste</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblcaste\">{{ item.Caste}}</span></h5>\r" +
+    "                                <a ng-click=\"page.model.partnerprefPopulate(item);\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\">Edit</a>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanel1\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
+    "                            <div id=\"UpdatePanel10\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <span id=\"subcaste\" style=\"font-weight:bold;\">subcaste</span></h6>\r" +
+    "                                    <span id=\"agegap\" style=\"font-weight:bold;\">Age Gap</span></h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblsubcaste\">{{ item.Subcaste}}</span></h5>\r" +
+    "                                    <span id=\"lblagegap\">{{ item.AgeGap}}</span></h5>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanel2\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
+    "                            <div id=\"UpdatePanel13\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <span id=\"maritalstatus\" style=\"font-weight:bold;\">marital status</span></h6>\r" +
+    "                                    <span id=\"height\" style=\"font-weight:bold;\">Height</span></h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblmaritalstatus\">{{ item.MaritalStatus}}</span></h5>\r" +
+    "                                    <span id=\"lblheight\">{{ item.Height}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"updateeducationgroup\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
+    "                            <div id=\"UpdatePanel15\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <span id=\"Education\" style=\"font-weight:bold;\">Education</span></h6>\r" +
+    "                                    <span id=\"mothertongue\" style=\"font-weight:bold;\">mother tongue</span></h6>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblEducation\">{{ item.EducationGroup!=null?item.EducationGroup:item.EducationCategory}}</span></h5>\r" +
+    "                                    <span id=\"lblmothertongue\">{{ item.Mothertongue }}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div id=\"UpdatePanel16\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"Religion\" style=\"font-weight:bold;\">Religion</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblReligion\">{{ item.Religion}}</span></h5>\r" +
+    "\n" +
+    "                                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "\r" +
+    "                            <div id=\"UpdatePanel17\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
+    "                                <div>\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"caste\" style=\"font-weight:bold;\">caste</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblcaste\">{{ item.Caste}}</span></h5>\r" +
+    "\n" +
+    "                                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div id=\"UpdatePanel5\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"profession\" style=\"font-weight:bold;\">profession</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblprofession\">{{ item.ProfessionGroup}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanel6\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <div id=\"UpdatePanel1\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div>\r" +
+    "                                <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <h6>\r" +
+    "                                    <h6>\r" +
     "\n" +
-    "                                    <span id=\"MangalikKujadosham\" style=\"font-weight:bold;\">Manglik/Kujadosham</span></h6>\r" +
+    "                                        <span id=\"subcaste\" style=\"font-weight:bold;\">subcaste</span></h6>\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                                    <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblMangalikKujadosham\">{{ item.Kujadosham}}</span></h5>\r" +
+    "                                        <span id=\"lblsubcaste\">{{ item.Subcaste}}</span></h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div id=\"UpdatePanel2\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"maritalstatus\" style=\"font-weight:bold;\">marital status</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblmaritalstatus\">{{ item.MaritalStatus}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div id=\"updateeducationgroup\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"Education\" style=\"font-weight:bold;\">Education</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblEducation\">{{ item.EducationGroup!=null?item.EducationGroup:item.EducationCategory}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -7285,61 +7295,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanel7\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <div id=\"UpdatePanel5\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"preferredstarLanguage\" style=\"font-weight:bold;\">preferred star Language</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblpreferredstarLanguage\">{{ item.StarLanguage}}</span></h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanel8\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"preferredstar\" style=\"font-weight:bold;\">Non preferred stars</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblpreferredstar\">{{ item.Stars}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanel12\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -7347,11 +7305,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <span id=\"Diet\" style=\"font-weight:bold;\">Diet</span></h6>\r" +
+    "                                    <span id=\"profession\" style=\"font-weight:bold;\">profession</span></h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblDiet\">{{ item.Diet}}</span></h5>\r" +
+    "                                    <span id=\"lblprofession\">{{ item.ProfessionGroup}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -7359,25 +7317,49 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
+    "                            <div id=\"UpdatePanel6\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div id=\"UpdatePanel18\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <div>\r" +
+    "                                <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <h6>\r" +
+    "                                    <h6>\r" +
     "\n" +
-    "                                    <span id=\"preferredCountry\" style=\"font-weight:bold;\">Domicile</span></h6>\r" +
+    "                                        <span id=\"MangalikKujadosham\" style=\"font-weight:bold;\">Manglik/Kujadosham</span></h6>\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                                    <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblpreferredCountry\">{{ item.Domicel}}</span></h5>\r" +
+    "                                        <span id=\"lblMangalikKujadosham\">{{ item.Kujadosham}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div id=\"UpdatePanel7\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"preferredstarLanguage\" style=\"font-weight:bold;\">preferred star Language</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblpreferredstarLanguage\">{{ item.StarLanguage}}</span></h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -7385,23 +7367,51 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
+    "                            <div id=\"UpdatePanel8\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div id=\"UpdatePanel18\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <div>\r" +
+    "                                <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <h6>\r" +
+    "                                    <h6>\r" +
     "\n" +
-    "                                    <span id=\"preferredCountry\" style=\"font-weight:bold;\">preferred Country</span></h6>\r" +
+    "                                        <span id=\"preferredstar\" style=\"font-weight:bold;\">Non preferred stars</span></h6>\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                                    <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblpreferredCountry\">{{ item.CountryName}}</span></h5>\r" +
+    "                                        <span id=\"lblpreferredstar\">{{ item.Stars}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div id=\"UpdatePanel12\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"Diet\" style=\"font-weight:bold;\">Diet</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblDiet\">{{ item.Diet}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -7409,55 +7419,105 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
+    "\r" +
     "\n" +
-    "                        <div id=\"UpdatePanel19\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <div id=\"UpdatePanel18\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            <div>\r" +
+    "                                <div>\r" +
     "\n" +
-    "                                <h6>\r" +
+    "\r" +
     "\n" +
-    "                                    <span id=\"preferredState\" style=\"font-weight:bold;\">preferred State</span></h6>\r" +
+    "                                    <h6>\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                                        <span id=\"preferredCountry\" style=\"font-weight:bold;\">Domicile</span></h6>\r" +
     "\n" +
-    "                                    <span id=\"lblpreferredState\">{{ item.StateName}}</span></h5>\r" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblpreferredCountry\">{{ item.Domicel}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
+    "                            <div id=\"UpdatePanel18\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                        <div id=\"UpdatePanel36\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                <div>\r" +
     "\n" +
-    "                            <div>\r" +
+    "\r" +
     "\n" +
-    "                                <h6>\r" +
+    "                                    <h6>\r" +
     "\n" +
-    "                                    <span id=\"RegionName\" style=\"font-weight:bold;\">Region</span></h6>\r" +
+    "                                        <span id=\"preferredCountry\" style=\"font-weight:bold;\">preferred Country</span></h6>\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                                    <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblRegionName\">{{ item.RegionName}}</span></h5>\r" +
+    "                                        <span id=\"lblpreferredCountry\">{{ item.CountryName}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div id=\"UpdatePanel19\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"preferredState\" style=\"font-weight:bold;\">preferred State</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblpreferredState\">{{ item.StateName}}</span></h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "                        </div>\r" +
+    "                            <div id=\"UpdatePanel36\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                        <div id=\"UpdatePanel40\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                <div>\r" +
     "\n" +
-    "                            <div>\r" +
+    "                                    <h6>\r" +
     "\n" +
-    "                                <h6>\r" +
+    "                                        <span id=\"RegionName\" style=\"font-weight:bold;\">Region</span></h6>\r" +
     "\n" +
-    "                                    <span id=\"BranchName\" style=\"font-weight:bold;\">Branch</span></h6>\r" +
+    "                                    <h5>\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                                        <span id=\"lblRegionName\">{{ item.RegionName}}</span></h5>\r" +
     "\n" +
-    "                                    <span id=\"lblBranchName\">{{ item.BranchName}}</span></h5>\r" +
+    "                                </div>\r" +
     "\n" +
     "                            </div>\r" +
+    "\n" +
+    "                            <div id=\"UpdatePanel40\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"BranchName\" style=\"font-weight:bold;\">Branch</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblBranchName\">{{ item.BranchName}}</span></h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
@@ -7465,51 +7525,23 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
     "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "        </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
-    "        <div class=\"edit_page_item\">\r" +
+    "            <div class=\"edit_page_item\">\r" +
     "\n" +
-    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "                <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "                <h4>Partner Description ( Describe qualities you are looking for in your partner)</h4>\r" +
+    "                    <h4>Partner Description ( Describe qualities you are looking for in your partner)</h4>\r" +
     "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "                    <div class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
-    "                    <div ng-if=\"item.PartnerDescripition==='' || item.PartnerDescripition===null\">\r" +
+    "                        <div ng-if=\"item.PartnerDescripition==='' || item.PartnerDescripition===null\">\r" +
     "\n" +
-    "                        <a id=\"lnkpartnerdesc\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.partnerdescPopulate();\"> Add</a>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanel9\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblpartnerdesc\">{{ page.model.partnerDescription}}</span></h5>\r" +
+    "                            <a id=\"lnkpartnerdesc\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.partnerdescPopulate();\"> Add</a>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
@@ -7517,9 +7549,35 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "                    <div ng-if=\"item.PartnerDescripition!=''  && item.PartnerDescripition!=null\" class=\"edit_page_item_ui clearfix\">\r" +
+    "                </div>\r" +
     "\n" +
-    "                        <a id=\"lnkpartnerdesc\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.partnerdescPopulate(item);\"> Edit</a>\r" +
+    "                <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanel9\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblpartnerdesc\">{{ page.model.partnerDescription}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ng-if=\"item.PartnerDescripition!=''  && item.PartnerDescripition!=null\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                            <a id=\"lnkpartnerdesc\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.partnerdescPopulate(item);\"> Edit</a>\r" +
+    "\n" +
+    "                        </div>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
@@ -7532,6 +7590,12 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "    </div>\r" +
     "\n" +
     "</div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -7980,437 +8044,45 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editProfileSetting/index.html',
-    "<div class=\"edit_pages_content_main clearfix\">\r" +
+    "<div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <div class=\"edit_page_item\">\r" +
-    "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "            <h4>Profile Settings\r" +
-    "\n" +
-    "            </h4>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item\" ng-repeat=\"item in page.model.profileSettingArr\">\r" +
-    "\n" +
-    "            <div id=\"fullupdatefatherbrother\">\r" +
-    "\n" +
-    "                <div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelFBProfession\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblprofilecurrentstatus\" font-bold=\"true\">Application Status</span>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblprofcurrentstatus\">{{item.ProfileStatus}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanellnkFatherSister\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showprofilepopup('profileSetting',item);\">Edit</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"UpApplicationStatusmodifybydiv\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"ApplicationStatusmodifybydiv\" class=\"edit_page_details_item_desc clearfix\" visible={{item.EmployeeName !=\"\" && Eval( \"EmployeeName\")!=null?true:false }}>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"ApplicationStatusmodifyby\" font-bold=\"true\">Application Status ModifiedBy</span>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblApplicationStatusmodifyby\">{{item.EmployeeName}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"inactivediv\" ng-show=\"item.ProfileStatusID==='55' || item.ProfileStatusID===55\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"divtotalinactive\">\r" +
-    "\n" +
-    "                            <div id=\"UpdatePanel9\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <span id=\"span1\" font-bold=\"true\">No of Days to be inactivated </span>\r" +
-    "\n" +
-    "                                    </h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblNoofDaysinactivated\">{{item.NoofDaysinactivated}}\r" +
-    "\n" +
-    "                                    </span>\r" +
-    "\n" +
-    "                                    </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div id=\"UpdatePanel12\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <span id=\"span6\" font-bold=\"true\">Reason for InActive</span>\r" +
-    "\n" +
-    "                                    </h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblReason4InActive\">{{item.Reason4InActive}}\r" +
-    "\n" +
-    "                                    </span>\r" +
-    "\n" +
-    "                                    </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div id=\"UpdatePanel13\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <span id=\"span8\" font-bold=\"true\">Requested By</span>\r" +
-    "\n" +
-    "                                    </h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblRequestedBy\">{{item.RequestedBy}}\r" +
-    "\n" +
-    "                                    </span>\r" +
-    "\n" +
-    "                                    </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelFBProfessionDetails\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"profilegrade\" font-bold=\"true\">Profile Grade</span>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblprofilegrade\">{{item.ProfileGrade}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"Updatelblprofilegrademodifyby\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\" ng-show=\"item.ProfileGradeModifiedByEmp !=='' && item.ProfileGradeModifiedByEmp!=null\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblprofilegrademodifyby\" font-bold=\"true\">Profile Grade ModifiedBy</span>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"ProfileGradeModifiedByEmp\">{{item.ProfileGradeModifiedByEmp}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
+    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
-    "    <div class=\"edit_page_item\" id=\"divconfidential\">\r" +
-    "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "            <h4>Confidential status\r" +
-    "\n" +
-    "            </h4>\r" +
-    "\n" +
     "\r" +
     "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item\" ng-repeat=\"item in page.model.ConfidentialArr\">\r" +
-    "\n" +
-    "            <div id=\"UpdatePanel2\">\r" +
-    "\n" +
-    "                <div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelFBCurrentLocation\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
     "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"isConfidential\" font-bold=\"true\">isConfidential</span>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblisConfidential\">{{item.ConfindentialStatus}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanel1\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showprofilepopup('confidential',item);\">Edit</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanel6\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"span5\" font-bold=\"true\">Very High Confidential</span>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblvryconfidential\">{{item.HighConfidentialStatus}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                </div>\r" +
+    "    <div class=\"edit_pages_content_main clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Profile Settings\r" +
+    "\n" +
+    "                </h4>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "        </div>\r" +
+    "            <div class=\"edit_page_details_item\" ng-repeat=\"item in page.model.profileSettingArr\">\r" +
     "\n" +
-    "    </div>\r" +
+    "                <div id=\"fullupdatefatherbrother\">\r" +
     "\n" +
-    "    <div class=\"edit_page_item\" id=\"divcprofiledisplaysettings\">\r" +
+    "                    <div>\r" +
     "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "            <h4>Profile Display Settings\r" +
-    "\n" +
-    "            </h4>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item\" ng-repeat=\"item in page.model.profileDisplayArr\">\r" +
-    "\n" +
-    "            <div id=\"UpdatePanel4\">\r" +
-    "\n" +
-    "                <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanel3\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showprofilepopup('profileDisplay',item);\">Edit</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanel7\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"span3\" font-bold=\"true\">Display In</span>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblProfileDisplayName\">{{item.ProfileDisplayName}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanel8\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblprofileloginstatus\" font-bold=\"true\">Profile Current Login Status Is</span>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblprofileloginstatusis\">{{item.LoginStatusName}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"divBlockdisplay\" visible={{item.Blockflag==\"1\" ? true: false }}>\r" +
-    "\n" +
-    "                        <div id=\"uplblcreateblockeddate\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div id=\"UpdatePanelFBProfession\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -8418,13 +8090,13 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <span id=\"lblcreatedate\">{{item.LoginStatusName == \"Blocked\" ? \"Blocked Date\": \"Allowed Date\" }}</span>\r" +
+    "                                    <span id=\"lblprofilecurrentstatus\" font-bold=\"true\">Application Status</span>\r" +
     "\n" +
     "                                </h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblcreateblockeddate\">{{item.BlockDate}}</span>\r" +
+    "                                    <span id=\"lblprofcurrentstatus\">{{item.ProfileStatus}}</span>\r" +
     "\n" +
     "                                </h5>\r" +
     "\n" +
@@ -8434,21 +8106,189 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "                        <div id=\"uplblblockedempname\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div id=\"UpdatePanellnkFatherSister\" class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div>\r" +
+    "                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showprofilepopup('profileSetting',item);\">Edit</a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"UpApplicationStatusmodifybydiv\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"ApplicationStatusmodifybydiv\" class=\"edit_page_details_item_desc clearfix\" visible={{item.EmployeeName !=\"\" && Eval( \"EmployeeName\")!=null?true:false }}>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <span id=\"lblblockedempname\">{{item.LoginStatusName == \"Blocked\" ? \"Blocked By\": \"Allowed By\" }}</span>\r" +
+    "                                    <span id=\"ApplicationStatusmodifyby\" font-bold=\"true\">Application Status ModifiedBy</span>\r" +
     "\n" +
     "                                </h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"span2\">{{item.BlockEmapName}}</span>\r" +
+    "                                    <span id=\"lblApplicationStatusmodifyby\">{{item.EmployeeName}}</span>\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"inactivediv\" ng-show=\"item.ProfileStatusID==='55' || item.ProfileStatusID===55\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"divtotalinactive\">\r" +
+    "\n" +
+    "                                <div id=\"UpdatePanel9\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <h6>\r" +
+    "\n" +
+    "                                            <span id=\"span1\" font-bold=\"true\">No of Days to be inactivated </span>\r" +
+    "\n" +
+    "                                        </h6>\r" +
+    "\n" +
+    "                                        <h5>\r" +
+    "\n" +
+    "                                            <span id=\"lblNoofDaysinactivated\">{{item.NoofDaysinactivated}}\r" +
+    "\n" +
+    "                                    </span>\r" +
+    "\n" +
+    "                                        </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                                <div id=\"UpdatePanel12\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <h6>\r" +
+    "\n" +
+    "                                            <span id=\"span6\" font-bold=\"true\">Reason for InActive</span>\r" +
+    "\n" +
+    "                                        </h6>\r" +
+    "\n" +
+    "                                        <h5>\r" +
+    "\n" +
+    "                                            <span id=\"lblReason4InActive\">{{item.Reason4InActive}}\r" +
+    "\n" +
+    "                                    </span>\r" +
+    "\n" +
+    "                                        </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                                <div id=\"UpdatePanel13\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <h6>\r" +
+    "\n" +
+    "                                            <span id=\"span8\" font-bold=\"true\">Requested By</span>\r" +
+    "\n" +
+    "                                        </h6>\r" +
+    "\n" +
+    "                                        <h5>\r" +
+    "\n" +
+    "                                            <span id=\"lblRequestedBy\">{{item.RequestedBy}}\r" +
+    "\n" +
+    "                                    </span>\r" +
+    "\n" +
+    "                                        </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelFBProfessionDetails\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"profilegrade\" font-bold=\"true\">Profile Grade</span>\r" +
+    "\n" +
+    "                                </h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblprofilegrade\">{{item.ProfileGrade}}</span>\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"Updatelblprofilegrademodifyby\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\" ng-show=\"item.ProfileGradeModifiedByEmp !=='' && item.ProfileGradeModifiedByEmp!=null\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblprofilegrademodifyby\" font-bold=\"true\">Profile Grade ModifiedBy</span>\r" +
+    "\n" +
+    "                                </h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"ProfileGradeModifiedByEmp\">{{item.ProfileGradeModifiedByEmp}}</span>\r" +
     "\n" +
     "                                </h5>\r" +
     "\n" +
@@ -8460,21 +8300,95 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                        <div id=\"upblockedreason\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"edit_page_item\" id=\"divconfidential\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Confidential status\r" +
+    "\n" +
+    "                </h4>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\" ng-repeat=\"item in page.model.ConfidentialArr\">\r" +
+    "\n" +
+    "                <div id=\"UpdatePanel2\">\r" +
+    "\n" +
+    "                    <div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelFBCurrentLocation\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
     "                            <div>\r" +
     "\n" +
+    "\r" +
+    "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <span id=\"lblreason\">{{item.LoginStatusName == \"Blocked\" ? \"Reason For Blocked\": \"Reason For Allowed\" }}</span>\r" +
+    "                                    <span id=\"isConfidential\" font-bold=\"true\">isConfidential</span>\r" +
     "\n" +
-    "                                    <h5>\r" +
+    "                                </h6>\r" +
     "\n" +
-    "                                        <span id=\"lblBlockedReason\">{{item.ProfileBlockReason}}</span>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                    </h5>\r" +
+    "                                    <span id=\"lblisConfidential\">{{item.ConfindentialStatus}}</span>\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanel1\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showprofilepopup('confidential',item);\">Edit</a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanel6\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"span5\" font-bold=\"true\">Very High Confidential</span>\r" +
+    "\n" +
+    "                                </h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblvryconfidential\">{{item.HighConfidentialStatus}}</span>\r" +
+    "\n" +
+    "                                </h5>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
@@ -8484,240 +8398,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"edit_page_item\">\r" +
-    "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "            <h4>Grade Selections\r" +
-    "\n" +
-    "            </h4>\r" +
-    "\n" +
-    "            <div id=\"updatecontenGrade\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div id=\"divAddGrade\" visible=\"false\">\r" +
-    "\n" +
-    "                    <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "                        <div id=\"updateAddlnkGrade\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showprofilepopup('grading');\">Add</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item\" ng-repeat=\"item in page.model.gradeSelectionArr\">\r" +
-    "\n" +
-    "            <div id=\"UpdatePanel14\">\r" +
-    "\n" +
-    "                <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelGrade\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showprofilepopup('grading',item);\">Edit</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatepanelEdu\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblEducationGradeText\" font-bold=\"true\">Education</span>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblEducationGrade\">{{item.EducationGrade}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelProfession\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblprofessionGradeText\" font-bold=\"true\">Profession</span>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblprofessionGrade\">{{item.ProfileGrade}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"updateproperty\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblpropertyGradeText\">Property</span>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblpropertyGrade\">{{item.PropertyGrade}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"updatefamily\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblfamilyGradeText\">Family</span>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblfamilyGrade\">{{item.FamilyGrade}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"updatePhoto\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblPhotoGradeText\">Photo</span>\r" +
-    "\n" +
-    "                            </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblPhotoGrade\">{{item.PhotoGrade}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"UpdatePaneCreatedBYEmp\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblCreatedBYEmp\">Created By</span> </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblCreatedBYEmpGrade\">{{item.CreatedBYEmp}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"UpdateCreatedDateGrade\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblCreatedDateGrade\">CreatedDate</span> </h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblCreatedDatedisplay\">{{item.CreatedDate}}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
     "                    </div>\r" +
@@ -8727,16 +8407,416 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "            </div>\r" +
     "\n" +
     "        </div>\r" +
+    "\n" +
+    "        <div class=\"edit_page_item\" id=\"divcprofiledisplaysettings\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Profile Display Settings\r" +
+    "\n" +
+    "                </h4>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\" ng-repeat=\"item in page.model.profileDisplayArr\">\r" +
+    "\n" +
+    "                <div id=\"UpdatePanel4\">\r" +
+    "\n" +
+    "                    <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanel3\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showprofilepopup('profileDisplay',item);\">Edit</a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanel7\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"span3\" font-bold=\"true\">Display In</span>\r" +
+    "\n" +
+    "                                </h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblProfileDisplayName\">{{item.ProfileDisplayName}}</span>\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanel8\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblprofileloginstatus\" font-bold=\"true\">Profile Current Login Status Is</span>\r" +
+    "\n" +
+    "                                </h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblprofileloginstatusis\">{{item.LoginStatusName}}</span>\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"divBlockdisplay\" visible={{item.Blockflag==\"1\" ? true: false }}>\r" +
+    "\n" +
+    "                            <div id=\"uplblcreateblockeddate\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"lblcreatedate\">{{item.LoginStatusName == \"Blocked\" ? \"Blocked Date\": \"Allowed Date\" }}</span>\r" +
+    "\n" +
+    "                                    </h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblcreateblockeddate\">{{item.BlockDate}}</span>\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div id=\"uplblblockedempname\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"lblblockedempname\">{{item.LoginStatusName == \"Blocked\" ? \"Blocked By\": \"Allowed By\" }}</span>\r" +
+    "\n" +
+    "                                    </h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"span2\">{{item.BlockEmapName}}</span>\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"upblockedreason\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"lblreason\">{{item.LoginStatusName == \"Blocked\" ? \"Reason For Blocked\": \"Reason For Allowed\" }}</span>\r" +
+    "\n" +
+    "                                        <h5>\r" +
+    "\n" +
+    "                                            <span id=\"lblBlockedReason\">{{item.ProfileBlockReason}}</span>\r" +
+    "\n" +
+    "                                        </h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Grade Selections\r" +
+    "\n" +
+    "                </h4>\r" +
+    "\n" +
+    "                <div id=\"updatecontenGrade\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div id=\"divAddGrade\" visible=\"false\">\r" +
+    "\n" +
+    "                        <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                            <div id=\"updateAddlnkGrade\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showprofilepopup('grading');\">Add</a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\" ng-repeat=\"item in page.model.gradeSelectionArr\">\r" +
+    "\n" +
+    "                <div id=\"UpdatePanel14\">\r" +
+    "\n" +
+    "                    <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelGrade\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.showprofilepopup('grading',item);\">Edit</a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatepanelEdu\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblEducationGradeText\" font-bold=\"true\">Education</span>\r" +
+    "\n" +
+    "                                </h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblEducationGrade\">{{item.EducationGrade}}</span>\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelProfession\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblprofessionGradeText\" font-bold=\"true\">Profession</span>\r" +
+    "\n" +
+    "                                </h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblprofessionGrade\">{{item.ProfileGrade}}</span>\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"updateproperty\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblpropertyGradeText\">Property</span>\r" +
+    "\n" +
+    "                                </h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblpropertyGrade\">{{item.PropertyGrade}}</span>\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"updatefamily\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblfamilyGradeText\">Family</span>\r" +
+    "\n" +
+    "                                </h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblfamilyGrade\">{{item.FamilyGrade}}</span>\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"updatePhoto\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblPhotoGradeText\">Photo</span>\r" +
+    "\n" +
+    "                                </h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblPhotoGrade\">{{item.PhotoGrade}}</span>\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"UpdatePaneCreatedBYEmp\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblCreatedBYEmp\">Created By</span> </h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblCreatedBYEmpGrade\">{{item.CreatedBYEmp}}</span>\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"UpdateCreatedDateGrade\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblCreatedDateGrade\">CreatedDate</span> </h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblCreatedDatedisplay\">{{item.CreatedDate}}</span>\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "</div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -9167,277 +9247,293 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editProperty/index.html',
-    "<div class=\"edit_pages_content_main clearfix\">\r" +
+    "<div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <page-review dispaly-name=\"'Property details'\" sectionid=\"'34'\" custid=\"page.model.CustID\"></page-review>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"edit_page_item\">\r" +
-    "\n" +
-    "        <div id=\"upppp\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "                <h4>Property Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" visible=\"false\" runat=\"server\" id=\"spanEduModID\">ModifiedBy :{{page.model.propertymodifiedby}}</span>\r" +
-    "\n" +
-    "                </h4>\r" +
-    "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.propertyArr.length===0\">\r" +
-    "\n" +
-    "                    <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.populateProperty()\">Add</a>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.propertyArr\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div>\r" +
-    "\n" +
-    "                    <div id=\"uplFamilyStatus\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"lblfamilystatus\" style=\"font-weight: bold;\">Family Status</span></h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"lblfmstatus\">{{(item.FamilyStatus!=null && item.FamilyStatus!=\"\")?item.FamilyStatus:\"Not Specified\" }}</span></h5>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div ng-if=\"page.model.propertyArr.length>0\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "                        <a id=\"lnkedittt\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.populateProperty(item)\">Edit</a>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                    <h6>\r" +
-    "\n" +
-    "                        <span id=\"lblproperty\" style=\"font-weight: bold;\">Property Value</span></h6>\r" +
-    "\n" +
-    "                    <h5>\r" +
-    "\n" +
-    "                        <span id=\"lblpropertyval\">{{((item.PropertyValue!=null && item.PropertyValue!=\"\")?item.PropertyValue+\" Lakhs\":\"\")}}</span>\r" +
-    "\n" +
-    "                    </h5>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div id=\"isproperty\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <h6>\r" +
-    "\n" +
-    "                        <label id=\"lblpropertysharedproperty\" style=\"font-weight: bold;\">Property Type</label></h6>\r" +
-    "\n" +
-    "                    <h5>\r" +
-    "\n" +
-    "                        <span id=\"lblisProperty\">{{((item.isProperty!=null && item.isProperty!=\"\")?item.isProperty:\"Not Specified\") }}</span></h5>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                    <h6>\r" +
-    "\n" +
-    "                        <span id=\"lblpropdet\" style=\"font-weight: bold;\">Property Details</span></h6>\r" +
-    "\n" +
-    "                    <h5>\r" +
-    "\n" +
-    "                        <span id=\"lblpropertydetails\">{{(item.PropertyDetails!=null && (item.PropertyDetails!=\"\"))?item.PropertyDetails:\"\"}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <hr>\r" +
-    "\n" +
-    "        </div>\r" +
+    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <script type=\"text/ng-template\" id=\"propertyContent.html\">\r" +
+    "\r" +
     "\n" +
-    "        <form name=\"propertyForm\" novalidate role=\"form\" ng-submit=\"page.model.propertySubmit(page.model.proObj)\">\r" +
+    "    <div class=\"edit_pages_content_main clearfix\">\r" +
     "\n" +
-    "            <div class=\"modal-header\">\r" +
+    "\r" +
     "\n" +
-    "                <h3 class=\"modal-title text-center\">Property Details\r" +
+    "        <page-review dispaly-name=\"'Property details'\" sectionid=\"'34'\" custid=\"page.model.CustID\"></page-review>\r" +
     "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"cancel();\">\r" +
+    "\r" +
     "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\">Delete</ng-md-icon>\r" +
+    "        <div class=\"edit_page_item\">\r" +
     "\n" +
-    "                    </a>\r" +
+    "            <div id=\"upppp\">\r" +
     "\n" +
-    "                </h3>\r" +
+    "\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                    <h4>Property Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" visible=\"false\" runat=\"server\" id=\"spanEduModID\">ModifiedBy :{{page.model.propertymodifiedby}}</span>\r" +
+    "\n" +
+    "                    </h4>\r" +
+    "\n" +
+    "                    <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.propertyArr.length===0\">\r" +
+    "\n" +
+    "                        <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.populateProperty()\">Add</a>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                <ul id=\"ulproperty\">\r" +
+    "                <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.propertyArr\">\r" +
     "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
+    "\r" +
     "\n" +
-    "                        <label for=\"lblfamilyStatus\" class=\"pop_label_left\">Family Status</label>\r" +
+    "                    <div>\r" +
     "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "                        <div id=\"uplFamilyStatus\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.proObj.ddlFamilyStatus\" typeofdata=\"'familyStatus'\"></select>\r" +
+    "\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"lblfamilystatus\" style=\"font-weight: bold;\">Family Status</span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblfmstatus\">{{(item.FamilyStatus!=null && item.FamilyStatus!=\"\")?item.FamilyStatus:\"Not Specified\" }}</span></h5>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "                    </li>\r" +
+    "                        <div ng-if=\"page.model.propertyArr.length>0\" class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblSharedProperty\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Is shared property</label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                            <md-radio-group name=\"rdlSharedProperty\" layout=\"row\" ng-model=\"page.model.proObj.rdlSharedProperty\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"0\"> No </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                        </md-input-container>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
-    "\n" +
-    "                        <label for=\"lblQuantity\" class=\"pop_label_left\">Quantity</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.proObj.txtQuantity\" class=\"form-control col-lg-3\" />\r" +
+    "                            <a id=\"lnkedittt\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.populateProperty(item)\">Edit</a>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "                    </li>\r" +
+    "                    </div>\r" +
     "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
+    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                        <label for=\"lblValueofproperty\" class=\"pop_label_left\">Value of property</label>\r" +
+    "                        <h6>\r" +
     "\n" +
-    "                        <div class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
+    "                            <span id=\"lblproperty\" style=\"font-weight: bold;\">Property Value</span></h6>\r" +
     "\n" +
-    "                            <input ng-model=\"page.model.proObj.txtValueofproperty\" class=\"form-control\" maxlength=\"5\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));\"\r" +
+    "                        <h5>\r" +
     "\n" +
-    "                            />\r" +
+    "                            <span id=\"lblpropertyval\">{{((item.PropertyValue!=null && item.PropertyValue!=\"\")?item.PropertyValue+\" Lakhs\":\"\")}}</span>\r" +
     "\n" +
-    "                            <span font-bold=\"true\">Lakhs</span>\r" +
+    "                        </h5>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
+    "                    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </li>\r" +
+    "                    <div id=\"isproperty\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
+    "                        <h6>\r" +
+    "\n" +
+    "                            <label id=\"lblpropertysharedproperty\" style=\"font-weight: bold;\">Property Type</label></h6>\r" +
+    "\n" +
+    "                        <h5>\r" +
+    "\n" +
+    "                            <span id=\"lblisProperty\">{{((item.isProperty!=null && item.isProperty!=\"\")?item.isProperty:\"Not Specified\") }}</span></h5>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                        <h6>\r" +
+    "\n" +
+    "                            <span id=\"lblpropdet\" style=\"font-weight: bold;\">Property Details</span></h6>\r" +
+    "\n" +
+    "                        <h5>\r" +
+    "\n" +
+    "                            <span id=\"lblpropertydetails\">{{(item.PropertyDetails!=null && (item.PropertyDetails!=\"\"))?item.PropertyDetails:\"\"}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <label for=\"lblQuantity\" class=\"pop_label_left\">Property description</label>\r" +
-    "\n" +
-    "                        <div class=\"\">\r" +
-    "\n" +
-    "                            <textarea ng-model=\"page.model.proObj.txtPropertydesc\" style=\"width:100%;\" maxlength=\"500\" rows=\"5\" width=\"515\"></textarea>\r" +
+    "                    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
+    "                </div>\r" +
     "\n" +
-    "                    </li>\r" +
+    "                <hr>\r" +
     "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
+    "            </div>\r" +
     "\n" +
-    "                        <div style=\"display: none;\">\r" +
+    "        </div>\r" +
     "\n" +
-    "                            <label for=\"lblShowingviewprofile\" class=\"pop_label_left\">Showing view profile</label>\r" +
+    "\r" +
     "\n" +
-    "                            <div class=\"pop_controls_right pop_radios_list\">\r" +
+    "        <script type=\"text/ng-template\" id=\"propertyContent.html\">\r" +
     "\n" +
-    "                                <label class=\"\">\r" +
+    "            <form name=\"propertyForm\" novalidate role=\"form\" ng-submit=\"page.model.propertySubmit(page.model.proObj)\">\r" +
+    "\n" +
+    "                <div class=\"modal-header\">\r" +
+    "\n" +
+    "                    <h3 class=\"modal-title text-center\">Property Details\r" +
+    "\n" +
+    "                        <a href=\"javascript:void(0);\" ng-click=\"cancel();\">\r" +
+    "\n" +
+    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\">Delete</ng-md-icon>\r" +
+    "\n" +
+    "                        </a>\r" +
+    "\n" +
+    "                    </h3>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <ul id=\"ulproperty\">\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblfamilyStatus\" class=\"pop_label_left\">Family Status</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                                <select multiselectdropdown ng-model=\"page.model.proObj.ddlFamilyStatus\" typeofdata=\"'familyStatus'\"></select>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix\">\r" +
+    "\n" +
+    "                            <label for=\"lblSharedProperty\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Is shared property</label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <md-input-container style=\"font-weight: 700;color:black;\">\r" +
+    "\n" +
+    "                                <md-radio-group name=\"rdlSharedProperty\" layout=\"row\" ng-model=\"page.model.proObj.rdlSharedProperty\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "\n" +
+    "                                    <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
+    "\n" +
+    "                                    <md-radio-button value=\"0\"> No </md-radio-button>\r" +
+    "\n" +
+    "                                </md-radio-group>\r" +
+    "\n" +
+    "                            </md-input-container>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
+    "\n" +
+    "                            <label for=\"lblQuantity\" class=\"pop_label_left\">Quantity</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.proObj.txtQuantity\" class=\"form-control col-lg-3\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblValueofproperty\" class=\"pop_label_left\">Value of property</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.proObj.txtValueofproperty\" class=\"form-control\" maxlength=\"5\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));\"\r" +
+    "\n" +
+    "                                />\r" +
+    "\n" +
+    "                                <span font-bold=\"true\">Lakhs</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <label for=\"lblQuantity\" class=\"pop_label_left\">Property description</label>\r" +
+    "\n" +
+    "                            <div class=\"\">\r" +
+    "\n" +
+    "                                <textarea ng-model=\"page.model.proObj.txtPropertydesc\" style=\"width:100%;\" maxlength=\"500\" rows=\"5\" width=\"515\"></textarea>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <div style=\"display: none;\">\r" +
+    "\n" +
+    "                                <label for=\"lblShowingviewprofile\" class=\"pop_label_left\">Showing view profile</label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right pop_radios_list\">\r" +
+    "\n" +
+    "                                    <label class=\"\">\r" +
     "\n" +
     "                    <input ng-model=\"page.model.proObj.rbtShowViewProfile\" value=\"1\" type=\"radio\" checked><span>&nbsp;Yes</span>\r" +
     "\n" +
     "                </label> &nbsp;\r" +
     "\n" +
-    "                                <label class=\"\"><input ng-model=\"page.model.proObj.rbtShowViewProfile\" value=\"0\" type=\"radio\"><span>&nbsp;No</span>\r" +
+    "                                    <label class=\"\"><input ng-model=\"page.model.proObj.rbtShowViewProfile\" value=\"0\" type=\"radio\"><span>&nbsp;No</span>\r" +
     "\n" +
     "                </label>\r" +
     "\n" +
+    "                                </div>\r" +
+    "\n" +
     "                            </div>\r" +
     "\n" +
-    "                        </div>\r" +
+    "                        </li>\r" +
     "\n" +
-    "                    </li>\r" +
+    "                        <li class=\"row \">\r" +
     "\n" +
-    "                    <li class=\"row \">\r" +
+    "                            <edit-footer></edit-footer>\r" +
     "\n" +
-    "                        <edit-footer></edit-footer>\r" +
+    "                        </li>\r" +
     "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
+    "                    </ul>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "            </div>\r" +
+    "                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        </form>\r" +
+    "            </form>\r" +
     "\n" +
-    "    </script>\r" +
+    "        </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -9446,43 +9542,103 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editReference/index.html',
-    "<div class=\"edit_pages_content_main clearfix\">\r" +
+    "<div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <page-review dispaly-name=\"'Reference details'\" sectionid=\"'29'\" custid=\"page.model.CustID\"></page-review>\r" +
+    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
-    "    <div class=\"edit_page_item\">\r" +
+    "    </div>\r" +
     "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
+    "\r" +
     "\n" +
-    "            <h4>Reference Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" visible=\"false\" runat=\"server\" id=\"spanEduModID\">ModifiedBy :{{page.model.referencemodifiedby}}</span></h4>\r" +
+    "    <div class=\"edit_pages_content_main clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <page-review dispaly-name=\"'Reference details'\" sectionid=\"'29'\" custid=\"page.model.CustID\"></page-review>\r" +
+    "\n" +
+    "        <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Reference Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" visible=\"false\" runat=\"server\" id=\"spanEduModID\">ModifiedBy :{{page.model.referencemodifiedby}}</span></h4>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\">\r" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
-    "                <a class=\"edit_page_add_button\" href=\"javascript:void(0)\" ng-click=\"page.model.referencePopulate();\">Add</a>\r" +
+    "                    <a class=\"edit_page_add_button\" href=\"javascript:void(0)\" ng-click=\"page.model.referencePopulate();\">Add</a>\r" +
+    "\n" +
+    "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "        </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
+    "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "            <div id=\"fullupdate\">\r" +
+    "                <div id=\"fullupdate\">\r" +
     "\n" +
-    "                <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.ReferenceArr\">\r" +
+    "                    <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.ReferenceArr\">\r" +
     "\n" +
-    "                    <div>\r" +
+    "                        <div>\r" +
     "\n" +
-    "                        <div id=\"uplRelationShipType\">\r" +
+    "                            <div id=\"uplRelationShipType\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"RelationShipType\" style=\"font-weight:bold;\">RelationShip Type</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblRelationShipType\">{{item.Relatioshiptype }}</span></h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ng-if=\"page.model.ReferenceArr.length>0\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                                <a class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.referencePopulate(item);\">Edit</a>\r" +
+    "\n" +
+    "                                <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeletePopup(item.RefrenceCust_Reference_ID)\">Delete</a>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"Name\" style=\"font-weight:bold;\">Name</span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblName\">{{item.RefrenceName }}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"uplEducationRef\">\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"uplProfessionDetails\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -9490,11 +9646,13 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <span id=\"RelationShipType\" style=\"font-weight:bold;\">RelationShip Type</span></h6>\r" +
+    "                                    <span id=\"ProfessionDetails\" style=\"font-weight:bold;\">Profession</span></h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblRelationShipType\">{{item.Relatioshiptype }}</span></h5>\r" +
+    "                                    <span id=\"lblProfessionDetails\">{{item.RefrenceProfessionDetails }}</span>\r" +
+    "\n" +
+    "                                </h5>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
@@ -9502,177 +9660,277 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "                        <div ng-if=\"page.model.ReferenceArr.length>0\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "                            <a class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.referencePopulate(item);\">Edit</a>\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeletePopup(item.RefrenceCust_Reference_ID)\">Delete</a>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div id=\"uplNativePlace\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <h6>\r" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            <span id=\"Name\" style=\"font-weight:bold;\">Name</span></h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                        <h5>\r" +
+    "                                    <span id=\"NativePlace\" style=\"font-weight:bold;\">Native Place</span></h6>\r" +
     "\n" +
-    "                            <span id=\"lblName\">{{item.RefrenceName }}</span></h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "\r" +
+    "                                    <span id=\"lblNativePlace\">{{item.RefrenceNativePlace }}</span></h5>\r" +
     "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"uplEducationRef\">\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"uplProfessionDetails\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"ProfessionDetails\" style=\"font-weight:bold;\">Profession</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblProfessionDetails\">{{item.RefrenceProfessionDetails }}</span>\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"uplNativePlace\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"NativePlace\" style=\"font-weight:bold;\">Native Place</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblNativePlace\">{{item.RefrenceNativePlace }}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"uplCurrentLocation\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"CurrentLocation\" style=\"font-weight:bold;\">Current Location</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblCurrentLocation\">{{item.RefenceCurrentLocation }}</span></h5>\r" +
+    "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"update0\">\r" +
+    "                        <div id=\"uplCurrentLocation\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div id=\"ownerdiv0\">\r" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div id=\"uplContacts\">\r" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"CurrentLocation\" style=\"font-weight:bold;\">Current Location</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblCurrentLocation\">{{item.RefenceCurrentLocation }}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            </div>\r" +
     "\n" +
-    "                                    <h6>\r" +
+    "\r" +
     "\n" +
-    "                                        <span id=\"Contacts\" style=\"font-weight:bold;\">Contacts</span></h6>\r" +
+    "                        </div>\r" +
     "\n" +
-    "                                    <h5>\r" +
+    "                        <div id=\"update0\">\r" +
     "\n" +
-    "                                        <span id=\"lblContacts\">{{item.RefrenceMobileNumberWithcode+(item.RefrenceLandNumberwithCode!=null&&item.RefrenceLandNumberwithCode!=\"\"?\"&\"+item.RefrenceLandNumberwithCode:\"\") }}</span></h5>\r" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"ownerdiv0\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div id=\"uplContacts\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                        <h6>\r" +
+    "\n" +
+    "                                            <span id=\"Contacts\" style=\"font-weight:bold;\">Contacts</span></h6>\r" +
+    "\n" +
+    "                                        <h5>\r" +
+    "\n" +
+    "                                            <span id=\"lblContacts\">{{item.RefrenceMobileNumberWithcode+(item.RefrenceLandNumberwithCode!=null&&item.RefrenceLandNumberwithCode!=\"\"?\"&\"+item.RefrenceLandNumberwithCode:\"\") }}</span></h5>\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div id=\"uplEmail\">\r" +
+    "                                <div id=\"uplEmail\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                                    <h6>\r" +
+    "                                        <h6>\r" +
     "\n" +
-    "                                        <span id=\"Email\" style=\"font-weight:bold;\">Email</span></h6>\r" +
+    "                                            <span id=\"Email\" style=\"font-weight:bold;\">Email</span></h6>\r" +
     "\n" +
-    "                                    <h5>\r" +
+    "                                        <h5>\r" +
     "\n" +
-    "                                        <span id=\"lblEmail\">{{item.RefrenceEmail }}</span></h5>\r" +
+    "                                            <span id=\"lblEmail\">{{item.RefrenceEmail }}</span></h5>\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"uplNarration\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"Narration\" style=\"font-weight:bold;\">Narration</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblNarration\">{{item.RefrenceNarration }}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <hr>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <script type=\"text/ng-template\" id=\"referenceContent.html\">\r" +
+    "\n" +
+    "            <form name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.refenceSubmit(page.model.refObj)\" accessible-form>\r" +
+    "\n" +
+    "                <div class=\"modal-header\">\r" +
+    "\n" +
+    "                    <h3 class=\"modal-title text-center\">Reference Details\r" +
+    "\n" +
+    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                            <ng-md-icon icon=\"close\" style=\"fill:#665454\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
+    "\n" +
+    "                        </a>\r" +
+    "\n" +
+    "                    </h3>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "                    <ul>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"Relationshiptype\" class=\"pop_label_left\">Relationship type<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                                <select multiselectdropdown ng-model=\"page.model.refObj.ddlRelationshiptype\" typeofdata=\"'RelationshipType'\" required></select>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"Firstname\" class=\"pop_label_left\">First name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.refObj.txtFname\" class=\"form-control\" tabindex=\"2\" maxlength=\"100\" required/>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"Lastname\" class=\"pop_label_left\">Last name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.refObj.txtLname\" class=\"form-control\" tabindex=\"3\" maxlength=\"50\" required/>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"Professiondetails\" class=\"pop_label_left\">Profession</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.refObj.txtProfessiondetails\" class=\"form-control\" tabindex=\"4\" maxlength=\"200\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <country-directive countryshow=\"true\" cityshow=\"false\" othercity=\"false\" dcountry=\"page.model.refObj.ddlCountry\" dstate=\"page.model.refObj.ddlState\" ddistrict=\"page.model.refObj.ddlDistrict\"></country-directive>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"NativePlace\" class=\"pop_label_left\">Native Place</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.refObj.txtNativePlace\" class=\"form-control\" tabindex=\"8\" maxlength=\"100\" />\r" +
+    "\n" +
     "\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "                        </div>\r" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblPresentlocation\" class=\"pop_label_left\">Present location </label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.refObj.txtPresentlocation\" class=\"form-control\" tabindex=\"9\" maxlength=\"100\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <contact-directive emailhide=\"true\" dmobile=\"page.model.refObj.ddlMobileCountryID\" strmobile=\"page.model.refObj.txtMobileNumber\" dalternative=\"page.model.refObj.ddlMobileCountryID2\" stralternative=\"page.model.refObj.txtMobileNumber2\" dland=\"page.model.refObj.ddlLandLineCountryID\"\r" +
+    "\n" +
+    "                            strareacode=\"page.model.refObj.txtAreCode\" strland=\"page.model.refObj.txtLandNumber\" strmail=\"page.model.refObj.txtEmails\"></contact-directive>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                    <div id=\"uplNarration\">\r" +
+    "                            <label for=\"lblNarration\" class=\"pop_label_left\">Narration</label>\r" +
     "\n" +
-    "\r" +
+    "                            <div class=\"\">\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"Narration\" style=\"font-weight:bold;\">Narration</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblNarration\">{{item.RefrenceNarration }}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
+    "                                <textarea ng-model=\"page.model.refObj.txtNarrations\" class=\"form-control\" textmode=\"MultiLine\" tabindex=\"21\" rows=\"4\" width=\"515\" maxlength=\"500\"></textarea>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
+    "                                <label style=\"color: #1e1c1c; font-size: 13px;\"></label>\r" +
     "\n" +
-    "                    <hr>\r" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"row \">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                    </ul>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -9680,165 +9938,13 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "            </div>\r" +
+    "            </form>\r" +
     "\n" +
-    "        </div>\r" +
+    "        </script>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "    <script type=\"text/ng-template\" id=\"referenceContent.html\">\r" +
-    "\n" +
-    "        <form name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.refenceSubmit(page.model.refObj)\" accessible-form>\r" +
-    "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\">Reference Details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#665454\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Relationshiptype\" class=\"pop_label_left\">Relationship type<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.refObj.ddlRelationshiptype\" typeofdata=\"'RelationshipType'\" required></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Firstname\" class=\"pop_label_left\">First name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.refObj.txtFname\" class=\"form-control\" tabindex=\"2\" maxlength=\"100\" required/>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Lastname\" class=\"pop_label_left\">Last name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.refObj.txtLname\" class=\"form-control\" tabindex=\"3\" maxlength=\"50\" required/>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Professiondetails\" class=\"pop_label_left\">Profession</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.refObj.txtProfessiondetails\" class=\"form-control\" tabindex=\"4\" maxlength=\"200\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <country-directive countryshow=\"true\" cityshow=\"false\" othercity=\"false\" dcountry=\"page.model.refObj.ddlCountry\" dstate=\"page.model.refObj.ddlState\" ddistrict=\"page.model.refObj.ddlDistrict\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"NativePlace\" class=\"pop_label_left\">Native Place</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.refObj.txtNativePlace\" class=\"form-control\" tabindex=\"8\" maxlength=\"100\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblPresentlocation\" class=\"pop_label_left\">Present location </label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.refObj.txtPresentlocation\" class=\"form-control\" tabindex=\"9\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <contact-directive emailhide=\"true\" dmobile=\"page.model.refObj.ddlMobileCountryID\" strmobile=\"page.model.refObj.txtMobileNumber\" dalternative=\"page.model.refObj.ddlMobileCountryID2\" stralternative=\"page.model.refObj.txtMobileNumber2\" dland=\"page.model.refObj.ddlLandLineCountryID\"\r" +
-    "\n" +
-    "                        strareacode=\"page.model.refObj.txtAreCode\" strland=\"page.model.refObj.txtLandNumber\" strmail=\"page.model.refObj.txtEmails\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblNarration\" class=\"pop_label_left\">Narration</label>\r" +
-    "\n" +
-    "                        <div class=\"\">\r" +
-    "\n" +
-    "                            <textarea ng-model=\"page.model.refObj.txtNarrations\" class=\"form-control\" textmode=\"MultiLine\" tabindex=\"21\" rows=\"4\" width=\"515\" maxlength=\"500\"></textarea>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <label style=\"color: #1e1c1c; font-size: 13px;\"></label>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </form>\r" +
-    "\n" +
-    "    </script>\r" +
-    "\n" +
     "</div>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "<style>\r" +
     "\n" +
@@ -9863,125 +9969,115 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editRelative/index.html',
-    "<div class=\"edit_pages_content_main clearfix\">\r" +
+    "<div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
-    "    <page-review dispaly-name=\"'Relatives details'\" sectionid=\"'27,28,32,33'\" custid=\"page.model.CustID\"></page-review>\r" +
+    "\r" +
     "\n" +
-    "    <div class=\"edit_page_item\">\r" +
+    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
+    "    </div>\r" +
     "\n" +
-    "            <h4>Father's Brother Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" visible=\"false\" runat=\"server\" id=\"spanEduModID\">ModifiedBy :{{page.model.FBemodifiedby}}</span>\r" +
+    "\r" +
     "\n" +
-    "            </h4>\r" +
+    "\r" +
     "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.FBArr.length===0\">\r" +
+    "    <div class=\"edit_pages_content_main clearfix\">\r" +
     "\n" +
-    "                <a href=\"javascript:void(0);\" ng-click=\"page.model.relativePopulatePopulate('FB');\" class=\"edit_page_add_button\" tabindex=\"0\">Add</a>\r" +
+    "        <page-review dispaly-name=\"'Relatives details'\" sectionid=\"'27,28,32,33'\" custid=\"page.model.CustID\"></page-review>\r" +
+    "\n" +
+    "        <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Father's Brother Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" visible=\"false\" runat=\"server\" id=\"spanEduModID\">ModifiedBy :{{page.model.FBemodifiedby}}</span>\r" +
+    "\n" +
+    "                </h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.FBArr.length===0\">\r" +
+    "\n" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.relativePopulatePopulate('FB');\" class=\"edit_page_add_button\" tabindex=\"0\">Add</a>\r" +
+    "\n" +
+    "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "        </div>\r" +
+    "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
+    "                <div id=\"fullupdatefatherbrother\" ng-repeat=\"item in page.model.FBArr\">\r" +
     "\n" +
-    "            <div id=\"fullupdatefatherbrother\" ng-repeat=\"item in page.model.FBArr\">\r" +
-    "\n" +
-    "                <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
-    "\n" +
-    "                    <div>\r" +
+    "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
     "                        <div>\r" +
     "\n" +
-    "                            <div id=\"upFatherBrother\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"FBName\" style=\"font-weight:bold;\">FB Name</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblFBName\">{{item.FatherbrotherName+\"(\"+item.FatherBrotherElderyounger+\")\"}}</span></h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div ng-if=\"page.model.FBArr.length>0\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <a href=\"javascript:void(0);\" ng-click=\"page.model.relativePopulatePopulate('FB',item);\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\">Edit</a>\r" +
-    "\n" +
-    "                                <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeletePopup('father brother',item.FatherbrotherCustfamilyID);\">Delete</a>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanelFBProfession\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "                            <div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"FBEducation\" style=\"font-weight:bold;\">Education</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblFBEducation\">{{item.FatherBrotherEducationDetails}}</span></h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanelFBProfessionDetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                <div id=\"upFatherBrother\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div>\r" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"FBName\" style=\"font-weight:bold;\">FB Name</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblFBName\">{{item.FatherbrotherName+\"(\"+item.FatherBrotherElderyounger+\")\"}}</span></h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                                <div ng-if=\"page.model.FBArr.length>0\" class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <h6>\r" +
+    "                                    <a href=\"javascript:void(0);\" ng-click=\"page.model.relativePopulatePopulate('FB',item);\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\">Edit</a>\r" +
     "\n" +
-    "                                    <span id=\"FBProfessionDetails\" style=\"font-weight:bold;\">Profession</span></h6>\r" +
+    "                                    <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeletePopup('father brother',item.FatherbrotherCustfamilyID);\">Delete</a>\r" +
     "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblProfessionDetails\">{{item.FatherbrotherProfessionDetails }}</span></h5>\r" +
+    "                                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
+    "                            <div id=\"UpdatePanelFBProfession\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div id=\"UpdatePanelFBCurrentLocation\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div>\r" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"FBEducation\" style=\"font-weight:bold;\">Education</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblFBEducation\">{{item.FatherBrotherEducationDetails}}</span></h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div id=\"UpdatePanelFBProfessionDetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <h6>\r" +
+    "                                <div>\r" +
     "\n" +
-    "                                    <span id=\"FBCurrentLocation\" style=\"font-weight:bold;\">Current Location</span></h6>\r" +
+    "\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                                    <h6>\r" +
     "\n" +
-    "                                    <span id=\"lblCurrentLocation\">{{item.FatherbrotherCurrentLocation }}</span></h5>\r" +
+    "                                        <span id=\"FBProfessionDetails\" style=\"font-weight:bold;\">Profession</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblProfessionDetails\">{{item.FatherbrotherProfessionDetails }}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -9989,29 +10085,51 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"update0\">\r" +
+    "                            <div id=\"UpdatePanelFBCurrentLocation\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div id=\"ownerdiv0\">\r" +
-    "\n" +
-    "                                <div id=\"UpdatePanelFBcontacts\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    <div>\r" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"FBCurrentLocation\" style=\"font-weight:bold;\">Current Location</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblCurrentLocation\">{{item.FatherbrotherCurrentLocation }}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                        <h6>\r" +
+    "                                </div>\r" +
     "\n" +
-    "                                            <span id=\"FBcontacts\" style=\"font-weight:bold;\">FB contacts</span></h6>\r" +
+    "\r" +
     "\n" +
-    "                                        <h5>\r" +
+    "                            </div>\r" +
     "\n" +
-    "                                            <span id=\"lblFBcontacts\">{{(item.FatherbrotherMobileNumberWithCode!=null?item.FatherbrotherMobileNumberWithCode:'')+\" \"\r" +
+    "                            <div id=\"update0\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div id=\"ownerdiv0\">\r" +
+    "\n" +
+    "                                    <div id=\"UpdatePanelFBcontacts\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <h6>\r" +
+    "\n" +
+    "                                                <span id=\"FBcontacts\" style=\"font-weight:bold;\">FB contacts</span></h6>\r" +
+    "\n" +
+    "                                            <h5>\r" +
+    "\n" +
+    "                                                <span id=\"lblFBcontacts\">{{(item.FatherbrotherMobileNumberWithCode!=null?item.FatherbrotherMobileNumberWithCode:'')+\" \"\r" +
     "\n" +
     "                                        +(item.FatherbrotherLandnumberwithcode!=null&&item.FatherbrotherLandnumberwithcode.ToString()!=\"\"?\"&\"+\r" +
     "\n" +
@@ -10019,129 +10137,175 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                                <div id=\"UpdatePanelFBEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <h6>\r" +
-    "\n" +
-    "                                            <span id=\"FBEmail\" style=\"font-weight:bold;\">FB Email</span></h6>\r" +
-    "\n" +
-    "                                        <h5>\r" +
-    "\n" +
-    "                                            <span id=\"lblFBEmail\">{{item.FatherbrotherEmail }}</span></h5>\r" +
+    "                                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                                    </div>\r" +
     "\n" +
+    "                                    <div id=\"UpdatePanelFBEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
     "\r" +
     "\n" +
+    "                                        <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <h6>\r" +
+    "\n" +
+    "                                                <span id=\"FBEmail\" style=\"font-weight:bold;\">FB Email</span></h6>\r" +
+    "\n" +
+    "                                            <h5>\r" +
+    "\n" +
+    "                                                <span id=\"lblFBEmail\">{{item.FatherbrotherEmail }}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
     "                                </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                        </div>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "                </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "            </div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
-    "    </div>\r" +
+    "        <div class=\"edit_page_item\">\r" +
     "\n" +
-    "    <div class=\"edit_page_item\">\r" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
+    "                <h4>Father's Sister Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" visible=\"false\" runat=\"server\" id=\"spanEduModID\">ModifiedBy :{{page.model.FSmodifiedby}}</span>\r" +
     "\n" +
-    "            <h4>Father's Sister Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" visible=\"false\" runat=\"server\" id=\"spanEduModID\">ModifiedBy :{{page.model.FSmodifiedby}}</span>\r" +
+    "                </h4>\r" +
     "\n" +
-    "            </h4>\r" +
+    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.FSArr.length===0\">\r" +
     "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.FSArr.length===0\">\r" +
+    "                    <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.relativePopulatePopulate('FS');\" tabindex=\"0\">Add</a>\r" +
     "\n" +
-    "                <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.relativePopulatePopulate('FS');\" tabindex=\"0\">Add</a>\r" +
+    "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "        </div>\r" +
+    "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
+    "                <div id=\"fullupdatefathersister\" ng-repeat=\"item in page.model.FSArr\">\r" +
     "\n" +
-    "            <div id=\"fullupdatefathersister\" ng-repeat=\"item in page.model.FSArr\">\r" +
-    "\n" +
-    "                <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
-    "\n" +
-    "                    <div>\r" +
+    "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
     "                        <div>\r" +
     "\n" +
-    "                            <div id=\"upFathersister\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"FsName\" style=\"font-weight:bold;\">FsName</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblFsName\">{{item.FatherSisterName+\"(\"+item.FatherSisterElderyounger+\")\" }}</span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div ng-if=\"page.model.FSArr.length>0\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "                                <a ng-click=\"page.model.relativePopulatePopulate('FS',item);\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\">Edit</a>\r" +
-    "\n" +
-    "                                <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeletePopup('father sister',item.FatherSisterCustfamilyID);\">Delete</a>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanelFshName\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "                            <div>\r" +
     "\n" +
+    "                                <div id=\"upFathersister\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
     "\r" +
     "\n" +
-    "                                <h6>\r" +
+    "                                    <h6>\r" +
     "\n" +
-    "                                    <span id=\"FshName\" style=\"font-weight:bold;\">Fsh Name</span></h6>\r" +
+    "                                        <span id=\"FsName\" style=\"font-weight:bold;\">FsName</span></h6>\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                                    <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblFshName\">{{item.FatherSisterSpouseName }}</span></h5>\r" +
+    "                                        <span id=\"lblFsName\">{{item.FatherSisterName+\"(\"+item.FatherSisterElderyounger+\")\" }}</span>\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                                <div ng-if=\"page.model.FSArr.length>0\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                                    <a ng-click=\"page.model.relativePopulatePopulate('FS',item);\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\">Edit</a>\r" +
+    "\n" +
+    "                                    <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeletePopup('father sister',item.FatherSisterCustfamilyID);\">Delete</a>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div id=\"UpdatePanelFshName\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"FshName\" style=\"font-weight:bold;\">Fsh Name</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblFshName\">{{item.FatherSisterSpouseName }}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div id=\"UpdatePanelFshEducation\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"lblEducationfsh\" style=\"font-weight:bold;\">Fsh Education</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblFshEducation\">{{item.FatherSisterSpouseEducationDetails }}</span></h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div id=\"UpdatePanelFshprofessiondetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"Fshprofessiondetails\" style=\"font-weight:bold;\">Fsh Profession</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblFshprofessiondetails\">{{item.FathersisterSpouseProfessionDetails }}</span></h5>\r" +
+    "\n" +
+    "                                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -10149,91 +10313,45 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanelFshEducation\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <div id=\"UpdatePanelFshCurrentLocation\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div>\r" +
+    "                                <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <h6>\r" +
+    "                                    <h6>\r" +
     "\n" +
-    "                                    <span id=\"lblEducationfsh\" style=\"font-weight:bold;\">Fsh Education</span></h6>\r" +
+    "                                        <span id=\"FshCurrentLocation\" style=\"font-weight:bold;\">Fsh Current Location</span></h6>\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                                    <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblFshEducation\">{{item.FatherSisterSpouseEducationDetails }}</span></h5>\r" +
-    "\n" +
-    "                            </div>\r" +
+    "                                        <span id=\"lblFshCurrentLocation\">{{item.FatherSisterCurrentLocation }}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanelFshprofessiondetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"Fshprofessiondetails\" style=\"font-weight:bold;\">Fsh Profession</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblFshprofessiondetails\">{{item.FathersisterSpouseProfessionDetails }}</span></h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanelFshCurrentLocation\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"FshCurrentLocation\" style=\"font-weight:bold;\">Fsh Current Location</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblFshCurrentLocation\">{{item.FatherSisterCurrentLocation }}</span></h5>\r" +
+    "                                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"UpdatePanelFshNativeplace\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <div id=\"UpdatePanelFshNativeplace\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div>\r" +
+    "                                <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <h6>\r" +
+    "                                    <h6>\r" +
     "\n" +
-    "                                    <span id=\"FshNativeplace\" style=\"font-weight:bold;\">Fsh Native Place</span></h6>\r" +
+    "                                        <span id=\"FshNativeplace\" style=\"font-weight:bold;\">Fsh Native Place</span></h6>\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                                    <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblFshNativeplace\">{{(item.FathersisterSpouseNativePlace!=null?item.FathersisterSpouseNativePlace:'')+\" \"+(item.FatherSisterSpousDistrict!=null && \r" +
+    "                                        <span id=\"lblFshNativeplace\">{{(item.FathersisterSpouseNativePlace!=null?item.FathersisterSpouseNativePlace:'')+\" \"+(item.FatherSisterSpousDistrict!=null && \r" +
     "\n" +
     "                                                item.FatherSisterSpousDistrict.ToString()!=\"\"? \",\"+item.FatherSisterSpousDistrict:\"\")+\" \"+(item.FatherSisterSpousestate!=null && \r" +
     "\n" +
@@ -10243,43 +10361,139 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "                            </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"update1\">\r" +
+    "                            <div id=\"update1\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div id=\"ownerdiv1\">\r" +
+    "                                <div id=\"ownerdiv1\">\r" +
     "\n" +
-    "                                <div id=\"UpdatePanelFShcontactnos\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <div>\r" +
+    "                                    <div id=\"UpdatePanelFShcontactnos\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                        <h6>\r" +
+    "                                        <div>\r" +
     "\n" +
-    "                                            <span id=\"FShcontactnos\" style=\"font-weight:bold;\">FSh contact nos</span></h6>\r" +
+    "\r" +
     "\n" +
-    "                                        <h5>\r" +
+    "                                            <h6>\r" +
     "\n" +
-    "                                            <span id=\"lblFSHcontacts\">{{(item.FatherSisterspouseMobileNumberWithCode!=null?item.FatherSisterspouseMobileNumberWithCode:'')+\" \"+(item.FatherSisterspouseLandnumberwithcode!=null&&\r" +
+    "                                                <span id=\"FShcontactnos\" style=\"font-weight:bold;\">FSh contact nos</span></h6>\r" +
+    "\n" +
+    "                                            <h5>\r" +
+    "\n" +
+    "                                                <span id=\"lblFSHcontacts\">{{(item.FatherSisterspouseMobileNumberWithCode!=null?item.FatherSisterspouseMobileNumberWithCode:'')+\" \"+(item.FatherSisterspouseLandnumberwithcode!=null&&\r" +
     "\n" +
     "                                    item.FatherSisterspouseLandnumberwithcode.ToString()!=\"\"?\"&\"+item.FatherSisterspouseLandnumberwithcode:\"\") }}</span></h5>\r" +
     "\n" +
-    "                                    </div>\r" +
+    "                                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "                                    <div id=\"UpdatePanelFSHEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <h6>\r" +
+    "\n" +
+    "                                                <span id=\"FSHEmail\" style=\"font-weight:bold;\">Fsh Email</span></h6>\r" +
+    "\n" +
+    "                                            <h5>\r" +
+    "\n" +
+    "                                                <span id=\"lblFSHEmail\">{{item.FatherSisterspouseEmail }}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
     "                                </div>\r" +
     "\n" +
-    "                                <div id=\"UpdatePanelFSHEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Mother's Brother Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" visible=\"false\" runat=\"server\" id=\"spanEduModID\">ModifiedBy :{{page.model.MBmodifiedby}}</span></h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.MBrr.length===0\">\r" +
+    "\n" +
+    "                    <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.relativePopulatePopulate('MB');\" tabindex=\"0\">Add</a>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                <div id=\"fullupdatemotherbrother\" ng-repeat=\"item in page.model.MBrr\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
+    "\n" +
+    "                        <div>\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "                                <div id=\"upmotherbrother\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"MBName\" style=\"font-weight:bold;\">MB Name</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblMBName\">{{item.MotherBrotherName+\"(\"+item.MotherBrotherElderyounger+\")\" }}</span>\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                                <div ng-if=\"page.model.MBrr.length>0\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                                    <a href=\"javascript:void(0);\" ng-click=\"page.model.relativePopulatePopulate('MB',item);\" class=\"edit_page_edit_button\">Edit</a>\r" +
+    "\n" +
+    "                                    <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeletePopup('mother brother',item.MotherBrotherCustfamilyID);\">Delete</a>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -10289,11 +10503,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                        <h6>\r" +
     "\n" +
-    "                                            <span id=\"FSHEmail\" style=\"font-weight:bold;\">Fsh Email</span></h6>\r" +
+    "                                            <span id=\"lblMotherbrithereducation\" style=\"font-weight:bold;\">Education</span></h6>\r" +
     "\n" +
     "                                        <h5>\r" +
     "\n" +
-    "                                            <span id=\"lblFSHEmail\">{{item.FatherSisterspouseEmail }}</span></h5>\r" +
+    "                                            <span id=\"lblMotherbrithereducationdetails\">{{item.MotherBrotherEducationDetails }}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -10303,203 +10517,111 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                </div>\r" +
     "\n" +
-    "                            </div>\r" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
+    "                                    <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
+    "                                        <h6>\r" +
     "\n" +
-    "                    </div>\r" +
+    "                                            <span id=\"MBProfessionDetails\" style=\"font-weight:bold;\">Profession</span></h6>\r" +
     "\n" +
-    "                </div>\r" +
+    "                                        <h5>\r" +
     "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "    <div class=\"edit_page_item\">\r" +
-    "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "            <h4>Mother's Brother Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" visible=\"false\" runat=\"server\" id=\"spanEduModID\">ModifiedBy :{{page.model.MBmodifiedby}}</span></h4>\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.MBrr.length===0\">\r" +
-    "\n" +
-    "                <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.relativePopulatePopulate('MB');\" tabindex=\"0\">Add</a>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "            <div id=\"fullupdatemotherbrother\" ng-repeat=\"item in page.model.MBrr\">\r" +
+    "                                            <span id=\"lblMBProfessionDetails\">{{item.MotherBrotherProfessionDetails }}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
-    "\n" +
-    "                    <div>\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "                            <div id=\"upmotherbrother\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"MBName\" style=\"font-weight:bold;\">MB Name</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblMBName\">{{item.MotherBrotherName+\"(\"+item.MotherBrotherElderyounger+\")\" }}</span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div ng-if=\"page.model.MBrr.length>0\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "                                <a href=\"javascript:void(0);\" ng-click=\"page.model.relativePopulatePopulate('MB',item);\" class=\"edit_page_edit_button\">Edit</a>\r" +
-    "\n" +
-    "                                <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeletePopup('mother brother',item.MotherBrotherCustfamilyID);\">Delete</a>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <span id=\"lblMotherbrithereducation\" style=\"font-weight:bold;\">Education</span></h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblMotherbrithereducationdetails\">{{item.MotherBrotherEducationDetails }}</span></h5>\r" +
+    "                                    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <div>\r" +
+    "                                    <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    <h6>\r" +
+    "                                        <h6>\r" +
     "\n" +
-    "                                        <span id=\"MBProfessionDetails\" style=\"font-weight:bold;\">Profession</span></h6>\r" +
+    "                                            <span id=\"MBCurrentLocation\" style=\"font-weight:bold;\">Current Location</span></h6>\r" +
     "\n" +
-    "                                    <h5>\r" +
+    "                                        <h5>\r" +
     "\n" +
-    "                                        <span id=\"lblMBProfessionDetails\">{{item.MotherBrotherProfessionDetails }}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
+    "                                            <span id=\"lblMBCurrentLocation\">{{item.MotherBrotherCurrentLocation }}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <span id=\"MBCurrentLocation\" style=\"font-weight:bold;\">Current Location</span></h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblMBCurrentLocation\">{{item.MotherBrotherCurrentLocation }}</span></h5>\r" +
+    "                                    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div id=\"update2\">\r" +
+    "                                <div id=\"update2\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <div id=\"ownerdiv2\">\r" +
+    "                                    <div id=\"ownerdiv2\">\r" +
     "\n" +
-    "                                    <div id=\"UpdatePanelMBcontacts\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <div>\r" +
+    "                                        <div id=\"UpdatePanelMBcontacts\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                            <h6>\r" +
+    "                                            <div>\r" +
     "\n" +
-    "                                                <span id=\"MBcontacts\" style=\"font-weight:bold;\">MB contacts</span></h6>\r" +
+    "\r" +
     "\n" +
-    "                                            <h5>\r" +
+    "                                                <h6>\r" +
     "\n" +
-    "                                                <span id=\"lblMBcontacts\">{{(item.MotherBrotherMobileNumberWithCode!=null?item.MotherBrotherMobileNumberWithCode:'')+\" \"+(item.MotherBrotherLandnumberwithcode!=null&& \r" +
+    "                                                    <span id=\"MBcontacts\" style=\"font-weight:bold;\">MB contacts</span></h6>\r" +
+    "\n" +
+    "                                                <h5>\r" +
+    "\n" +
+    "                                                    <span id=\"lblMBcontacts\">{{(item.MotherBrotherMobileNumberWithCode!=null?item.MotherBrotherMobileNumberWithCode:'')+\" \"+(item.MotherBrotherLandnumberwithcode!=null&& \r" +
     "\n" +
     "                                                    item.MotherBrotherLandnumberwithcode.ToString()!=\"\"?\"&\"+item.MotherBrotherLandnumberwithcode:\"\") }}</span></h5>\r" +
     "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                    <div id=\"UpdatePanelMBEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            <h6>\r" +
-    "\n" +
-    "                                                <span id=\"MBEmail\" style=\"font-weight:bold;\">MB Email</span></h6>\r" +
-    "\n" +
-    "                                            <h5>\r" +
-    "\n" +
-    "                                                <span id=\"lblMBEmail\">{{item.MotherBrotherEmail }}</span></h5>\r" +
+    "                                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                                        </div>\r" +
     "\n" +
+    "                                        <div id=\"UpdatePanelMBEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
     "\r" +
     "\n" +
+    "                                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                <h6>\r" +
+    "\n" +
+    "                                                    <span id=\"MBEmail\" style=\"font-weight:bold;\">MB Email</span></h6>\r" +
+    "\n" +
+    "                                                <h5>\r" +
+    "\n" +
+    "                                                    <span id=\"lblMBEmail\">{{item.MotherBrotherEmail }}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
     "                                    </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
@@ -10507,165 +10629,161 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
     "                        </div>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "                </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "            </div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
-    "    </div>\r" +
+    "        <div class=\"edit_page_item\">\r" +
     "\n" +
-    "    <div class=\"edit_page_item\">\r" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
+    "                <h4>Mother's Sister Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" visible=\"false\" runat=\"server\" id=\"spanEduModID\">ModifiedBy :{{page.model.MSmodifiedby}}</span>\r" +
     "\n" +
-    "            <h4>Mother's Sister Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" visible=\"false\" runat=\"server\" id=\"spanEduModID\">ModifiedBy :{{page.model.MSmodifiedby}}</span>\r" +
+    "                </h4>\r" +
     "\n" +
-    "            </h4>\r" +
+    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.MSArr.length===0\">\r" +
     "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.MSArr.length===0\">\r" +
+    "                    <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.relativePopulatePopulate('MS');\" tabindex=\"0\">Add</a>\r" +
     "\n" +
-    "                <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.relativePopulatePopulate('MS');\" tabindex=\"0\">Add</a>\r" +
+    "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "        </div>\r" +
+    "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "            <div id=\"fullupdatemothersister\" ng-repeat=\"item in page.model.MSArr\">\r" +
+    "                <div id=\"fullupdatemothersister\" ng-repeat=\"item in page.model.MSArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
-    "\n" +
-    "                    <div>\r" +
+    "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
     "                        <div>\r" +
     "\n" +
-    "                            <div id=\"upMothersister\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <div>\r" +
+    "\n" +
+    "                                <div id=\"upMothersister\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span id=\"MsName\" style=\"font-weight:bold;\">MsName</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span id=\"lblMsName\">{{item.MotherSisterName+\"(\"+item.MotherSisterElderyounger+\")\" }}</span>\r" +
+    "\n" +
+    "                                    </h5>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                                <div ng-if=\"page.model.MSArr.length>0\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                                    <a href=\"javascript:void(0);\" ng-click=\"page.model.relativePopulatePopulate('MS',item);\" class=\"edit_page_edit_button\">Edit</a>\r" +
+    "\n" +
+    "                                    <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeletePopup('mother sister',item.MotherSisterCustfamilyID);\">Delete</a>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <span id=\"MsName\" style=\"font-weight:bold;\">MsName</span></h6>\r" +
+    "                                    <span id=\"MshName\" style=\"font-weight:bold;\">Msh Name</span></h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblMsName\">{{item.MotherSisterName+\"(\"+item.MotherSisterElderyounger+\")\" }}</span>\r" +
-    "\n" +
-    "                                </h5>\r" +
+    "                                    <span id=\"lblMshName\">{{item.MotherSisterSpouseName}}</span></h5>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "                            <div ng-if=\"page.model.MSArr.length>0\" class=\"edit_page_item_ui clearfix\">\r" +
+    "                        </div>\r" +
     "\n" +
-    "                                <a href=\"javascript:void(0);\" ng-click=\"page.model.relativePopulatePopulate('MS',item);\" class=\"edit_page_edit_button\">Edit</a>\r" +
+    "\r" +
     "\n" +
-    "                                <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeletePopup('mother sister',item.MotherSisterCustfamilyID);\">Delete</a>\r" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            </div>\r" +
+    "\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"lblMshEducation\" style=\"font-weight:bold;\">Msh Education</span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblMshEducationdetails\">{{item.MothersisterspouseEducationdetails }}</span></h5>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
     "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                            <div>\r" +
     "\n" +
-    "                                <span id=\"MshName\" style=\"font-weight:bold;\">Msh Name</span></h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                    <span style=\"font-weight:bold;\">Msh profession</span></h6>\r" +
     "\n" +
-    "                                <span id=\"lblMshName\">{{item.MotherSisterSpouseName}}</span></h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                        </div>\r" +
+    "                                    <span>{{item.MotherSisterProfessionDetails }}</span></h5>\r" +
     "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"lblMshEducation\" style=\"font-weight:bold;\">Msh Education</span></h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"lblMshEducationdetails\">{{item.MothersisterspouseEducationdetails }}</span></h5>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span style=\"font-weight:bold;\">Msh profession</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span>{{item.MotherSisterProfessionDetails }}</span></h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelMshCurrentLocation\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"MshCurrentLocation\" style=\"font-weight:bold;\">Msh Current Location</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblMshCurrentLocation\">{{item.MotherSisterCurrentLocation }}</span></h5>\r" +
-    "\n" +
-    "\r" +
+    "                            </div>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelMshNativeplace\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div id=\"UpdatePanelMshCurrentLocation\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div>\r" +
+    "                            <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                                <h6>\r" +
     "\n" +
-    "                                <span id=\"MshNativeplace\" style=\"font-weight:bold;\">Msh Native Place</span></h6>\r" +
+    "                                    <span id=\"MshCurrentLocation\" style=\"font-weight:bold;\">Msh Current Location</span></h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                                <h5>\r" +
     "\n" +
-    "                                <span id=\"lblMshNativeplace\">{{(item.MotherSisterSpouseNativePlace!=null?item.MotherSisterSpouseNativePlace:'')+\" \"+(item.Mothersisterspousedistrict!=null && \r" +
+    "                                    <span id=\"lblMshCurrentLocation\">{{item.MotherSisterCurrentLocation }}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelMshNativeplace\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"MshNativeplace\" style=\"font-weight:bold;\">Msh Native Place</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblMshNativeplace\">{{(item.MotherSisterSpouseNativePlace!=null?item.MotherSisterSpouseNativePlace:'')+\" \"+(item.Mothersisterspousedistrict!=null && \r" +
     "\n" +
     "                                                item.Mothersisterspousedistrict.ToString()!=\"\"? \",\"+item.Mothersisterspousedistrict:\"\")+\" \"+(item.Motherssisterspousestate!=null && \r" +
     "\n" +
@@ -10675,65 +10793,69 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
+    "                            </div>\r" +
+    "\n" +
     "                        </div>\r" +
     "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"update3\">\r" +
+    "                        <div id=\"update3\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div id=\"ownerdiv3\">\r" +
+    "                            <div id=\"ownerdiv3\">\r" +
     "\n" +
-    "                            <div id=\"UpdatePanelMshcontactnos\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div>\r" +
+    "                                <div id=\"UpdatePanelMshcontactnos\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    <h6>\r" +
+    "                                    <div>\r" +
     "\n" +
-    "                                        <span id=\"Mshcontactnos\" style=\"font-weight:bold;\">Msh contact nos</span></h6>\r" +
+    "\r" +
     "\n" +
-    "                                    <h5>\r" +
+    "                                        <h6>\r" +
     "\n" +
-    "                                        <span id=\"lblMshcontactnos\">{{(item.MotherSisterspouseMobileNumberWithCode!=null?item.MotherSisterspouseMobileNumberWithCode:'')+\" \"+(item.MotherSisterspouseLandnumberwithcode!=null \r" +
+    "                                            <span id=\"Mshcontactnos\" style=\"font-weight:bold;\">Msh contact nos</span></h6>\r" +
+    "\n" +
+    "                                        <h5>\r" +
+    "\n" +
+    "                                            <span id=\"lblMshcontactnos\">{{(item.MotherSisterspouseMobileNumberWithCode!=null?item.MotherSisterspouseMobileNumberWithCode:'')+\" \"+(item.MotherSisterspouseLandnumberwithcode!=null \r" +
     "\n" +
     "                                            && item.MotherSisterspouseLandnumberwithcode.ToString()!=\"\" ?\r" +
     "\n" +
     "                                            \"&\"+item.MotherSisterspouseLandnumberwithcode:\"\") }}</span></h5>\r" +
     "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div id=\"UpdatePanelMsHEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <span id=\"MsHEmail\" style=\"font-weight:bold;\">Msh Email</span></h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblMsHEmail\">{{item.MotherSisterspouseEmail }}</span></h5>\r" +
+    "                                    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
+    "                                <div id=\"UpdatePanelMsHEmail\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
     "\r" +
     "\n" +
+    "                                    <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <h6>\r" +
+    "\n" +
+    "                                            <span id=\"MsHEmail\" style=\"font-weight:bold;\">Msh Email</span></h6>\r" +
+    "\n" +
+    "                                        <h5>\r" +
+    "\n" +
+    "                                            <span id=\"lblMsHEmail\">{{item.MotherSisterspouseEmail }}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
     "                            </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
@@ -10741,21 +10863,17 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
     "                </div>\r" +
     "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
     "    </div>\r" +
-    "\n" +
-    "</div>\r" +
     "\n" +
     "</div>\r" +
     "\n" +
@@ -11444,219 +11562,233 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editSibbling/index.html',
-    "<div class=\"edit_pages_content_main clearfix\">\r" +
-    "\n" +
-    "    <page-review dispaly-name=\"'Siblings details'\" sectionid=\"'14,25,26'\" custid=\"page.model.CustID\"></page-review>\r" +
+    "<div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <div class=\"edit_page_item\">\r" +
+    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
+    "    </div>\r" +
     "\n" +
-    "            <h4>Sibling Details\r" +
+    "\r" +
     "\n" +
-    "            </h4>\r" +
+    "\r" +
     "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.sibblingCountArr.length===0\">\r" +
+    "    <div class=\"edit_pages_content_main clearfix\">\r" +
     "\n" +
-    "                <a href=\"javascript:void(0);\" ng-click=\"page.model.sibblingPopulatePopulate('sibCounrt')\" class=\"edit_page_add_button\">Add</a>\r" +
+    "        <page-review dispaly-name=\"'Siblings details'\" sectionid=\"'14,25,26'\" custid=\"page.model.CustID\"></page-review>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Sibling Details\r" +
+    "\n" +
+    "                </h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.sibblingCountArr.length===0\">\r" +
+    "\n" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.sibblingPopulatePopulate('sibCounrt')\" class=\"edit_page_add_button\">Add</a>\r" +
+    "\n" +
+    "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "        </div>\r" +
+    "\r" +
+    "\n" +
+    "            <div id=\"upnoofSibblings\" class=\"edit_page_details_item\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        <div id=\"upnoofSibblings\" class=\"edit_page_details_item\">\r" +
+    "                <div id=\"lstnoofbros\">\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "            <div id=\"lstnoofbros\">\r" +
-    "\n" +
-    "                <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.sibblingCountArr\">\r" +
-    "\n" +
-    "                    <div>\r" +
+    "                    <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.sibblingCountArr\">\r" +
     "\n" +
     "                        <div>\r" +
     "\n" +
-    "                            <div class=\"form-group\">\r" +
+    "                            <div>\r" +
     "\n" +
-    "                                <div id=\"uplNoOfBrothers\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                <div class=\"form-group\">\r" +
     "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <label id=\"NoOfBrothers\" font-bold=\"true\">No of Brothers</label>\r" +
-    "\n" +
-    "                                    </h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblNoOfBrothers\">\r" +
-    "\n" +
-    "                                            {{ item.NoOfBrothers }}\r" +
-    "\n" +
-    "                                    </span>\r" +
-    "\n" +
-    "                                    </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                                <div id=\"brotherHide\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <div ng-hide=\"item.NoOfElderBrothers===null || item.NoOfElderBrothers===0\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
+    "                                    <div id=\"uplNoOfBrothers\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "                                        <h6>\r" +
     "\n" +
-    "                                            <label id=\"noofelderbrother\" font-bold=\"true\">No of elder brothers</label></h6>\r" +
-    "\n" +
-    "                                        <h5>\r" +
-    "\n" +
-    "                                            <span id=\"lblnoofelderbrother\">\r" +
-    "\n" +
-    "                                                {{ item.NoOfElderBrothers }}\r" +
-    "\n" +
-    "                                        </span>\r" +
-    "\n" +
-    "                                        </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                    <div ng-hide=\"item.NoOfYoungerBrothers===null || item.NoOfYoungerBrothers===0\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <h6>\r" +
-    "\n" +
-    "                                            <label id=\"Noofyoungerbrother\" font-bold=\"true\">No of younger brother</label>\r" +
+    "                                            <label id=\"NoOfBrothers\" font-bold=\"true\">No of Brothers</label>\r" +
     "\n" +
     "                                        </h6>\r" +
     "\n" +
     "                                        <h5>\r" +
     "\n" +
-    "                                            <span id=\"lblnofyoungbro\">\r" +
+    "                                            <span id=\"lblNoOfBrothers\">\r" +
+    "\n" +
+    "                                            {{ item.NoOfBrothers }}\r" +
+    "\n" +
+    "                                    </span>\r" +
+    "\n" +
+    "                                        </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "                                    <div id=\"brotherHide\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <div ng-hide=\"item.NoOfElderBrothers===null || item.NoOfElderBrothers===0\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <h6>\r" +
+    "\n" +
+    "                                                <label id=\"noofelderbrother\" font-bold=\"true\">No of elder brothers</label></h6>\r" +
+    "\n" +
+    "                                            <h5>\r" +
+    "\n" +
+    "                                                <span id=\"lblnoofelderbrother\">\r" +
+    "\n" +
+    "                                                {{ item.NoOfElderBrothers }}\r" +
+    "\n" +
+    "                                        </span>\r" +
+    "\n" +
+    "                                            </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                        <div ng-hide=\"item.NoOfYoungerBrothers===null || item.NoOfYoungerBrothers===0\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <h6>\r" +
+    "\n" +
+    "                                                <label id=\"Noofyoungerbrother\" font-bold=\"true\">No of younger brother</label>\r" +
+    "\n" +
+    "                                            </h6>\r" +
+    "\n" +
+    "                                            <h5>\r" +
+    "\n" +
+    "                                                <span id=\"lblnofyoungbro\">\r" +
     "\n" +
     "                                                {{ item.NoOfYoungerBrothers }}\r" +
     "\n" +
     "                                        </span>\r" +
     "\n" +
-    "                                        </h5>\r" +
+    "                                            </h5>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "                                    <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.sibblingCountArr.length>0\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.sibblingPopulatePopulate('sibCounrt',item)\">Edit</a>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                                    </div>\r" +
     "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.sibblingCountArr.length>0\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" ng-click=\"page.model.sibblingPopulatePopulate('sibCounrt',item)\">Edit</a>\r" +
-    "\n" +
     "\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div class=\"form-group\">\r" +
+    "                                <div class=\"form-group\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <div ng-hide=\"item.NoOfSisters===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                    <div ng-hide=\"item.NoOfSisters===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    <h6>\r" +
+    "                                        <h6>\r" +
     "\n" +
-    "                                        <label font-bold=\"true\">No of sisters</label></h6>\r" +
+    "                                            <label font-bold=\"true\">No of sisters</label></h6>\r" +
     "\n" +
-    "                                    <h5>\r" +
+    "                                        <h5>\r" +
     "\n" +
-    "                                        <span id=\"lblNoofsisters\">\r" +
+    "                                            <span id=\"lblNoofsisters\">\r" +
     "\n" +
     "                                            {{ item.NoOfSisters }}\r" +
     "\n" +
     "                                    </span>\r" +
     "\n" +
-    "                                    </h5>\r" +
+    "                                        </h5>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                </div>\r" +
+    "                                    </div>\r" +
     "\n" +
-    "                                <div id=\"sisterHideDiv\">\r" +
+    "                                    <div id=\"sisterHideDiv\">\r" +
     "\n" +
-    "                                    <div ng-hide=\"item.NoOfElderSisters===null || item.NoOfElderSisters===0\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                        <div ng-hide=\"item.NoOfElderSisters===null || item.NoOfElderSisters===0\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                        <h6>\r" +
+    "                                            <h6>\r" +
     "\n" +
-    "                                            <label font-bold=\"true\">No of elder sisters</label></h6>\r" +
+    "                                                <label font-bold=\"true\">No of elder sisters</label></h6>\r" +
     "\n" +
-    "                                        <h5>\r" +
+    "                                            <h5>\r" +
     "\n" +
-    "                                            <span id=\"lblNoofeldersisters\">\r" +
+    "                                                <span id=\"lblNoofeldersisters\">\r" +
     "\n" +
     "                                                {{ item.NoOfElderSisters }}\r" +
     "\n" +
     "                                        </span>\r" +
     "\n" +
-    "                                        </h5>\r" +
+    "                                            </h5>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    </div>\r" +
+    "                                        </div>\r" +
     "\n" +
-    "                                    <div ng-hide=\"item.NoOfYoungerSisters===null || item.NoOfYoungerSisters===0\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                        <div ng-hide=\"item.NoOfYoungerSisters===null || item.NoOfYoungerSisters===0\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                        <h6>\r" +
+    "                                            <h6>\r" +
     "\n" +
-    "                                            <label font-bold=\"true\">No of younger sisters</label></h6>\r" +
+    "                                                <label font-bold=\"true\">No of younger sisters</label></h6>\r" +
     "\n" +
-    "                                        <h5>\r" +
+    "                                            <h5>\r" +
     "\n" +
-    "                                            <span>\r" +
+    "                                                <span>\r" +
     "\n" +
     "                                                {{ item.NoOfYoungerSisters }}\r" +
     "\n" +
     "                                        </span>\r" +
     "\n" +
-    "                                        </h5>\r" +
+    "                                            </h5>\r" +
     "\n" +
     "\r" +
+    "\n" +
+    "                                        </div>\r" +
     "\n" +
     "                                    </div>\r" +
     "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
@@ -11664,6 +11796,8 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    </div>\r" +
     "\n" +
+    "\r" +
+    "\n" +
     "                </div>\r" +
     "\n" +
     "\r" +
@@ -11672,221 +11806,217 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "        </div>\r" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Brother&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\">ModifiedBy :{{page.model.broModifiedby}}</span>\r" +
+    "\n" +
+    "                </h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                    <div id=\"uplnkbrotherdetails\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "            <h4>Brother&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\">ModifiedBy :{{page.model.broModifiedby}}</span>\r" +
-    "\n" +
-    "            </h4>\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "                <div id=\"uplnkbrotherdetails\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.sibblingPopulatePopulate('brother')\" class=\"edit_page_add_button\">Add\r" +
+    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.sibblingPopulatePopulate('brother')\" class=\"edit_page_add_button\">Add\r" +
     "\n" +
     "                </a>\r" +
     "\n" +
     "\r" +
     "\n" +
+    "                    </div>\r" +
+    "\n" +
     "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "        </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        <div id=\"uplstSibbling\" class=\"edit_page_details_item\">\r" +
+    "            <div id=\"uplstSibbling\" class=\"edit_page_details_item\">\r" +
     "\n" +
-    "            <div id=\"lstSibbling\" ng-repeat=\"item in page.model.BrotherArr\">\r" +
+    "                <div id=\"lstSibbling\" ng-repeat=\"item in page.model.BrotherArr\">\r" +
     "\n" +
-    "                <div>\r" +
+    "                    <div>\r" +
     "\n" +
-    "                    <div id=\"Div1\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
-    "\n" +
-    "                        <div>\r" +
+    "                        <div id=\"Div1\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
     "                            <div>\r" +
     "\n" +
-    "                                <div id=\"uplElderbrotherName\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                <div>\r" +
+    "\n" +
+    "                                    <div id=\"uplElderbrotherName\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    <h6>\r" +
+    "                                        <h6>\r" +
     "\n" +
-    "                                        <label id=\"ElderbrotherName\" font-bold=\"true\" style=\"color:red;\">\r" +
+    "                                            <label id=\"ElderbrotherName\" font-bold=\"true\" style=\"color:red;\">\r" +
     "\n" +
     "                                        Brother Name</label></h6>\r" +
     "\n" +
-    "                                    <h5>\r" +
+    "                                        <h5>\r" +
     "\n" +
-    "                                        <span id=\"lblElderbrotherName\" style=\"color:red;\">\r" +
+    "                                            <span id=\"lblElderbrotherName\" style=\"color:red;\">\r" +
     "\n" +
     "                                            {{ item.SibilingName+\" (\"+item.brotherYoungerORelder+\")\" }}\r" +
     "\n" +
     "                                    </span>\r" +
     "\n" +
-    "                                    </h5>\r" +
+    "                                        </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "                                    <div id=\"upllnkbrodetailseb\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <a class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.sibblingPopulatePopulate('brother',item)\">Edit</a>\r" +
+    "\n" +
+    "                                        <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeletePopup('brother',item.SibilingCustfamilyID);\">Delete</a>\r" +
+    "\n" +
+    "                                    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
-    "                                <div id=\"upllnkbrodetailseb\" class=\"edit_page_item_ui clearfix\">\r" +
+    "                                <div id=\"brothereducation\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    <a class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.sibblingPopulatePopulate('brother',item)\">Edit</a>\r" +
-    "\n" +
-    "                                    <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeletePopup('brother',item.SibilingCustfamilyID);\">Delete</a>\r" +
-    "\n" +
-    "                                </div>\r" +
+    "                                    <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            </div>\r" +
+    "                                        <h6>\r" +
     "\n" +
-    "                            <div id=\"brothereducation\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                            <label id=\"lblEducationbrother\" font-bold=\"true\">Education</label></h6>\r" +
     "\n" +
-    "\r" +
+    "                                        <h5>\r" +
     "\n" +
-    "                                <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <label id=\"lblEducationbrother\" font-bold=\"true\">Education</label></h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblBrotherEducationDetails\">\r" +
+    "                                            <span id=\"lblBrotherEducationDetails\">\r" +
     "\n" +
     "                                            {{ item.SibilingEducationDetails!=null?item.SibilingEducationDetails:''}}\r" +
     "\n" +
     "                                    </span>\r" +
     "\n" +
-    "                                    </h5>\r" +
+    "                                        </h5>\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
-    "\r" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                    <div>\r" +
     "\n" +
-    "                                <div>\r" +
+    "                                        <h6>\r" +
     "\n" +
-    "                                    <h6>\r" +
+    "                                            <label font-bold=\"true\">Profession Category</label></h6>\r" +
     "\n" +
-    "                                        <label font-bold=\"true\">Profession Category</label></h6>\r" +
+    "                                        <h5>\r" +
     "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span>\r" +
+    "                                            <span>\r" +
     "\n" +
     "                                            {{ item.ProfessionCategory}}\r" +
     "\n" +
     "                                    </span>\r" +
     "\n" +
-    "                                    </h5>\r" +
+    "                                        </h5>\r" +
+    "\n" +
+    "                                    </div>\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
-    "                            </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                                <div>\r" +
+    "                                    <div>\r" +
     "\n" +
-    "                                    <h6>\r" +
+    "                                        <h6>\r" +
     "\n" +
-    "                                        <label id=\"Label2\" font-bold=\"true\">Designation</label></h6>\r" +
+    "                                            <label id=\"Label2\" font-bold=\"true\">Designation</label></h6>\r" +
     "\n" +
-    "                                    <h5>\r" +
+    "                                        <h5>\r" +
     "\n" +
-    "                                        <span id=\"lblBrotherprofessionDetails\">\r" +
+    "                                            <span id=\"lblBrotherprofessionDetails\">\r" +
     "\n" +
     "                                            {{ item.SibilingProfessionDetails}}\r" +
     "\n" +
     "                                    </span>\r" +
     "\n" +
-    "                                    </h5>\r" +
+    "                                        </h5>\r" +
+    "\n" +
+    "                                    </div>\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
-    "                            </div>\r" +
+    "\r" +
+    "\n" +
+    "                                <div id=\"uplprofessioneb\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div id=\"uplprofessioneb\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                    <div id=\"professiondiv\">\r" +
     "\n" +
-    "\r" +
+    "                                        <h6>\r" +
     "\n" +
-    "                                <div id=\"professiondiv\">\r" +
+    "                                            <label id=\"profession\" font-bold=\"true\">Company&JobLocation</label></h6>\r" +
     "\n" +
-    "                                    <h6>\r" +
+    "                                        <h5>\r" +
     "\n" +
-    "                                        <label id=\"profession\" font-bold=\"true\">Company&JobLocation</label></h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblprofession\">\r" +
+    "                                            <span id=\"lblprofession\">\r" +
     "\n" +
     "                                            {{ (item.SibilingCompany!==null?item.SibilingCompany:'')+\" \"+(item.SibilingJobPLace.ToString()!=\"\" && item.SibilingJobPLace!=null?\",\"+item.SibilingJobPLace:\"\") }}\r" +
     "\n" +
     "                                    </span>\r" +
     "\n" +
-    "                                    </h5>\r" +
+    "                                        </h5>\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            </div>\r" +
+    "\r" +
+    "\n" +
+    "                                <div id=\"update0\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
+    "                                    <div id=\"ownerdiv0\">\r" +
     "\n" +
-    "                            <div id=\"update0\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div id=\"ownerdiv0\">\r" +
-    "\n" +
-    "                                    <div id=\"uplConactNoeb\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                        <div id=\"uplConactNoeb\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                        <div>\r" +
+    "                                            <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                            <h6>\r" +
+    "                                                <h6>\r" +
     "\n" +
-    "                                                <label id=\"ConactNo\" font-bold=\"true\">Conact Nos</label></h6>\r" +
+    "                                                    <label id=\"ConactNo\" font-bold=\"true\">Conact Nos</label></h6>\r" +
     "\n" +
-    "                                            <h5>\r" +
+    "                                                <h5>\r" +
     "\n" +
-    "                                                <span id=\"lblConactNo\">\r" +
+    "                                                    <span id=\"lblConactNo\">\r" +
     "\n" +
     "                                                    {{ (item.SibilingMobileNumberWithCode!==null?item.SibilingMobileNumberWithCode:'')+\r" +
     "\n" +
@@ -11894,265 +12024,145 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                            </span>\r" +
     "\n" +
-    "                                            </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <div id=\"brotheremail\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            <h6>\r" +
-    "\n" +
-    "                                                <label id=\"brotheremail\" font-bold=\"true\">Email</label></h6>\r" +
-    "\n" +
-    "                                            <h5>\r" +
-    "\n" +
-    "                                                <span id=\"lblbrotheremail\">\r" +
-    "\n" +
-    "                                                    {{ item.SibilingEmail }}\r" +
-    "\n" +
-    "                                            </span>\r" +
-    "\n" +
-    "                                            </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div id=\"uuuuuuuppp\" ng-if=\"item.SibilingMarried==1\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div id=\"BROTHERDIV\">\r" +
-    "\n" +
-    "                                    <div id=\"uplWifeNameeb\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <div id=\"divWifeNamenew\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            <h6>\r" +
-    "\n" +
-    "                                                <label id=\"SpouseName\" font-bold=\"true\" style=\"font-weight: bold; font-family: helvetica; font-size: 18px\">\r" +
-    "\n" +
-    "                                                Spouse Name</label></h6>\r" +
-    "\n" +
-    "                                            <h5>\r" +
-    "\n" +
-    "                                                <span id=\"lblWifeName\">\r" +
-    "\n" +
-    "                                                    {{ item.SibilingSpouseName}}\r" +
-    "\n" +
-    "                                            </span>\r" +
-    "\n" +
-    "                                            </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                    <div id=\"lblbrotherwifeeducationdetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <div id=\"divlblbrotherwifeeducation\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            <h6>\r" +
-    "\n" +
-    "                                                <label id=\"lblbrotherwifeeducation\" font-bold=\"true\">Education</label></h6>\r" +
-    "\n" +
-    "                                            <h5>\r" +
-    "\n" +
-    "                                                <span id=\"lblbrotherwifeeducationdetails\">\r" +
-    "\n" +
-    "                                                    {{ item.SibilingSpouseEducationDetails}}\r" +
-    "\n" +
-    "                                            </span>\r" +
-    "\n" +
-    "                                            </h5>\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                                        <div>\r" +
-    "\n" +
-    "                                            <h6>\r" +
-    "\n" +
-    "                                                <label font-bold=\"true\">Profession Category</label></h6>\r" +
-    "\n" +
-    "                                            <h5>\r" +
-    "\n" +
-    "                                                <span>\r" +
-    "\n" +
-    "                                            {{ item.SpouseProfessionCategory}}\r" +
-    "\n" +
-    "                                    </span>\r" +
-    "\n" +
-    "                                            </h5>\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <div id=\"lblbrotherwifeprofessiondetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <div id=\"divlblbrotherwifeprofession\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                            <h6>\r" +
-    "\n" +
-    "                                                <label id=\"lblbrotherwifeprofession\" font-bold=\"true\">Designation</label></h6>\r" +
-    "\n" +
-    "                                            <h5>\r" +
-    "\n" +
-    "                                                <span id=\"lblbrotherwifeprofessiondetails\">\r" +
-    "\n" +
-    "                                                    {{ item.SibilingSpouseProfessionDetails}}\r" +
-    "\n" +
-    "                                            </span>\r" +
-    "\n" +
-    "                                            </h5>\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                    <div id=\"uplwifeprofessioneb\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.SibilingSpouseProfessionDetails=='HouseWife'\">\r" +
-    "\n" +
-    "                                        <h6>\r" +
-    "\n" +
-    "                                            <label id=\"wifeprofession\" font-bold=\"true\">Company&JobLocation</label></h6>\r" +
-    "\n" +
-    "                                        <h5>\r" +
-    "\n" +
-    "                                            <span id=\"lblwifeprofession\">\r" +
-    "\n" +
-    "                                                    {{ ((item.spoucecompanyName.ToString()!=\"\" && item.spoucecompanyName!=null)?item.spoucecompanyName:\"\")+((item.spoucejobloc.ToString()!=\"\"\r" +
-    "\n" +
-    "                                                    && item.spoucejobloc!=null)?\",\"+item.spoucejobloc:\"\") }}\r" +
-    "\n" +
-    "                                            </span>\r" +
-    "\n" +
-    "                                        </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                    <div id=\"update1\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <div id=\"ownerdiv1\">\r" +
-    "\n" +
-    "                                            <div id=\"wifenumbers\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                                <div id=\"divspousecontactnumbers\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                                    <h6>\r" +
-    "\n" +
-    "                                                        <label id=\"lblbrotherwife\" font-bold=\"true\">Contact Nos</label></h6>\r" +
-    "\n" +
-    "                                                    <h5>\r" +
-    "\n" +
-    "                                                        <span id=\"lblbrotherwifemobnumbers\">\r" +
-    "\n" +
-    "                                                           {{ (item.SibilingSpouceMobileNumberWithCode!==null?item.SibilingSpouceMobileNumberWithCode:'')\r" +
-    "\n" +
-    "                                                          +((item.SibilingSpouceLandNumberWithCode.ToString()!=\"\" && item.SibilingSpouceLandNumberWithCode!=null)?\",\"+item.SibilingSpouceLandNumberWithCode:\"\") }}\r" +
-    "\n" +
-    "                                                    </span>\r" +
-    "\n" +
-    "                                                    </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                                </div>\r" +
-    "\n" +
-    "\r" +
+    "                                                </h5>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                                            </div>\r" +
     "\n" +
-    "                                            <div id=\"Brotherwife\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <div id=\"brotheremail\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                                <h6>\r" +
     "\n" +
-    "                                                    <label id=\"brotherwifeemail\" font-bold=\"true\">Email</label></h6>\r" +
+    "                                                    <label id=\"brotheremail\" font-bold=\"true\">Email</label></h6>\r" +
     "\n" +
     "                                                <h5>\r" +
     "\n" +
-    "                                                    <span id=\"lblbrotherwifeemail\">\r" +
+    "                                                    <span id=\"lblbrotheremail\">\r" +
     "\n" +
-    "                                                            {{ item.SpouseEmail }}\r" +
+    "                                                    {{ item.SibilingEmail }}\r" +
     "\n" +
-    "                                                    </span>\r" +
+    "                                            </span>\r" +
+    "\n" +
+    "                                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div id=\"uuuuuuuppp\" ng-if=\"item.SibilingMarried==1\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <div id=\"BROTHERDIV\">\r" +
+    "\n" +
+    "                                        <div id=\"uplWifeNameeb\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <div id=\"divWifeNamenew\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                <h6>\r" +
+    "\n" +
+    "                                                    <label id=\"SpouseName\" font-bold=\"true\" style=\"font-weight: bold; font-family: helvetica; font-size: 18px\">\r" +
+    "\n" +
+    "                                                Spouse Name</label></h6>\r" +
+    "\n" +
+    "                                                <h5>\r" +
+    "\n" +
+    "                                                    <span id=\"lblWifeName\">\r" +
+    "\n" +
+    "                                                    {{ item.SibilingSpouseName}}\r" +
+    "\n" +
+    "                                            </span>\r" +
+    "\n" +
+    "                                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                        <div id=\"lblbrotherwifeeducationdetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <div id=\"divlblbrotherwifeeducation\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                <h6>\r" +
+    "\n" +
+    "                                                    <label id=\"lblbrotherwifeeducation\" font-bold=\"true\">Education</label></h6>\r" +
+    "\n" +
+    "                                                <h5>\r" +
+    "\n" +
+    "                                                    <span id=\"lblbrotherwifeeducationdetails\">\r" +
+    "\n" +
+    "                                                    {{ item.SibilingSpouseEducationDetails}}\r" +
+    "\n" +
+    "                                            </span>\r" +
+    "\n" +
+    "                                                </h5>\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                            <div>\r" +
+    "\n" +
+    "                                                <h6>\r" +
+    "\n" +
+    "                                                    <label font-bold=\"true\">Profession Category</label></h6>\r" +
+    "\n" +
+    "                                                <h5>\r" +
+    "\n" +
+    "                                                    <span>\r" +
+    "\n" +
+    "                                            {{ item.SpouseProfessionCategory}}\r" +
+    "\n" +
+    "                                    </span>\r" +
     "\n" +
     "                                                </h5>\r" +
     "\n" +
@@ -12162,61 +12172,181 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                    <div id=\"uplWifeFatherfirstnameeb\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                        <h6>\r" +
+    "\r" +
     "\n" +
-    "                                            <label id=\"lWifeFatherfirstname\" font-bold=\"true\">Spouse Father's Name</label></h6>\r" +
+    "                                        <div id=\"lblbrotherwifeprofessiondetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                                        <h5>\r" +
+    "\r" +
     "\n" +
-    "                                            <span id=\"lblWifeFatherfirstname\">\r" +
+    "                                            <div id=\"divlblbrotherwifeprofession\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                <h6>\r" +
+    "\n" +
+    "                                                    <label id=\"lblbrotherwifeprofession\" font-bold=\"true\">Designation</label></h6>\r" +
+    "\n" +
+    "                                                <h5>\r" +
+    "\n" +
+    "                                                    <span id=\"lblbrotherwifeprofessiondetails\">\r" +
+    "\n" +
+    "                                                    {{ item.SibilingSpouseProfessionDetails}}\r" +
+    "\n" +
+    "                                            </span>\r" +
+    "\n" +
+    "                                                </h5>\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                        <div id=\"uplwifeprofessioneb\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.SibilingSpouseProfessionDetails=='HouseWife'\">\r" +
+    "\n" +
+    "                                            <h6>\r" +
+    "\n" +
+    "                                                <label id=\"wifeprofession\" font-bold=\"true\">Company&JobLocation</label></h6>\r" +
+    "\n" +
+    "                                            <h5>\r" +
+    "\n" +
+    "                                                <span id=\"lblwifeprofession\">\r" +
+    "\n" +
+    "                                                    {{ ((item.spoucecompanyName.ToString()!=\"\" && item.spoucecompanyName!=null)?item.spoucecompanyName:\"\")+((item.spoucejobloc.ToString()!=\"\"\r" +
+    "\n" +
+    "                                                    && item.spoucejobloc!=null)?\",\"+item.spoucejobloc:\"\") }}\r" +
+    "\n" +
+    "                                            </span>\r" +
+    "\n" +
+    "                                            </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                        <div id=\"update1\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <div id=\"ownerdiv1\">\r" +
+    "\n" +
+    "                                                <div id=\"wifenumbers\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                    <div id=\"divspousecontactnumbers\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                        <h6>\r" +
+    "\n" +
+    "                                                            <label id=\"lblbrotherwife\" font-bold=\"true\">Contact Nos</label></h6>\r" +
+    "\n" +
+    "                                                        <h5>\r" +
+    "\n" +
+    "                                                            <span id=\"lblbrotherwifemobnumbers\">\r" +
+    "\n" +
+    "                                                           {{ (item.SibilingSpouceMobileNumberWithCode!==null?item.SibilingSpouceMobileNumberWithCode:'')\r" +
+    "\n" +
+    "                                                          +((item.SibilingSpouceLandNumberWithCode.ToString()!=\"\" && item.SibilingSpouceLandNumberWithCode!=null)?\",\"+item.SibilingSpouceLandNumberWithCode:\"\") }}\r" +
+    "\n" +
+    "                                                    </span>\r" +
+    "\n" +
+    "                                                        </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                </div>\r" +
+    "\n" +
+    "                                                <div id=\"Brotherwife\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                                    <h6>\r" +
+    "\n" +
+    "                                                        <label id=\"brotherwifeemail\" font-bold=\"true\">Email</label></h6>\r" +
+    "\n" +
+    "                                                    <h5>\r" +
+    "\n" +
+    "                                                        <span id=\"lblbrotherwifeemail\">\r" +
+    "\n" +
+    "                                                            {{ item.SpouseEmail }}\r" +
+    "\n" +
+    "                                                    </span>\r" +
+    "\n" +
+    "                                                    </h5>\r" +
+    "\n" +
+    "                                                </div>\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                        <div id=\"uplWifeFatherfirstnameeb\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            <h6>\r" +
+    "\n" +
+    "                                                <label id=\"lWifeFatherfirstname\" font-bold=\"true\">Spouse Father's Name</label></h6>\r" +
+    "\n" +
+    "                                            <h5>\r" +
+    "\n" +
+    "                                                <span id=\"lblWifeFatherfirstname\">\r" +
     "\n" +
     "                                                    {{ item.SibilingSpouseFatherName }}\r" +
     "\n" +
     "                                            </span>\r" +
     "\n" +
-    "                                        </h5>\r" +
+    "                                            </h5>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    </div>\r" +
+    "                                        </div>\r" +
     "\n" +
-    "                                    <div id=\"brotherspusefathercaste\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                        <div id=\"brotherspusefathercaste\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                        <h6>\r" +
+    "                                            <h6>\r" +
     "\n" +
-    "                                            <label id=\"botherwifefathercaste\" font-bold=\"true\">Spouse Father Caste</label></h6>\r" +
+    "                                                <label id=\"botherwifefathercaste\" font-bold=\"true\">Spouse Father Caste</label></h6>\r" +
     "\n" +
-    "                                        <h5>\r" +
+    "                                            <h5>\r" +
     "\n" +
-    "                                            <span id=\"lblbotherwifefathercaste\">\r" +
+    "                                                <span id=\"lblbotherwifefathercaste\">\r" +
     "\n" +
     "                                                    {{ item.SibilingSpouseFatherCaste }}\r" +
     "\n" +
     "                                            </span>\r" +
     "\n" +
-    "                                        </h5>\r" +
+    "                                            </h5>\r" +
     "\n" +
-    "                                    </div>\r" +
+    "                                        </div>\r" +
     "\n" +
-    "                                    <div id=\"upBroSpouseFatherNativePlace\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                        <div id=\"upBroSpouseFatherNativePlace\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                                        <h6>\r" +
+    "                                            <h6>\r" +
     "\n" +
-    "                                            <label id=\"BroSpouseFatherNativePlace\" font-bold=\"true\">Native Place</label></h6>\r" +
+    "                                                <label id=\"BroSpouseFatherNativePlace\" font-bold=\"true\">Native Place</label></h6>\r" +
     "\n" +
-    "                                        <h5>\r" +
+    "                                            <h5>\r" +
     "\n" +
-    "                                            <span id=\"lblBroSpouseFatherNativePlace\">\r" +
+    "                                                <span id=\"lblBroSpouseFatherNativePlace\">\r" +
     "\n" +
     "                                                   {{((item.BroSpouseFatherCity!=null && item.BroSpouseFatherCity.ToString()!=\"\")?item.BroSpouseFatherCity:\"\") +\r" +
     "\n" +
@@ -12228,7 +12358,131 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                            </span>\r" +
     "\n" +
+    "                                            </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <hr />\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Sister Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\">ModifiedBy :{{page.model.sisModifiedby}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                    <div id=\"uplnksisterdet\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.sibblingPopulatePopulate('sister')\" data-original-title=\"Add Sister Details\" class=\"edit_page_add_button\">Add\r" +
+    "\n" +
+    "                </a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div id=\"uplistsister\" class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div id=\"listsister\" ng-repeat=\"item in page.model.sisterArr\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div>\r" +
+    "\n" +
+    "                        <div id=\"Div2\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "                                    <div id=\"uplsisnamees\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <h6>\r" +
+    "\n" +
+    "                                            <label id=\"sisname\" font-bold=\"true\" style=\"color:red;\">Sister Name\r" +
+    "\n" +
+    "                                    </label>\r" +
+    "\n" +
+    "                                        </h6>\r" +
+    "\n" +
+    "                                        <h5>\r" +
+    "\n" +
+    "                                            <span id=\"lblsisname\" style=\"color:red;\">\r" +
+    "\n" +
+    "                                            {{ item.SibilingName+\" (\"+item.SisterElderORyounger+\")\"}}\r" +
+    "\n" +
+    "                                    </span>\r" +
+    "\n" +
     "                                        </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "                                    <div id=\"upllnksisteredites\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                        <a class=\"edit_page_edit_button\" data-original-title=\"Edit Sister Details\" href=\"javascript:void(0);\" ng-click=\"page.model.sibblingPopulatePopulate('sister',item)\">Edit\r" +
+    "\n" +
+    "                                         \r" +
+    "\n" +
+    "                                    </a>\r" +
+    "\n" +
+    "                                        <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeletePopup('sister',item.SibilingCustfamilyID);\">Delete</a>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -12238,217 +12492,93 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                            </div>\r" +
+    "                                <div id=\"sistereducationdetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </div>\r" +
+    "                                    <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                </div>\r" +
+    "                                        <h6>\r" +
     "\n" +
-    "\r" +
+    "                                            <label id=\"lblsistereducation\" font-bold=\"true\">Education</label></h6>\r" +
     "\n" +
-    "                <hr />\r" +
+    "                                        <h5>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "            <h4>Sister Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\">ModifiedBy :{{page.model.sisModifiedby}}</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </h4>\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "                <div id=\"uplnksisterdet\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.sibblingPopulatePopulate('sister')\" data-original-title=\"Add Sister Details\" class=\"edit_page_add_button\">Add\r" +
-    "\n" +
-    "                </a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div id=\"uplistsister\" class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            <div id=\"listsister\" ng-repeat=\"item in page.model.sisterArr\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div>\r" +
-    "\n" +
-    "                    <div id=\"Div2\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "                                <div id=\"uplsisnamees\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <label id=\"sisname\" font-bold=\"true\" style=\"color:red;\">Sister Name\r" +
-    "\n" +
-    "                                    </label>\r" +
-    "\n" +
-    "                                    </h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblsisname\" style=\"color:red;\">\r" +
-    "\n" +
-    "                                            {{ item.SibilingName+\" (\"+item.SisterElderORyounger+\")\"}}\r" +
-    "\n" +
-    "                                    </span>\r" +
-    "\n" +
-    "                                    </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                                <div id=\"upllnksisteredites\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <a class=\"edit_page_edit_button\" data-original-title=\"Edit Sister Details\" href=\"javascript:void(0);\" ng-click=\"page.model.sibblingPopulatePopulate('sister',item)\">Edit\r" +
-    "\n" +
-    "                                         \r" +
-    "\n" +
-    "                                    </a>\r" +
-    "\n" +
-    "                                    <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeletePopup('sister',item.SibilingCustfamilyID);\">Delete</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div id=\"sistereducationdetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <label id=\"lblsistereducation\" font-bold=\"true\">Education</label></h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblsistereducationdetails\">\r" +
+    "                                            <span id=\"lblsistereducationdetails\">\r" +
     "\n" +
     "                                            {{ item.SibilingEducationDetails}}\r" +
     "\n" +
     "                                    </span>\r" +
     "\n" +
-    "                                    </h5>\r" +
+    "                                        </h5>\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
-    "\r" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                    <div>\r" +
     "\n" +
-    "                                <div>\r" +
+    "                                        <h6>\r" +
     "\n" +
-    "                                    <h6>\r" +
+    "                                            <label font-bold=\"true\">Profession Category</label></h6>\r" +
     "\n" +
-    "                                        <label font-bold=\"true\">Profession Category</label></h6>\r" +
+    "                                        <h5>\r" +
     "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span>\r" +
+    "                                            <span>\r" +
     "\n" +
     "                                            {{ item.ProfessionCategory}}\r" +
     "\n" +
     "                                    </span>\r" +
     "\n" +
-    "                                    </h5>\r" +
+    "                                        </h5>\r" +
+    "\n" +
+    "                                    </div>\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
-    "                            </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div id=\"lblsisterprofessiondetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                <div id=\"lblsisterprofessiondetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <div>\r" +
+    "                                    <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    <h6>\r" +
+    "                                        <h6>\r" +
     "\n" +
-    "                                        <label id=\"lblsisterprofession\" font-bold=\"true\">Designation</label></h6>\r" +
+    "                                            <label id=\"lblsisterprofession\" font-bold=\"true\">Designation</label></h6>\r" +
     "\n" +
-    "                                    <h5>\r" +
+    "                                        <h5>\r" +
     "\n" +
-    "                                        <span id=\"lblsisterprofessiondetails\">\r" +
+    "                                            <span id=\"lblsisterprofessiondetails\">\r" +
     "\n" +
     "                                            {{ item.SibilingProfessionDetails}}\r" +
     "\n" +
     "                                    </span>\r" +
     "\n" +
-    "                                    </h5>\r" +
+    "                                        </h5>\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div id=\"uplsisprofes\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.SibilingProfessionDetails=='HouseWife'\">\r" +
+    "                                <div id=\"uplsisprofes\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.SibilingProfessionDetails=='HouseWife'\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -12456,19 +12586,19 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                                <h6>\r" +
+    "                                    <h6>\r" +
     "\n" +
-    "                                    <label id=\"sisprof\" font-bold=\"true\">Company & Job Location </label></h6>\r" +
+    "                                        <label id=\"sisprof\" font-bold=\"true\">Company & Job Location </label></h6>\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                                    <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblsisprof\">\r" +
+    "                                        <span id=\"lblsisprof\">\r" +
     "\n" +
     "                                            {{ (item.SibilingCompany!==null?item.SibilingCompany:'')+ ((item.SibilingJobPLace.ToString()!=\"\" && item.SibilingJobPLace!=null)?\",\"+item.SibilingJobPLace:\"\")}}\r" +
     "\n" +
     "                                    </span>\r" +
     "\n" +
-    "                                </h5>\r" +
+    "                                    </h5>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -12476,31 +12606,31 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                            </div>\r" +
+    "                                </div>\r" +
     "\n" +
-    "                            <div id=\"update2\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div id=\"ownerdiv2\">\r" +
+    "                                <div id=\"update2\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    <div id=\"uplsisnumbers\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                    <div id=\"ownerdiv2\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                        <div>\r" +
+    "                                        <div id=\"uplsisnumbers\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                            <h6>\r" +
+    "                                            <div>\r" +
     "\n" +
-    "                                                <label id=\"sisnumbers\" font-bold=\"true\">Contact Nos</label></h6>\r" +
+    "\r" +
     "\n" +
-    "                                            <h5>\r" +
+    "                                                <h6>\r" +
     "\n" +
-    "                                                <span id=\"lblsisnumbers\">\r" +
+    "                                                    <label id=\"sisnumbers\" font-bold=\"true\">Contact Nos</label></h6>\r" +
+    "\n" +
+    "                                                <h5>\r" +
+    "\n" +
+    "                                                    <span id=\"lblsisnumbers\">\r" +
     "\n" +
     "                                                    {{ (item.SibilingMobileNumberWithCode!==null?item.SibilingMobileNumberWithCode:'')+\r" +
     "\n" +
@@ -12508,215 +12638,215 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                            </span>\r" +
     "\n" +
-    "                                            </h5>\r" +
+    "                                                </h5>\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                    <div id=\"sisterwifeemail\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                        <div id=\"sisterwifeemail\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                        <div>\r" +
+    "                                            <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                            <h6>\r" +
+    "                                                <h6>\r" +
     "\n" +
-    "                                                <label id=\"sisteremail\" font-bold=\"true\">Email</label></h6>\r" +
+    "                                                    <label id=\"sisteremail\" font-bold=\"true\">Email</label></h6>\r" +
     "\n" +
-    "                                            <h5>\r" +
+    "                                                <h5>\r" +
     "\n" +
-    "                                                <span id=\"lblsisteremail\">\r" +
+    "                                                    <span id=\"lblsisteremail\">\r" +
     "\n" +
     "                                                    {{ item.SibilingEmail }}\r" +
     "\n" +
     "                                            </span>\r" +
     "\n" +
-    "                                            </h5>\r" +
+    "                                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
     "                                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "                                    </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div id=\"pqw\">\r" +
+    "                                <div id=\"pqw\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <div id=\"Sisterspousedetails\" ng-if=\"item.SibilingMarried==1\">\r" +
+    "                                    <div id=\"Sisterspousedetails\" ng-if=\"item.SibilingMarried==1\">\r" +
     "\n" +
-    "                                    <div id=\"uplhusnamees\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <div id=\"divhusname\">\r" +
+    "                                        <div id=\"uplhusnamees\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                            <h6>\r" +
+    "                                            <div id=\"divhusname\">\r" +
     "\n" +
-    "                                                <label id=\"husname\" font-bold=\"true\" style=\"font-weight: bold; font-family: helvetica; font-size: 18px\">\r" +
+    "\r" +
+    "\n" +
+    "                                                <h6>\r" +
+    "\n" +
+    "                                                    <label id=\"husname\" font-bold=\"true\" style=\"font-weight: bold; font-family: helvetica; font-size: 18px\">\r" +
     "\n" +
     "                                                Husband Name</label></h6>\r" +
     "\n" +
-    "                                            <h5>\r" +
+    "                                                <h5>\r" +
     "\n" +
-    "                                                <span id=\"lblhusname\">\r" +
+    "                                                    <span id=\"lblhusname\">\r" +
     "\n" +
     "                                                    {{ item.SibilingSpouseName}}\r" +
     "\n" +
     "                                            </span>\r" +
     "\n" +
-    "                                            </h5>\r" +
+    "                                                </h5>\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    </div>\r" +
+    "                                        <div id=\"lblsisterspouseeducation\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "\r" +
+    "                                            <div id=\"divlblsisterspouseeducation\">\r" +
     "\n" +
-    "                                    <div id=\"lblsisterspouseeducation\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                                <h6>\r" +
     "\n" +
-    "                                        <div id=\"divlblsisterspouseeducation\">\r" +
+    "                                                    <label id=\"lblsisterspouseeducation\" font-bold=\"true\">Education</label></h6>\r" +
     "\n" +
-    "                                            <h6>\r" +
+    "                                                <h5>\r" +
     "\n" +
-    "                                                <label id=\"lblsisterspouseeducation\" font-bold=\"true\">Education</label></h6>\r" +
-    "\n" +
-    "                                            <h5>\r" +
-    "\n" +
-    "                                                <span id=\"lbllblsisterspouseeducationdetails\">\r" +
+    "                                                    <span id=\"lbllblsisterspouseeducationdetails\">\r" +
     "\n" +
     "                                                    {{ item.SibilingSpouseEducationDetails}}\r" +
     "\n" +
     "                                            </span>\r" +
     "\n" +
-    "                                            </h5>\r" +
+    "                                                </h5>\r" +
+    "\n" +
+    "                                            </div>\r" +
     "\n" +
     "                                        </div>\r" +
     "\n" +
-    "                                    </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
-    "                                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                                        <div>\r" +
+    "                                            <div>\r" +
     "\n" +
-    "                                            <h6>\r" +
+    "                                                <h6>\r" +
     "\n" +
-    "                                                <label font-bold=\"true\">Profession Category</label></h6>\r" +
+    "                                                    <label font-bold=\"true\">Profession Category</label></h6>\r" +
     "\n" +
-    "                                            <h5>\r" +
+    "                                                <h5>\r" +
     "\n" +
-    "                                                <span>\r" +
+    "                                                    <span>\r" +
     "\n" +
     "                                            {{ item.SpouseProfessionCategory}}\r" +
     "\n" +
     "                                    </span>\r" +
     "\n" +
-    "                                            </h5>\r" +
+    "                                                </h5>\r" +
+    "\n" +
+    "                                            </div>\r" +
     "\n" +
     "                                        </div>\r" +
     "\n" +
-    "                                    </div>\r" +
+    "\r" +
+    "\n" +
+    "                                        <div id=\"lblsisterspouseprofession\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    <div id=\"lblsisterspouseprofession\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                            <div id=\"divlblsisterspouseprofession\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                        <div id=\"divlblsisterspouseprofession\">\r" +
+    "                                                <h6>\r" +
     "\n" +
-    "\r" +
+    "                                                    <label id=\"lblsisterspouseprofession\" font-bold=\"true\">Designation</label></h6>\r" +
     "\n" +
-    "                                            <h6>\r" +
+    "                                                <h5>\r" +
     "\n" +
-    "                                                <label id=\"lblsisterspouseprofession\" font-bold=\"true\">Designation</label></h6>\r" +
-    "\n" +
-    "                                            <h5>\r" +
-    "\n" +
-    "                                                <span id=\"lblsisterspouseprofessiondetails\">\r" +
+    "                                                    <span id=\"lblsisterspouseprofessiondetails\">\r" +
     "\n" +
     "                                                    {{ item.SibilingSpouseProfessionDetails}}\r" +
     "\n" +
     "                                            </span>\r" +
     "\n" +
-    "                                            </h5>\r" +
+    "                                                </h5>\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                    <div id=\"uplhusprofes\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                        <div id=\"uplhusprofes\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                        <div id=\"divlblsisterspousecmpy\">\r" +
+    "                                            <div id=\"divlblsisterspousecmpy\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                            <h6>\r" +
+    "                                                <h6>\r" +
     "\n" +
-    "                                                <label id=\"husprof\" font-bold=\"true\">Company&JobLocation</label></h6>\r" +
+    "                                                    <label id=\"husprof\" font-bold=\"true\">Company&JobLocation</label></h6>\r" +
     "\n" +
-    "                                            <h5>\r" +
+    "                                                <h5>\r" +
     "\n" +
-    "                                                <span id=\"lblhusprof\">\r" +
+    "                                                    <span id=\"lblhusprof\">\r" +
     "\n" +
     "                                                    {{((item.spoucecompanyName.ToString()!=\"\" && item.spoucecompanyName!=null)?\" \"+item.spoucecompanyName:\"\")+((item.spoucejobloc.ToString()!=\"\" && item.spoucejobloc!=null)?\",\"+item.spoucejobloc:\"\") }}\r" +
     "\n" +
     "                                            </span>\r" +
     "\n" +
-    "                                            </h5>\r" +
+    "                                                </h5>\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                    <div id=\"update3\">\r" +
+    "                                        <div id=\"update3\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                        <div id=\"ownerdiv3\">\r" +
+    "                                            <div id=\"ownerdiv3\">\r" +
     "\n" +
-    "                                            <div id=\"husbandnumbers\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                                <div id=\"divmobilesisterhus\">\r" +
+    "                                                <div id=\"husbandnumbers\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                                    <h6>\r" +
+    "                                                    <div id=\"divmobilesisterhus\">\r" +
     "\n" +
-    "                                                        <label id=\"lblsisterhusband\" font-bold=\"true\">Conact Nos</label></h6>\r" +
+    "\r" +
     "\n" +
-    "                                                    <h5>\r" +
+    "                                                        <h6>\r" +
     "\n" +
-    "                                                        <span id=\"lblhusbandnumbers\">\r" +
+    "                                                            <label id=\"lblsisterhusband\" font-bold=\"true\">Conact Nos</label></h6>\r" +
+    "\n" +
+    "                                                        <h5>\r" +
+    "\n" +
+    "                                                            <span id=\"lblhusbandnumbers\">\r" +
     "\n" +
     "                                                          {{ (item.SibilingSpouceMobileNumberWithCode!==null?item.SibilingSpouceMobileNumberWithCode:'')+((item.SibilingSpouceLandNumberWithCode.ToString()!=\"\" && item.SibilingSpouceLandNumberWithCode!=null)?\",\"\r" +
     "\n" +
@@ -12724,127 +12854,127 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                                    </span>\r" +
     "\n" +
-    "                                                    </h5>\r" +
+    "                                                        </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                    </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
     "                                                </div>\r" +
     "\n" +
-    "\r" +
+    "                                                <div id=\"lblsisterspouseemail\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                            </div>\r" +
-    "\n" +
-    "                                            <div id=\"lblsisterspouseemail\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                                    <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                                <div>\r" +
+    "                                                        <h6>\r" +
     "\n" +
-    "\r" +
+    "                                                            <label id=\"sisterspouseemail\" font-bold=\"true\">Email</label></h6>\r" +
     "\n" +
-    "                                                    <h6>\r" +
+    "                                                        <h5>\r" +
     "\n" +
-    "                                                        <label id=\"sisterspouseemail\" font-bold=\"true\">Email</label></h6>\r" +
-    "\n" +
-    "                                                    <h5>\r" +
-    "\n" +
-    "                                                        <span id=\"lblsisterspouseemail\">{{ item.SpouseEmail }}\r" +
+    "                                                            <span id=\"lblsisterspouseemail\">{{ item.SpouseEmail }}\r" +
     "\n" +
     "                                                    </span>\r" +
     "\n" +
-    "                                                    </h5>\r" +
+    "                                                        </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                                    </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
     "                                                </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "                                            </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                    <div id=\"uplhusfathernamees\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                        <div id=\"uplhusfathernamees\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                        <div id=\"divhusfathernames\">\r" +
+    "                                            <div id=\"divhusfathernames\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                            <h6>\r" +
+    "                                                <h6>\r" +
     "\n" +
-    "                                                <label id=\"husfathernames\" font-bold=\"true\">Husband Father Name</label></h6>\r" +
+    "                                                    <label id=\"husfathernames\" font-bold=\"true\">Husband Father Name</label></h6>\r" +
     "\n" +
-    "                                            <h5>\r" +
+    "                                                <h5>\r" +
     "\n" +
-    "                                                <span id=\"lblhusfathername\">\r" +
+    "                                                    <span id=\"lblhusfathername\">\r" +
     "\n" +
     "                                                    {{ item.SibilingSpouseFatherName }}\r" +
     "\n" +
     "                                            </span>\r" +
     "\n" +
-    "                                            </h5>\r" +
+    "                                                </h5>\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                    <div id=\"sisterspousefathercaste\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                        <div id=\"sisterspousefathercaste\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                        <div id=\"divsisterspousefathercaste\">\r" +
+    "                                            <div id=\"divsisterspousefathercaste\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                            <h6>\r" +
+    "                                                <h6>\r" +
     "\n" +
-    "                                                <label id=\"sisterhusbandfathercaste\" font-bold=\"true\">Husband Father Caste</label></h6>\r" +
+    "                                                    <label id=\"sisterhusbandfathercaste\" font-bold=\"true\">Husband Father Caste</label></h6>\r" +
     "\n" +
-    "                                            <h5>\r" +
+    "                                                <h5>\r" +
     "\n" +
-    "                                                <span id=\"lblsisterSpousefathercaste\">\r" +
+    "                                                    <span id=\"lblsisterSpousefathercaste\">\r" +
     "\n" +
     "                                                    {{ item.SibilingSpouseFatherCaste }}\r" +
     "\n" +
     "                                            </span>\r" +
     "\n" +
-    "                                            </h5>\r" +
+    "                                                </h5>\r" +
+    "\n" +
+    "                                            </div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                    <div id=\"upSisNativePlace\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                        <div id=\"upSisNativePlace\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                        <div>\r" +
+    "                                            <div>\r" +
     "\n" +
-    "                                            <h6>\r" +
+    "                                                <h6>\r" +
     "\n" +
-    "                                                <label id=\"SisSpouseFatherNativePlace\" font-bold=\"true\">Native Place</label>\r" +
+    "                                                    <label id=\"SisSpouseFatherNativePlace\" font-bold=\"true\">Native Place</label>\r" +
     "\n" +
-    "                                            </h6>\r" +
+    "                                                </h6>\r" +
     "\n" +
-    "                                            <h5>\r" +
+    "                                                <h5>\r" +
     "\n" +
-    "                                                <span id=\"lblSisSpouseFatherNativePlace\">\r" +
+    "                                                    <span id=\"lblSisSpouseFatherNativePlace\">\r" +
     "\n" +
     "                                                   {{((item.SisSpousefatherCity!=null && item.SisSpousefatherCity.ToString()!=\"\")?item.SisSpousefatherCity:\"\") +\r" +
     "\n" +
@@ -12856,13 +12986,19 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                            </span>\r" +
     "\n" +
-    "                                            </h5>\r" +
+    "                                                </h5>\r" +
     "\n" +
-    "                                        </div>\r" +
+    "                                            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
+    "                                        </div>\r" +
+    "\n" +
     "                                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
@@ -12872,29 +13008,27 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "                        </div>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "                </div>\r" +
+    "                    <hr />\r" +
     "\n" +
-    "                <hr />\r" +
+    "\r" +
+    "\n" +
+    "                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "            </div>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
     "</div>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -13775,561 +13909,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editSpouse/index.html',
-    "<div class=\"edit_pages_content_main clearfix\">\r" +
+    "<div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <div class=\"edit_page_item\">\r" +
-    "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "            <h4>Spouse Details</h4>\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <a href=\"javascrip:void(0);\" class=\"edit_page_add_button\" ng-click=\"page.model.populatepopup('Spouse');\">Add\r" +
-    "\n" +
-    "            </a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "            <div id=\"fullSpouseDetails\" ng-repeat=\"item in page.model.spouseArray\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div id=\"reviewdiv\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"updatespousename\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <h6>\r" +
-    "\n" +
-    "                            <span id=\"spouseName\" font-bold=\"true\">Name</span></h6>\r" +
-    "\n" +
-    "                        <h5>\r" +
-    "\n" +
-    "                            <span id=\"lblspouseName\">{{item.NAME}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanellnkspouseedit\" class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <a class=\"edit_page_edit_button\" href=\"javascrip:void(0);\" ng-click=\"page.model.populatepopup('Spouse',item);\">Edit\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelspouseProfession\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"spouseEducation\" font-bold=\"true\">Education</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblspouseEducation\">{{item.EducationDetails}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelspouseProfessionDetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"spouseProfessionDetails\" font-bold=\"true\">Profession</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblspouseProfessionDetails\">{{item.ProfessionDetails}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelMarriedon\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"Marriedon\" font-bold=\"true\">Married on</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblMarriedon\">{{item.MarriageDate}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelSeparateddate\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"Separateddate\" font-bold=\"true\">Separated date</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblSeparateddate\">\r" +
-    "\n" +
-    "                                {{item.SeperatedDate}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelLegallydivorced\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"Legallydivorced\" font-bold=\"true\">Legally divorced</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblLegallydivorced\"></span> {{item.LeagallyDivorce}}\r" +
-    "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelFamilyplanning\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"LabelFamilyplanning\" font-bold=\"true\">Family planning</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"Familyplanning\">{{item.MyFamilyPlanning}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelDateofegallydivorce\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"Dateoflegallydivorce\" font-bold=\"true\">Date of legally divorce</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblDateoflegallydivorce\">{{item.DateofLegallDivorce}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelReasonfordivorce\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"Reasonfordivorce\" font-bold=\"true\">Reason for divorce</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblReasonfordivorce\">{{item.ReasonforDivorce}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelFathername\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"Fathername\" font-bold=\"true\">Father name</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblFathername\">{{item.FatherFirstName+\" \"+item.FatherLastName}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanellblNoOfChildrens\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblnoofchildrenss\" font-bold=\"true\">No Of Children</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblNoOfChildrens\">{{item.NoOfChildrens}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelHouseFlatnumber\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"HouseFlatnumber\" font-bold=\"true\">House/Flat number</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblHouseFlatnumber\">{{item.HouseFlatNumberID}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelApartmentname\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"Apartmentname\" font-bold=\"true\">Apartmentname</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblApartmentname\">{{item.AppartmentName}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelStreetname\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"Streetname\" font-bold=\"true\">Street name</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblStreetname\">{{item.StreetName}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelAreaname\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"Areaname\" font-bold=\"true\">Area name</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblAreaname\">{{item.AreaName}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelLandmark\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"lblLandark\" font-bold=\"true\">Land mark</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblLandmark\">{{item.LandMark}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelCountry\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"Country\" font-bold=\"true\">Country</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblCountry\">{{item.CountryName}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelState\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"State\" font-bold=\"true\">State</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblState\">{{item.StateName}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelDistrict\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"District\" font-bold=\"true\">District</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblDistrict\">{{item.DistrictName}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div id=\"UpdatePanelCity\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span id=\"City\" font-bold=\"true\">City</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span id=\"lblCity\">{{item.CityName}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <hr />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
+    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
@@ -14339,21 +13923,23 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <div class=\"edit_page_item\">\r" +
-    "\n" +
-    "        <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "            <h4>Children Details </h4>\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "                <div ID=\"UpdatePanelChildrenDetails\">\r" +
+    "    <div class=\"edit_pages_content_main clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <a href=\"javascrip:void(0);\" ng-click=\"page.model.populatepopup('Child');\" class=\"edit_page_add_button\">Add\r" +
+    "        <div class=\"edit_page_item\">\r" +
     "\n" +
-    "                    </a>\r" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Spouse Details</h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <a href=\"javascrip:void(0);\" class=\"edit_page_add_button\" ng-click=\"page.model.populatepopup('Spouse');\">Add\r" +
+    "\n" +
+    "            </a>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -14361,15 +13947,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            </div>\r" +
     "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "            <div ID=\"UpdatePanelfullChildrenDetails\">\r" +
-    "\n" +
     "\r" +
     "\n" +
-    "                <div ID=\"listChildrenDetails\" ng-repeat=\"item in page.model.ChildArray\">\r" +
+    "            <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                <div id=\"fullSpouseDetails\" ng-repeat=\"item in page.model.spouseArray\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -14379,35 +13961,31 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div id=\"updatespousename\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
     "                            <h6>\r" +
     "\n" +
-    "                                <span ID=\"Nameofthechild\" Font-Bold=\"true\" ForeColor=\"Red\">Name of the child</span></h6>\r" +
+    "                                <span id=\"spouseName\" font-bold=\"true\">Name</span></h6>\r" +
     "\n" +
     "                            <h5>\r" +
     "\n" +
-    "                                <span ID=\"lblNameofthechild\">{{item.ChildName}}</span></h5>\r" +
+    "                                <span id=\"lblspouseName\">{{item.NAME}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "                        <div ID=\"UpdatePanellnkchidrensedit\" class=\"edit_page_item_ui clearfix\">\r" +
+    "                        <div id=\"UpdatePanellnkspouseedit\" class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <a href=\"javascrip:void(0);\" ng-click=\"page.model.populatepopup('Child',item);\" class=\"edit_page_edit_button\">Edit\r" +
+    "                            <a class=\"edit_page_edit_button\" href=\"javascrip:void(0);\" ng-click=\"page.model.populatepopup('Spouse',item);\">Edit\r" +
     "\n" +
-    "                                    </a>\r" +
+    "                    </a>\r" +
     "\n" +
-    "                            <a title=\"\" data-placement=\"bottom\" data-toggle=\"tooltip\" data-original-title=\"Delete chidrens Details\" class=\"edit_page_del_button\">delete\r" +
-    "\n" +
-    "                                           \r" +
-    "\n" +
-    "                                    </a>\r" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -14417,7 +13995,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div id=\"UpdatePanelspouseProfession\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -14427,11 +14005,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <span ID=\"Genderofthechild\" Font-Bold=\"true\">Gender of the child</span></h6>\r" +
+    "                                    <span id=\"spouseEducation\" font-bold=\"true\">Education</span></h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span ID=\"lblGenderofthechild\">{{item.GenderName}}</span></h5>\r" +
+    "                                    <span id=\"lblspouseEducation\">{{item.EducationDetails}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -14441,7 +14019,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div id=\"UpdatePanelspouseProfessionDetails\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -14451,11 +14029,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <span ID=\"Dateofbirthofthechild\" Font-Bold=\"true\">DOB of the child</span></h6>\r" +
+    "                                    <span id=\"spouseProfessionDetails\" font-bold=\"true\">Profession</span></h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span ID=\"lblDateofbirthofthechild\">{{item.ChildDOB}}</span></h5>\r" +
+    "                                    <span id=\"lblspouseProfessionDetails\">{{item.ProfessionDetails}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -14467,7 +14045,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                        <divclass=\"edit_page_details_item_desc clearfix\">\r" +
+    "                        <div id=\"UpdatePanelMarriedon\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -14477,43 +14055,421 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <span ID=\"Childstayingwith\" Font-Bold=\"true\">Child staying with</span></h6>\r" +
+    "                                    <span id=\"Marriedon\" font-bold=\"true\">Married on</span></h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span ID=\"lblChildstayingwith\">{{item.ChildStayingWith}}</span></h5>\r" +
+    "                                    <span id=\"lblMarriedon\">{{item.MarriageDate}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
     "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelSeparateddate\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"Separateddate\" font-bold=\"true\">Separated date</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblSeparateddate\">\r" +
+    "\n" +
+    "                                {{item.SeperatedDate}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelLegallydivorced\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"Legallydivorced\" font-bold=\"true\">Legally divorced</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblLegallydivorced\"></span> {{item.LeagallyDivorce}}\r" +
+    "\n" +
+    "                                </h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelFamilyplanning\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"LabelFamilyplanning\" font-bold=\"true\">Family planning</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"Familyplanning\">{{item.MyFamilyPlanning}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelDateofegallydivorce\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"Dateoflegallydivorce\" font-bold=\"true\">Date of legally divorce</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblDateoflegallydivorce\">{{item.DateofLegallDivorce}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelReasonfordivorce\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"Reasonfordivorce\" font-bold=\"true\">Reason for divorce</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblReasonfordivorce\">{{item.ReasonforDivorce}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelFathername\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"Fathername\" font-bold=\"true\">Father name</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblFathername\">{{item.FatherFirstName+\" \"+item.FatherLastName}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanellblNoOfChildrens\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblnoofchildrenss\" font-bold=\"true\">No Of Children</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblNoOfChildrens\">{{item.NoOfChildrens}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelHouseFlatnumber\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"HouseFlatnumber\" font-bold=\"true\">House/Flat number</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblHouseFlatnumber\">{{item.HouseFlatNumberID}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelApartmentname\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"Apartmentname\" font-bold=\"true\">Apartmentname</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblApartmentname\">{{item.AppartmentName}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelStreetname\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"Streetname\" font-bold=\"true\">Street name</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblStreetname\">{{item.StreetName}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelAreaname\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"Areaname\" font-bold=\"true\">Area name</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblAreaname\">{{item.AreaName}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelLandmark\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblLandark\" font-bold=\"true\">Land mark</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblLandmark\">{{item.LandMark}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelCountry\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"Country\" font-bold=\"true\">Country</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblCountry\">{{item.CountryName}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelState\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"State\" font-bold=\"true\">State</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblState\">{{item.StateName}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelDistrict\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"District\" font-bold=\"true\">District</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblDistrict\">{{item.DistrictName}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelCity\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"City\" font-bold=\"true\">City</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblCity\">{{item.CityName}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                    <hr />\r" +
     "\n" +
     "\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <h6>\r" +
-    "\n" +
-    "                                <span ID=\"Childstayingwithrelation\" Font-Bold=\"true\">Child staying with relation</span></h6>\r" +
-    "\n" +
-    "                            <h5>\r" +
-    "\n" +
-    "                                <span ID=\"lblChildstayingwithrelation\">{{item.ChildernRelationName}}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -14521,21 +14477,213 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                </div>\r" +
     "\n" +
-    "                <hr />\r" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
     "\n" +
     "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Children Details </h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                    <div ID=\"UpdatePanelChildrenDetails\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <a href=\"javascrip:void(0);\" ng-click=\"page.model.populatepopup('Child');\" class=\"edit_page_add_button\">Add\r" +
+    "\n" +
+    "                    </a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                <div ID=\"UpdatePanelfullChildrenDetails\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div ID=\"listChildrenDetails\" ng-repeat=\"item in page.model.ChildArray\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"reviewdiv\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span ID=\"Nameofthechild\" Font-Bold=\"true\" ForeColor=\"Red\">Name of the child</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span ID=\"lblNameofthechild\">{{item.ChildName}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ID=\"UpdatePanellnkchidrensedit\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <a href=\"javascrip:void(0);\" ng-click=\"page.model.populatepopup('Child',item);\" class=\"edit_page_edit_button\">Edit\r" +
+    "\n" +
+    "                                    </a>\r" +
+    "\n" +
+    "                                <a title=\"\" data-placement=\"bottom\" data-toggle=\"tooltip\" data-original-title=\"Delete chidrens Details\" class=\"edit_page_del_button\">delete\r" +
+    "\n" +
+    "                                           \r" +
+    "\n" +
+    "                                    </a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"Genderofthechild\" Font-Bold=\"true\">Gender of the child</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblGenderofthechild\">{{item.GenderName}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"Dateofbirthofthechild\" Font-Bold=\"true\">DOB of the child</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblDateofbirthofthechild\">{{item.ChildDOB}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <divclass=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <h6>\r" +
+    "\n" +
+    "                                        <span ID=\"Childstayingwith\" Font-Bold=\"true\">Child staying with</span></h6>\r" +
+    "\n" +
+    "                                    <h5>\r" +
+    "\n" +
+    "                                        <span ID=\"lblChildstayingwith\">{{item.ChildStayingWith}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span ID=\"Childstayingwithrelation\" Font-Bold=\"true\">Child staying with relation</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span ID=\"lblChildstayingwithrelation\">{{item.ChildernRelationName}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <hr />\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
     "        </div>\r" +
     "\n" +
     "    </div>\r" +
-    "\n" +
-    "</div>\r" +
     "\n" +
     "</div>\r" +
     "\n" +

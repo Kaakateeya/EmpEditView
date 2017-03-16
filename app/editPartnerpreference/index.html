@@ -1,262 +1,268 @@
-<div class="edit_pages_content_main clearfix">
-    <!--<div class="employee_review_check clearfix">
-        <md-checkbox ng-model="chkboxedu" style="padding: 9px 13px 0px 0px;" class="pull-right" name="chkboxedu" aria-label="Checkbox 1"><span style="color: black;">Review</span>
-        </md-checkbox>
-        <div class="clearfix"></div>
-    </div>-->
-    <page-review dispaly-name="'PartnerPreference details'" sectionid="'16,17,18,20,21,22'" custid="page.model.CustID"></page-review>
-    <div ng-repeat="item in page.model.partnerPrefArr">
+<div class="right_col" style="padding-top: 6%;padding-left: 1%;">
 
-        <div class="edit_page_item">
-            <div class="edit_page_item_head clearfix">
-                <h4>PartnerPreference Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" runat="server" id="spanEduModID">ModifiedBy :{{page.model.partnermodifiedby}}</span>
-                </h4>
-                <div class="edit_page_item_ui clearfix" ng-if="page.model.partnerPrefArr.length===0">
-                    <a ng-click="page.model.partnerprefPopulate();" class="edit_page_add_button" href="javascript:void(0);">Add</a>
+    <div ng-include="'templates/sideMenu.html'">
+    </div>
+
+
+    <div class="edit_pages_content_main clearfix">
+
+        <page-review dispaly-name="'PartnerPreference details'" sectionid="'16,17,18,20,21,22'" custid="page.model.CustID"></page-review>
+        <div ng-repeat="item in page.model.partnerPrefArr">
+
+            <div class="edit_page_item">
+                <div class="edit_page_item_head clearfix">
+                    <h4>PartnerPreference Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" runat="server" id="spanEduModID">ModifiedBy :{{page.model.partnermodifiedby}}</span>
+                    </h4>
+                    <div class="edit_page_item_ui clearfix" ng-if="page.model.partnerPrefArr.length===0">
+                        <a ng-click="page.model.partnerprefPopulate();" class="edit_page_add_button" href="javascript:void(0);">Add</a>
+                    </div>
                 </div>
-            </div>
-            <div class="edit_page_details_item">
-                <div id="uppartner">
-                    <div id="reviewdiv" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
+                <div class="edit_page_details_item">
+                    <div id="uppartner">
+                        <div id="reviewdiv" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
 
-                        <div id="UpdatePanel21" class="edit_page_details_item_desc clearfix">
-                            <h6>
-                                <span id="partnergen" style="color:Red;font-weight:bold;">Gender</span></h6>
-                            <h5>
-                                <span id="lblpartnergen" style="color:Red;">{{ item.Gender}}</span></h5>
-                        </div>
-                        <div ng-if="page.model.partnerPrefArr.length>0" class="edit_page_item_ui clearfix">
-                            <a ng-click="page.model.partnerprefPopulate(item);" class="edit_page_edit_button" href="javascript:void(0);">Edit</a>
-                        </div>
-                        <div id="UpdatePanel10" class="edit_page_details_item_desc clearfix">
-                            <h6>
-                                <span id="agegap" style="font-weight:bold;">Age Gap</span></h6>
-                            <h5>
-                                <span id="lblagegap">{{ item.AgeGap}}</span></h5>
-                        </div>
-                        <div id="UpdatePanel13" class="edit_page_details_item_desc clearfix">
-                            <h6>
-                                <span id="height" style="font-weight:bold;">Height</span></h6>
-                            <h5>
-                                <span id="lblheight">{{ item.Height}}</span></h5>
-
-                        </div>
-                        <div id="UpdatePanel15" class="edit_page_details_item_desc clearfix">
-                            <h6>
-                                <span id="mothertongue" style="font-weight:bold;">mother tongue</span></h6>
-
-                            <h5>
-                                <span id="lblmothertongue">{{ item.Mothertongue }}</span></h5>
-                        </div>
-                        <div id="UpdatePanel16" class="edit_page_details_item_desc clearfix">
-
-                            <div>
-
+                            <div id="UpdatePanel21" class="edit_page_details_item_desc clearfix">
                                 <h6>
-                                    <span id="Religion" style="font-weight:bold;">Religion</span></h6>
+                                    <span id="partnergen" style="color:Red;font-weight:bold;">Gender</span></h6>
                                 <h5>
-                                    <span id="lblReligion">{{ item.Religion}}</span></h5>
+                                    <span id="lblpartnergen" style="color:Red;">{{ item.Gender}}</span></h5>
                             </div>
-
-                        </div>
-                        <div id="UpdatePanel17" class="edit_page_details_item_desc clearfix">
-
-                            <div>
-                                <h6>
-                                    <span id="caste" style="font-weight:bold;">caste</span></h6>
-                                <h5>
-                                    <span id="lblcaste">{{ item.Caste}}</span></h5>
+                            <div ng-if="page.model.partnerPrefArr.length>0" class="edit_page_item_ui clearfix">
+                                <a ng-click="page.model.partnerprefPopulate(item);" class="edit_page_edit_button" href="javascript:void(0);">Edit</a>
                             </div>
-
-                        </div>
-                        <div id="UpdatePanel1" class="edit_page_details_item_desc clearfix">
-
-
-                            <div>
-
+                            <div id="UpdatePanel10" class="edit_page_details_item_desc clearfix">
                                 <h6>
-                                    <span id="subcaste" style="font-weight:bold;">subcaste</span></h6>
+                                    <span id="agegap" style="font-weight:bold;">Age Gap</span></h6>
                                 <h5>
-                                    <span id="lblsubcaste">{{ item.Subcaste}}</span></h5>
+                                    <span id="lblagegap">{{ item.AgeGap}}</span></h5>
                             </div>
-
-
-                        </div>
-                        <div id="UpdatePanel2" class="edit_page_details_item_desc clearfix">
-
-
-                            <div>
-
+                            <div id="UpdatePanel13" class="edit_page_details_item_desc clearfix">
                                 <h6>
-                                    <span id="maritalstatus" style="font-weight:bold;">marital status</span></h6>
+                                    <span id="height" style="font-weight:bold;">Height</span></h6>
                                 <h5>
-                                    <span id="lblmaritalstatus">{{ item.MaritalStatus}}</span></h5>
+                                    <span id="lblheight">{{ item.Height}}</span></h5>
 
                             </div>
-
-                        </div>
-                        <div id="updateeducationgroup" class="edit_page_details_item_desc clearfix">
-
-
-                            <div>
-
+                            <div id="UpdatePanel15" class="edit_page_details_item_desc clearfix">
                                 <h6>
-                                    <span id="Education" style="font-weight:bold;">Education</span></h6>
+                                    <span id="mothertongue" style="font-weight:bold;">mother tongue</span></h6>
+
                                 <h5>
-                                    <span id="lblEducation">{{ item.EducationGroup!=null?item.EducationGroup:item.EducationCategory}}</span></h5>
+                                    <span id="lblmothertongue">{{ item.Mothertongue }}</span></h5>
+                            </div>
+                            <div id="UpdatePanel16" class="edit_page_details_item_desc clearfix">
+
+                                <div>
+
+                                    <h6>
+                                        <span id="Religion" style="font-weight:bold;">Religion</span></h6>
+                                    <h5>
+                                        <span id="lblReligion">{{ item.Religion}}</span></h5>
+                                </div>
 
                             </div>
+                            <div id="UpdatePanel17" class="edit_page_details_item_desc clearfix">
+
+                                <div>
+                                    <h6>
+                                        <span id="caste" style="font-weight:bold;">caste</span></h6>
+                                    <h5>
+                                        <span id="lblcaste">{{ item.Caste}}</span></h5>
+                                </div>
+
+                            </div>
+                            <div id="UpdatePanel1" class="edit_page_details_item_desc clearfix">
 
 
-                        </div>
+                                <div>
 
-                        <div id="UpdatePanel5" class="edit_page_details_item_desc clearfix">
-
-
-
-                            <h6>
-                                <span id="profession" style="font-weight:bold;">profession</span></h6>
-                            <h5>
-                                <span id="lblprofession">{{ item.ProfessionGroup}}</span></h5>
-
-                        </div>
-
-                        <div id="UpdatePanel6" class="edit_page_details_item_desc clearfix">
+                                    <h6>
+                                        <span id="subcaste" style="font-weight:bold;">subcaste</span></h6>
+                                    <h5>
+                                        <span id="lblsubcaste">{{ item.Subcaste}}</span></h5>
+                                </div>
 
 
-                            <div>
+                            </div>
+                            <div id="UpdatePanel2" class="edit_page_details_item_desc clearfix">
 
-                                <h6>
-                                    <span id="MangalikKujadosham" style="font-weight:bold;">Manglik/Kujadosham</span></h6>
-                                <h5>
-                                    <span id="lblMangalikKujadosham">{{ item.Kujadosham}}</span></h5>
+
+                                <div>
+
+                                    <h6>
+                                        <span id="maritalstatus" style="font-weight:bold;">marital status</span></h6>
+                                    <h5>
+                                        <span id="lblmaritalstatus">{{ item.MaritalStatus}}</span></h5>
+
+                                </div>
+
+                            </div>
+                            <div id="updateeducationgroup" class="edit_page_details_item_desc clearfix">
+
+
+                                <div>
+
+                                    <h6>
+                                        <span id="Education" style="font-weight:bold;">Education</span></h6>
+                                    <h5>
+                                        <span id="lblEducation">{{ item.EducationGroup!=null?item.EducationGroup:item.EducationCategory}}</span></h5>
+
+                                </div>
+
 
                             </div>
 
-                        </div>
-                        <div id="UpdatePanel7" class="edit_page_details_item_desc clearfix">
+                            <div id="UpdatePanel5" class="edit_page_details_item_desc clearfix">
 
-                            <div>
-                                <h6>
-                                    <span id="preferredstarLanguage" style="font-weight:bold;">preferred star Language</span></h6>
-                                <h5>
-                                    <span id="lblpreferredstarLanguage">{{ item.StarLanguage}}</span></h5>
-                            </div>
-
-
-                        </div>
-
-                        <div id="UpdatePanel8" class="edit_page_details_item_desc clearfix">
-
-                            <div>
-
-                                <h6>
-                                    <span id="preferredstar" style="font-weight:bold;">Non preferred stars</span></h6>
-                                <h5>
-                                    <span id="lblpreferredstar">{{ item.Stars}}</span></h5>
-
-                            </div>
-
-                        </div>
-                        <div id="UpdatePanel12" class="edit_page_details_item_desc clearfix">
-
-                            <div>
 
 
                                 <h6>
-                                    <span id="Diet" style="font-weight:bold;">Diet</span></h6>
+                                    <span id="profession" style="font-weight:bold;">profession</span></h6>
                                 <h5>
-                                    <span id="lblDiet">{{ item.Diet}}</span></h5>
+                                    <span id="lblprofession">{{ item.ProfessionGroup}}</span></h5>
 
                             </div>
 
-                        </div>
+                            <div id="UpdatePanel6" class="edit_page_details_item_desc clearfix">
 
 
-                        <div id="UpdatePanel18" class="edit_page_details_item_desc clearfix">
-                            <div>
+                                <div>
 
-                                <h6>
-                                    <span id="preferredCountry" style="font-weight:bold;">Domicile</span></h6>
-                                <h5>
-                                    <span id="lblpreferredCountry">{{ item.Domicel}}</span></h5>
+                                    <h6>
+                                        <span id="MangalikKujadosham" style="font-weight:bold;">Manglik/Kujadosham</span></h6>
+                                    <h5>
+                                        <span id="lblMangalikKujadosham">{{ item.Kujadosham}}</span></h5>
+
+                                </div>
+
+                            </div>
+                            <div id="UpdatePanel7" class="edit_page_details_item_desc clearfix">
+
+                                <div>
+                                    <h6>
+                                        <span id="preferredstarLanguage" style="font-weight:bold;">preferred star Language</span></h6>
+                                    <h5>
+                                        <span id="lblpreferredstarLanguage">{{ item.StarLanguage}}</span></h5>
+                                </div>
+
 
                             </div>
 
-                        </div>
+                            <div id="UpdatePanel8" class="edit_page_details_item_desc clearfix">
 
-                        <div id="UpdatePanel18" class="edit_page_details_item_desc clearfix">
-                            <div>
+                                <div>
 
-                                <h6>
-                                    <span id="preferredCountry" style="font-weight:bold;">preferred Country</span></h6>
-                                <h5>
-                                    <span id="lblpreferredCountry">{{ item.CountryName}}</span></h5>
+                                    <h6>
+                                        <span id="preferredstar" style="font-weight:bold;">Non preferred stars</span></h6>
+                                    <h5>
+                                        <span id="lblpreferredstar">{{ item.Stars}}</span></h5>
+
+                                </div>
+
+                            </div>
+                            <div id="UpdatePanel12" class="edit_page_details_item_desc clearfix">
+
+                                <div>
+
+
+                                    <h6>
+                                        <span id="Diet" style="font-weight:bold;">Diet</span></h6>
+                                    <h5>
+                                        <span id="lblDiet">{{ item.Diet}}</span></h5>
+
+                                </div>
 
                             </div>
 
-                        </div>
-                        <div id="UpdatePanel19" class="edit_page_details_item_desc clearfix">
-                            <div>
-                                <h6>
-                                    <span id="preferredState" style="font-weight:bold;">preferred State</span></h6>
-                                <h5>
-                                    <span id="lblpreferredState">{{ item.StateName}}</span></h5>
+
+                            <div id="UpdatePanel18" class="edit_page_details_item_desc clearfix">
+                                <div>
+
+                                    <h6>
+                                        <span id="preferredCountry" style="font-weight:bold;">Domicile</span></h6>
+                                    <h5>
+                                        <span id="lblpreferredCountry">{{ item.Domicel}}</span></h5>
+
+                                </div>
+
                             </div>
 
-                        </div>
-                        <div id="UpdatePanel36" class="edit_page_details_item_desc clearfix">
-                            <div>
-                                <h6>
-                                    <span id="RegionName" style="font-weight:bold;">Region</span></h6>
-                                <h5>
-                                    <span id="lblRegionName">{{ item.RegionName}}</span></h5>
+                            <div id="UpdatePanel18" class="edit_page_details_item_desc clearfix">
+                                <div>
+
+                                    <h6>
+                                        <span id="preferredCountry" style="font-weight:bold;">preferred Country</span></h6>
+                                    <h5>
+                                        <span id="lblpreferredCountry">{{ item.CountryName}}</span></h5>
+
+                                </div>
+
                             </div>
-                        </div>
-                        <div id="UpdatePanel40" class="edit_page_details_item_desc clearfix">
-                            <div>
-                                <h6>
-                                    <span id="BranchName" style="font-weight:bold;">Branch</span></h6>
-                                <h5>
-                                    <span id="lblBranchName">{{ item.BranchName}}</span></h5>
+                            <div id="UpdatePanel19" class="edit_page_details_item_desc clearfix">
+                                <div>
+                                    <h6>
+                                        <span id="preferredState" style="font-weight:bold;">preferred State</span></h6>
+                                    <h5>
+                                        <span id="lblpreferredState">{{ item.StateName}}</span></h5>
+                                </div>
+
                             </div>
+                            <div id="UpdatePanel36" class="edit_page_details_item_desc clearfix">
+                                <div>
+                                    <h6>
+                                        <span id="RegionName" style="font-weight:bold;">Region</span></h6>
+                                    <h5>
+                                        <span id="lblRegionName">{{ item.RegionName}}</span></h5>
+                                </div>
+                            </div>
+                            <div id="UpdatePanel40" class="edit_page_details_item_desc clearfix">
+                                <div>
+                                    <h6>
+                                        <span id="BranchName" style="font-weight:bold;">Branch</span></h6>
+                                    <h5>
+                                        <span id="lblBranchName">{{ item.BranchName}}</span></h5>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
-
                 </div>
             </div>
-        </div>
 
-        <div class="edit_page_item">
-            <div class="edit_page_item_head clearfix">
-                <h4>Partner Description ( Describe qualities you are looking for in your partner)</h4>
-                <div class="edit_page_item_ui clearfix">
-                    <div ng-if="item.PartnerDescripition==='' || item.PartnerDescripition===null">
-                        <a id="lnkpartnerdesc" class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.partnerdescPopulate();"> Add</a>
-                    </div>
-
-                </div>
-            </div>
-            <div class="edit_page_details_item">
-
-                <div>
-                    <div id="UpdatePanel9" class="edit_page_details_item_desc clearfix">
-
-                        <div class="edit_page_details_item_desc clearfix">
-                            <h5>
-                                <span id="lblpartnerdesc">{{ page.model.partnerDescription}}</span></h5>
+            <div class="edit_page_item">
+                <div class="edit_page_item_head clearfix">
+                    <h4>Partner Description ( Describe qualities you are looking for in your partner)</h4>
+                    <div class="edit_page_item_ui clearfix">
+                        <div ng-if="item.PartnerDescripition==='' || item.PartnerDescripition===null">
+                            <a id="lnkpartnerdesc" class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.partnerdescPopulate();"> Add</a>
                         </div>
 
                     </div>
-                    <div ng-if="item.PartnerDescripition!=''  && item.PartnerDescripition!=null" class="edit_page_item_ui clearfix">
-                        <a id="lnkpartnerdesc" class="edit_page_edit_button" href="javascript:void(0);" ng-click="page.model.partnerdescPopulate(item);"> Edit</a>
+                </div>
+                <div class="edit_page_details_item">
+
+                    <div>
+                        <div id="UpdatePanel9" class="edit_page_details_item_desc clearfix">
+
+                            <div class="edit_page_details_item_desc clearfix">
+                                <h5>
+                                    <span id="lblpartnerdesc">{{ page.model.partnerDescription}}</span></h5>
+                            </div>
+
+                        </div>
+                        <div ng-if="item.PartnerDescripition!=''  && item.PartnerDescripition!=null" class="edit_page_item_ui clearfix">
+                            <a id="lnkpartnerdesc" class="edit_page_edit_button" href="javascript:void(0);" ng-click="page.model.partnerdescPopulate(item);"> Edit</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
 
 <script type="text/ng-template" id="partnerPrefContent.html">
 

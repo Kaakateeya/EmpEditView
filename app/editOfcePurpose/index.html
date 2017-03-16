@@ -1,27 +1,33 @@
-<div class="edit_pages_content_main clearfix">
-    <div class="edit_page_item">
-        <div class="edit_page_item_head clearfix">
-            <h4>About Profile Details</h4>
-            <div class="edit_page_item_ui clearfix">
-                <a id="lnkAboutProfile" class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.showPopup();" ng-show="dataval===''?true:false">Add
+<div class="right_col" style="padding-top: 6%;padding-left: 1%;">
+
+    <div ng-include="'templates/sideMenu.html'">
+    </div>
+
+
+    <div class="edit_pages_content_main clearfix">
+        <div class="edit_page_item">
+            <div class="edit_page_item_head clearfix">
+                <h4>About Profile Details</h4>
+                <div class="edit_page_item_ui clearfix">
+                    <a id="lnkAboutProfile" class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.showPopup();" ng-show="dataval===''?true:false">Add
                     
                 </a>
+                </div>
             </div>
-        </div>
-        <div class="edit_page_details_item">
-            <div class="edit_page_details_item_desc clearfix">
-                <h5>
-                    <span id="lblAboutProfile">{{page.model.dataval}}</span>
-                </h5>
-                <div class="edit_page_item_ui clearfix">
-                    <a id="LinkButton1dfd" data-placement="bottom" class="edit_page_edit_button" href="javascript:void(0);" ng-click="page.model.showPopup(page.model.dataval);" ng-hide="dataval===''?true:false">Edit
+            <div class="edit_page_details_item">
+                <div class="edit_page_details_item_desc clearfix">
+                    <h5>
+                        <span id="lblAboutProfile">{{page.model.dataval}}</span>
+                    </h5>
+                    <div class="edit_page_item_ui clearfix">
+                        <a id="LinkButton1dfd" data-placement="bottom" class="edit_page_edit_button" href="javascript:void(0);" ng-click="page.model.showPopup(page.model.dataval);" ng-hide="dataval===''?true:false">Edit
                     </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <script type="text/ng-template" id="AboutModalContent.html">
     <form name="aboutForm" novalidate role="form" ng-submit="page.model.AboutProfleSubmit(page.model.aboutObj.txtAboutprofile)">
