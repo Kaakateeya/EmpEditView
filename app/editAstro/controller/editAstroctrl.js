@@ -15,7 +15,7 @@
      }
      angular
          .module('KaakateeyaEmpEdit')
-         .controller('editAstroCtrl', controller)
+         .controller('editAstroCtrl', controller);
 
      controller.$inject = ['editAstroModel', '$scope'];
  })(angular);

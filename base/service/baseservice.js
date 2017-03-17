@@ -21,6 +21,11 @@
                 return http.get(editviewapp.apipath + 'CustomerPersonal/getCustomerphotoRequestDisplay', {
                     params: { profileid: ProfileID, EMPID: empid, ticketIDs: '' }
                 });
+            },
+            menudata: function(custid) {
+                return http.get(editviewapp.apipath + 'CustomerPersonal/getCustomerPersonaloffice_purpose', {
+                    params: { flag: '9', ID: custid, AboutProfile: '', IsConfidential: '', HighConfendential: '' }
+                });
             }
 
         };

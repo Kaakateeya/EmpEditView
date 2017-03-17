@@ -16,6 +16,7 @@
         var s3obj = {};
 
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         var custID = model.CustID = stateParams.CustID;
 
         // model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
@@ -38,7 +39,7 @@
                 if (commonFactory.checkvals(response.data[0])) {
                     model.AstroArr = JSON.parse(response.data[0]);
                     model.generateData = JSON.parse(response.data[1]);
-                    debugger;
+
                     if (commonFactory.checkvals(model.AstroArr[0] && commonFactory.checkvals(model.AstroArr[0].Horoscopeimage))) {
 
                         if (commonFactory.checkvals(model.AstroArr[0].Horoscopeimage) && (model.AstroArr[0].Horoscopeimage).indexOf('Horo_no') === -1) {
@@ -154,7 +155,7 @@
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 
@@ -180,7 +181,7 @@
         };
 
         model.uploadGenerateHoro = function(val) {
-            debugger;
+
             if (val === '0') {
                 commonFactory.open('AddHoroPopup.html', model.scope, uibModal, 'sm');
             } else {
@@ -338,7 +339,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editAstroModel', factory)
+        .factory('editAstroModel', factory);
 
     factory.$inject = ['editAstroService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'fileUpload', '$http', '$stateParams'];
 

@@ -14,7 +14,7 @@
      }
      angular
          .module('KaakateeyaEmpEdit')
-         .controller('editContactCtrl', controller)
+         .controller('editContactCtrl', controller);
 
      controller.$inject = ['editContactModel', '$scope'];
  })(angular);

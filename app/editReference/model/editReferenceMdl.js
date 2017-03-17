@@ -11,6 +11,7 @@
         model.ReferenceArr = [];
         model.refObj = {};
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         model.deleteDisplayTxt = 'reference';
         var isSubmit = true;
         model.identityID = 0;
@@ -104,7 +105,7 @@
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
                 model.submitPromise = editReferenceService.submitReferenceData(model.referenceData).then(function(response) {

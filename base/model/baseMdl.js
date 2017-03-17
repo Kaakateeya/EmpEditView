@@ -2,7 +2,7 @@
     'use strict';
 
 
-    function factory(baseService, authSvc, uibModal, commonFactory, stateParams) {
+    function factory(baseService, authSvc, uibModal, commonFactory, stateParams, filter) {
         var model = {};
         // var logincustid = authSvc.getCustId();
         var CustID = stateParams.CustID;
@@ -10,6 +10,7 @@
         model.scope = {};
         model.init = function() {
             model.unreviewedLinks();
+            model.menuItem();
             baseService.personalDetails(CustID).then(function(response) {
                 debugger;
                 model.PersonalObj = response.data;
@@ -63,6 +64,19 @@
                 });
             });
         };
+
+        model.menuItem = function() {
+            baseService.menudata(CustID).then(function(response) {
+
+                model.branchdata = JSON.parse(response.data)[0];
+                model.registrationdate = filter('date')(model.branchdata.RegistrationDate, 'dd-MM-yyyy hh:mm:ss');
+                console.log(model.branchdata);
+                model.strCon = model.branchdata.HighConfendential == 1 && model.branchdata.IsConfidential == true ? ",SC" : (model.branchdata.HighConfendential == 1 ? ",SC" : (model.branchdata.IsConfidential == true ? ",C" : null));
+
+            });
+        };
+
+
 
         model.photorequestAndshow = function() {
 
@@ -118,6 +132,6 @@
     angular
         .module('KaakateeyaEmpEdit')
         .factory('baseModel', factory)
-    factory.$inject = ['baseService', 'authSvc', '$uibModal', 'commonFactory', '$stateParams'];
+    factory.$inject = ['baseService', 'authSvc', '$uibModal', 'commonFactory', '$stateParams', '$filter'];
 
 })(angular);

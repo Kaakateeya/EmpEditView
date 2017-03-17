@@ -8,6 +8,7 @@
 
         model.scope = {};
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         //start declaration block
         model.stateArr = [];
         model.districtArr = [];
@@ -169,6 +170,7 @@
 
                 case 'custData':
                     if (item !== undefined) {
+                        model.subcasteArr = commonFactory.subCaste(item.CasteID);
                         model.custObj.rdlGender = item.GenderID;
                         model.custObj.txtSurName = item.LastName;
                         model.custObj.txtName = item.FirstName;
@@ -206,7 +208,7 @@
 
         model.changeBind = function(type, parentval) {
 
-            debugger;
+
             if (commonFactory.checkvals(parentval)) {
 
                 switch (type) {
@@ -260,7 +262,7 @@
                     customerpersonaldetails: {
                         intCusID: CustID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 
@@ -313,7 +315,7 @@
                     customerpersonaldetails: {
                         intCusID: CustID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 
@@ -387,7 +389,7 @@
                 customerpersonaldetails: {
                     intCusID: CustID,
                     EmpID: loginEmpid,
-                    Admin: null
+                    Admin: AdminID
                 }
             };
 
@@ -419,7 +421,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editEducationModel', factory)
+        .factory('editEducationModel', factory);
 
     factory.$inject = ['$http', 'authSvc', 'editEducationService', 'commonFactory', '$uibModal', '$filter', 'alert', 'baseService', '$stateParams'];
 

@@ -19,6 +19,7 @@
         model.CountryVal = '1';
         model.identityID = 0;
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         var isSubmit = true;
 
         // var logincustid = authSvc.getCustId();
@@ -417,7 +418,7 @@
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 
@@ -492,7 +493,7 @@
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
                 model.submitPromise = editSibblingService.submitSibSisData(model.sibSisData).then(function(response) {

@@ -67,7 +67,7 @@
                 SibblingFlag: ISibblingFlag
 
             };
-            debugger;
+
 
             editContactService.submitContactData(model.Mobj).then(function(response) {
                 console.log(response);
@@ -102,7 +102,7 @@
                 Admin: null
 
             };
-            debugger;
+
             editContactService.submitContactData(model.Mobj).then(function(response) {
                 console.log(response);
                 commonFactory.closepopup();
@@ -120,14 +120,14 @@
         };
 
         model.showContactPopup = function(type, item, sibFlag) {
-            debugger;
+
             switch (type) {
 
                 case 'Candidate':
                     model.candidateobj = {};
                     if (item !== undefined) {
                         model.candidateobj.emaILcust_family_id = item.emaILcust_family_id;
-                        debugger;
+
 
 
                         model.candidateobj.ddlcandidateMobileCountryID = commonFactory.checkvals(item.Candidatemobilecountrycode) ? parseInt(item.Candidatemobilecountrycode) : 0;
@@ -158,7 +158,7 @@
 
                         model.sibobj.ddlSiblingmob = commonFactory.checkvals(item.Siblingmobilecountrycode) ? parseInt(item.Siblingmobilecountrycode) : 0;
                         model.sibobj.txtSiblingmob = item.Siblingmobilenumber;
-                        debugger;
+
                         if (commonFactory.checkvals(item.Siblinglandareacode)) {
 
                             model.sibobj.ddlsiblinglandcode = commonFactory.checkvals(item.SiblingLandlinecountrycode) ? parseInt(item.SiblingLandlinecountrycode) : 0;
@@ -345,7 +345,7 @@
                 } else {
                     model.primaryRel = JSON.parse(response.data[0])[0];
                     console.log(model.primaryRel);
-                    debugger;
+
                     model.setrelObj.ddlPrimaryMobileRel = model.primaryRel.PrimaryMobileRel;
                     model.setrelObj.ddlPrimaryEmailRel = model.primaryRel.PrimaryEmailRel;
 

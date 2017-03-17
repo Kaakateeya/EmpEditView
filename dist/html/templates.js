@@ -3065,7 +3065,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                </h4>\r" +
     "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.CustomerDataArr.length==0\">\r" +
     "\n" +
     "                    <a id=\"lnkpersonaldetailsadd\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('custData');\">Add</a>\r" +
     "\n" +
@@ -3247,7 +3247,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblcandidatecaste\">{{item.Caste}}</span></h5>\r" +
+    "                                    <span id=\"lblcandidatecaste\">{{item.Caste+(item.SubCaste!=='' && item.SubCaste!==null?'('+item.SubCaste+')':'')}}</span></h5>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
@@ -3255,7 +3255,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "                        <div id=\"UpdatePanelSubcaste\">\r" +
+    "                        <!--<div id=\"UpdatePanelSubcaste\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -3273,7 +3273,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
+    "                        </div>-->\r" +
     "\n" +
     "                        <div id=\"UpdatePanelBorncitizenship\">\r" +
     "\n" +
@@ -4219,7 +4219,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <li class=\"clearfix\">\r" +
     "\n" +
-    "                    <label for=\"lblElderYounger\" class=\"pop_label_left\">Gender<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "                    <label for=\"lblElderYounger\" class=\"pop_label_left\" style=\"padding-top: 4%;\">Gender<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
     "\n" +
     "                    <div class=\"pop_controls_right pop_radios_list\">\r" +
     "\n" +

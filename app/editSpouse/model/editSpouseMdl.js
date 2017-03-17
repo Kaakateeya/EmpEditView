@@ -15,6 +15,7 @@
         model.noofChldrenAray = commonFactory.numbersBind('', 0, 10);
         model.childCount = 0;
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         model.init = function() {
             model.pageload();
             return model;
@@ -130,7 +131,7 @@
                 customerpersonaldetails: {
                     intCusID: custID,
                     EmpID: loginEmpid,
-                    Admin: null
+                    Admin: AdminID
                 }
             };
             model.childCount = obj.ddlspousechidrens;
@@ -162,7 +163,7 @@
                 customerpersonaldetails: {
                     intCusID: custID,
                     EmpID: loginEmpid,
-                    Admin: null
+                    Admin: AdminID
                 }
             };
 

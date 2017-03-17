@@ -17,7 +17,7 @@
      }
      angular
          .module('KaakateeyaEmpEdit')
-         .controller('editManagePhotoCtrl', controller)
+         .controller('editManagePhotoCtrl', controller);
 
      controller.$inject = ['editManagePhotoModel', '$scope'];
  })(angular);

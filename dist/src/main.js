@@ -64,21 +64,21 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         $stateProvider.state(item.name, {
             url: item.url,
-            views: innerView,
-            resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-                loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                    // you can lazy load files for an existing module
-                    var edit = item.name.slice(9);
-                    if (editviewapp.env === 'dev') {
-                        return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+            views: innerView
+                // resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+                //     loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                //         // you can lazy load files for an existing module
+                //         var edit = item.name.slice(9);
+                //         if (editviewapp.env === 'dev') {
+                //             return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
 
-                    } else {
-                        return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
-                    }
+            //         } else {
+            //             return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
+            //         }
 
-                    // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-                }]
-            }
+            //         // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+            //     }]
+            // }
         });
         $locationProvider.html5Mode(true);
     });
@@ -113,7 +113,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     'use strict';
 
 
-    function factory(baseService, authSvc, uibModal, commonFactory, stateParams) {
+    function factory(baseService, authSvc, uibModal, commonFactory, stateParams, filter) {
         var model = {};
         // var logincustid = authSvc.getCustId();
         var CustID = stateParams.CustID;
@@ -121,6 +121,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.scope = {};
         model.init = function() {
             model.unreviewedLinks();
+            model.menuItem();
             baseService.personalDetails(CustID).then(function(response) {
                 debugger;
                 model.PersonalObj = response.data;
@@ -174,6 +175,19 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 });
             });
         };
+
+        model.menuItem = function() {
+            baseService.menudata(CustID).then(function(response) {
+
+                model.branchdata = JSON.parse(response.data)[0];
+                model.registrationdate = filter('date')(model.branchdata.RegistrationDate, 'dd-MM-yyyy hh:mm:ss');
+                console.log(model.branchdata);
+                model.strCon = model.branchdata.HighConfendential == 1 && model.branchdata.IsConfidential == true ? ",SC" : (model.branchdata.HighConfendential == 1 ? ",SC" : (model.branchdata.IsConfidential == true ? ",C" : null));
+
+            });
+        };
+
+
 
         model.photorequestAndshow = function() {
 
@@ -229,7 +243,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     angular
         .module('KaakateeyaEmpEdit')
         .factory('baseModel', factory)
-    factory.$inject = ['baseService', 'authSvc', '$uibModal', 'commonFactory', '$stateParams'];
+    factory.$inject = ['baseService', 'authSvc', '$uibModal', 'commonFactory', '$stateParams', '$filter'];
 
 })(angular);
 (function(angular) {
@@ -254,6 +268,11 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             PhotoRequest: function(ProfileID, empid) {
                 return http.get(editviewapp.apipath + 'CustomerPersonal/getCustomerphotoRequestDisplay', {
                     params: { profileid: ProfileID, EMPID: empid, ticketIDs: '' }
+                });
+            },
+            menudata: function(custid) {
+                return http.get(editviewapp.apipath + 'CustomerPersonal/getCustomerPersonaloffice_purpose', {
+                    params: { flag: '9', ID: custid, AboutProfile: '', IsConfidential: '', HighConfendential: '' }
                 });
             }
 
@@ -283,7 +302,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
      }
      angular
          .module('KaakateeyaEmpEdit')
-         .controller('editAstroCtrl', controller)
+         .controller('editAstroCtrl', controller);
 
      controller.$inject = ['editAstroModel', '$scope'];
  })(angular);
@@ -305,6 +324,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         var s3obj = {};
 
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         var custID = model.CustID = stateParams.CustID;
 
         // model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
@@ -327,7 +347,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 if (commonFactory.checkvals(response.data[0])) {
                     model.AstroArr = JSON.parse(response.data[0]);
                     model.generateData = JSON.parse(response.data[1]);
-                    debugger;
+
                     if (commonFactory.checkvals(model.AstroArr[0] && commonFactory.checkvals(model.AstroArr[0].Horoscopeimage))) {
 
                         if (commonFactory.checkvals(model.AstroArr[0].Horoscopeimage) && (model.AstroArr[0].Horoscopeimage).indexOf('Horo_no') === -1) {
@@ -443,7 +463,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 
@@ -469,7 +489,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         };
 
         model.uploadGenerateHoro = function(val) {
-            debugger;
+
             if (val === '0') {
                 commonFactory.open('AddHoroPopup.html', model.scope, uibModal, 'sm');
             } else {
@@ -627,7 +647,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editAstroModel', factory)
+        .factory('editAstroModel', factory);
 
     factory.$inject = ['editAstroService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'fileUpload', '$http', '$stateParams'];
 
@@ -659,7 +679,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editAstroService', factory)
+        .factory('editAstroService', factory);
 
     factory.$inject = ['$http'];
 })(angular);
@@ -679,7 +699,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
      }
      angular
          .module('KaakateeyaEmpEdit')
-         .controller('editContactCtrl', controller)
+         .controller('editContactCtrl', controller);
 
      controller.$inject = ['editContactModel', '$scope'];
  })(angular);
@@ -752,7 +772,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 SibblingFlag: ISibblingFlag
 
             };
-            debugger;
+
 
             editContactService.submitContactData(model.Mobj).then(function(response) {
                 console.log(response);
@@ -787,7 +807,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 Admin: null
 
             };
-            debugger;
+
             editContactService.submitContactData(model.Mobj).then(function(response) {
                 console.log(response);
                 commonFactory.closepopup();
@@ -805,14 +825,14 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         };
 
         model.showContactPopup = function(type, item, sibFlag) {
-            debugger;
+
             switch (type) {
 
                 case 'Candidate':
                     model.candidateobj = {};
                     if (item !== undefined) {
                         model.candidateobj.emaILcust_family_id = item.emaILcust_family_id;
-                        debugger;
+
 
 
                         model.candidateobj.ddlcandidateMobileCountryID = commonFactory.checkvals(item.Candidatemobilecountrycode) ? parseInt(item.Candidatemobilecountrycode) : 0;
@@ -843,7 +863,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
                         model.sibobj.ddlSiblingmob = commonFactory.checkvals(item.Siblingmobilecountrycode) ? parseInt(item.Siblingmobilecountrycode) : 0;
                         model.sibobj.txtSiblingmob = item.Siblingmobilenumber;
-                        debugger;
+
                         if (commonFactory.checkvals(item.Siblinglandareacode)) {
 
                             model.sibobj.ddlsiblinglandcode = commonFactory.checkvals(item.SiblingLandlinecountrycode) ? parseInt(item.SiblingLandlinecountrycode) : 0;
@@ -1030,7 +1050,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 } else {
                     model.primaryRel = JSON.parse(response.data[0])[0];
                     console.log(model.primaryRel);
-                    debugger;
+
                     model.setrelObj.ddlPrimaryMobileRel = model.primaryRel.PrimaryMobileRel;
                     model.setrelObj.ddlPrimaryEmailRel = model.primaryRel.PrimaryEmailRel;
 
@@ -1141,7 +1161,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editContactService', factory)
+        .factory('editContactService', factory);
 
     factory.$inject = ['$http'];
 })(angular);
@@ -1157,15 +1177,11 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
              model.scope = scope;
          };
 
-         vm.vallll = baseModel.lnkeducationandprofReview
-
-
-
          vm.init();
      }
      angular
          .module('KaakateeyaEmpEdit')
-         .controller('editEducationCtrl', controller)
+         .controller('editEducationCtrl', controller);
 
      controller.$inject = ['editEducationModel', '$scope', 'baseModel'];
  })(angular);
@@ -1179,6 +1195,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         model.scope = {};
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         //start declaration block
         model.stateArr = [];
         model.districtArr = [];
@@ -1340,6 +1357,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
                 case 'custData':
                     if (item !== undefined) {
+                        model.subcasteArr = commonFactory.subCaste(item.CasteID);
                         model.custObj.rdlGender = item.GenderID;
                         model.custObj.txtSurName = item.LastName;
                         model.custObj.txtName = item.FirstName;
@@ -1377,7 +1395,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         model.changeBind = function(type, parentval) {
 
-            debugger;
+
             if (commonFactory.checkvals(parentval)) {
 
                 switch (type) {
@@ -1431,7 +1449,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     customerpersonaldetails: {
                         intCusID: CustID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 
@@ -1484,7 +1502,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     customerpersonaldetails: {
                         intCusID: CustID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 
@@ -1558,7 +1576,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 customerpersonaldetails: {
                     intCusID: CustID,
                     EmpID: loginEmpid,
-                    Admin: null
+                    Admin: AdminID
                 }
             };
 
@@ -1590,7 +1608,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editEducationModel', factory)
+        .factory('editEducationModel', factory);
 
     factory.$inject = ['$http', 'authSvc', 'editEducationService', 'commonFactory', '$uibModal', '$filter', 'alert', 'baseService', '$stateParams'];
 
@@ -1632,7 +1650,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editEducationService', factory)
+        .factory('editEducationService', factory);
 
     factory.$inject = ['$http'];
 })(angular);
@@ -1655,7 +1673,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
      }
      angular
          .module('KaakateeyaEmpEdit')
-         .controller('editManagePhotoCtrl', controller)
+         .controller('editManagePhotoCtrl', controller);
 
      controller.$inject = ['editManagePhotoModel', '$scope'];
  })(angular);
@@ -1674,6 +1692,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         var genderID = 1;
         //authSvc.getGenderID();
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         model.photorowID = 0;
 
         //end declaration block
@@ -1794,7 +1813,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                                 customerpersonaldetails: {
                                     intCusID: CustID,
                                     EmpID: loginEmpid,
-                                    Admin: null
+                                    Admin: AdminID
                                 }
                             };
 
@@ -1887,7 +1906,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editManagePhotoModel', factory)
+        .factory('editManagePhotoModel', factory);
 
     factory.$inject = ['editManagePhotoService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$http', 'fileUpload', '$stateParams'];
 
@@ -2055,6 +2074,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.AboutFamilyReviewStatus = null;
         var isSubmit = true;
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         //end declarion block
 
         // var logincustid = authSvc.getCustId();
@@ -2329,7 +2349,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
 
                 };
@@ -2381,7 +2401,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
 
                 };
@@ -2421,7 +2441,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
 
                 };
@@ -2576,6 +2596,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.partnerDescObj = {};
         var isSubmit = true;
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         // var logincustid = authSvc.getCustId();
         var custID = model.CustID = stateParams.CustID;
         //  model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
@@ -2739,7 +2760,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 
@@ -3099,6 +3120,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         //declaration part
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         model.propertyArr = [];
         model.proObj = {};
 
@@ -3157,7 +3179,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 
@@ -3243,6 +3265,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.ReferenceArr = [];
         model.refObj = {};
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         model.deleteDisplayTxt = 'reference';
         var isSubmit = true;
         model.identityID = 0;
@@ -3336,7 +3359,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
                 model.submitPromise = editReferenceService.submitReferenceData(model.referenceData).then(function(response) {
@@ -3442,7 +3465,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         var custid = model.CustID = stateParams.CustID;
         //  model. = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         var loginEmpid = authSvc.LoginEmpid();
-
+        var AdminID = authSvc.isAdmin();
         //end declaration block
         model.init = function() {
             model.relativePageLoad();
@@ -3632,7 +3655,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     customerpersonaldetails: {
                         intCusID: custid,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 
@@ -3682,7 +3705,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     customerpersonaldetails: {
                         intCusID: custid,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 
@@ -3726,7 +3749,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     customerpersonaldetails: {
                         intCusID: custid,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 
@@ -3776,7 +3799,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     customerpersonaldetails: {
                         intCusID: custid,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
                 model.submitPromise = editRelativeService.submitMSData(model.MSData).then(function(response) {
@@ -3892,6 +3915,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.CountryVal = '1';
         model.identityID = 0;
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         var isSubmit = true;
 
         // var logincustid = authSvc.getCustId();
@@ -4290,7 +4314,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 
@@ -4365,7 +4389,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
                 model.submitPromise = editSibblingService.submitSibSisData(model.sibSisData).then(function(response) {
@@ -4460,6 +4484,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.noofChldrenAray = commonFactory.numbersBind('', 0, 10);
         model.childCount = 0;
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         model.init = function() {
             model.pageload();
             return model;
@@ -4575,7 +4600,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 customerpersonaldetails: {
                     intCusID: custID,
                     EmpID: loginEmpid,
-                    Admin: null
+                    Admin: AdminID
                 }
             };
             model.childCount = obj.ddlspousechidrens;
@@ -4607,7 +4632,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 customerpersonaldetails: {
                     intCusID: custID,
                     EmpID: loginEmpid,
-                    Admin: null
+                    Admin: AdminID
                 }
             };
 
@@ -9301,7 +9326,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                </h4>\r" +
     "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.CustomerDataArr.length==0\">\r" +
     "\n" +
     "                    <a id=\"lnkpersonaldetailsadd\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('custData');\">Add</a>\r" +
     "\n" +
@@ -9483,7 +9508,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblcandidatecaste\">{{item.Caste}}</span></h5>\r" +
+    "                                    <span id=\"lblcandidatecaste\">{{item.Caste+(item.SubCaste!=='' && item.SubCaste!==null?'('+item.SubCaste+')':'')}}</span></h5>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
@@ -9491,7 +9516,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "                        <div id=\"UpdatePanelSubcaste\">\r" +
+    "                        <!--<div id=\"UpdatePanelSubcaste\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -9509,7 +9534,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
+    "                        </div>-->\r" +
     "\n" +
     "                        <div id=\"UpdatePanelBorncitizenship\">\r" +
     "\n" +
@@ -10455,7 +10480,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <li class=\"clearfix\">\r" +
     "\n" +
-    "                    <label for=\"lblElderYounger\" class=\"pop_label_left\">Gender<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "                    <label for=\"lblElderYounger\" class=\"pop_label_left\" style=\"padding-top: 4%;\">Gender<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
     "\n" +
     "                    <div class=\"pop_controls_right pop_radios_list\">\r" +
     "\n" +

@@ -1454,12 +1454,13 @@ label {
 }
 
 .select-box-my-trible .btn-group {
-    width: 18% !important;
+    /*width: 18% !important;*/
+    width: 30% !important;
     float: left;
     box-shadow: none;
     margin: 3px 0 0 4px;
     font-size: 14px;
-    padding: 7px 8px;
+    padding: 0px 0px;
     font-weight: 700;
     border-radius: 3px !important;
 }
@@ -1514,4 +1515,26 @@ label {
 .multiselect-container>li>a label.checkbox input[type="checkbox"] {
     margin: 0px 0 0 !important;
     width: auto !important;
+}
+
+.modal {
+    z-index: 99068 !important;
+}
+
+.button_custom {
+    border: 0 none;
+    display: block;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    background: #d42e02;
+    border-radius: 3px;
+    padding: 12px 24px;
+    transition: all 0.4s ease-in-out;
+}
+
+.button_custom_reset {
+    background: #959595;
 }

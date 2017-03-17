@@ -10,15 +10,11 @@
              model.scope = scope;
          };
 
-         vm.vallll = baseModel.lnkeducationandprofReview
-
-
-
          vm.init();
      }
      angular
          .module('KaakateeyaEmpEdit')
-         .controller('editEducationCtrl', controller)
+         .controller('editEducationCtrl', controller);
 
      controller.$inject = ['editEducationModel', '$scope', 'baseModel'];
  })(angular);

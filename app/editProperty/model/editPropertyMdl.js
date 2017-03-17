@@ -8,6 +8,7 @@
 
         //declaration part
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         model.propertyArr = [];
         model.proObj = {};
 
@@ -66,7 +67,7 @@
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 

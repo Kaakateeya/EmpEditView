@@ -18,7 +18,7 @@
         var custid = model.CustID = stateParams.CustID;
         //  model. = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         var loginEmpid = authSvc.LoginEmpid();
-
+        var AdminID = authSvc.isAdmin();
         //end declaration block
         model.init = function() {
             model.relativePageLoad();
@@ -208,7 +208,7 @@
                     customerpersonaldetails: {
                         intCusID: custid,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 
@@ -258,7 +258,7 @@
                     customerpersonaldetails: {
                         intCusID: custid,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 
@@ -302,7 +302,7 @@
                     customerpersonaldetails: {
                         intCusID: custid,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
 
@@ -352,7 +352,7 @@
                     customerpersonaldetails: {
                         intCusID: custid,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
                 };
                 model.submitPromise = editRelativeService.submitMSData(model.MSData).then(function(response) {

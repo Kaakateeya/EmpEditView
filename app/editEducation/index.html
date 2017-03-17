@@ -9,7 +9,7 @@
             <div class="edit_page_item_head clearfix">
                 <h4>Customer Personal Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" id="spanEduModID">ModifiedBy :{{page.model.custEmpLastModificationDate}}</span>
                 </h4>
-                <div class="edit_page_item_ui clearfix">
+                <div class="edit_page_item_ui clearfix" ng-if="page.model.CustomerDataArr.length==0">
                     <a id="lnkpersonaldetailsadd" class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.showpopup('custData');">Add</a>
                 </div>
             </div>
@@ -100,11 +100,11 @@
                                 <h6>
                                     <span id="lblcaste" font-bold="true">Caste</span></h6>
                                 <h5>
-                                    <span id="lblcandidatecaste">{{item.Caste}}</span></h5>
+                                    <span id="lblcandidatecaste">{{item.Caste+(item.SubCaste!=='' && item.SubCaste!==null?'('+item.SubCaste+')':'')}}</span></h5>
                             </div>
 
                         </div>
-                        <div id="UpdatePanelSubcaste">
+                        <!--<div id="UpdatePanelSubcaste">
 
                             <div id="divSubcaste" class="edit_page_details_item_desc clearfix" visible='<%#(Eval("SubCaste").ToString()!="" && Eval("SubCaste").ToString()!=null)?true:false %>'>
                                 <h6>
@@ -113,7 +113,7 @@
                                     <span id="lblsubcastecandidate">{{item.SubCaste}}</span></h5>
                             </div>
 
-                        </div>
+                        </div>-->
                         <div id="UpdatePanelBorncitizenship">
 
                             <div id="divBorncitizenship" class="edit_page_details_item_desc clearfix">
@@ -586,7 +586,7 @@
         <div class="modal-body clearfix pop_content_my" id="modal-body">
             <ul>
                 <li class="clearfix">
-                    <label for="lblElderYounger" class="pop_label_left">Gender<span style="color: red; margin-left: 3px;">*</span></label>
+                    <label for="lblElderYounger" class="pop_label_left" style="padding-top: 4%;">Gender<span style="color: red; margin-left: 3px;">*</span></label>
                     <div class="pop_controls_right pop_radios_list">
                         <md-input-container style="font-weight: 700; color: black;">
                             <md-radio-group ng-required="true" name="rdlGender" layout="row" ng-model="page.model.custObj.rdlGender" class="md-block" flex-gt-sm ng-disabled="manageakerts">

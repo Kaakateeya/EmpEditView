@@ -16,6 +16,7 @@
         model.AboutFamilyReviewStatus = null;
         var isSubmit = true;
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         //end declarion block
 
         // var logincustid = authSvc.getCustId();
@@ -290,7 +291,7 @@
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
 
                 };
@@ -342,7 +343,7 @@
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
 
                 };
@@ -382,7 +383,7 @@
                     customerpersonaldetails: {
                         intCusID: custID,
                         EmpID: loginEmpid,
-                        Admin: null
+                        Admin: AdminID
                     }
 
                 };

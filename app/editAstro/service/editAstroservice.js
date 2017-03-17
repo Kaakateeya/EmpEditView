@@ -25,7 +25,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editAstroService', factory)
+        .factory('editAstroService', factory);
 
     factory.$inject = ['$http'];
 })(angular);

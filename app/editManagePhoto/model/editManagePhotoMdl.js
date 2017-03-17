@@ -13,6 +13,7 @@
         var genderID = 1;
         //authSvc.getGenderID();
         var loginEmpid = authSvc.LoginEmpid();
+        var AdminID = authSvc.isAdmin();
         model.photorowID = 0;
 
         //end declaration block
@@ -133,7 +134,7 @@
                                 customerpersonaldetails: {
                                     intCusID: CustID,
                                     EmpID: loginEmpid,
-                                    Admin: null
+                                    Admin: AdminID
                                 }
                             };
 
@@ -226,7 +227,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editManagePhotoModel', factory)
+        .factory('editManagePhotoModel', factory);
 
     factory.$inject = ['editManagePhotoService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$http', 'fileUpload', '$stateParams'];
 
