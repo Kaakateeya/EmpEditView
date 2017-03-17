@@ -275,9 +275,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editAstro/index.html',
-    "<div id=\"EditViewClass\">\r" +
+    "<div id=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
-    "    <div class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "    <div>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -8067,10 +8067,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
     "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
