@@ -1,4 +1,4 @@
-<div class="right_col" style="padding-top: 6%;padding-left: 1%;">
+<div id="EditViewClass" class="right_col" style="padding-top: 6%;padding-left: 1%;">
 
     <div ng-include="'templates/sideMenu.html'">
     </div>
@@ -259,229 +259,227 @@
             </div>
         </div>
     </div>
+
+
+    <script type="text/ng-template" id="partnerPrefContent.html">
+
+        <form name="partnerFormForm" novalidate role="form" ng-submit="page.model.partnerPrefSubmit(page.model.partnerObj)" accessible-form>
+            <div class="modal-header">
+                <h3 class="modal-title text-center" id="modal-title">Partnerprefernece details
+                    <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                        <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="25">Delete</ng-md-icon>
+                    </a>
+                </h3>
+            </div>
+            <div class="modal-body clearfix pop_content_my" id="modal-body">
+
+                <ul id="divclear">
+                    <li class="clearfix">
+                        <label for="lblGender" class="pop_label_left">Gender</label>
+
+                        <md-radio-group name="rbtlGender" style="font-weight: 700;color:black;" layout="row" ng-model="page.model.partnerObj.rbtlGender" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                            <md-radio-button value="1" class="md-primary">Male</md-radio-button>
+                            <md-radio-button value="2">Female </md-radio-button>
+                        </md-radio-group>
+
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblagegapp" class="pop_label_left">Age Gap<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my select-box-my-double input-group">
+                            <select multiselectdropdown ng-model="page.model.partnerObj.ddlFromAge" ng-options="item.value as item.label for item in page.model.ageGapArr" required></select>
+                            <select multiselectdropdown ng-model="page.model.partnerObj.ddlToAge" ng-options="item.value as item.label for item in page.model.ageGapArr" required></select>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblpatnerheight" class="pop_label_left">Height<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my select-box-my-double input-group">
+                            <select multiselectdropdown required ng-model="page.model.partnerObj.ddlFromheight" typeofdata="'height'" required></select>
+                            <select multiselectdropdown required ng-model="page.model.partnerObj.ddltoHeight" typeofdata="'height'" required></select>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblReligion" class="pop_label_left">Religion<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my input-group">
+                            <select multiselectdropdown multiple="multiple" ng-model="page.model.partnerObj.lstReligion" typeofdata="'Religion'" ng-change="page.model.changeBind('caste',page.model.partnerObj.lstReligion,page.model.partnerObj.lstMothertongue);" required></select>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblmothertongue" class="pop_label_left">Mother tongue<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my input-group">
+                            <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstMothertongue" typeofdata="'Mothertongue'" ng-change="page.model.changeBind('caste',page.model.partnerObj.lstReligion,page.model.partnerObj.lstMothertongue);" required></select>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblpartnerCaste" class="pop_label_left">Caste<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my input-group">
+                            <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstCaste" ng-options="item.value as item.label for item in page.model.casteArr" ng-change="page.model.changeBind('subCaste',page.model.partnerObj.lstCaste);" required></select>
+                        </div>
+
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblSubcaste" class="pop_label_left">Subcaste</label>
+                        <div class="pop_controls_right select-box-my ">
+                            <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstSubcaste" ng-options="item.value as item.label for item in page.model.subCasteArr"></select>
+                        </div>
+
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblMaritalstatus" class="pop_label_left">Marital status<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my input-group">
+                            <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstMaritalstatus" typeofdata="'MaritalStatus'" required></select>
+                        </div>
+                    </li>
+
+                    <li class="clearfix form-group">
+                        <label for="lblEducationcategory" class="pop_label_left">Education category</label>
+                        <div class="pop_controls_right select-box-my">
+                            <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstEducationcategory" typeofdata="'educationcategory'" ng-change="page.model.changeBind('EducationCatgory',page.model.partnerObj.lstEducationcategory);"></select>
+                        </div>
+
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblEducationgroup" class="pop_label_left">Education group</label>
+
+                        <div class="pop_controls_right select-box-my">
+                            <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstEducationgroup" ng-options="item.value as item.label for item in page.model.eduGroupArr"></select>
+                        </div>
+
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblEmployedin" class="pop_label_left">Employed in</label>
+                        <div class="pop_controls_right select-box-my">
+                            <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstEmployedin" typeofdata="'ProfCatgory'"></select>
+                        </div>
+
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblProfessiongroup" class="pop_label_left">Profession group </label>
+                        <div class="pop_controls_right select-box-my">
+                            <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstProfessiongroup" typeofdata="'ProfGroup'"></select>
+
+                        </div>
+
+                    </li>
+
+                    <li class="clearfix">
+                        <label for="lblPreferredstar" class="pop_label_left">Domicile</label>
+                        <md-radio-group name="rbtDomacile" style="font-weight: 700;color:black;" layout="row" ng-model="page.model.partnerObj.rbtDomacile" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                            <md-radio-button value="0" class="md-primary">India</md-radio-button>
+                            <md-radio-button value="1">Abroad </md-radio-button>
+                            <md-radio-button value="2">Both</md-radio-button>
+                        </md-radio-group>
+
+                    </li>
+
+
+                    <li class="clearfix form-group">
+                        <label for="lblPreferredcountry" class="pop_label_left">Preferred country 	</label>
+                        <div class="pop_controls_right select-box-my">
+                            <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstPreferredcountry" typeofdata="'Country'" ng-change="page.model.changeBind('Country',page.model.partnerObj.lstPreferredcountry);"></select>
+                        </div>
+
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblPreferredstate" class="pop_label_left">Preferred state</label>
+                        <div class="pop_controls_right select-box-my">
+                            <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstPreferredstate" ng-options="item.value as item.label for item in page.model.stateArr"></select>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group" id="divRegioncontrol">
+                        <label for="lblRegion" class="pop_label_left">Region</label>
+                        <div class="pop_controls_right select-box-my">
+                            <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstRegion" typeofdata="'region'" ng-change="page.model.changeBind('region',page.model.partnerObj.lstRegion);"></select>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblBranch" class="pop_label_left">Branch</label>
+                        <div class="pop_controls_right select-box-my">
+                            <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstBranch" ng-options="item.value as item.label for item in page.model.branchArr"></select>
+
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <label for="lblDiet" class="pop_label_left">Diet</label>
+
+                        <md-radio-group name="rbtDiet" style="font-weight: 700;color:black;" layout="row" ng-model="page.model.partnerObj.rbtDiet" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                            <md-radio-button value="27" class="md-primary">Veg</md-radio-button>
+                            <md-radio-button value="28"> Non Veg </md-radio-button>
+                            <md-radio-button value="29"> Both </md-radio-button>
+                        </md-radio-group>
+
+
+                    </li>
+
+                    <li class="clearfix">
+                        <label for="lblManglik" class="pop_label_left">Manglik/Kuja dosham</label>
+
+
+
+                        <md-radio-group name="rbtManglikKujadosham" style="font-weight: 700;color:black;" layout="row" ng-model="page.model.partnerObj.rbtManglikKujadosham" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                            <md-radio-button value="0" class="md-primary">Yes</md-radio-button>
+                            <md-radio-button value="1">No </md-radio-button>
+                            <md-radio-button value="2"> Does Not Matter </md-radio-button>
+                        </md-radio-group>
+
+                    </li>
+                    <li class="clearfix">
+                        <label for="lblPreferredstar" class="pop_label_left">Preferred star Language</label>
+                        <md-radio-group name="rbtPreferredstarLanguage" style="font-weight: 700;color:black;" ng-change="page.model.changeBind('star',page.model.partnerObj.rbtPreferredstarLanguage);" layout="row" ng-model="page.model.partnerObj.rbtPreferredstarLanguage" class="md-block"
+                            flex-gt-sm ng-disabled="manageakerts">
+                            <md-radio-button value="1" class="md-primary">Telugu</md-radio-button>
+                            <md-radio-button value="2">Tamil </md-radio-button>
+                            <md-radio-button value="3">Kannada</md-radio-button>
+                        </md-radio-group>
+
+                    </li>
+                    <li class="clearfix">
+
+                        <label for="" class="pop_label_left">Star Preference</label>
+                        <md-radio-group name="rbtPreferredstars" style="font-weight: 700;color:black;" layout="row" ng-model="page.model.partnerObj.rbtPreferredstars" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                            <md-radio-button value="0" class="md-primary">Preferredstars</md-radio-button>
+                            <md-radio-button value="1">NonPreferredstars </md-radio-button>
+                        </md-radio-group>
+
+
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="" class="pop_label_left"></label>
+                        <div class="pop_controls_right select-box-my">
+                            <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstpreferedstars" ng-options="item.value as item.label for item in page.model.starArr"></select>
+                        </div>
+                    </li>
+                    <li class="row">
+                        <br/>
+
+                        <edit-footer></edit-footer>
+                    </li>
+                </ul>
+            </div>
+
+        </form>
+    </script>
+
+    <script type="text/ng-template" id="partnerDescContent.html">
+        <form name="aboutForm" novalidate role="form" ng-submit="page.model.partnerDescriptionSubmit(page.model.partnerDescObj)">
+            <div class="modal-header">
+                <h3 class="modal-title text-center" id="modal-title">Partner Description
+                    <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                        <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="20"></ng-md-icon>
+                    </a>
+                </h3>
+            </div>
+            <div class="modal-body clearfix pop_content_my" id="modal-body">
+                <ul>
+                    <li class="clearfix form-group">
+                        <textarea ng-model="page.model.partnerDescObj.txtpartnerdescription" style="width: 500px; height: 150px;" class="col-lg-10" maxlength="1000" required ng-class="form-control" required />
+                    </li>
+                    <li class="row">
+                        <br/>
+                        <edit-footer></edit-footer>
+                    </li>
+                </ul>
+            </div>
+
+        </form>
+    </script>
 </div>
-
-
-
-
-<script type="text/ng-template" id="partnerPrefContent.html">
-
-    <form name="partnerFormForm" novalidate role="form" ng-submit="page.model.partnerPrefSubmit(page.model.partnerObj)" accessible-form>
-        <div class="modal-header">
-            <h3 class="modal-title text-center" id="modal-title">Partnerprefernece details
-                <a href="javascript:void(0);" ng-click="page.model.cancel();">
-                    <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="25">Delete</ng-md-icon>
-                </a>
-            </h3>
-        </div>
-        <div class="modal-body clearfix pop_content_my" id="modal-body">
-
-            <ul id="divclear">
-                <li class="clearfix">
-                    <label for="lblGender" class="pop_label_left">Gender</label>
-
-                    <md-radio-group name="rbtlGender" style="font-weight: 700;color:black;" layout="row" ng-model="page.model.partnerObj.rbtlGender" class="md-block" flex-gt-sm ng-disabled="manageakerts">
-                        <md-radio-button value="1" class="md-primary">Male</md-radio-button>
-                        <md-radio-button value="2">Female </md-radio-button>
-                    </md-radio-group>
-
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblagegapp" class="pop_label_left">Age Gap<span style="color: red; margin-left: 3px;">*</span></label>
-                    <div class="pop_controls_right select-box-my select-box-my-double input-group">
-                        <select multiselectdropdown ng-model="page.model.partnerObj.ddlFromAge" ng-options="item.value as item.label for item in page.model.ageGapArr" required></select>
-                        <select multiselectdropdown ng-model="page.model.partnerObj.ddlToAge" ng-options="item.value as item.label for item in page.model.ageGapArr" required></select>
-                    </div>
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblpatnerheight" class="pop_label_left">Height<span style="color: red; margin-left: 3px;">*</span></label>
-                    <div class="pop_controls_right select-box-my select-box-my-double input-group">
-                        <select multiselectdropdown required ng-model="page.model.partnerObj.ddlFromheight" typeofdata="'height'" required></select>
-                        <select multiselectdropdown required ng-model="page.model.partnerObj.ddltoHeight" typeofdata="'height'" required></select>
-                    </div>
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblReligion" class="pop_label_left">Religion<span style="color: red; margin-left: 3px;">*</span></label>
-                    <div class="pop_controls_right select-box-my input-group">
-                        <select multiselectdropdown multiple="multiple" ng-model="page.model.partnerObj.lstReligion" typeofdata="'Religion'" ng-change="page.model.changeBind('caste',page.model.partnerObj.lstReligion,page.model.partnerObj.lstMothertongue);" required></select>
-                    </div>
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblmothertongue" class="pop_label_left">Mother tongue<span style="color: red; margin-left: 3px;">*</span></label>
-                    <div class="pop_controls_right select-box-my input-group">
-                        <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstMothertongue" typeofdata="'Mothertongue'" ng-change="page.model.changeBind('caste',page.model.partnerObj.lstReligion,page.model.partnerObj.lstMothertongue);" required></select>
-                    </div>
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblpartnerCaste" class="pop_label_left">Caste<span style="color: red; margin-left: 3px;">*</span></label>
-                    <div class="pop_controls_right select-box-my input-group">
-                        <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstCaste" ng-options="item.value as item.label for item in page.model.casteArr" ng-change="page.model.changeBind('subCaste',page.model.partnerObj.lstCaste);" required></select>
-                    </div>
-
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblSubcaste" class="pop_label_left">Subcaste</label>
-                    <div class="pop_controls_right select-box-my ">
-                        <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstSubcaste" ng-options="item.value as item.label for item in page.model.subCasteArr"></select>
-                    </div>
-
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblMaritalstatus" class="pop_label_left">Marital status<span style="color: red; margin-left: 3px;">*</span></label>
-                    <div class="pop_controls_right select-box-my input-group">
-                        <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstMaritalstatus" typeofdata="'MaritalStatus'" required></select>
-                    </div>
-                </li>
-
-                <li class="clearfix form-group">
-                    <label for="lblEducationcategory" class="pop_label_left">Education category</label>
-                    <div class="pop_controls_right select-box-my">
-                        <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstEducationcategory" typeofdata="'educationcategory'" ng-change="page.model.changeBind('EducationCatgory',page.model.partnerObj.lstEducationcategory);"></select>
-                    </div>
-
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblEducationgroup" class="pop_label_left">Education group</label>
-
-                    <div class="pop_controls_right select-box-my">
-                        <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstEducationgroup" ng-options="item.value as item.label for item in page.model.eduGroupArr"></select>
-                    </div>
-
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblEmployedin" class="pop_label_left">Employed in</label>
-                    <div class="pop_controls_right select-box-my">
-                        <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstEmployedin" typeofdata="'ProfCatgory'"></select>
-                    </div>
-
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblProfessiongroup" class="pop_label_left">Profession group </label>
-                    <div class="pop_controls_right select-box-my">
-                        <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstProfessiongroup" typeofdata="'ProfGroup'"></select>
-
-                    </div>
-
-                </li>
-
-                <li class="clearfix">
-                    <label for="lblPreferredstar" class="pop_label_left">Domicile</label>
-                    <md-radio-group name="rbtDomacile" style="font-weight: 700;color:black;" layout="row" ng-model="page.model.partnerObj.rbtDomacile" class="md-block" flex-gt-sm ng-disabled="manageakerts">
-                        <md-radio-button value="0" class="md-primary">India</md-radio-button>
-                        <md-radio-button value="1">Abroad </md-radio-button>
-                        <md-radio-button value="2">Both</md-radio-button>
-                    </md-radio-group>
-
-                </li>
-
-
-                <li class="clearfix form-group">
-                    <label for="lblPreferredcountry" class="pop_label_left">Preferred country 	</label>
-                    <div class="pop_controls_right select-box-my">
-                        <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstPreferredcountry" typeofdata="'Country'" ng-change="page.model.changeBind('Country',page.model.partnerObj.lstPreferredcountry);"></select>
-                    </div>
-
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblPreferredstate" class="pop_label_left">Preferred state</label>
-                    <div class="pop_controls_right select-box-my">
-                        <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstPreferredstate" ng-options="item.value as item.label for item in page.model.stateArr"></select>
-                    </div>
-                </li>
-                <li class="clearfix form-group" id="divRegioncontrol">
-                    <label for="lblRegion" class="pop_label_left">Region</label>
-                    <div class="pop_controls_right select-box-my">
-                        <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstRegion" typeofdata="'region'" ng-change="page.model.changeBind('region',page.model.partnerObj.lstRegion);"></select>
-                    </div>
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblBranch" class="pop_label_left">Branch</label>
-                    <div class="pop_controls_right select-box-my">
-                        <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstBranch" ng-options="item.value as item.label for item in page.model.branchArr"></select>
-
-                    </div>
-                </li>
-                <li class="clearfix">
-                    <label for="lblDiet" class="pop_label_left">Diet</label>
-
-                    <md-radio-group name="rbtDiet" style="font-weight: 700;color:black;" layout="row" ng-model="page.model.partnerObj.rbtDiet" class="md-block" flex-gt-sm ng-disabled="manageakerts">
-                        <md-radio-button value="27" class="md-primary">Veg</md-radio-button>
-                        <md-radio-button value="28"> Non Veg </md-radio-button>
-                        <md-radio-button value="29"> Both </md-radio-button>
-                    </md-radio-group>
-
-
-                </li>
-
-                <li class="clearfix">
-                    <label for="lblManglik" class="pop_label_left">Manglik/Kuja dosham</label>
-
-
-
-                    <md-radio-group name="rbtManglikKujadosham" style="font-weight: 700;color:black;" layout="row" ng-model="page.model.partnerObj.rbtManglikKujadosham" class="md-block" flex-gt-sm ng-disabled="manageakerts">
-                        <md-radio-button value="0" class="md-primary">Yes</md-radio-button>
-                        <md-radio-button value="1">No </md-radio-button>
-                        <md-radio-button value="2"> Does Not Matter </md-radio-button>
-                    </md-radio-group>
-
-                </li>
-                <li class="clearfix">
-                    <label for="lblPreferredstar" class="pop_label_left">Preferred star Language</label>
-                    <md-radio-group name="rbtPreferredstarLanguage" style="font-weight: 700;color:black;" ng-change="page.model.changeBind('star',page.model.partnerObj.rbtPreferredstarLanguage);" layout="row" ng-model="page.model.partnerObj.rbtPreferredstarLanguage" class="md-block"
-                        flex-gt-sm ng-disabled="manageakerts">
-                        <md-radio-button value="1" class="md-primary">Telugu</md-radio-button>
-                        <md-radio-button value="2">Tamil </md-radio-button>
-                        <md-radio-button value="3">Kannada</md-radio-button>
-                    </md-radio-group>
-
-                </li>
-                <li class="clearfix">
-
-                    <label for="" class="pop_label_left">Star Preference</label>
-                    <md-radio-group name="rbtPreferredstars" style="font-weight: 700;color:black;" layout="row" ng-model="page.model.partnerObj.rbtPreferredstars" class="md-block" flex-gt-sm ng-disabled="manageakerts">
-                        <md-radio-button value="0" class="md-primary">Preferredstars</md-radio-button>
-                        <md-radio-button value="1">NonPreferredstars </md-radio-button>
-                    </md-radio-group>
-
-
-                </li>
-                <li class="clearfix form-group">
-                    <label for="" class="pop_label_left"></label>
-                    <div class="pop_controls_right select-box-my">
-                        <select multiselectdropdown multiple ng-model="page.model.partnerObj.lstpreferedstars" ng-options="item.value as item.label for item in page.model.starArr"></select>
-                    </div>
-                </li>
-                <li class="row">
-                    <br/>
-
-                    <edit-footer></edit-footer>
-                </li>
-            </ul>
-        </div>
-
-    </form>
-</script>
-
-<script type="text/ng-template" id="partnerDescContent.html">
-    <form name="aboutForm" novalidate role="form" ng-submit="page.model.partnerDescriptionSubmit(page.model.partnerDescObj)">
-        <div class="modal-header">
-            <h3 class="modal-title text-center" id="modal-title">Partner Description
-                <a href="javascript:void(0);" ng-click="page.model.cancel();">
-                    <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="20"></ng-md-icon>
-                </a>
-            </h3>
-        </div>
-        <div class="modal-body clearfix pop_content_my" id="modal-body">
-            <ul>
-                <li class="clearfix form-group">
-                    <textarea ng-model="page.model.partnerDescObj.txtpartnerdescription" style="width: 500px; height: 150px;" class="col-lg-10" maxlength="1000" required ng-class="form-control" required />
-                </li>
-                <li class="row">
-                    <br/>
-                    <edit-footer></edit-footer>
-                </li>
-            </ul>
-        </div>
-
-    </form>
-</script>

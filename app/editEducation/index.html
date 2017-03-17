@@ -1,4 +1,4 @@
-<div class="right_col" style="padding-top: 6%;padding-left: 1%;">
+<div id="EditViewClass" class="right_col" style="padding-top: 6%;padding-left: 1%;">
 
     <div ng-include="'templates/sideMenu.html'">
     </div>
@@ -547,154 +547,155 @@
         </div>
 
     </div>
+
+    <script type="text/ng-template" id="deleteEduContent.html">
+        <form name="deletetForm" novalidate role="form" ng-submit="page.model.deleteEduSubmit();">
+            <div class="modal-header">
+                <h3 class="modal-title text-center" id="modal-title">Alert
+                    <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                        <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="25">Delete</ng-md-icon>
+                    </a>
+                </h3>
+            </div>
+            <div class="modal-body clearfix" id="modal-body">
+                <b class="text-center"> Do you want to delete Education details</b>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Delete</button>
+                <button type="button" class="btn btn-danger" ng-click="page.model.cancel();">Cancel</button>
+            </div>
+
+        </form>
+    </script>
+
+
+    <script type="text/ng-template" id="CustomerDataContent.html">
+        <form name="custForm" novalidate role="form" ng-submit="page.model.custdataSubmit(page.model.custObj)">
+            <div class="modal-header">
+                <h3 class="modal-title text-center" id="modal-title">Customer details
+                    <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                        <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="25">Delete</ng-md-icon>
+                    </a>
+                </h3>
+            </div>
+            <div class="modal-body clearfix pop_content_my" id="modal-body">
+                <ul>
+                    <li class="clearfix">
+                        <label for="lblElderYounger" class="pop_label_left" style="padding-top: 4%;">Gender<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right pop_radios_list">
+                            <md-input-container style="font-weight: 700; color: black;">
+                                <md-radio-group ng-required="true" name="rdlGender" layout="row" ng-model="page.model.custObj.rdlGender" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                    <md-radio-button value="2" class="md-primary">Female</md-radio-button>
+                                    <md-radio-button value="1"> Male </md-radio-button>
+                                </md-radio-group>
+                                <div ng-messages="custForm.rdlGender.$invalid">
+                                    <div ng-if="custForm.rdlGender.$invalid && (custForm.$submitted)">This field is required.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblname" class="pop_label_left">Sur Name<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my input-group">
+                            <input type="text" ng-model="page.model.custObj.txtSurName" class="form-control" required/>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblname" class="pop_label_left">Name<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my input-group">
+                            <input type="text" ng-model="page.model.custObj.txtName" class="form-control" required/>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblMaritalstatus" class="pop_label_left">Marital Status<span style="color: red; margin-left: 3px;">*</span></label>
+
+                        <div class="pop_controls_right select-box-my input-group">
+                            <select multiselectdropdown ng-model="page.model.custObj.dropmaritalstatus" typeofdata="'MaritalStatus'" required></select>
+
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lbldob" class="pop_label_left">Date Of Birth<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my input-group">
+                            <date-picker strdate="page.model.custObj.txtdobcandidate" required></date-picker>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblheight" class="pop_label_left">Height<span style="color: red; margin-left: 3px;">*</span></label>
+
+                        <div class="pop_controls_right select-box-my input-group">
+
+                            <select multiselectdropdown ng-model="page.model.custObj.ddlHeightpersonal" typeofdata="'height'" required></select>
+
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblheight" class="pop_label_left">Complexion<span style="color: red; margin-left: 3px;">*</span></label>
+
+                        <div class="pop_controls_right select-box-my input-group">
+                            <select multiselectdropdown ng-model="page.model.custObj.ddlcomplexion" typeofdata="'Complexion'" required></select>
+
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="Religion" class="pop_label_left">Religion<span style="color: red; margin-left: 3px;">*</span></label>
+
+                        <div class="pop_controls_right select-box-my input-group">
+                            <div class="select-box-my">
+
+                                <select multiselectdropdown ng-model="page.model.custObj.ddlreligioncandadate" typeofdata="'Religion'" required></select>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group" id="divMotherTongue">
+                        <label for="lblPersonalMotherTongue" class="pop_label_left">Mother Tongue<span style="color: red; margin-left: 3px;">*</span></label>
+
+                        <div class="pop_controls_right select-box-my input-group">
+
+                            <select multiselectdropdown ng-model="page.model.custObj.ddlmothertongue" typeofdata="'Mothertongue'" required></select>
+
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblCaste" class="pop_label_left">Caste<span style="color: red; margin-left: 3px;">*</span></label>
+
+                        <div class="pop_controls_right select-box-my input-group">
+
+                            <select multiselectdropdown ng-model="page.model.custObj.ddlcaste" typeofdata="'caste'" ng-change="page.model.changeBind('caste',page.model.custObj.ddlcaste);" required></select>
+
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblCaste" class="pop_label_left">SubCaste</label>
+                        <div class="pop_controls_right select-box-my">
+                            <select multiselectdropdown ng-model="page.model.custObj.ddlsubcaste" ng-options="item.value as item.label for item in page.model.subcasteArr"></select>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblborncitizenship" class="pop_label_left">Born Citizenship<span style="color: red; margin-left: 3px;">*</span></label>
+
+                        <div class="pop_controls_right select-box-my input-group">
+                            <select multiselectdropdown ng-model="page.model.custObj.ddlBornCitizenship" typeofdata="'Country'" required></select>
+
+                        </div>
+                    </li>
+                    <li class="row">
+                        <edit-footer></edit-footer>
+                    </li>
+                </ul>
+
+            </div>
+
+
+
+        </form>
+    </script>
 </div>
 
 
 
 
-<script type="text/ng-template" id="deleteEduContent.html">
-    <form name="deletetForm" novalidate role="form" ng-submit="page.model.deleteEduSubmit();">
-        <div class="modal-header">
-            <h3 class="modal-title text-center" id="modal-title">Alert
-                <a href="javascript:void(0);" ng-click="page.model.cancel();">
-                    <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="25">Delete</ng-md-icon>
-                </a>
-            </h3>
-        </div>
-        <div class="modal-body clearfix" id="modal-body">
-            <b class="text-center"> Do you want to delete Education details</b>
-        </div>
-
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-success">Delete</button>
-            <button type="button" class="btn btn-danger" ng-click="page.model.cancel();">Cancel</button>
-        </div>
-
-    </form>
-</script>
-
-
-<script type="text/ng-template" id="CustomerDataContent.html">
-    <form name="custForm" novalidate role="form" ng-submit="page.model.custdataSubmit(page.model.custObj)">
-        <div class="modal-header">
-            <h3 class="modal-title text-center" id="modal-title">Customer details
-                <a href="javascript:void(0);" ng-click="page.model.cancel();">
-                    <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="25">Delete</ng-md-icon>
-                </a>
-            </h3>
-        </div>
-        <div class="modal-body clearfix pop_content_my" id="modal-body">
-            <ul>
-                <li class="clearfix">
-                    <label for="lblElderYounger" class="pop_label_left" style="padding-top: 4%;">Gender<span style="color: red; margin-left: 3px;">*</span></label>
-                    <div class="pop_controls_right pop_radios_list">
-                        <md-input-container style="font-weight: 700; color: black;">
-                            <md-radio-group ng-required="true" name="rdlGender" layout="row" ng-model="page.model.custObj.rdlGender" class="md-block" flex-gt-sm ng-disabled="manageakerts">
-                                <md-radio-button value="2" class="md-primary">Female</md-radio-button>
-                                <md-radio-button value="1"> Male </md-radio-button>
-                            </md-radio-group>
-                            <div ng-messages="custForm.rdlGender.$invalid">
-                                <div ng-if="custForm.rdlGender.$invalid && (custForm.$submitted)">This field is required.</div>
-                            </div>
-                        </md-input-container>
-                    </div>
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblname" class="pop_label_left">Sur Name<span style="color: red; margin-left: 3px;">*</span></label>
-                    <div class="pop_controls_right select-box-my input-group">
-                        <input type="text" ng-model="page.model.custObj.txtSurName" class="form-control" required/>
-                    </div>
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblname" class="pop_label_left">Name<span style="color: red; margin-left: 3px;">*</span></label>
-                    <div class="pop_controls_right select-box-my input-group">
-                        <input type="text" ng-model="page.model.custObj.txtName" class="form-control" required/>
-                    </div>
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblMaritalstatus" class="pop_label_left">Marital Status<span style="color: red; margin-left: 3px;">*</span></label>
-
-                    <div class="pop_controls_right select-box-my input-group">
-                        <select multiselectdropdown ng-model="page.model.custObj.dropmaritalstatus" typeofdata="'MaritalStatus'" required></select>
-
-                    </div>
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lbldob" class="pop_label_left">Date Of Birth<span style="color: red; margin-left: 3px;">*</span></label>
-                    <div class="pop_controls_right select-box-my input-group">
-                        <date-picker strdate="page.model.custObj.txtdobcandidate" required></date-picker>
-                    </div>
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblheight" class="pop_label_left">Height<span style="color: red; margin-left: 3px;">*</span></label>
-
-                    <div class="pop_controls_right select-box-my input-group">
-
-                        <select multiselectdropdown ng-model="page.model.custObj.ddlHeightpersonal" typeofdata="'height'" required></select>
-
-                    </div>
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblheight" class="pop_label_left">Complexion<span style="color: red; margin-left: 3px;">*</span></label>
-
-                    <div class="pop_controls_right select-box-my input-group">
-                        <select multiselectdropdown ng-model="page.model.custObj.ddlcomplexion" typeofdata="'Complexion'" required></select>
-
-                    </div>
-                </li>
-                <li class="clearfix form-group">
-                    <label for="Religion" class="pop_label_left">Religion<span style="color: red; margin-left: 3px;">*</span></label>
-
-                    <div class="pop_controls_right select-box-my input-group">
-                        <div class="select-box-my">
-
-                            <select multiselectdropdown ng-model="page.model.custObj.ddlreligioncandadate" typeofdata="'Religion'" required></select>
-                        </div>
-                    </div>
-                </li>
-                <li class="clearfix form-group" id="divMotherTongue">
-                    <label for="lblPersonalMotherTongue" class="pop_label_left">Mother Tongue<span style="color: red; margin-left: 3px;">*</span></label>
-
-                    <div class="pop_controls_right select-box-my input-group">
-
-                        <select multiselectdropdown ng-model="page.model.custObj.ddlmothertongue" typeofdata="'Mothertongue'" required></select>
-
-                    </div>
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblCaste" class="pop_label_left">Caste<span style="color: red; margin-left: 3px;">*</span></label>
-
-                    <div class="pop_controls_right select-box-my input-group">
-
-                        <select multiselectdropdown ng-model="page.model.custObj.ddlcaste" typeofdata="'caste'" ng-change="page.model.changeBind('caste',page.model.custObj.ddlcaste);" required></select>
-
-                    </div>
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblCaste" class="pop_label_left">SubCaste</label>
-                    <div class="pop_controls_right select-box-my">
-                        <select multiselectdropdown ng-model="page.model.custObj.ddlsubcaste" ng-options="item.value as item.label for item in page.model.subcasteArr"></select>
-                    </div>
-                </li>
-                <li class="clearfix form-group">
-                    <label for="lblborncitizenship" class="pop_label_left">Born Citizenship<span style="color: red; margin-left: 3px;">*</span></label>
-
-                    <div class="pop_controls_right select-box-my input-group">
-                        <select multiselectdropdown ng-model="page.model.custObj.ddlBornCitizenship" typeofdata="'Country'" required></select>
-
-                    </div>
-                </li>
-                <li class="row">
-                    <edit-footer></edit-footer>
-                </li>
-            </ul>
-
-        </div>
-
-
-
-    </form>
-</script>
 
 <style>
     .multiselect {
