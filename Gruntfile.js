@@ -116,7 +116,7 @@ module.exports = function(grunt) {
                 src: ['index.js', 'app/**/**/*.js', 'dist/html/templates.js',
                     '!common/services/authSvc.js',
                     'common/**/*.js',
-                    'base\**\*.js'
+                    'base/**/*.js'
                 ],
                 dest: 'dist/src/main.js'
             },
