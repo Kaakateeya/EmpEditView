@@ -132,7 +132,7 @@ module.exports = function(grunt) {
                     module: "KaakateeyaEmpEdit",
                     prefix: '',
                 },
-                src: ['app/**/**/*.html', 'templates/SlideHeader.html'],
+                src: ['app/**/**/*.html', 'common/**/*.html', 'templates\*.html'],
                 dest: "dist/html/templates.js"
             }
         }

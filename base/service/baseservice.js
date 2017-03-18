@@ -33,7 +33,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('baseService', factory)
+        .factory('baseService', factory);
 
     factory.$inject = ['$http'];
 })(angular);

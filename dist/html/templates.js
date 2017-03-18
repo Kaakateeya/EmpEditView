@@ -14850,58 +14850,326 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
   );
 
 
-  $templateCache.put('templates/SlideHeader.html',
-    "<div class=\"row\">\r" +
+  $templateCache.put('common/templates/Photopopup.html',
+    "<div class=\"modal-content\">\r" +
     "\n" +
-    "\r" +
+    "    <div class=\"modal-header\">\r" +
     "\n" +
-    "\r" +
+    "        <button type=\"button\" class=\"close\" ng-click=\"model.cancel()\">×</button>\r" +
     "\n" +
-    "    <div class=\"col-lg-6 col-md-6 col-xs-8 col-sm-8\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <label id=\"lbltotalrecords\">Total Records :</label>\r" +
-    "\n" +
-    "        <label id=\"lblcurrentprofile\"></label> &nbsp;of&nbsp;\r" +
-    "\n" +
-    "        <label id=\"lblcurSlide\"></label>\r" +
-    "\n" +
-    "\r" +
+    "        <h4 class=\"modal-title\">Photo Album</h4>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
-    "    <div class=\"col-lg-4 col-md-4 col-xs-4 col-sm-4\">\r" +
+    "    <div class=\"modal-body\">\r" +
     "\n" +
-    "\r" +
+    "        <div class=\"bs-example\">\r" +
     "\n" +
-    "        <div class=\"col-lg-6 col-md-6 col-xs-6 col-sm-6\">\r" +
+    "            <div id=\"slideshow\" class=\"carousel slide\" data-interval=\"3000\" data-ride=\"carousel\">\r" +
     "\n" +
-    "            <label>Viewed</label>&nbsp;<label id=\"lnkLastSlide\" style=\"color: blue;\">1</label>&nbsp;<label>Profiles</label>\r" +
+    "                <ol class=\"carousel-indicators\">\r" +
+    "\n" +
+    "                    <li ng-repeat=\"slide in model.SlideArr\" data-target=\"#slideshow\" ng-class=\"$index+1==1?'active':''\" data-slide-to=\"$index+1-1\"></li>\r" +
+    "\n" +
+    "                </ol>\r" +
+    "\n" +
+    "                <div class=\"carousel-inner\">\r" +
+    "\n" +
+    "                    <div ng-class=\"($index+1)==1?'item active':'item'\" ng-repeat=\"slide in model.SlideArr\">\r" +
+    "\n" +
+    "                        <img id=\"imh\" ng-src=\"{{slide.FullPhotoPath}}\" style=\"margin-left: auto;\r" +
+    "\n" +
+    "    margin-right: auto;\"></img>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <a data-target=\"#slideshow\" id=\"a1\" class=\"carousel-control left\" href=\"javascript:void(0)\" data-slide=\"prev\">\r" +
+    "\n" +
+    "                    <span class=\"glyphicon glyphicon-chevron-left\"></span>\r" +
+    "\n" +
+    "                </a>\r" +
+    "\n" +
+    "                <a data-target=\"#slideshow\" id=\"a2\" class=\"carousel-control right\" href=\"javascript:void(0)\" data-slide=\"next\">\r" +
+    "\n" +
+    "                    <span class=\"glyphicon glyphicon-chevron-right\"></span>\r" +
+    "\n" +
+    "                </a>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div ng-hide=\"true\">\r" +
+    "\n" +
+    "                <img src=\"http://d16o2fcjgzj2wp.cloudfront.net/Images/HoroscopeImages/86974_HaroscopeImage/86974_HaroscopeImage.jpg\" style=\"height: 500px; width: 500px;\">\r" +
+    "\n" +
+    "            </div>\r" +
     "\n" +
     "        </div>\r" +
-    "\n" +
-    "        <div class=\"col-lg-1 col-md-1 col-xs-1 col-sm-1\">\r" +
-    "\n" +
-    "            <input type=\"text\" id=\"txtGotoVal\" class=\"form-control\" style=\"width: 50px; height: 24px; margin-left: -20px;\" onchange=\"gotoSlide(this);\" />\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "    <div class=\"col-lg-2\" ng-if=\"slidetype==='popup'\">\r" +
-    "\n" +
-    "        <a href=\"javascript:void(0);\">\r" +
-    "\n" +
-    "            <a class=\"pull-right\" size=\"25\">close</a>\r" +
-    "\n" +
-    "        </a>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
     "</div>"
+  );
+
+
+  $templateCache.put('common/templates/contacttemplate.html',
+    "<div id=\"ownerdiv4\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <li id=\"divfathernumbersowner\" class=\"clearfix form-group\">\r" +
+    "\n" +
+    "        <label for=\"lblContactNumbersfather\" class=\"pop_label_left\">Contact Numbers</label>\r" +
+    "\n" +
+    "        <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <a data-toggle=\"tooltip\" style=\"padding-right:20%;\" data-original-title=\"Add Mobile Number\" tabindex=\"6\" ng-click=\"showhidemob($event,'mob');\" href=javascript:void(0);>\r" +
+    "\n" +
+    "                <ng-md-icon icon=\"smartphone\" style=\"fill:#337ab7\" size=\"20\"></ng-md-icon>\r" +
+    "\n" +
+    "            </a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <a data-toggle=\"tooltip\" style=\"padding-right:20%;\" data-original-title=\"Add  Land Number\" tabindex=\"7\" ng-click=\"showhidemob($event,'land');\" href=javascript:void(0);>\r" +
+    "\n" +
+    "                <ng-md-icon icon=\"call\" style=\"fill:#337ab7\" size=\"20\"></ng-md-icon>\r" +
+    "\n" +
+    "            </a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <a data-toggle=\"tooltip\" ng-show=\"emailhide\" data-original-title=\"Add  Email ID\" tabindex=\"8\" ng-click=\"showhidemob($event,'mail');\" href=javascript:void(0);>\r" +
+    "\n" +
+    "                <ng-md-icon icon=\"mail\" style=\"fill:#337ab7\" size=\"20\"></ng-md-icon>\r" +
+    "\n" +
+    "            </a>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <li class=\"clearfix form-group\" ng-show=\"pmob\">\r" +
+    "\n" +
+    "        <div>\r" +
+    "\n" +
+    "            <label for=\"lblMobile\" class=\"pop_label_left\">Mobile #  </label>\r" +
+    "\n" +
+    "            <div class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
+    "\n" +
+    "                <select multiselectdropdown ng-model=\"dmobile\" typeofdata=\"'countryCode'\"></select>\r" +
+    "\n" +
+    "                <input type=text ng-model=\"strmobile\" class=\"form-control\" maxlength=\"10\" tabindex=\"10\" />\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </li>\r" +
+    "\n" +
+    "    <li class=\"clearfix form-group\" ng-show=\"amob\">\r" +
+    "\n" +
+    "        <div>\r" +
+    "\n" +
+    "            <label for=\"lblMobilefather\" class=\"pop_label_left\">Altenate Number</label>\r" +
+    "\n" +
+    "            <div class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
+    "\n" +
+    "                <select multiselectdropdown ng-model=\"dalternative\" typeofdata=\"'countryCode'\"></select>\r" +
+    "\n" +
+    "                <input type=text class=\"form-control\" ng-model=\"stralternative\" maxlength=\"10\" tabindex=\"12\" />\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </li>\r" +
+    "\n" +
+    "    <li class=\"clearfix form-group\" ng-show=\"land\">\r" +
+    "\n" +
+    "        <div>\r" +
+    "\n" +
+    "            <label for=\"lblLandLine\" class=\"pop_label_left\">Land line #  </label>\r" +
+    "\n" +
+    "            <div class=\"pop_controls_right select-box-my select-box-my-trible\">\r" +
+    "\n" +
+    "                <select multiselectdropdown ng-model=\"dland\" typeofdata=\"'countryCode'\"></select>\r" +
+    "\n" +
+    "                <input type=text ng-model=\"strareacode\" maxlength=\"4\" tabindex=\"14\" />\r" +
+    "\n" +
+    "                <input type=text ng-model=\"strland\" maxlength=\"8\" tabindex=\"15\" />\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    </li>\r" +
+    "\n" +
+    "    <li class=\"clearfix form-group\" ng-show=\"mail\">\r" +
+    "\n" +
+    "        <label for=\"lblEmail\" class=\"pop_label_left\">Email  </label>\r" +
+    "\n" +
+    "        <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "            <input type=text ng-model=\"strmail\" class=\"form-control\" placeholder=\"Enter Email\" text=\" \" tabindex=\"16\" />\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </li>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('common/templates/countryTemplate.html',
+    "<div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <li class=\"clearfix form-group\" ng-show=\"countryshow\">\r" +
+    "\n" +
+    "        <label for=\"lblCountry\" class=\"pop_label_left\">Country<span ng-if=\"require==true\" style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "        <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "            <select multiselectdropdown ng-model=\"dcountry\" ng-change=\"changeBind('Country',dcountry);\" typeofdata=\"'Country'\" ng-required=\"require\"></select>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </li>\r" +
+    "\n" +
+    "    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "        <label for=\"State\" class=\"pop_label_left\">State<span ng-if=\"require==true\" style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "        <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "            <select multiselectdropdown ng-model=\"dstate\" ng-options=\"item.value as item.label for item in stateArr\" ng-change=\"changeBind('State',dstate,dcountry);\" ng-required=\"require\"></select>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </li>\r" +
+    "\n" +
+    "    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "        <div id=\"divEduDistric\">\r" +
+    "\n" +
+    "            <label for=\"lblDistrict\" class=\"pop_label_left\">District<span ng-if=\"require==true\" style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "            <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                <select multiselectdropdown ng-model=\"ddistrict\" ng-options=\"item1.value as item1.label for item1 in districtArr\" ng-change=\"changeBind('District',ddistrict);\" ng-required=\"(dcountry===1 || dcountry==='1')?require:false\"></select>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </li>\r" +
+    "\n" +
+    "    <li class=\"clearfix form-group\" ng-show=\"cityshow\">\r" +
+    "\n" +
+    "        <label for=\"lblCityworking\" class=\"pop_label_left\">City<span ng-if=\"require==true\" style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "            <div ng-show=\"!cityinput\">\r" +
+    "\n" +
+    "                <select multiselectdropdown ng-model=\"dcity\" ng-options=\"item.value as item.label for item in cityeArr\" ng-required=\"cityshow==true?require:false\"></select>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div ng-show=\"othercity\">\r" +
+    "\n" +
+    "                <input ng-model=\"strothercity\" ng-show=\"cityinput\" class=\"form-control\" maxlength=\"100\" />\r" +
+    "\n" +
+    "                <a id=\"lnkCity\" href=\"javascript:void(0);\" ng-click=\"ShowCity();\">Not in List</a>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </li>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('common/templates/deletepopup.html',
+    "<form name=\"deleteForm\" novalidate role=\"form\" ng-submit=\"page.model.deleteSubmit()\">\r" +
+    "\n" +
+    "    <div class=\"modal-header\">\r" +
+    "\n" +
+    "        <h3 class=\"modal-title text-center\" id=\"modal-title\">Alert\r" +
+    "\n" +
+    "            <a href=\"javascript:void(0);\" ng-click=\"cancel();\">\r" +
+    "\n" +
+    "                <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
+    "\n" +
+    "            </a>\r" +
+    "\n" +
+    "        </h3>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div class=\"modal-body clearfix\" id=\"modal-body\">\r" +
+    "\n" +
+    "        <b class=\"text-center\"> Do you want to delete <span>{{deleteDisplayTxt}}</span> details</b>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div class=\"modal-footer\">\r" +
+    "\n" +
+    "        <button type=\"submit\" class=\"btn btn-success\">Delete</button>\r" +
+    "\n" +
+    "        <button type=\"button\" class=\"btn btn-danger\" ng-click=\"page.model.cancel();\">Cancel</button>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "</form>"
+  );
+
+
+  $templateCache.put('common/templates/reviewConfirmationPopup.html',
+    "<form name=\"reviewConfirmForm\" novalidate role=\"form\" ng-submit=\"reviewSubmit();\">\r" +
+    "\n" +
+    "    <div class=\"modal-header text-center\" style=\"color: #57b5e3;\r" +
+    "\n" +
+    "    border-bottom: 3px solid #57b5e3;font-size: 30px;\">\r" +
+    "\n" +
+    "        <i class=\"glyphicon glyphicon-alert\"></i>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div class=\"modal-title text-center\" style=\"font-size: 17px;color: #737373;font-weight: bold;\">Confirmation</div>\r" +
+    "\n" +
+    "    <div class=\"modal-body clearfix\" id=\"modal-body\">\r" +
+    "\n" +
+    "        <b class=\"text-center\" style=\"color:gray;\"> Do you want to Review the {{reviewdisplay}}</b>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div class=\"modal-footer\">\r" +
+    "\n" +
+    "        <button type=\"submit\" class=\"btn btn-success\">Review</button>\r" +
+    "\n" +
+    "        <button type=\"button\" class=\"btn btn-danger\" ng-click=\"cancel();\">Cancel</button>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</form>"
   );
 
 }]);
