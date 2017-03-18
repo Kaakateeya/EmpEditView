@@ -22,7 +22,6 @@
         "moment": "latest",
         "multi-select": "*",
         "ng-numbers-only": "latest",
-        "registration": "git+https://github.com/Kaakateeya/Registration.git#EmployeeRegistration",
         "underscore": "latest"
     },
     "devDependencies": {
