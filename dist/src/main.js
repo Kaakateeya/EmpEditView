@@ -20393,43 +20393,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
     angular
         .module('KaakateeyaEmpEdit')
-        .directive('datePicker', directive);
-
-    function directive() {
-
-        var directive = {
-            link: link,
-            restrict: 'EA',
-            scope: {
-                strdate: '='
-            },
-            template: '<p class="input-group">' +
-                '<input type="text" class="form-control" style="width:82%;"  uib-datepicker-popup="MM/dd/yyyy"  ng-model="strdate" is-open="showdate"  show-button-bar="false" close-text="Close" />' +
-                '<span class="input-group-btn">' +
-                '<button type="button" class="btn btn-default" style="position: relative;height: 5%;height: 30px;display:block;" ng-click="open2()"><ng-md-icon icon="perm_contact_calendar" style="fill:#665454" size="20"></ng-md-icon></button>' +
-                '</span></p>'
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-
-            if (scope.strdate !== '' && scope.strdate !== undefined && scope.strdate !== null)
-                scope.strdate = new Date(scope.strdate); //moment(new Date()).format();
-            scope.showdate = false;
-
-            scope.open2 = function() {
-                scope.showdate = true;
-            };
-
-        }
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('KaakateeyaEmpEdit')
         .factory('alert', factory)
 
     factory.$inject = ['$mdDialog', '$uibModal', '$timeout'];
@@ -20516,31 +20479,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
         };
     }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('KaakateeyaEmpEdit')
-        .directive('editFooter', directive);
-
-    function directive() {
-
-        var directive = {
-            link: link,
-            restrict: 'EA',
-            template: '<div class="col-lg-9">' +
-                '<button class="button_custom  pull-right"  ng-disabled="loading"  type="submit" promise-btn="page.model.submitPromise">Submit</button>' +
-                '</div>' +
-                ' <div class="col-lg-3">' +
-                '<input value="Cancel"  class="button_custom button_custom_reset pull-right" ng-click="page.model.cancel();" type="button">' +
-                ' </div>'
-        };
-        return directive;
-
-        function link(scope, element, attrs) {}
-    }
-
 })();
 // AngularJS: 1.3.15
 // bootstrap-multiselect: 0.9.6
