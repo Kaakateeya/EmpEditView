@@ -9221,353 +9221,59 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
   $templateCache.put('app/editParent/index.html',
     "<div id=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
-    "\n" +
-    "    </div>\r" +
+    "    <div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
+    "        <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
-    "    <div class=\"edit_pages_content_main clearfix\">\r" +
+    "        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <page-review dispaly-name=\"'Parent details'\" sectionid=\"'11,12,13,15'\" custid=\"page.model.CustID\"></page-review>\r" +
+    "        <div class=\"edit_pages_content_main clearfix\" class=\"right_col\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        <div class=\"edit_page_item\" id=\"divlnkaddparents\">\r" +
-    "\n" +
-    "            <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "                <h4>Parents Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" id=\"spanEduModID\">ModifiedBy :{{page.model.parentmodifiedby}}</span>\r" +
-    "\n" +
-    "                    <span style=\"color: #08CFD2\" id=\"spanEduModID\" visible=\"false\">\r" +
-    "\n" +
-    "                    <label id=\"lblParentsDetailsmodby\" forecolor=\"#08CFD2\"></label>\r" +
-    "\n" +
-    "                    </span>\r" +
-    "\n" +
-    "                </h4>\r" +
-    "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.parentArr.length===0\">\r" +
-    "\n" +
-    "                    <a data-toggle=\"tooltip\" data-original-title=\"Add Parents Details\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.populateModel('parent');\">Add</a>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "                <div id=\"listparents\" ng-repeat=\"item in page.model.parentArr\">\r" +
-    "\n" +
-    "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "                            <div>\r" +
-    "\n" +
-    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <label id=\"lfathername\" font-bold=\"true\"></label>Father Name</h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"LBfathername\">{{item.FatherName}}</span>\r" +
-    "\n" +
-    "                                    </h5>\r" +
+    "            <page-review dispaly-name=\"'Astro details'\" sectionid=\"'23'\" custid=\"page.model.CustID\"></page-review>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                </div>\r" +
+    "            <div id=\"divlnkasro\" class=\"edit_page_item\">\r" +
     "\n" +
-    "                                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.parentArr.length>0\">\r" +
+    "                <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "                                    <a id=\"LinkButton1dfd\" href=\"javascript:void(0):\" data-original-title=\"Edit Parents Details\" class=\"edit_page_edit_button\" ng-click=\"page.model.populateModel('parent',item);\">Edit</a>\r" +
+    "                    <h4>Astro Details </h4>\r" +
     "\n" +
-    "\r" +
+    "                    <div class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
-    "                                </div>\r" +
+    "                        <div ng-if=\"page.model.AstroArr.length==0\" cssclass=\"edit_page_add_button\">\r" +
     "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <label id=\"lblfathereducation\" font-bold=\"true\">Education</label>\r" +
-    "\n" +
-    "                                </h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblfathereducationdetails\">\r" +
-    "\n" +
-    "                                    {{item.FatherEducationDetails }}\r" +
-    "\n" +
-    "                            </span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <label font-bold=\"true\">Profession Category</label>\r" +
-    "\n" +
-    "                                </h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span>\r" +
-    "\n" +
-    "                                    {{item.FatherProfessionCategory }}\r" +
-    "\n" +
-    "                            </span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <label id=\"lblFatherprofession\" font-bold=\"true\">Designation</label>\r" +
-    "\n" +
-    "                                </h6>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblfatherprofessiondetails\">\r" +
-    "\n" +
-    "                                   {{item.FatherProfDetails }}\r" +
-    "\n" +
-    "                            </span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\" id=\"fathercompnay\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <label id=\"lblfatherprofessionloc\" font-bold=\"true\">Company & JobLocation</label>\r" +
-    "\n" +
-    "                                </h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblfatherprofandloc\">\r" +
-    "\n" +
-    "                                   {{((item.FathercompanyName!=null && (item.FathercompanyName!=\"\")?item.FathercompanyName:\"NotSpecified\"))\r" +
-    "\n" +
-    "                                        +\" \"+((item.FatherJoblocation!=null && (item.FatherJoblocation!=\"\")?\",\" +\" \"+item.FatherJoblocation:''))}}\r" +
-    "\n" +
-    "                            </span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div id=\"ownerdiv0\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <label id=\"lblfathernumber\" font-bold=\"true\">Father contact nos</label>\r" +
-    "\n" +
-    "                                    </h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblfathermobile\">\r" +
-    "\n" +
-    "                                       {{((item.FatherMobilenumber!=null && (item.FatherMobilenumber!=\"\")?item.FatherMobilenumber:\"\"))\r" +
-    "\n" +
-    "                                        +\" \"+((item.FatherLandNumber!=null && (item.FatherLandNumber!=\"\")?\"&\"+\" \"+item.FatherLandNumber:\"\")) }}\r" +
-    "\n" +
-    "                                </span>\r" +
-    "\n" +
-    "                                    </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <label id=\"fatheremail\" font-bold=\"true\">Father Email</label>\r" +
-    "\n" +
-    "                                    </h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblFatherEmail\">\r" +
-    "\n" +
-    "                                       {{ item.FatherEmail }}\r" +
-    "\n" +
-    "                                </span>\r" +
-    "\n" +
-    "                                    </h5>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <label id=\"lblfathersfather\">Father's Father Name</label></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblfathersfath\">\r" +
-    "\n" +
-    "                                  {{  ((item.FatherFathername!=null && (item.FatherFathername!=\"\")?item.FatherFathername:\"\"))\r" +
-    "\n" +
-    "                                        }}\r" +
-    "\n" +
-    "                            </span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div id=\"ownerdiv1\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <label id=\"FFContactNos\">FF contact nos</label></h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblFFContactNos\">\r" +
-    "\n" +
-    "                                       {{((item.FFMobileNumberWithcode!=null && (item.FFMobileNumberWithcode!=\"\")?item.FFMobileNumberWithcode:\"\"))\r" +
-    "\n" +
-    "                                       + ((item.FFLandNumberwithCode!=null && item.FFLandNumberwithCode!=\"\")?\" & \"+item.FFLandNumberwithCode:\"\") }}\r" +
-    "\n" +
-    "                                </span>\r" +
-    "\n" +
-    "                                    </h5>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <label id=\"FnativePlace\" font-bold=\"true\">Native Place</label>\r" +
-    "\n" +
-    "                                </h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblFnativePlace\">\r" +
-    "\n" +
-    "                                   {{\r" +
-    "\n" +
-    "                                        ((item.FatherNativeplace!=null && item.FatherNativeplace!=\"\")?item.FatherNativeplace:\"\" )+\r" +
-    "\n" +
-    "                                        ((item.FatherDistric!=null && item.FatherDistric!=\"\")?\" ,\"+item.FatherDistric:\"\")+\r" +
-    "\n" +
-    "                                        ((item.FatherState!=null && item.FatherState!=\"\")?\" ,\"+item.FatherState:\"\" )+\r" +
-    "\n" +
-    "                                        ((item.FatherCountry!=null && item.FatherCountry!=\"\")?\" ,\"+item.FatherCountry:\"\" )}}\r" +
-    "\n" +
-    "                            </span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
+    "                            <a ng-click=\"page.model.populateAstro();\" class=\"edit_page_add_button\" href=\"javascript:void(0);\">Add</a>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                    <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.AstroArr track by $index\">\r" +
+    "\n" +
     "                        <div>\r" +
     "\n" +
-    "                            <hr />\r" +
+    "                            <div ng-hide=\"item.TimeOfBirth===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "\r" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"TimeofBirth\" style=\"font-weight:bold;\">Time of Birth</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblTimeofBirth\">{{item.TimeOfBirth}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
     "\n" +
     "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
@@ -9575,293 +9281,585 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <label id=\"lblmothername\" font-bold=\"true\" forecolor=\"Red\">\r" +
-    "\n" +
-    "                                Mother Name\r" +
-    "\n" +
-    "                            </label>\r" +
-    "\n" +
-    "                                </h6>\r" +
-    "\n" +
-    "\r" +
+    "                                    <span id=\"PlaceofBirth\" style=\"font-weight:bold;\">Place of Birth</span></h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblmothernameandedu\">\r" +
-    "\n" +
-    "                                    {{item.MotherName}}\r" +
-    "\n" +
-    "                            </span>\r" +
+    "                                    <span id=\"lblPlaceofBirth\">{{ item.CityOfBirth +\",\"+item.DistrictOfBirth+\",\"+item.StateOfBirth+\",\"+item.CountryOfBirth}}</span>\r" +
     "\n" +
     "                                </h5>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "\r" +
+    "                            <div ng-hide=\"item.TypeofStar===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"Telugustar\" style=\"font-weight:bold;\">Star Language</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblTelugustar\">{{ item.TypeofStar+((item.StarName!=\"\" &&  item.StarName!=null)?\" - \"+\r" +
+    "\n" +
+    "                                            item.StarName:\"\")+((item.Paadam!=\"\" &&  item.Paadam!=null)?\" (\"+item.Paadam+\")\":\"\") }}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            </div>\r" +
+    "\n" +
+    "                            <div ng-hide=\"item.Rassi===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <label id=\"lbleducationmother\">Education</label></h6>\r" +
-    "\n" +
-    "\r" +
+    "                                    <span id=\"raasimoonsign\" style=\"font-weight:bold;\">Raasi/moon sign</span></h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblmotherducation\">\r" +
-    "\n" +
-    "                                   {{ ((item.MotherEducationDetails!=null && item.MotherEducationDetails!=\"\")?item.MotherEducationDetails:\"\" )}}\r" +
-    "\n" +
-    "                            </span>\r" +
-    "\n" +
-    "                                </h5>\r" +
+    "                                    <span id=\"lblraasimoonsign\">{{ item.Rassi}}</span></h5>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                            <div ng-hide=\"item.Lagnam===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <label font-bold=\"true\">Profession Category</label>\r" +
-    "\n" +
-    "                                </h6>\r" +
+    "                                    <span id=\"Lagnam\" style=\"font-weight:bold;\">Lagnam</span></h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span>\r" +
-    "\n" +
-    "                                    {{item.MotherProfessionCategory }}\r" +
-    "\n" +
-    "                            </span>\r" +
-    "\n" +
-    "                                </h5>\r" +
+    "                                    <span id=\"lblLagnam\">  {{ item.Lagnam }}</span></h5>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
+    "                            <div ng-hide=\"item.Gothram===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <label id=\"lblprofessionmotherr\" font-bold=\"true\">Designation</label>\r" +
-    "\n" +
-    "                                </h6>\r" +
-    "\n" +
-    "\r" +
+    "                                    <span id=\"GothramGotra\" style=\"font-weight:bold;\">Gothram/Gotra</span></h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblmotherprofdetails\">\r" +
-    "\n" +
-    "                                  {{((item.MotherProfedetails!=null && item.MotherProfedetails!=\"\")?\r" +
-    "\n" +
-    "                                                item.MotherProfedetails:\"\" )}}\r" +
-    "\n" +
-    "                            </span>\r" +
-    "\n" +
-    "                                </h5>\r" +
+    "                                    <span id=\"lblGothramGotra\">  {{ item.Gothram}}</span></h5>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                            <div id=\"mothercompany\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.MotherProfedetails=='HouseWife'\">\r" +
-    "\n" +
-    "\r" +
+    "                            <div ng-hide=\"item.MeternalGothramID===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <label id=\"lblmotherprofession\">Company & JobLocation</label></h6>\r" +
+    "                                    <span id=\"MaternalGothram\" style=\"font-weight:bold;\">Maternal Gothram</span></h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblmotherprofandloc\">\r" +
-    "\n" +
-    "                                   {{((item.MothercompanyName!=null && (item.MothercompanyName!=\"\")?item.MothercompanyName:\"\"))+\" \"+\r" +
-    "\n" +
-    "                                            ((item.MotherJoblocation!=null && (item.MotherJoblocation!=\"\")?\", \"+\" \"+\r" +
-    "\n" +
-    "                                            item.MotherJoblocation:''))}}\r" +
-    "\n" +
-    "                                </span>\r" +
-    "\n" +
-    "                                </h5>\r" +
+    "                                    <span id=\"lblMaternalGothram\">{{ item.MeternalGothramID }}</span></h5>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                            <div id=\"ownerdiv2\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <label id=\"lblmothercontacts\">Mother contact nos</label></h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblmompmobile\">\r" +
-    "\n" +
-    "                                       {{((item.MotherMobilenumber!=null && item.MotherMobilenumber!=\"\")?item.MotherMobilenumber:\"\" )+\" \"+((item.MotherLandNumber!=null && (item.MotherLandNumber!=\"\")?\"&\"+\" \"+item.MotherLandNumber:\"\"))}}\r" +
-    "\n" +
-    "                                </span>\r" +
-    "\n" +
-    "                                    </h5>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <label id=\"lblmotheremail\" font-bold=\"true\">Mother Email</label>\r" +
-    "\n" +
-    "                                    </h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblmomemail\">\r" +
-    "\n" +
-    "                                        {{ item.MotherEmail }}\r" +
-    "\n" +
-    "                                </span>\r" +
-    "\n" +
-    "                                    </h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
+    "                            <div ng-hide=\"item.manglikkujadosham===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "                                <h6>\r" +
     "\n" +
-    "                                    <label id=\"lblmotherfatherupp\" font-bold=\"true\">Mother's Father Name</label>\r" +
-    "\n" +
-    "                                </h6>\r" +
+    "                                    <span id=\"manglikkujadosham\" style=\"font-weight:bold;\">manglik/kuja dosham</span></h6>\r" +
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblMotherFatherName\">\r" +
-    "\n" +
-    "                                   {{item.MotherFatherName }}\r" +
-    "\n" +
-    "                            </span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "                                </label>\r" +
+    "                                    <span id=\"lblmanglikkujadosham\">{{ item.manglikkujadosham }}</span></h5>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.AstroArr.length>0\">\r" +
+    "\n" +
+    "                            <a ng-click=\"page.model.populateAstro(item);\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\">Edit</a>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <br>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item_desc clearfix\" style=\"padding: 0 0 0 20px;\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"radio-group-my input-group\" ng-show=\"page.model.ImageUrl==='' || page.model.ImageUrl===null\">\r" +
+    "\n" +
+    "                    <md-radio-group ng-required=\"true\" name=\"rdlUploadGenerate\" layout=\"row\" ng-model=\"page.model.atroObj.rdlUploadGenerate\" ng-change=\"page.model.uploadGenerateHoro(page.model.atroObj.rdlUploadGenerate);\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "\n" +
+    "                        <md-radio-button value=\"0\">Upload Horoscope</md-radio-button>\r" +
+    "\n" +
+    "                        <md-radio-button value=\"1\"> Generate Horoscope </md-radio-button>\r" +
+    "\n" +
+    "                    </md-radio-group>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div ng-hide=\"page.model.ImageUrl==='' || page.model.ImageUrl===null\">\r" +
+    "\n" +
+    "                <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                        <img ng-model=\"page.model.imghoroName\" ng-src=\"{{page.model.ImageUrl}}\" Style=\"width: 250px; height: 250px;\" ng-show=\"!page.model.iframeShow\" />\r" +
+    "\n" +
+    "                        <iframe border=\"0\" id=\"iframe\" frameborder=\"0\" height=\"300\" width=\"800\" ng-show=\"page.model.iframeShow\"></iframe>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"edit_page_details_item_desc clearfix\" style=\"padding: 0 0 0 20px;\">\r" +
+    "\n" +
+    "                    <div class=\"edit_page_item_ui clearfix  pull-left\">\r" +
+    "\n" +
+    "                        <a ID=\"btndeletehoro\" class=\"edit_page_del_button\" href=\"javascript:void(0);\" ng-click=\"page.model.shoedeletePopup();\" data-placement=\"bottom\" data-toggle=\"tooltip\" data-original-title=\"Delete Astro Details\">\r" +
+    "\n" +
+    "               Delete <ng-md-icon icon=\"delete\" style=\"fill:#665454\" size=\"18\">Delete</ng-md-icon></a>\r" +
+    "\n" +
+    "                        <a Style=\"padding-left: 100px;\" class=\"btn btn-link\" ng-click=\"page.model.vewHoro();\">View<span class=\"glyphicon glyphicon-eye-open\"></span></a>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"astroContent.html\">\r" +
+    "\n" +
+    "        <form name=\"astroForm\" novalidate role=\"form\" ng-submit=\"page.model.astroSubmit(page.model.atroObj);\" accessible-form>\r" +
+    "\n" +
+    "            <div class=\"modal-header\">\r" +
+    "\n" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Astro details\r" +
+    "\n" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"cancel();\">\r" +
+    "\n" +
+    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
+    "\n" +
+    "                    </a>\r" +
+    "\n" +
+    "                </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "                <ul id=\"ulastro\">\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lbltimebirth\" class=\"pop_label_left\">Time of Birth<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my select-box-my-trible select-box-my-trible3 input-group\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromHours\" ng-options=\"item.value as item.label for item in page.model.hrsbindArr\" required></select>\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromMinutes\" ng-options=\"item.value as item.label for item in page.model.minbindArr\" required></select>\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromSeconds\" ng-options=\"item.value as item.label for item in page.model.secbindArr\" required></select>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <country-directive require=\"true\" countryshow=\"true\" cityshow=\"true\" othercity=\"false\" dcountry=\"page.model.atroObj.ddlCountryOfBirthID\" dstate=\"page.model.atroObj.ddlStateOfBirthID\" ddistrict=\"page.model.atroObj.ddlDistrictOfBirthID\" dcity=\"page.model.atroObj.ddlcity\"></country-directive>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblstarlan\" class=\"pop_label_left\">Star language</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlstarlanguage\" typeofdata=\"'starLanguage'\" ng-change=\"page.model.changeBind('star',page.model.atroObj.ddlstarlanguage);\"></select>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblstar\" class=\"pop_label_left\">Star</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlstar\" ng-options=\"item.value as item.label for item in page.model.starArr\"></select>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblpaadam\" class=\"pop_label_left\">Paadam</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlpaadam\" typeofdata=\"'paadam'\"></select>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblLagnam\" class=\"pop_label_left\">Lagnam</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlLagnam\" typeofdata=\"'lagnam'\"></select>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblRaasiMoonsign\" class=\"pop_label_left\">Raasi/Moon sign</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlRaasiMoonsign\" typeofdata=\"'ZodaicSign'\"></select>\r" +
+    "\n" +
+    "                            </select>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblGothramGotra\" class=\"pop_label_left\">Gothram/Gotra</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                            <input ng-model=\"page.model.atroObj.txtGothramGotra\" class=\"form-control\" tabindex=\"13\" maxlength=\"100\" />\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix\">\r" +
+    "\n" +
+    "                        <label for=\"lblMaternalgothram\" class=\"pop_label_left\">Maternal gothram</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                            <input ng-model=\"page.model.atroObj.txtMaternalgothram\" class=\"form-control\" tabindex=\"14\" maxlength=\"100\" />\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix\">\r" +
+    "\n" +
+    "                        <label for=\"lblManglikKujadosham\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Manglik/Kuja dosham</label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <md-input-container style=\"font-weight: 700;color:black;\">\r" +
+    "\n" +
+    "                            <md-radio-group name=\"rdlkujaDosham\" layout=\"row\" ng-model=\"page.model.atroObj.rdlkujaDosham\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "\n" +
+    "                                <md-radio-button value=\"0\" class=\"md-primary\">Yes</md-radio-button>\r" +
+    "\n" +
+    "                                <md-radio-button value=\"1\"> No </md-radio-button>\r" +
+    "\n" +
+    "                                <md-radio-button value=\"2\"> Dont't Know </md-radio-button>\r" +
+    "\n" +
+    "                            </md-radio-group>\r" +
+    "\n" +
+    "                        </md-input-container>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
+    "\n" +
+    "                        <label for=\"lbllongitude\" class=\"pop_label_left\">Place of birth longitude</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                            <input id=\"txtlogitude\" class=\"form-control\" />\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddllongitude\"></select>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
+    "\n" +
+    "                        <label for=\"lbllatitude\" class=\"pop_label_left\">Place of birth latitude</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                            <input id=\"txtlatitude\" class=\"form-control col-lg-3\" />\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddllatitude\"></select>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
+    "\n" +
+    "                        <label for=\"lbllatitude\">Place of birth latitude</label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                            <input type=\"checkbox\" ng-model=\"page.model.atroObj.Chkgenertehoro\" value=\"Generate HoroScope\" />\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"row\">\r" +
+    "\n" +
+    "                        <edit-footer></edit-footer>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                </ul>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"AddHoroPopup.html\">\r" +
+    "\n" +
+    "        <form name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.upload(up);\">\r" +
+    "\n" +
+    "            <div class=\"modal-header\">\r" +
+    "\n" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Upload Horoscope </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body\" id=\"modal-body\">\r" +
+    "\n" +
+    "                <label class=\"control-label\">Use this file formats like gif, jpeg, png,jpg</label>\r" +
+    "\n" +
+    "                <br>\r" +
+    "\n" +
+    "                <ul id=\"ulprofession\">\r" +
+    "\n" +
+    "                    <input type=\"file\" file-model=\"up.myFile\" />\r" +
+    "\n" +
+    "                </ul>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-footer\">\r" +
+    "\n" +
+    "                <input value=\"Cancel\" class=\"button_custom button_custom_reset\" ng-click=\"page.model.cancel();\" type=\"button\">\r" +
+    "\n" +
+    "                <input value=\"Upload\" class=\"button_custom\" type=\"submit\">\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"deletehoroPopup.html\">\r" +
+    "\n" +
+    "        <form name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.deleteHoroImage();\">\r" +
+    "\n" +
+    "            <div class=\"modal-header\">\r" +
+    "\n" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Delete Horoscope </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body\" id=\"modal-body\">\r" +
+    "\n" +
+    "                <div class=\"text-center\">Are you sure to delete horoscope?</div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-footer\">\r" +
+    "\n" +
+    "                <input value=\"Close\" class=\"button_custom button_custom_reset\" ng-click=\"page.model.cancel();\" type=\"button\">\r" +
+    "\n" +
+    "                <input value=\"Delete\" class=\"button_custom\" type=\"submit\">\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "    <script type=\"text/ng-template\" id=\"AstroCityPopup.html\">\r" +
+    "\n" +
+    "        <div class=\"modal-header alert alert-danger\" id=\"div2\">\r" +
+    "\n" +
+    "            <button type=\"button\" class=\"close\" ng-click=\"page.model.cancel();\">&times;</button>\r" +
+    "\n" +
+    "            <h4 class=\"modal-title\">\r" +
+    "\n" +
+    "                <span id=\"lblcityheader\">we are unable to genearte horoscope with your given city <b style=\"color: green\"> Administrative Buildings </b>,so please select Nearest city to your place of birth</span>\r" +
+    "\n" +
+    "            </h4>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"modal-body\" id=\"modalbodyIDnew\">\r" +
+    "\n" +
+    "            <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                <select multiselectdropdown ng-model=\"page.model.ddlAstrocity\" ng-options=\"item.value as item.label for item in page.model.AstrocityArr\" ng-change=\"page.model.AstroCityChange(page.model.ddlAstrocity);\"></select>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"modal-footer\">\r" +
+    "\n" +
+    "            <button type=\"button\" class=\"btn btn-default\" ng-click=\"page.model.cancel();\">Close</button>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </script>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <label id=\"MotherFatherLastName\" font-bold=\"true\">Mother's Father SurName</label>\r" +
-    "\n" +
-    "                                </h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblMotherFatherLastName\">\r" +
-    "\n" +
-    "                                  {{item.MotherFatherLastName}}\r" +
-    "\n" +
-    "                            </span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "                            </div>\r" +
+    "    <script type=\"text/ng-template\" id=\"AstroimagePopup.html\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div id=\"ownerdiv3\">\r" +
+    "        <div class=\"modal-header\">\r" +
+    "\n" +
+    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Horoscope\r" +
+    "\n" +
+    "                <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                    <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\"></ng-md-icon>\r" +
+    "\n" +
+    "                </a>\r" +
+    "\n" +
+    "            </h3>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "            <img ng-src=\"{{page.model.ImageUrl}}\" style=\"width:500px;height:500px;\" />\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"modal-footer\">\r" +
+    "\n" +
+    "            <div class=\"pull-right\">\r" +
+    "\n" +
+    "                <input value=\"Cancel\" class=\"button_custom button_custom_reset  pull-right\" ng-click=\"page.model.cancel();\" type=\"button\">\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </script>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"RefreshPopup.html\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    <h6>\r" +
+    "        <div class=\"modal-body clearfix\" id=\"modal-body\">\r" +
     "\n" +
-    "                                        <label id=\"mContactNos\" font-bold=\"true\">MF Contact nos</label>\r" +
-    "\n" +
-    "                                    </h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblmContactNos\">\r" +
-    "\n" +
-    "                                       {{ item.MMMobileNumberWithcode+\r" +
-    "\n" +
-    "                                        ((item.MMLandNumberwithCode!=null && item.MMLandNumberwithCode!=\"\")?\" & \"+item.MMLandNumberwithCode:\"\") }}\r" +
-    "\n" +
-    "                                </span>\r" +
-    "\n" +
-    "                                    </h5>\r" +
-    "\n" +
-    "                                </div>\r" +
+    "            <button ng-click=\"page.model.generatedhoroS3Upload();\" class=\"btn btn-success center-block\">Refresh Page<span class=\"fa fa-refresh\"></span></button>&nbsp;&nbsp;\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            </div>\r" +
+    "        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "    </script>\r" +
+    "\n" +
+    "</div> {{ item.MMMobileNumberWithcode+ ((item.MMLandNumberwithCode!=null && item.MMLandNumberwithCode!=\"\")?\" & \"+item.MMLandNumberwithCode:\"\") }}\r" +
+    "\n" +
+    "</span>\r" +
+    "\n" +
+    "</h5>\r" +
+    "\n" +
+    "</div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <h6>\r" +
+    "</div>\r" +
     "\n" +
-    "                                    <label id=\"MNativePlace\" font-bold=\"true\">Native Place</label>\r" +
+    "\r" +
     "\n" +
-    "                                </h6>\r" +
+    "<div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                                <h5>\r" +
+    "\r" +
     "\n" +
-    "                                    <span id=\"lblMNativePlace\">\r" +
+    "    <h6>\r" +
+    "\n" +
+    "        <label id=\"MNativePlace\" font-bold=\"true\">Native Place</label>\r" +
+    "\n" +
+    "    </h6>\r" +
+    "\n" +
+    "    <h5>\r" +
+    "\n" +
+    "        <span id=\"lblMNativePlace\">\r" +
     "\n" +
     "                                   {{((item.MotherNativeplace!=null && item.MotherNativeplace!=\"\")?item.MotherNativeplace:\"\") +\r" +
     "\n" +
@@ -9873,281 +9871,277 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                                </h5>\r" +
+    "    </h5>\r" +
     "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "                            <div id=\"divParentIntercasteHide\">\r" +
+    "</div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "</div>\r" +
+    "\n" +
+    "<div>\r" +
+    "\n" +
+    "    <div id=\"divParentIntercasteHide\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <label id=\"ParentsInterCaste\">Are Parents InterCaste</label></h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblParentsInterCaste\">{{item.Intercaste }}</span>\r" +
-    "\n" +
-    "                                    </h5>\r" +
-    "\n" +
-    "                                </div>\r" +
+    "        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "            <h6>\r" +
     "\n" +
-    "\r" +
+    "                <label id=\"ParentsInterCaste\">Are Parents InterCaste</label></h6>\r" +
     "\n" +
-    "                                    <h6>\r" +
+    "            <h5>\r" +
     "\n" +
-    "                                        <label id=\"lFatherCaste\">Father Caste</label></h6>\r" +
+    "                <span id=\"lblParentsInterCaste\">{{item.Intercaste }}</span>\r" +
     "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblFatherCaste\">{{item.FatherCaste }}</span>\r" +
-    "\n" +
-    "                                    </h5>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <h6>\r" +
-    "\n" +
-    "                                        <label id=\"lMotherCaste\">Mother Caste</label>\r" +
-    "\n" +
-    "                                    </h6>\r" +
-    "\n" +
-    "                                    <h5>\r" +
-    "\n" +
-    "                                        <span id=\"lblMotherCaste\">{{item.MotherCaste }}</span>\r" +
-    "\n" +
-    "                                    </h5>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <hr />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
+    "            </h5>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
-    "        <div class=\"edit_page_item\" id=\"divlnkAddcontactaddress\">\r" +
+    "\r" +
     "\n" +
-    "            <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "                <h4>Contact Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\">ModifiedBy :{{page.model.addrmodifiedby}}</span>\r" +
+    "        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                </h4>\r" +
+    "            <h6>\r" +
     "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.addressArr.length===0\">\r" +
+    "                <label id=\"lFatherCaste\">Father Caste</label></h6>\r" +
     "\n" +
-    "\r" +
+    "            <h5>\r" +
     "\n" +
-    "                    <a ng-click=\"page.model.populateModel('Address',item);\" href=\"javascript:void(0);\" data-original-title=\"Add Contact Address\" class=\"edit_page_add_button\">Add</a>\r" +
+    "                <span id=\"lblFatherCaste\">{{item.FatherCaste }}</span>\r" +
     "\n" +
-    "\r" +
+    "            </h5>\r" +
     "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"edit_page_details_item\">\r" +
+    "        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                <div ng-repeat=\"item in page.model.addressArr\">\r" +
+    "        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div id=\"Div1\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
+    "            <h6>\r" +
+    "\n" +
+    "                <label id=\"lMotherCaste\">Mother Caste</label>\r" +
+    "\n" +
+    "            </h6>\r" +
+    "\n" +
+    "            <h5>\r" +
+    "\n" +
+    "                <span id=\"lblMotherCaste\">{{item.MotherCaste }}</span>\r" +
+    "\n" +
+    "            </h5>\r" +
+    "\n" +
+    "        </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "    </div>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n" +
+    "<hr />\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "\r" +
     "\n" +
-    "                                <label id=\"lblhousenum\" font-bold=\"true\">House/Flat No</label>\r" +
+    "</div>\r" +
     "\n" +
-    "                            </h6>\r" +
+    "</div>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "<div class=\"edit_page_item\" id=\"divlnkAddcontactaddress\">\r" +
     "\n" +
-    "                                <span id=\"lblhouseflat\">\r" +
+    "    <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "        <h4>Contact Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\">ModifiedBy :{{page.model.addrmodifiedby}}</span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        </h4>\r" +
+    "\n" +
+    "        <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.addressArr.length===0\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <a ng-click=\"page.model.populateModel('Address',item);\" href=\"javascript:void(0);\" data-original-title=\"Add Contact Address\" class=\"edit_page_add_button\">Add</a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div ng-repeat=\"item in page.model.addressArr\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div id=\"Div1\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <h6>\r" +
+    "\n" +
+    "                        <label id=\"lblhousenum\" font-bold=\"true\">House/Flat No</label>\r" +
+    "\n" +
+    "                    </h6>\r" +
+    "\n" +
+    "                    <h5>\r" +
+    "\n" +
+    "                        <span id=\"lblhouseflat\">\r" +
     "\n" +
     "                                {{ item.FlatNumber}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                    </h5>\r" +
     "\n" +
-    "                        </div>\r" +
+    "                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div id=\"divapartment\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                <div id=\"divapartment\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                    <h6>\r" +
     "\n" +
-    "                                <label id=\"lblapartmentname\" font-bold=\"true\">Apt Name</label>\r" +
+    "                        <label id=\"lblapartmentname\" font-bold=\"true\">Apt Name</label>\r" +
     "\n" +
-    "                            </h6>\r" +
+    "                    </h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                    <h5>\r" +
     "\n" +
-    "                                <span id=\"lblapartment\">\r" +
+    "                        <span id=\"lblapartment\">\r" +
     "\n" +
     "                                {{ item.ApartmentName}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                    </h5>\r" +
     "\n" +
-    "                        </div>\r" +
+    "                </div>\r" +
     "\n" +
-    "                        <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.addressArr.length>0\">\r" +
+    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.addressArr.length>0\">\r" +
     "\n" +
-    "                            <a ng-click=\"page.model.populateModel('Address',item);\" href=\"javascript:void(0);\">Edit</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div id=\"divareaname\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                    <a ng-click=\"page.model.populateModel('Address',item);\" href=\"javascript:void(0);\">Edit</a>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                </div>\r" +
     "\n" +
-    "                                <label id=\"lblareaname\" font-bold=\"true\">Area Name</label>\r" +
+    "                <div id=\"divareaname\" class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            </h6>\r" +
+    "\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                    <h6>\r" +
     "\n" +
-    "                                <span id=\"lblareanamee\">\r" +
+    "                        <label id=\"lblareaname\" font-bold=\"true\">Area Name</label>\r" +
+    "\n" +
+    "                    </h6>\r" +
+    "\n" +
+    "                    <h5>\r" +
+    "\n" +
+    "                        <span id=\"lblareanamee\">\r" +
     "\n" +
     "                                {{ item.AreaName}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                    </h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
+    "                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                    <h6>\r" +
     "\n" +
-    "                                <label id=\"lblstreet\" font-bold=\"true\">Street Name</label>\r" +
+    "                        <label id=\"lblstreet\" font-bold=\"true\">Street Name</label>\r" +
     "\n" +
-    "                            </h6>\r" +
+    "                    </h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                    <h5>\r" +
     "\n" +
-    "                                <span id=\"lblstreetname\">\r" +
+    "                        <span id=\"lblstreetname\">\r" +
     "\n" +
     "                                {{ item.StreetName}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                    </h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
+    "                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                    <h6>\r" +
     "\n" +
-    "                                <label id=\"lblland\" font-bold=\"true\">Land Mark</label>\r" +
+    "                        <label id=\"lblland\" font-bold=\"true\">Land Mark</label>\r" +
     "\n" +
-    "                            </h6>\r" +
+    "                    </h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                    <h5>\r" +
     "\n" +
-    "                                <span id=\"lbllandmark\">\r" +
+    "                        <span id=\"lbllandmark\">\r" +
     "\n" +
     "                                {{ item.LandMark}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                    </h5>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
+    "                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                    <h6>\r" +
     "\n" +
-    "                                <label id=\"lblcityy\" font-bold=\"true\">City</label>\r" +
+    "                        <label id=\"lblcityy\" font-bold=\"true\">City</label>\r" +
     "\n" +
-    "                            </h6>\r" +
+    "                    </h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                    <h5>\r" +
     "\n" +
-    "                                <span id=\"lblcityname\">\r" +
+    "                        <span id=\"lblcityname\">\r" +
     "\n" +
     "                                {{ item.CityName+\" \"+(item.DistrictName!=null?\",\"+ item.DistrictName:\"\")+(item.StateName!=null?\",\"+ item.StateName:\"\")+(item.CountryName!=null?\",\"+item.CountryName:\"\")+(item.Zip!=null?\"-\"+item.Zip:\"\") }}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </div>\r" +
+    "                    </h5>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -10155,271 +10149,269 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        </div>\r" +
     "\n" +
-    "        <div class=\"edit_page_item\" id=\"divlnkAddphsysicall\">\r" +
+    "    </div>\r" +
     "\n" +
-    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "</div>\r" +
     "\n" +
-    "                <h4>Physical Attribute & Health Details of Candidate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" id=\"spanEduModID\">ModifiedBy :{{page.model.physicalmodifiedby}}</span></h4>\r" +
+    "<div class=\"edit_page_item\" id=\"divlnkAddphsysicall\">\r" +
     "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.physicalArr.length===0\">\r" +
+    "    <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "\r" +
+    "        <h4>Physical Attribute & Health Details of Candidate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" id=\"spanEduModID\">ModifiedBy :{{page.model.physicalmodifiedby}}</span></h4>\r" +
     "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.populateModel('physicalAttributes',item);\" data-original-title=\"Add Physical Attribute & Health Details\" class=\"edit_page_add_button\">Add</a>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"edit_page_details_item\">\r" +
+    "        <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.physicalArr.length===0\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                <div ng-repeat=\"item in page.model.physicalArr\">\r" +
+    "            <a href=\"javascript:void(0);\" ng-click=\"page.model.populateModel('physicalAttributes',item);\" data-original-title=\"Add Physical Attribute & Health Details\" class=\"edit_page_add_button\">Add</a>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div class=\"edit_page_details_item\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div id=\"Div2\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
+    "        <div ng-repeat=\"item in page.model.physicalArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "            <div id=\"Div2\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
-    "                            <h6>\r" +
+    "\r" +
     "\n" +
-    "                                <label id=\"lbllDiet\" font-bold=\"true\">Diet</label></h6>\r" +
+    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                    <h6>\r" +
     "\n" +
-    "                                <span id=\"lblDiet\">\r" +
+    "                        <label id=\"lbllDiet\" font-bold=\"true\">Diet</label></h6>\r" +
+    "\n" +
+    "                    <h5>\r" +
+    "\n" +
+    "                        <span id=\"lblDiet\">\r" +
     "\n" +
     "                                {{ item.Diet}}\r" +
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                    </h5>\r" +
     "\n" +
-    "                        </div>\r" +
+    "                </div>\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                    <h6>\r" +
     "\n" +
-    "                                <label id=\"lbllDrink\">Drink</label></h6>\r" +
+    "                        <label id=\"lbllDrink\">Drink</label></h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                    <h5>\r" +
     "\n" +
-    "                                <span id=\"lblDrink\">\r" +
+    "                        <span id=\"lblDrink\">\r" +
     "\n" +
     "                                {{ item.Drink}}\r" +
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                    </h5>\r" +
     "\n" +
-    "                        </div>\r" +
+    "                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                    <h6>\r" +
     "\n" +
-    "                                <label id=\"lbllSmoke\">Smoke</label>\r" +
+    "                        <label id=\"lbllSmoke\">Smoke</label>\r" +
     "\n" +
-    "                            </h6>\r" +
+    "                    </h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                    <h5>\r" +
     "\n" +
-    "                                <span id=\"lblSmoke\">\r" +
+    "                        <span id=\"lblSmoke\">\r" +
     "\n" +
     "                                {{ item.Smoke}}\r" +
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                    </h5>\r" +
     "\n" +
-    "                        </div>\r" +
+    "                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                    <h6>\r" +
     "\n" +
-    "                                <label id=\"lbllBodyType\">Body Type</label></h6>\r" +
+    "                        <label id=\"lbllBodyType\">Body Type</label></h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                    <h5>\r" +
     "\n" +
-    "                                <span id=\"lblBodyType\">\r" +
+    "                        <span id=\"lblBodyType\">\r" +
     "\n" +
     "                                {{ item.BodyType}}\r" +
     "\n" +
     "                            </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                    </h5>\r" +
     "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                                <label id=\"lblbodyweight\" font-bold=\"true\">Body Weight</label>\r" +
+    "\r" +
     "\n" +
-    "                            </h6>\r" +
+    "                    <h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                        <label id=\"lblbodyweight\" font-bold=\"true\">Body Weight</label>\r" +
     "\n" +
-    "                                <span id=\"lblweight\">\r" +
+    "                    </h6>\r" +
+    "\n" +
+    "                    <h5>\r" +
+    "\n" +
+    "                        <span id=\"lblweight\">\r" +
     "\n" +
     "                                {{ item.BodyWeight}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                    </h5>\r" +
     "\n" +
-    "                        </div>\r" +
+    "                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                    <h6>\r" +
     "\n" +
-    "                                <label id=\"lblbloodgroup\" font-bold=\"true\">Blood Group</label>\r" +
+    "                        <label id=\"lblbloodgroup\" font-bold=\"true\">Blood Group</label>\r" +
     "\n" +
-    "                            </h6>\r" +
+    "                    </h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                    <h5>\r" +
     "\n" +
-    "                                <span id=\"lblbloodgrop\">\r" +
+    "                        <span id=\"lblbloodgrop\">\r" +
     "\n" +
     "                                {{ item.BloodGroupName}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                    </h5>\r" +
     "\n" +
-    "                        </div>\r" +
+    "                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            <h6>\r" +
+    "                    <h6>\r" +
     "\n" +
-    "                                <label id=\"lblhealthconditions\" font-bold=\"true\">Health Conditions</label>\r" +
+    "                        <label id=\"lblhealthconditions\" font-bold=\"true\">Health Conditions</label>\r" +
     "\n" +
-    "                            </h6>\r" +
+    "                    </h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                    <h5>\r" +
     "\n" +
-    "                                <span id=\"lblhealthcondition\">\r" +
+    "                        <span id=\"lblhealthcondition\">\r" +
     "\n" +
     "                                {{ item.Healthcondition}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                            </h5>\r" +
+    "                    </h5>\r" +
     "\n" +
-    "                        </div>\r" +
+    "                </div>\r" +
     "\n" +
-    "                        <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.physicalArr.length>0\">\r" +
+    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.physicalArr.length>0\">\r" +
     "\n" +
-    "                            <a data-original-title=\"Edit Physical Attribute & Health Details\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.populateModel('physicalAttributes',item);\">Edit</a>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
+    "                    <a data-original-title=\"Edit Physical Attribute & Health Details\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.populateModel('physicalAttributes',item);\">Edit</a>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                </div>\r" +
     "\n" +
-    "                            <h6>\r" +
+    "\r" +
     "\n" +
-    "                                <label id=\"lblhealthdescription\" font-bold=\"true\">Health Condition Description</label>\r" +
+    "                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                            </h6>\r" +
+    "                    <h6>\r" +
     "\n" +
-    "                            <h5>\r" +
+    "                        <label id=\"lblhealthdescription\" font-bold=\"true\">Health Condition Description</label>\r" +
     "\n" +
-    "                                <span id=\"lblhealthdescriptions\">\r" +
+    "                    </h6>\r" +
+    "\n" +
+    "                    <h5>\r" +
+    "\n" +
+    "                        <span id=\"lblhealthdescriptions\">\r" +
     "\n" +
     "                                {{ item.HealthConditionDescription}}\r" +
     "\n" +
     "                        </span>\r" +
     "\n" +
-    "                            </h5>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </div>\r" +
+    "                    </h5>\r" +
     "\n" +
     "                </div>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
-    "        <div class=\"edit_page_item\" id=\"divlnkaboutt\">\r" +
+    "\r" +
     "\n" +
-    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "    </div>\r" +
     "\n" +
-    "                <h4>About My Family </h4>\r" +
+    "</div>\r" +
     "\n" +
-    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.lblaboutMyfamily==='' || page.model.lblaboutMyfamily===null\">\r" +
+    "<div class=\"edit_page_item\" id=\"divlnkaboutt\">\r" +
+    "\n" +
+    "    <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "        <h4>About My Family </h4>\r" +
+    "\n" +
+    "        <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.lblaboutMyfamily==='' || page.model.lblaboutMyfamily===null\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <a data-original-title=\"Add About My Family\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.populateModel('AboutFamily');\">Add</a>\r" +
+    "            <a data-original-title=\"Add About My Family\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.populateModel('AboutFamily');\">Add</a>\r" +
     "\n" +
-    "                </div>\r" +
+    "        </div>\r" +
     "\n" +
-    "            </div>\r" +
+    "    </div>\r" +
     "\n" +
-    "            <div class=\"edit_page_details_item\">\r" +
+    "    <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"lstAboutMyFamily\">\r" +
+    "        <div id=\"lstAboutMyFamily\">\r" +
     "\n" +
-    "                    <div id=\"Div3\" ng-class=\"AboutFamilyReviewStatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
+    "            <div id=\"Div3\" ng-class=\"AboutFamilyReviewStatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
-    "                        <div>\r" +
+    "                <div>\r" +
     "\n" +
-    "                            <div>\r" +
+    "                    <div>\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                        <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblAboutMyFamily\">\r" +
+    "                            <span id=\"lblAboutMyFamily\">\r" +
     "\n" +
     "                                    {{page.model.lblaboutMyfamily}}\r" +
     "\n" +
     "                                </span>\r" +
     "\n" +
-    "                                </h5>\r" +
+    "                        </h5>\r" +
     "\n" +
-    "                                <label id=\"Label5\" visible=\"false\"></label>\r" +
+    "                        <label id=\"Label5\" visible=\"false\"></label>\r" +
     "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.lblaboutMyfamily!='' && page.model.lblaboutMyfamily!=null\">\r" +
-    "\n" +
-    "                                <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" data-original-title=\"Edit About My Family\" ng-click=\"page.model.populateModel('AboutFamily',page.model.lblaboutMyfamily);\">Edit</a>\r" +
-    "\n" +
-    "                            </div>\r" +
+    "                    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        </div>\r" +
+    "                    <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.lblaboutMyfamily!='' && page.model.lblaboutMyfamily!=null\">\r" +
+    "\n" +
+    "                        <a href=\"javascript:void(0);\" class=\"edit_page_edit_button\" data-original-title=\"Edit About My Family\" ng-click=\"page.model.populateModel('AboutFamily',page.model.lblaboutMyfamily);\">Edit</a>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
@@ -10429,611 +10421,279 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            </div>\r" +
     "\n" +
+    "\r" +
+    "\n" +
     "        </div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
-    "\r" +
+    "</div>\r" +
+    "\n" +
+    "</div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <div id=\"popupDiv\">\r" +
+    "\r" +
     "\n" +
-    "        <script type=\"text/ng-template\" id=\"parentModalContent.html\">\r" +
+    "<div id=\"popupDiv\">\r" +
     "\n" +
-    "            <form name=\"parentForm\" novalidate role=\"form\" ng-submit=\"page.model.ParentSubmit(page.model.parent)\">\r" +
+    "    <script type=\"text/ng-template\" id=\"parentModalContent.html\">\r" +
     "\n" +
-    "                <div class=\"modal-header\">\r" +
+    "        <form name=\"parentForm\" novalidate role=\"form\" ng-submit=\"page.model.ParentSubmit(page.model.parent)\">\r" +
     "\n" +
-    "                    <h3 class=\"modal-title text-center\" id=\"modal-title\">Parent details\r" +
+    "            <div class=\"modal-header\">\r" +
     "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Parent details\r" +
     "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
     "\n" +
-    "                        </a>\r" +
+    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
     "\n" +
-    "                    </h3>\r" +
+    "                    </a>\r" +
     "\n" +
-    "                </div>\r" +
+    "                </h3>\r" +
     "\n" +
-    "                <div class=\"modal-body\" id=\"modal-body\">\r" +
+    "            </div>\r" +
     "\n" +
-    "                    <div class='modal-body clearfix pop_content_my'>\r" +
+    "            <div class=\"modal-body\" id=\"modal-body\">\r" +
     "\n" +
-    "                        <ul>\r" +
+    "                <div class='modal-body clearfix pop_content_my'>\r" +
     "\n" +
-    "                            <li>\r" +
+    "                    <ul>\r" +
     "\n" +
-    "                                <h6>Father Details</h6>\r" +
+    "                        <li>\r" +
     "\n" +
-    "                            </li>\r" +
+    "                            <h6>Father Details</h6>\r" +
     "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
+    "                        </li>\r" +
     "\n" +
-    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\" style=\"color: red;\">Father Name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lbleducationGroup\" class=\"pop_label_left\" style=\"color: red;\">Father Name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                <div class=\"pop_controls_right form-group\">\r" +
+    "                            <div class=\"pop_controls_right form-group\">\r" +
     "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.parent.txtFathername\" class=\"form-control\" tabindex=\"1\" required/>\r" +
+    "                                <input type=\"text\" ng-model=\"page.model.parent.txtFathername\" class=\"form-control\" tabindex=\"1\" required/>\r" +
     "\n" +
-    "                                </div>\r" +
+    "                            </div>\r" +
     "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblFEducation\" class=\"pop_label_left\">Education</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.parent.txtFEducation\" class=\"form-control\" maxlength=\"150\" tabindex=\"2\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
+    "                        </li>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
+    "                        <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                                <label for=\"lblFprofessioncat\" class=\"pop_label_left\">Profession Category</label>\r" +
+    "                            <label for=\"lblFEducation\" class=\"pop_label_left\">Education</label>\r" +
     "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "                            <div class=\"pop_controls_right\">\r" +
     "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.parent.ddlFprofessionCatgory\" typeofdata=\"'newProfessionCatgory'\"></select>\r" +
+    "                                <input type=\"text\" ng-model=\"page.model.parent.txtFEducation\" class=\"form-control\" maxlength=\"150\" tabindex=\"2\" />\r" +
     "\n" +
-    "                                </div>\r" +
+    "                            </div>\r" +
     "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblFProfession\" class=\"pop_label_left\">Designation</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.parent.txtFProfession\" class=\"form-control\" maxlength=\"200\" tabindex=\"3\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblCompanyName\" class=\"pop_label_left\">Company Name </label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.parent.txtCompany\" class=\"form-control\" maxlength=\"100\" tabindex=\"4\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblJobLocation\" class=\"pop_label_left\">Job Location</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.parent.txtJobLocation\" class=\"form-control\" maxlength=\"100\" tabindex=\"5\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
+    "                        </li>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <contact-directive emailhide=\"true\" dmobile=\"parent.ddlMobile\" strmobile=\"parent.txtMobile\" dalternative=\"parent.ddlfathermobile2\" stralternative=\"parent.txtfathermobile2\" dland=\"parent.ddlLandLineCountry\" strareacode=\"parent.txtAreCode\" strland=\"parent.txtLandNumber\"\r" +
+    "                        <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                                strmail=\"parent.txtEmail\"></contact-directive>\r" +
+    "                            <label for=\"lblFprofessioncat\" class=\"pop_label_left\">Profession Category</label>\r" +
     "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
+    "                            <div class=\"pop_controls_right select-box-my input-group\">\r" +
     "\n" +
-    "                                <label for=\"lblFatherFname\" class=\"pop_label_left\">Father's father name </label>\r" +
+    "                                <select multiselectdropdown ng-model=\"page.model.parent.ddlFprofessionCatgory\" typeofdata=\"'newProfessionCatgory'\"></select>\r" +
     "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
+    "                            </div>\r" +
     "\n" +
-    "                                    <input type=text ng-model=\"page.model.parent.txtFatherFname\" class=\"form-control\" placeholder=\"Enter Father's father name\" maxlength=\"100\" tabindex=\"17\" />\r" +
+    "                        </li>\r" +
     "\n" +
-    "                                </div>\r" +
+    "                        <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                            </li>\r" +
+    "                            <label for=\"lblFProfession\" class=\"pop_label_left\">Designation</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <input type=\"text\" ng-model=\"page.model.parent.txtFProfession\" class=\"form-control\" maxlength=\"200\" tabindex=\"3\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblCompanyName\" class=\"pop_label_left\">Company Name </label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <input type=\"text\" ng-model=\"page.model.parent.txtCompany\" class=\"form-control\" maxlength=\"100\" tabindex=\"4\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblJobLocation\" class=\"pop_label_left\">Job Location</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <input type=\"text\" ng-model=\"page.model.parent.txtJobLocation\" class=\"form-control\" maxlength=\"100\" tabindex=\"5\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <contact-directive emailhide=\"true\" dmobile=\"parent.ddlMobile\" strmobile=\"parent.txtMobile\" dalternative=\"parent.ddlfathermobile2\" stralternative=\"parent.txtfathermobile2\" dland=\"parent.ddlLandLineCountry\" strareacode=\"parent.txtAreCode\" strland=\"parent.txtLandNumber\"\r" +
+    "\n" +
+    "                            strmail=\"parent.txtEmail\"></contact-directive>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblFatherFname\" class=\"pop_label_left\">Father's father name </label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <input type=text ng-model=\"page.model.parent.txtFatherFname\" class=\"form-control\" placeholder=\"Enter Father's father name\" maxlength=\"100\" tabindex=\"17\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <contact-directive emailhide=\"false\" dmobile=\"parent.ddlFatherfatherMobileCountryCode\" strmobile=\"parent.txtMobileFatherfather\" dalternative=\"parent.ddlfatherfatherAlternative\" stralternative=\"parent.txtfatherfatherAlternative\" dland=\"parent.ddlFatherFatherLandLineCode\"\r" +
+    "                        <contact-directive emailhide=\"false\" dmobile=\"parent.ddlFatherfatherMobileCountryCode\" strmobile=\"parent.txtMobileFatherfather\" dalternative=\"parent.ddlfatherfatherAlternative\" stralternative=\"parent.txtfatherfatherAlternative\" dland=\"parent.ddlFatherFatherLandLineCode\"\r" +
     "\n" +
-    "                                strareacode=\"parent.txtGrandFatherArea\" strland=\"parent.txtGrandFatherLandLinenum\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <country-directive countryshow=\"false\" dcountry=\"dcountry\" cityshow=\"false\" othercity=\"false\" dstate=\"parent.ddlFState\" ddistrict=\"parent.ddlFDistric\"></country-directive>\r" +
+    "                            strareacode=\"parent.txtGrandFatherArea\" strland=\"parent.txtGrandFatherLandLinenum\"></contact-directive>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"FNativePlace\" class=\"pop_label_left\">Native Place</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.parent.txtFNativePlace\" class=\"form-control\" maxlength=\"100\" tabindex=\"29\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li>\r" +
-    "\n" +
-    "                                <h6>Mother Details</h6>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblMotherName\" class=\"pop_label_left\" style=\"color: red;\">Mother Name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right form-group\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.parent.txtMName\" class=\"form-control\" maxlength=\"100\" tabindex=\"30\" required/>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
+    "                        <country-directive countryshow=\"false\" dcountry=\"dcountry\" cityshow=\"false\" othercity=\"false\" dstate=\"parent.ddlFState\" ddistrict=\"parent.ddlFDistric\"></country-directive>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
+    "                        <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                                <label for=\"lblMEducation\" class=\"pop_label_left\">Education</label>\r" +
+    "                            <label for=\"FNativePlace\" class=\"pop_label_left\">Native Place</label>\r" +
     "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
+    "                            <div class=\"pop_controls_right\">\r" +
     "\n" +
-    "                                    <input ng-model=\"page.model.parent.txtMEducation\" class=\"form-control\" maxlength=\"150\" tabindex=\"31\" />\r" +
+    "                                <input ng-model=\"page.model.parent.txtFNativePlace\" class=\"form-control\" maxlength=\"100\" tabindex=\"29\" />\r" +
     "\n" +
-    "                                </div>\r" +
+    "                            </div>\r" +
     "\n" +
-    "                            </li>\r" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li>\r" +
+    "\n" +
+    "                            <h6>Mother Details</h6>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblMotherName\" class=\"pop_label_left\" style=\"color: red;\">Mother Name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right form-group\">\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.parent.txtMName\" class=\"form-control\" maxlength=\"100\" tabindex=\"30\" required/>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
+    "                        <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                                <label for=\"lblFprofessioncat\" class=\"pop_label_left\">Profession Category</label>\r" +
+    "                            <label for=\"lblMEducation\" class=\"pop_label_left\">Education</label>\r" +
     "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "                            <div class=\"pop_controls_right\">\r" +
     "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.parent.ddlMprofessionCatgory\" typeofdata=\"'newProfessionCatgory'\"></select>\r" +
+    "                                <input ng-model=\"page.model.parent.txtMEducation\" class=\"form-control\" maxlength=\"150\" tabindex=\"31\" />\r" +
     "\n" +
-    "                                </div>\r" +
+    "                            </div>\r" +
     "\n" +
-    "                            </li>\r" +
+    "                        </li>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
+    "                        <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                                <label for=\"lblMProfession\" class=\"pop_label_left\">Designation</label>\r" +
+    "                            <label for=\"lblFprofessioncat\" class=\"pop_label_left\">Profession Category</label>\r" +
     "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
+    "                            <div class=\"pop_controls_right select-box-my input-group\">\r" +
     "\n" +
-    "                                    <input ng-model=\"page.model.parent.txtMProfession\" class=\"form-control\" maxlength=\"200\" tabindex=\"32\" />\r" +
+    "                                <select multiselectdropdown ng-model=\"page.model.parent.ddlMprofessionCatgory\" typeofdata=\"'newProfessionCatgory'\"></select>\r" +
     "\n" +
-    "                                    <label class=\"checkbox-inline checkbox_my\" style=\"padding: 5px 0 0 0;\">\r" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblMProfession\" class=\"pop_label_left\">Designation</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.parent.txtMProfession\" class=\"form-control\" maxlength=\"200\" tabindex=\"32\" />\r" +
+    "\n" +
+    "                                <label class=\"checkbox-inline checkbox_my\" style=\"padding: 5px 0 0 0;\">\r" +
     "\n" +
     "                <input type=checkbox ng-model=\"page.model.parent.chkbox\"  tabindex=\"33\"  ng-change=\"page.model.housewiseChk(page.model.parent);\"/><span>&nbsp;HouseWife</span>\r" +
     "\n" +
     "            </label>\r" +
     "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <div id=\"divmotherprofesseion\" ng-hide=\"parent.chkbox==true\">\r" +
-    "\n" +
-    "                                <li id=\"divComLocation\" class=\"clearfix form-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label for=\"lblMCompanyName\" class=\"pop_label_left\">Company Name </label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                        <input ng-model=\"page.model.parent.txtMCompanyName\" class=\"form-control\" maxlength=\"100\" tabindex=\"34\" />\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                    <label for=\"lblMJobLocation\" class=\"pop_label_left\">Job Location</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                        <input ng-model=\"page.model.parent.txtMJobLocation\" class=\"form-control\" maxlength=\"100\" tabindex=\"35\" />\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
     "                            </div>\r" +
     "\n" +
-    "                            <div style=\"height: 15px;\"></div>\r" +
+    "\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <div id=\"divmotherprofesseion\" ng-hide=\"parent.chkbox==true\">\r" +
+    "\n" +
+    "                            <li id=\"divComLocation\" class=\"clearfix form-group\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <contact-directive emailhide=\"true\" dmobile=\"page.model.parent.ddlMMobileCounCodeID\" strmobile=\"page.model.parent.txtMMobileNum\" dalternative=\"page.model.parent.ddlMMobileCounCodeID2\" stralternative=\"page.model.parent.txtMMobileNum2\" dland=\"page.model.parent.ddlMLandLineCounCode\"\r" +
-    "\n" +
-    "                                strareacode=\"page.model.parent.txtmAreaCode\" strland=\"page.model.parent.txtMLandLineNum\" strmail=\"page.model.parent.txtMEmail\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblMotherFname\" class=\"pop_label_left\">Mother's Father Name </label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                    <input type=text ng-model=\"page.model.parent.txtMFatherFname\" class=\"form-control\" placeholder=\"FIRST NAME\" tabindex=\"47\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblMotherFname\" class=\"pop_label_left\">Mother's Last Name </label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                    <input type=text ng-model=\"page.model.parent.txtMFatherLname\" class=\"form-control\" placeholder=\"LAST NAME\" tabindex=\"48\" maxlength=\"50\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <contact-directive emailhide=\"false\" dmobile=\"page.model.parent.ddlMotherfatheMobileCountryCode\" strmobile=\"page.model.parent.txtMotherfatheMobilenumber\" dalternative=\"page.model.parent.ddlmotherfatheralternative\" stralternative=\"page.model.parent.txtmotherfatheralternative\"\r" +
-    "\n" +
-    "                                dland=\"page.model.parent.ddlMotherFatherLandLineCode\" strareacode=\"page.model.parent.txtMotherFatherLandLineareacode\" strland=\"page.model.parent.txtMotherFatherLandLinenum\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <country-directive countryshow=\"false\" dcountry=\"dcountry\" cityshow=\"false\" othercity=\"false\" dstate=\"page.model.parent.ddlMState\" ddistrict=\"page.model.parent.ddlMDistrict\"></country-directive>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"MNativePlace\" class=\"pop_label_left\">Native Place</label>\r" +
+    "                                <label for=\"lblMCompanyName\" class=\"pop_label_left\">Company Name </label>\r" +
     "\n" +
     "                                <div class=\"pop_controls_right\">\r" +
     "\n" +
-    "                                    <input type=text ng-model=\"page.model.parent.txtMNativePlace\" class=\"form-control\" maxlength=\"150\" tabindex=\"60\" />\r" +
+    "                                    <input ng-model=\"page.model.parent.txtMCompanyName\" class=\"form-control\" maxlength=\"100\" tabindex=\"34\" />\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
     "                            </li>\r" +
     "\n" +
+    "\r" +
+    "\n" +
     "                            <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                                <label for=\"ParentIntercaste\" class=\"pop_label_left\">Are parents interCaste ? </label>\r" +
+    "                                <label for=\"lblMJobLocation\" class=\"pop_label_left\">Job Location</label>\r" +
     "\n" +
-    "\r" +
+    "                                <div class=\"pop_controls_right\">\r" +
     "\n" +
-    "\r" +
+    "                                    <input ng-model=\"page.model.parent.txtMJobLocation\" class=\"form-control\" maxlength=\"100\" tabindex=\"35\" />\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                                <md-radio-group name=\"rbtlParentIntercaste\" style=\"font-weight: 700;color:black;\" layout=\"row\" ng-model=\"page.model.parent.rbtlParentIntercaste\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                    <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                    <md-radio-button value=\"0\">No </md-radio-button>\r" +
-    "\n" +
-    "                                </md-radio-group>\r" +
+    "                                </div>\r" +
     "\n" +
     "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div ng-if=\"page.model.parent.rbtlParentIntercaste==='1' || page.model.parent.rbtlParentIntercaste===1\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <li id=\"divddlFatherCaste\" class=\"clearfix form-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label for=\"lblFCaste\" class=\"pop_label_left\">Father Caste</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <select multiselectdropdown ng-model=\"page.model.parent.ddlFatherCaste\" typeofdata=\"'caste'\" required></select>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "                                <li id=\"divddlMotherCaste\" class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                    <label for=\"lblMCaste\" class=\"pop_label_left\">Mother Caste</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                        <select multiselectdropdown ng-model=\"page.model.parent.ddlMotherCaste\" typeofdata=\"'caste'\"></select>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"row \">\r" +
-    "\n" +
-    "                                <br/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                        </ul>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "                    </div>\r" +
+    "                        <div style=\"height: 15px;\"></div>\r" +
     "\n" +
     "\r" +
-    "\n" +
-    "            </form>\r" +
-    "\n" +
-    "        </script>\r" +
-    "\n" +
-    "        <script type=\"text/ng-template\" id=\"AddressModalContent.html\">\r" +
-    "\n" +
-    "            <form name=\"addressForm\" novalidate role=\"form\" ng-submit=\"page.model.contactAddressSubmit(page.model.AdrrObj)\">\r" +
-    "\n" +
-    "                <div class=\"modal-header\">\r" +
-    "\n" +
-    "                    <h3 class=\"modal-title text-center\" id=\"modal-title\">Contact Details\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </h3>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"modal-body\" id=\"modal-body\">\r" +
-    "\n" +
-    "                    <div class=\"modal-body clearfix pop_content_my\">\r" +
-    "\n" +
-    "                        <ul>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblHouse_flat\" class=\"pop_label_left\">House/Flat number<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right form-group\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtHouse_flat\" class=\"form-control\" maxlength=\"50\" tabindex=\"1\" required/>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblApartmentName\" class=\"pop_label_left\">Apartment name</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtApartmentName\" class=\"form-control\" maxlength=\"150\" tabindex=\"2\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblStreetName\" class=\"pop_label_left\">Street name</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtStreetName\" class=\"form-control\" maxlength=\"150\" tabindex=\"3\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblAreaName\" class=\"pop_label_left\">Area Name</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtAreaName\" class=\"form-control\" maxlength=\"150\" tabindex=\"4\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\">Landmark</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtLandmark\" class=\"form-control\" maxlength=\"150\" tabindex=\"5\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <country-directive countryshow=\"true\" cityshow=\"false\" othercity=\"false\" dcountry=\"page.model.AdrrObj.ddlCountryContact\" dstate=\"page.model.AdrrObj.ddlStateContact\" ddistrict=\"page.model.AdrrObj.ddlDistricContact\" require=true></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblCityParentContactPopupgroup\" class=\"pop_label_left\">City<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtCity\" class=\"form-control\" tabindex=\"9\" maxlength=\"100\" required/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblZip_pin\" class=\"pop_label_left\">Zip/Pin 	</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtZip_no\" class=\"form-control\" maxlength=\"8\" tabindex=\"10\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"row\">\r" +
-    "\n" +
-    "                                <br/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                        </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </form>\r" +
-    "\n" +
-    "        </script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <script type=\"text/ng-template\" id=\"PhysicalAttributeModalContent.html\">\r" +
-    "\n" +
-    "            <form name=\"PhysicalForm\" novalidate role=\"form\" ng-submit=\"page.model.physicalAtrrSubmit(page.model.physicalObj)\">\r" +
-    "\n" +
-    "                <div class=\"modal-header\">\r" +
-    "\n" +
-    "                    <h3 class=\"modal-title text-center\" id=\"modal-title\">Physical Attributes & Health Details of Candidate\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </h3>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"modal-body\" id=\"modal-body\">\r" +
-    "\n" +
-    "                    <div class=\"modal-body clearfix pop_content_my\">\r" +
-    "\n" +
-    "                        <ul id=\"HealthDivClear\">\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblpDiet\" class=\"pop_label_left\">Diet</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -11041,173 +10701,131 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                                    <md-radio-group name=\"rbtlDiet\" style=\"font-weight: 700;color:black;\" layout=\"row\" ng-model=\"page.model.physicalObj.rbtlDiet\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "                        <contact-directive emailhide=\"true\" dmobile=\"page.model.parent.ddlMMobileCounCodeID\" strmobile=\"page.model.parent.txtMMobileNum\" dalternative=\"page.model.parent.ddlMMobileCounCodeID2\" stralternative=\"page.model.parent.txtMMobileNum2\" dland=\"page.model.parent.ddlMLandLineCounCode\"\r" +
     "\n" +
-    "                                        <md-radio-button value=\"27\" class=\"md-primary\">Veg</md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"28\">Non Veg </md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"29\">Both </md-radio-button>\r" +
-    "\n" +
-    "                                    </md-radio-group>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblpDrink\" class=\"pop_label_left\">Drink</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <md-radio-group name=\"rbtlDrink\" style=\"font-weight: 700;color:black;\" layout=\"row\" ng-model=\"page.model.physicalObj.rbtlDrink\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"30\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"31\">No </md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"32\">Occasional </md-radio-button>\r" +
-    "\n" +
-    "                                    </md-radio-group>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblpSmoke\" class=\"pop_label_left\">Smoke</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
+    "                            strareacode=\"page.model.parent.txtmAreaCode\" strland=\"page.model.parent.txtMLandLineNum\" strmail=\"page.model.parent.txtMEmail\"></contact-directive>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
+    "                        <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                                    <md-radio-group name=\"rbtlSmoke\" style=\"font-weight: 700;color:black;\" layout=\"row\" ng-model=\"page.model.physicalObj.rbtlSmoke\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "                            <label for=\"lblMotherFname\" class=\"pop_label_left\">Mother's Father Name </label>\r" +
     "\n" +
-    "                                        <md-radio-button value=\"30\" class=\"md-primary\">Yes</md-radio-button>\r" +
+    "                            <div class=\"pop_controls_right select-box-my\">\r" +
     "\n" +
-    "                                        <md-radio-button value=\"31\">No </md-radio-button>\r" +
+    "                                <input type=text ng-model=\"page.model.parent.txtMFatherFname\" class=\"form-control\" placeholder=\"FIRST NAME\" tabindex=\"47\" maxlength=\"100\" />\r" +
     "\n" +
-    "                                        <md-radio-button value=\"32\">Occasional </md-radio-button>\r" +
+    "                        </li>\r" +
     "\n" +
-    "                                    </md-radio-group>\r" +
+    "                        <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                                </div>\r" +
+    "                            <label for=\"lblMotherFname\" class=\"pop_label_left\">Mother's Last Name </label>\r" +
     "\n" +
-    "                            </li>\r" +
+    "                            <div class=\"pop_controls_right select-box-my\">\r" +
     "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblpBodyType\" class=\"pop_label_left\">Body Type</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right  select-box-my\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.physicalObj.ddlBodyType\" typeofdata=\"'bodyType'\"></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblBodtWeight\" class=\"pop_label_left\">Body weight</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
-    "\n" +
-    "                                    <span>kgs</span>\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.physicalObj.txtBWKgs\" class=\"form-control\" tabindex=\"5\" width=\"200px\" ng-keyup=\"page.model.converttolbs(page.model.physicalObj);\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label id=\"lbllbs\" class=\"pop_label_left\">lbs</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <div>\r" +
-    "\n" +
-    "                                        <input ng-model=\"page.model.physicalObj.txtlbs\" class=\"form-control\" text=\"\" onkeyup=\"converttokgs(this.id);\" onkeydown=\"return checkwhitespace(event,this.id);\" onblur=\"validateLbs(this)\" tabindex=\"6\" />\r" +
+    "                                <input type=text ng-model=\"page.model.parent.txtMFatherLname\" class=\"form-control\" placeholder=\"LAST NAME\" tabindex=\"48\" maxlength=\"50\" />\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                                    </div>\r" +
+    "                            </div>\r" +
     "\n" +
-    "                                </div>\r" +
+    "                        </li>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            </li>\r" +
+    "                        <contact-directive emailhide=\"false\" dmobile=\"page.model.parent.ddlMotherfatheMobileCountryCode\" strmobile=\"page.model.parent.txtMotherfatheMobilenumber\" dalternative=\"page.model.parent.ddlmotherfatheralternative\" stralternative=\"page.model.parent.txtmotherfatheralternative\"\r" +
     "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
+    "                            dland=\"page.model.parent.ddlMotherFatherLandLineCode\" strareacode=\"page.model.parent.txtMotherFatherLandLineareacode\" strland=\"page.model.parent.txtMotherFatherLandLinenum\"></contact-directive>\r" +
     "\n" +
-    "                                <label for=\"lblBloodGroup\" class=\"pop_label_left\">Blood Group</label>\r" +
+    "\r" +
+    "\n" +
+    "                        <country-directive countryshow=\"false\" dcountry=\"dcountry\" cityshow=\"false\" othercity=\"false\" dstate=\"page.model.parent.ddlMState\" ddistrict=\"page.model.parent.ddlMDistrict\"></country-directive>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"MNativePlace\" class=\"pop_label_left\">Native Place</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <input type=text ng-model=\"page.model.parent.txtMNativePlace\" class=\"form-control\" maxlength=\"150\" tabindex=\"60\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"ParentIntercaste\" class=\"pop_label_left\">Are parents interCaste ? </label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <md-radio-group name=\"rbtlParentIntercaste\" style=\"font-weight: 700;color:black;\" layout=\"row\" ng-model=\"page.model.parent.rbtlParentIntercaste\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "\n" +
+    "                                <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
+    "\n" +
+    "                                <md-radio-button value=\"0\">No </md-radio-button>\r" +
+    "\n" +
+    "                            </md-radio-group>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div ng-if=\"page.model.parent.rbtlParentIntercaste==='1' || page.model.parent.rbtlParentIntercaste===1\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <li id=\"divddlFatherCaste\" class=\"clearfix form-group\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <label for=\"lblFCaste\" class=\"pop_label_left\">Father Caste</label>\r" +
     "\n" +
     "                                <div class=\"pop_controls_right select-box-my\">\r" +
     "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.physicalObj.ddlBloodGroup\" typeofdata=\"'bloodGroup'\"></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblHealthConditions\" class=\"pop_label_left\">Health Conditions</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <div class=\"select-box-my\">\r" +
-    "\n" +
-    "                                        <select multiselectdropdown ng-model=\"page.model.physicalObj.ddlHealthConditions\" typeofdata=\"'healthCondition'\"></select>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblHealthCondition\" class=\"pop_label_left\">Health Condition Description</label>\r" +
-    "\n" +
-    "                                <div class=\"\">\r" +
-    "\n" +
-    "                                    <textarea ng-model=\"page.model.physicalObj.txtHealthCondition\" class=\"form-control\" tabindex=\"9\" rows=\"4\" style=\"width: 515px;\" maxlength=\"200\"></textarea>\r" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.parent.ddlFatherCaste\" typeofdata=\"'caste'\" required></select>\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
     "                            </li>\r" +
     "\n" +
-    "                            <li class=\"row\">\r" +
+    "                            <li id=\"divddlMotherCaste\" class=\"clearfix form-group\">\r" +
     "\n" +
-    "                                <br/>\r" +
+    "                                <label for=\"lblMCaste\" class=\"pop_label_left\">Mother Caste</label>\r" +
     "\n" +
-    "\r" +
+    "                                <div class=\"pop_controls_right select-box-my\">\r" +
     "\n" +
-    "\r" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.parent.ddlMotherCaste\" typeofdata=\"'caste'\"></select>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                                <edit-footer></edit-footer>\r" +
+    "                                </div>\r" +
     "\n" +
     "                            </li>\r" +
     "\n" +
-    "                        </ul>\r" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <li class=\"row \">\r" +
+    "\n" +
+    "                            <br/>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                    </ul>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
@@ -11215,85 +10833,465 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "            </form>\r" +
+    "        </form>\r" +
     "\n" +
-    "        </script>\r" +
+    "    </script>\r" +
     "\n" +
-    "        <script type=\"text/ng-template\" id=\"AboutFamilyModalContent.html\">\r" +
+    "    <script type=\"text/ng-template\" id=\"AddressModalContent.html\">\r" +
     "\n" +
-    "            <form name=\"AboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutMyfamilySubmit(page.model.aboutFamilyObj)\">\r" +
+    "        <form name=\"addressForm\" novalidate role=\"form\" ng-submit=\"page.model.contactAddressSubmit(page.model.AdrrObj)\">\r" +
     "\n" +
-    "                <div class=\"modal-header\">\r" +
+    "            <div class=\"modal-header\">\r" +
     "\n" +
-    "                    <h3 class=\"modal-title text-center\" id=\"modal-title\">About My Family\r" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Contact Details\r" +
     "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
     "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
+    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
     "\n" +
-    "                        </a>\r" +
+    "                    </a>\r" +
     "\n" +
-    "                    </h3>\r" +
+    "                </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body\" id=\"modal-body\">\r" +
+    "\n" +
+    "                <div class=\"modal-body clearfix pop_content_my\">\r" +
+    "\n" +
+    "                    <ul>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblHouse_flat\" class=\"pop_label_left\">House/Flat number<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right form-group\">\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.AdrrObj.txtHouse_flat\" class=\"form-control\" maxlength=\"50\" tabindex=\"1\" required/>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblApartmentName\" class=\"pop_label_left\">Apartment name</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.AdrrObj.txtApartmentName\" class=\"form-control\" maxlength=\"150\" tabindex=\"2\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblStreetName\" class=\"pop_label_left\">Street name</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.AdrrObj.txtStreetName\" class=\"form-control\" maxlength=\"150\" tabindex=\"3\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblAreaName\" class=\"pop_label_left\">Area Name</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.AdrrObj.txtAreaName\" class=\"form-control\" maxlength=\"150\" tabindex=\"4\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lbleducationGroup\" class=\"pop_label_left\">Landmark</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.AdrrObj.txtLandmark\" class=\"form-control\" maxlength=\"150\" tabindex=\"5\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <country-directive countryshow=\"true\" cityshow=\"false\" othercity=\"false\" dcountry=\"page.model.AdrrObj.ddlCountryContact\" dstate=\"page.model.AdrrObj.ddlStateContact\" ddistrict=\"page.model.AdrrObj.ddlDistricContact\" require=true></country-directive>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblCityParentContactPopupgroup\" class=\"pop_label_left\">City<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.AdrrObj.txtCity\" class=\"form-control\" tabindex=\"9\" maxlength=\"100\" required/>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblZip_pin\" class=\"pop_label_left\">Zip/Pin 	</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.AdrrObj.txtZip_no\" class=\"form-control\" maxlength=\"8\" tabindex=\"10\" />\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <li class=\"row\">\r" +
+    "\n" +
+    "                            <br/>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                    </ul>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
-    "                <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\r" +
+    "\n" +
+    "            </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div class=\"form-group\">\r" +
+    "        </form>\r" +
     "\n" +
-    "                        <label class=\"control-label\">(Do Not Mention Any Contact Information Phone Numbers, Email Id’s or your Profile May be Rejected.)</label>\r" +
-    "\n" +
-    "                        <textarea class=\"form-control\" ng-model=\"page.model.aboutFamilyObj.txtAboutUs\" required=\"required\" type=\"text\"> </textarea>\r" +
-    "\n" +
-    "                    </div>\r" +
+    "    </script>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                    <div class=\"row\">\r" +
+    "    <script type=\"text/ng-template\" id=\"PhysicalAttributeModalContent.html\">\r" +
     "\n" +
-    "                        <br/>\r" +
+    "        <form name=\"PhysicalForm\" novalidate role=\"form\" ng-submit=\"page.model.physicalAtrrSubmit(page.model.physicalObj)\">\r" +
+    "\n" +
+    "            <div class=\"modal-header\">\r" +
+    "\n" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Physical Attributes & Health Details of Candidate\r" +
+    "\n" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
+    "\n" +
+    "                    </a>\r" +
+    "\n" +
+    "                </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body\" id=\"modal-body\">\r" +
+    "\n" +
+    "                <div class=\"modal-body clearfix pop_content_my\">\r" +
+    "\n" +
+    "                    <ul id=\"HealthDivClear\">\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblpDiet\" class=\"pop_label_left\">Diet</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                        <edit-footer></edit-footer>\r" +
+    "\r" +
     "\n" +
-    "                    </div>\r" +
+    "                                <md-radio-group name=\"rbtlDiet\" style=\"font-weight: 700;color:black;\" layout=\"row\" ng-model=\"page.model.physicalObj.rbtlDiet\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "\n" +
+    "                                    <md-radio-button value=\"27\" class=\"md-primary\">Veg</md-radio-button>\r" +
+    "\n" +
+    "                                    <md-radio-button value=\"28\">Non Veg </md-radio-button>\r" +
+    "\n" +
+    "                                    <md-radio-button value=\"29\">Both </md-radio-button>\r" +
+    "\n" +
+    "                                </md-radio-group>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblpDrink\" class=\"pop_label_left\">Drink</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <md-radio-group name=\"rbtlDrink\" style=\"font-weight: 700;color:black;\" layout=\"row\" ng-model=\"page.model.physicalObj.rbtlDrink\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "\n" +
+    "                                    <md-radio-button value=\"30\" class=\"md-primary\">Yes</md-radio-button>\r" +
+    "\n" +
+    "                                    <md-radio-button value=\"31\">No </md-radio-button>\r" +
+    "\n" +
+    "                                    <md-radio-button value=\"32\">Occasional </md-radio-button>\r" +
+    "\n" +
+    "                                </md-radio-group>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblpSmoke\" class=\"pop_label_left\">Smoke</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <md-radio-group name=\"rbtlSmoke\" style=\"font-weight: 700;color:black;\" layout=\"row\" ng-model=\"page.model.physicalObj.rbtlSmoke\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "\n" +
+    "                                    <md-radio-button value=\"30\" class=\"md-primary\">Yes</md-radio-button>\r" +
+    "\n" +
+    "                                    <md-radio-button value=\"31\">No </md-radio-button>\r" +
+    "\n" +
+    "                                    <md-radio-button value=\"32\">Occasional </md-radio-button>\r" +
+    "\n" +
+    "                                </md-radio-group>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblpBodyType\" class=\"pop_label_left\">Body Type</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right  select-box-my\">\r" +
+    "\n" +
+    "                                <select multiselectdropdown ng-model=\"page.model.physicalObj.ddlBodyType\" typeofdata=\"'bodyType'\"></select>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblBodtWeight\" class=\"pop_label_left\">Body weight</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
+    "\n" +
+    "                                <span>kgs</span>\r" +
+    "\n" +
+    "                                <input ng-model=\"page.model.physicalObj.txtBWKgs\" class=\"form-control\" tabindex=\"5\" width=\"200px\" ng-keyup=\"page.model.converttolbs(page.model.physicalObj);\" />\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label id=\"lbllbs\" class=\"pop_label_left\">lbs</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "                                    <input ng-model=\"page.model.physicalObj.txtlbs\" class=\"form-control\" text=\"\" onkeyup=\"converttokgs(this.id);\" onkeydown=\"return checkwhitespace(event,this.id);\" onblur=\"validateLbs(this)\" tabindex=\"6\" />\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblBloodGroup\" class=\"pop_label_left\">Blood Group</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                                <select multiselectdropdown ng-model=\"page.model.physicalObj.ddlBloodGroup\" typeofdata=\"'bloodGroup'\"></select>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblHealthConditions\" class=\"pop_label_left\">Health Conditions</label>\r" +
+    "\n" +
+    "                            <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                <div class=\"select-box-my\">\r" +
+    "\n" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.physicalObj.ddlHealthConditions\" typeofdata=\"'healthCondition'\"></select>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                            <label for=\"lblHealthCondition\" class=\"pop_label_left\">Health Condition Description</label>\r" +
+    "\n" +
+    "                            <div class=\"\">\r" +
+    "\n" +
+    "                                <textarea ng-model=\"page.model.physicalObj.txtHealthCondition\" class=\"form-control\" tabindex=\"9\" rows=\"4\" style=\"width: 515px;\" maxlength=\"200\"></textarea>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                        <li class=\"row\">\r" +
+    "\n" +
+    "                            <br/>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
+    "                    </ul>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"AboutFamilyModalContent.html\">\r" +
+    "\n" +
+    "        <form name=\"AboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutMyfamilySubmit(page.model.aboutFamilyObj)\">\r" +
+    "\n" +
+    "            <div class=\"modal-header\">\r" +
+    "\n" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">About My Family\r" +
+    "\n" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
+    "\n" +
+    "                    </a>\r" +
+    "\n" +
+    "                </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"form-group\">\r" +
+    "\n" +
+    "                    <label class=\"control-label\">(Do Not Mention Any Contact Information Phone Numbers, Email Id’s or your Profile May be Rejected.)</label>\r" +
+    "\n" +
+    "                    <textarea class=\"form-control\" ng-model=\"page.model.aboutFamilyObj.txtAboutUs\" required=\"required\" type=\"text\"> </textarea>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "            </form>\r" +
+    "                <div class=\"row\">\r" +
     "\n" +
-    "        </script>\r" +
-    "\n" +
-    "        <alert-directive></alert-directive>\r" +
-    "\n" +
-    "        </div>\r" +
+    "                    <br/>\r" +
     "\n" +
     "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "    <alert-directive></alert-directive>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
+    "</div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <style>\r" +
+    "<style>\r" +
     "\n" +
-    "        .md-dialog-container {\r" +
+    "    .md-dialog-container {\r" +
     "\n" +
-    "            z-index: 99999999999;\r" +
+    "        z-index: 99999999999;\r" +
     "\n" +
-    "        }\r" +
+    "    }\r" +
     "\n" +
-    "    </style>"
+    "</style>"
   );
 
 
