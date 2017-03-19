@@ -64,21 +64,21 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         $stateProvider.state(item.name, {
             url: item.url,
-            views: innerView,
-            resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-                loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                    // you can lazy load files for an existing module
-                    var edit = item.name.slice(9);
-                    if (editviewapp.env === 'dev') {
-                        return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+            views: innerView
+                // resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+                //     loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                //         // you can lazy load files for an existing module
+                //         var edit = item.name.slice(9);
+                //         if (editviewapp.env === 'dev') {
+                //             return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
 
-                    } else {
-                        return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
-                    }
+            //         } else {
+            //             return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
+            //         }
 
-                    // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-                }]
-            }
+            //         // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+            //     }]
+            // }
         });
         $locationProvider.html5Mode(true);
     });
@@ -8396,7 +8396,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"CustomerDataContent.html\">\r" +
     "\n" +
-    "        <form name=\"custForm\" novalidate role=\"form\" ng-submit=\"page.model.custdataSubmit(page.model.custObj)\">\r" +
+    "        <form name=\"custForm\" id=\"EditViewClass\" novalidate role=\"form\" ng-submit=\"page.model.custdataSubmit(page.model.custObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -13485,8 +13485,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
     "    </div>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +

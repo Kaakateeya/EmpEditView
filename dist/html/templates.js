@@ -3912,7 +3912,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"CustomerDataContent.html\">\r" +
     "\n" +
-    "        <form name=\"custForm\" novalidate role=\"form\" ng-submit=\"page.model.custdataSubmit(page.model.custObj)\">\r" +
+    "        <form name=\"custForm\" id=\"EditViewClass\" novalidate role=\"form\" ng-submit=\"page.model.custdataSubmit(page.model.custObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -9001,8 +9001,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
     "    </div>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
