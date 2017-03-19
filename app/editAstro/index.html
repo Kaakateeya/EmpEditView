@@ -1,308 +1,711 @@
-<div class="right_col EditViewClass" style="padding-top: 6%;padding-left: 1%;">
-    <div>
+<div ng-class="'EditViewClass'" class="right_col" style="padding-top: 6%;padding-left: 1%;">
 
-        <div ng-include="'templates/sideMenu.html'">
-        </div>
-        <div class="edit_pages_content_main clearfix" class="right_col">
-
-            <page-review dispaly-name="'Astro details'" sectionid="'23'" custid="page.model.CustID"></page-review>
-
-            <div id="divlnkasro" class="edit_page_item">
-                <div class="edit_page_item_head clearfix">
-                    <h4>Astro Details </h4>
-                    <div class="edit_page_item_ui clearfix">
-                        <div ng-if="page.model.AstroArr.length==0" cssclass="edit_page_add_button">
-                            <a ng-click="page.model.populateAstro();" class="edit_page_add_button" href="javascript:void(0);">Add</a>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="edit_page_details_item">
-                    <div ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'" ng-repeat="item in page.model.AstroArr track by $index">
-                        <div>
-                            <div ng-hide="item.TimeOfBirth===null" class="edit_page_details_item_desc clearfix">
-                                <h6>
-                                    <span id="TimeofBirth" style="font-weight:bold;">Time of Birth</span></h6>
-                                <h5>
-                                    <span id="lblTimeofBirth">{{item.TimeOfBirth}}</span></h5>
-                            </div>
-                            <div class="edit_page_details_item_desc clearfix">
-
-                                <h6>
-                                    <span id="PlaceofBirth" style="font-weight:bold;">Place of Birth</span></h6>
-                                <h5>
-                                    <span id="lblPlaceofBirth">{{ item.CityOfBirth +","+item.DistrictOfBirth+","+item.StateOfBirth+","+item.CountryOfBirth}}</span>
-                                </h5>
-                            </div>
-                            <div ng-hide="item.TypeofStar===null" class="edit_page_details_item_desc clearfix">
-                                <h6>
-                                    <span id="Telugustar" style="font-weight:bold;">Star Language</span></h6>
-                                <h5>
-                                    <span id="lblTelugustar">{{ item.TypeofStar+((item.StarName!="" &&  item.StarName!=null)?" - "+
-                                            item.StarName:"")+((item.Paadam!="" &&  item.Paadam!=null)?" ("+item.Paadam+")":"") }}</span></h5>
-
-                            </div>
-                            <div ng-hide="item.Rassi===null" class="edit_page_details_item_desc clearfix">
-
-                                <h6>
-                                    <span id="raasimoonsign" style="font-weight:bold;">Raasi/moon sign</span></h6>
-                                <h5>
-                                    <span id="lblraasimoonsign">{{ item.Rassi}}</span></h5>
-                            </div>
-                            <div ng-hide="item.Lagnam===null" class="edit_page_details_item_desc clearfix">
-                                <h6>
-                                    <span id="Lagnam" style="font-weight:bold;">Lagnam</span></h6>
-                                <h5>
-                                    <span id="lblLagnam">  {{ item.Lagnam }}</span></h5>
-                            </div>
-                            <div ng-hide="item.Gothram===null" class="edit_page_details_item_desc clearfix">
-                                <h6>
-                                    <span id="GothramGotra" style="font-weight:bold;">Gothram/Gotra</span></h6>
-                                <h5>
-                                    <span id="lblGothramGotra">  {{ item.Gothram}}</span></h5>
-                            </div>
-                            <div ng-hide="item.MeternalGothramID===null" class="edit_page_details_item_desc clearfix">
-                                <h6>
-                                    <span id="MaternalGothram" style="font-weight:bold;">Maternal Gothram</span></h6>
-                                <h5>
-                                    <span id="lblMaternalGothram">{{ item.MeternalGothramID }}</span></h5>
-                            </div>
-                            <div ng-hide="item.manglikkujadosham===null" class="edit_page_details_item_desc clearfix">
-                                <h6>
-                                    <span id="manglikkujadosham" style="font-weight:bold;">manglik/kuja dosham</span></h6>
-                                <h5>
-                                    <span id="lblmanglikkujadosham">{{ item.manglikkujadosham }}</span></h5>
-                            </div>
-                        </div>
-                        <div class="edit_page_item_ui clearfix" ng-if="page.model.AstroArr.length>0">
-                            <a ng-click="page.model.populateAstro(item);" class="edit_page_edit_button" href="javascript:void(0);">Edit</a>
-                        </div>
-                        <br>
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="edit_page_details_item_desc clearfix" style="padding: 0 0 0 20px;">
-
-                <div class="radio-group-my input-group" ng-show="page.model.ImageUrl==='' || page.model.ImageUrl===null">
-                    <md-radio-group ng-required="true" name="rdlUploadGenerate" layout="row" ng-model="page.model.atroObj.rdlUploadGenerate" ng-change="page.model.uploadGenerateHoro(page.model.atroObj.rdlUploadGenerate);" class="md-block" flex-gt-sm ng-disabled="manageakerts">
-                        <md-radio-button value="0">Upload Horoscope</md-radio-button>
-                        <md-radio-button value="1"> Generate Horoscope </md-radio-button>
-                    </md-radio-group>
-                </div>
-
-            </div>
-
-            <div ng-hide="page.model.ImageUrl==='' || page.model.ImageUrl===null">
-                <div class="edit_page_details_item">
-                    <div class="edit_page_details_item_desc clearfix">
-                        <img ng-model="page.model.imghoroName" ng-src="{{page.model.ImageUrl}}" Style="width: 250px; height: 250px;" ng-show="!page.model.iframeShow" />
-                        <iframe border="0" id="iframe" frameborder="0" height="300" width="800" ng-show="page.model.iframeShow"></iframe>
-                    </div>
-                </div>
-                <div class="edit_page_details_item_desc clearfix" style="padding: 0 0 0 20px;">
-                    <div class="edit_page_item_ui clearfix  pull-left">
-                        <a ID="btndeletehoro" class="edit_page_del_button" href="javascript:void(0);" ng-click="page.model.shoedeletePopup();" data-placement="bottom" data-toggle="tooltip" data-original-title="Delete Astro Details">
-               Delete <ng-md-icon icon="delete" style="fill:#665454" size="18">Delete</ng-md-icon></a>
-                        <a Style="padding-left: 100px;" class="btn btn-link" ng-click="page.model.vewHoro();">View<span class="glyphicon glyphicon-eye-open"></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div ng-include="'templates/sideMenu.html'">
     </div>
 
-    <script type="text/ng-template" id="astroContent.html">
-        <form name="astroForm" novalidate role="form" ng-submit="page.model.astroSubmit(page.model.atroObj);" accessible-form>
+    <div class="edit_pages_content_main clearfix">
+        <page-review dispaly-name="'Education details'" sectionid="'6,7,8'" custid="page.model.CustID"></page-review>
+        <div class="edit_page_item">
+            <div class="edit_page_item_head clearfix">
+                <h4>Customer Personal Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" id="spanEduModID">ModifiedBy :{{page.model.custEmpLastModificationDate}}</span>
+                </h4>
+                <div class="edit_page_item_ui clearfix" ng-if="page.model.CustomerDataArr.length==0">
+                    <a id="lnkpersonaldetailsadd" class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.showpopup('custData');">Add</a>
+                </div>
+            </div>
+
+            <div class="edit_page_details_item">
+                <div id="listpersonaldetails" ng-repeat="item in page.model.CustomerDataArr">
+
+                    <div id="reviewdivpersonal" class="edit_page_details_item_desc clearfix">
+                        <div id="UpdatePanel6" class="edit_page_details_item_desc clearfix">
+
+                            <h6>
+                                <span id="gender">Gender</span></h6>
+                            <h5>
+                                <span id="lblGender">
+                            {{item.Gender}}</span></h5>
+
+                        </div>
+                        <div id="UpdatePanellblMaritalStatus" class="edit_page_details_item_desc clearfix">
+
+                            <h6>
+                                <span id="MaritalStatus">Marital Status</span></h6>
+                            <h5>
+                                <span id="lblMaritalStatus">
+                            {{item.MartialStatus}}</span></h5>
+                        </div>
+
+                        <div id="UpdatePanelLnkpersonaledit" class="edit_page_item_ui clearfix">
+
+                            <a href="javascript:void(0);" ng-click="page.model.showpopup('custData',item);" visible='<%# Request.QueryString["Admin"] == "1" %>' class="edit_page_edit_button">Edit
+                    </a>
+
+
+                        </div>
+                        <div id="UpdatePaneldateofbirth">
+
+                            <div id="divdateofbirth" class="edit_page_details_item_desc clearfix">
+                                <h6>
+                                    <span id="dateofbirth" font-bold="true">Date Of Birth</span></h6>
+
+                                <h5>
+                                    <span id="lbldateofbirth">{{item.DateofBirth}}</span></h5>
+                            </div>
+
+                        </div>
+                        <div id="UpdatePanelheight">
+
+                            <div id="divcandidateheight" class="edit_page_details_item_desc clearfix">
+                                <h6>
+                                    <span id="lblcandidateheight" font-bold="true">Height</span></h6>
+                                <h5>
+                                    <span id="lblheight">{{item.Height}}</span></h5>
+                            </div>
+
+                        </div>
+                        <div id="UpdatePanelcolor">
+
+                            <div class="edit_page_details_item_desc clearfix" id="divcomplexion">
+                                <h6>
+                                    <span id="lblcolor" font-bold="true">Complexion</span></h6>
+                                <h5>
+                                    <span id="lblcomplexion">{{item.Complexion}}</span></h5>
+                            </div>
+
+                        </div>
+                        <div id="UpdatePanelreligion">
+
+                            <div id="divreligion" class="edit_page_details_item_desc clearfix">
+                                <h6>
+                                    <span id="religion" font-bold="true">Religion</span></h6>
+                                <h5>
+                                    <span id="lblReligion">{{item.Religion}}</span></h5>
+                            </div>
+
+                        </div>
+                        <div id="UpdatePanel1">
+
+                            <div id="div1" class="edit_page_details_item_desc clearfix">
+                                <h6>
+                                    <span id="span1" font-bold="true">Mother Tongue</span></h6>
+                                <h5>
+                                    <span id="lblmothertongue">{{item.Mothertongue}}</span></h5>
+                            </div>
+
+                        </div>
+                        <div id="UpdatePanelpersonalcaste">
+
+                            <div id="divpersonalcaste" class="edit_page_details_item_desc clearfix">
+                                <h6>
+                                    <span id="lblcaste" font-bold="true">Caste</span></h6>
+                                <h5>
+                                    <span id="lblcandidatecaste">{{item.Caste+(item.SubCaste!=='' && item.SubCaste!==null?'('+item.SubCaste+')':'')}}</span></h5>
+                            </div>
+
+                        </div>
+                        <!--<div id="UpdatePanelSubcaste">
+
+                            <div id="divSubcaste" class="edit_page_details_item_desc clearfix" visible='<%#(Eval("SubCaste").ToString()!="" && Eval("SubCaste").ToString()!=null)?true:false %>'>
+                                <h6>
+                                    <span id="lblsubcaste" font-bold="true">SubCaste</span></h6>
+                                <h5>
+                                    <span id="lblsubcastecandidate">{{item.SubCaste}}</span></h5>
+                            </div>
+
+                        </div>-->
+                        <div id="UpdatePanelBorncitizenship">
+
+                            <div id="divBorncitizenship" class="edit_page_details_item_desc clearfix">
+                                <h6>
+                                    <span id="lblcitizenship" font-bold="true">BornCitizenship</span></h6>
+                                <h5>
+                                    <span id="lblborncitizenship">{{item.Citizenship}}</span></h5>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="edit_page_item" id="divEducation">
+            <div class="edit_page_item_head clearfix">
+                <h4>Education Details {{page.vallll}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2">ModifiedBy :{{page.model.eduEmpLastModificationDate}}</span></h4>
+                <div class="edit_page_item_ui clearfix">
+                    <a class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.showpopup('showEduModal');">Add</a>
+                </div>
+            </div>
+            <div class="edit_page_details_item">
+                <div ng-repeat="item in page.model.educationSelectArray">
+                    <div id="reviewdiv" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
+                        <div id="lbleducationgroup" class="edit_page_details_item_desc clearfix">
+                            <h6>
+                                <label id="lbleducationgroup" ng-style="{color: item.EduHighestDegree==1?'Red':'Black'}">{{item.EducationCategory!=null?(item.EducationCategory=="Below Graduation"?"Under Graduation":"Education"):"Education"}}</label>
+                            </h6>
+                            <h5>
+                                <label id="edgoup" ng-style="{color: item.EduHighestDegree==1?'Red':''}">{{item.EducationGroup+" "+((item.EducationSpecialization!=null?"(" +item.EducationSpecialization+")":""))+" "+((item.EduPassOfYear!=null?",Completed"+"-"+item.EduPassOfYear:""))}} </label>
+                            </h5>
+                        </div>
+
+                        <div id="editeducationbutton" class="edit_page_item_ui clearfix">
+                            <a id="LinkButton1dfd" href="javascript:void(0);" ng-click="page.model.showpopup('showEduModal',item)">Edit</a>
+
+                            <a href="javascript:void(0);" class="edit_page_del_button" ng-click="page.model.DeleteEduPopup(item.EducationID);">Delete</a>
+                        </div>
+
+                        <div id="divuniversityhiding" class="edit_page_details_item_desc clearfix" ng-hide="item.EduUniversity===null">
+                            <h6>
+                                <span id="Label1">University</span>
+                            </h6>
+
+                            <h5>
+                                <span id="lblTuniversity">{{item.EduUniversity}}</span>
+                            </h5>
+                        </div>
+
+                        <div id="divCollege" class="edit_page_details_item_desc clearfix" ng-hide="item.EduCollege===null">
+                            <h6>
+                                <span id="Label9">College</span>
+                            </h6>
+                            <h5>
+                                <span id="lblTcollege">{{item.EduCollege}}</span>
+                            </h5>
+                        </div>
+
+                        <div class="edit_page_details_item_desc clearfix" id="divcityviewhiding" ng-hide="item.EduCityIn===null">
+                            <h6>
+                                <span id="Label3" font-bold="true">City Study In</span>
+                            </h6>
+                            <h5>
+                                <span id="lblcountry">{{item.EduCityIn+","+item.EduDistrictIn+","+item.EduStateIn+","+item.EduCountryIn}}</span>
+                            </h5>
+                        </div>
+                        <div id="divmerit" class="edit_page_details_item_desc clearfix" ng-hide="item.Educationdesc==null">
+                            <h6>
+                                <span id="Label5" font-bold="true">Education Merits</span>
+                            </h6>
+                            <h5>
+                                <span id="lblmerits">{{item.Educationdesc}}</span>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="edit_page_item">
+            <div id="divlnkAddProfession" class="edit_page_item_head clearfix">
+                <h4>Professional Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color: #08CFD2">ModifiedBy :{{page.model.profEmpLastModificationDate}}</span></h4>
+                </h4>
+                <div class="edit_page_item_ui clearfix">
+                    <div ng-if="page.model.ProfessionSelectArray.length==0">
+                        <a class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.showpopup('showProfModal')">Add</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="edit_page_details_item">
+                <div id="lstProfession" ng-repeat="item in page.model.ProfessionSelectArray">
+                    <div id="reviewdiv" ng-class="item.reviewstatus===false?'reviewCls':''">
+                        <div class="edit_page_details_item_desc clearfix">
+                            <h6>
+                                <span id="lblprofession" style="font-weight:bold;">Profession</span></h6>
+                            <h5>
+                                <span id="txtProfession">{{item.Professional+" "+(item.CompanyName !=null && item.CompanyName !=""?"in"+" "+item.CompanyName:'')}}</span></h5>
+                        </div>
+                        <div class="edit_page_item_ui clearfix" ng-if="page.model.ProfessionSelectArray.length>0">
+
+                            <a id="Linkedit" class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.showpopup('showProfModal',item)">Edit</a>
+                        </div>
+                        <div id="divcitywork" class="edit_page_details_item_desc clearfix" ng-hide="item.CityWorkingIn==null">
+                            <h6>
+                                <span id="lblcitywork" style="font-weight:bold;">City working in </span></h6>
+                            <h5>
+                                <span id="lblcityworkingg">{{(item.CityWorkingIn!=null?" "+item.CityWorkingIn:" ")+ " " +(item.StateWorkingIn!=null && item.StateWorkingIn!=" "?","+item.StateWorkingIn:"")+" "+(item.CountryWorkingIn!=null && item.CountryWorkingIn!=""? ", "+item.CountryWorkingIn:" ")}}</span></h5>
+                        </div>
+                        <div id="Div1">
+                            <div class="edit_page_details_item_desc clearfix" ng-hide="item.Salary===null">
+                                <h6>
+                                    <span id="lblsal" style="font-weight:bold;">Monthly salary</span></h6>
+                                <h5>
+                                    <span id="lblsalaryy">{{item.Currency+" "+(item.Salary!=null && item.Salary!=""?" "+item.Salary+"/-":"")}}</span></h5>
+                            </div>
+
+                            <div id="Div2" class="edit_page_details_item_desc clearfix" ng-hide="item.WorkingFromDate===null">
+                                <h6>
+                                    <span id="lblworkfrom" style="font-weight:bold;">Working from date</span></h6>
+                                <h5>
+                                    <span id="lblworkingfrom">{{item.WorkingFromDate}}</span></h5>
+                            </div>
+                        </div>
+                        <div id="Div3" class="edit_page_details_item_desc clearfix" ng-hide="item.VisaStatus===null">
+                            <h6>
+                                <label id="lblvisa">visa status</label>
+                            </h6>
+                            <h5>
+                                <span id="txtvisa">{{item.VisaStatus}}</span>
+                            </h5>
+                        </div>
+                        <div id="Div4" class="edit_page_details_item_desc clearfix" ng-hide="item.ResidingSince===null">
+
+                            <h6>
+                                <span id="lblsincedate">Since date</span>
+                            </h6>
+                            <h5>
+                                <span id="txtsincedate">{{item.ResidingSince}}</span>
+                            </h5>
+                        </div>
+
+                        <div id="Div5" class="edit_page_details_item_desc clearfix" ng-hide="item.ArrivingDate===null">
+
+                            <h6>
+                                <span id="lblarrival">Arrival Date</span>
+                            </h6>
+                            <h5>
+                                <span id="txtarrival">{{item.ArrivingDate}}</span>
+                            </h5>
+                        </div>
+                        <div id="Div6" class="edit_page_details_item_desc clearfix" ng-hide="item.DepartureDate===null">
+
+                            <h6>
+                                <span id="lbldepartture">Departure Date</span>
+                            </h6>
+                            <h5>
+                                <span id="txtdaparture"> {{item.DepartureDate}}</span>
+                            </h5>
+                        </div>
+                        <div id="Div7" class="edit_page_details_item_desc clearfix" ng-hide="item.OccupationDetails===null">
+
+                            <h6>
+                                <span id="lblOccupation" style="font-weight:bold;">Occupation Details</span></h6>
+                            <h5>
+                                <span>{{item.OccupationDetails}} </span></h5>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="divlnkadd" class="edit_page_item">
+            <div class="edit_page_item_head clearfix">
+                <h4>Mention your goals, interests and hobbies etc</h4>
+                <div class="edit_page_item_ui clearfix">
+                    <div id="upAboutAdd" ng-if="page.model.lblaboutUrself==='' || page.model.lblaboutUrself===null">
+                        <a class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.showpopup('showAboutModal')">Add</a>
+                    </div>
+                </div>
+            </div>
+            <div class="edit_page_details_item">
+                <div id="reviewdiv" ng-class="AboutReviewStatusID===0?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
+                    <div class="form-group">
+                        <div id="uplblAbout" class="edit_page_details_item_desc clearfix">
+
+                            <h5 style="float: none; width: 92%; display: block;">
+                                <span>{{page.model.lblaboutUrself}}</span>
+                            </h5>
+                        </div>
+                        <div ng-if="page.model.lblaboutUrself!='' && page.model.lblaboutUrself!=null" class="edit_page_item_ui clearfix">
+                            <a class="edit_page_edit_button" href="javascript:void(0);" ng-click="page.model.showpopup('showAboutModal',page.model.lblaboutUrself)">Edit</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="edupopupdiv">
+            <script type="text/ng-template" id="EduModalContent.html">
+                <form class="EditViewClass" name="eduForm" novalidate role="form" ng-submit="eduForm.$valid  && page.model.eduSubmit(page.model.edoObj);" accessible-form>
+                    <div class="modal-header">
+                        <h3 class="modal-title text-center" id="modal-title">Education Details
+                            <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                                <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="20"></ng-md-icon>
+                            </a>
+                        </h3>
+                    </div>
+                    <div class="modal-body" id="modal-body">
+                        <ul id="uleducation" class='modal-body clearfix pop_content_my'>
+                            <li class="clearfix">
+                                <label for="lblIsHighestDegree" class="pop_label_left" style="padding-top: 2%;">Is Highest Degree<span style="color: red; margin-left: 3px;">*</span></label>
+                                <div class="radio-group-my">
+                                    <md-input-container style="font-weight: 700;color:black;">
+                                        <md-radio-group ng-required="true" name="IsHighestDegree" layout="row" ng-model="page.model.edoObj.IsHighestDegree" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                            <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                                            <md-radio-button value="0"> No </md-radio-button>
+                                        </md-radio-group>
+                                        <div ng-messages="eduForm.IsHighestDegree.$invalid">
+                                            <div ng-if="eduForm.IsHighestDegree.$invalid && (eduForm.$submitted)">This field is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </li>
+                            <li class="clearfix form-group">
+                                <label for="lbleducationGroup" class="pop_label_left">Education category<span style="color: red; margin-left: 3px;">*</span></label>
+                                <div class="pop_controls_right select-box-my input-group">
+                                    <select multiselectdropdown id="estt" ng-model="page.model.edoObj.ddlEduCatgory" typeofdata="'educationcategory'" ng-change="page.model.changeBind('EducationCatgory',page.model.edoObj.ddlEduCatgory);" required></select>
+                                </div>
+                            </li>
+                            <li class="clearfix form-group">
+                                <label for="lbleducationGroup" class="pop_label_left">Education group<span style="color: red; margin-left: 3px;">*</span></label>
+                                <div class="pop_controls_right select-box-my input-group">
+                                    <select multiselectdropdown ng-model="page.model.edoObj.ddlEdugroup" ng-options="item.value as item.label for item in page.model.eduGroupArr" ng-change="page.model.changeBind('EducationGroup',page.model.edoObj.ddlEdugroup);" required></select>
+                                </div>
+                            </li>
+                            <li class="clearfix form-group">
+                                <label for="lbleducationGroup" class="pop_label_left">Edu specialization<span style="color: red; margin-left: 3px;">*</span></label>
+                                <div class="pop_controls_right select-box-my input-group">
+                                    <select multiselectdropdown ng-model="page.model.edoObj.ddlEduspecialization" ng-options="item.value as item.label for item in page.model.eduSpecialisationArr" required></select>
+                                </div>
+                            </li>
+                            <li class="clearfix form-group" id="divuniversity">
+                                <label for="lbluniversity" class="pop_label_left">University</label>
+
+                                <div class="pop_controls_right">
+                                    <input type="text" ng-model="page.model.edoObj.txtuniversity" maxlength="100" class="form-control" />
+                                </div>
+                            </li>
+                            <li class="clearfix form-group">
+                                <label for="lblcollege" class="pop_label_left">College</label>
+                                <div class="pop_controls_right">
+                                    <input type="text" ng-model="page.model.edoObj.txtcollege" maxlength="150" class="form-control" />
+                                </div>
+                            </li>
+                            <li class="clearfix form-group">
+                                <label for="lblPassOfYear" class="pop_label_left">Pass of year</label>
+
+                                <div class="pop_controls_right select-box-my">
+                                    <select multiselectdropdown ng-model="page.model.edoObj.ddlpassOfyear" ng-options="item1.value as item1.label for item1 in page.model.passOfyearArr"></select>
+                                </div>
+                            </li>
+
+                            <country-directive countryshow="true" cityshow="true" othercity="true" dcountry="page.model.edoObj.ddlCountry" dstate="page.model.edoObj.ddlState" ddistrict="page.model.edoObj.ddlDistrict" dcity="page.model.edoObj.ddlcity" strothercity="page.model.edoObj.txtcity"></country-directive>
+
+                            <li class="clearfix form-group">
+                                <label for="lblEduMerits" class="pop_label_left">Educational merits</label>
+                                <div class="">
+
+                                    <textarea ng-model="page.model.edoObj.txtEdumerits" maxlength="500" rows="4" cols="20" style="max-width:515px;width:100%;" tabindex="12" onkeydown="return CharacterCountedu()" onkeyup="return CharacterCountedu()"></textarea>
+
+                                </div>
+                            </li>
+                            <li class="row">
+                                <br/>
+
+
+                                <edit-footer></edit-footer>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </form>
+            </script>
+
+        </div>
+        <div id=profpopupdiv>
+            <script type="text/ng-template" id="profModalContent.html">
+                <form class="EditViewClass" name="profForm" novalidate role="form" ng-submit="page.model.ProfSubmit(page.model.profObj);" accessible-form>
+                    <div class="modal-header">
+                        <h3 class="modal-title text-center" id="modal-title">Profession details
+                            <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                                <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="25">Delete</ng-md-icon>
+                            </a>
+                        </h3>
+                    </div>
+                    <div class="modal-body clearfix pop_content_my" id="modal-body">
+                        <ul>
+                            <li class="clearfix form-group">
+                                <label for="lblempin" class="pop_label_left">Employed In<span style="color: red; margin-left: 3px;">*</span></label>
+                                <div class="pop_controls_right select-box-my input-group">
+                                    <select multiselectdropdown ng-model="page.model.profObj.ddlemployedin" typeofdata="'ProfCatgory'" required></select>
+                                </div>
+                            </li>
+                            <li class="clearfix form-group">
+                                <label for="lblprofessiongroup" class="pop_label_left">Professional group<span style="color: red; margin-left: 3px;">*</span></label>
+                                <div class="pop_controls_right select-box-my input-group">
+                                    <select multiselectdropdown ng-model="page.model.profObj.ddlprofgroup" typeofdata="'ProfGroup'" ng-change="page.model.ProfchangeBind('ProfessionGroup',page.model.profObj.ddlprofgroup);" required></select>
+                                </div>
+                            </li>
+
+                            <li class="clearfix form-group">
+                                <label for="lblprofession" class="pop_label_left">Profession<span style="color: red; margin-left: 3px;">*</span></label>
+                                <div class="pop_controls_right select-box-my input-group">
+                                    <select multiselectdropdown ng-model="page.model.profObj.ddlprofession" ng-options="item.value as item.label for item in page.model.ProfSpecialisationArr" required></select>
+                                </div>
+                            </li>
+
+                            <li class="clearfix form-group">
+                                <label for="lblcmpyname" class="pop_label_left">Company name</label>
+                                <div class="pop_controls_right select-box-my">
+                                    <input ng-model="page.model.profObj.txtcmpyname" class="form-control" tabindex="4" maxlength="100" />
+                                </div>
+                            </li>
+                            <li class="clearfix form-group">
+                                <label for="lblsal" class="pop_label_left">Monthly salary</label>
+                                <div class="pop_controls_right select-box-my select-box-my-double">
+                                    <select multiselectdropdown ng-model="page.model.profObj.ddlcurreny" typeofdata="'currency'"></select>
+                                    <input ng-model="page.model.profObj.txtsalary" style="float:right" class="form-control" onchange="currency();" maxlength="7" tabindex="6" onkeydown="return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));"
+                                    />
+                                </div>
+                            </li>
+
+                            <country-directive countryshow="true" cityshow="true" othercity="true" dcountry="page.model.profObj.ddlCountryProf" dstate="page.model.profObj.ddlStateProf" ddistrict="page.model.profObj.ddlDistrictProf" dcity="page.model.profObj.ddlcityworkingprofession"
+                                strothercity="page.model.profObj.txtcityprofession"></country-directive>
+
+                            <li class="clearfix form-group">
+                                <label for="lblworkingfrome" class="pop_label_left">Working from date</label>
+                                <div class="pop_controls_right">
+
+                                    <date-picker strdate="page.model.profObj.txtworkingfrom"></date-picker>
+                                </div>
+                            </li>
+                            <div id="divfalseVisa" ng-if="page.model.profObj.ddlCountryProf!=1">
+                                <li class="clearfix form-group">
+                                    <label for="lblvisastatus" class="pop_label_left">visa status</label>
+                                    <div class="pop_controls_right select-box-my">
+                                        <div class="select-box-my">
+                                            <select multiselectdropdown ng-model="page.model.profObj.ddlvisastatus"></select>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="clearfix form-group">
+
+                                    <label class="pop_label_left" for="lblsincedate">Since date</label>
+                                    <div class="pop_controls_right">
+                                        <date-picker strdate="page.model.profObj.txtssincedate"></date-picker>
+                                    </div>
+                                </li>
+                                <li class="clearfix form-group">
+                                    <label for="lblarrivaldate" class="pop_label_left">Arrival Date</label>
+                                    <div class="pop_controls_right">
+                                        <date-picker strdate="page.model.profObj.txtarrivaldate"></date-picker>
+                                    </div>
+                                </li>
+
+                                <li class="clearfix form-group">
+                                    <label for="lbldeaparturedate" class="pop_label_left">Departure Date</label>
+                                    <div class="pop_controls_right">
+                                        <date-picker strdate="page.model.profObj.txtdeparture"></date-picker>
+                                    </div>
+                                </li>
+                            </div>
+
+
+                            <li class="clearfix form-group">
+                                <label for="lbloccupation" class="pop_label_left">Occupation Details</label>
+                                <div class="">
+                                    <textarea ng-model="page.model.profObj.txtoccupation" style="width:515px;" rows="4" tabindex="16" maxlength="500" onkeydown="return CharacterCount()"></textarea>
+
+                                    <label id="lbloccupationcount" style="color: #1e1c1c; font-size: 13px;"></label>
+                                </div>
+                            </li>
+                            <li class="row">
+
+                                <edit-footer></edit-footer>
+                            </li>
+                        </ul>
+                    </div>
+
+                </form>
+            </script>
+        </div>
+        <div id="AboutPopup">
+            <script type="text/ng-template" id="AboutModalContent.html">
+                <form class="EditViewClass" name="aboutForm" novalidate role="form" ng-submit="page.model.AboutUrselfSubmit(page.model.aboutObj)">
+                    <div class="modal-header">
+                        <h3 class="modal-title text-center" id="modal-title">About your self
+                            <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                                <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="25">Delete</ng-md-icon>
+                            </a>
+                        </h3>
+                    </div>
+                    <div class="modal-body clearfix pop_content_my" id="modal-body">
+                        <ul>
+                            <li class="clearfix form-group">
+                                <label id="lblabout" style="color: #9b2828; font-size: 13px;">
+            				(Please don't write phone numbers/emails/any junk characters)*</label>
+                                <textarea ng-model="page.model.aboutObj.txtAboutUS" style="width: 500px; height: 150px;" class="col-lg-10" maxlength="1000" required ng-class="form-control" required />
+                                <div>
+                                </div>
+                                <label id="Label1" style="color: red; font-size: 13px;" class="pull-right">(max 1000 characters)</label>
+                                <label id="lblaboutcount" style="color: #1e1c1c; font-size: 13px;">{{aboutForm.txtAboutUS.length}}</label>
+                            </li>
+                            <li class="row">
+                                <edit-footer></edit-footer>
+                            </li>
+                        </ul>
+
+                    </div>
+                </form>
+            </script>
+        </div>
+
+    </div>
+
+    <script type="text/ng-template" id="deleteEduContent.html">
+        <form class="EditViewClass" name="deletetForm" novalidate role="form" ng-submit="page.model.deleteEduSubmit();">
             <div class="modal-header">
-                <h3 class="modal-title text-center" id="modal-title">Astro details
-                    <a href="javascript:void(0);" ng-click="cancel();">
-                        <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="20"></ng-md-icon>
+                <h3 class="modal-title text-center" id="modal-title">Alert
+                    <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                        <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="25">Delete</ng-md-icon>
+                    </a>
+                </h3>
+            </div>
+            <div class="modal-body clearfix" id="modal-body">
+                <b class="text-center"> Do you want to delete Education details</b>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Delete</button>
+                <button type="button" class="btn btn-danger" ng-click="page.model.cancel();">Cancel</button>
+            </div>
+
+        </form>
+    </script>
+
+
+    <script type="text/ng-template" id="CustomerDataContent.html">
+        <form class="EditViewClass" name="custForm" ng-class="'EditViewClass'" novalidate role="form" ng-submit="page.model.custdataSubmit(page.model.custObj)">
+            <div class="modal-header">
+                <h3 class="modal-title text-center" id="modal-title">Customer details
+                    <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                        <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="25">Delete</ng-md-icon>
                     </a>
                 </h3>
             </div>
             <div class="modal-body clearfix pop_content_my" id="modal-body">
-                <ul id="ulastro">
-                    <li class="clearfix form-group">
-                        <label for="lbltimebirth" class="pop_label_left">Time of Birth<span style="color: red; margin-left: 3px;">*</span></label>
-                        <div class="pop_controls_right select-box-my select-box-my-trible select-box-my-trible3 input-group">
-
-                            <select multiselectdropdown ng-model="page.model.atroObj.ddlFromHours" ng-options="item.value as item.label for item in page.model.hrsbindArr" required></select>
-                            <select multiselectdropdown ng-model="page.model.atroObj.ddlFromMinutes" ng-options="item.value as item.label for item in page.model.minbindArr" required></select>
-                            <select multiselectdropdown ng-model="page.model.atroObj.ddlFromSeconds" ng-options="item.value as item.label for item in page.model.secbindArr" required></select>
-                        </div>
-                    </li>
-
-                    <country-directive require="true" countryshow="true" cityshow="true" othercity="false" dcountry="page.model.atroObj.ddlCountryOfBirthID" dstate="page.model.atroObj.ddlStateOfBirthID" ddistrict="page.model.atroObj.ddlDistrictOfBirthID" dcity="page.model.atroObj.ddlcity"></country-directive>
-
-                    <li class="clearfix form-group">
-                        <label for="lblstarlan" class="pop_label_left">Star language</label>
-                        <div class="pop_controls_right select-box-my">
-                            <select multiselectdropdown ng-model="page.model.atroObj.ddlstarlanguage" typeofdata="'starLanguage'" ng-change="page.model.changeBind('star',page.model.atroObj.ddlstarlanguage);"></select>
-                        </div>
-                    </li>
-
-                    <li class="clearfix form-group">
-                        <label for="lblstar" class="pop_label_left">Star</label>
-                        <div class="pop_controls_right select-box-my">
-
-                            <select multiselectdropdown ng-model="page.model.atroObj.ddlstar" ng-options="item.value as item.label for item in page.model.starArr"></select>
-
-                        </div>
-                    </li>
-                    <li class="clearfix form-group">
-                        <label for="lblpaadam" class="pop_label_left">Paadam</label>
-                        <div class="pop_controls_right select-box-my">
-                            <select multiselectdropdown ng-model="page.model.atroObj.ddlpaadam" typeofdata="'paadam'"></select>
-                        </div>
-                    </li>
-                    <li class="clearfix form-group">
-                        <label for="lblLagnam" class="pop_label_left">Lagnam</label>
-                        <div class="pop_controls_right select-box-my">
-                            <select multiselectdropdown ng-model="page.model.atroObj.ddlLagnam" typeofdata="'lagnam'"></select>
-                        </div>
-                    </li>
-                    <li class="clearfix form-group">
-                        <label for="lblRaasiMoonsign" class="pop_label_left">Raasi/Moon sign</label>
-                        <div class="pop_controls_right select-box-my">
-                            <select multiselectdropdown ng-model="page.model.atroObj.ddlRaasiMoonsign" typeofdata="'ZodaicSign'"></select>
-                            </select>
-                        </div>
-                    </li>
-                    <li class="clearfix form-group">
-                        <label for="lblGothramGotra" class="pop_label_left">Gothram/Gotra</label>
-                        <div class="pop_controls_right select-box-my">
-                            <input ng-model="page.model.atroObj.txtGothramGotra" class="form-control" tabindex="13" maxlength="100" />
-                        </div>
-                    </li>
+                <ul>
                     <li class="clearfix">
-                        <label for="lblMaternalgothram" class="pop_label_left">Maternal gothram</label>
-                        <div class="pop_controls_right select-box-my">
-                            <input ng-model="page.model.atroObj.txtMaternalgothram" class="form-control" tabindex="14" maxlength="100" />
+                        <label for="lblElderYounger" class="pop_label_left" style="padding-top: 4%;">Gender<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right pop_radios_list">
+                            <md-input-container style="font-weight: 700; color: black;">
+                                <md-radio-group ng-required="true" name="rdlGender" layout="row" ng-model="page.model.custObj.rdlGender" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                    <md-radio-button value="2" class="md-primary">Female</md-radio-button>
+                                    <md-radio-button value="1"> Male </md-radio-button>
+                                </md-radio-group>
+                                <div ng-messages="custForm.rdlGender.$invalid">
+                                    <div ng-if="custForm.rdlGender.$invalid && (custForm.$submitted)">This field is required.</div>
+                                </div>
+                            </md-input-container>
                         </div>
                     </li>
-                    <li class="clearfix">
-                        <label for="lblManglikKujadosham" style="padding-top: 2%;" class="pop_label_left">Manglik/Kuja dosham</label>
-
-                        <md-input-container style="font-weight: 700;color:black;">
-                            <md-radio-group name="rdlkujaDosham" layout="row" ng-model="page.model.atroObj.rdlkujaDosham" class="md-block" flex-gt-sm ng-disabled="manageakerts">
-                                <md-radio-button value="0" class="md-primary">Yes</md-radio-button>
-                                <md-radio-button value="1"> No </md-radio-button>
-                                <md-radio-button value="2"> Dont't Know </md-radio-button>
-                            </md-radio-group>
-                        </md-input-container>
-                    </li>
-
-                    <li class="clearfix form-group" style="display: none;">
-                        <label for="lbllongitude" class="pop_label_left">Place of birth longitude</label>
-                        <div class="pop_controls_right select-box-my">
-                            <input id="txtlogitude" class="form-control" />
-
-                            <select multiselectdropdown ng-model="page.model.atroObj.ddllongitude"></select>
+                    <li class="clearfix form-group">
+                        <label for="lblname" class="pop_label_left">Sur Name<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my input-group">
+                            <input type="text" ng-model="page.model.custObj.txtSurName" class="form-control" required/>
                         </div>
                     </li>
-                    <li class="clearfix form-group" style="display: none;">
-                        <label for="lbllatitude" class="pop_label_left">Place of birth latitude</label>
-                        <div class="pop_controls_right select-box-my">
-                            <input id="txtlatitude" class="form-control col-lg-3" />
-                            <select multiselectdropdown ng-model="page.model.atroObj.ddllatitude"></select>
+                    <li class="clearfix form-group">
+                        <label for="lblname" class="pop_label_left">Name<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my input-group">
+                            <input type="text" ng-model="page.model.custObj.txtName" class="form-control" required/>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblMaritalstatus" class="pop_label_left">Marital Status<span style="color: red; margin-left: 3px;">*</span></label>
+
+                        <div class="pop_controls_right select-box-my input-group">
+                            <select multiselectdropdown ng-model="page.model.custObj.dropmaritalstatus" typeofdata="'MaritalStatus'" required></select>
 
                         </div>
                     </li>
-                    <li class="clearfix form-group" style="display: none;">
-                        <label for="lbllatitude">Place of birth latitude</label>
+                    <li class="clearfix form-group">
+                        <label for="lbldob" class="pop_label_left">Date Of Birth<span style="color: red; margin-left: 3px;">*</span></label>
+                        <div class="pop_controls_right select-box-my input-group">
+                            <date-picker strdate="page.model.custObj.txtdobcandidate" required></date-picker>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblheight" class="pop_label_left">Height<span style="color: red; margin-left: 3px;">*</span></label>
+
+                        <div class="pop_controls_right select-box-my input-group">
+
+                            <select multiselectdropdown ng-model="page.model.custObj.ddlHeightpersonal" typeofdata="'height'" required></select>
+
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblheight" class="pop_label_left">Complexion<span style="color: red; margin-left: 3px;">*</span></label>
+
+                        <div class="pop_controls_right select-box-my input-group">
+                            <select multiselectdropdown ng-model="page.model.custObj.ddlcomplexion" typeofdata="'Complexion'" required></select>
+
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="Religion" class="pop_label_left">Religion<span style="color: red; margin-left: 3px;">*</span></label>
+
+                        <div class="pop_controls_right select-box-my input-group">
+                            <div class="select-box-my">
+
+                                <select multiselectdropdown ng-model="page.model.custObj.ddlreligioncandadate" typeofdata="'Religion'" required></select>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group" id="divMotherTongue">
+                        <label for="lblPersonalMotherTongue" class="pop_label_left">Mother Tongue<span style="color: red; margin-left: 3px;">*</span></label>
+
+                        <div class="pop_controls_right select-box-my input-group">
+
+                            <select multiselectdropdown ng-model="page.model.custObj.ddlmothertongue" typeofdata="'Mothertongue'" required></select>
+
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblCaste" class="pop_label_left">Caste<span style="color: red; margin-left: 3px;">*</span></label>
+
+                        <div class="pop_controls_right select-box-my input-group">
+
+                            <select multiselectdropdown ng-model="page.model.custObj.ddlcaste" typeofdata="'caste'" ng-change="page.model.changeBind('caste',page.model.custObj.ddlcaste);" required></select>
+
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblCaste" class="pop_label_left">SubCaste</label>
                         <div class="pop_controls_right select-box-my">
-                            <input type="checkbox" ng-model="page.model.atroObj.Chkgenertehoro" value="Generate HoroScope" />
+                            <select multiselectdropdown ng-model="page.model.custObj.ddlsubcaste" ng-options="item.value as item.label for item in page.model.subcasteArr"></select>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblborncitizenship" class="pop_label_left">Born Citizenship<span style="color: red; margin-left: 3px;">*</span></label>
+
+                        <div class="pop_controls_right select-box-my input-group">
+                            <select multiselectdropdown ng-model="page.model.custObj.ddlBornCitizenship" typeofdata="'Country'" required></select>
+
                         </div>
                     </li>
                     <li class="row">
                         <edit-footer></edit-footer>
-
                     </li>
                 </ul>
+
             </div>
+
+
 
         </form>
-    </script>
-
-    <script type="text/ng-template" id="AddHoroPopup.html">
-        <form name="uploadForm" novalidate role="form" ng-submit="page.model.upload(up);">
-            <div class="modal-header">
-                <h3 class="modal-title text-center" id="modal-title">Upload Horoscope </h3>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <label class="control-label">Use this file formats like gif, jpeg, png,jpg</label>
-                <br>
-                <ul id="ulprofession">
-                    <input type="file" file-model="up.myFile" />
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <input value="Cancel" class="button_custom button_custom_reset" ng-click="page.model.cancel();" type="button">
-                <input value="Upload" class="button_custom" type="submit">
-            </div>
-        </form>
-    </script>
-    <script type="text/ng-template" id="deletehoroPopup.html">
-        <form name="uploadForm" novalidate role="form" ng-submit="page.model.deleteHoroImage();">
-            <div class="modal-header">
-                <h3 class="modal-title text-center" id="modal-title">Delete Horoscope </h3>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <div class="text-center">Are you sure to delete horoscope?</div>
-            </div>
-            <div class="modal-footer">
-                <input value="Close" class="button_custom button_custom_reset" ng-click="page.model.cancel();" type="button">
-                <input value="Delete" class="button_custom" type="submit">
-            </div>
-        </form>
-
-    </script>
-
-
-    <script type="text/ng-template" id="AstroCityPopup.html">
-        <div class="modal-header alert alert-danger" id="div2">
-            <button type="button" class="close" ng-click="page.model.cancel();">&times;</button>
-            <h4 class="modal-title">
-                <span id="lblcityheader">we are unable to genearte horoscope with your given city <b style="color: green"> Administrative Buildings </b>,so please select Nearest city to your place of birth</span>
-            </h4>
-        </div>
-        <div class="modal-body" id="modalbodyIDnew">
-            <div class="pop_controls_right select-box-my">
-                <select multiselectdropdown ng-model="page.model.ddlAstrocity" ng-options="item.value as item.label for item in page.model.AstrocityArr" ng-change="page.model.AstroCityChange(page.model.ddlAstrocity);"></select>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" ng-click="page.model.cancel();">Close</button>
-        </div>
-    </script>
-
-    <script type="text/ng-template" id="AstroimagePopup.html">
-
-        <div class="modal-header">
-            <h3 class="modal-title text-center" id="modal-title">Horoscope
-                <a href="javascript:void(0);" ng-click="page.model.cancel();">
-                    <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="25"></ng-md-icon>
-                </a>
-            </h3>
-        </div>
-        <div class="modal-body clearfix pop_content_my" id="modal-body">
-            <img ng-src="{{page.model.ImageUrl}}" style="width:500px;height:500px;" />
-        </div>
-        <div class="modal-footer">
-            <div class="pull-right">
-                <input value="Cancel" class="button_custom button_custom_reset  pull-right" ng-click="page.model.cancel();" type="button">
-            </div>
-        </div>
-    </script>
-
-
-    <script type="text/ng-template" id="RefreshPopup.html">
-
-        <div class="modal-body clearfix" id="modal-body">
-            <button ng-click="page.model.generatedhoroS3Upload();" class="btn btn-success center-block">Refresh Page<span class="fa fa-refresh"></span></button>&nbsp;&nbsp;
-
-        </div>
-
     </script>
 </div>
+
+
+
+
+
+<style>
+    .multiselect {
+        border: solid 1px #ADA2A2 !important;
+        color: #000;
+        background: #fff !important;
+        box-shadow: none !important;
+        height: 34px !important;
+        line-height: 33px;
+        margin: 0 !important;
+    }
+</style>
+<!--<alert-directive></alert-directive>-->

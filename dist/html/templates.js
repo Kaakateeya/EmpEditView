@@ -2,245 +2,1161 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
   'use strict';
 
   $templateCache.put('app/editAstro/index.html',
-    "<div class=\"right_col EditViewClass\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
-    "\n" +
-    "    <div>\r" +
+    "<div ng-class=\"'EditViewClass'\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        <div ng-include=\"'templates/sideMenu.html'\">\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"edit_pages_content_main clearfix\" class=\"right_col\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            <page-review dispaly-name=\"'Astro details'\" sectionid=\"'23'\" custid=\"page.model.CustID\"></page-review>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            <div id=\"divlnkasro\" class=\"edit_page_item\">\r" +
-    "\n" +
-    "                <div class=\"edit_page_item_head clearfix\">\r" +
-    "\n" +
-    "                    <h4>Astro Details </h4>\r" +
-    "\n" +
-    "                    <div class=\"edit_page_item_ui clearfix\">\r" +
-    "\n" +
-    "                        <div ng-if=\"page.model.AstroArr.length==0\" cssclass=\"edit_page_add_button\">\r" +
-    "\n" +
-    "                            <a ng-click=\"page.model.populateAstro();\" class=\"edit_page_add_button\" href=\"javascript:void(0);\">Add</a>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "                    <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.AstroArr track by $index\">\r" +
-    "\n" +
-    "                        <div>\r" +
-    "\n" +
-    "                            <div ng-hide=\"item.TimeOfBirth===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"TimeofBirth\" style=\"font-weight:bold;\">Time of Birth</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblTimeofBirth\">{{item.TimeOfBirth}}</span></h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"PlaceofBirth\" style=\"font-weight:bold;\">Place of Birth</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblPlaceofBirth\">{{ item.CityOfBirth +\",\"+item.DistrictOfBirth+\",\"+item.StateOfBirth+\",\"+item.CountryOfBirth}}</span>\r" +
-    "\n" +
-    "                                </h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div ng-hide=\"item.TypeofStar===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"Telugustar\" style=\"font-weight:bold;\">Star Language</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblTelugustar\">{{ item.TypeofStar+((item.StarName!=\"\" &&  item.StarName!=null)?\" - \"+\r" +
-    "\n" +
-    "                                            item.StarName:\"\")+((item.Paadam!=\"\" &&  item.Paadam!=null)?\" (\"+item.Paadam+\")\":\"\") }}</span></h5>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div ng-hide=\"item.Rassi===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"raasimoonsign\" style=\"font-weight:bold;\">Raasi/moon sign</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblraasimoonsign\">{{ item.Rassi}}</span></h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div ng-hide=\"item.Lagnam===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"Lagnam\" style=\"font-weight:bold;\">Lagnam</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblLagnam\">  {{ item.Lagnam }}</span></h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div ng-hide=\"item.Gothram===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"GothramGotra\" style=\"font-weight:bold;\">Gothram/Gotra</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblGothramGotra\">  {{ item.Gothram}}</span></h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div ng-hide=\"item.MeternalGothramID===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"MaternalGothram\" style=\"font-weight:bold;\">Maternal Gothram</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblMaternalGothram\">{{ item.MeternalGothramID }}</span></h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div ng-hide=\"item.manglikkujadosham===null\" class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                                <h6>\r" +
-    "\n" +
-    "                                    <span id=\"manglikkujadosham\" style=\"font-weight:bold;\">manglik/kuja dosham</span></h6>\r" +
-    "\n" +
-    "                                <h5>\r" +
-    "\n" +
-    "                                    <span id=\"lblmanglikkujadosham\">{{ item.manglikkujadosham }}</span></h5>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.AstroArr.length>0\">\r" +
-    "\n" +
-    "                            <a ng-click=\"page.model.populateAstro(item);\" class=\"edit_page_edit_button\" href=\"javascript:void(0);\">Edit</a>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                        <br>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"edit_page_details_item_desc clearfix\" style=\"padding: 0 0 0 20px;\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                <div class=\"radio-group-my input-group\" ng-show=\"page.model.ImageUrl==='' || page.model.ImageUrl===null\">\r" +
-    "\n" +
-    "                    <md-radio-group ng-required=\"true\" name=\"rdlUploadGenerate\" layout=\"row\" ng-model=\"page.model.atroObj.rdlUploadGenerate\" ng-change=\"page.model.uploadGenerateHoro(page.model.atroObj.rdlUploadGenerate);\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                        <md-radio-button value=\"0\">Upload Horoscope</md-radio-button>\r" +
-    "\n" +
-    "                        <md-radio-button value=\"1\"> Generate Horoscope </md-radio-button>\r" +
-    "\n" +
-    "                    </md-radio-group>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            <div ng-hide=\"page.model.ImageUrl==='' || page.model.ImageUrl===null\">\r" +
-    "\n" +
-    "                <div class=\"edit_page_details_item\">\r" +
-    "\n" +
-    "                    <div class=\"edit_page_details_item_desc clearfix\">\r" +
-    "\n" +
-    "                        <img ng-model=\"page.model.imghoroName\" ng-src=\"{{page.model.ImageUrl}}\" Style=\"width: 250px; height: 250px;\" ng-show=\"!page.model.iframeShow\" />\r" +
-    "\n" +
-    "                        <iframe border=\"0\" id=\"iframe\" frameborder=\"0\" height=\"300\" width=\"800\" ng-show=\"page.model.iframeShow\"></iframe>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"edit_page_details_item_desc clearfix\" style=\"padding: 0 0 0 20px;\">\r" +
-    "\n" +
-    "                    <div class=\"edit_page_item_ui clearfix  pull-left\">\r" +
-    "\n" +
-    "                        <a ID=\"btndeletehoro\" class=\"edit_page_del_button\" href=\"javascript:void(0);\" ng-click=\"page.model.shoedeletePopup();\" data-placement=\"bottom\" data-toggle=\"tooltip\" data-original-title=\"Delete Astro Details\">\r" +
-    "\n" +
-    "               Delete <ng-md-icon icon=\"delete\" style=\"fill:#665454\" size=\"18\">Delete</ng-md-icon></a>\r" +
-    "\n" +
-    "                        <a Style=\"padding-left: 100px;\" class=\"btn btn-link\" ng-click=\"page.model.vewHoro();\">View<span class=\"glyphicon glyphicon-eye-open\"></span></a>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
+    "    <div ng-include=\"'templates/sideMenu.html'\">\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <script type=\"text/ng-template\" id=\"astroContent.html\">\r" +
+    "    <div class=\"edit_pages_content_main clearfix\">\r" +
     "\n" +
-    "        <form name=\"astroForm\" novalidate role=\"form\" ng-submit=\"page.model.astroSubmit(page.model.atroObj);\" accessible-form>\r" +
+    "        <page-review dispaly-name=\"'Education details'\" sectionid=\"'6,7,8'\" custid=\"page.model.CustID\"></page-review>\r" +
+    "\n" +
+    "        <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Customer Personal Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" id=\"spanEduModID\">ModifiedBy :{{page.model.custEmpLastModificationDate}}</span>\r" +
+    "\n" +
+    "                </h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.CustomerDataArr.length==0\">\r" +
+    "\n" +
+    "                    <a id=\"lnkpersonaldetailsadd\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('custData');\">Add</a>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                <div id=\"listpersonaldetails\" ng-repeat=\"item in page.model.CustomerDataArr\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <div id=\"reviewdivpersonal\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanel6\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"gender\">Gender</span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblGender\">\r" +
+    "\n" +
+    "                            {{item.Gender}}</span></h5>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanellblMaritalStatus\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"MaritalStatus\">Marital Status</span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblMaritalStatus\">\r" +
+    "\n" +
+    "                            {{item.MartialStatus}}</span></h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelLnkpersonaledit\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('custData',item);\" visible='<%# Request.QueryString[\"Admin\"] == \"1\" %>' class=\"edit_page_edit_button\">Edit\r" +
+    "\n" +
+    "                    </a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePaneldateofbirth\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"divdateofbirth\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"dateofbirth\" font-bold=\"true\">Date Of Birth</span></h6>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lbldateofbirth\">{{item.DateofBirth}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelheight\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"divcandidateheight\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblcandidateheight\" font-bold=\"true\">Height</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblheight\">{{item.Height}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelcolor\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\" id=\"divcomplexion\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblcolor\" font-bold=\"true\">Complexion</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblcomplexion\">{{item.Complexion}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelreligion\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"divreligion\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"religion\" font-bold=\"true\">Religion</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblReligion\">{{item.Religion}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanel1\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"div1\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"span1\" font-bold=\"true\">Mother Tongue</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblmothertongue\">{{item.Mothertongue}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelpersonalcaste\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"divpersonalcaste\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblcaste\" font-bold=\"true\">Caste</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblcandidatecaste\">{{item.Caste+(item.SubCaste!=='' && item.SubCaste!==null?'('+item.SubCaste+')':'')}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <!--<div id=\"UpdatePanelSubcaste\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"divSubcaste\" class=\"edit_page_details_item_desc clearfix\" visible='<%#(Eval(\"SubCaste\").ToString()!=\"\" && Eval(\"SubCaste\").ToString()!=null)?true:false %>'>\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblsubcaste\" font-bold=\"true\">SubCaste</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblsubcastecandidate\">{{item.SubCaste}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>-->\r" +
+    "\n" +
+    "                        <div id=\"UpdatePanelBorncitizenship\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"divBorncitizenship\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblcitizenship\" font-bold=\"true\">BornCitizenship</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblborncitizenship\">{{item.Citizenship}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"edit_page_item\" id=\"divEducation\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Education Details {{page.vallll}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\">ModifiedBy :{{page.model.eduEmpLastModificationDate}}</span></h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                    <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showEduModal');\">Add</a>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                <div ng-repeat=\"item in page.model.educationSelectArray\">\r" +
+    "\n" +
+    "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
+    "\n" +
+    "                        <div id=\"lbleducationgroup\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <label id=\"lbleducationgroup\" ng-style=\"{color: item.EduHighestDegree==1?'Red':'Black'}\">{{item.EducationCategory!=null?(item.EducationCategory==\"Below Graduation\"?\"Under Graduation\":\"Education\"):\"Education\"}}</label>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <label id=\"edgoup\" ng-style=\"{color: item.EduHighestDegree==1?'Red':''}\">{{item.EducationGroup+\" \"+((item.EducationSpecialization!=null?\"(\" +item.EducationSpecialization+\")\":\"\"))+\" \"+((item.EduPassOfYear!=null?\",Completed\"+\"-\"+item.EduPassOfYear:\"\"))}} </label>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"editeducationbutton\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                            <a id=\"LinkButton1dfd\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showEduModal',item)\">Edit</a>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" class=\"edit_page_del_button\" ng-click=\"page.model.DeleteEduPopup(item.EducationID);\">Delete</a>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"divuniversityhiding\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.EduUniversity===null\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"Label1\">University</span>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblTuniversity\">{{item.EduUniversity}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"divCollege\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.EduCollege===null\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"Label9\">College</span>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblTcollege\">{{item.EduCollege}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\" id=\"divcityviewhiding\" ng-hide=\"item.EduCityIn===null\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"Label3\" font-bold=\"true\">City Study In</span>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblcountry\">{{item.EduCityIn+\",\"+item.EduDistrictIn+\",\"+item.EduStateIn+\",\"+item.EduCountryIn}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"divmerit\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.Educationdesc==null\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"Label5\" font-bold=\"true\">Education Merits</span>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblmerits\">{{item.Educationdesc}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"edit_page_item\">\r" +
+    "\n" +
+    "            <div id=\"divlnkAddProfession\" class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Professional Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style=\"color: #08CFD2\">ModifiedBy :{{page.model.profEmpLastModificationDate}}</span></h4>\r" +
+    "\n" +
+    "                </h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                    <div ng-if=\"page.model.ProfessionSelectArray.length==0\">\r" +
+    "\n" +
+    "                        <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showProfModal')\">Add</a>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                <div id=\"lstProfession\" ng-repeat=\"item in page.model.ProfessionSelectArray\">\r" +
+    "\n" +
+    "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'reviewCls':''\">\r" +
+    "\n" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"lblprofession\" style=\"font-weight:bold;\">Profession</span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"txtProfession\">{{item.Professional+\" \"+(item.CompanyName !=null && item.CompanyName !=\"\"?\"in\"+\" \"+item.CompanyName:'')}}</span></h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div class=\"edit_page_item_ui clearfix\" ng-if=\"page.model.ProfessionSelectArray.length>0\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <a id=\"Linkedit\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showProfModal',item)\">Edit</a>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"divcitywork\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.CityWorkingIn==null\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"lblcitywork\" style=\"font-weight:bold;\">City working in </span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"lblcityworkingg\">{{(item.CityWorkingIn!=null?\" \"+item.CityWorkingIn:\" \")+ \" \" +(item.StateWorkingIn!=null && item.StateWorkingIn!=\" \"?\",\"+item.StateWorkingIn:\"\")+\" \"+(item.CountryWorkingIn!=null && item.CountryWorkingIn!=\"\"? \", \"+item.CountryWorkingIn:\" \")}}</span></h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"Div1\">\r" +
+    "\n" +
+    "                            <div class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.Salary===null\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblsal\" style=\"font-weight:bold;\">Monthly salary</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblsalaryy\">{{item.Currency+\" \"+(item.Salary!=null && item.Salary!=\"\"?\" \"+item.Salary+\"/-\":\"\")}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <div id=\"Div2\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.WorkingFromDate===null\">\r" +
+    "\n" +
+    "                                <h6>\r" +
+    "\n" +
+    "                                    <span id=\"lblworkfrom\" style=\"font-weight:bold;\">Working from date</span></h6>\r" +
+    "\n" +
+    "                                <h5>\r" +
+    "\n" +
+    "                                    <span id=\"lblworkingfrom\">{{item.WorkingFromDate}}</span></h5>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"Div3\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.VisaStatus===null\">\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <label id=\"lblvisa\">visa status</label>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"txtvisa\">{{item.VisaStatus}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"Div4\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.ResidingSince===null\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"lblsincedate\">Since date</span>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"txtsincedate\">{{item.ResidingSince}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div id=\"Div5\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.ArrivingDate===null\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"lblarrival\">Arrival Date</span>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"txtarrival\">{{item.ArrivingDate}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"Div6\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.DepartureDate===null\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"lbldepartture\">Departure Date</span>\r" +
+    "\n" +
+    "                            </h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span id=\"txtdaparture\"> {{item.DepartureDate}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div id=\"Div7\" class=\"edit_page_details_item_desc clearfix\" ng-hide=\"item.OccupationDetails===null\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <h6>\r" +
+    "\n" +
+    "                                <span id=\"lblOccupation\" style=\"font-weight:bold;\">Occupation Details</span></h6>\r" +
+    "\n" +
+    "                            <h5>\r" +
+    "\n" +
+    "                                <span>{{item.OccupationDetails}} </span></h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div id=\"divlnkadd\" class=\"edit_page_item\">\r" +
+    "\n" +
+    "            <div class=\"edit_page_item_head clearfix\">\r" +
+    "\n" +
+    "                <h4>Mention your goals, interests and hobbies etc</h4>\r" +
+    "\n" +
+    "                <div class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                    <div id=\"upAboutAdd\" ng-if=\"page.model.lblaboutUrself==='' || page.model.lblaboutUrself===null\">\r" +
+    "\n" +
+    "                        <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showAboutModal')\">Add</a>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"edit_page_details_item\">\r" +
+    "\n" +
+    "                <div id=\"reviewdiv\" ng-class=\"AboutReviewStatusID===0?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
+    "\n" +
+    "                    <div class=\"form-group\">\r" +
+    "\n" +
+    "                        <div id=\"uplblAbout\" class=\"edit_page_details_item_desc clearfix\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <h5 style=\"float: none; width: 92%; display: block;\">\r" +
+    "\n" +
+    "                                <span>{{page.model.lblaboutUrself}}</span>\r" +
+    "\n" +
+    "                            </h5>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                        <div ng-if=\"page.model.lblaboutUrself!='' && page.model.lblaboutUrself!=null\" class=\"edit_page_item_ui clearfix\">\r" +
+    "\n" +
+    "                            <a class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showAboutModal',page.model.lblaboutUrself)\">Edit</a>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div id=\"edupopupdiv\">\r" +
+    "\n" +
+    "            <script type=\"text/ng-template\" id=\"EduModalContent.html\">\r" +
+    "\n" +
+    "                <form class=\"EditViewClass\" name=\"eduForm\" novalidate role=\"form\" ng-submit=\"eduForm.$valid  && page.model.eduSubmit(page.model.edoObj);\" accessible-form>\r" +
+    "\n" +
+    "                    <div class=\"modal-header\">\r" +
+    "\n" +
+    "                        <h3 class=\"modal-title text-center\" id=\"modal-title\">Education Details\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                                <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
+    "\n" +
+    "                            </a>\r" +
+    "\n" +
+    "                        </h3>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <div class=\"modal-body\" id=\"modal-body\">\r" +
+    "\n" +
+    "                        <ul id=\"uleducation\" class='modal-body clearfix pop_content_my'>\r" +
+    "\n" +
+    "                            <li class=\"clearfix\">\r" +
+    "\n" +
+    "                                <label for=\"lblIsHighestDegree\" class=\"pop_label_left\" style=\"padding-top: 2%;\">Is Highest Degree<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                                <div class=\"radio-group-my\">\r" +
+    "\n" +
+    "                                    <md-input-container style=\"font-weight: 700;color:black;\">\r" +
+    "\n" +
+    "                                        <md-radio-group ng-required=\"true\" name=\"IsHighestDegree\" layout=\"row\" ng-model=\"page.model.edoObj.IsHighestDegree\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "\n" +
+    "                                            <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
+    "\n" +
+    "                                            <md-radio-button value=\"0\"> No </md-radio-button>\r" +
+    "\n" +
+    "                                        </md-radio-group>\r" +
+    "\n" +
+    "                                        <div ng-messages=\"eduForm.IsHighestDegree.$invalid\">\r" +
+    "\n" +
+    "                                            <div ng-if=\"eduForm.IsHighestDegree.$invalid && (eduForm.$submitted)\">This field is required.</div>\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                    </md-input-container>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\">Education category<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                                    <select multiselectdropdown id=\"estt\" ng-model=\"page.model.edoObj.ddlEduCatgory\" typeofdata=\"'educationcategory'\" ng-change=\"page.model.changeBind('EducationCatgory',page.model.edoObj.ddlEduCatgory);\" required></select>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\">Education group<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.edoObj.ddlEdugroup\" ng-options=\"item.value as item.label for item in page.model.eduGroupArr\" ng-change=\"page.model.changeBind('EducationGroup',page.model.edoObj.ddlEdugroup);\" required></select>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\">Edu specialization<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.edoObj.ddlEduspecialization\" ng-options=\"item.value as item.label for item in page.model.eduSpecialisationArr\" required></select>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\" id=\"divuniversity\">\r" +
+    "\n" +
+    "                                <label for=\"lbluniversity\" class=\"pop_label_left\">University</label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                    <input type=\"text\" ng-model=\"page.model.edoObj.txtuniversity\" maxlength=\"100\" class=\"form-control\" />\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblcollege\" class=\"pop_label_left\">College</label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                    <input type=\"text\" ng-model=\"page.model.edoObj.txtcollege\" maxlength=\"150\" class=\"form-control\" />\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblPassOfYear\" class=\"pop_label_left\">Pass of year</label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.edoObj.ddlpassOfyear\" ng-options=\"item1.value as item1.label for item1 in page.model.passOfyearArr\"></select>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <country-directive countryshow=\"true\" cityshow=\"true\" othercity=\"true\" dcountry=\"page.model.edoObj.ddlCountry\" dstate=\"page.model.edoObj.ddlState\" ddistrict=\"page.model.edoObj.ddlDistrict\" dcity=\"page.model.edoObj.ddlcity\" strothercity=\"page.model.edoObj.txtcity\"></country-directive>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblEduMerits\" class=\"pop_label_left\">Educational merits</label>\r" +
+    "\n" +
+    "                                <div class=\"\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <textarea ng-model=\"page.model.edoObj.txtEdumerits\" maxlength=\"500\" rows=\"4\" cols=\"20\" style=\"max-width:515px;width:100%;\" tabindex=\"12\" onkeydown=\"return CharacterCountedu()\" onkeyup=\"return CharacterCountedu()\"></textarea>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"row\">\r" +
+    "\n" +
+    "                                <br/>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </ul>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </form>\r" +
+    "\n" +
+    "            </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div id=profpopupdiv>\r" +
+    "\n" +
+    "            <script type=\"text/ng-template\" id=\"profModalContent.html\">\r" +
+    "\n" +
+    "                <form class=\"EditViewClass\" name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.ProfSubmit(page.model.profObj);\" accessible-form>\r" +
+    "\n" +
+    "                    <div class=\"modal-header\">\r" +
+    "\n" +
+    "                        <h3 class=\"modal-title text-center\" id=\"modal-title\">Profession details\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                                <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
+    "\n" +
+    "                            </a>\r" +
+    "\n" +
+    "                        </h3>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "                        <ul>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblempin\" class=\"pop_label_left\">Employed In<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.profObj.ddlemployedin\" typeofdata=\"'ProfCatgory'\" required></select>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblprofessiongroup\" class=\"pop_label_left\">Professional group<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.profObj.ddlprofgroup\" typeofdata=\"'ProfGroup'\" ng-change=\"page.model.ProfchangeBind('ProfessionGroup',page.model.profObj.ddlprofgroup);\" required></select>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblprofession\" class=\"pop_label_left\">Profession<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.profObj.ddlprofession\" ng-options=\"item.value as item.label for item in page.model.ProfSpecialisationArr\" required></select>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblcmpyname\" class=\"pop_label_left\">Company name</label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                                    <input ng-model=\"page.model.profObj.txtcmpyname\" class=\"form-control\" tabindex=\"4\" maxlength=\"100\" />\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblsal\" class=\"pop_label_left\">Monthly salary</label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
+    "\n" +
+    "                                    <select multiselectdropdown ng-model=\"page.model.profObj.ddlcurreny\" typeofdata=\"'currency'\"></select>\r" +
+    "\n" +
+    "                                    <input ng-model=\"page.model.profObj.txtsalary\" style=\"float:right\" class=\"form-control\" onchange=\"currency();\" maxlength=\"7\" tabindex=\"6\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));\"\r" +
+    "\n" +
+    "                                    />\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <country-directive countryshow=\"true\" cityshow=\"true\" othercity=\"true\" dcountry=\"page.model.profObj.ddlCountryProf\" dstate=\"page.model.profObj.ddlStateProf\" ddistrict=\"page.model.profObj.ddlDistrictProf\" dcity=\"page.model.profObj.ddlcityworkingprofession\"\r" +
+    "\n" +
+    "                                strothercity=\"page.model.profObj.txtcityprofession\"></country-directive>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lblworkingfrome\" class=\"pop_label_left\">Working from date</label>\r" +
+    "\n" +
+    "                                <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <date-picker strdate=\"page.model.profObj.txtworkingfrom\"></date-picker>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <div id=\"divfalseVisa\" ng-if=\"page.model.profObj.ddlCountryProf!=1\">\r" +
+    "\n" +
+    "                                <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                    <label for=\"lblvisastatus\" class=\"pop_label_left\">visa status</label>\r" +
+    "\n" +
+    "                                    <div class=\"pop_controls_right select-box-my\">\r" +
+    "\n" +
+    "                                        <div class=\"select-box-my\">\r" +
+    "\n" +
+    "                                            <select multiselectdropdown ng-model=\"page.model.profObj.ddlvisastatus\"></select>\r" +
+    "\n" +
+    "                                        </div>\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "                                </li>\r" +
+    "\n" +
+    "                                <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <label class=\"pop_label_left\" for=\"lblsincedate\">Since date</label>\r" +
+    "\n" +
+    "                                    <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                        <date-picker strdate=\"page.model.profObj.txtssincedate\"></date-picker>\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "                                </li>\r" +
+    "\n" +
+    "                                <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                    <label for=\"lblarrivaldate\" class=\"pop_label_left\">Arrival Date</label>\r" +
+    "\n" +
+    "                                    <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                        <date-picker strdate=\"page.model.profObj.txtarrivaldate\"></date-picker>\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "                                </li>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                    <label for=\"lbldeaparturedate\" class=\"pop_label_left\">Departure Date</label>\r" +
+    "\n" +
+    "                                    <div class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                                        <date-picker strdate=\"page.model.profObj.txtdeparture\"></date-picker>\r" +
+    "\n" +
+    "                                    </div>\r" +
+    "\n" +
+    "                                </li>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label for=\"lbloccupation\" class=\"pop_label_left\">Occupation Details</label>\r" +
+    "\n" +
+    "                                <div class=\"\">\r" +
+    "\n" +
+    "                                    <textarea ng-model=\"page.model.profObj.txtoccupation\" style=\"width:515px;\" rows=\"4\" tabindex=\"16\" maxlength=\"500\" onkeydown=\"return CharacterCount()\"></textarea>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                    <label id=\"lbloccupationcount\" style=\"color: #1e1c1c; font-size: 13px;\"></label>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"row\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                        </ul>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </form>\r" +
+    "\n" +
+    "            </script>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div id=\"AboutPopup\">\r" +
+    "\n" +
+    "            <script type=\"text/ng-template\" id=\"AboutModalContent.html\">\r" +
+    "\n" +
+    "                <form class=\"EditViewClass\" name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutUrselfSubmit(page.model.aboutObj)\">\r" +
+    "\n" +
+    "                    <div class=\"modal-header\">\r" +
+    "\n" +
+    "                        <h3 class=\"modal-title text-center\" id=\"modal-title\">About your self\r" +
+    "\n" +
+    "                            <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                                <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
+    "\n" +
+    "                            </a>\r" +
+    "\n" +
+    "                        </h3>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                    <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
+    "\n" +
+    "                        <ul>\r" +
+    "\n" +
+    "                            <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                                <label id=\"lblabout\" style=\"color: #9b2828; font-size: 13px;\">\r" +
+    "\n" +
+    "            				(Please don't write phone numbers/emails/any junk characters)*</label>\r" +
+    "\n" +
+    "                                <textarea ng-model=\"page.model.aboutObj.txtAboutUS\" style=\"width: 500px; height: 150px;\" class=\"col-lg-10\" maxlength=\"1000\" required ng-class=\"form-control\" required />\r" +
+    "\n" +
+    "                                <div>\r" +
+    "\n" +
+    "                                </div>\r" +
+    "\n" +
+    "                                <label id=\"Label1\" style=\"color: red; font-size: 13px;\" class=\"pull-right\">(max 1000 characters)</label>\r" +
+    "\n" +
+    "                                <label id=\"lblaboutcount\" style=\"color: #1e1c1c; font-size: 13px;\">{{aboutForm.txtAboutUS.length}}</label>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                            <li class=\"row\">\r" +
+    "\n" +
+    "                                <edit-footer></edit-footer>\r" +
+    "\n" +
+    "                            </li>\r" +
+    "\n" +
+    "                        </ul>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </form>\r" +
+    "\n" +
+    "            </script>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"deleteEduContent.html\">\r" +
+    "\n" +
+    "        <form class=\"EditViewClass\" name=\"deletetForm\" novalidate role=\"form\" ng-submit=\"page.model.deleteEduSubmit();\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Astro details\r" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Alert\r" +
     "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"cancel();\">\r" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
     "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
+    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
+    "\n" +
+    "                    </a>\r" +
+    "\n" +
+    "                </h3>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"modal-body clearfix\" id=\"modal-body\">\r" +
+    "\n" +
+    "                <b class=\"text-center\"> Do you want to delete Education details</b>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "            <div class=\"modal-footer\">\r" +
+    "\n" +
+    "                <button type=\"submit\" class=\"btn btn-success\">Delete</button>\r" +
+    "\n" +
+    "                <button type=\"button\" class=\"btn btn-danger\" ng-click=\"page.model.cancel();\">Cancel</button>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        </form>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"CustomerDataContent.html\">\r" +
+    "\n" +
+    "        <form class=\"EditViewClass\" name=\"custForm\" ng-class=\"'EditViewClass'\" novalidate role=\"form\" ng-submit=\"page.model.custdataSubmit(page.model.custObj)\">\r" +
+    "\n" +
+    "            <div class=\"modal-header\">\r" +
+    "\n" +
+    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Customer details\r" +
+    "\n" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
+    "\n" +
+    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
     "\n" +
     "                    </a>\r" +
     "\n" +
@@ -250,173 +1166,69 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
     "\n" +
-    "                <ul id=\"ulastro\">\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lbltimebirth\" class=\"pop_label_left\">Time of Birth<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my select-box-my-trible select-box-my-trible3 input-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromHours\" ng-options=\"item.value as item.label for item in page.model.hrsbindArr\" required></select>\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromMinutes\" ng-options=\"item.value as item.label for item in page.model.minbindArr\" required></select>\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromSeconds\" ng-options=\"item.value as item.label for item in page.model.secbindArr\" required></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <country-directive require=\"true\" countryshow=\"true\" cityshow=\"true\" othercity=\"false\" dcountry=\"page.model.atroObj.ddlCountryOfBirthID\" dstate=\"page.model.atroObj.ddlStateOfBirthID\" ddistrict=\"page.model.atroObj.ddlDistrictOfBirthID\" dcity=\"page.model.atroObj.ddlcity\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblstarlan\" class=\"pop_label_left\">Star language</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlstarlanguage\" typeofdata=\"'starLanguage'\" ng-change=\"page.model.changeBind('star',page.model.atroObj.ddlstarlanguage);\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblstar\" class=\"pop_label_left\">Star</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlstar\" ng-options=\"item.value as item.label for item in page.model.starArr\"></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblpaadam\" class=\"pop_label_left\">Paadam</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlpaadam\" typeofdata=\"'paadam'\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblLagnam\" class=\"pop_label_left\">Lagnam</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlLagnam\" typeofdata=\"'lagnam'\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblRaasiMoonsign\" class=\"pop_label_left\">Raasi/Moon sign</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlRaasiMoonsign\" typeofdata=\"'ZodaicSign'\"></select>\r" +
-    "\n" +
-    "                            </select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblGothramGotra\" class=\"pop_label_left\">Gothram/Gotra</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.atroObj.txtGothramGotra\" class=\"form-control\" tabindex=\"13\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
+    "                <ul>\r" +
     "\n" +
     "                    <li class=\"clearfix\">\r" +
     "\n" +
-    "                        <label for=\"lblMaternalgothram\" class=\"pop_label_left\">Maternal gothram</label>\r" +
+    "                        <label for=\"lblElderYounger\" class=\"pop_label_left\" style=\"padding-top: 4%;\">Gender<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
     "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "                        <div class=\"pop_controls_right pop_radios_list\">\r" +
     "\n" +
-    "                            <input ng-model=\"page.model.atroObj.txtMaternalgothram\" class=\"form-control\" tabindex=\"14\" maxlength=\"100\" />\r" +
+    "                            <md-input-container style=\"font-weight: 700; color: black;\">\r" +
     "\n" +
-    "                        </div>\r" +
+    "                                <md-radio-group ng-required=\"true\" name=\"rdlGender\" layout=\"row\" ng-model=\"page.model.custObj.rdlGender\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
     "\n" +
-    "                    </li>\r" +
+    "                                    <md-radio-button value=\"2\" class=\"md-primary\">Female</md-radio-button>\r" +
     "\n" +
-    "                    <li class=\"clearfix\">\r" +
+    "                                    <md-radio-button value=\"1\"> Male </md-radio-button>\r" +
     "\n" +
-    "                        <label for=\"lblManglikKujadosham\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Manglik/Kuja dosham</label>\r" +
+    "                                </md-radio-group>\r" +
     "\n" +
-    "\r" +
+    "                                <div ng-messages=\"custForm.rdlGender.$invalid\">\r" +
     "\n" +
-    "                        <md-input-container style=\"font-weight: 700;color:black;\">\r" +
+    "                                    <div ng-if=\"custForm.rdlGender.$invalid && (custForm.$submitted)\">This field is required.</div>\r" +
     "\n" +
-    "                            <md-radio-group name=\"rdlkujaDosham\" layout=\"row\" ng-model=\"page.model.atroObj.rdlkujaDosham\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "                                </div>\r" +
     "\n" +
-    "                                <md-radio-button value=\"0\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"1\"> No </md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"2\"> Dont't Know </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                        </md-input-container>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
-    "\n" +
-    "                        <label for=\"lbllongitude\" class=\"pop_label_left\">Place of birth longitude</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input id=\"txtlogitude\" class=\"form-control\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddllongitude\"></select>\r" +
+    "                            </md-input-container>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
     "                    </li>\r" +
     "\n" +
-    "                    <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
+    "                    <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                        <label for=\"lbllatitude\" class=\"pop_label_left\">Place of birth latitude</label>\r" +
+    "                        <label for=\"lblname\" class=\"pop_label_left\">Sur Name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
     "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
+    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
     "\n" +
-    "                            <input id=\"txtlatitude\" class=\"form-control col-lg-3\" />\r" +
+    "                            <input type=\"text\" ng-model=\"page.model.custObj.txtSurName\" class=\"form-control\" required/>\r" +
     "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddllatitude\"></select>\r" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblname\" class=\"pop_label_left\">Name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                            <input type=\"text\" ng-model=\"page.model.custObj.txtName\" class=\"form-control\" required/>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblMaritalstatus\" class=\"pop_label_left\">Marital Status<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.custObj.dropmaritalstatus\" typeofdata=\"'MaritalStatus'\" required></select>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -424,13 +1236,131 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    </li>\r" +
     "\n" +
-    "                    <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
+    "                    <li class=\"clearfix form-group\">\r" +
     "\n" +
-    "                        <label for=\"lbllatitude\">Place of birth latitude</label>\r" +
+    "                        <label for=\"lbldob\" class=\"pop_label_left\">Date Of Birth<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                            <date-picker strdate=\"page.model.custObj.txtdobcandidate\" required></date-picker>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblheight\" class=\"pop_label_left\">Height<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlHeightpersonal\" typeofdata=\"'height'\" required></select>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblheight\" class=\"pop_label_left\">Complexion<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlcomplexion\" typeofdata=\"'Complexion'\" required></select>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"Religion\" class=\"pop_label_left\">Religion<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                            <div class=\"select-box-my\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                                <select multiselectdropdown ng-model=\"page.model.custObj.ddlreligioncandadate\" typeofdata=\"'Religion'\" required></select>\r" +
+    "\n" +
+    "                            </div>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\" id=\"divMotherTongue\">\r" +
+    "\n" +
+    "                        <label for=\"lblPersonalMotherTongue\" class=\"pop_label_left\">Mother Tongue<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlmothertongue\" typeofdata=\"'Mothertongue'\" required></select>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblCaste\" class=\"pop_label_left\">Caste<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlcaste\" typeofdata=\"'caste'\" ng-change=\"page.model.changeBind('caste',page.model.custObj.ddlcaste);\" required></select>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblCaste\" class=\"pop_label_left\">SubCaste</label>\r" +
     "\n" +
     "                        <div class=\"pop_controls_right select-box-my\">\r" +
     "\n" +
-    "                            <input type=\"checkbox\" ng-model=\"page.model.atroObj.Chkgenertehoro\" value=\"Generate HoroScope\" />\r" +
+    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlsubcaste\" ng-options=\"item.value as item.label for item in page.model.subcasteArr\"></select>\r" +
+    "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblborncitizenship\" class=\"pop_label_left\">Born Citizenship<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlBornCitizenship\" typeofdata=\"'Country'\" required></select>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
@@ -440,13 +1370,17 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <edit-footer></edit-footer>\r" +
     "\n" +
-    "\r" +
-    "\n" +
     "                    </li>\r" +
     "\n" +
     "                </ul>\r" +
     "\n" +
+    "\r" +
+    "\n" +
     "            </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -454,169 +1388,41 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    </script>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "    <script type=\"text/ng-template\" id=\"AddHoroPopup.html\">\r" +
-    "\n" +
-    "        <form name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.upload(up);\">\r" +
-    "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Upload Horoscope </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <label class=\"control-label\">Use this file formats like gif, jpeg, png,jpg</label>\r" +
-    "\n" +
-    "                <br>\r" +
-    "\n" +
-    "                <ul id=\"ulprofession\">\r" +
-    "\n" +
-    "                    <input type=\"file\" file-model=\"up.myFile\" />\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-footer\">\r" +
-    "\n" +
-    "                <input value=\"Cancel\" class=\"button_custom button_custom_reset\" ng-click=\"page.model.cancel();\" type=\"button\">\r" +
-    "\n" +
-    "                <input value=\"Upload\" class=\"button_custom\" type=\"submit\">\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </form>\r" +
-    "\n" +
-    "    </script>\r" +
-    "\n" +
-    "    <script type=\"text/ng-template\" id=\"deletehoroPopup.html\">\r" +
-    "\n" +
-    "        <form name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.deleteHoroImage();\">\r" +
-    "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Delete Horoscope </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <div class=\"text-center\">Are you sure to delete horoscope?</div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-footer\">\r" +
-    "\n" +
-    "                <input value=\"Close\" class=\"button_custom button_custom_reset\" ng-click=\"page.model.cancel();\" type=\"button\">\r" +
-    "\n" +
-    "                <input value=\"Delete\" class=\"button_custom\" type=\"submit\">\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </form>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    </script>\r" +
+    "</div>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <script type=\"text/ng-template\" id=\"AstroCityPopup.html\">\r" +
-    "\n" +
-    "        <div class=\"modal-header alert alert-danger\" id=\"div2\">\r" +
-    "\n" +
-    "            <button type=\"button\" class=\"close\" ng-click=\"page.model.cancel();\">&times;</button>\r" +
-    "\n" +
-    "            <h4 class=\"modal-title\">\r" +
-    "\n" +
-    "                <span id=\"lblcityheader\">we are unable to genearte horoscope with your given city <b style=\"color: green\"> Administrative Buildings </b>,so please select Nearest city to your place of birth</span>\r" +
-    "\n" +
-    "            </h4>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"modal-body\" id=\"modalbodyIDnew\">\r" +
-    "\n" +
-    "            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                <select multiselectdropdown ng-model=\"page.model.ddlAstrocity\" ng-options=\"item.value as item.label for item in page.model.AstrocityArr\" ng-change=\"page.model.AstroCityChange(page.model.ddlAstrocity);\"></select>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"modal-footer\">\r" +
-    "\n" +
-    "            <button type=\"button\" class=\"btn btn-default\" ng-click=\"page.model.cancel();\">Close</button>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </script>\r" +
-    "\n" +
     "\r" +
-    "\n" +
-    "    <script type=\"text/ng-template\" id=\"AstroimagePopup.html\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"modal-header\">\r" +
-    "\n" +
-    "            <h3 class=\"modal-title text-center\" id=\"modal-title\">Horoscope\r" +
-    "\n" +
-    "                <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                    <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\"></ng-md-icon>\r" +
-    "\n" +
-    "                </a>\r" +
-    "\n" +
-    "            </h3>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "            <img ng-src=\"{{page.model.ImageUrl}}\" style=\"width:500px;height:500px;\" />\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div class=\"modal-footer\">\r" +
-    "\n" +
-    "            <div class=\"pull-right\">\r" +
-    "\n" +
-    "                <input value=\"Cancel\" class=\"button_custom button_custom_reset  pull-right\" ng-click=\"page.model.cancel();\" type=\"button\">\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </script>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <script type=\"text/ng-template\" id=\"RefreshPopup.html\">\r" +
+    "<style>\r" +
     "\n" +
-    "\r" +
+    "    .multiselect {\r" +
     "\n" +
-    "        <div class=\"modal-body clearfix\" id=\"modal-body\">\r" +
+    "        border: solid 1px #ADA2A2 !important;\r" +
     "\n" +
-    "            <button ng-click=\"page.model.generatedhoroS3Upload();\" class=\"btn btn-success center-block\">Refresh Page<span class=\"fa fa-refresh\"></span></button>&nbsp;&nbsp;\r" +
+    "        color: #000;\r" +
     "\n" +
-    "\r" +
+    "        background: #fff !important;\r" +
     "\n" +
-    "        </div>\r" +
+    "        box-shadow: none !important;\r" +
     "\n" +
-    "\r" +
+    "        height: 34px !important;\r" +
     "\n" +
-    "    </script>\r" +
+    "        line-height: 33px;\r" +
     "\n" +
-    "</div>"
+    "        margin: 0 !important;\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "</style>\r" +
+    "\n" +
+    "<!--<alert-directive></alert-directive>-->"
   );
 
 
@@ -1265,7 +2071,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <script type=\"text/ng-template\" id=\"EduModalContent.html\">\r" +
     "\n" +
-    "                <form name=\"eduForm\" novalidate role=\"form\" ng-submit=\"eduForm.$valid  && page.model.eduSubmit(page.model.edoObj);\" accessible-form>\r" +
+    "                <form class=\"EditViewClass\"   name=\"eduForm\" novalidate role=\"form\" ng-submit=\"eduForm.$valid  && page.model.eduSubmit(page.model.edoObj);\" accessible-form>\r" +
     "\n" +
     "                    <div class=\"modal-header\">\r" +
     "\n" +
@@ -1445,7 +2251,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <script type=\"text/ng-template\" id=\"profModalContent.html\">\r" +
     "\n" +
-    "                <form name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.ProfSubmit(page.model.profObj);\" accessible-form>\r" +
+    "                <form class=\"EditViewClass\"   name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.ProfSubmit(page.model.profObj);\" accessible-form>\r" +
     "\n" +
     "                    <div class=\"modal-header\">\r" +
     "\n" +
@@ -1659,7 +2465,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <script type=\"text/ng-template\" id=\"AboutModalContent.html\">\r" +
     "\n" +
-    "                <form name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutUrselfSubmit(page.model.aboutObj)\">\r" +
+    "                <form class=\"EditViewClass\"   name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutUrselfSubmit(page.model.aboutObj)\">\r" +
     "\n" +
     "                    <div class=\"modal-header\">\r" +
     "\n" +
@@ -1723,7 +2529,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"deleteEduContent.html\">\r" +
     "\n" +
-    "        <form name=\"deletetForm\" novalidate role=\"form\" ng-submit=\"page.model.deleteEduSubmit();\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"deletetForm\" novalidate role=\"form\" ng-submit=\"page.model.deleteEduSubmit();\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -1767,7 +2573,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"CustomerDataContent.html\">\r" +
     "\n" +
-    "        <form name=\"custForm\" ng-class=\"'EditViewClass'\" novalidate role=\"form\" ng-submit=\"page.model.custdataSubmit(page.model.custObj)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"custForm\" ng-class=\"'EditViewClass'\" novalidate role=\"form\" ng-submit=\"page.model.custdataSubmit(page.model.custObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -2075,7 +2881,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "<script type=\"text/ng-template\" id=\"parentContactContent.html\">\r" +
     "\n" +
-    "    <form name=\"parentForm\" novalidate role=\"form\" ng-submit=\"page.model.commonContactSubmit(page.model.parentobj.MotheremaILcust_family_id,\r" +
+    "    <form class=\"EditViewClass\"   name=\"parentForm\" novalidate role=\"form\" ng-submit=\"page.model.commonContactSubmit(page.model.parentobj.MotheremaILcust_family_id,\r" +
     "\n" +
     "    page.model.parentobj.txtFathername,page.model.parentobj.ddlcandidatefathermobcode,page.model.parentobj.txtcandidatefathermob,page.model.parentobj.ddlcandidatefathermob2code,\r" +
     "\n" +
@@ -2147,7 +2953,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "<script type=\"text/ng-template\" id=\"relativeContactContent.html\">\r" +
     "\n" +
-    "    <form name=\"relativeForm\" novalidate role=\"form\" ng-submit=\"page.model.commonContactSubmit(page.model.relativeobj.emaILcust_family_id,page.model.relativeobj.txtrelativename\r" +
+    "    <form class=\"EditViewClass\"   name=\"relativeForm\" novalidate role=\"form\" ng-submit=\"page.model.commonContactSubmit(page.model.relativeobj.emaILcust_family_id,page.model.relativeobj.txtrelativename\r" +
     "\n" +
     "    ,page.model.relativeobj.ddlRelativemob,\r" +
     "\n" +
@@ -2215,7 +3021,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "<script type=\"text/ng-template\" id=\"candidateContactContent.html\">\r" +
     "\n" +
-    "    <form name=\"candidateForm\" novalidate role=\"form\" ng-submit=\"page.model.commonContactSubmit(page.model.candidateobj.emaILcust_family_id,'',\r" +
+    "    <form class=\"EditViewClass\"   name=\"candidateForm\" novalidate role=\"form\" ng-submit=\"page.model.commonContactSubmit(page.model.candidateobj.emaILcust_family_id,'',\r" +
     "\n" +
     "    page.model.candidateobj.ddlcandidateMobileCountryID,\r" +
     "\n" +
@@ -2291,7 +3097,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "<script type=\"text/ng-template\" id=\"referenceContactContent.html\">\r" +
     "\n" +
-    "    <form name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.submitContactReference(page.model.referenceobj)\">\r" +
+    "    <form class=\"EditViewClass\"   name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.submitContactReference(page.model.referenceobj)\">\r" +
     "\n" +
     "        <div class=\"modal-header\">\r" +
     "\n" +
@@ -2355,7 +3161,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "<script type=\"text/ng-template\" id=\"candidateAddrContent.html\">\r" +
     "\n" +
-    "    <form name=\"addrForm\" novalidate role=\"form\" ng-submit=\"page.model.CandidateAddressSubmit(page.model.canAddrobj)\">\r" +
+    "    <form class=\"EditViewClass\"   name=\"addrForm\" novalidate role=\"form\" ng-submit=\"page.model.CandidateAddressSubmit(page.model.canAddrobj)\">\r" +
     "\n" +
     "        <div class=\"modal-header\">\r" +
     "\n" +
@@ -2529,7 +3335,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "<script type=\"text/ng-template\" id=\"primaryRelationContent.html\">\r" +
     "\n" +
-    "    <form name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.primaryRelationSubmit(page.model.setrelObj.ddlPrimaryMobileRel,page.model.setrelObj.ddlPrimaryEmailRel,'1')\">\r" +
+    "    <form class=\"EditViewClass\"   name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.primaryRelationSubmit(page.model.setrelObj.ddlPrimaryMobileRel,page.model.setrelObj.ddlPrimaryEmailRel,'1')\">\r" +
     "\n" +
     "        <div class=\"modal-header\">\r" +
     "\n" +
@@ -2643,7 +3449,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "<script type=\"text/ng-template\" id=\"verifyMobileContent.html\">\r" +
     "\n" +
-    "    <form name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.verifyMobCode(page.model.verifymobObj.txtVerificationcode)\">\r" +
+    "    <form class=\"EditViewClass\"   name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.verifyMobCode(page.model.verifymobObj.txtVerificationcode)\">\r" +
     "\n" +
     "        <div class=\"modal-header\">\r" +
     "\n" +
@@ -3410,7 +4216,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <script type=\"text/ng-template\" id=\"EduModalContent.html\">\r" +
     "\n" +
-    "                <form name=\"eduForm\" novalidate role=\"form\" ng-submit=\"eduForm.$valid  && page.model.eduSubmit(page.model.edoObj);\" accessible-form>\r" +
+    "                <form class=\"EditViewClass\"   name=\"eduForm\" novalidate role=\"form\" ng-submit=\"eduForm.$valid  && page.model.eduSubmit(page.model.edoObj);\" accessible-form>\r" +
     "\n" +
     "                    <div class=\"modal-header\">\r" +
     "\n" +
@@ -3590,7 +4396,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <script type=\"text/ng-template\" id=\"profModalContent.html\">\r" +
     "\n" +
-    "                <form name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.ProfSubmit(page.model.profObj);\" accessible-form>\r" +
+    "                <form class=\"EditViewClass\"   name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.ProfSubmit(page.model.profObj);\" accessible-form>\r" +
     "\n" +
     "                    <div class=\"modal-header\">\r" +
     "\n" +
@@ -3804,7 +4610,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <script type=\"text/ng-template\" id=\"AboutModalContent.html\">\r" +
     "\n" +
-    "                <form name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutUrselfSubmit(page.model.aboutObj)\">\r" +
+    "                <form class=\"EditViewClass\"   name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutUrselfSubmit(page.model.aboutObj)\">\r" +
     "\n" +
     "                    <div class=\"modal-header\">\r" +
     "\n" +
@@ -3868,7 +4674,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"deleteEduContent.html\">\r" +
     "\n" +
-    "        <form name=\"deletetForm\" novalidate role=\"form\" ng-submit=\"page.model.deleteEduSubmit();\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"deletetForm\" novalidate role=\"form\" ng-submit=\"page.model.deleteEduSubmit();\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -3912,7 +4718,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"CustomerDataContent.html\">\r" +
     "\n" +
-    "        <form name=\"custForm\" ng-class=\"'EditViewClass'\" novalidate role=\"form\" ng-submit=\"page.model.custdataSubmit(page.model.custObj)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"custForm\" ng-class=\"'EditViewClass'\" novalidate role=\"form\" ng-submit=\"page.model.custdataSubmit(page.model.custObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -4491,7 +5297,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"AddimagePopup.html\">\r" +
     "\n" +
-    "        <form name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.upload(up);\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.upload(up);\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -4525,7 +5331,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"deleteimagePopup.html\">\r" +
     "\n" +
-    "        <form name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.Delete(up);\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.Delete(up);\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -4676,7 +5482,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"AboutModalContent.html\">\r" +
     "\n" +
-    "        <form name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutProfleSubmit(page.model.aboutObj.txtAboutprofile)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutProfleSubmit(page.model.aboutObj.txtAboutprofile)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -4965,7 +5771,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"astroContent.html\">\r" +
     "\n" +
-    "        <form name=\"astroForm\" novalidate role=\"form\" ng-submit=\"page.model.astroSubmit(page.model.atroObj);\" accessible-form>\r" +
+    "        <form class=\"EditViewClass\"   name=\"astroForm\" novalidate role=\"form\" ng-submit=\"page.model.astroSubmit(page.model.atroObj);\" accessible-form>\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -5191,7 +5997,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"AddHoroPopup.html\">\r" +
     "\n" +
-    "        <form name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.upload(up);\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.upload(up);\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -5227,7 +6033,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"deletehoroPopup.html\">\r" +
     "\n" +
-    "        <form name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.deleteHoroImage();\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.deleteHoroImage();\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -5957,7 +6763,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"parentModalContent.html\">\r" +
     "\n" +
-    "        <form name=\"parentForm\" novalidate role=\"form\" ng-submit=\"page.model.ParentSubmit(page.model.parent)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"parentForm\" novalidate role=\"form\" ng-submit=\"page.model.ParentSubmit(page.model.parent)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -6355,7 +7161,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"AddressModalContent.html\">\r" +
     "\n" +
-    "        <form name=\"addressForm\" novalidate role=\"form\" ng-submit=\"page.model.contactAddressSubmit(page.model.AdrrObj)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"addressForm\" novalidate role=\"form\" ng-submit=\"page.model.contactAddressSubmit(page.model.AdrrObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -6521,7 +7327,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"PhysicalAttributeModalContent.html\">\r" +
     "\n" +
-    "        <form name=\"PhysicalForm\" novalidate role=\"form\" ng-submit=\"page.model.physicalAtrrSubmit(page.model.physicalObj)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"PhysicalForm\" novalidate role=\"form\" ng-submit=\"page.model.physicalAtrrSubmit(page.model.physicalObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -6735,7 +7541,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"AboutFamilyModalContent.html\">\r" +
     "\n" +
-    "        <form name=\"AboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutMyfamilySubmit(page.model.aboutFamilyObj)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"AboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutMyfamilySubmit(page.model.aboutFamilyObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -7342,7 +8148,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "        <form name=\"partnerFormForm\" novalidate role=\"form\" ng-submit=\"page.model.partnerPrefSubmit(page.model.partnerObj)\" accessible-form>\r" +
+    "        <form class=\"EditViewClass\"   name=\"partnerFormForm\" novalidate role=\"form\" ng-submit=\"page.model.partnerPrefSubmit(page.model.partnerObj)\" accessible-form>\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -7736,7 +8542,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"partnerDescContent.html\">\r" +
     "\n" +
-    "        <form name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.partnerDescriptionSubmit(page.model.partnerDescObj)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.partnerDescriptionSubmit(page.model.partnerDescObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -8559,7 +9365,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"profileSettingContent.html\">\r" +
     "\n" +
-    "        <form name=\"psForm\" novalidate role=\"form\" ng-submit=\"page.model.profileSettingSubmit(page.model.psObj)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"psForm\" novalidate role=\"form\" ng-submit=\"page.model.profileSettingSubmit(page.model.psObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -8691,7 +9497,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"confidentialContent.html\">\r" +
     "\n" +
-    "        <form name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.confidentialSubmit(page.model.csObj)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.confidentialSubmit(page.model.csObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -8767,7 +9573,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"profileDisplayContent.html\">\r" +
     "\n" +
-    "        <form name=\"psdForm\" novalidate role=\"form\" ng-submit=\"page.model.profileSettingDisplaySubmit(page.model.psdObj)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"psdForm\" novalidate role=\"form\" ng-submit=\"page.model.profileSettingDisplaySubmit(page.model.psdObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -8869,7 +9675,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"gradeSelectionContent.html\">\r" +
     "\n" +
-    "        <form name=\"gradeForm\" novalidate role=\"form\" ng-submit=\"page.model.gradeSubmit(page.model.gradeObj)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"gradeForm\" novalidate role=\"form\" ng-submit=\"page.model.gradeSubmit(page.model.gradeObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -9126,7 +9932,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        <script type=\"text/ng-template\" id=\"propertyContent.html\">\r" +
     "\n" +
-    "            <form name=\"propertyForm\" novalidate role=\"form\" ng-submit=\"page.model.propertySubmit(page.model.proObj)\">\r" +
+    "            <form class=\"EditViewClass\"   name=\"propertyForm\" novalidate role=\"form\" ng-submit=\"page.model.propertySubmit(page.model.proObj)\">\r" +
     "\n" +
     "                <div class=\"modal-header\">\r" +
     "\n" +
@@ -9539,7 +10345,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        <script type=\"text/ng-template\" id=\"referenceContent.html\">\r" +
     "\n" +
-    "            <form name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.refenceSubmit(page.model.refObj)\" accessible-form>\r" +
+    "            <form class=\"EditViewClass\"   name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.refenceSubmit(page.model.refObj)\" accessible-form>\r" +
     "\n" +
     "                <div class=\"modal-header\">\r" +
     "\n" +
@@ -10624,7 +11430,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"FBModalContent.html\">\r" +
     "\n" +
-    "        <form name=\"FBForm\" novalidate role=\"form\" ng-submit=\"FBForm.$valid  && page.model.FBSubmit(page.model.fbObj)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"FBForm\" novalidate role=\"form\" ng-submit=\"FBForm.$valid  && page.model.FBSubmit(page.model.fbObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -10756,7 +11562,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"FSModalContent.html\">\r" +
     "\n" +
-    "        <form name=\"FSForm\" novalidate role=\"form\" ng-submit=\"FSForm.$valid  && page.model.FSSubmit(page.model.fsObj)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"FSForm\" novalidate role=\"form\" ng-submit=\"FSForm.$valid  && page.model.FSSubmit(page.model.fsObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -10944,7 +11750,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"MBModalContent.html\">\r" +
     "\n" +
-    "        <form name=\"MBForm\" novalidate role=\"form\" ng-submit=\"MBForm.$valid  && page.model.MBSubmit(page.model.mbObj)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"MBForm\" novalidate role=\"form\" ng-submit=\"MBForm.$valid  && page.model.MBSubmit(page.model.mbObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -11104,7 +11910,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"MSModalContent.html\">\r" +
     "\n" +
-    "        <form name=\"MSForm\" novalidate=\"true\" ng-submit=\"MSForm.$valid  && page.model.MSSubmit(page.model.msObj)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"MSForm\" novalidate=\"true\" ng-submit=\"MSForm.$valid  && page.model.MSSubmit(page.model.msObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -12781,7 +13587,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"SibblingCountPopup.html\">\r" +
     "\n" +
-    "        <form name=\"sibblingCoutForm\" novalidate role=\"form\" ng-submit=\"page.model.sibblingCountsSubmit(page.model.SibCountObj)\">\r" +
+    "        <form class=\"EditViewClass\"   name=\"sibblingCoutForm\" novalidate role=\"form\" ng-submit=\"page.model.sibblingCountsSubmit(page.model.SibCountObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -12897,7 +13703,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"brotherModalContent.html\">\r" +
     "\n" +
-    "        <form name=\"brotherForm\" novalidate role=\"form\" ng-submit=\"brotherForm.$valid  && page.model.sibBroSubmit(page.model.broObj)\" accessible-form>\r" +
+    "        <form class=\"EditViewClass\"   name=\"brotherForm\" novalidate role=\"form\" ng-submit=\"brotherForm.$valid  && page.model.sibBroSubmit(page.model.broObj)\" accessible-form>\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -13275,7 +14081,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"sisterModalContent.html\">\r" +
     "\n" +
-    "        <form name=\"sibsisForm\" novalidate role=\"form\" ng-submit=\"sibsisForm.$valid  && page.model.sibSisSubmit(page.model.sisObj)\" accessible-form>\r" +
+    "        <form class=\"EditViewClass\"   name=\"sibsisForm\" novalidate role=\"form\" ng-submit=\"sibsisForm.$valid  && page.model.sibSisSubmit(page.model.sisObj)\" accessible-form>\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -14444,7 +15250,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"SpouseContent.html\">\r" +
     "\n" +
-    "        <form name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.spouseSubmit(page.model.spouObj);\" accessible-form>\r" +
+    "        <form class=\"EditViewClass\"   name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.spouseSubmit(page.model.spouObj);\" accessible-form>\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -14734,7 +15540,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"spouseChildContent.html\">\r" +
     "\n" +
-    "        <form name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.childSubmit(page.model.childObj);\" accessible-form>\r" +
+    "        <form class=\"EditViewClass\"   name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.childSubmit(page.model.childObj);\" accessible-form>\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -15100,7 +15906,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('common/templates/deletepopup.html',
-    "<form name=\"deleteForm\" novalidate role=\"form\" ng-submit=\"page.model.deleteSubmit()\">\r" +
+    "<form class=\"EditViewClass\"   name=\"deleteForm\" novalidate role=\"form\" ng-submit=\"page.model.deleteSubmit()\">\r" +
     "\n" +
     "    <div class=\"modal-header\">\r" +
     "\n" +
@@ -15139,7 +15945,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('common/templates/reviewConfirmationPopup.html',
-    "<form name=\"reviewConfirmForm\" novalidate role=\"form\" ng-submit=\"reviewSubmit();\">\r" +
+    "<form class=\"EditViewClass\"   name=\"reviewConfirmForm\" novalidate role=\"form\" ng-submit=\"reviewSubmit();\">\r" +
     "\n" +
     "    <div class=\"modal-header text-center\" style=\"color: #57b5e3;\r" +
     "\n" +

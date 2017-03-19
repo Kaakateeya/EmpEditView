@@ -320,7 +320,7 @@
 
         <div id="edupopupdiv">
             <script type="text/ng-template" id="EduModalContent.html">
-                <form name="eduForm" novalidate role="form" ng-submit="eduForm.$valid  && page.model.eduSubmit(page.model.edoObj);" accessible-form>
+                <form class="EditViewClass"   name="eduForm" novalidate role="form" ng-submit="eduForm.$valid  && page.model.eduSubmit(page.model.edoObj);" accessible-form>
                     <div class="modal-header">
                         <h3 class="modal-title text-center" id="modal-title">Education Details
                             <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -410,7 +410,7 @@
         </div>
         <div id=profpopupdiv>
             <script type="text/ng-template" id="profModalContent.html">
-                <form name="profForm" novalidate role="form" ng-submit="page.model.ProfSubmit(page.model.profObj);" accessible-form>
+                <form class="EditViewClass"   name="profForm" novalidate role="form" ng-submit="page.model.ProfSubmit(page.model.profObj);" accessible-form>
                     <div class="modal-header">
                         <h3 class="modal-title text-center" id="modal-title">Profession details
                             <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -517,7 +517,7 @@
         </div>
         <div id="AboutPopup">
             <script type="text/ng-template" id="AboutModalContent.html">
-                <form name="aboutForm" novalidate role="form" ng-submit="page.model.AboutUrselfSubmit(page.model.aboutObj)">
+                <form class="EditViewClass"   name="aboutForm" novalidate role="form" ng-submit="page.model.AboutUrselfSubmit(page.model.aboutObj)">
                     <div class="modal-header">
                         <h3 class="modal-title text-center" id="modal-title">About your self
                             <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -549,7 +549,7 @@
     </div>
 
     <script type="text/ng-template" id="deleteEduContent.html">
-        <form name="deletetForm" novalidate role="form" ng-submit="page.model.deleteEduSubmit();">
+        <form class="EditViewClass"   name="deletetForm" novalidate role="form" ng-submit="page.model.deleteEduSubmit();">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Alert
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -571,7 +571,7 @@
 
 
     <script type="text/ng-template" id="CustomerDataContent.html">
-        <form name="custForm" ng-class="'EditViewClass'" novalidate role="form" ng-submit="page.model.custdataSubmit(page.model.custObj)">
+        <form class="EditViewClass"   name="custForm" ng-class="'EditViewClass'" novalidate role="form" ng-submit="page.model.custdataSubmit(page.model.custObj)">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Customer details
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -725,7 +725,7 @@
 
 
 <script type="text/ng-template" id="parentContactContent.html">
-    <form name="parentForm" novalidate role="form" ng-submit="page.model.commonContactSubmit(page.model.parentobj.MotheremaILcust_family_id,
+    <form class="EditViewClass"   name="parentForm" novalidate role="form" ng-submit="page.model.commonContactSubmit(page.model.parentobj.MotheremaILcust_family_id,
     page.model.parentobj.txtFathername,page.model.parentobj.ddlcandidatefathermobcode,page.model.parentobj.txtcandidatefathermob,page.model.parentobj.ddlcandidatefathermob2code,
     page.model.parentobj.txtcandidatefathermob2,page.model.parentobj.ddlcandidatefathelandcode,page.model.parentobj.txtcandidatefathelandareacode
     ,page.model.parentobj.txtcandidatefathelandnumber,page.model.parentobj.txtcandidatefatheremail,'Parent')">
@@ -761,7 +761,7 @@
 
 
 <script type="text/ng-template" id="relativeContactContent.html">
-    <form name="relativeForm" novalidate role="form" ng-submit="page.model.commonContactSubmit(page.model.relativeobj.emaILcust_family_id,page.model.relativeobj.txtrelativename
+    <form class="EditViewClass"   name="relativeForm" novalidate role="form" ng-submit="page.model.commonContactSubmit(page.model.relativeobj.emaILcust_family_id,page.model.relativeobj.txtrelativename
     ,page.model.relativeobj.ddlRelativemob,
     page.model.relativeobj.txtRelativemob,page.model.relativeobj.ddlRelativemob2,page.model.relativeobj.txtRelativemob2,page.model.relativeobj.ddllandRelativecode,page.model.relativeobj.txtRelativeareacode
     ,page.model.relativeobj.txtlandnumberRelative,page.model.relativeobj.txtRelativeemail,'relative')">
@@ -795,7 +795,7 @@
 
 
 <script type="text/ng-template" id="candidateContactContent.html">
-    <form name="candidateForm" novalidate role="form" ng-submit="page.model.commonContactSubmit(page.model.candidateobj.emaILcust_family_id,'',
+    <form class="EditViewClass"   name="candidateForm" novalidate role="form" ng-submit="page.model.commonContactSubmit(page.model.candidateobj.emaILcust_family_id,'',
     page.model.candidateobj.ddlcandidateMobileCountryID,
     page.model.candidateobj.txtcandidatemobilenumber,page.model.candidateobj.ddlcandidateMobileCountryID2,
     page.model.candidateobj.txtFBMobileNumber2,page.model.candidateobj.ddlcandidateLandLineCountry,page.model.candidateobj.txtcandidateAreCode,
@@ -833,7 +833,7 @@
 
 
 <script type="text/ng-template" id="referenceContactContent.html">
-    <form name="refForm" novalidate role="form" ng-submit="page.model.submitContactReference(page.model.referenceobj)">
+    <form class="EditViewClass"   name="refForm" novalidate role="form" ng-submit="page.model.submitContactReference(page.model.referenceobj)">
         <div class="modal-header">
             <h3 class="modal-title text-center" id="modal-title">Reference Contact details
                 <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -865,7 +865,7 @@
 
 
 <script type="text/ng-template" id="candidateAddrContent.html">
-    <form name="addrForm" novalidate role="form" ng-submit="page.model.CandidateAddressSubmit(page.model.canAddrobj)">
+    <form class="EditViewClass"   name="addrForm" novalidate role="form" ng-submit="page.model.CandidateAddressSubmit(page.model.canAddrobj)">
         <div class="modal-header">
             <h3 class="modal-title text-center" id="modal-title">Candidate Address Details
                 <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -952,7 +952,7 @@
 
 
 <script type="text/ng-template" id="primaryRelationContent.html">
-    <form name="refForm" novalidate role="form" ng-submit="page.model.primaryRelationSubmit(page.model.setrelObj.ddlPrimaryMobileRel,page.model.setrelObj.ddlPrimaryEmailRel,'1')">
+    <form class="EditViewClass"   name="refForm" novalidate role="form" ng-submit="page.model.primaryRelationSubmit(page.model.setrelObj.ddlPrimaryMobileRel,page.model.setrelObj.ddlPrimaryEmailRel,'1')">
         <div class="modal-header">
             <h3 class="modal-title text-center" id="modal-title">Candidate Primary Contact relation
                 <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -1009,7 +1009,7 @@
 
 
 <script type="text/ng-template" id="verifyMobileContent.html">
-    <form name="refForm" novalidate role="form" ng-submit="page.model.verifyMobCode(page.model.verifymobObj.txtVerificationcode)">
+    <form class="EditViewClass"   name="refForm" novalidate role="form" ng-submit="page.model.verifyMobCode(page.model.verifymobObj.txtVerificationcode)">
         <div class="modal-header">
             <h3 class="modal-title text-center" id="modal-title">Mobile verification code sent successfully to {{page.model.popupMobilenumber}}
                 <a href="javascript:void(0);" ng-click="page.model.cancel();">

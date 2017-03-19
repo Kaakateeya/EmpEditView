@@ -320,7 +320,7 @@
 
         <div id="edupopupdiv">
             <script type="text/ng-template" id="EduModalContent.html">
-                <form name="eduForm" novalidate role="form" ng-submit="eduForm.$valid  && page.model.eduSubmit(page.model.edoObj);" accessible-form>
+                <form class="EditViewClass"   name="eduForm" novalidate role="form" ng-submit="eduForm.$valid  && page.model.eduSubmit(page.model.edoObj);" accessible-form>
                     <div class="modal-header">
                         <h3 class="modal-title text-center" id="modal-title">Education Details
                             <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -410,7 +410,7 @@
         </div>
         <div id=profpopupdiv>
             <script type="text/ng-template" id="profModalContent.html">
-                <form name="profForm" novalidate role="form" ng-submit="page.model.ProfSubmit(page.model.profObj);" accessible-form>
+                <form class="EditViewClass"   name="profForm" novalidate role="form" ng-submit="page.model.ProfSubmit(page.model.profObj);" accessible-form>
                     <div class="modal-header">
                         <h3 class="modal-title text-center" id="modal-title">Profession details
                             <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -517,7 +517,7 @@
         </div>
         <div id="AboutPopup">
             <script type="text/ng-template" id="AboutModalContent.html">
-                <form name="aboutForm" novalidate role="form" ng-submit="page.model.AboutUrselfSubmit(page.model.aboutObj)">
+                <form class="EditViewClass"   name="aboutForm" novalidate role="form" ng-submit="page.model.AboutUrselfSubmit(page.model.aboutObj)">
                     <div class="modal-header">
                         <h3 class="modal-title text-center" id="modal-title">About your self
                             <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -549,7 +549,7 @@
     </div>
 
     <script type="text/ng-template" id="deleteEduContent.html">
-        <form name="deletetForm" novalidate role="form" ng-submit="page.model.deleteEduSubmit();">
+        <form class="EditViewClass"   name="deletetForm" novalidate role="form" ng-submit="page.model.deleteEduSubmit();">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Alert
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -571,7 +571,7 @@
 
 
     <script type="text/ng-template" id="CustomerDataContent.html">
-        <form name="custForm" ng-class="'EditViewClass'" novalidate role="form" ng-submit="page.model.custdataSubmit(page.model.custObj)">
+        <form class="EditViewClass"   name="custForm" ng-class="'EditViewClass'" novalidate role="form" ng-submit="page.model.custdataSubmit(page.model.custObj)">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Customer details
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">
