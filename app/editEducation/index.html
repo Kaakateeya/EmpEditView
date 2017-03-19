@@ -1,4 +1,4 @@
-<div ng-class="EditViewClass" class="right_col" style="padding-top: 6%;padding-left: 1%;">
+<div ng-class="'EditViewClass'" class="right_col" style="padding-top: 6%;padding-left: 1%;">
 
     <div ng-include="'templates/sideMenu.html'">
     </div>
@@ -571,7 +571,7 @@
 
 
     <script type="text/ng-template" id="CustomerDataContent.html">
-        <form name="custForm" ng-class="EditViewClass" novalidate role="form" ng-submit="page.model.custdataSubmit(page.model.custObj)">
+        <form name="custForm" ng-class="'EditViewClass'" novalidate role="form" ng-submit="page.model.custdataSubmit(page.model.custObj)">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Customer details
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">
