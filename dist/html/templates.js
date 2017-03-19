@@ -2,7 +2,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
   'use strict';
 
   $templateCache.put('app/editAstro/index.html',
-    "<div id=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "<div class=\"right_col EditViewClass\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "    <div>\r" +
     "\n" +
@@ -621,7 +621,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editContact/index.html',
-    "<div id=\"EditViewClass\">\r" +
+    "<div class=\"EditViewClass\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -2766,7 +2766,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editEducation/index.html',
-    "<div id=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "<div ng-class=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -3912,7 +3912,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"CustomerDataContent.html\">\r" +
     "\n" +
-    "        <form name=\"custForm\" id=\"EditViewClass\" novalidate role=\"form\" ng-submit=\"page.model.custdataSubmit(page.model.custObj)\">\r" +
+    "        <form name=\"custForm\" ng-class=\"EditViewClass\" novalidate role=\"form\" ng-submit=\"page.model.custdataSubmit(page.model.custObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -4191,7 +4191,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editManagePhoto/index.html',
-    "<div id=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "<div ng-class=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -4610,7 +4610,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editOfcePurpose/index.html',
-    "<div id=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "<div ng-class=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -4735,7 +4735,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editParent/index.html',
-    "<div id=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "<div ng-class=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "    <div>\r" +
     "\n" +
@@ -6812,7 +6812,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editPartnerpreference/index.html',
-    "<div id=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "<div ng-class=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -7785,7 +7785,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editProfileSetting/index.html',
-    "<div id=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "<div ng-class=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -8992,7 +8992,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editProperty/index.html',
-    "<div id=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "<div ng-class=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -9285,7 +9285,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editReference/index.html',
-    "<div id=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "<div ng-class=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -9712,7 +9712,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editRelative/index.html',
-    "<div id=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "<div ng-class=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -11311,7 +11311,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editSibbling/index.html',
-    "<div id=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "<div ng-class=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -13662,7 +13662,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('app/editSpouse/index.html',
-    "<div id=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "<div ng-class=\"EditViewClass\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
     "\n" +
     "\r" +
     "\n" +

@@ -19,7 +19,8 @@
                     scope: scope,
                     size: size,
                     backdrop: 'static',
-                    keyboard: false
+                    keyboard: false,
+                    windowClass: 'EditViewClass'
                 });
             },
             closepopup: function() {
