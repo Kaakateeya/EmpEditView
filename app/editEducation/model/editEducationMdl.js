@@ -33,9 +33,11 @@
 
 
         var CustID = stateParams.CustID;
+        alert(stateParams.CustID);
         // logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.CustID = CustID;
         model.init = function() {
+            CustID = stateParams.CustID;
             model.getdata();
             return model;
         };

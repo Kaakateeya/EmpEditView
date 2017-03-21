@@ -9,6 +9,7 @@
         model.lnkeducationandprofReview = false;
         model.scope = {};
         model.init = function() {
+            CustID = stateParams.CustID;
             model.unreviewedLinks();
             model.menuItem();
             baseService.personalDetails(CustID).then(function(response) {

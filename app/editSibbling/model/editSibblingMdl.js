@@ -29,6 +29,7 @@
         //end declaration block
 
         model.init = function() {
+            custID = model.CustID = stateParams.CustID;
             model.sibPageload();
             return model;
         };

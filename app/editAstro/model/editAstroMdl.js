@@ -19,7 +19,7 @@
         var AdminID = authSvc.isAdmin();
         var custID = model.CustID = stateParams.CustID;
 
-        // model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+
         var isSubmit = true;
 
         model.loginpaidstatus = authSvc.getpaidstatus();
@@ -27,6 +27,7 @@
         // end declaration part
 
         model.init = function() {
+            custID = model.CustID = stateParams.CustID;
             model.astropageload();
 
             return model;
@@ -34,7 +35,7 @@
 
         model.astropageload = function() {
 
-            editAstroService.getAstroData(custID).then(function(response) {
+            editAstroService.getAstroData(stateParams.CustID).then(function(response) {
 
                 if (commonFactory.checkvals(response.data[0])) {
                     model.AstroArr = JSON.parse(response.data[0]);
@@ -224,8 +225,6 @@
                                 IsActive: keyname.indexOf('html') !== -1 ? 1 : 0,
                                 i_flag: 1
                             };
-
-
 
                             editAstroService.uploadDeleteAstroData(model.uploadData).then(function(response) {
 

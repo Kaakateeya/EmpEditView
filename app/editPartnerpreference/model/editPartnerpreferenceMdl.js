@@ -21,6 +21,7 @@
         //end declaration block
 
         model.init = function() {
+            custID = model.CustID = stateParams.CustID;
             model.pageload();
 
             return model;

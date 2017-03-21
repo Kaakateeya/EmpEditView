@@ -8,6 +8,7 @@
          vm.init = function() {
              scope.model = model = baseModel;
              model.scope = scope;
+             scope.model.init();
          };
 
          scope.redirect = function(type) {

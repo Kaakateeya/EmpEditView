@@ -25,6 +25,7 @@
 
 
         model.init = function() {
+            custID = model.CustID = stateParams.CustID;
             model.parentBindData();
             model.AboutPageloadData();
             return model;

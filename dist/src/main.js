@@ -126,7 +126,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         var AdminID = authSvc.isAdmin();
         var custID = model.CustID = stateParams.CustID;
 
-        // model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
+
         var isSubmit = true;
 
         model.loginpaidstatus = authSvc.getpaidstatus();
@@ -134,6 +134,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         // end declaration part
 
         model.init = function() {
+            custID = model.CustID = stateParams.CustID;
             model.astropageload();
 
             return model;
@@ -141,7 +142,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         model.astropageload = function() {
 
-            editAstroService.getAstroData(custID).then(function(response) {
+            editAstroService.getAstroData(stateParams.CustID).then(function(response) {
 
                 if (commonFactory.checkvals(response.data[0])) {
                     model.AstroArr = JSON.parse(response.data[0]);
@@ -331,8 +332,6 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                                 IsActive: keyname.indexOf('html') !== -1 ? 1 : 0,
                                 i_flag: 1
                             };
-
-
 
                             editAstroService.uploadDeleteAstroData(model.uploadData).then(function(response) {
 
@@ -532,6 +531,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.mobileVerificationCode = "";
         model.ID = 0;
         model.init = function() {
+            custID = model.CustID = stateParams.CustID;
             model.pageload();
             return model;
         };
@@ -1021,9 +1021,11 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
 
         var CustID = stateParams.CustID;
+        alert(stateParams.CustID);
         // logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.CustID = CustID;
         model.init = function() {
+            CustID = stateParams.CustID;
             model.getdata();
             return model;
         };
@@ -1507,6 +1509,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         //end declaration block
 
         model.init = function() {
+            CustID = stateParams.CustID;
             model.getData();
             return model;
         };
@@ -1777,6 +1780,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.aboutObj = {};
 
         model.init = function() {
+            custID = stateParams.CustID;
             model.pageload();
             return model;
         };
@@ -1892,6 +1896,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
 
         model.init = function() {
+            custID = model.CustID = stateParams.CustID;
             model.parentBindData();
             model.AboutPageloadData();
             return model;
@@ -2414,6 +2419,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         //end declaration block
 
         model.init = function() {
+            custID = model.CustID = stateParams.CustID;
             model.pageload();
 
             return model;
@@ -2686,7 +2692,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
 
         model.init = function() {
-
+            custID = stateParams.CustID;
             model.pageload();
             return model;
         };
@@ -2941,6 +2947,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         //end declaration block
 
         model.init = function() {
+            custID = model.CustID = stateParams.CustID;
             model.pageload();
 
             return model;
@@ -3084,6 +3091,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         //end declaration block
         model.init = function() {
+            custID = model.CustID = stateParams.CustID;
             model.pageload();
             return model;
         };
@@ -3277,6 +3285,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         var AdminID = authSvc.isAdmin();
         //end declaration block
         model.init = function() {
+            custid = model.CustID = stateParams.CustID;
             model.relativePageLoad();
             return model;
         };
@@ -3734,6 +3743,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         //end declaration block
 
         model.init = function() {
+            custID = model.CustID = stateParams.CustID;
             model.sibPageload();
             return model;
         };
@@ -4292,6 +4302,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         var loginEmpid = authSvc.LoginEmpid();
         var AdminID = authSvc.isAdmin();
         model.init = function() {
+            custID = stateParams.CustID;
             model.pageload();
             return model;
         };
@@ -21401,6 +21412,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
          vm.init = function() {
              scope.model = model = baseModel;
              model.scope = scope;
+             scope.model.init();
          };
 
          scope.redirect = function(type) {
@@ -21427,6 +21439,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
         model.lnkeducationandprofReview = false;
         model.scope = {};
         model.init = function() {
+            CustID = stateParams.CustID;
             model.unreviewedLinks();
             model.menuItem();
             baseService.personalDetails(CustID).then(function(response) {

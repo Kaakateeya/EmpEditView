@@ -21,6 +21,7 @@
         var AdminID = authSvc.isAdmin();
         //end declaration block
         model.init = function() {
+            custid = model.CustID = stateParams.CustID;
             model.relativePageLoad();
             return model;
         };

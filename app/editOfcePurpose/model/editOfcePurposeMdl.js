@@ -12,6 +12,7 @@
         model.aboutObj = {};
 
         model.init = function() {
+            custID = stateParams.CustID;
             model.pageload();
             return model;
         };

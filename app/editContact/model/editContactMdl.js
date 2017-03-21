@@ -28,6 +28,7 @@
         model.mobileVerificationCode = "";
         model.ID = 0;
         model.init = function() {
+            custID = model.CustID = stateParams.CustID;
             model.pageload();
             return model;
         };

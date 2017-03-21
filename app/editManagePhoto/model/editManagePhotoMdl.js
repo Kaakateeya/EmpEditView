@@ -19,6 +19,7 @@
         //end declaration block
 
         model.init = function() {
+            CustID = stateParams.CustID;
             model.getData();
             return model;
         };
