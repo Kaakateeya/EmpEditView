@@ -14,7 +14,7 @@
      }
      angular
          .module('KaakateeyaEmpEdit')
-         .controller('editOfcePurposeCtrl', controller)
+         .controller('editOfcePurposeCtrl', controller);
 
      controller.$inject = ['editOfcePurposeModel', '$scope'];
  })(angular);

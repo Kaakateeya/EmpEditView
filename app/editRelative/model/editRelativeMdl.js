@@ -393,7 +393,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editRelativeModel', factory)
+        .factory('editRelativeModel', factory);
 
     factory.$inject = ['editRelativeService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'SelectBindService', '$stateParams'];
 

@@ -63,7 +63,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('countryArrayModel', factory)
+        .factory('countryArrayModel', factory);
 
     factory.$inject = ['$http', 'SelectBindService'];
 

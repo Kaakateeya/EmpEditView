@@ -13,7 +13,7 @@
      }
      angular
          .module('KaakateeyaEmpEdit')
-         .controller('editPropertyCtrl', controller)
+         .controller('editPropertyCtrl', controller);
 
      controller.$inject = ['editPropertyModel', '$scope'];
  })(angular);

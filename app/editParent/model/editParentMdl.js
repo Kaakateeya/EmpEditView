@@ -28,7 +28,7 @@
             model.parentBindData();
             model.AboutPageloadData();
             return model;
-        }
+        };
 
         model.parentBindData = function() {
             editParentService.getParentData(custID).then(function(response) {
@@ -466,7 +466,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editParentModel', factory)
+        .factory('editParentModel', factory);
 
     factory.$inject = ['editParentService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 

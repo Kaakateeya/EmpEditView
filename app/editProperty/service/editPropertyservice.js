@@ -14,7 +14,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editPropertyService', factory)
+        .factory('editPropertyService', factory);
 
     factory.$inject = ['$http'];
 })(angular);

@@ -11,7 +11,7 @@
             <div id="upppp">
 
                 <div class="edit_page_item_head clearfix">
-                    <h4>Property Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" visible="false" runat="server" id="spanEduModID">ModifiedBy :{{page.model.propertymodifiedby}}</span>
+                    <h4>Property Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" ng-show="page.model.propertymodifiedby!=null && page.model.propertymodifiedby!=='' && page.model.propertymodifiedby!==undefined">ModifiedBy :{{page.model.propertymodifiedby}}</span>
                     </h4>
                     <div class="edit_page_item_ui clearfix" ng-if="page.model.propertyArr.length===0">
                         <a class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.populateProperty()">Add</a>
@@ -65,7 +65,7 @@
         </div>
 
         <script type="text/ng-template" id="propertyContent.html">
-            <form class="EditViewClass"   name="propertyForm" novalidate role="form" ng-submit="page.model.propertySubmit(page.model.proObj)">
+            <form class="EditViewClass" name="propertyForm" novalidate role="form" ng-submit="page.model.propertySubmit(page.model.proObj)">
                 <div class="modal-header">
                     <h3 class="modal-title text-center">Property Details
                         <a href="javascript:void(0);" ng-click="cancel();">

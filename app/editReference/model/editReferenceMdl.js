@@ -69,7 +69,7 @@
             editReferenceService.getReferenceData(custID).then(function(response) {
                 model.ReferenceArr = response.data;
                 console.log(model.ReferenceArr);
-                model.referencemodifiedby = (model.ReferenceArr.length > 0 && model.ReferenceArr[0].EmpLastModificationDate !== undefined && model.ReferenceArr[0].EmpLastModificationDate !== null) ? model.ReferenceArr[0].EmpLastModificationDate : '';
+                model.referencemodifiedby = (model.ReferenceArr !== undefined && model.ReferenceArr.length > 0 && model.ReferenceArr[0].EmpLastModificationDate !== undefined && model.ReferenceArr[0].EmpLastModificationDate !== null) ? model.ReferenceArr[0].EmpLastModificationDate : '';
             });
         };
 
@@ -147,7 +147,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editReferenceModel', factory)
+        .factory('editReferenceModel', factory);
 
     factory.$inject = ['editReferenceService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'SelectBindService', '$stateParams'];
 

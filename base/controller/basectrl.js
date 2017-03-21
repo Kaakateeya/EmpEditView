@@ -19,7 +19,7 @@
      }
      angular
          .module('KaakateeyaEmpEdit')
-         .controller('baseCtrl', controller)
+         .controller('baseCtrl', controller);
 
      controller.$inject = ['baseModel', '$scope', '$state', '$stateParams'];
  })(angular);

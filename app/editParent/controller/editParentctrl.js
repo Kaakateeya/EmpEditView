@@ -14,7 +14,7 @@
      }
      angular
          .module('KaakateeyaEmpEdit')
-         .controller('editParentCtrl', controller)
+         .controller('editParentCtrl', controller);
 
      controller.$inject = ['editParentModel', '$scope'];
  })(angular);

@@ -14,7 +14,7 @@
      }
      angular
          .module('KaakateeyaEmpEdit')
-         .controller('editSibblingCtrl', controller)
+         .controller('editSibblingCtrl', controller);
 
      controller.$inject = ['editSibblingModel', '$scope'];
  })(angular);

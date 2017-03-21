@@ -2,12 +2,13 @@
      'use strict';
 
      function controller(editEducationModel, scope, baseModel) {
-         var vm = this,
-             model;
-         vm.scope = scope;
+         var vm = this;
+
+         //  vm.scope = scope;
          vm.init = function() {
-             vm.model = model = editEducationModel.init();
-             model.scope = scope;
+             vm.model = editEducationModel;
+             //  editEducationModel.init();
+             vm.model.scope = scope;
          };
 
          vm.init();

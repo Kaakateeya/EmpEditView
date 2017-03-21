@@ -67,7 +67,7 @@
                     break;
 
                 case 'brother':
-                    debugger;
+
                     if (item !== undefined && model.BrotherArr.length <= parseInt(model.BroCount)) {
                         model.broObj.SibilingCustfamilyID = null;
                         model.broObj = {};
@@ -355,9 +355,6 @@
                 model.sibPageload(custID);
                 commonFactory.closepopup();
             });
-
-
-
         };
 
         model.sibBroSubmit = function(obj) {
@@ -517,7 +514,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editSibblingModel', factory)
+        .factory('editSibblingModel', factory);
 
     factory.$inject = ['editSibblingService', 'authSvc', 'alert', 'commonFactory', '$uibModal', 'SelectBindService', '$stateParams'];
 

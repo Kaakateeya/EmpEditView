@@ -13,7 +13,7 @@
      }
      angular
          .module('KaakateeyaEmpEdit')
-         .controller('editSpouseCtrl', controller)
+         .controller('editSpouseCtrl', controller);
 
      controller.$inject = ['editSpouseModel', '$scope'];
  })(angular);

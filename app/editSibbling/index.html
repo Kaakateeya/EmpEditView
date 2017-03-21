@@ -121,7 +121,7 @@
             </div>
 
             <div class="edit_page_item_head clearfix">
-                <h4>Brother&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2">ModifiedBy :{{page.model.broModifiedby}}</span>
+                <h4>Brother&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" ng-show="page.model.broModifiedby!=null && page.model.broModifiedby!=='' && page.model.broModifiedby!==undefined">ModifiedBy :{{page.model.broModifiedby}}</span>
                 </h4>
                 <div class="edit_page_item_ui clearfix">
                     <div id="uplnkbrotherdetails">
@@ -415,7 +415,7 @@
             </div>
 
             <div class="edit_page_item_head clearfix">
-                <h4>Sister Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2">ModifiedBy :{{page.model.sisModifiedby}}</span>
+                <h4>Sister Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" ng-show="page.model.sisModifiedby!=null && page.model.sisModifiedby!=='' && page.model.sisModifiedby!==undefined">ModifiedBy :{{page.model.sisModifiedby}}</span>
 
                 </h4>
                 <div class="edit_page_item_ui clearfix">
@@ -733,7 +733,7 @@
 
 
     <script type="text/ng-template" id="SibblingCountPopup.html">
-        <form class="EditViewClass"   name="sibblingCoutForm" novalidate role="form" ng-submit="page.model.sibblingCountsSubmit(page.model.SibCountObj)">
+        <form class="EditViewClass" name="sibblingCoutForm" novalidate role="form" ng-submit="page.model.sibblingCountsSubmit(page.model.SibCountObj)">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Sibling Details
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -791,7 +791,7 @@
         </form>
     </script>
     <script type="text/ng-template" id="brotherModalContent.html">
-        <form class="EditViewClass"   name="brotherForm" novalidate role="form" ng-submit="brotherForm.$valid  && page.model.sibBroSubmit(page.model.broObj)" accessible-form>
+        <form class="EditViewClass" name="brotherForm" novalidate role="form" ng-submit="brotherForm.$valid  && page.model.sibBroSubmit(page.model.broObj)" accessible-form>
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Brother details
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -980,7 +980,7 @@
     </script>
 
     <script type="text/ng-template" id="sisterModalContent.html">
-        <form class="EditViewClass"   name="sibsisForm" novalidate role="form" ng-submit="sibsisForm.$valid  && page.model.sibSisSubmit(page.model.sisObj)" accessible-form>
+        <form class="EditViewClass" name="sibsisForm" novalidate role="form" ng-submit="sibsisForm.$valid  && page.model.sibSisSubmit(page.model.sisObj)" accessible-form>
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Sister details
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">

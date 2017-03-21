@@ -32,7 +32,7 @@
         model.pageload = function() {
 
             editProfileSettingService.getProfileSettingData(custID).then(function(response) {
-                debugger;
+
                 if (response.data.length > 0) {
                     model.profileSettingArr = response.data[0].length > 0 ? JSON.parse(response.data[0]) : [];
                     model.ConfidentialArr = response.data[1].length > 0 ? JSON.parse(response.data[1]) : [];
@@ -83,7 +83,7 @@
                     break;
 
                 case 'confidential':
-                    debugger;
+
                     model.csObj.chkisconfidential = item.ConfindentialStatusID === true ? true : false;
                     model.csObj.chkvryhighconfidential = item.HighConfidentialStatusID === 1 ? true : false;
 
@@ -92,7 +92,7 @@
                     break;
 
                 case 'grading':
-                    debugger;
+
                     if (item !== undefined) {
 
                         model.gradeObj.ddlfamilyGrade = model.populategrade(item.FamilyGrade);
@@ -154,7 +154,7 @@
                 Admin: null,
                 Blockedreason: IBlockedreason
             };
-            debugger;
+
             editProfileSettingService.submitProfileSettingAndDispalyData(model.Mobj).then(function(response) {
                 console.log(response);
 
@@ -184,11 +184,11 @@
         };
 
         model.confidentialSubmit = function(obj) {
-            debugger;
+
             editProfileSettingService.confidentialSubmit(custID, model.getChkVals(obj.chkisconfidential), model.getChkVals(obj.chkvryhighconfidential), '2').then(function(response) {
                 console.log(response);
                 commonFactory.closepopup();
-                if (response.data != undefined && response.data.length > 0) {
+                if (response.data !== undefined && response.data.length > 0) {
                     if (JSON.parse(response.data[0])[0].STATUS === 1) {
                         model.pageload();
                         alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
@@ -204,7 +204,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editProfileSettingModel', factory)
+        .factory('editProfileSettingModel', factory);
 
     factory.$inject = ['editProfileSettingService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 

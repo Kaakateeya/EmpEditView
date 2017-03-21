@@ -3,7 +3,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('SelectBindService', factory)
+        .factory('SelectBindService', factory);
 
     factory.$inject = ['$http'];
 

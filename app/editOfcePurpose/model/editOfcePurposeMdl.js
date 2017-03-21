@@ -58,7 +58,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editOfcePurposeModel', factory)
+        .factory('editOfcePurposeModel', factory);
 
     factory.$inject = ['editOfcePurposeService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 

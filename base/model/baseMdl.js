@@ -12,7 +12,7 @@
             model.unreviewedLinks();
             model.menuItem();
             baseService.personalDetails(CustID).then(function(response) {
-                debugger;
+
                 model.PersonalObj = response.data;
                 // model.imgsrc = authSvc.getprofilepic();
 
@@ -131,7 +131,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('baseModel', factory)
+        .factory('baseModel', factory);
     factory.$inject = ['baseService', 'authSvc', '$uibModal', 'commonFactory', '$stateParams', '$filter'];
 
 })(angular);

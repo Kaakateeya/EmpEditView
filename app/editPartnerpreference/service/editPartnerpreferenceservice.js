@@ -17,7 +17,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editPartnerpreferenceService', factory)
+        .factory('editPartnerpreferenceService', factory);
 
     factory.$inject = ['$http'];
 })(angular);

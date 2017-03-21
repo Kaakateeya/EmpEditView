@@ -13,7 +13,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('parametervalueService', factory)
+        .factory('parametervalueService', factory);
 
     factory.$inject = ['$http'];
 })(angular);

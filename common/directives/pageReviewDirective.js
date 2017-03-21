@@ -5,9 +5,9 @@
         .module('KaakateeyaEmpEdit')
         .directive('pageReview', directive);
 
-    directive.$inject = ['commonFactory', '$uibModal', 'baseService', 'baseModel'];
+    directive.$inject = ['commonFactory', '$uibModal', 'baseService', 'baseModel', 'authSvc'];
 
-    function directive(commonFactory, uibModal, baseService, baseModel) {
+    function directive(commonFactory, uibModal, baseService, baseModel, authSvc) {
         var model = baseModel;
         var directive = {
             link: link,
@@ -26,7 +26,8 @@
         return directive;
 
         function link(scope, element, attrs) {
-            scope.showChk = true;
+            var AdminID = authSvc.isAdmin();
+            scope.showChk = false;
             scope.reviewonchange = function(booltype) {
 
                 if (booltype === true) {
@@ -50,6 +51,29 @@
             scope.cancel = function() {
                 commonFactory.closepopup();
             };
+
+            if (AdminID === 1 || AdminID = '1') {
+                baseService.menuReviewstatus(scope.custid, '2', scope.sectionid).then(function(response) {
+                    model.revstatus = JSON.parse(response.data);
+                    console.log('sectionID');
+                    debugger;
+                    console.log(model.revstatus);
+
+                    _.each(model.revstatus, function(item) {
+
+                        var SectionID = item.ReviewStatusID;
+                        if (SectionID === 0) {
+                            scope.showChk = true;
+                        } else {
+                            scope.showChk = false;
+                        }
+                    });
+                });
+            }
+
+
+
+
 
 
         }

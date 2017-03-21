@@ -14,7 +14,7 @@
      }
      angular
          .module('KaakateeyaEmpEdit')
-         .controller('editPartnerpreferenceCtrl', controller)
+         .controller('editPartnerpreferenceCtrl', controller);
 
      controller.$inject = ['editPartnerpreferenceModel', '$scope'];
  })(angular);

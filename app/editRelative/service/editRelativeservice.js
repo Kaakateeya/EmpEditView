@@ -23,7 +23,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editRelativeService', factory)
+        .factory('editRelativeService', factory);
 
     factory.$inject = ['$http'];
 })(angular);

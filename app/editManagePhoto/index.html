@@ -15,10 +15,55 @@
                 <div class="dragzone">
                     <div class="pics_selected_list_main clearfix">
                         <div class="pics_selected_list_main_lt clearfix">
-                            <p class="clearfix"><span>Upload your three different photos</span></p>
+                            <!--<p class="clearfix"><span>Upload your three different photos</span></p>-->
                             <div id="dtimagephoto" class="clearfix" ng-repeat="item in page.model.manageArr" style="width:33%;float:left;">
                                 <div class="photos">
                                     <div class="pics_selected_list_item clearfix">
+
+
+                                        <div id="divFalseCustomer">
+                                            <div>
+
+                                                <div class="row" ng-show='item.UploadedBy== null?false:true'>
+                                                    <div class="col-lg-12" ng-show='item.UploadedBy== null?false:true'>
+                                                        <label style="color: maroon !important;">Uploaded By :</label>
+                                                        <label id="lblUploadedText" font-bold="true" forecolor="Black">{{item.UploadedBy}}</label>
+                                                    </div>
+                                                    <br />
+                                                    <div class="col-lg-12">
+                                                        <label id="lblUploadedDate" font-bold="true" style="color: maroon !important;">Uploaded Date:</label>
+                                                        <label id="lblUploadedDateText" font-bold="true" forecolor="Black">{{item.UploadedDate}}</label>
+                                                    </div>
+                                                </div>
+
+                                                <div id="Div3" class="row" ng-show='item.strModifiedByEmpID==null?false:true'>
+                                                    <div class="col-lg-12">
+                                                        <label id="lblModifiedBy" font-bold="true" style="color: maroon !important;">Modified By :</label>
+                                                        <label id="lblModifiedByText" font-bold="true" forecolor="Black">{{item.strModifiedByEmpID}}</label>
+                                                    </div>
+                                                    <br />
+                                                    <div class="col-lg-12" ng-show='item.ModifiedDate==null?false:true'>
+                                                        <label id="lblModifiedDate" font-bold="true" style="color: maroon !important;">Modified Date:</label>
+                                                        <label id="lblModifiedDateText" font-bold="true" text="" forecolor="Black">{{item.ModifiedDate}}</label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                         <div ng-class="item.IsActive == 0 && item.PhotoName !== null?'cssMaskdiv clearfix':''">
                                             <img ng-model="imgPhotoName" ng-src="{{item.ImageUrl}}" />
                                         </div>
@@ -73,7 +118,8 @@
 
             <div class="my_photos_main_block2 clearfix">
                 <div class="clearfix pics_incorrect_list">
-                    <h3>Such Photos cannot be Uploaded</h3>
+
+                    <h3> Such Photos cannot be Uploaded</h3>
                     <table id="DataList3" class="clearfix" style="border-collapse: collapse;" cellspacing="0">
                         <tbody>
                             <tr>
@@ -148,7 +194,7 @@
     </div>
 
     <script type="text/ng-template" id="AddimagePopup.html">
-        <form class="EditViewClass"   name="uploadForm" novalidate role="form" ng-submit="page.model.upload(up);">
+        <form class="EditViewClass" name="uploadForm" novalidate role="form" ng-submit="page.model.upload(up);">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Upload Photo </h3>
             </div>
@@ -165,7 +211,7 @@
     </script>
 
     <script type="text/ng-template" id="deleteimagePopup.html">
-        <form class="EditViewClass"   name="uploadForm" novalidate role="form" ng-submit="page.model.Delete(up);">
+        <form class="EditViewClass" name="uploadForm" novalidate role="form" ng-submit="page.model.Delete(up);">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Delete Photo </h3>
             </div>
@@ -184,7 +230,7 @@
 
 
 
-<style>
+<style type="text/css">
     .cssMaskdiv {
         position: relative;
         display: inline-block;
@@ -204,5 +250,22 @@
         text-align: center;
         top: 0;
         width: 100%;
+    }
+    
+    .pics_incorrect_list h3 {
+        background: url(src/images/icon_x_mark.png) no-repeat center left !important;
+        color: #f26522 !important;
+        line-height: 18px;
+    }
+    
+    .my_photos_main_block2 h3 {
+        background: url(src/images/icon_tick_mark.png) no-repeat center left;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: #000;
+        line-height: 18px;
+        display: block;
+        padding: 0 0 0 30px;
+        margin: 0 0 20px 0;
     }
 </style>

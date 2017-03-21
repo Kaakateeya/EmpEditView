@@ -221,7 +221,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editPartnerpreferenceModel', factory)
+        .factory('editPartnerpreferenceModel', factory);
 
     factory.$inject = ['editPartnerpreferenceService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 

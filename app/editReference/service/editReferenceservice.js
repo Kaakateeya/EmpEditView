@@ -14,7 +14,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editReferenceService', factory)
+        .factory('editReferenceService', factory);
 
     factory.$inject = ['$http'];
 })(angular);

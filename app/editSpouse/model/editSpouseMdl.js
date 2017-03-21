@@ -186,7 +186,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editSpouseModel', factory)
+        .factory('editSpouseModel', factory);
 
     factory.$inject = ['editSpouseService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$filter', '$stateParams'];
 

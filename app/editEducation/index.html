@@ -7,7 +7,7 @@
         <page-review dispaly-name="'Education details'" sectionid="'6,7,8'" custid="page.model.CustID"></page-review>
         <div class="edit_page_item">
             <div class="edit_page_item_head clearfix">
-                <h4>Customer Personal Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" id="spanEduModID">ModifiedBy :{{page.model.custEmpLastModificationDate}}</span>
+                <h4>Customer Personal Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" ng-show="page.model.custEmpLastModificationDate!=undefined && page.model.custEmpLastModificationDate!=null && page.model.custEmpLastModificationDate!==''">ModifiedBy :{{page.model.custEmpLastModificationDate}}</span>
                 </h4>
                 <div class="edit_page_item_ui clearfix" ng-if="page.model.CustomerDataArr.length==0">
                     <a id="lnkpersonaldetailsadd" class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.showpopup('custData');">Add</a>
@@ -134,62 +134,63 @@
 
         <div class="edit_page_item" id="divEducation">
             <div class="edit_page_item_head clearfix">
-                <h4>Education Details {{page.vallll}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2">ModifiedBy :{{page.model.eduEmpLastModificationDate}}</span></h4>
-                <div class="edit_page_item_ui clearfix">
-                    <a class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.showpopup('showEduModal');">Add</a>
+                <h4>Education Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" ng-show="page.model.eduEmpLastModificationDate!=null && page.model.eduEmpLastModificationDate!=='' && page.model.eduEmpLastModificationDate!==undefined">ModifiedBy :{{page.model.eduEmpLastModificationDate}}</span></h4>
+                <div class="edit_page_item_ui clearfix ">
+                    <a class="edit_page_add_button " href="javascript:void(0); " ng-click="page.model.showpopup( 'showEduModal'); ">Add</a>
                 </div>
             </div>
             <div class="edit_page_details_item">
-                <div ng-repeat="item in page.model.educationSelectArray">
-                    <div id="reviewdiv" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
-                        <div id="lbleducationgroup" class="edit_page_details_item_desc clearfix">
+                <div ng-repeat="item in page.model.educationSelectArray ">
+                    <div id="reviewdiv " ng-class="item.reviewstatus===false? 'edit_page_details_item_desc clearfix reviewCls': 'edit_page_details_item_desc clearfix' ">
+                        <div id="lbleducationgroup " class="edit_page_details_item_desc clearfix ">
                             <h6>
-                                <label id="lbleducationgroup" ng-style="{color: item.EduHighestDegree==1?'Red':'Black'}">{{item.EducationCategory!=null?(item.EducationCategory=="Below Graduation"?"Under Graduation":"Education"):"Education"}}</label>
+                                <label id="lbleducationgroup " ng-style="{color: item.EduHighestDegree==1? 'Red': 'Black'} ">{{item.EducationCategory!=null?(item.EducationCategory=="Below Graduation "?"Under Graduation ":"Education "):"Education "}}</label>
                             </h6>
                             <h5>
-                                <label id="edgoup" ng-style="{color: item.EduHighestDegree==1?'Red':''}">{{item.EducationGroup+" "+((item.EducationSpecialization!=null?"(" +item.EducationSpecialization+")":""))+" "+((item.EduPassOfYear!=null?",Completed"+"-"+item.EduPassOfYear:""))}} </label>
+                                <label id="edgoup " ng-style="{color: item.EduHighestDegree==1? 'Red': ''} ">{{item.EducationGroup+" "+((item.EducationSpecialization!=null?"( " +item.EducationSpecialization+") ":" "))+"
+                        "+((item.EduPassOfYear!=null?",Completed "+"- "+item.EduPassOfYear:" "))}} </label>
                             </h5>
                         </div>
 
-                        <div id="editeducationbutton" class="edit_page_item_ui clearfix">
-                            <a id="LinkButton1dfd" href="javascript:void(0);" ng-click="page.model.showpopup('showEduModal',item)">Edit</a>
+                        <div id="editeducationbutton " class="edit_page_item_ui clearfix ">
+                            <a id="LinkButton1dfd " href="javascript:void(0); " ng-click="page.model.showpopup( 'showEduModal',item) ">Edit</a>
 
-                            <a href="javascript:void(0);" class="edit_page_del_button" ng-click="page.model.DeleteEduPopup(item.EducationID);">Delete</a>
+                            <a href="javascript:void(0); " class="edit_page_del_button " ng-click="page.model.DeleteEduPopup(item.EducationID); ">Delete</a>
                         </div>
 
-                        <div id="divuniversityhiding" class="edit_page_details_item_desc clearfix" ng-hide="item.EduUniversity===null">
+                        <div id="divuniversityhiding " class="edit_page_details_item_desc clearfix " ng-hide="item.EduUniversity===null ">
                             <h6>
-                                <span id="Label1">University</span>
+                                <span id="Label1 ">University</span>
                             </h6>
 
                             <h5>
-                                <span id="lblTuniversity">{{item.EduUniversity}}</span>
+                                <span id="lblTuniversity ">{{item.EduUniversity}}</span>
                             </h5>
                         </div>
 
-                        <div id="divCollege" class="edit_page_details_item_desc clearfix" ng-hide="item.EduCollege===null">
+                        <div id="divCollege " class="edit_page_details_item_desc clearfix " ng-hide="item.EduCollege===null ">
                             <h6>
-                                <span id="Label9">College</span>
+                                <span id="Label9 ">College</span>
                             </h6>
                             <h5>
-                                <span id="lblTcollege">{{item.EduCollege}}</span>
+                                <span id="lblTcollege ">{{item.EduCollege}}</span>
                             </h5>
                         </div>
 
-                        <div class="edit_page_details_item_desc clearfix" id="divcityviewhiding" ng-hide="item.EduCityIn===null">
+                        <div class="edit_page_details_item_desc clearfix " id="divcityviewhiding " ng-hide="item.EduCityIn===null ">
                             <h6>
-                                <span id="Label3" font-bold="true">City Study In</span>
+                                <span id="Label3 " font-bold="true ">City Study In</span>
                             </h6>
                             <h5>
-                                <span id="lblcountry">{{item.EduCityIn+","+item.EduDistrictIn+","+item.EduStateIn+","+item.EduCountryIn}}</span>
+                                <span id="lblcountry ">{{item.EduCityIn+", "+item.EduDistrictIn+", "+item.EduStateIn+", "+item.EduCountryIn}}</span>
                             </h5>
                         </div>
-                        <div id="divmerit" class="edit_page_details_item_desc clearfix" ng-hide="item.Educationdesc==null">
+                        <div id="divmerit " class="edit_page_details_item_desc clearfix " ng-hide="item.Educationdesc==null ">
                             <h6>
-                                <span id="Label5" font-bold="true">Education Merits</span>
+                                <span id="Label5 " font-bold="true ">Education Merits</span>
                             </h6>
                             <h5>
-                                <span id="lblmerits">{{item.Educationdesc}}</span>
+                                <span id="lblmerits ">{{item.Educationdesc}}</span>
                             </h5>
                         </div>
                     </div>
@@ -197,27 +198,27 @@
             </div>
         </div>
 
-        <div class="edit_page_item">
-            <div id="divlnkAddProfession" class="edit_page_item_head clearfix">
-                <h4>Professional Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color: #08CFD2">ModifiedBy :{{page.model.profEmpLastModificationDate}}</span></h4>
+        <div class="edit_page_item ">
+            <div id="divlnkAddProfession " class="edit_page_item_head clearfix ">
+                <h4>Professional Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color: #08CFD2 " ng-show="page.model.profEmpLastModificationDate!=null && page.model.profEmpLastModificationDate!=='' && page.model.profEmpLastModificationDate!==undefined">ModifiedBy :{{page.model.profEmpLastModificationDate}}</span></h4>
                 </h4>
-                <div class="edit_page_item_ui clearfix">
-                    <div ng-if="page.model.ProfessionSelectArray.length==0">
-                        <a class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.showpopup('showProfModal')">Add</a>
+                <div class="edit_page_item_ui clearfix ">
+                    <div ng-if="page.model.ProfessionSelectArray.length==0 ">
+                        <a class="edit_page_add_button " href="javascript:void(0); " ng-click="page.model.showpopup( 'showProfModal') ">Add</a>
                     </div>
                 </div>
             </div>
 
-            <div class="edit_page_details_item">
-                <div id="lstProfession" ng-repeat="item in page.model.ProfessionSelectArray">
-                    <div id="reviewdiv" ng-class="item.reviewstatus===false?'reviewCls':''">
-                        <div class="edit_page_details_item_desc clearfix">
+            <div class="edit_page_details_item ">
+                <div id="lstProfession " ng-repeat="item in page.model.ProfessionSelectArray ">
+                    <div id="reviewdiv " ng-class="item.reviewstatus===false? 'reviewCls': '' ">
+                        <div class="edit_page_details_item_desc clearfix ">
                             <h6>
-                                <span id="lblprofession" style="font-weight:bold;">Profession</span></h6>
+                                <span id="lblprofession " style="font-weight:bold; ">Profession</span></h6>
                             <h5>
-                                <span id="txtProfession">{{item.Professional+" "+(item.CompanyName !=null && item.CompanyName !=""?"in"+" "+item.CompanyName:'')}}</span></h5>
+                                <span id="txtProfession ">{{item.Professional+" "+(item.CompanyName !=null && item.CompanyName !=" "?"in "+" "+item.CompanyName:'')}}</span></h5>
                         </div>
-                        <div class="edit_page_item_ui clearfix" ng-if="page.model.ProfessionSelectArray.length>0">
+                        <div class="edit_page_item_ui clearfix " ng-if="page.model.ProfessionSelectArray.length>0">
 
                             <a id="Linkedit" class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.showpopup('showProfModal',item)">Edit</a>
                         </div>
@@ -320,7 +321,7 @@
 
         <div id="edupopupdiv">
             <script type="text/ng-template" id="EduModalContent.html">
-                <form class="EditViewClass"   name="eduForm" novalidate role="form" ng-submit="eduForm.$valid  && page.model.eduSubmit(page.model.edoObj);" accessible-form>
+                <form class="EditViewClass" name="eduForm" novalidate role="form" ng-submit="eduForm.$valid  && page.model.eduSubmit(page.model.edoObj);" accessible-form>
                     <div class="modal-header">
                         <h3 class="modal-title text-center" id="modal-title">Education Details
                             <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -389,7 +390,7 @@
                                 <label for="lblEduMerits" class="pop_label_left">Educational merits</label>
                                 <div class="">
 
-                                    <textarea ng-model="page.model.edoObj.txtEdumerits" maxlength="500" rows="4" cols="20" style="max-width:515px;width:100%;" tabindex="12" onkeydown="return CharacterCountedu()" onkeyup="return CharacterCountedu()"></textarea>
+                                    <textarea ng-model="page.model.edoObj.txtEdumerits" maxlength="500" rows="4" cols="20" style="max-width:515px;width:100%;" tabindex="12"></textarea>
 
                                 </div>
                             </li>
@@ -410,7 +411,7 @@
         </div>
         <div id=profpopupdiv>
             <script type="text/ng-template" id="profModalContent.html">
-                <form class="EditViewClass"   name="profForm" novalidate role="form" ng-submit="page.model.ProfSubmit(page.model.profObj);" accessible-form>
+                <form class="EditViewClass" name="profForm" novalidate role="form" ng-submit="page.model.ProfSubmit(page.model.profObj);" accessible-form>
                     <div class="modal-header">
                         <h3 class="modal-title text-center" id="modal-title">Profession details
                             <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -517,7 +518,7 @@
         </div>
         <div id="AboutPopup">
             <script type="text/ng-template" id="AboutModalContent.html">
-                <form class="EditViewClass"   name="aboutForm" novalidate role="form" ng-submit="page.model.AboutUrselfSubmit(page.model.aboutObj)">
+                <form class="EditViewClass" name="aboutForm" novalidate role="form" ng-submit="page.model.AboutUrselfSubmit(page.model.aboutObj)">
                     <div class="modal-header">
                         <h3 class="modal-title text-center" id="modal-title">About your self
                             <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -549,7 +550,7 @@
     </div>
 
     <script type="text/ng-template" id="deleteEduContent.html">
-        <form class="EditViewClass"   name="deletetForm" novalidate role="form" ng-submit="page.model.deleteEduSubmit();">
+        <form class="EditViewClass" name="deletetForm" novalidate role="form" ng-submit="page.model.deleteEduSubmit();">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Alert
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -571,7 +572,7 @@
 
 
     <script type="text/ng-template" id="CustomerDataContent.html">
-        <form class="EditViewClass"   name="custForm" ng-class="'EditViewClass'" novalidate role="form" ng-submit="page.model.custdataSubmit(page.model.custObj)">
+        <form class="EditViewClass" name="custForm" ng-class="'EditViewClass'" novalidate role="form" ng-submit="page.model.custdataSubmit(page.model.custObj)">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Customer details
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">

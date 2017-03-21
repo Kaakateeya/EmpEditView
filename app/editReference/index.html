@@ -8,7 +8,7 @@
         <page-review dispaly-name="'Reference details'" sectionid="'29'" custid="page.model.CustID"></page-review>
         <div class="edit_page_item">
             <div class="edit_page_item_head clearfix">
-                <h4>Reference Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" visible="false" runat="server" id="spanEduModID">ModifiedBy :{{page.model.referencemodifiedby}}</span></h4>
+                <h4>Reference Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" ng-show="page.model.referencemodifiedby!=null && page.model.referencemodifiedby!=='' && page.model.referencemodifiedby!==undefined">ModifiedBy :{{page.model.referencemodifiedby}}</span></h4>
 
 
                 <div class="edit_page_item_ui clearfix">
@@ -125,7 +125,7 @@
         </div>
 
         <script type="text/ng-template" id="referenceContent.html">
-            <form class="EditViewClass"   name="refForm" novalidate role="form" ng-submit="page.model.refenceSubmit(page.model.refObj)" accessible-form>
+            <form class="EditViewClass" name="refForm" novalidate role="form" ng-submit="page.model.refenceSubmit(page.model.refObj)" accessible-form>
                 <div class="modal-header">
                     <h3 class="modal-title text-center">Reference Details
                         <a href="javascript:void(0);" ng-click="page.model.cancel();">

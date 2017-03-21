@@ -2,7 +2,7 @@
     'use strict';
 
 
-    function factory($http, authSvc, editEducationService, commonFactory, uibModal, filter, alertss, stateParams) {
+    function factory($http, authSvc, editEducationService, commonFactory, uibModal, filter, alertss, stateParams, SelectBindService) {
         var model = {};
         // var logincustid = authSvc.getCustId();
 
@@ -48,10 +48,14 @@
         };
 
         model.eduPageload = function() {
+
             editEducationService.getEducationData(CustID).then(function(response) {
+                console.log(response.data);
                 if (commonFactory.checkvals(response.data)) {
                     model.educationSelectArray = response.data;
-                    model.eduEmpLastModificationDate = model.educationSelectArray[0].EmpLastModificationDate;
+
+                    model.eduEmpLastModificationDate = model.educationSelectArray.length > 0 ? model.educationSelectArray[0].EmpLastModificationDate : '';
+
                 }
 
             });
@@ -323,9 +327,7 @@
 
                     commonFactory.closepopup();
                     if (response.data === 1) {
-
                         model.ProfPageload();
-
                         alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
                         if (scope.datagetInStatus === 1) {
                             sessionStorage.removeItem('missingStatus');
@@ -361,7 +363,7 @@
         };
 
         model.deleteEduSubmit = function() {
-            editEducationService.DeleteSection({ sectioname: 'Education', CustID: CustID, identityid: model.educationID }).then(function(response) {
+            SelectBindService.DeleteSection({ sectioname: 'Education', CustID: CustID, identityid: model.educationID }).then(function(response) {
                 console.log(response);
                 model.eduPageload();
                 commonFactory.closepopup();
@@ -396,7 +398,13 @@
             editEducationService.submitCustomerData(model.custData).then(function(response) {
                 console.log(response);
                 commonFactory.closepopup();
-                model.custdatapageload();
+
+                if (response.data === 1) {
+                    model.custdatapageload();
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                } else {
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                }
             });
 
 
@@ -423,6 +431,6 @@
         .module('KaakateeyaEmpEdit')
         .factory('editEducationModel', factory);
 
-    factory.$inject = ['$http', 'authSvc', 'editEducationService', 'commonFactory', '$uibModal', '$filter', 'alert', '$stateParams'];
+    factory.$inject = ['$http', 'authSvc', 'editEducationService', 'commonFactory', '$uibModal', '$filter', 'alert', '$stateParams', 'SelectBindService'];
 
 })(angular);

@@ -27,7 +27,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('otherArrayModel', factory)
+        .factory('otherArrayModel', factory);
 
     factory.$inject = ['$http', 'SelectBindService'];
 

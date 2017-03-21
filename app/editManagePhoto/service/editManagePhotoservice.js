@@ -17,7 +17,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editManagePhotoService', factory)
+        .factory('editManagePhotoService', factory);
 
     factory.$inject = ['$http'];
 })(angular);

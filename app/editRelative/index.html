@@ -8,7 +8,7 @@
         <page-review dispaly-name="'Relatives details'" sectionid="'27,28,32,33'" custid="page.model.CustID"></page-review>
         <div class="edit_page_item">
             <div class="edit_page_item_head clearfix">
-                <h4>Father's Brother Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" visible="false" runat="server" id="spanEduModID">ModifiedBy :{{page.model.FBemodifiedby}}</span>
+                <h4>Father's Brother Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" ng-show="page.model.FBemodifiedby!=null && page.model.FBemodifiedby!=='' && page.model.FBemodifiedby!==undefined">ModifiedBy :{{page.model.FBemodifiedby}}</span>
                 </h4>
                 <div class="edit_page_item_ui clearfix" ng-if="page.model.FBArr.length===0">
                     <a href="javascript:void(0);" ng-click="page.model.relativePopulatePopulate('FB');" class="edit_page_add_button" tabindex="0">Add</a>
@@ -110,7 +110,7 @@
         </div>
         <div class="edit_page_item">
             <div class="edit_page_item_head clearfix">
-                <h4>Father's Sister Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" visible="false" runat="server" id="spanEduModID">ModifiedBy :{{page.model.FSmodifiedby}}</span>
+                <h4>Father's Sister Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" ng-show="page.model.FSmodifiedby!=null && page.model.FSmodifiedby!=='' && page.model.FSmodifiedby!==undefined">ModifiedBy :{{page.model.FSmodifiedby}}</span>
                 </h4>
                 <div class="edit_page_item_ui clearfix" ng-if="page.model.FSArr.length===0">
                     <a class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.relativePopulatePopulate('FS');" tabindex="0">Add</a>
@@ -236,7 +236,7 @@
         </div>
         <div class="edit_page_item">
             <div class="edit_page_item_head clearfix">
-                <h4>Mother's Brother Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" visible="false" runat="server" id="spanEduModID">ModifiedBy :{{page.model.MBmodifiedby}}</span></h4>
+                <h4>Mother's Brother Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" ng-show="page.model.MBmodifiedby!=null && page.model.MBmodifiedby!=='' && page.model.MBmodifiedby!==undefined">ModifiedBy :{{page.model.MBmodifiedby}}</span></h4>
                 <div class="edit_page_item_ui clearfix" ng-if="page.model.MBrr.length===0">
                     <a class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.relativePopulatePopulate('MB');" tabindex="0">Add</a>
                 </div>
@@ -337,7 +337,7 @@
         </div>
         <div class="edit_page_item">
             <div class="edit_page_item_head clearfix">
-                <h4>Mother's Sister Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" visible="false" runat="server" id="spanEduModID">ModifiedBy :{{page.model.MSmodifiedby}}</span>
+                <h4>Mother's Sister Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" ng-show="page.model.MSmodifiedby!=null && page.model.MSmodifiedby!=='' && page.model.MSmodifiedby!==undefined">ModifiedBy :{{page.model.MSmodifiedby}}</span>
                 </h4>
                 <div class="edit_page_item_ui clearfix" ng-if="page.model.MSArr.length===0">
                     <a class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.relativePopulatePopulate('MS');" tabindex="0">Add</a>
@@ -454,7 +454,7 @@
 
 
     <script type="text/ng-template" id="FBModalContent.html">
-        <form class="EditViewClass"   name="FBForm" novalidate role="form" ng-submit="FBForm.$valid  && page.model.FBSubmit(page.model.fbObj)">
+        <form class="EditViewClass" name="FBForm" novalidate role="form" ng-submit="FBForm.$valid  && page.model.FBSubmit(page.model.fbObj)">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Father's Brother Details
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -520,7 +520,7 @@
         </form>
     </script>
     <script type="text/ng-template" id="FSModalContent.html">
-        <form class="EditViewClass"   name="FSForm" novalidate role="form" ng-submit="FSForm.$valid  && page.model.FSSubmit(page.model.fsObj)">
+        <form class="EditViewClass" name="FSForm" novalidate role="form" ng-submit="FSForm.$valid  && page.model.FSSubmit(page.model.fsObj)">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Father's Sister Details
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -614,7 +614,7 @@
         </form>
     </script>
     <script type="text/ng-template" id="MBModalContent.html">
-        <form class="EditViewClass"   name="MBForm" novalidate role="form" ng-submit="MBForm.$valid  && page.model.MBSubmit(page.model.mbObj)">
+        <form class="EditViewClass" name="MBForm" novalidate role="form" ng-submit="MBForm.$valid  && page.model.MBSubmit(page.model.mbObj)">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Mother's Brother Details
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -694,7 +694,7 @@
         </form>
     </script>
     <script type="text/ng-template" id="MSModalContent.html">
-        <form class="EditViewClass"   name="MSForm" novalidate="true" ng-submit="MSForm.$valid  && page.model.MSSubmit(page.model.msObj)">
+        <form class="EditViewClass" name="MSForm" novalidate="true" ng-submit="MSForm.$valid  && page.model.MSSubmit(page.model.msObj)">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Mother's Sister Details
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">

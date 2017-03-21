@@ -13,7 +13,7 @@
      }
      angular
          .module('KaakateeyaEmpEdit')
-         .controller('editRelativeCtrl', controller)
+         .controller('editRelativeCtrl', controller);
 
      controller.$inject = ['editRelativeModel', '$scope'];
  })(angular);

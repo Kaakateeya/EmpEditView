@@ -412,7 +412,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editContactModel', factory)
+        .factory('editContactModel', factory);
 
     factory.$inject = ['editContactService', 'authSvc', 'alert', 'commonFactory', '$uibModal', '$stateParams'];
 

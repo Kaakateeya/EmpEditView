@@ -22,7 +22,7 @@
 
     angular
         .module('KaakateeyaEmpEdit')
-        .factory('editProfileSettingService', factory)
+        .factory('editProfileSettingService', factory);
 
     factory.$inject = ['$http'];
 })(angular);
