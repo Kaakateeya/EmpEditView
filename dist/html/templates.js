@@ -4387,6 +4387,10 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        </br>\r" +
     "\n" +
+    "\r" +
+    "\n" +
+    "                        <div class=\"clearfix\"></div>\r" +
+    "\n" +
     "                        <div class=\"photo_upload_instrctns_list clearfix\">\r" +
     "\n" +
     "\r" +
