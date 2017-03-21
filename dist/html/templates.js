@@ -604,7 +604,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    </script>\r" +
     "\n" +
-    "</div>"
+    "</div>\r" +
+    "\n" +
+    "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
 
 
@@ -2743,7 +2745,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    }\r" +
     "\n" +
-    "</style>"
+    "</style>\r" +
+    "\n" +
+    "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
 
 
@@ -4170,7 +4174,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "</style>\r" +
     "\n" +
-    "<!--<alert-directive></alert-directive>-->"
+    "<!--<alert-directive></alert-directive>-->\r" +
+    "\n" +
+    "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
 
 
@@ -4711,7 +4717,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    }\r" +
     "\n" +
-    "</style>"
+    "</style>\r" +
+    "\n" +
+    "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
 
 
@@ -4782,7 +4790,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"AboutModalContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\"   name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutProfleSubmit(page.model.aboutObj.txtAboutprofile)\">\r" +
+    "        <form class=\"EditViewClass\" name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutProfleSubmit(page.model.aboutObj.txtAboutprofile)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -4836,7 +4844,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    </script>\r" +
     "\n" +
-    "</div>"
+    "</div>\r" +
+    "\n" +
+    "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
 
 
@@ -6899,7 +6909,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        }\r" +
     "\n" +
-    "    </style>"
+    "    </style>\r" +
+    "\n" +
+    "    <script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
 
 
@@ -7872,7 +7884,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    </script>\r" +
     "\n" +
-    "</div>"
+    "</div>\r" +
+    "\n" +
+    "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
 
 
@@ -8651,7 +8665,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"profileSettingContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\"   name=\"psForm\" novalidate role=\"form\" ng-submit=\"page.model.profileSettingSubmit(page.model.psObj)\">\r" +
+    "        <form class=\"EditViewClass\" name=\"psForm\" novalidate role=\"form\" ng-submit=\"page.model.profileSettingSubmit(page.model.psObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -8783,7 +8797,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"confidentialContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\"   name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.confidentialSubmit(page.model.csObj)\">\r" +
+    "        <form class=\"EditViewClass\" name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.confidentialSubmit(page.model.csObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -8859,7 +8873,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"profileDisplayContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\"   name=\"psdForm\" novalidate role=\"form\" ng-submit=\"page.model.profileSettingDisplaySubmit(page.model.psdObj)\">\r" +
+    "        <form class=\"EditViewClass\" name=\"psdForm\" novalidate role=\"form\" ng-submit=\"page.model.profileSettingDisplaySubmit(page.model.psdObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -8961,7 +8975,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"gradeSelectionContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\"   name=\"gradeForm\" novalidate role=\"form\" ng-submit=\"page.model.gradeSubmit(page.model.gradeObj)\">\r" +
+    "        <form class=\"EditViewClass\" name=\"gradeForm\" novalidate role=\"form\" ng-submit=\"page.model.gradeSubmit(page.model.gradeObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -9079,7 +9093,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "</div>"
+    "</div>\r" +
+    "\n" +
+    "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
 
 
@@ -9372,7 +9388,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "</div>"
+    "</div>\r" +
+    "\n" +
+    "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
 
 
@@ -9799,7 +9817,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    }\r" +
     "\n" +
-    "</style>"
+    "</style>\r" +
+    "\n" +
+    "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
 
 
@@ -11398,7 +11418,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    }\r" +
     "\n" +
-    "</style>"
+    "</style>\r" +
+    "\n" +
+    "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
 
 
@@ -13749,7 +13771,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    }\r" +
     "\n" +
-    "</style>"
+    "</style>\r" +
+    "\n" +
+    "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
 
 
@@ -14536,7 +14560,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"SpouseContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\"   name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.spouseSubmit(page.model.spouObj);\" accessible-form>\r" +
+    "        <form class=\"EditViewClass\" name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.spouseSubmit(page.model.spouObj);\" accessible-form>\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -14826,7 +14850,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"spouseChildContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\"   name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.childSubmit(page.model.childObj);\" accessible-form>\r" +
+    "        <form class=\"EditViewClass\" name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.childSubmit(page.model.childObj);\" accessible-form>\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -14934,7 +14958,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    </script>\r" +
     "\n" +
-    "</div>"
+    "</div>\r" +
+    "\n" +
+    "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
 
 

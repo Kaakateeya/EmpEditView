@@ -16,12 +16,12 @@
                 model.PersonalObj = response.data;
                 // model.imgsrc = authSvc.getprofilepic();
 
-                console.log(response.data);
+
 
                 if (model.PersonalObj != null && model.PersonalObj != undefined) {
                     baseService.nodatastatus(model.PersonalObj.ProfileID).then(function(res) {
                         model.rev = res.data;
-                        console.log(model.rev);
+
                     });
                 }
             });
@@ -70,7 +70,7 @@
 
                 model.branchdata = JSON.parse(response.data)[0];
                 model.registrationdate = filter('date')(model.branchdata.RegistrationDate, 'dd-MM-yyyy hh:mm:ss');
-                console.log(model.branchdata);
+
                 model.strCon = model.branchdata.HighConfendential == 1 && model.branchdata.IsConfidential == true ? ",SC" : (model.branchdata.HighConfendential == 1 ? ",SC" : (model.branchdata.IsConfidential == true ? ",C" : null));
 
             });
@@ -97,7 +97,7 @@
                     if (response.data != undefined && response.data.length > 0) {
                         model.SlideArr = [];
                         model.FPobj = JSON.parse(response.data[0]);
-                        console.log(model.FPobj);
+
                         _.each(model.FPobj, function(item) {
                             debugger;
                             model.SlideArr.push({ FullPhotoPath: editviewapp.GlobalImgPath + "Images/ProfilePics/KMPL_" + CustID + "_Images/" + (item.PhotoName.slice(0, 4)).replace("i", "I") + "_Images/" + model.PersonalObj.ProfileID + "_FullPhoto.jpg" });
