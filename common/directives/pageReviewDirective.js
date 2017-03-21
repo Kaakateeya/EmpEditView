@@ -52,7 +52,7 @@
                 commonFactory.closepopup();
             };
 
-            if (AdminID === 1 || AdminID = '1') {
+            if (AdminID === 1 || AdminID === '1') {
                 baseService.menuReviewstatus(scope.custid, '2', scope.sectionid).then(function(response) {
                     model.revstatus = JSON.parse(response.data);
                     console.log('sectionID');

@@ -3,11 +3,12 @@
 
      function controller(editEducationModel, scope, baseModel) {
          var vm = this;
+         var model;
 
-         //  vm.scope = scope;
+         vm.scope = scope;
          vm.init = function() {
              vm.model = editEducationModel;
-             //  editEducationModel.init();
+             editEducationModel.init();
              vm.model.scope = scope;
          };
 

@@ -969,11 +969,12 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
      function controller(editEducationModel, scope, baseModel) {
          var vm = this;
+         var model;
 
-         //  vm.scope = scope;
+         vm.scope = scope;
          vm.init = function() {
              vm.model = editEducationModel;
-             //  editEducationModel.init();
+             editEducationModel.init();
              vm.model.scope = scope;
          };
 
@@ -9125,11 +9126,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "<style type=\"text/css\">\r" +
+    "<style>\r" +
     "\n" +
     "    .cssMaskdiv {\r" +
     "\n" +
@@ -20619,37 +20616,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
         };
     }
 })();
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('KaakateeyaEmpEdit')
-//         .directive('fileModel', directive);
-//     directive.$inject = ['$parse'];
-
-//     function directive($parse) {
-
-//         var directive = {
-//             link: link,
-//             restrict: 'A'
-//         };
-//         return directive;
-
-//         function link(scope, element, attrs) {
-//             var model = $parse(attrs.fileModel);
-//             var modelSetter = model.assign;
-
-//             element.bind('change', function() {
-//                 scope.$apply(function() {
-//                     modelSetter(scope, element[0].files[0]);
-//                 });
-//             });
-
-
-//         }
-//     }
-
-// })();
 // AngularJS: 1.3.15
 // bootstrap-multiselect: 0.9.6
 //var statticdata=require('./staticArrayBindings.json');
@@ -20927,7 +20893,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                 commonFactory.closepopup();
             };
 
-            if (AdminID === 1 || AdminID = '1') {
+            if (AdminID === 1 || AdminID === '1') {
                 baseService.menuReviewstatus(scope.custid, '2', scope.sectionid).then(function(response) {
                     model.revstatus = JSON.parse(response.data);
                     console.log('sectionID');

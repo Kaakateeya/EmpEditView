@@ -4635,11 +4635,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "<style type=\"text/css\">\r" +
+    "<style>\r" +
     "\n" +
     "    .cssMaskdiv {\r" +
     "\n" +
