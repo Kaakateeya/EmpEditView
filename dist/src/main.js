@@ -20619,6 +20619,37 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
         };
     }
 })();
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .directive('fileModel', directive);
+    directive.$inject = ['$parse'];
+
+    function directive($parse) {
+
+        var directive = {
+            link: link,
+            restrict: 'A'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+
+            element.bind('change', function() {
+                scope.$apply(function() {
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+
+
+        }
+    }
+
+})();
 // AngularJS: 1.3.15
 // bootstrap-multiselect: 0.9.6
 //var statticdata=require('./staticArrayBindings.json');

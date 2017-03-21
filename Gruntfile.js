@@ -117,7 +117,8 @@ module.exports = function(grunt) {
                     '!common/services/authSvc.js',
                     'common/**/*.js',
                     'base/**/*.js', '!common/directives/editFooter.js',
-                    '!common/directives/datePickerDirective.js', '!common/directives/fileUploadDirective.js'
+                    '!common/directives/datePickerDirective.js'
+
                 ],
                 dest: 'dist/src/main.js'
             },
