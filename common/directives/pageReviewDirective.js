@@ -41,7 +41,7 @@
                 baseService.menuReviewstatus(scope.custid, '1', scope.sectionid).then(function(response) {
 
                     if (response.data != undefined && response.data.length > 0) {
-                        if (JSON.parse(response.data[0])[0].Status === 1) {
+                        if (JSON.parse(response.data[0])[0].STATUS === 1) {
                             commonFactory.closepopup();
                             scope.showChk = false;
                         }
@@ -60,7 +60,6 @@
                     console.log(model.revstatus);
 
                     _.each(model.revstatus, function(item) {
-
                         var SectionID = item.ReviewStatusID;
                         if (SectionID === 0) {
                             scope.showChk = true;

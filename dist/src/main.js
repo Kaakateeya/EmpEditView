@@ -75,7 +75,6 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             //         } else {
             //             return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
             //         }
-
             //         // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
             //     }]
             // }
@@ -8786,32 +8785,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "                                            </div>\r" +
     "\n" +
     "                                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -19763,7 +19736,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
 
   $templateCache.put('common/templates/reviewConfirmationPopup.html',
-    "<form class=\"EditViewClass\"   name=\"reviewConfirmForm\" novalidate role=\"form\" ng-submit=\"reviewSubmit();\">\r" +
+    "<form class=\"EditViewClass\" name=\"reviewConfirmForm\" novalidate role=\"form\" ng-submit=\"reviewSubmit();\">\r" +
     "\n" +
     "    <div class=\"modal-header text-center\" style=\"color: #57b5e3;\r" +
     "\n" +
@@ -20700,7 +20673,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                 baseService.menuReviewstatus(scope.custid, '1', scope.sectionid).then(function(response) {
 
                     if (response.data != undefined && response.data.length > 0) {
-                        if (JSON.parse(response.data[0])[0].Status === 1) {
+                        if (JSON.parse(response.data[0])[0].STATUS === 1) {
                             commonFactory.closepopup();
                             scope.showChk = false;
                         }
@@ -20719,7 +20692,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                     console.log(model.revstatus);
 
                     _.each(model.revstatus, function(item) {
-
                         var SectionID = item.ReviewStatusID;
                         if (SectionID === 0) {
                             scope.showChk = true;
