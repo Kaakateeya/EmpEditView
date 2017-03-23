@@ -87,6 +87,8 @@
             editEducationService.getCustomerData(CustID).then(function(response) {
                 model.CustomerDataArr = response.data !== undefined && response.data.length > 0 ? JSON.parse(response.data) : [];
                 model.custEmpLastModificationDate = model.CustomerDataArr[0].EmpLastModificationDate;
+                console.log('custdata');
+                console.log(model.CustomerDataArr);
             });
         };
 
@@ -189,6 +191,8 @@
                         model.custObj.ddlcaste = item.CasteID;
                         model.custObj.ddlsubcaste = item.SubCasteID;
                         model.custObj.ddlBornCitizenship = item.CitizenshipID;
+                        model.custObj.rdlPhysicalStatus = item.PhysicalStatusID;
+
                     }
                     commonFactory.open('CustomerDataContent.html', model.scope, uibModal);
                     break;
@@ -388,7 +392,8 @@
                     SubcasteID: obj.ddlsubcaste,
                     LastName: obj.txtSurName,
                     FirstName: obj.txtName,
-                    Gender: obj.rdlGender
+                    Gender: obj.rdlGender,
+                    PhysicallyChallenged: obj.rdlPhysicalStatus
                 },
                 customerpersonaldetails: {
                     intCusID: CustID,

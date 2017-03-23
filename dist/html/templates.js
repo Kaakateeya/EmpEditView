@@ -2964,25 +2964,19 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "                        <!--<div id=\"UpdatePanelSubcaste\">\r" +
-    "\n" +
     "\r" +
     "\n" +
-    "                            <div id=\"divSubcaste\" class=\"edit_page_details_item_desc clearfix\" visible='<%#(Eval(\"SubCaste\").ToString()!=\"\" && Eval(\"SubCaste\").ToString()!=null)?true:false %>'>\r" +
+    "                        <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
-    "                                <h6>\r" +
+    "                            <h6>\r" +
     "\n" +
-    "                                    <span id=\"lblsubcaste\" font-bold=\"true\">SubCaste</span></h6>\r" +
+    "                                <span id=\"lblsubcaste\" font-bold=\"true\">Physical Status</span></h6>\r" +
     "\n" +
-    "                                <h5>\r" +
+    "                            <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblsubcastecandidate\">{{item.SubCaste}}</span></h5>\r" +
+    "                                <span id=\"lblsubcastecandidate\">{{item.PhysicalStatus}}</span></h5>\r" +
     "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>-->\r" +
+    "                        </div>\r" +
     "\n" +
     "                        <div id=\"UpdatePanelBorncitizenship\">\r" +
     "\n" +
@@ -3348,7 +3342,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
-    "                    <div id=\"upAboutAdd\" ng-if=\"page.model.lblaboutUrself==='' || page.model.lblaboutUrself===null\">\r" +
+    "                    <div id=\"upAboutAdd\" ng-if=\"page.model.lblaboutUrself===undefined || page.model.lblaboutUrself==='' || page.model.lblaboutUrself===null\">\r" +
     "\n" +
     "                        <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showAboutModal')\">Add</a>\r" +
     "\n" +
@@ -3376,7 +3370,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        </div>\r" +
     "\n" +
-    "                        <div ng-if=\"page.model.lblaboutUrself!='' && page.model.lblaboutUrself!=null\" class=\"edit_page_item_ui clearfix\">\r" +
+    "                        <div ng-if=\"page.model.lblaboutUrself!==undefined && page.model.lblaboutUrself!=='' && page.model.lblaboutUrself!==null\" class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
     "                            <a class=\"edit_page_edit_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showpopup('showAboutModal',page.model.lblaboutUrself)\">Edit</a>\r" +
     "\n" +
@@ -3900,7 +3894,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"CustomerDataContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\" name=\"custForm\" ng-class=\"'EditViewClass'\" novalidate role=\"form\" ng-submit=\"page.model.custdataSubmit(page.model.custObj)\">\r" +
+    "        <form class=\"EditViewClass\" name=\"custForm\" ng-class=\"'EditViewClass'\" novalidate role=\"form\" ng-submit=\"custForm.$valid && page.model.custdataSubmit(page.model.custObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -3987,6 +3981,8 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "                        </div>\r" +
     "\n" +
     "                    </li>\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "                    <li class=\"clearfix form-group\">\r" +
     "\n" +
@@ -4112,7 +4108,27 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlBornCitizenship\" typeofdata=\"'Country'\" required></select>\r" +
     "\n" +
+    "                        </div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                    <li class=\"clearfix form-group\">\r" +
+    "\n" +
+    "                        <label for=\"lblMaritalstatus\" class=\"pop_label_left\">Physical Status<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
     "\r" +
+    "\n" +
+    "                        <div class=\"pop_controls_right\" style=\"font-weight: 700; color: black;\">\r" +
+    "\n" +
+    "                            <md-radio-group ng-required=\"true\" name=\"rdlPhysicalStatus\" layout=\"row\" ng-model=\"page.model.custObj.rdlPhysicalStatus\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "\n" +
+    "                                <md-radio-button value=\"25\" class=\"md-primary\">Normal</md-radio-button>\r" +
+    "\n" +
+    "                                <md-radio-button value=\"26\"> Physically Challenged </md-radio-button>\r" +
+    "\n" +
+    "                            </md-radio-group>\r" +
+    "\n" +
+    "                            <div ng-if=\"custForm.rdlPhysicalStatus.$invalid && (custForm.$submitted)\" style=\"color:#a94442;\">This field is required.</div>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +

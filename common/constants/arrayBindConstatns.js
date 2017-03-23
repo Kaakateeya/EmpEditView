@@ -283,6 +283,11 @@
                 { "label": "Medium", "title": "Medium", "value": 19 },
                 { "label": "Dark", "title": "Dark", "value": 20 },
                 { "label": "Doesn't Matter", "title": "Doesn't Matter", "value": 38 }
+            ],
+            'PhysicalStatus': [
+                { "label": "--select-- ", "title": "--select--", "value": "" },
+                { "label": "Normal", "title": "Normal", "value": 25 },
+                { "label": "Physically Challenged", "title": "Physically Challenged", "value": 26 }
             ]
 
         });

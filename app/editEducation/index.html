@@ -104,16 +104,13 @@
                             </div>
 
                         </div>
-                        <!--<div id="UpdatePanelSubcaste">
 
-                            <div id="divSubcaste" class="edit_page_details_item_desc clearfix" visible='<%#(Eval("SubCaste").ToString()!="" && Eval("SubCaste").ToString()!=null)?true:false %>'>
-                                <h6>
-                                    <span id="lblsubcaste" font-bold="true">SubCaste</span></h6>
-                                <h5>
-                                    <span id="lblsubcastecandidate">{{item.SubCaste}}</span></h5>
-                            </div>
-
-                        </div>-->
+                        <div class="edit_page_details_item_desc clearfix">
+                            <h6>
+                                <span id="lblsubcaste" font-bold="true">Physical Status</span></h6>
+                            <h5>
+                                <span id="lblsubcastecandidate">{{item.PhysicalStatus}}</span></h5>
+                        </div>
                         <div id="UpdatePanelBorncitizenship">
 
                             <div id="divBorncitizenship" class="edit_page_details_item_desc clearfix">
@@ -296,7 +293,7 @@
             <div class="edit_page_item_head clearfix">
                 <h4>Mention your goals, interests and hobbies etc</h4>
                 <div class="edit_page_item_ui clearfix">
-                    <div id="upAboutAdd" ng-if="page.model.lblaboutUrself==='' || page.model.lblaboutUrself===null">
+                    <div id="upAboutAdd" ng-if="page.model.lblaboutUrself===undefined || page.model.lblaboutUrself==='' || page.model.lblaboutUrself===null">
                         <a class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.showpopup('showAboutModal')">Add</a>
                     </div>
                 </div>
@@ -310,7 +307,7 @@
                                 <span>{{page.model.lblaboutUrself}}</span>
                             </h5>
                         </div>
-                        <div ng-if="page.model.lblaboutUrself!='' && page.model.lblaboutUrself!=null" class="edit_page_item_ui clearfix">
+                        <div ng-if="page.model.lblaboutUrself!==undefined && page.model.lblaboutUrself!=='' && page.model.lblaboutUrself!==null" class="edit_page_item_ui clearfix">
                             <a class="edit_page_edit_button" href="javascript:void(0);" ng-click="page.model.showpopup('showAboutModal',page.model.lblaboutUrself)">Edit</a>
                         </div>
 
@@ -572,7 +569,7 @@
 
 
     <script type="text/ng-template" id="CustomerDataContent.html">
-        <form class="EditViewClass" name="custForm" ng-class="'EditViewClass'" novalidate role="form" ng-submit="page.model.custdataSubmit(page.model.custObj)">
+        <form class="EditViewClass" name="custForm" ng-class="'EditViewClass'" novalidate role="form" ng-submit="custForm.$valid && page.model.custdataSubmit(page.model.custObj)">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Customer details
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -616,6 +613,7 @@
 
                         </div>
                     </li>
+
                     <li class="clearfix form-group">
                         <label for="lbldob" class="pop_label_left">Date Of Birth<span style="color: red; margin-left: 3px;">*</span></label>
                         <div class="pop_controls_right select-box-my input-group">
@@ -678,7 +676,17 @@
 
                         <div class="pop_controls_right select-box-my input-group">
                             <select multiselectdropdown ng-model="page.model.custObj.ddlBornCitizenship" typeofdata="'Country'" required></select>
+                        </div>
+                    </li>
+                    <li class="clearfix form-group">
+                        <label for="lblMaritalstatus" class="pop_label_left">Physical Status<span style="color: red; margin-left: 3px;">*</span></label>
 
+                        <div class="pop_controls_right" style="font-weight: 700; color: black;">
+                            <md-radio-group ng-required="true" name="rdlPhysicalStatus" layout="row" ng-model="page.model.custObj.rdlPhysicalStatus" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                                <md-radio-button value="25" class="md-primary">Normal</md-radio-button>
+                                <md-radio-button value="26"> Physically Challenged </md-radio-button>
+                            </md-radio-group>
+                            <div ng-if="custForm.rdlPhysicalStatus.$invalid && (custForm.$submitted)" style="color:#a94442;">This field is required.</div>
                         </div>
                     </li>
                     <li class="row">

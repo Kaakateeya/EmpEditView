@@ -167,6 +167,9 @@
                     case 'Priority':
                         scope.databind(cons.Priority);
                         break;
+                    case 'PhysicalStatus':
+                        scope.databind(cons.PhysicalStatus);
+                        break;
                     case 'Age':
                     case 'Ageselect':
                         var test = [];
