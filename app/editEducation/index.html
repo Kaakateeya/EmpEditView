@@ -5,7 +5,7 @@
 
     <div class="edit_pages_content_main clearfix">
         <page-review dispaly-name="'Education details'" sectionid="'6,7,8'" custid="page.model.CustID"></page-review>
-        <div class="edit_page_item">
+        <div class="edit_page_item" ng-if="page.model.Admin === 1 || page.model.Admin === '1'">
             <div class="edit_page_item_head clearfix">
                 <h4>Customer Personal Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" ng-show="page.model.custEmpLastModificationDate!=undefined && page.model.custEmpLastModificationDate!=null && page.model.custEmpLastModificationDate!==''">ModifiedBy :{{page.model.custEmpLastModificationDate}}</span>
                 </h4>
@@ -566,7 +566,6 @@
 
         </form>
     </script>
-
 
     <script type="text/ng-template" id="CustomerDataContent.html">
         <form class="EditViewClass" name="custForm" ng-class="'EditViewClass'" novalidate role="form" ng-submit="custForm.$valid && page.model.custdataSubmit(page.model.custObj)">

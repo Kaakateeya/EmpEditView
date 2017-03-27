@@ -270,10 +270,8 @@
 
                     <div id="divAddGrade" visible="false">
                         <div class="edit_page_item_ui clearfix">
-                            <div id="updateAddlnkGrade">
-
+                            <div ng-if="page.model.gradeSelectionArr.length===0">
                                 <a class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.showprofilepopup('grading');">Add</a>
-
                             </div>
                         </div>
                     </div>

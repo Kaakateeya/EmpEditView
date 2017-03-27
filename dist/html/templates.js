@@ -2766,7 +2766,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        <page-review dispaly-name=\"'Education details'\" sectionid=\"'6,7,8'\" custid=\"page.model.CustID\"></page-review>\r" +
     "\n" +
-    "        <div class=\"edit_page_item\">\r" +
+    "        <div class=\"edit_page_item\" ng-if=\"page.model.Admin === 1 || page.model.Admin === '1'\">\r" +
     "\n" +
     "            <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
@@ -3887,8 +3887,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "        </form>\r" +
     "\n" +
     "    </script>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -8429,13 +8427,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <div class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
-    "                            <div id=\"updateAddlnkGrade\">\r" +
-    "\n" +
-    "\r" +
+    "                            <div ng-if=\"page.model.gradeSelectionArr.length===0\">\r" +
     "\n" +
     "                                <a class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.showprofilepopup('grading');\">Add</a>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +

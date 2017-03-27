@@ -8,7 +8,7 @@
 
         model.scope = {};
         var loginEmpid = authSvc.LoginEmpid();
-        var AdminID = authSvc.isAdmin();
+        var AdminID = model.Admin = authSvc.isAdmin();
         //start declaration block
         model.stateArr = [];
         model.districtArr = [];
