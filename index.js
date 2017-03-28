@@ -75,13 +75,12 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 //         var edit = item.name.slice(9);
                 //         if (editviewapp.env === 'dev') {
                 //             return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-
-            //         } else {
-            //             return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
-            //         }
-            //         // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-            //     }]
-            // }
+                //         } else {
+                //             return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
+                //         }
+                //         // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+                //     }]
+                // }
         });
         $locationProvider.html5Mode(true);
     });

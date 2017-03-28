@@ -26,44 +26,43 @@
                     });
                 }
             });
-
-
             return model;
         };
 
         model.unreviewedLinks = function() {
-            baseService.menuReviewstatus(CustID, '0', '').then(function(response) {
 
+            baseService.menuReviewstatus(CustID, '0', '').then(function(response) {
+                model.lnkparentsReview = model.lnksiblingsReview = model.lnkrelativesReview = model.lnkeducationandprofReview = model.lnkpartnerReview = model.lnkastroReview = model.lnkreferenceReview = model.lnkpropertyReview = '';
                 model.menuReviewdata = JSON.parse(response.data);
                 _.each(model.menuReviewdata, function(item) {
                     var SectionID = item.SectionID;
-
                     if (SectionID === 11 || SectionID === 12 || SectionID === 13 || SectionID == 15) {
-                        model.lnkparentsReview = true;
+                        model.lnkparentsReview = 'red';
                     }
                     if (SectionID === 14 || SectionID === 25 || SectionID === 26) {
-                        model.lnksiblingsReview = true;
+                        model.lnksiblingsReview = 'red';
                     }
                     if (SectionID === 27 || SectionID === 28 || SectionID === 32 || SectionID === 33) {
-                        model.lnkrelativesReview = true;
+                        model.lnkrelativesReview = 'red';
                     }
                     if (SectionID === 6 || SectionID === 7 || SectionID === 8) {
-                        model.lnkeducationandprofReview = true;
+                        model.lnkeducationandprofReview = 'red';
                     }
                     if (SectionID === 16 || SectionID === 22) {
-                        model.lnkpartnerReview = true;
+                        model.lnkpartnerReview = 'red';
                     }
                     if (SectionID === 23) {
-                        model.lnkastroReview = true;
+                        model.lnkastroReview = 'red';
                     }
                     if (SectionID === 29) {
-                        model.lnkreferenceReview = true;
+                        model.lnkreferenceReview = 'red';
                     }
                     if (SectionID === 34) {
-                        model.lnkpropertyReview = true;
+                        model.lnkpropertyReview = 'red';
                     }
                 });
             });
+
         };
 
         model.menuItem = function() {

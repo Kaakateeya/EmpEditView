@@ -71,13 +71,12 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 //         var edit = item.name.slice(9);
                 //         if (editviewapp.env === 'dev') {
                 //             return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-
-            //         } else {
-            //             return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
-            //         }
-            //         // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-            //     }]
-            // }
+                //         } else {
+                //             return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
+                //         }
+                //         // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+                //     }]
+                // }
         });
         $locationProvider.html5Mode(true);
     });
@@ -7270,7 +7269,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <div class=\"edit_pages_content_main clearfix\">\r" +
     "\n" +
-    "        <page-review dispaly-name=\"'Education details'\" sectionid=\"'6,7,8'\" custid=\"page.model.CustID\"></page-review>\r" +
+    "        <page-review dispaly-name=\"'Education details'\" linkval=\"model.lnkeducationandprofReview\" sectionid=\"'6,7,8'\" custid=\"page.model.CustID\"></page-review>\r" +
     "\n" +
     "        <div class=\"edit_page_item\" ng-if=\"page.model.Admin === 1 || page.model.Admin === '1'\">\r" +
     "\n" +
@@ -7528,7 +7527,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div class=\"edit_page_item_ui clearfix \">\r" +
     "\n" +
-    "                    <a class=\"edit_page_add_button \" href=\"javascript:void(0); \" ng-click=\"page.model.showpopup( 'showEduModal'); \">Add</a>\r" +
+    "                    <a class=\"edit_page_add_button\" href=\"javascript:void(0); \" ng-click=\"page.model.showpopup('showEduModal'); \">Add</a>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -7538,7 +7537,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-repeat=\"item in page.model.educationSelectArray \">\r" +
     "\n" +
-    "                    <div id=\"reviewdiv \" ng-class=\"item.reviewstatus===false? 'edit_page_details_item_desc clearfix reviewCls': 'edit_page_details_item_desc clearfix' \">\r" +
+    "                    <div id=\"reviewdiv \" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls': 'edit_page_details_item_desc clearfix' \">\r" +
     "\n" +
     "                        <div id=\"lbleducationgroup \" class=\"edit_page_details_item_desc clearfix \">\r" +
     "\n" +
@@ -20681,7 +20680,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
             var AdminID = authSvc.isAdmin();
             scope.showChk = false;
             scope.reviewonchange = function(booltype) {
-
+                model.lnkeducationandprofReview = '';
                 if (booltype === true) {
                     scope.reviewdisplay = scope.dispalyName;
                     commonFactory.open('common/templates/reviewConfirmationPopup.html', scope, uibModal, 'sm');
@@ -20696,6 +20695,38 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                         if (JSON.parse(response.data[0])[0].STATUS === 1) {
                             commonFactory.closepopup();
                             scope.showChk = false;
+                            baseService.menuReviewstatus(scope.custid, '0', '').then(function(response) {
+                                debugger;
+                                model.lnkparentsReview = model.lnksiblingsReview = model.lnkrelativesReview = model.lnkeducationandprofReview = model.lnkpartnerReview = model.lnkastroReview = model.lnkreferenceReview = model.lnkpropertyReview = '';
+                                model.menuReviewdata = JSON.parse(response.data);
+                                _.each(model.menuReviewdata, function(item) {
+                                    var SectionID = item.SectionID;
+                                    if (SectionID === 11 || SectionID === 12 || SectionID === 13 || SectionID == 15) {
+                                        model.lnkparentsReview = 'red';
+                                    }
+                                    if (SectionID === 14 || SectionID === 25 || SectionID === 26) {
+                                        model.lnksiblingsReview = 'red';
+                                    }
+                                    if (SectionID === 27 || SectionID === 28 || SectionID === 32 || SectionID === 33) {
+                                        model.lnkrelativesReview = 'red';
+                                    }
+                                    if (SectionID === 6 || SectionID === 7 || SectionID === 8) {
+                                        model.lnkeducationandprofReview = 'red';
+                                    }
+                                    if (SectionID === 16 || SectionID === 22) {
+                                        model.lnkpartnerReview = 'red';
+                                    }
+                                    if (SectionID === 23) {
+                                        model.lnkastroReview = 'red';
+                                    }
+                                    if (SectionID === 29) {
+                                        model.lnkreferenceReview = 'red';
+                                    }
+                                    if (SectionID === 34) {
+                                        model.lnkpropertyReview = 'red';
+                                    }
+                                });
+                            });
                         }
                     }
                 });
@@ -21229,44 +21260,43 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                     });
                 }
             });
-
-
             return model;
         };
 
         model.unreviewedLinks = function() {
-            baseService.menuReviewstatus(CustID, '0', '').then(function(response) {
 
+            baseService.menuReviewstatus(CustID, '0', '').then(function(response) {
+                model.lnkparentsReview = model.lnksiblingsReview = model.lnkrelativesReview = model.lnkeducationandprofReview = model.lnkpartnerReview = model.lnkastroReview = model.lnkreferenceReview = model.lnkpropertyReview = '';
                 model.menuReviewdata = JSON.parse(response.data);
                 _.each(model.menuReviewdata, function(item) {
                     var SectionID = item.SectionID;
-
                     if (SectionID === 11 || SectionID === 12 || SectionID === 13 || SectionID == 15) {
-                        model.lnkparentsReview = true;
+                        model.lnkparentsReview = 'red';
                     }
                     if (SectionID === 14 || SectionID === 25 || SectionID === 26) {
-                        model.lnksiblingsReview = true;
+                        model.lnksiblingsReview = 'red';
                     }
                     if (SectionID === 27 || SectionID === 28 || SectionID === 32 || SectionID === 33) {
-                        model.lnkrelativesReview = true;
+                        model.lnkrelativesReview = 'red';
                     }
                     if (SectionID === 6 || SectionID === 7 || SectionID === 8) {
-                        model.lnkeducationandprofReview = true;
+                        model.lnkeducationandprofReview = 'red';
                     }
                     if (SectionID === 16 || SectionID === 22) {
-                        model.lnkpartnerReview = true;
+                        model.lnkpartnerReview = 'red';
                     }
                     if (SectionID === 23) {
-                        model.lnkastroReview = true;
+                        model.lnkastroReview = 'red';
                     }
                     if (SectionID === 29) {
-                        model.lnkreferenceReview = true;
+                        model.lnkreferenceReview = 'red';
                     }
                     if (SectionID === 34) {
-                        model.lnkpropertyReview = true;
+                        model.lnkpropertyReview = 'red';
                     }
                 });
             });
+
         };
 
         model.menuItem = function() {

@@ -4,7 +4,7 @@
     </div>
 
     <div class="edit_pages_content_main clearfix">
-        <page-review dispaly-name="'Education details'" sectionid="'6,7,8'" custid="page.model.CustID"></page-review>
+        <page-review dispaly-name="'Education details'" linkval="model.lnkeducationandprofReview" sectionid="'6,7,8'" custid="page.model.CustID"></page-review>
         <div class="edit_page_item" ng-if="page.model.Admin === 1 || page.model.Admin === '1'">
             <div class="edit_page_item_head clearfix">
                 <h4>Customer Personal Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" ng-show="page.model.custEmpLastModificationDate!=undefined && page.model.custEmpLastModificationDate!=null && page.model.custEmpLastModificationDate!==''">ModifiedBy :{{page.model.custEmpLastModificationDate}}</span>
@@ -133,12 +133,12 @@
             <div class="edit_page_item_head clearfix">
                 <h4>Education Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #08CFD2" ng-show="page.model.eduEmpLastModificationDate!=null && page.model.eduEmpLastModificationDate!=='' && page.model.eduEmpLastModificationDate!==undefined">ModifiedBy :{{page.model.eduEmpLastModificationDate}}</span></h4>
                 <div class="edit_page_item_ui clearfix ">
-                    <a class="edit_page_add_button " href="javascript:void(0); " ng-click="page.model.showpopup( 'showEduModal'); ">Add</a>
+                    <a class="edit_page_add_button" href="javascript:void(0); " ng-click="page.model.showpopup('showEduModal'); ">Add</a>
                 </div>
             </div>
             <div class="edit_page_details_item">
                 <div ng-repeat="item in page.model.educationSelectArray ">
-                    <div id="reviewdiv " ng-class="item.reviewstatus===false? 'edit_page_details_item_desc clearfix reviewCls': 'edit_page_details_item_desc clearfix' ">
+                    <div id="reviewdiv " ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls': 'edit_page_details_item_desc clearfix' ">
                         <div id="lbleducationgroup " class="edit_page_details_item_desc clearfix ">
                             <h6>
                                 <label id="lbleducationgroup " ng-style="{color: item.EduHighestDegree==1? 'Red': 'Black'} ">{{item.EducationCategory!=null?(item.EducationCategory=="Below Graduation "?"Under Graduation ":"Education "):"Education "}}</label>

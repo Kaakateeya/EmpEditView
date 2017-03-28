@@ -29,7 +29,7 @@
             var AdminID = authSvc.isAdmin();
             scope.showChk = false;
             scope.reviewonchange = function(booltype) {
-
+                model.lnkeducationandprofReview = '';
                 if (booltype === true) {
                     scope.reviewdisplay = scope.dispalyName;
                     commonFactory.open('common/templates/reviewConfirmationPopup.html', scope, uibModal, 'sm');
@@ -44,6 +44,38 @@
                         if (JSON.parse(response.data[0])[0].STATUS === 1) {
                             commonFactory.closepopup();
                             scope.showChk = false;
+                            baseService.menuReviewstatus(scope.custid, '0', '').then(function(response) {
+                                debugger;
+                                model.lnkparentsReview = model.lnksiblingsReview = model.lnkrelativesReview = model.lnkeducationandprofReview = model.lnkpartnerReview = model.lnkastroReview = model.lnkreferenceReview = model.lnkpropertyReview = '';
+                                model.menuReviewdata = JSON.parse(response.data);
+                                _.each(model.menuReviewdata, function(item) {
+                                    var SectionID = item.SectionID;
+                                    if (SectionID === 11 || SectionID === 12 || SectionID === 13 || SectionID == 15) {
+                                        model.lnkparentsReview = 'red';
+                                    }
+                                    if (SectionID === 14 || SectionID === 25 || SectionID === 26) {
+                                        model.lnksiblingsReview = 'red';
+                                    }
+                                    if (SectionID === 27 || SectionID === 28 || SectionID === 32 || SectionID === 33) {
+                                        model.lnkrelativesReview = 'red';
+                                    }
+                                    if (SectionID === 6 || SectionID === 7 || SectionID === 8) {
+                                        model.lnkeducationandprofReview = 'red';
+                                    }
+                                    if (SectionID === 16 || SectionID === 22) {
+                                        model.lnkpartnerReview = 'red';
+                                    }
+                                    if (SectionID === 23) {
+                                        model.lnkastroReview = 'red';
+                                    }
+                                    if (SectionID === 29) {
+                                        model.lnkreferenceReview = 'red';
+                                    }
+                                    if (SectionID === 34) {
+                                        model.lnkpropertyReview = 'red';
+                                    }
+                                });
+                            });
                         }
                     }
                 });

@@ -2764,7 +2764,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <div class=\"edit_pages_content_main clearfix\">\r" +
     "\n" +
-    "        <page-review dispaly-name=\"'Education details'\" sectionid=\"'6,7,8'\" custid=\"page.model.CustID\"></page-review>\r" +
+    "        <page-review dispaly-name=\"'Education details'\" linkval=\"model.lnkeducationandprofReview\" sectionid=\"'6,7,8'\" custid=\"page.model.CustID\"></page-review>\r" +
     "\n" +
     "        <div class=\"edit_page_item\" ng-if=\"page.model.Admin === 1 || page.model.Admin === '1'\">\r" +
     "\n" +
@@ -3022,7 +3022,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div class=\"edit_page_item_ui clearfix \">\r" +
     "\n" +
-    "                    <a class=\"edit_page_add_button \" href=\"javascript:void(0); \" ng-click=\"page.model.showpopup( 'showEduModal'); \">Add</a>\r" +
+    "                    <a class=\"edit_page_add_button\" href=\"javascript:void(0); \" ng-click=\"page.model.showpopup('showEduModal'); \">Add</a>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -3032,7 +3032,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-repeat=\"item in page.model.educationSelectArray \">\r" +
     "\n" +
-    "                    <div id=\"reviewdiv \" ng-class=\"item.reviewstatus===false? 'edit_page_details_item_desc clearfix reviewCls': 'edit_page_details_item_desc clearfix' \">\r" +
+    "                    <div id=\"reviewdiv \" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls': 'edit_page_details_item_desc clearfix' \">\r" +
     "\n" +
     "                        <div id=\"lbleducationgroup \" class=\"edit_page_details_item_desc clearfix \">\r" +
     "\n" +
