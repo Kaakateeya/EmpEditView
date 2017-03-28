@@ -19631,7 +19631,29 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    </li>\r" +
     "\n" +
-    "</div>"
+    "</div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "<style type=\"text/css\">\r" +
+    "\n" +
+    "    body {\r" +
+    "\n" +
+    "        color: black;\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    .multiselect-selected-text {\r" +
+    "\n" +
+    "        overflow: hidden;\r" +
+    "\n" +
+    "        display: block;\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "</style>"
   );
 
 
