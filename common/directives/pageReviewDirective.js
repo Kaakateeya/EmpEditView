@@ -29,7 +29,6 @@
             var AdminID = authSvc.isAdmin();
             scope.showChk = false;
             scope.reviewonchange = function(booltype) {
-                model.lnkeducationandprofReview = '';
                 if (booltype === true) {
                     scope.reviewdisplay = scope.dispalyName;
                     commonFactory.open('common/templates/reviewConfirmationPopup.html', scope, uibModal, 'sm');
