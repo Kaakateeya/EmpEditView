@@ -1597,7 +1597,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 if (extension !== null && gifFormat.indexOf(angular.lowercase(extension)) === -1) {
                     alert('Your uploaded image contains an unapproved file formats.');
                 } else if (size > 4 * 1024) {
-                    alert('Sorry,Upload Photo Size Must Be Less than 1 mb');
+                    alert('Sorry,Upload Photo Size Must Be Less than  4 mb');
                 } else {
                     // var extension = ((obj.myFile.name).split('.'))[1];
                     var keyname = editviewapp.prefixPath + 'KMPL_' + CustID + '_Images/Img' + model.photorowID + '.' + extension;
@@ -1632,14 +1632,13 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                             editManagePhotoService.submituploadData(model.uploadData).then(function(response) {
                                 console.log(response);
                                 if (response.status === 200) {
-
                                     model.manageArr = response.data;
                                     model.refreshPageLoad(model.manageArr);
-
-
-                                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Uploaded Succesfully', 4500);
+                                    alert('Uploaded Succesfully');
+                                    //alertss.timeoutoldalerts(model.scope, 'alert-success', 'Uploaded Succesfully', 4500);
                                 } else {
-                                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Uploaded failed', 4500);
+                                    alert('Uploaded failed');
+                                    // alertss.timeoutoldalerts(model.scope, 'alert-success', 'Uploaded failed', 4500);
                                 }
                             });
                         }
