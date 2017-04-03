@@ -15,9 +15,9 @@
         var loginEmpid = authSvc.LoginEmpid();
         var AdminID = authSvc.isAdmin();
         model.photorowID = 0;
-
+        model.manageArr = [];
         //end declaration block
-
+        model.up = {};
         model.init = function() {
             CustID = stateParams.CustID;
             model.getData();
@@ -42,8 +42,8 @@
                 if (item.IsActive === 0 && item.PhotoName !== null) {
                     var strCustDirName1 = "KMPL_" + CustID + "_Images";
                     var path1 = imagepath + strCustDirName1 + "/" + item.PhotoName;
-                    // item.ImageUrl = path1 + '?decache=' + Math.random();
-                    item.ImageUrl = path1;
+                    item.ImageUrl = path1 + '?decache=' + Math.random();
+                    //item.ImageUrl = path1;
                     item.addButtonvisible = false;
                     item.keyname = strCustDirName1 + "/" + item.PhotoName;
 
@@ -94,6 +94,7 @@
             commonFactory.open('AddimagePopup.html', model.scope, uibModal, 'sm');
         };
         model.upload = function(obj) {
+            debugger;
             console.log(obj.myFile);
             var extension = (obj.myFile.name !== '' && obj.myFile.name !== undefined && obj.myFile.name !== null) ? (obj.myFile.name.split('.'))[1] : null;
 

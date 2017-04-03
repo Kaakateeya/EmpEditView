@@ -4559,7 +4559,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"AddimagePopup.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\" name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.upload(up);\">\r" +
+    "        <form class=\"EditViewClass\" name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.upload(page.model.up)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -4571,7 +4571,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <ul id=\"ulprofession\">\r" +
     "\n" +
-    "                    <input type=\"file\" file-model=\"up.myFile\" />\r" +
+    "                    <input type=\"file\" file-model=\"page.model.up.myFile\" />\r" +
     "\n" +
     "                </ul>\r" +
     "\n" +
@@ -4703,9 +4703,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    }\r" +
     "\n" +
-    "</style>\r" +
-    "\n" +
-    "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
+    "</style>"
   );
 
 

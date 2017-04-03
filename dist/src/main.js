@@ -64,19 +64,19 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         $stateProvider.state(item.name, {
             url: item.url,
-            views: innerView
-                // resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-                //     loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                //         // you can lazy load files for an existing module
-                //         var edit = item.name.slice(9);
-                //         if (editviewapp.env === 'dev') {
-                //             return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-                //         } else {
-                //             return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
-                //         }
-                //         // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-                //     }]
-                // }
+            views: innerView,
+            // resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+            //     loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            //         // you can lazy load files for an existing module
+            //         var edit = item.name.slice(9);
+            //         if (editviewapp.env === 'dev') {
+            //             return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+            //         } else {
+            //             return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
+            //         }
+            //         // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+            //     }]
+            // }
         });
         $locationProvider.html5Mode(true);
     });
@@ -1504,9 +1504,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         var loginEmpid = authSvc.LoginEmpid();
         var AdminID = authSvc.isAdmin();
         model.photorowID = 0;
-
+        model.manageArr = [];
         //end declaration block
-
+        model.up = {};
         model.init = function() {
             CustID = stateParams.CustID;
             model.getData();
@@ -1531,8 +1531,8 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 if (item.IsActive === 0 && item.PhotoName !== null) {
                     var strCustDirName1 = "KMPL_" + CustID + "_Images";
                     var path1 = imagepath + strCustDirName1 + "/" + item.PhotoName;
-                    // item.ImageUrl = path1 + '?decache=' + Math.random();
-                    item.ImageUrl = path1;
+                    item.ImageUrl = path1 + '?decache=' + Math.random();
+                    //item.ImageUrl = path1;
                     item.addButtonvisible = false;
                     item.keyname = strCustDirName1 + "/" + item.PhotoName;
 
@@ -1583,6 +1583,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             commonFactory.open('AddimagePopup.html', model.scope, uibModal, 'sm');
         };
         model.upload = function(obj) {
+            debugger;
             console.log(obj.myFile);
             var extension = (obj.myFile.name !== '' && obj.myFile.name !== undefined && obj.myFile.name !== null) ? (obj.myFile.name.split('.'))[1] : null;
 
@@ -9066,7 +9067,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"AddimagePopup.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\" name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.upload(up);\">\r" +
+    "        <form class=\"EditViewClass\" name=\"uploadForm\" novalidate role=\"form\" ng-submit=\"page.model.upload(page.model.up)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -9078,7 +9079,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <ul id=\"ulprofession\">\r" +
     "\n" +
-    "                    <input type=\"file\" file-model=\"up.myFile\" />\r" +
+    "                    <input type=\"file\" file-model=\"page.model.up.myFile\" />\r" +
     "\n" +
     "                </ul>\r" +
     "\n" +
@@ -9210,9 +9211,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    }\r" +
     "\n" +
-    "</style>\r" +
-    "\n" +
-    "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
+    "</style>"
   );
 
 

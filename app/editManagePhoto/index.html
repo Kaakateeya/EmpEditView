@@ -183,13 +183,13 @@
     </div>
 
     <script type="text/ng-template" id="AddimagePopup.html">
-        <form class="EditViewClass" name="uploadForm" novalidate role="form" ng-submit="page.model.upload(up);">
+        <form class="EditViewClass" name="uploadForm" novalidate role="form" ng-submit="page.model.upload(page.model.up)">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Upload Photo </h3>
             </div>
             <div class="modal-body" id="modal-body">
                 <ul id="ulprofession">
-                    <input type="file" file-model="up.myFile" />
+                    <input type="file" file-model="page.model.up.myFile" />
                 </ul>
             </div>
             <div class="modal-footer">
@@ -256,4 +256,3 @@
         margin: 0 0 20px 0;
     }
 </style>
-<script src="build/js/custom.js" type="text/javascript"></script>
