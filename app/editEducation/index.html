@@ -568,7 +568,7 @@
     </script>
 
     <script type="text/ng-template" id="CustomerDataContent.html">
-        <form class="EditViewClass" name="custForm" ng-class="'EditViewClass'" novalidate role="form" ng-submit="custForm.$valid && page.model.custdataSubmit(page.model.custObj)">
+        <form class="EditViewClass" name="custForm" ng-class="'EditViewClass'" novalidate role="form" ng-submit="custForm.$valid && page.model.custdataSubmit(page.model.custObj)" accessible-form>
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Customer details
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -624,7 +624,7 @@
 
                         <div class="pop_controls_right select-box-my input-group">
 
-                            <select multiselectdropdown ng-model="page.model.custObj.ddlHeightpersonal" typeofdata="'height'" required></select>
+                            <select multiselectdropdown ng-model="page.model.custObj.ddlHeightpersonal" typeofdata="'heightregistration'" required></select>
 
                         </div>
                     </li>
@@ -700,9 +700,6 @@
         </form>
     </script>
 </div>
-
-
-
 
 
 <style>

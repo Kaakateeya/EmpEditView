@@ -8397,7 +8397,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"CustomerDataContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\" name=\"custForm\" ng-class=\"'EditViewClass'\" novalidate role=\"form\" ng-submit=\"custForm.$valid && page.model.custdataSubmit(page.model.custObj)\">\r" +
+    "        <form class=\"EditViewClass\" name=\"custForm\" ng-class=\"'EditViewClass'\" novalidate role=\"form\" ng-submit=\"custForm.$valid && page.model.custdataSubmit(page.model.custObj)\" accessible-form>\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -8509,7 +8509,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlHeightpersonal\" typeofdata=\"'height'\" required></select>\r" +
+    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlHeightpersonal\" typeofdata=\"'heightregistration'\" required></select>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -8660,12 +8660,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "    </script>\r" +
     "\n" +
     "</div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -12003,9 +11997,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        <div class=\"pop_controls_right select-box-my select-box-my-double input-group\">\r" +
     "\n" +
-    "                            <select multiselectdropdown required ng-model=\"page.model.partnerObj.ddlFromheight\" typeofdata=\"'height'\" required></select>\r" +
+    "                            <select multiselectdropdown required ng-model=\"page.model.partnerObj.ddlFromheight\" typeofdata=\"'heightregistration'\" required></select>\r" +
     "\n" +
-    "                            <select multiselectdropdown required ng-model=\"page.model.partnerObj.ddltoHeight\" typeofdata=\"'height'\" required></select>\r" +
+    "                            <select multiselectdropdown required ng-model=\"page.model.partnerObj.ddltoHeight\" typeofdata=\"'heightregistration'\" required></select>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
