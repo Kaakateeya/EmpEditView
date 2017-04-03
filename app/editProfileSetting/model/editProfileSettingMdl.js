@@ -129,9 +129,9 @@
                 commonFactory.closepopup();
                 if (response.data === 1) {
                     model.pageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Grade Selections Submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Grade Selections Updation failed', 4500);
                 }
             });
         };
@@ -162,9 +162,9 @@
 
                 if (response.data === 1) {
                     model.pageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Profile Settings Submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Profile Settings Updation failed', 4500);
                 }
             });
 
@@ -191,10 +191,10 @@
                 if (response.data !== undefined && response.data.length > 0) {
                     if (JSON.parse(response.data[0])[0].STATUS === 1) {
                         model.pageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Confidential Status Submitted Succesfully', 4500);
                     }
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Confidential Status Updation failed', 4500);
                 }
             });
         };

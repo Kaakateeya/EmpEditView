@@ -303,7 +303,7 @@
                     commonFactory.closepopup();
                     if (response.data === 1) {
                         model.parentBindData(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Parents Details submitted Succesfully', 4500);
 
                         if (model.datagetInStatus === 1) {
                             sessionStorage.removeItem('missingStatus');
@@ -312,7 +312,7 @@
 
                         }
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Parents Details Updation failed', 4500);
                     }
                 });
 
@@ -354,9 +354,9 @@
                     if (response.data === 1) {
 
                         model.parentBindData(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Contact Address submitted Succesfully', 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Contact Address Updation failed', 4500);
                     }
                 });
 
@@ -395,9 +395,9 @@
                     if (response.data === 1) {
 
                         model.parentBindData(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Physical Attribute & Health Details Of Candidate submitted Succesfully', 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Physical Attribute & Health Details Of Candidate Updation failed', 4500);
                     }
                 });
             }
@@ -415,9 +415,9 @@
                     if (response.data === '1') {
 
                         model.AboutPageloadData(custID);
-                        model.$broadcast("showAlertPopupccc", 'alert-success', 'submitted Succesfully', 1500);
+                        model.$broadcast("showAlertPopupccc", 'alert-success', 'About My Family submitted Succesfully', 1500);
                     } else {
-                        model.$broadcast("showAlertPopupccc", 'alert-danger', 'Updation failed', 1500);
+                        model.$broadcast("showAlertPopupccc", 'alert-danger', 'About My Family Updation failed', 1500);
                     }
                 });
             }

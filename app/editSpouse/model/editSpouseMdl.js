@@ -142,9 +142,9 @@
                 commonFactory.closepopup();
                 if (response.data === 1) {
                     model.pageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Spouse Details Submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Spouse Details Updation failed', 4500);
                 }
 
             });
@@ -173,9 +173,9 @@
                 commonFactory.closepopup();
                 if (response.data === 1) {
                     model.pageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Spouse Childern Details Submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Spouse Childern Details Updation failed', 4500);
                 }
             });
 

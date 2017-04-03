@@ -168,10 +168,10 @@
                             route.go('mobileverf', {});
                         }
                         model.astropageload(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Astro Details submitted Succesfully', 4500);
 
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Astro Details Updation failed', 4500);
                     }
                 });
             }

@@ -219,9 +219,9 @@
                     if (response.data === 1) {
 
                         model.relativePageLoad(custid);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', "Father's Brother Details Submitted Succesfully", 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', "Father's Brother Details Updation failed", 4500);
                     }
                 });
             }
@@ -269,9 +269,9 @@
                     if (response.data === 1) {
 
                         model.relativePageLoad(custid);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', "Father's Sister Details Submitted Succesfully", 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', "Father's Sister Details Updation failed", 4500);
                     }
                 });
             }
@@ -313,9 +313,9 @@
                     if (response.data === 1) {
 
                         model.relativePageLoad(custid);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', "Mother's Brother Details Submitted Succesfully", 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', "Mother's Brother Details Updation failed", 4500);
                     }
                 });
             }
@@ -362,9 +362,9 @@
                     if (response.data === 1) {
 
                         model.relativePageLoad(custid);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', "Mother's Sister Details Submitted Succesfully", 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', "Mother's Sister Details Updation failed", 4500);
                     }
                 });
             }

@@ -66,21 +66,17 @@
                 EmpID: '2',
                 Admin: 1,
                 SibblingFlag: ISibblingFlag
-
             };
-
-
             editContactService.submitContactData(model.Mobj).then(function(response) {
                 console.log(response);
                 commonFactory.closepopup();
                 if (response.data === 1) {
                     model.pageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Contact Details  submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Contact Details  Updation failed', 4500);
                 }
             });
-
         };
 
         model.CandidateAddressSubmit = function(obj) {
@@ -110,9 +106,9 @@
 
                 if (response.data === 1) {
                     model.pageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Contact Details submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Contact Details Updation failed', 4500);
                 }
 
             });
@@ -316,9 +312,9 @@
                 commonFactory.closepopup();
                 if (response.data === 1) {
                     model.pageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Contact Details submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Contact Details  Updation failed', 4500);
                 }
             });
 

@@ -273,9 +273,9 @@
                         commonFactory.closepopup();
                         if (response.data === 1) {
                             model.sibPageload(custID);
-                            alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                            alertss.timeoutoldalerts(model.scope, 'alert-success', 'Sibling Details Submitted Succesfully', 4500);
                         } else {
-                            alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                            alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Sibling Details Updation failed', 4500);
                         }
                     });
                 } else {
@@ -425,9 +425,9 @@
                     commonFactory.closepopup();
                     if (response.data === 1) {
                         model.sibPageload(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Brother Details Submitted Succesfully', 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Brother Details Updation failed', 4500);
                     }
                 });
             }
@@ -501,9 +501,9 @@
 
                         model.sibPageload(custID);
 
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Sister Details Submitted Succesfully', 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Sister Details Updation failed', 4500);
                     }
                 });
             }

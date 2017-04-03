@@ -282,13 +282,13 @@
                     if (response.data === 1) {
 
                         model.eduPageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Education Details submitted Succesfully', 4500);
                         if (model.datagetInStatus === 1) {
                             sessionStorage.removeItem('missingStatus');
                             route.go('mobileverf', {});
                         }
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Education Details Updation failed', 4500);
                     }
                 });
             }
@@ -334,14 +334,14 @@
                     commonFactory.closepopup();
                     if (response.data === 1) {
                         model.ProfPageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Professional Details  submitted Succesfully', 4500);
                         if (scope.datagetInStatus === 1) {
                             sessionStorage.removeItem('missingStatus');
                             route.go('mobileverf', {});
                         }
 
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Professional Details  Updation failed', 4500);
                     }
                 });
             }
@@ -354,9 +354,9 @@
                     commonFactory.closepopup();
                     if (response.data === '1') {
                         model.aboutPageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'About Yourself submitted Succesfully', 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'About Yourself Updation failed', 4500);
                     }
                 });
             }
@@ -408,9 +408,9 @@
 
                 if (response.data === 1) {
                     model.custdatapageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Customer Personal Details submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Customer Personal Details Updation failed', 4500);
                 }
             });
 

@@ -114,9 +114,9 @@
                     commonFactory.closepopup();
                     if (response.data === 1) {
                         model.pageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Reference Details Submitted Succesfully', 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Reference Details Updation failed', 4500);
                     }
                 });
 

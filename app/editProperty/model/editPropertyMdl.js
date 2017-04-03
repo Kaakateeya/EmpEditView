@@ -80,9 +80,9 @@
                         editPropertyService.getPropertyData(custID).then(function(response) {
                             model.propertyArr = response.data;
                         });
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Property Details Submitted Succesfully', 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Property Details Updation failed', 4500);
                     }
                 });
             }

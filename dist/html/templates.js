@@ -11653,7 +11653,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "                <h4>Brother&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" ng-show=\"page.model.broModifiedby!=null && page.model.broModifiedby!=='' && page.model.broModifiedby!==undefined\">ModifiedBy :{{page.model.broModifiedby}}</span>\r" +
+    "                <h4>Brother Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" ng-show=\"page.model.broModifiedby!=null && page.model.broModifiedby!=='' && page.model.broModifiedby!==undefined\">ModifiedBy :{{page.model.broModifiedby}}</span>\r" +
     "\n" +
     "                </h4>\r" +
     "\n" +

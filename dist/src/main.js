@@ -274,10 +274,10 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                             route.go('mobileverf', {});
                         }
                         model.astropageload(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Astro Details submitted Succesfully', 4500);
 
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Astro Details Updation failed', 4500);
                     }
                 });
             }
@@ -569,21 +569,17 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 EmpID: '2',
                 Admin: 1,
                 SibblingFlag: ISibblingFlag
-
             };
-
-
             editContactService.submitContactData(model.Mobj).then(function(response) {
                 console.log(response);
                 commonFactory.closepopup();
                 if (response.data === 1) {
                     model.pageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Contact Details  submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Contact Details  Updation failed', 4500);
                 }
             });
-
         };
 
         model.CandidateAddressSubmit = function(obj) {
@@ -613,9 +609,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
                 if (response.data === 1) {
                     model.pageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Contact Details submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Contact Details Updation failed', 4500);
                 }
 
             });
@@ -819,9 +815,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 commonFactory.closepopup();
                 if (response.data === 1) {
                     model.pageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Contact Details submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Contact Details  Updation failed', 4500);
                 }
             });
 
@@ -1271,13 +1267,13 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     if (response.data === 1) {
 
                         model.eduPageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Education Details submitted Succesfully', 4500);
                         if (model.datagetInStatus === 1) {
                             sessionStorage.removeItem('missingStatus');
                             route.go('mobileverf', {});
                         }
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Education Details Updation failed', 4500);
                     }
                 });
             }
@@ -1323,14 +1319,14 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     commonFactory.closepopup();
                     if (response.data === 1) {
                         model.ProfPageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Professional Details  submitted Succesfully', 4500);
                         if (scope.datagetInStatus === 1) {
                             sessionStorage.removeItem('missingStatus');
                             route.go('mobileverf', {});
                         }
 
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Professional Details  Updation failed', 4500);
                     }
                 });
             }
@@ -1343,9 +1339,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     commonFactory.closepopup();
                     if (response.data === '1') {
                         model.aboutPageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'About Yourself submitted Succesfully', 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'About Yourself Updation failed', 4500);
                     }
                 });
             }
@@ -1397,9 +1393,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
                 if (response.data === 1) {
                     model.custdatapageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Customer Personal Details submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Customer Personal Details Updation failed', 4500);
                 }
             });
 
@@ -1640,9 +1636,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                                     model.refreshPageLoad(model.manageArr);
 
 
-                                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Uploaded Succesfully', 4500);
                                 } else {
-                                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Updation failed', 4500);
+                                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Uploaded failed', 4500);
                                 }
                             });
                         }
@@ -1815,9 +1811,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 commonFactory.closepopup();
                 if (response.data === 1) {
                     model.dataval = str;
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'About Profile Details submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'About Profile Details Updation failed', 4500);
                 }
 
             });
@@ -2176,7 +2172,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     commonFactory.closepopup();
                     if (response.data === 1) {
                         model.parentBindData(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Parents Details submitted Succesfully', 4500);
 
                         if (model.datagetInStatus === 1) {
                             sessionStorage.removeItem('missingStatus');
@@ -2185,7 +2181,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
                         }
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Parents Details Updation failed', 4500);
                     }
                 });
 
@@ -2227,9 +2223,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     if (response.data === 1) {
 
                         model.parentBindData(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Contact Address submitted Succesfully', 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Contact Address Updation failed', 4500);
                     }
                 });
 
@@ -2268,9 +2264,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     if (response.data === 1) {
 
                         model.parentBindData(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Physical Attribute & Health Details Of Candidate submitted Succesfully', 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Physical Attribute & Health Details Of Candidate Updation failed', 4500);
                     }
                 });
             }
@@ -2288,9 +2284,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     if (response.data === '1') {
 
                         model.AboutPageloadData(custID);
-                        model.$broadcast("showAlertPopupccc", 'alert-success', 'submitted Succesfully', 1500);
+                        model.$broadcast("showAlertPopupccc", 'alert-success', 'About My Family submitted Succesfully', 1500);
                     } else {
-                        model.$broadcast("showAlertPopupccc", 'alert-danger', 'Updation failed', 1500);
+                        model.$broadcast("showAlertPopupccc", 'alert-danger', 'About My Family Updation failed', 1500);
                     }
                 });
             }
@@ -2591,9 +2587,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                             model.partnerPrefArr = response.data;
                             console.log(model.partnerPrefArr);
                         });
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'PartnerPreference Details Submitted Succesfully', 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'PartnerPreference Details Updation failed', 4500);
                     }
                 });
 
@@ -2610,9 +2606,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     commonFactory.closepopup();
                     if (response.data === '1') {
                         model.partnerDescription = obj.txtpartnerdescription;
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Partner Description Submitted Succesfully', 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Partner Description Updation failed', 4500);
                     }
                 });
             }
@@ -2802,9 +2798,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 commonFactory.closepopup();
                 if (response.data === 1) {
                     model.pageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Grade Selections Submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Grade Selections Updation failed', 4500);
                 }
             });
         };
@@ -2835,9 +2831,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
                 if (response.data === 1) {
                     model.pageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Profile Settings Submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Profile Settings Updation failed', 4500);
                 }
             });
 
@@ -2864,10 +2860,10 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 if (response.data !== undefined && response.data.length > 0) {
                     if (JSON.parse(response.data[0])[0].STATUS === 1) {
                         model.pageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Confidential Status Submitted Succesfully', 4500);
                     }
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Confidential Status Updation failed', 4500);
                 }
             });
         };
@@ -3012,9 +3008,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                         editPropertyService.getPropertyData(custID).then(function(response) {
                             model.propertyArr = response.data;
                         });
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Property Details Submitted Succesfully', 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Property Details Updation failed', 4500);
                     }
                 });
             }
@@ -3190,9 +3186,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     commonFactory.closepopup();
                     if (response.data === 1) {
                         model.pageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Reference Details Submitted Succesfully', 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Reference Details Updation failed', 4500);
                     }
                 });
 
@@ -3490,9 +3486,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     if (response.data === 1) {
 
                         model.relativePageLoad(custid);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', "Father's Brother Details Submitted Succesfully", 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', "Father's Brother Details Updation failed", 4500);
                     }
                 });
             }
@@ -3540,9 +3536,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     if (response.data === 1) {
 
                         model.relativePageLoad(custid);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', "Father's Sister Details Submitted Succesfully", 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', "Father's Sister Details Updation failed", 4500);
                     }
                 });
             }
@@ -3584,9 +3580,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     if (response.data === 1) {
 
                         model.relativePageLoad(custid);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', "Mother's Brother Details Submitted Succesfully", 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', "Mother's Brother Details Updation failed", 4500);
                     }
                 });
             }
@@ -3633,9 +3629,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     if (response.data === 1) {
 
                         model.relativePageLoad(custid);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', "Mother's Sister Details Submitted Succesfully", 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', "Mother's Sister Details Updation failed", 4500);
                     }
                 });
             }
@@ -3995,9 +3991,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                         commonFactory.closepopup();
                         if (response.data === 1) {
                             model.sibPageload(custID);
-                            alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                            alertss.timeoutoldalerts(model.scope, 'alert-success', 'Sibling Details Submitted Succesfully', 4500);
                         } else {
-                            alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                            alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Sibling Details Updation failed', 4500);
                         }
                     });
                 } else {
@@ -4147,9 +4143,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     commonFactory.closepopup();
                     if (response.data === 1) {
                         model.sibPageload(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Brother Details Submitted Succesfully', 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Brother Details Updation failed', 4500);
                     }
                 });
             }
@@ -4223,9 +4219,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
                         model.sibPageload(custID);
 
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Sister Details Submitted Succesfully', 4500);
                     } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Sister Details Updation failed', 4500);
                     }
                 });
             }
@@ -4436,9 +4432,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 commonFactory.closepopup();
                 if (response.data === 1) {
                     model.pageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Spouse Details Submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Spouse Details Updation failed', 4500);
                 }
 
             });
@@ -4467,9 +4463,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 commonFactory.closepopup();
                 if (response.data === 1) {
                     model.pageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Spouse Childern Details Submitted Succesfully', 4500);
                 } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Updation failed', 4500);
+                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Spouse Childern Details Updation failed', 4500);
                 }
             });
 
@@ -16164,7 +16160,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_item_head clearfix\">\r" +
     "\n" +
-    "                <h4>Brother&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" ng-show=\"page.model.broModifiedby!=null && page.model.broModifiedby!=='' && page.model.broModifiedby!==undefined\">ModifiedBy :{{page.model.broModifiedby}}</span>\r" +
+    "                <h4>Brother Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #08CFD2\" ng-show=\"page.model.broModifiedby!=null && page.model.broModifiedby!=='' && page.model.broModifiedby!==undefined\">ModifiedBy :{{page.model.broModifiedby}}</span>\r" +
     "\n" +
     "                </h4>\r" +
     "\n" +

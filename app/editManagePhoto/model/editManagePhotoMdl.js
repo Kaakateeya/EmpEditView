@@ -147,9 +147,9 @@
                                     model.refreshPageLoad(model.manageArr);
 
 
-                                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'submitted Succesfully', 4500);
+                                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Uploaded Succesfully', 4500);
                                 } else {
-                                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Updation failed', 4500);
+                                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Uploaded failed', 4500);
                                 }
                             });
                         }
