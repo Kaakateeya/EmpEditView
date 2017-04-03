@@ -85,11 +85,12 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
  (function(angular) {
      'use strict';
 
-     function controller(editAstroModel, scope) {
+     function controller(editAstroModel, scope, window) {
          /* jshint validthis:true */
          var vm = this;
          vm.scope = scope;
          vm.init = function() {
+             window.scrollTo(0, 0);
              vm.model = editAstroModel;
              editAstroModel.init();
              vm.model.scope = scope;
@@ -101,7 +102,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          .module('KaakateeyaEmpEdit')
          .controller('editAstroCtrl', controller);
 
-     controller.$inject = ['editAstroModel', '$scope'];
+     controller.$inject = ['editAstroModel', '$scope', '$window'];
  })(angular);
 (function(angular) {
     'use strict';
@@ -482,10 +483,11 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
  (function(angular) {
      'use strict';
 
-     function controller(editContactModel, scope) {
+     function controller(editContactModel, scope, window) {
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
+             window.scrollTo(0, 0);
              vm.model = editContactModel;
              editContactModel.init();
              vm.model.scope = scope;
@@ -497,7 +499,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          .module('KaakateeyaEmpEdit')
          .controller('editContactCtrl', controller);
 
-     controller.$inject = ['editContactModel', '$scope'];
+     controller.$inject = ['editContactModel', '$scope', '$window'];
  })(angular);
 (function(angular) {
     'use strict';
@@ -965,12 +967,13 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
  (function(angular) {
      'use strict';
 
-     function controller(editEducationModel, scope, baseModel) {
+     function controller(editEducationModel, scope, baseModel, window) {
          var vm = this;
          var model;
 
          vm.scope = scope;
          vm.init = function() {
+             window.scrollTo(0, 0);
              vm.model = editEducationModel;
              editEducationModel.init();
              vm.model.scope = scope;
@@ -982,7 +985,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          .module('KaakateeyaEmpEdit')
          .controller('editEducationCtrl', controller);
 
-     controller.$inject = ['editEducationModel', '$scope', 'baseModel'];
+     controller.$inject = ['editEducationModel', '$scope', 'baseModel', '$window'];
  })(angular);
 (function(angular) {
     'use strict';
@@ -1471,25 +1474,22 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
  (function(angular) {
      'use strict';
 
-     function controller(editManagePhotoModel, scope) {
+     function controller(editManagePhotoModel, scope, window) {
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
-
+             window.scrollTo(0, 0);
              vm.model = editManagePhotoModel;
-
              editManagePhotoModel.init();
              vm.model.scope = scope;
          };
-
-
          vm.init();
      }
      angular
          .module('KaakateeyaEmpEdit')
          .controller('editManagePhotoCtrl', controller);
 
-     controller.$inject = ['editManagePhotoModel', '$scope'];
+     controller.$inject = ['editManagePhotoModel', '$scope', '$window'];
  })(angular);
 (function(angular) {
     'use strict';
@@ -1752,12 +1752,12 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
  (function(angular) {
      'use strict';
 
-     function controller(editOfcePurposeModel, scope) {
+     function controller(editOfcePurposeModel, scope, window) {
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
+             window.scrollTo(0, 0);
              vm.model = editOfcePurposeModel.init();
-
              vm.model.scope = scope;
          };
 
@@ -1767,7 +1767,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          .module('KaakateeyaEmpEdit')
          .controller('editOfcePurposeCtrl', controller);
 
-     controller.$inject = ['editOfcePurposeModel', '$scope'];
+     controller.$inject = ['editOfcePurposeModel', '$scope', '$window'];
  })(angular);
 (function(angular) {
     'use strict';
@@ -1855,22 +1855,21 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
  (function(angular) {
      'use strict';
 
-     function controller(editParentModel, scope) {
+     function controller(editParentModel, scope, window) {
          /* jshint validthis:true */
          var vm = this;
-
          vm.init = function() {
+             window.scrollTo(0, 0);
              vm.model = editParentModel.init();
              vm.model.scope = scope;
          };
-
          vm.init();
      }
      angular
          .module('KaakateeyaEmpEdit')
          .controller('editParentCtrl', controller);
 
-     controller.$inject = ['editParentModel', '$scope'];
+     controller.$inject = ['editParentModel', '$scope', '$window'];
  })(angular);
 (function(angular) {
     'use strict';
@@ -2382,10 +2381,11 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
  (function(angular) {
      'use strict';
 
-     function controller(editPartnerpreferenceModel, scope) {
+     function controller(editPartnerpreferenceModel, scope, window) {
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
+             window.scrollTo(0, 0);
              vm.model = editPartnerpreferenceModel.init();
              vm.model.scope = scope;
          };
@@ -2397,7 +2397,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          .module('KaakateeyaEmpEdit')
          .controller('editPartnerpreferenceCtrl', controller);
 
-     controller.$inject = ['editPartnerpreferenceModel', '$scope'];
+     controller.$inject = ['editPartnerpreferenceModel', '$scope', '$window'];
  })(angular);
 (function(angular) {
     'use strict';
@@ -2654,10 +2654,11 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
  (function(angular) {
      'use strict';
 
-     function controller(editProfileSettingModel, scope) {
+     function controller(editProfileSettingModel, scope, window) {
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
+             window.scrollTo(0, 0);
              vm.model = editProfileSettingModel.init();
              vm.model.scope = scope;
          };
@@ -2668,7 +2669,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          .module('KaakateeyaEmpEdit')
          .controller('editProfileSettingCtrl', controller);
 
-     controller.$inject = ['editProfileSettingModel', '$scope'];
+     controller.$inject = ['editProfileSettingModel', '$scope', '$window'];
  })(angular);
 (function(angular) {
     'use strict';
@@ -2912,10 +2913,11 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
  (function(angular) {
      'use strict';
 
-     function controller(editPropertyModel, scope) {
+     function controller(editPropertyModel, scope, window) {
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
+             window.scrollTo(0, 0);
              vm.model = editPropertyModel.init();
              vm.model.scope = scope;
          };
@@ -2926,7 +2928,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          .module('KaakateeyaEmpEdit')
          .controller('editPropertyCtrl', controller);
 
-     controller.$inject = ['editPropertyModel', '$scope'];
+     controller.$inject = ['editPropertyModel', '$scope', '$window'];
  })(angular);
 (function(angular) {
     'use strict';
@@ -3055,10 +3057,11 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
  (function(angular) {
      'use strict';
 
-     function controller(editReferenceModel, scope) {
+     function controller(editReferenceModel, scope, window) {
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
+             window.scrollTo(0, 0);
              vm.model = editReferenceModel.init();
              vm.model.scope = scope;
          };
@@ -3069,7 +3072,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          .module('KaakateeyaEmpEdit')
          .controller('editReferenceCtrl', controller);
 
-     controller.$inject = ['editReferenceModel', '$scope'];
+     controller.$inject = ['editReferenceModel', '$scope', '$window'];
  })(angular);
 (function(angular) {
     'use strict';
@@ -3249,10 +3252,11 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
  (function(angular) {
      'use strict';
 
-     function controller(editRelativeModel, scope) {
+     function controller(editRelativeModel, scope, window) {
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
+             window.scrollTo(0, 0);
              vm.model = editRelativeModel.init();
              vm.model.scope = scope;
          };
@@ -3263,7 +3267,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          .module('KaakateeyaEmpEdit')
          .controller('editRelativeCtrl', controller);
 
-     controller.$inject = ['editRelativeModel', '$scope'];
+     controller.$inject = ['editRelativeModel', '$scope', '$window'];
  })(angular);
 (function(angular) {
     'use strict';
@@ -3698,10 +3702,11 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
  (function(angular) {
      'use strict';
 
-     function controller(editSibblingModel, scope) {
+     function controller(editSibblingModel, scope, window) {
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
+             window.scrollTo(0, 0);
              vm.model = editSibblingModel.init();
              vm.model.scope = scope;
          };
@@ -3713,7 +3718,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          .module('KaakateeyaEmpEdit')
          .controller('editSibblingCtrl', controller);
 
-     controller.$inject = ['editSibblingModel', '$scope'];
+     controller.$inject = ['editSibblingModel', '$scope', '$window'];
  })(angular);
 (function(angular) {
     'use strict';
@@ -4270,10 +4275,11 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
  (function(angular) {
      'use strict';
 
-     function controller(editSpouseModel, scope) {
+     function controller(editSpouseModel, scope, window) {
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
+             window.scrollTo(0, 0);
              vm.model = editSpouseModel.init();
              vm.model.scope = scope;
          };
@@ -4284,7 +4290,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
          .module('KaakateeyaEmpEdit')
          .controller('editSpouseCtrl', controller);
 
-     controller.$inject = ['editSpouseModel', '$scope'];
+     controller.$inject = ['editSpouseModel', '$scope', '$window'];
  })(angular);
 (function(angular) {
     'use strict';
@@ -4735,7 +4741,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Astro details\r" +
     "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"cancel();\">\r" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
     "\n" +
     "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
     "\n" +
@@ -13727,7 +13733,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    <h3 class=\"modal-title text-center\">Property Details\r" +
     "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"cancel();\">\r" +
+    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
     "\n" +
     "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\">Delete</ng-md-icon>\r" +
     "\n" +

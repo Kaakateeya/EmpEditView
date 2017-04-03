@@ -1,12 +1,12 @@
  (function(angular) {
      'use strict';
 
-     function controller(editOfcePurposeModel, scope) {
+     function controller(editOfcePurposeModel, scope, window) {
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
+             window.scrollTo(0, 0);
              vm.model = editOfcePurposeModel.init();
-
              vm.model.scope = scope;
          };
 
@@ -16,5 +16,5 @@
          .module('KaakateeyaEmpEdit')
          .controller('editOfcePurposeCtrl', controller);
 
-     controller.$inject = ['editOfcePurposeModel', '$scope'];
+     controller.$inject = ['editOfcePurposeModel', '$scope', '$window'];
  })(angular);

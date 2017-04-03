@@ -230,7 +230,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Astro details\r" +
     "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"cancel();\">\r" +
+    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
     "\n" +
     "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
     "\n" +
@@ -9222,7 +9222,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    <h3 class=\"modal-title text-center\">Property Details\r" +
     "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"cancel();\">\r" +
+    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
     "\n" +
     "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\">Delete</ng-md-icon>\r" +
     "\n" +

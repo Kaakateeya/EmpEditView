@@ -1,10 +1,11 @@
  (function(angular) {
      'use strict';
 
-     function controller(editProfileSettingModel, scope) {
+     function controller(editProfileSettingModel, scope, window) {
          /* jshint validthis:true */
          var vm = this;
          vm.init = function() {
+             window.scrollTo(0, 0);
              vm.model = editProfileSettingModel.init();
              vm.model.scope = scope;
          };
@@ -15,5 +16,5 @@
          .module('KaakateeyaEmpEdit')
          .controller('editProfileSettingCtrl', controller);
 
-     controller.$inject = ['editProfileSettingModel', '$scope'];
+     controller.$inject = ['editProfileSettingModel', '$scope', '$window'];
  })(angular);
