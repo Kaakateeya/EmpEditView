@@ -3568,7 +3568,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        </div>\r" +
     "\n" +
-    "        <div id=profpopupdiv>\r" +
+    "        <div id=\"profpopupdiv\">\r" +
     "\n" +
     "            <script type=\"text/ng-template\" id=\"profModalContent.html\">\r" +
     "\n" +
