@@ -1531,8 +1531,8 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 if (item.IsActive === 0 && item.PhotoName !== null) {
                     var strCustDirName1 = "KMPL_" + CustID + "_Images";
                     var path1 = imagepath + strCustDirName1 + "/" + item.PhotoName;
-                    item.ImageUrl = path1 + '?decache=' + Math.random();
-
+                    // item.ImageUrl = path1 + '?decache=' + Math.random();
+                    item.ImageUrl = path1;
                     item.addButtonvisible = false;
                     item.keyname = strCustDirName1 + "/" + item.PhotoName;
 
