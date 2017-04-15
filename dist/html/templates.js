@@ -6159,9 +6159,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                            <contact-directive emailhide=\"true\" dmobile=\"parent.ddlMobile\" strmobile=\"parent.txtMobile\" dalternative=\"parent.ddlfathermobile2\" stralternative=\"parent.txtfathermobile2\" dland=\"parent.ddlLandLineCountry\" strareacode=\"parent.txtAreCode\" strland=\"parent.txtLandNumber\"\r" +
+    "                            <contact-directive emailhide=\"true\" dmobile=\"parent.model.ddlMobile\" strmobile=\"parent.model.txtMobile\" dalternative=\"parent.model.ddlfathermobile2\" stralternative=\"parent.model.txtfathermobile2\" dland=\"parent.model.ddlLandLineCountry\" strareacode=\"parent.model.txtAreCode\"\r" +
     "\n" +
-    "                                strmail=\"parent.txtEmail\"></contact-directive>\r" +
+    "                                strland=\"parent.model.txtLandNumber\" strmail=\"parent.model.txtEmail\"></contact-directive>\r" +
     "\n" +
     "                            <li class=\"clearfix form-group\">\r" +
     "\n" +

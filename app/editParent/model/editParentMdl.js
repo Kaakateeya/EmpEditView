@@ -296,7 +296,7 @@
                     }
 
                 };
-
+                debugger;
                 console.log(JSON.stringify(model.myData));
                 model.submitPromise = editParentService.submitParentData(model.myData).then(function(response) {
                     console.log(response);
