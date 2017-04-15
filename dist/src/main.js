@@ -10666,9 +10666,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                            <contact-directive emailhide=\"true\" dmobile=\"parent.model.ddlMobile\" strmobile=\"parent.model.txtMobile\" dalternative=\"parent.model.ddlfathermobile2\" stralternative=\"parent.model.txtfathermobile2\" dland=\"parent.model.ddlLandLineCountry\" strareacode=\"parent.model.txtAreCode\"\r" +
+    "                            <contact-directive emailhide=\"true\" dmobile=\"page.model.parent.ddlMobile\" strmobile=\"page.model.parent.txtMobile\" dalternative=\"page.model.parent.ddlfathermobile2\" stralternative=\"page.model.parent.txtfathermobile2\" dland=\"page.model.parent.ddlLandLineCountry\"\r" +
     "\n" +
-    "                                strland=\"parent.model.txtLandNumber\" strmail=\"parent.model.txtEmail\"></contact-directive>\r" +
+    "                                strareacode=\"page.model.parent.txtAreCode\" strland=\"page.model.parent.txtLandNumber\" strmail=\"page.model.parent.txtEmail\"></contact-directive>\r" +
     "\n" +
     "                            <li class=\"clearfix form-group\">\r" +
     "\n" +
@@ -10686,13 +10686,13 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                            <contact-directive emailhide=\"false\" dmobile=\"parent.ddlFatherfatherMobileCountryCode\" strmobile=\"parent.txtMobileFatherfather\" dalternative=\"parent.ddlfatherfatherAlternative\" stralternative=\"parent.txtfatherfatherAlternative\" dland=\"parent.ddlFatherFatherLandLineCode\"\r" +
+    "                            <contact-directive emailhide=\"false\" dmobile=\"page.model.parent.ddlFatherfatherMobileCountryCode\" strmobile=\"page.model.parent.txtMobileFatherfather\" dalternative=\"page.model.parent.ddlfatherfatherAlternative\" stralternative=\"page.model.parent.txtfatherfatherAlternative\"\r" +
     "\n" +
-    "                                strareacode=\"parent.txtGrandFatherArea\" strland=\"parent.txtGrandFatherLandLinenum\"></contact-directive>\r" +
+    "                                dland=\"page.model.parent.ddlFatherFatherLandLineCode\" strareacode=\"page.model.parent.txtGrandFatherArea\" strland=\"page.model.parent.txtGrandFatherLandLinenum\"></contact-directive>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <country-directive countryshow=\"false\" dcountry=\"dcountry\" cityshow=\"false\" othercity=\"false\" dstate=\"parent.ddlFState\" ddistrict=\"parent.ddlFDistric\"></country-directive>\r" +
+    "                            <country-directive countryshow=\"false\" dcountry=\"dcountry\" cityshow=\"false\" othercity=\"false\" dstate=\"page.model.parent.ddlFState\" ddistrict=\"page.model.parent.ddlFDistric\"></country-directive>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -10776,7 +10776,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            </li>\r" +
     "\n" +
-    "                            <div id=\"divmotherprofesseion\" ng-hide=\"parent.chkbox==true\">\r" +
+    "                            <div id=\"divmotherprofesseion\" ng-hide=\"page.model.parent.chkbox==true\">\r" +
     "\n" +
     "                                <li id=\"divComLocation\" class=\"clearfix form-group\">\r" +
     "\n" +

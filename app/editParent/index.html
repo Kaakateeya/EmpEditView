@@ -660,8 +660,8 @@
                                 </div>
                             </li>
 
-                            <contact-directive emailhide="true" dmobile="parent.model.ddlMobile" strmobile="parent.model.txtMobile" dalternative="parent.model.ddlfathermobile2" stralternative="parent.model.txtfathermobile2" dland="parent.model.ddlLandLineCountry" strareacode="parent.model.txtAreCode"
-                                strland="parent.model.txtLandNumber" strmail="parent.model.txtEmail"></contact-directive>
+                            <contact-directive emailhide="true" dmobile="page.model.parent.ddlMobile" strmobile="page.model.parent.txtMobile" dalternative="page.model.parent.ddlfathermobile2" stralternative="page.model.parent.txtfathermobile2" dland="page.model.parent.ddlLandLineCountry"
+                                strareacode="page.model.parent.txtAreCode" strland="page.model.parent.txtLandNumber" strmail="page.model.parent.txtEmail"></contact-directive>
                             <li class="clearfix form-group">
                                 <label for="lblFatherFname" class="pop_label_left">Father's father name </label>
                                 <div class="pop_controls_right">
@@ -670,10 +670,10 @@
                             </li>
 
 
-                            <contact-directive emailhide="false" dmobile="parent.ddlFatherfatherMobileCountryCode" strmobile="parent.txtMobileFatherfather" dalternative="parent.ddlfatherfatherAlternative" stralternative="parent.txtfatherfatherAlternative" dland="parent.ddlFatherFatherLandLineCode"
-                                strareacode="parent.txtGrandFatherArea" strland="parent.txtGrandFatherLandLinenum"></contact-directive>
+                            <contact-directive emailhide="false" dmobile="page.model.parent.ddlFatherfatherMobileCountryCode" strmobile="page.model.parent.txtMobileFatherfather" dalternative="page.model.parent.ddlfatherfatherAlternative" stralternative="page.model.parent.txtfatherfatherAlternative"
+                                dland="page.model.parent.ddlFatherFatherLandLineCode" strareacode="page.model.parent.txtGrandFatherArea" strland="page.model.parent.txtGrandFatherLandLinenum"></contact-directive>
 
-                            <country-directive countryshow="false" dcountry="dcountry" cityshow="false" othercity="false" dstate="parent.ddlFState" ddistrict="parent.ddlFDistric"></country-directive>
+                            <country-directive countryshow="false" dcountry="dcountry" cityshow="false" othercity="false" dstate="page.model.parent.ddlFState" ddistrict="page.model.parent.ddlFDistric"></country-directive>
 
                             <li class="clearfix form-group">
                                 <label for="FNativePlace" class="pop_label_left">Native Place</label>
@@ -715,7 +715,7 @@
                                 </div>
 
                             </li>
-                            <div id="divmotherprofesseion" ng-hide="parent.chkbox==true">
+                            <div id="divmotherprofesseion" ng-hide="page.model.parent.chkbox==true">
                                 <li id="divComLocation" class="clearfix form-group">
 
                                     <label for="lblMCompanyName" class="pop_label_left">Company Name </label>
