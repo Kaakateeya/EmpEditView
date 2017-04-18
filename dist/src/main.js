@@ -21257,6 +21257,26 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
              $state.go('editview.' + type, { CustID: stateParams.CustID });
 
          };
+         scope.backgroundcolor = function(status) {
+             var color = "background:#EFEFEF";
+             switch (status) {
+                 case 54:
+                     color = "background:#EFEFEF";
+                     break;
+                 case 55:
+                     color = "background: #185615;";
+                     break;
+                 case 56:
+                 case 394:
+                     color = "background:#BCC3BE;";
+                     break;
+                 case 57:
+                 case 393:
+                     color = "background:#17F067";
+                     break;
+             }
+             return color;
+         };
          vm.init();
      }
      angular
