@@ -1583,16 +1583,10 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             commonFactory.open('AddimagePopup.html', model.scope, uibModal, 'sm');
         };
         model.upload = function(obj) {
-            debugger;
-            console.log(obj.myFile);
             var extension = (obj.myFile.name !== '' && obj.myFile.name !== undefined && obj.myFile.name !== null) ? (obj.myFile.name.split('.'))[1] : null;
-
             extension = angular.lowercase(extension);
-
             var gifFormat = "gif, jpeg, png,jpg";
-
             if (typeof(obj.myFile.name) != "undefined") {
-
                 var size = parseFloat(obj.myFile.size / 1024).toFixed(2);
                 if (extension !== null && gifFormat.indexOf(angular.lowercase(extension)) === -1) {
                     alert('Your uploaded image contains an unapproved file formats.');
@@ -2165,20 +2159,14 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     }
 
                 };
-                debugger;
-                console.log(JSON.stringify(model.myData));
                 model.submitPromise = editParentService.submitParentData(model.myData).then(function(response) {
-                    console.log(response);
                     commonFactory.closepopup();
                     if (response.data === 1) {
                         model.parentBindData(custID);
                         alertss.timeoutoldalerts(model.scope, 'alert-success', 'Parents Details submitted Succesfully', 4500);
-
                         if (model.datagetInStatus === 1) {
                             sessionStorage.removeItem('missingStatus');
                             route.go('mobileverf', {});
-
-
                         }
                     } else {
                         alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Parents Details Updation failed', 4500);
@@ -20195,7 +20183,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                 return str;
             },
             StateBind: function(parentval) {
-                debugger;
                 var stateArr = [];
                 if (parentval !== undefined && parentval !== null && parentval !== '') {
                     stateArr.push({ "label": "--select--", "title": "--select--", "value": "" });
@@ -20374,21 +20361,15 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
             },
 
             AstroCity: function(countryName, stateName) {
-
                 var AstrocityArr = [];
                 AstrocityArr.push({ "label": "--select--", "title": "--select--", "value": "" });
                 SelectBindService.AstroCities(countryName, stateName).then(function(response) {
-                    debugger;
                     _.each(response.data, function(item) {
                         AstrocityArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                     });
                 });
                 return AstrocityArr;
             }
-
-
-
-
         };
 
     }
@@ -20660,7 +20641,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                 $mdDialog.hide();
             },
             timeoutoldalerts: function($scope, cls, msg, time) {
-                debugger;
                 $scope.typecls = cls;
                 $scope.msgs = msg;
                 modalinstance = uibModal.open({
@@ -21408,7 +21388,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                         model.SlideArr = [];
                         model.FPobj = JSON.parse(response.data[0]);
                         _.each(model.FPobj, function(item) {
-                            debugger;
                             model.SlideArr.push({ FullPhotoPath: editviewapp.GlobalImgPath + "Images/ProfilePics/KMPL_" + CustID + "_Images/" + (item.PhotoName.slice(0, 4)).replace("i", "I") + "_Images/" + model.PersonalObj.ProfileID + "_FullPhoto.jpg" });
                         });
                         commonFactory.open('common/templates/Photopopup.html', model.scope, uibModal);

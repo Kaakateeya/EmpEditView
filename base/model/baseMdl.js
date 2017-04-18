@@ -116,7 +116,6 @@
                         model.SlideArr = [];
                         model.FPobj = JSON.parse(response.data[0]);
                         _.each(model.FPobj, function(item) {
-                            debugger;
                             model.SlideArr.push({ FullPhotoPath: editviewapp.GlobalImgPath + "Images/ProfilePics/KMPL_" + CustID + "_Images/" + (item.PhotoName.slice(0, 4)).replace("i", "I") + "_Images/" + model.PersonalObj.ProfileID + "_FullPhoto.jpg" });
                         });
                         commonFactory.open('common/templates/Photopopup.html', model.scope, uibModal);

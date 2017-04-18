@@ -67,7 +67,6 @@
                 $mdDialog.hide();
             },
             timeoutoldalerts: function($scope, cls, msg, time) {
-                debugger;
                 $scope.typecls = cls;
                 $scope.msgs = msg;
                 modalinstance = uibModal.open({

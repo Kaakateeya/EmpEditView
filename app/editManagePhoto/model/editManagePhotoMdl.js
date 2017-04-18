@@ -94,16 +94,10 @@
             commonFactory.open('AddimagePopup.html', model.scope, uibModal, 'sm');
         };
         model.upload = function(obj) {
-            debugger;
-            console.log(obj.myFile);
             var extension = (obj.myFile.name !== '' && obj.myFile.name !== undefined && obj.myFile.name !== null) ? (obj.myFile.name.split('.'))[1] : null;
-
             extension = angular.lowercase(extension);
-
             var gifFormat = "gif, jpeg, png,jpg";
-
             if (typeof(obj.myFile.name) != "undefined") {
-
                 var size = parseFloat(obj.myFile.size / 1024).toFixed(2);
                 if (extension !== null && gifFormat.indexOf(angular.lowercase(extension)) === -1) {
                     alert('Your uploaded image contains an unapproved file formats.');

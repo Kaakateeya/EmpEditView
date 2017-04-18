@@ -38,7 +38,6 @@
                 return str;
             },
             StateBind: function(parentval) {
-                debugger;
                 var stateArr = [];
                 if (parentval !== undefined && parentval !== null && parentval !== '') {
                     stateArr.push({ "label": "--select--", "title": "--select--", "value": "" });
@@ -217,21 +216,15 @@
             },
 
             AstroCity: function(countryName, stateName) {
-
                 var AstrocityArr = [];
                 AstrocityArr.push({ "label": "--select--", "title": "--select--", "value": "" });
                 SelectBindService.AstroCities(countryName, stateName).then(function(response) {
-                    debugger;
                     _.each(response.data, function(item) {
                         AstrocityArr.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                     });
                 });
                 return AstrocityArr;
             }
-
-
-
-
         };
 
     }

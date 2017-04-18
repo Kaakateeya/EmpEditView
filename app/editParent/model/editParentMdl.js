@@ -296,20 +296,14 @@
                     }
 
                 };
-                debugger;
-                console.log(JSON.stringify(model.myData));
                 model.submitPromise = editParentService.submitParentData(model.myData).then(function(response) {
-                    console.log(response);
                     commonFactory.closepopup();
                     if (response.data === 1) {
                         model.parentBindData(custID);
                         alertss.timeoutoldalerts(model.scope, 'alert-success', 'Parents Details submitted Succesfully', 4500);
-
                         if (model.datagetInStatus === 1) {
                             sessionStorage.removeItem('missingStatus');
                             route.go('mobileverf', {});
-
-
                         }
                     } else {
                         alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Parents Details Updation failed', 4500);
