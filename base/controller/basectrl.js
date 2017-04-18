@@ -17,21 +17,22 @@
 
          };
          scope.backgroundcolor = function(status) {
-             var color = "background:#EFEFEF";
+             console.log(status);
+             var color = "{'background':'#EFEFEF'}";
              switch (status) {
                  case 54:
-                     color = "background:#EFEFEF";
+                     color = "{'background':'#EFEFEF'}";
                      break;
                  case 55:
-                     color = "background: #185615;";
+                     color = "{'background': '#185615'}";
                      break;
                  case 56:
                  case 394:
-                     color = "background:#BCC3BE;";
+                     color = "{'background':'#BCC3BE'}";
                      break;
                  case 57:
                  case 393:
-                     color = "background:#17F067";
+                     color = "{'background':'#17F067'}";
                      break;
              }
              return color;
