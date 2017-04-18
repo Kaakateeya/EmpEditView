@@ -111,13 +111,13 @@
                         case 34:
                             model.lnkpropertyReview = 'red';
                             break;
-                        default:
-                            if (model.PersonalObj.ProfileStatusID === 55) {
-                                model.lnkparentsReview = model.lnksiblingsReview = model.lnkrelativesReview =
-                                    model.lnkeducationandprofReview = model.lnkpartnerReview = model.lnkastroReview =
-                                    model.lnkreferenceReview = model.lnkpropertyReview = '#337ab7';
-                            }
-                            break;
+                            // default:
+                            //     if (model.PersonalObj.ProfileStatusID === 55) {
+                            //         model.lnkparentsReview = model.lnksiblingsReview = model.lnkrelativesReview =
+                            //             model.lnkeducationandprofReview = model.lnkpartnerReview = model.lnkastroReview =
+                            //             model.lnkreferenceReview = model.lnkpropertyReview = '#337ab7';
+                            //     }
+                            //     break;
                     }
 
                 });
