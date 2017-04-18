@@ -64,19 +64,19 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         $stateProvider.state(item.name, {
             url: item.url,
-            views: innerView,
-            // resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-            //     loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-            //         // you can lazy load files for an existing module
-            //         var edit = item.name.slice(9);
-            //         if (editviewapp.env === 'dev') {
-            //             return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-            //         } else {
-            //             return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
-            //         }
-            //         // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-            //     }]
-            // }
+            views: innerView
+                // resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+                //     loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                //         // you can lazy load files for an existing module
+                //         var edit = item.name.slice(9);
+                //         if (editviewapp.env === 'dev') {
+                //             return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+                //         } else {
+                //             return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
+                //         }
+                //         // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+                //     }]
+                // }
         });
         $locationProvider.html5Mode(true);
     });
@@ -2165,7 +2165,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     }
 
                 };
-
+                debugger;
                 console.log(JSON.stringify(model.myData));
                 model.submitPromise = editParentService.submitParentData(model.myData).then(function(response) {
                     console.log(response);
@@ -10666,9 +10666,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                            <contact-directive emailhide=\"true\" dmobile=\"parent.ddlMobile\" strmobile=\"parent.txtMobile\" dalternative=\"parent.ddlfathermobile2\" stralternative=\"parent.txtfathermobile2\" dland=\"parent.ddlLandLineCountry\" strareacode=\"parent.txtAreCode\" strland=\"parent.txtLandNumber\"\r" +
+    "                            <contact-directive emailhide=\"true\" dmobile=\"page.model.parent.ddlMobile\" strmobile=\"page.model.parent.txtMobile\" dalternative=\"page.model.parent.ddlfathermobile2\" stralternative=\"page.model.parent.txtfathermobile2\" dland=\"page.model.parent.ddlLandLineCountry\"\r" +
     "\n" +
-    "                                strmail=\"parent.txtEmail\"></contact-directive>\r" +
+    "                                strareacode=\"page.model.parent.txtAreCode\" strland=\"page.model.parent.txtLandNumber\" strmail=\"page.model.parent.txtEmail\"></contact-directive>\r" +
     "\n" +
     "                            <li class=\"clearfix form-group\">\r" +
     "\n" +
@@ -10686,13 +10686,13 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                            <contact-directive emailhide=\"false\" dmobile=\"parent.ddlFatherfatherMobileCountryCode\" strmobile=\"parent.txtMobileFatherfather\" dalternative=\"parent.ddlfatherfatherAlternative\" stralternative=\"parent.txtfatherfatherAlternative\" dland=\"parent.ddlFatherFatherLandLineCode\"\r" +
+    "                            <contact-directive emailhide=\"false\" dmobile=\"page.model.parent.ddlFatherfatherMobileCountryCode\" strmobile=\"page.model.parent.txtMobileFatherfather\" dalternative=\"page.model.parent.ddlfatherfatherAlternative\" stralternative=\"page.model.parent.txtfatherfatherAlternative\"\r" +
     "\n" +
-    "                                strareacode=\"parent.txtGrandFatherArea\" strland=\"parent.txtGrandFatherLandLinenum\"></contact-directive>\r" +
+    "                                dland=\"page.model.parent.ddlFatherFatherLandLineCode\" strareacode=\"page.model.parent.txtGrandFatherArea\" strland=\"page.model.parent.txtGrandFatherLandLinenum\"></contact-directive>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "                            <country-directive countryshow=\"false\" dcountry=\"dcountry\" cityshow=\"false\" othercity=\"false\" dstate=\"parent.ddlFState\" ddistrict=\"parent.ddlFDistric\"></country-directive>\r" +
+    "                            <country-directive countryshow=\"false\" dcountry=\"dcountry\" cityshow=\"false\" othercity=\"false\" dstate=\"page.model.parent.ddlFState\" ddistrict=\"page.model.parent.ddlFDistric\"></country-directive>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -10776,7 +10776,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            </li>\r" +
     "\n" +
-    "                            <div id=\"divmotherprofesseion\" ng-hide=\"parent.chkbox==true\">\r" +
+    "                            <div id=\"divmotherprofesseion\" ng-hide=\"page.model.parent.chkbox==true\">\r" +
     "\n" +
     "                                <li id=\"divComLocation\" class=\"clearfix form-group\">\r" +
     "\n" +
