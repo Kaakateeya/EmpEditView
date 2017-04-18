@@ -39,39 +39,51 @@
             scope.reviewSubmit = function() {
                 baseService.menuReviewstatus(scope.custid, '1', scope.sectionid).then(function(response) {
 
-                    if (response.data != undefined && response.data.length > 0) {
+                    if (response.data !== undefined && response.data.length > 0) {
                         if (JSON.parse(response.data[0])[0].STATUS === 1) {
                             commonFactory.closepopup();
                             scope.showChk = false;
                             baseService.menuReviewstatus(scope.custid, '0', '').then(function(response) {
-                                debugger;
                                 model.lnkparentsReview = model.lnksiblingsReview = model.lnkrelativesReview = model.lnkeducationandprofReview = model.lnkpartnerReview = model.lnkastroReview = model.lnkreferenceReview = model.lnkpropertyReview = '';
                                 model.menuReviewdata = JSON.parse(response.data);
                                 _.each(model.menuReviewdata, function(item) {
                                     var SectionID = item.SectionID;
-                                    if (SectionID === 11 || SectionID === 12 || SectionID === 13 || SectionID == 15) {
-                                        model.lnkparentsReview = 'red';
-                                    }
-                                    if (SectionID === 14 || SectionID === 25 || SectionID === 26) {
-                                        model.lnksiblingsReview = 'red';
-                                    }
-                                    if (SectionID === 27 || SectionID === 28 || SectionID === 32 || SectionID === 33) {
-                                        model.lnkrelativesReview = 'red';
-                                    }
-                                    if (SectionID === 6 || SectionID === 7 || SectionID === 8) {
-                                        model.lnkeducationandprofReview = 'red';
-                                    }
-                                    if (SectionID === 16 || SectionID === 22) {
-                                        model.lnkpartnerReview = 'red';
-                                    }
-                                    if (SectionID === 23) {
-                                        model.lnkastroReview = 'red';
-                                    }
-                                    if (SectionID === 29) {
-                                        model.lnkreferenceReview = 'red';
-                                    }
-                                    if (SectionID === 34) {
-                                        model.lnkpropertyReview = 'red';
+                                    switch (SectionID) {
+                                        case 11:
+                                        case 12:
+                                        case 13:
+                                        case 15:
+                                            model.lnkparentsReview = 'red';
+                                            break;
+                                        case 14:
+                                        case 25:
+                                        case 26:
+                                            model.lnksiblingsReview = 'red';
+                                            break;
+                                        case 27:
+                                        case 28:
+                                        case 32:
+                                        case 33:
+                                            model.lnkrelativesReview = 'red';
+                                            break;
+                                        case 6:
+                                        case 7:
+                                        case 8:
+                                            model.lnkeducationandprofReview = 'red';
+                                            break;
+                                        case 16:
+                                        case 22:
+                                            model.lnkpartnerReview = 'red';
+                                            break;
+                                        case 23:
+                                            model.lnkastroReview = 'red';
+                                            break;
+                                        case 29:
+                                            model.lnkreferenceReview = 'red';
+                                            break;
+                                        case 34:
+                                            model.lnkpropertyReview = 'red';
+                                            break;
                                     }
                                 });
                             });
@@ -87,9 +99,7 @@
                 baseService.menuReviewstatus(scope.custid, '2', scope.sectionid).then(function(response) {
                     model.revstatus = JSON.parse(response.data);
                     console.log('sectionID');
-                    debugger;
                     console.log(model.revstatus);
-
                     _.each(model.revstatus, function(item) {
                         var SectionID = item.ReviewStatusID;
                         if (SectionID === 0) {
@@ -100,12 +110,6 @@
                     });
                 });
             }
-
-
-
-
-
-
         }
     }
 
