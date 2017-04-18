@@ -21298,56 +21298,116 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
         model.scope = {};
         model.init = function() {
             CustID = stateParams.CustID;
-            model.unreviewedLinks();
+
             model.menuItem();
             baseService.personalDetails(CustID).then(function(response) {
-
                 model.PersonalObj = response.data;
                 // model.imgsrc = authSvc.getprofilepic();
-
-
-
                 if (model.PersonalObj != null && model.PersonalObj != undefined) {
                     baseService.nodatastatus(model.PersonalObj.ProfileID).then(function(res) {
                         model.rev = res.data;
 
                     });
                 }
+                model.unreviewedLinks();
             });
             return model;
         };
 
         model.unreviewedLinks = function() {
-
+            switch (model.PersonalObj.ProfileStatusID) {
+                case 54:
+                    model.mymenucolor = '#EFEFEF';
+                    break;
+                case 55:
+                    model.mymenucolor = '#185615';
+                    break;
+                case 56:
+                case 394:
+                    model.mymenucolor = '#BCC3BE';
+                    break;
+                case 57:
+                case 393:
+                    model.mymenucolor = '#17F067';
+                    break;
+                default:
+                    model.mymenucolor = '#EFEFEF';
+                    break;
+            }
             baseService.menuReviewstatus(CustID, '0', '').then(function(response) {
                 model.lnkparentsReview = model.lnksiblingsReview = model.lnkrelativesReview = model.lnkeducationandprofReview = model.lnkpartnerReview = model.lnkastroReview = model.lnkreferenceReview = model.lnkpropertyReview = '';
                 model.menuReviewdata = JSON.parse(response.data);
                 _.each(model.menuReviewdata, function(item) {
                     var SectionID = item.SectionID;
-                    if (SectionID === 11 || SectionID === 12 || SectionID === 13 || SectionID == 15) {
-                        model.lnkparentsReview = 'red';
+                    // if (SectionID === 11 || SectionID === 12 || SectionID === 13 || SectionID == 15) {
+                    //     model.lnkparentsReview = 'red';
+                    // }
+                    // if (SectionID === 14 || SectionID === 25 || SectionID === 26) {
+                    //     model.lnksiblingsReview = 'red';
+                    // }
+                    // if (SectionID === 27 || SectionID === 28 || SectionID === 32 || SectionID === 33) {
+                    //     model.lnkrelativesReview = 'red';
+                    // }
+                    // if (SectionID === 6 || SectionID === 7 || SectionID === 8) {
+                    //     model.lnkeducationandprofReview = 'red';
+                    // }
+                    // if (SectionID === 16 || SectionID === 22) {
+                    //     model.lnkpartnerReview = 'red';
+                    // }
+                    // if (SectionID === 23) {
+                    //     model.lnkastroReview = 'red';
+                    // }
+                    // if (SectionID === 29) {
+                    //     model.lnkreferenceReview = 'red';
+                    // }
+                    // if (SectionID === 34) {
+                    //     model.lnkpropertyReview = 'red';
+                    // }
+                    switch (SectionID) {
+                        case 11:
+                        case 12:
+                        case 13:
+                        case 15:
+                            model.lnkparentsReview = 'red';
+                            break;
+                        case 14:
+                        case 25:
+                        case 26:
+                            model.lnksiblingsReview = 'red';
+                            break;
+                        case 27:
+                        case 28:
+                        case 32:
+                        case 33:
+                            model.lnkrelativesReview = 'red';
+                            break;
+                        case 6:
+                        case 7:
+                        case 8:
+                            model.lnkeducationandprofReview = 'red';
+                            break;
+                        case 16:
+                        case 22:
+                            model.lnkpartnerReview = 'red';
+                            break;
+                        case 23:
+                            model.lnkastroReview = 'red';
+                            break;
+                        case 29:
+                            model.lnkreferenceReview = 'red';
+                            break;
+                        case 34:
+                            model.lnkpropertyReview = 'red';
+                            break;
+                        default:
+                            if (model.PersonalObj.ProfileStatusID === 55) {
+                                model.lnkparentsReview = model.lnksiblingsReview = model.lnkrelativesReview =
+                                    model.lnkeducationandprofReview = model.lnkpartnerReview = model.lnkastroReview =
+                                    model.lnkreferenceReview = model.lnkpropertyReview = "#337ab7";
+                            }
+                            break;
                     }
-                    if (SectionID === 14 || SectionID === 25 || SectionID === 26) {
-                        model.lnksiblingsReview = 'red';
-                    }
-                    if (SectionID === 27 || SectionID === 28 || SectionID === 32 || SectionID === 33) {
-                        model.lnkrelativesReview = 'red';
-                    }
-                    if (SectionID === 6 || SectionID === 7 || SectionID === 8) {
-                        model.lnkeducationandprofReview = 'red';
-                    }
-                    if (SectionID === 16 || SectionID === 22) {
-                        model.lnkpartnerReview = 'red';
-                    }
-                    if (SectionID === 23) {
-                        model.lnkastroReview = 'red';
-                    }
-                    if (SectionID === 29) {
-                        model.lnkreferenceReview = 'red';
-                    }
-                    if (SectionID === 34) {
-                        model.lnkpropertyReview = 'red';
-                    }
+
                 });
             });
 
