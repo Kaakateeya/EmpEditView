@@ -4305,7 +4305,8 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 if (response.data.length > 0) {
                     model.spouseArray = response.data[0].length > 0 ? JSON.parse(response.data[0]) : [];
                     model.ChildArray = response.data[1].length > 0 ? JSON.parse(response.data[1]) : [];
-                    model.childCount = response.data !== undefined && response.data[0].length > 0 && response.data[0].NoOfChildrens !== null ? (JSON.parse(response.data[0]))[0].NoOfChildrens : [];
+                    debugger;
+                    model.childCount = response.data !== undefined && response.data[0].length > 0 && (JSON.parse(response.data[0])).length > 0 ? (JSON.parse(response.data[0]))[0].NoOfChildrens : [];
 
                     console.log(model.spouseArray);
                     console.log(model.ChildArray);
