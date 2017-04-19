@@ -52,7 +52,7 @@
                                 extension = "jpg";
                             }
 
-                            model.ImageUrl = editviewapp.GlobalImgPathforimage + "Images/Horoscopeimages/" + custID + "_HaromodelImage/" + custID + "_HaromodelImage." + extension;
+                            model.ImageUrl = editviewapp.GlobalImgPathforimage + "Images/Horoscopeimages/" + custID + "_HaroscopeImage/" + custID + "_HaroscopeImage." + extension;
                             if (extension === "html") {
                                 model.iframeShow = true;
                                 $('#iframe').attr('src', model.ImageUrl);
@@ -67,7 +67,7 @@
                                 model.iframeShow = false;
                                 extensn = "jpg";
                             }
-                            model.ImageUrl = editviewapp.GlobalImgPathforimage + "Images/Horoscopeimages/" + custID + "_HaromodelImage/" + custID + "_HaromodelImage." + extensn;
+                            model.ImageUrl = editviewapp.GlobalImgPathforimage + "Images/Horoscopeimages/" + custID + "_HaroscopeImage/" + custID + "_HaroscopeImage." + extensn;
                             if (extensn === "html") {
                                 model.iframeShow = true;
                                 $('#iframe').attr('src', model.ImageUrl);
@@ -210,7 +210,7 @@
                     alert('Sorry,Upload Photo Size Must Be Less than 1 mb');
                 } else {
                     // var extension = ((obj.myFile.name).split('.'))[1];
-                    var keyname = "Images/Horoscopeimages/" + custID + "_HaromodelImage/" + custID + "_HaromodelImage." + extension;
+                    var keyname = "Images/Horoscopeimages/" + custID + "_HaroscopeImage/" + custID + "_HaroscopeImage." + extension;
 
                     fileUpload.uploadFileToUrl(obj.myFile, '/photoUplad', keyname).then(function(res) {
 
@@ -232,7 +232,7 @@
 
                                 model.astropageload(custID);
 
-                                model.ImageUrl = editviewapp.GlobalImgPathforimage + "Images/Horoscopeimages/" + custID + "_HaromodelImage/" + custID + "_HaromodelImage." + extension;
+                                model.ImageUrl = editviewapp.GlobalImgPathforimage + "Images/Horoscopeimages/" + custID + "_HaroscopeImage/" + custID + "_HaroscopeImage." + extension;
                             });
                         }
                     });
@@ -275,7 +275,7 @@
             // } else {
             //     extension = "jpg";
             // }
-            var keynameq = "Images/Horoscopeimages/" + custID + "_HaromodelImage/" + custID + "_HaromodelImage." + extension;
+            var keynameq = "Images/Horoscopeimages/" + custID + "_HaroscopeImage/" + custID + "_HaroscopeImage." + extension;
             http.post('/photoDelete', JSON.stringify({ keyname: keynameq })).then(function(data) {
 
             });
