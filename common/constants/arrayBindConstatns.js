@@ -306,8 +306,11 @@
                 { "label": "--select-- ", "title": "--select--", "value": "" },
                 { "label": "Normal", "title": "Normal", "value": 25 },
                 { "label": "Physically Challenged", "title": "Physically Challenged", "value": 26 }
+            ],
+            'boolType': [
+                { "label": "Yes", "title": "Yes", "value": 1 },
+                { "label": "No", "title": "No", "value": 0 }
             ]
-
         });
 
 }());

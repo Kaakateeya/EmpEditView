@@ -193,6 +193,20 @@
 
                     case 'getrelationships':
                         scope.databind(scope.parentVal);
+                        break;
+                    case 'passOfYear':
+                        var test = [];
+                        var yr = 1,
+                            maxyr = 2020,
+                            no_year = 1975;
+                        test.push({ "label": "--select--", "title": "--select--", "value": 0 });
+                        for (var i = maxyr; i >= no_year; i--) {
+                            test.push({ "label": i, "title": i, "value": i });
+                            yr += 1;
+                        }
+                        scope.databind(test);
+                        break;
+
                 }
             }, 1000);
             element.multiselect({

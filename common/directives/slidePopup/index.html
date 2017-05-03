@@ -1,0 +1,92 @@
+<!--<script type="text/ng-template" id="popup.html">-->
+
+
+<form class="EditViewClass" name="dynamicForm" novalidate role="form" ng-submit="dynamicForm.$valid && submit();" accessible-form>
+    <div class="modal-header">
+        <h3 class="modal-title text-center" id="modal-title">{{model.popupHeader}}
+            <a href="javascript:void(0);" ng-click="page.model.cancel();">
+                <ng-md-icon icon="close" style="fill:#c73e5f" class="pull-right" size="20"> </ng-md-icon>
+            </a>
+        </h3>
+    </div>
+    <div class="modal-body">
+        <ul class="modal-body clearfix pop_content_my">
+            <li class="clearfix form-group" ng-repeat="item in model.popupdata">
+
+                <label ng-if="item.controlType!=='country'" for="item.lblname" ng-class="{'radiocls':item.controlType==='radio'}" class="pop_label_left">{{item.lblname}}<span ng-if="item.required" style="color: red; margin-left: 3px;">*</span></label>
+                <div ng-if="item.controlType==='select'" class="pop_controls_right select-box-my input-group">
+                    <select multiselectdropdown ng-model="model[item.ngmodel]" typeofdata="item.typeofdata" ng-required="item.required" ng-change="ddlChange(model[item.ngmodel],item.childName,item.changeApi)"></select>
+                </div>
+                <div ng-if="item.controlType==='Changeselect'" class="pop_controls_right select-box-my input-group">
+                    <select multiselectdropdown ng-model="model[item.ngmodel]" ng-required="item.required" ng-options="itm.value as itm.label for itm in item.dataSource" ng-change="ddlChange(model[item.ngmodel],item.childName,item.changeApi)"></select>
+                </div>
+                <div ng-if="item.controlType==='textbox'" class="pop_controls_right">
+                    <input type="text" ng-model="model[item.ngmodel]" maxlength="150" class="form-control" ng-required="item.required" />
+                </div>
+                <div ng-if="item.controlType==='textarea'">
+                    <textarea ng-model="model[item.ngmodel]" maxlength="500" rows="4" cols="20" ng-required="item.required" style="max-width:515px;width:100%;"></textarea>
+                </div>
+                <!--textbox with select-->
+                <div ng-if="item.controlType==='textboxSelect'" class="pop_controls_right select-box-my select-box-my-double">
+                    <select multiselectdropdown ng-model="model[item.ngmodelSelect]" typeofdata="item.typeofdata"></select>
+                    <input ng-model="model[item.ngmodelText]" class="form-control" maxlength="7" onkeydown="return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));"
+                    />
+                </div>
+                <md-input-container ng-if="item.controlType==='radio'" style="font-weight: 700; color: black;">
+                    <md-radio-group ng-required="true" name="item.ngmodel" ng-change="model[item.method](model[item.ngmodel],item.ngmodel)" layout="row" ng-model="model[item.ngmodel]" class="md-block" flex-gt-sm ng-disabled="manageakerts">
+                        <md-radio-button ng-value="rd.value" ng-repeat="rd in item.dataSource" class="md-primary">{{rd.label}}</md-radio-button>
+                    </md-radio-group>
+
+                    <div ng-messages="model.returnString(item.ngmodel);">
+                        <div ng-if="model.returnString(item.ngmodel) && dynamicForm.$submitted">This field is required.</div>
+                    </div>
+                </md-input-container>
+                <div ng-if="item.controlType==='checkbox'" class="pop_controls_right">
+                    <md-checkbox ng-model="model[item.ngmodel]" name="chkisconfidential" aria-label="Checkbox 1" ng-change="model[item.method](model[item.ngmodel],item.ngmodel)">
+                    </md-checkbox>
+                </div>
+
+                <div ng-if="item.controlType==='country'">
+                    <country-directive countryshow="item.countryshow" cityshow="item.cityshow" othercity="item.othercity" dcountry="model[item.dcountry]" dstate="model[item.dstate]" ddistrict="model[item.ddistrict]" dcity="model[item.dcity]" strothercity="model[item.strothercity]"></country-directive>
+                </div>
+            </li>
+            <li class="row">
+                <br/>
+                <div class="col-lg-9">
+                    <button class="button_custom  pull-right" ng-disabled="loading" type="submit" promise-btn="page.model.submitPromise">Submit</button>
+                </div>
+                <div class="col-lg-3">
+                    <input value="Cancel" class="button_custom button_custom_reset pull-right" ng-click="cancel();" type="button"></div>
+            </li>
+        </ul>
+    </div>
+</form>
+<!--</script>-->
+
+
+<style>
+    .requiredStar::after {
+        content: " * ";
+        float: right;
+        color: red;
+        font-size: 22px !important;
+        padding-left: 6px;
+    }
+    
+    .radiocls {
+        padding-top: 2%;
+    }
+    
+    .multiselect {
+        border: solid 1px #ADA2A2 !important;
+        color: #000;
+        background: #fff !important;
+        box-shadow: none !important;
+        height: 34px !important;
+        margin: 0 !important;
+    }
+    
+    .help-block {
+        padding-left: 40%;
+    }
+</style>

@@ -119,7 +119,8 @@ module.exports = function(grunt) {
                     'base/**/*.js', '!common/directives/editFooter.js',
                     '!common/directives/datePickerDirective.js',
                     '!common/directives/fileUploadDirective.js',
-                    '!common/directives/multiSelectDirective.js'
+                    '!common/directives/multiSelectDirective.js',
+                    '!common/directives/accessibleForm.js'
                 ],
                 dest: 'dist/src/main.js'
             },

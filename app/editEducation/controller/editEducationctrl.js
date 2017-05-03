@@ -4,7 +4,7 @@
      function controller(editEducationModel, scope, baseModel, window) {
          var vm = this;
          var model;
-
+         scope.model = {};
          vm.scope = scope;
          vm.init = function() {
              window.scrollTo(0, 0);

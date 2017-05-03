@@ -41,7 +41,8 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         { name: 'editview.editSpouse', url: '/Spouse/:CustID', subname: ['common/directives/datePickerDirective.js'] },
         { name: 'editview.editContact', url: '/Contact/:CustID', subname: [] },
         { name: 'editview.editOfcePurpose', url: '/OfcePurpose/:CustID', subname: [] },
-        { name: 'editview.editProfileSetting', url: '/ProfileSetting/:CustID', subname: [] }
+        { name: 'editview.editProfileSetting', url: '/ProfileSetting/:CustID', subname: [] },
+        { name: 'editview.popup', url: '/popup', subname: [] }
     ];
     $ocLazyLoadProvider.config({
         debug: true
@@ -69,18 +70,18 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         $stateProvider.state(item.name, {
             url: item.url,
             views: innerView,
-            // resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-            //     loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-            //         // you can lazy load files for an existing module
-            //         var edit = item.name.slice(9);
-            //         if (editviewapp.env === 'dev') {
-            //             return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-            //         } else {
-            //             return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
-            //         }
-            //         // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-            //     }]
-            // }
+            resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+                loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                    // you can lazy load files for an existing module
+                    var edit = item.name.slice(9);
+                    if (editviewapp.env === 'dev') {
+                        return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+                    } else {
+                        return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
+                    }
+                    // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+                }]
+            }
         });
         $locationProvider.html5Mode(true);
     });

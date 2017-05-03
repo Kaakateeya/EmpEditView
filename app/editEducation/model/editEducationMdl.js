@@ -2,13 +2,14 @@
     'use strict';
 
 
-    function factory($http, authSvc, editEducationService, commonFactory, uibModal, filter, alertss, stateParams, SelectBindService) {
+    function factory($http, authSvc, editEducationService, commonFactory, uibModal, filter, alertss, stateParams, SelectBindService, arrayConstantsEdit) {
         var model = {};
         // var logincustid = authSvc.getCustId();
 
         model.scope = {};
         var loginEmpid = authSvc.LoginEmpid();
         var AdminID = model.Admin = authSvc.isAdmin();
+        model.Education = {};
         //start declaration block
         model.stateArr = [];
         model.districtArr = [];
@@ -21,22 +22,22 @@
         model.ProfdistrictArr = [];
         model.ProfcityeArr = [];
         model.profObj = {};
-        model.edoObj = {};
+
         model.aboutObj = {};
         model.custObj = {};
-        model.edoObj.IsHighestDegree = '';
         var isSubmit = true;
         model.educationID = 0;
         model.CustomerDataArr = [];
         model.reviewdisplay = 'Education details';
+        model.eventType = 'add';
         //end declaration block
-
 
         var CustID = stateParams.CustID;
 
         // logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.CustID = CustID;
         model.init = function() {
+
             CustID = stateParams.CustID;
             model.getdata();
             return model;
@@ -92,51 +93,44 @@
             });
         };
 
-        model.passOfYear = function(maxyr, no_year) {
-            var yr = 1;
-            model.passOfyearArr.push({ "label": "--select--", "title": "--select--", "value": 0 });
-            for (var i = maxyr; i >= no_year; i--) {
-                model.passOfyearArr.push({ "label": i, "title": i, "value": i });
-                yr += 1;
-            }
-        };
-
         model.showpopup = function(type, item) {
             isSubmit = true;
+            model.eventType = 'add';
             switch (type) {
                 case 'showEduModal':
-                    model.passOfYear(2020, 1975);
-                    model.edoObj.EducationID = null;
-                    model.edoObj = {};
-                    if (item !== undefined) {
 
+                    model.popupdata = model.Education;
+                    model.popupHeader = 'Education Details';
+                    model.EducationID = null;
+
+                    if (item !== undefined) {
+                        model.eventType = 'edit';
                         model.eduGroupArr = commonFactory.checkvals(item.EducationCategoryID) ? commonFactory.educationGroupBind(item.EducationCategoryID) : [];
                         model.eduSpecialisationArr = commonFactory.checkvals(item.EducationGroupID) ? commonFactory.educationSpeciakisationBind(item.EducationGroupID) : [];
-
-                        model.edoObj.IsHighestDegree = item.EduHighestDegree;
-                        console.log(item.EduPassOfYear);
-
-                        model.edoObj.ddlEduCatgory = commonFactory.checkvals(item.EducationCategoryID) ? parseInt(item.EducationCategoryID) : null;
-                        model.edoObj.ddlEdugroup = item.EducationGroupID;
-                        model.edoObj.ddlEduspecialization = item.EducationSpecializationID;
-                        model.edoObj.txtuniversity = item.EduUniversity;
-                        model.edoObj.txtcollege = item.EduCollege;
-                        model.edoObj.ddlpassOfyear = commonFactory.checkvals(item.EduPassOfYear) ? parseInt(item.EduPassOfYear) : null;
-                        model.edoObj.ddlCountry = item.CountryID;
-                        model.edoObj.ddlState = item.StateID;
-                        model.edoObj.ddlDistrict = item.DistrictID;
-                        model.edoObj.ddlcity = item.CityID;
-                        model.edoObj.txtcity = "";
-                        model.edoObj.txtEdumerits = item.Educationdesc;
-                        model.edoObj.intCusID = item.intCusID;
-                        model.edoObj.EducationID = item.EducationID;
+                        model.IsHighestDegreeId = item.EduHighestDegree;
+                        model.EduCatgoryId = commonFactory.checkvals(item.EducationCategoryID) ? parseInt(item.EducationCategoryID) : null;
+                        model.EdugroupId = item.EducationGroupID;
+                        model.EduspecializationId = item.EducationSpecializationID;
+                        model.universityId = item.EduUniversity;
+                        model.collegeId = item.EduCollege;
+                        model.passOfyear = commonFactory.checkvals(item.EduPassOfYear) ? parseInt(item.EduPassOfYear) : null;
+                        model.countryId = item.CountryID;
+                        model.stateId = item.StateID;
+                        model.districtId = item.DistrictID;
+                        model.cityId = item.CityID;
+                        model.txtcity = "";
+                        model.Edumerits = item.Educationdesc;
+                        model.intCusID = item.intCusID;
+                        model.EducationID = item.EducationID;
                     }
-
 
                     commonFactory.open('EduModalContent.html', model.scope, uibModal);
                     break;
 
                 case 'showProfModal':
+                    model.popupdata = model.profession;
+                    model.popupHeader = 'Profession details';
+
                     model.profObj.Cust_Profession_ID = null;
                     model.profObj = {};
                     if (item !== undefined) {
@@ -204,9 +198,7 @@
             commonFactory.closepopup();
         };
 
-
         model.ProfchangeBind = function(type, parentval) {
-
             switch (type) {
 
                 case 'ProfessionGroup':
@@ -218,25 +210,9 @@
 
         model.changeBind = function(type, parentval) {
 
-
             if (commonFactory.checkvals(parentval)) {
 
                 switch (type) {
-
-                    case 'EducationCatgory':
-
-                        model.eduGroupArr = commonFactory.educationGroupBind(parentval);
-                        model.edoObj.ddlEdugroup = "";
-
-                        break;
-
-                    case 'EducationGroup':
-
-                        model.eduSpecialisationArr = commonFactory.educationSpeciakisationBind(parentval);
-                        model.edoObj.ddlEduspecialization = "";
-
-                        break;
-
                     case 'caste':
 
                         model.subcasteArr = commonFactory.subCaste(parentval);
@@ -246,53 +222,33 @@
             }
         };
 
-        model.eduSubmit = function(objitem) {
+        model.updateData = function(inObj, type) {
 
             if (isSubmit) {
                 isSubmit = false;
-                model.myData = {
-                    customerEducation: {
-                        CustID: CustID,
-                        Educationcategory: objitem.ddlEduCatgory,
-                        Educationgroup: objitem.ddlEdugroup,
-                        EducationSpecialization: objitem.ddlEduspecialization,
-                        University: objitem.txtuniversity,
-                        College: objitem.txtcollege,
-                        Passofyear: objitem.ddlpassOfyear,
-                        Countrystudyin: objitem.ddlCountry,
-                        Statestudyin: objitem.ddlState,
-                        Districtstudyin: objitem.ddlDistrict,
-                        CitystudyIn: objitem.ddlcity,
-                        OtherCity: objitem.txtcity,
-                        Highestdegree: objitem.IsHighestDegree,
-                        Educationalmerits: objitem.txtEdumerits,
-                        Cust_Education_ID: model.edoObj.EducationID,
-                        intEduID: model.edoObj.EducationID,
-                    },
-                    customerpersonaldetails: {
-                        intCusID: CustID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
+                switch (type) {
+                    case 'Education Details':
+                        inObj.customerEducation.Cust_Education_ID = model.EducationID;
+                        inObj.customerEducation.intEduID = model.EducationID;
+                        inObj.customerEducation.CustID = model.CustID;
 
-                model.submitPromise = editEducationService.submitEducationData(model.myData).then(function(response) {
-                    console.log(response);
-                    commonFactory.closepopup();
-                    if (response.data === 1) {
-
-                        model.eduPageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Education Details submitted Succesfully', 4500);
-                        if (model.datagetInStatus === 1) {
-                            sessionStorage.removeItem('missingStatus');
-                            route.go('mobileverf', {});
-                        }
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Education Details Updation failed', 4500);
-                    }
-                });
+                        model.submitPromise = editEducationService.submitEducationData(inObj).then(function(response) {
+                            console.log(response);
+                            commonFactory.closepopup();
+                            if (response.data === 1) {
+                                model.eduPageload();
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'Education Details submitted Succesfully', 4500);
+                                if (model.datagetInStatus === 1) {
+                                    sessionStorage.removeItem('missingStatus');
+                                    route.go('mobileverf', {});
+                                }
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Education Details Updation failed', 4500);
+                            }
+                        });
+                        break;
+                }
             }
-
         };
 
         model.ProfSubmit = function(objitem) {
@@ -417,18 +373,76 @@
 
         };
 
+        //performance code
+        model.Education = [
+            { lblname: 'Is Highest Degree', controlType: 'radio', ngmodel: 'IsHighestDegreeId', required: true, arrbind: 'boolType', parameterValue: 'Highestdegree' },
+            { lblname: 'Education category', controlType: 'select', ngmodel: 'EduCatgoryId', required: true, typeofdata: 'educationcategory', parameterValue: 'Educationcategory', childName: 'EducationGroup', changeApi: 'EducationGroup' },
+            { lblname: 'Education group', controlType: 'Changeselect', ngmodel: 'EdugroupId', required: true, parentName: 'EducationGroup', parameterValue: 'Educationgroup', changeApi: 'EducationSpecialisation', childName: 'EducationSpecialisation' },
+            { lblname: 'Edu specialization', controlType: 'Changeselect', ngmodel: 'EduspecializationId', required: true, parentName: 'EducationSpecialisation', parameterValue: 'EducationSpecialization' },
+            { lblname: 'University', controlType: 'textbox', ngmodel: 'universityId', parameterValue: 'University' },
+            { lblname: 'College', controlType: 'textbox', ngmodel: 'collegeId', parameterValue: 'College' },
+            { lblname: 'Pass of year', controlType: 'select', ngmodel: 'passOfyear', typeofdata: 'passOfYear', parameterValue: 'Passofyear' },
+            {
+                lblname: 'country',
+                controlType: 'country',
+                countryshow: true,
+                cityshow: true,
+                othercity: true,
+                dcountry: 'countryId',
+                dstate: 'stateId',
+                ddistrict: 'districtId',
+                dcity: 'cityId',
+                strothercity: 'txtcity',
+                countryParameterValue: 'Countrystudyin',
+                stateParameterValue: 'Statestudyin',
+                districtParameterValue: 'Districtstudyin',
+                cityParameterValue: 'CitystudyIn',
+                cityotherParameterValue: 'OtherCity'
+            },
+            {
+                lblname: 'Educational merits',
+                controlType: 'textarea',
+                ngmodel: 'Edumerits',
+                parameterValue: 'Educationalmerits'
+            }
 
-        // model.reviewonchange = function(booltype) {
-        //     if (booltype === true)
-        //         commonFactory.open('common/templates/reviewConfirmationPopup.html', model.scope, uibModal, 'sm');
-        // };
+        ];
 
 
-        // model.reviewSubmit = function() {
-        //     baseService.menuReviewstatus(CustID, '1', '6,7,8').then(function(response) {
-        //         console.log(response.data);
-        //     });
-        // };
+
+
+        model.profession = [
+            { lblname: 'Employed In', controlType: 'select', ngmodel: 'IsHighestDegreeId', required: true, arrbind: 'boolType', parameterValue: 'Highestdegree' },
+            { lblname: 'Professional group', controlType: 'select', ngmodel: 'EduCatgoryId', required: true, typeofdata: 'educationcategory', parameterValue: 'Educationcategory', childName: 'EducationGroup', changeApi: 'EducationGroup' },
+            { lblname: 'Profession', controlType: 'Changeselect', ngmodel: 'EdugroupId', required: true, parentName: 'EducationGroup', parameterValue: 'Educationgroup', changeApi: 'EducationSpecialisation', childName: 'EducationSpecialisation' },
+            { lblname: 'Company name', controlType: 'textbox', ngmodel: 'EduspecializationId', required: true, parentName: 'EducationSpecialisation', parameterValue: 'EducationSpecialization' },
+            { lblname: 'Monthly salary', controlType: 'textboxSelect', ngmodel: 'universityId', parameterValue: 'University' },
+            {
+                controlType: 'country',
+                countryshow: true,
+                cityshow: true,
+                othercity: true,
+                dcountry: 'profCountryId',
+                dstate: 'profStateId',
+                ddistrict: 'profDistrictId',
+                dcity: 'profCityId',
+                strothercity: 'profTxtcity',
+                // countryParameterValue: 'Countrystudyin',
+                // stateParameterValue: 'Statestudyin',
+                // districtParameterValue: 'Districtstudyin',
+                // cityParameterValue: 'CitystudyIn',
+                // cityotherParameterValue: 'OtherCity'
+            },
+            {
+                lblname: 'Educational merits',
+                controlType: 'textarea',
+                ngmodel: 'Edumerits',
+                parameterValue: 'Educationalmerits'
+            }
+
+        ];
+
+
 
 
         return model.init();
@@ -438,6 +452,6 @@
         .module('KaakateeyaEmpEdit')
         .factory('editEducationModel', factory);
 
-    factory.$inject = ['$http', 'authSvc', 'editEducationService', 'commonFactory', '$uibModal', '$filter', 'alert', '$stateParams', 'SelectBindService'];
+    factory.$inject = ['$http', 'authSvc', 'editEducationService', 'commonFactory', '$uibModal', '$filter', 'alert', '$stateParams', 'SelectBindService', 'arrayConstantsEdit'];
 
 })(angular);

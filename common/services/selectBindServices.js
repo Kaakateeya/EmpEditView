@@ -27,7 +27,7 @@
                 return http.get(editviewapp.apipath + 'Dependency/getEducationDependency', { params: { dependencyName: "", dependencyValue: "" } });
             },
             EducationGroup: function(dependencyVal2) {
-
+                debugger;
                 return http.get(editviewapp.apipath + 'Dependency/getEducationDependency', { params: { dependencyName: "educationGroup", dependencyValue: dependencyVal2 } });
             },
             EducationSpecialisation: function(dependencyVal2) {
