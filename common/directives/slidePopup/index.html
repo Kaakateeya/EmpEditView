@@ -1,5 +1,3 @@
-
-
 <form class="EditViewClass" name="dynamicForm" novalidate role="form" ng-submit="dynamicForm.$valid && submit();" accessible-form>
     <div class="modal-header">
         <h3 class="modal-title text-center" id="modal-title">{{model.popupHeader}}
@@ -10,13 +8,13 @@
     </div>
     <div class="modal-body  ">
         <ul class="modal-body pop_content_my clearfix">
-            <li  ng-show="item.parentDependecy===undefined?true:model[item.parentDependecy](item)" class="clearfix form-group"   ng-repeat="item in model.popupdata">
-               
-                <label ng-if="item.controlType!=='country' && item.controlType!=='contact'  && item.controlType!=='bindHtml' && item.controlType!=='about'" for="item.lblname" ng-class="{'radiocls':item.controlType==='radio'}" class="pop_label_left">{{item.lblname}}<span ng-if="item.required" style="color: red; margin-left: 3px;">*</span></label>       
+            <li ng-show="item.parentDependecy===undefined?true:model[item.parentDependecy](item)" class="clearfix form-group" ng-repeat="item in model.popupdata">
+
+                <label ng-if="item.controlType!=='country' && item.controlType!=='contact'  && item.controlType!=='bindHtml' && item.controlType!=='about'" for="item.lblname" ng-class="{'radiocls':item.controlType==='radio'}" class="pop_label_left">{{item.lblname}}<span ng-if="item.required" style="color: red; margin-left: 3px;">*</span></label>
                 <label class="col-lg-12" ng-class="item.classname" ng-if="item.controlType==='bindHtml'">
                <span ng-bind-html="item.html"></span>
                 </label>
-               
+
 
                 <div ng-if="item.controlType==='select'" class="pop_controls_right select-box-my input-group">
                     <select multiselectdropdown ng-model="model[item.ngmodel]" typeofdata="item.typeofdata" ng-required="item.required" ng-change="ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)"></select>
@@ -41,11 +39,11 @@
                         <md-radio-button ng-value="rd.value" ng-repeat="rd in item.dataSource" class="md-primary">{{rd.label}}</md-radio-button>
                     </md-radio-group>
 
-                  
+
                 </md-input-container>
 
                 <div ng-if="item.controlType==='checkbox'" class="pop_controls_right">
-                  
+
                     <md-checkbox ng-model="model[item.ngmodel]" name="chkisconfidential" aria-label="Checkbox 1" ng-change="model[item.method](model[item.ngmodel],item.ngmodel)">
                     </md-checkbox>
                 </div>
@@ -62,9 +60,9 @@
                 </div>
 
                 <div ng-if="item.controlType==='housewife'" class="pop_controls_right">
-                    
+
                     <input ng-model="model[item.ngmodelText]" class="form-control" maxlength="200" tabindex="32" />
-                      
+
                     <label class="checkbox-inline checkbox_my" style="padding: 5px 0 6px 0;">
                 <input type=checkbox ng-model="model[item.ngmodelChk]"  tabindex="33"  ng-change="model[item.ngmodelText]=chkChange(model[item.ngmodelChk]);"/><span>&nbsp;HouseWife</span>
                     </label>
@@ -82,8 +80,8 @@
                     <select multiselectdropdown ng-model="model[item.ngmodel]" multiple ng-required="item.required" ng-options="itm.value as itm.label for itm in item.dataSource" ng-change="ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)"></select>
                 </div>
                 <div ng-if="item.controlType==='doublemultiselect'" class="pop_controls_right select-box-my select-box-my-double input-group">
-                    <select multiselectdropdown ng-model="model[item.ngmodelSelect1]" multiple typeofdata="item.typeofdata" ng-required="item.required" ng-change="ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)"></select>
-                    <select multiselectdropdown ng-model="model[item.ngmodelSelect2]" multiple typeofdata="item.typeofdata" ng-required="item.required" ng-change="ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)"></select>
+                    <select multiselectdropdown ng-model="model[item.ngmodelSelect1]" typeofdata="item.typeofdata" ng-required="item.required" ng-change="ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)"></select>
+                    <select multiselectdropdown ng-model="model[item.ngmodelSelect2]" typeofdata="item.typeofdata" ng-required="item.required" ng-change="ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)"></select>
                 </div>
             </li>
             <li class="row">

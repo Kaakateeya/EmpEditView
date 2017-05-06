@@ -26,12 +26,12 @@
             var CustID = stateParams.CustID;
             var loginEmpid = authSvc.LoginEmpid();
             var AdminID = authSvc.isAdmin();
-            scope.getExpression=function(val){
+            scope.getExpression = function(val) {
                 console.log(val);
                 return val;
             }
             scope.ddlChange = function(value, value2, text, apiPath) {
-             
+
                 if (apiPath && value2) {
                     SelectBindService[apiPath](commonFactory.listSelectedVal(value), commonFactory.listSelectedVal(value2)).then(function(res) {
                         _.map(_.where(scope.model.popupdata, { parentName: text }), function(item) {
@@ -46,7 +46,7 @@
                     SelectBindService[apiPath](commonFactory.listSelectedVal(value)).then(function(res) {
                         _.map(_.where(scope.model.popupdata, { parentName: text }), function(item) {
                             var depData = [];
-                          
+
                             _.each(res.data, function(item) {
                                 depData.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                             });
@@ -87,8 +87,9 @@
                         scope.model[item.strland] = undefined;
                         scope.model[item.strmail] = undefined;
                     }
+
                 }
-            
+
                 if (scope.model[item.ngmodel] && item.childName) {
                     scope.ddlChange(scope.model[item.ngmodel], scope.model[item.secondParent], item.childName, item.changeApi);
                 }
@@ -102,7 +103,7 @@
                 var parameters = {};
                 _.each(scope.model.popupdata, function(item) {
                     if (item.parameterValue) {
-                        parameters[item.parameterValue] = scope.model[item.ngmodel];
+                        parameters[item.parameterValue] = commonFactory.listSelectedVal(scope.model[item.ngmodel]);
                     } else if (item.controlType === 'country') {
                         parameters[item.countryParameterValue] = item.countryshow = false ? 1 : scope.model[item.dcountry];
                         parameters[item.stateParameterValue] = scope.model[item.dstate];
@@ -119,6 +120,9 @@
                         parameters[item.landAreaCodeIdParameterValue] = commonFactory.checkvals(scope.model[item.stralternative]) ? null : (commonFactory.checkvals(scope.model[item.strareacode]) ? scope.model[item.strareacode] : null);
                         parameters[item.landNumberParameterValue] = commonFactory.checkvals(scope.model[item.stralternative]) ? scope.model[item.stralternative] : (commonFactory.checkvals(scope.model[item.strland]) ? scope.model[item.strland] : null);
                         parameters[item.emailParameterValue] = scope.model[item.strmail];
+                    } else if (item.controlType === 'doublemultiselect') {
+                        parameters[item.parameterValue1] = commonFactory.listSelectedVal(scope.model[item.ngmodelSelect1]);
+                        parameters[item.parameterValue2] = commonFactory.listSelectedVal(scope.model[item.ngmodelSelect2]);
                     }
 
                 });

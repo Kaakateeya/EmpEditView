@@ -495,8 +495,8 @@
             }
         };
 
-       model.showHousewife=function(val){
-               return model.chkhousewife;
+        model.showHousewife = function(val) {
+            return model.chkhousewife;
         };
 
         model.parent = [

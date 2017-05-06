@@ -461,7 +461,11 @@
     </script>
 
     <script type="text/ng-template" id="partnerDescContent.html">
-        <form class="EditViewClass" name="aboutForm" novalidate role="form" ng-submit="page.model.partnerDescriptionSubmit(page.model.partnerDescObj)">
+
+        <slide-popup model="page.model" eventtype="page.model.eventType">
+        </slide-popup>
+
+        <!--<form class="EditViewClass" name="aboutForm" novalidate role="form" ng-submit="page.model.partnerDescriptionSubmit(page.model.partnerDescObj)">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Partner Description
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -481,7 +485,7 @@
                 </ul>
             </div>
 
-        </form>
+        </form>-->
     </script>
 </div>
 <script src="build/js/custom.js" type="text/javascript"></script>
