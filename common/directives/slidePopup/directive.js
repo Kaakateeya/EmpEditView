@@ -26,12 +26,12 @@
             var CustID = stateParams.CustID;
             var loginEmpid = authSvc.LoginEmpid();
             var AdminID = authSvc.isAdmin();
-            scope.getExpression=function(val){
+            scope.getExpression = function(val) {
                 console.log(val);
                 return val;
             }
             scope.ddlChange = function(value, value2, text, apiPath) {
-             
+
                 if (apiPath && value2) {
                     SelectBindService[apiPath](commonFactory.listSelectedVal(value), commonFactory.listSelectedVal(value2)).then(function(res) {
                         _.map(_.where(scope.model.popupdata, { parentName: text }), function(item) {
@@ -46,7 +46,7 @@
                     SelectBindService[apiPath](commonFactory.listSelectedVal(value)).then(function(res) {
                         _.map(_.where(scope.model.popupdata, { parentName: text }), function(item) {
                             var depData = [];
-                          
+
                             _.each(res.data, function(item) {
                                 depData.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                             });
@@ -88,7 +88,7 @@
                         scope.model[item.strmail] = undefined;
                     }
                 }
-            
+
                 if (scope.model[item.ngmodel] && item.childName) {
                     scope.ddlChange(scope.model[item.ngmodel], scope.model[item.secondParent], item.childName, item.changeApi);
                 }

@@ -35,44 +35,33 @@
 
         model.populateProperty = function(item) {
             isSubmit = true;
-            model.proObj = {};
-            model.proObj.Custpropertyid = null;
+            model.Custpropertyid = null;
+            model.eventType = 'add';
+            model.RefrenceCust_Reference_ID = null;
+            model.popupdata = model.Refrence;
+            model.popupHeader = 'Refrence';
             if (item !== undefined) {
-                model.proObj.Custpropertyid = item.Custpropertyid;
-                model.proObj.ddlFamilyStatus = item.FamilyValuesID;
-                model.proObj.rdlSharedProperty = item.SharedPropertyID === true ? 1 : 0;
-                model.proObj.txtValueofproperty = item.PropertyValue;
-                model.proObj.txtPropertydesc = item.PropertyDetails;
+                model.eventType = 'edit';
+                model.Custpropertyid = item.Custpropertyid;
+                model.ddlFamilyStatus = item.FamilyValuesID;
+                model.rdlSharedProperty = item.SharedPropertyID === true ? 1 : 0;
+                model.txtValueofproperty = item.PropertyValue;
+                model.txtPropertydesc = item.PropertyDetails;
             }
             commonFactory.open('propertyContent.html', model.scope, uibModal);
 
         };
 
 
-        model.propertySubmit = function(obj) {
+        model.updateData = function(inObj, type) {
 
             if (isSubmit) {
                 isSubmit = false;
-                model.propertyData = {
-                    GetDetails: {
-                        FamilyStatus: obj.ddlFamilyStatus,
-                        Issharedproperty: obj.rdlSharedProperty,
-                        Valueofproperty: obj.txtValueofproperty,
-                        PropertyType: '281',
-                        Propertydescription: obj.txtPropertydesc,
-                        Showingviewprofile: obj.rbtShowViewProfile,
-                        Custpropertyid: model.proObj.Custpropertyid,
-                        PropertyID: model.proObj.Custpropertyid,
-                        CustId: custID
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-
-                model.submitPromise = editPropertyService.submitPropertyData(model.propertyData).then(function(response) {
+                inObj.GetDetails.PropertyType = '281';
+                inObj.GetDetails.Custpropertyid = model.Custpropertyid;
+                inObj.GetDetails.PropertyID = model.Custpropertyid;
+                inObj.GetDetails.CustId = custID;
+                model.submitPromise = editPropertyService.submitPropertyData(inObj).then(function(response) {
                     console.log(response);
                     commonFactory.closepopup();
                     if (response.data === 1) {
@@ -92,6 +81,19 @@
         model.cancel = function() {
             commonFactory.closepopup();
         };
+        //performance code
+        model.Refrence = [
+            { lblname: 'Family Status', controlType: 'select', ngmodel: 'ddlFamilyStatus', required: true, typeofdata: 'familyStatus', parameterValue: 'FamilyStatus' },
+            { lblname: 'Is shared property', controlType: 'radio', ngmodel: 'rdlSharedProperty', arrbind: 'boolType', parameterValue: 'Issharedproperty' },
+            { lblname: 'Value of property', controlType: 'textboxNumber', maxLength: 5, span: true, spanText: 'Lakhs', ngmodel: 'txtFname', required: true, parameterValue: 'Valueofproperty' },
+            {
+                lblname: 'Property description',
+                controlType: 'textarea',
+                ngmodel: 'txtPropertydesc',
+                parameterValue: 'Propertydescription'
+            }
+
+        ];
         return model.init();
     }
 
