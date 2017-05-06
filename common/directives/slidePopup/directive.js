@@ -65,6 +65,13 @@
                     }
                     item.dataSource = Arr;
                 }
+                if (item.ownArray) {
+                    var Array = scope.model[item.ownArray];
+                    if (Array !== undefined && Array.length > 0 && angular.lowercase(Array[0].title) === '--select--') {
+                        Array.splice(0, 1);
+                    }
+                    item.dataSource = Array;
+                }
                 if (scope.eventtype === 'add') {
                     if (item.ngmodel)
                         scope.model[item.ngmodel] = undefined;
