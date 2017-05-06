@@ -31,30 +31,33 @@
                 return val;
             }
             scope.ddlChange = function(value, value2, text, apiPath) {
+                if (apiPath) {
 
-                if (apiPath && value2) {
-                    SelectBindService[apiPath](commonFactory.listSelectedVal(value), commonFactory.listSelectedVal(value2)).then(function(res) {
-                        _.map(_.where(scope.model.popupdata, { parentName: text }), function(item) {
-                            var depData = [];
-                            _.each(res.data, function(item) {
-                                depData.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                    if (value2) {
+                        SelectBindService[apiPath](commonFactory.listSelectedVal(value), commonFactory.listSelectedVal(value2)).then(function(res) {
+                            _.map(_.where(scope.model.popupdata, { parentName: text }), function(item) {
+                                var depData = [];
+                                _.each(res.data, function(item) {
+                                    depData.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                                });
+                                item.dataSource = depData;
                             });
-                            item.dataSource = depData;
                         });
-                    });
-                } else {
-                    SelectBindService[apiPath](commonFactory.listSelectedVal(value)).then(function(res) {
-                        _.map(_.where(scope.model.popupdata, { parentName: text }), function(item) {
-                            var depData = [];
+                    } else {
+                        SelectBindService[apiPath](commonFactory.listSelectedVal(value)).then(function(res) {
+                            _.map(_.where(scope.model.popupdata, { parentName: text }), function(item) {
+                                var depData = [];
 
-                            _.each(res.data, function(item) {
-                                depData.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                                _.each(res.data, function(item) {
+                                    depData.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                                });
+                                item.dataSource = [];
+                                item.dataSource = depData;
                             });
-                            item.dataSource = [];
-                            item.dataSource = depData;
                         });
-                    });
+                    }
                 }
+
             };
 
             _.each(scope.model.popupdata, function(item) {
@@ -123,6 +126,9 @@
                     } else if (item.controlType === 'doublemultiselect') {
                         parameters[item.parameterValue1] = commonFactory.listSelectedVal(scope.model[item.ngmodelSelect1]);
                         parameters[item.parameterValue2] = commonFactory.listSelectedVal(scope.model[item.ngmodelSelect2]);
+                    } else if (item.controlType === 'housewife') {
+                        parameters[item.parameterValueText] = commonFactory.listSelectedVal(scope.model[item.ngmodelText]);
+                        parameters[item.parameterValueChk] = commonFactory.listSelectedVal(scope.model[item.ngmodelChk]);
                     }
 
                 });

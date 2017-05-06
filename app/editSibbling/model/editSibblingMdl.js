@@ -55,81 +55,78 @@
                 case 'sibCounrt':
 
                     if (item !== undefined) {
-                        model.SibCountObj.ddlnoofsiblings = item.NoOfBrothers;
-                        model.SibCountObj.ddlnoofelderrother = item.NoOfElderBrothers;
-                        model.SibCountObj.ddlnoofyoungerbrother = item.NoOfYoungerBrothers;
-                        model.SibCountObj.ddlnoofsisters = item.NoOfSisters;
-                        model.SibCountObj.ddlnoofeldersisters = item.NoOfElderSisters;
-                        model.SibCountObj.ddlnoofyoungersisters = item.NoOfYoungerSisters;
+                        model.noOfBorthersId = item.NoOfBrothers;
+                        model.noOfelderBroId = item.NoOfElderBrothers;
+                        model.noOfyoungerBroId = item.NoOfYoungerBrothers;
+                        model.noOfSisterId = item.NoOfSisters;
+                        model.noOfelderSisId = item.NoOfElderSisters;
+                        model.noOfyoungerSisId = item.NoOfYoungerSisters;
                     }
-
-                    commonFactory.open('SibblingCountPopup.html', model.scope, uibModal);
-
+                    commonFactory.open('commonSibblingpopup.html', model.scope, uibModal);
                     break;
 
                 case 'brother':
 
                     if (item !== undefined && model.BrotherArr.length <= parseInt(model.BroCount)) {
-                        model.broObj.SibilingCustfamilyID = null;
+                        model.SibilingCustfamilyID = null;
                         model.broObj = {};
                         if (item !== undefined) {
-                            model.broObj.SibilingCustfamilyID = item.SibilingCustfamilyID;
-                            model.broObj.rdlBElderYounger = item.brotherYoungerORelder == 'Elder' ? 42 : (item.brotherYoungerORelder == 'Younger' ? 41 : '-1');
-                            model.broObj.txtBName = item.SibilingName;
-                            model.broObj.txtbrotherreducation = item.SibilingEducationDetails;
-                            model.broObj.txtbrotherprofession = item.SibilingProfessionDetails;
-                            model.broObj.txtBCompanyname = item.SibilingCompany;
-                            model.broObj.txtBJoblocation = item.SibilingJobPLace;
+                            model.SibilingCustfamilyID = item.SibilingCustfamilyID;
+                            model.youngerElderBro = item.brotherYoungerORelder == 'Elder' ? 42 : (item.brotherYoungerORelder == 'Younger' ? 41 : '-1');
+                            model.broName = item.SibilingName;
+                            model.broEducation = item.SibilingEducationDetails;
+                            model.broDesignation = item.SibilingProfessionDetails;
+                            model.broComapnyName = item.SibilingCompany;
+                            model.broJobLocation = item.SibilingJobPLace;
 
-                            model.broObj.ddlBMObileCountryID = item.SibilingMobileCode;
-                            model.broObj.txtBmobilenumber = item.SibilingMobileNumber;
+                            model.broCountryCodeId = item.SibilingMobileCode;
+                            model.broMobileNumber = item.SibilingMobileNumber;
 
                             if (item.SibilingLandaraecode !== '' && item.SibilingLandaraecode !== null) {
-                                model.broObj.ddlBLandLineCountryID = item.SibilngLandCountryCode;
-                                model.broObj.txtBAreCode = item.SibilingLandaraecode;
-                                model.broObj.txtBLandNumber = item.SibilingLandNumber;
+                                model.broLandountryCodeId = item.SibilngLandCountryCode;
+                                model.broLandAreaCodeId = item.SibilingLandaraecode;
+                                model.broLandNumberId = item.SibilingLandNumber;
                             } else {
-                                model.broObj.ddlBMObileCountryID2 = item.SibilngLandCountryCode;
-                                model.broObj.txtBmobilenumber2 = item.SibilingLandNumber;
-
+                                model.broAlternativeCountryCodeId = item.SibilngLandCountryCode;
+                                model.broAlternativeNumber = item.SibilingLandNumber;
                             }
 
-                            model.broObj.txtBEmails = item.SibilingEmail;
-                            model.broObj.rdlBIsMarried = item.SibilingMarried;
+                            model.broEmail = item.SibilingEmail;
+                            model.broIsMarried = item.SibilingMarried;
 
-                            model.broObj.txtBWifeName = item.SibilingSpouseName;
-                            model.broObj.txtbrotherwifeeducation = item.SibilingSpouseEducationDetails;
-                            model.broObj.txtbrotherwifeprofession = item.SibilingSpouseProfessionDetails;
-                            model.broObj.chkboxbrotherwifeprofession = item.SibilingSpouseProfessionDetails === 'HouseWife' ? true : false;
-                            model.broObj.txtBWifeCompanyName = item.spoucecompanyName;
-                            model.broObj.txtBwifeJoblocation = item.spoucejobloc;
-                            model.broObj.ddlBWMobileCode = item.SibilingSpouseMobileCode;
-                            model.broObj.txtBWifeMobileNumber = item.SibilingSpouceMobileNumber;
+                            model.spouseName = item.SibilingSpouseName;
+                            model.spouseEducation = item.SibilingSpouseEducationDetails;
+                            model.spouseDesignation = item.SibilingSpouseProfessionDetails;
+                            model.chkspousehousewife = item.SibilingSpouseProfessionDetails === 'HouseWife' ? true : false;
+                            model.spouseCompany = item.spoucecompanyName;
+                            model.spouseJobLocation = item.spoucejobloc;
+                            model.spouseCountryCodeId = item.SibilingSpouseMobileCode;
+                            model.spouseMobNumber = item.SibilingSpouceMobileNumber;
                             if (item.SibilingSpouseLandareCode !== '' && item.SibilingSpouseLandareCode !== null) {
-                                model.broObj.ddlBWifeLandLineCountryCode = item.SibilingSpouseLandCode;
-                                model.broObj.txtBWifeLandLineAreaCode = item.SibilingSpouseLandareCode;
-                                model.broObj.txtBWifeLandLineNumber = item.SibilngSpouseLandnumber;
+                                model.spouseLandCountryCodeId = item.SibilingSpouseLandCode;
+                                model.spouseLandAreaCodeId = item.SibilingSpouseLandareCode;
+                                model.spouseLandNumberId = item.SibilngSpouseLandnumber;
                             } else {
-                                model.broObj.ddlBWMobileCode2 = item.SibilingSpouseLandCode;
-                                model.broObj.txtBWifeMobileNumber2 = item.SibilngSpouseLandnumber;
+                                model.spouseAlternativeCountryCodeId = item.SibilingSpouseLandCode;
+                                model.spouseAlternativeNumber = item.SibilngSpouseLandnumber;
                             }
 
-                            model.broObj.txtwifeEmail = item.SpouseEmail;
-                            model.broObj.txtBWifeFatherSurName = item.SFsurname;
-                            model.broObj.txtBWWifeFatherName = item.SFname;
-                            model.broObj.ddlborherspousefathercaste = item.SibilingSpouseFatherCasteID;
-                            model.broObj.ddlBroSpousefatherState = item.BroSpouseFatherStateID;
-                            model.broObj.ddlBroSpousefatherDistrict = item.BroSpouseFatherDistrictID;
-                            model.broObj.txtBroSpousefatherCity = item.BroSpouseFatherCity;
-                            model.broObj.ddlbroprofessionCatgory = item.ProfessionCategoryID;
-                            model.broObj.ddlbroSpouseprofessionCatgory = item.SpouceProfessionCategoryID;
+                            model.spouseEmail = item.SpouseEmail;
+                            model.txtBWifeFatherSurName = item.SFsurname;
+                            model.txtBWWifeFatherName = item.SFname;
+                            model.ddlborherspousefathercaste = item.SibilingSpouseFatherCasteID;
+                            model.ddlBroSpousefatherState = item.BroSpouseFatherStateID;
+                            model.ddlBroSpousefatherDistrict = item.BroSpouseFatherDistrictID;
+                            model.txtBroSpousefatherCity = item.BroSpouseFatherCity;
+                            model.broProfessionCatgory = item.ProfessionCategoryID;
+                            model.spouseProfCatgory = item.SpouceProfessionCategoryID;
                             //  
                             commonFactory.open('brotherModalContent.html', model.scope, uibModal);
                         }
                     } else if (item === undefined && model.BrotherArr.length < parseInt(model.BroCount)) {
-                        model.broObj.SibilingCustfamilyID = null;
+                        model.SibilingCustfamilyID = null;
                         model.broObj = {};
-                        commonFactory.open('brotherModalContent.html', model.scope, uibModal);
+                        commonFactory.open('commonSibblingpopup.html', model.scope, uibModal);
                     } else {
                         alertss.timeoutoldalerts(model.model, 'alert-danger', 'Cannot add more brothers', 4500);
                     }
@@ -203,7 +200,7 @@
 
                         model.sisObj.SibilingCustfamilyID = null;
                         model.sisObj = {};
-                        commonFactory.open('sisterModalContent.html', model.scope, uibModal);
+                        commonFactory.open('commonSibblingpopup.html', model.scope, uibModal);
                     } else {
                         alertss.timeoutoldalerts(model.model, 'alert-danger', 'Cannot add more sisters', 4500);
                         break;
@@ -290,26 +287,26 @@
 
         model.BIsMarried = function(val) {
             if (val == '0') {
-                model.broObj.txtBWifeName = '';
-                model.broObj.txtbrotherwifeeducation = '';
-                model.broObj.txtbrotherwifeprofession = '';
-                model.broObj.chkboxbrotherwifeprofession = '';
-                model.broObj.txtBWifeCompanyName = '';
-                model.broObj.txtBwifeJoblocation = '';
-                model.broObj.ddlBWMobileCode = '';
-                model.broObj.txtBWifeMobileNumber = '';
-                model.broObj.ddlBWifeLandLineCountryCode = '';
-                model.broObj.txtBWifeLandLineAreaCode = '';
-                model.broObj.txtBWifeLandLineNumber = '';
-                model.broObj.ddlBWMobileCode2 = '';
-                model.broObj.txtBWifeMobileNumber2 = '';
-                model.broObj.txtwifeEmail = '';
-                model.broObj.txtBWifeFatherSurName = '';
-                model.broObj.txtBWWifeFatherName = '';
-                model.broObj.ddlborherspousefathercaste = '';
-                model.broObj.ddlBroSpousefatherState = '';
-                model.broObj.ddlBroSpousefatherDistrict = '';
-                model.broObj.txtBroSpousefatherCity = '';
+                model.txtBWifeName = '';
+                model.txtbrotherwifeeducation = '';
+                model.txtbrotherwifeprofession = '';
+                model.chkboxbrotherwifeprofession = '';
+                model.txtBWifeCompanyName = '';
+                model.txtBwifeJoblocation = '';
+                model.ddlBWMobileCode = '';
+                model.txtBWifeMobileNumber = '';
+                model.ddlBWifeLandLineCountryCode = '';
+                model.txtBWifeLandLineAreaCode = '';
+                model.txtBWifeLandLineNumber = '';
+                model.ddlBWMobileCode2 = '';
+                model.txtBWifeMobileNumber2 = '';
+                model.txtwifeEmail = '';
+                model.txtBWifeFatherSurName = '';
+                model.txtBWWifeFatherName = '';
+                model.ddlborherspousefathercaste = '';
+                model.ddlBroSpousefatherState = '';
+                model.ddlBroSpousefatherDistrict = '';
+                model.txtBroSpousefatherCity = '';
             }
         };
 
@@ -398,7 +395,7 @@
                         BroWifeLandNumber: commonFactory.checkvals(obj.txtBWifeMobileNumber2) ? obj.txtBWifeMobileNumber2 : commonFactory.checkvals(obj.txtBWifeLandLineNumber) ? obj.txtBWifeLandLineNumber : null,
                         BroWifeFatherSurName: obj.txtBWifeFatherSurName,
                         BroWifeFatherName: obj.txtBWWifeFatherName,
-                        BroSibilingCustfamilyID: model.broObj.SibilingCustfamilyID,
+                        BroSibilingCustfamilyID: model.SibilingCustfamilyID,
                         BroEducationDetails: obj.txtbrotherreducation,
                         BrowifeEducationDetails: obj.txtbrotherwifeeducation,
                         BroProfessionDetails: obj.txtbrotherprofession,
@@ -512,12 +509,12 @@
 
 
         model.noOfSibblings = [
-            { lblname: 'No of Brothers', controlType: 'select', ngmodel: 'noOfBortherId', parameterValue: 'OccupationDetails' },
-            { lblname: 'Elder Brother', controlType: 'select', ngmodel: 'elderBroId', parameterValue: 'OccupationDetails' },
-            { lblname: 'Younger Brother', controlType: 'select', ngmodel: 'youngerBroId', parameterValue: 'OccupationDetails' },
+            { lblname: 'No of Brothers', controlType: 'select', ngmodel: 'noOfBorthersId', parameterValue: 'OccupationDetails' },
+            { lblname: 'Elder Brother', controlType: 'select', ngmodel: 'noOfelderBroId', parameterValue: 'OccupationDetails' },
+            { lblname: 'Younger Brother', controlType: 'select', ngmodel: 'noOfyoungerBroId', parameterValue: 'OccupationDetails' },
             { lblname: 'No of sisters', controlType: 'select', ngmodel: 'noOfSisterId', parameterValue: 'OccupationDetails' },
-            { lblname: 'Elder sisters', controlType: 'select', ngmodel: 'elderSisId', parameterValue: 'OccupationDetails' },
-            { lblname: 'Younger  sisters', controlType: 'select', ngmodel: 'youngerSisId', parameterValue: 'OccupationDetails' },
+            { lblname: 'Elder sisters', controlType: 'select', ngmodel: 'noOfelderSisId', parameterValue: 'OccupationDetails' },
+            { lblname: 'Younger  sisters', controlType: 'select', ngmodel: 'noOfyoungerSisId', parameterValue: 'OccupationDetails' },
         ];
 
 
@@ -552,7 +549,7 @@
             { lblname: 'Spouse Name', controlType: 'textbox', ngmodel: 'spouseName', parameterValue: 'OccupationDetails' },
             { lblname: 'Spouse Education', controlType: 'textbox', ngmodel: 'spouseEducation', parameterValue: 'OccupationDetails' },
             { lblname: 'Profession Category', controlType: 'textarea', ngmodel: 'spouseProfCatgory', parameterValue: 'OccupationDetails' },
-            { lblname: 'Spouse Designation', controlType: 'textbox', ngmodel: 'spouseDesignation', parameterValue: 'OccupationDetails' },
+            { lblname: 'Spouse Designation', controlType: 'housewife', ngmodelText: 'spouseDesignation', ngmodelChk: 'chkspousehousewife', parameterValueText: 'MotherProfessiondetails', parameterValueChk: 'MotherProfessiondetails' },
             { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'spouseCompany', parameterValue: 'OccupationDetails' },
             { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'spouseJobLocation', parameterValue: 'OccupationDetails' },
             {
@@ -664,7 +661,6 @@
                 // districtParameterValue: 'MotherDistric'
             },
             { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'broSpouseCityId', parameterValue: 'OccupationDetails' }
-
 
         ];
 

@@ -157,13 +157,12 @@
                         model.mProfCtagory = item.MotherProfessionCategoryID;
 
                     }
-                    commonFactory.open('parentModalContent.html', model.scope, uibModal);
 
                     break;
 
                 case "Address":
                     model.popupdata = model.Address;
-                    model.popupHeader = 'Parent details';
+                    model.popupHeader = 'Contact Details';
                     model.Cust_Family_ID = null;
 
                     if (item !== undefined) {
@@ -181,19 +180,16 @@
                         model.cityId = item.CityName;
                         model.zipcode = item.Zip;
                     }
-                    commonFactory.open('AddressModalContent.html', model.scope, uibModal);
-
 
                     break;
 
                 case "physicalAttributes":
 
                     model.popupdata = model.physicalAttributes;
-                    model.popupHeader = 'Parent details';
+                    model.popupHeader = 'Physical Attributes & Health Details of Candidate';
                     if (item !== undefined) {
                         model.eventType = 'edit';
                         model.Cust_ID = item.Cust_ID;
-
                         model.dietId = item.DietID;
                         model.drinkId = item.DrinkID;
                         model.smokeId = item.SmokeID;
@@ -203,124 +199,26 @@
                         model.healthConditionId = item.HealthConditionID;
                         model.healthDescritionId = item.HealthConditionDescription;
                     }
-                    commonFactory.open('PhysicalAttributeModalContent.html', model.scope, uibModal);
-
 
                     break;
 
                 case "AboutFamily":
+
                     model.popupdata = model.aboutFamily;
-                    model.popupHeader = 'Parent details';
+                    model.popupHeader = 'About My Family';
                     if (item !== undefined) {
                         model.eventType = 'edit';
                         model.aboutFamilyId = item;
                     }
-                    commonFactory.open('AboutFamilyModalContent.html', model.scope, uibModal);
 
                     break;
             }
+            commonFactory.open('commonParentpopup.html', model.scope, uibModal);
         };
 
         model.cancel = function() {
             commonFactory.closepopup();
         };
-
-        model.ParentSubmit = function(objitem) {
-            if (isSubmit) {
-                isSubmit = false;
-
-                model.myData = {
-                    GetDetails: {
-                        CustID: custID,
-                        FatherName: objitem.txtFathername,
-                        Educationcategory: null,
-                        Educationgroup: null,
-                        Educationspecialization: null,
-                        Employedin: null,
-                        Professiongroup: null,
-                        Profession: null,
-                        CompanyName: objitem.txtCompany,
-                        JobLocation: objitem.txtJobLocation,
-                        Professiondetails: objitem.txtFProfession,
-                        MobileCountry: objitem.ddlMobile,
-                        MobileNumber: objitem.txtMobile,
-                        LandlineCountry: commonFactory.checkvals(objitem.ddlfathermobile2) ? objitem.ddlfathermobile2 : (commonFactory.checkvals(objitem.ddlLandLineCountry) ? objitem.ddlLandLineCountry : null),
-                        LandAreCode: commonFactory.checkvals(objitem.txtfathermobile2) ? null : (commonFactory.checkvals(objitem.txtAreCode) ? objitem.txtAreCode : null),
-                        landLineNumber: commonFactory.checkvals(objitem.txtfathermobile2) ? objitem.txtfathermobile2 : (commonFactory.checkvals(objitem.txtLandNumber) ? objitem.txtLandNumber : null),
-                        Email: objitem.txtEmail,
-                        FatherFatherName: objitem.txtFatherFname,
-
-                        MotherName: objitem.txtMName,
-                        MotherEducationcategory: null,
-                        MotherEducationgroup: null,
-                        MotherEducationspecialization: null,
-                        MotherEmployedIn: null,
-                        MotherProfessiongroup: null,
-                        MotherProfession: null,
-                        MotherCompanyName: objitem.txtMCompanyName,
-                        MotherJobLocation: objitem.txtMJobLocation,
-                        MotherProfessiondetails: objitem.txtMProfession,
-                        MotherMobileCountryID: objitem.ddlMMobileCounCodeID,
-                        MotherMobileNumber: objitem.txtMMobileNum,
-                        MotherLandCountryID: commonFactory.checkvals(objitem.ddlMMobileCounCodeID2) ? objitem.ddlMMobileCounCodeID2 : commonFactory.checkvals(objitem.ddlMLandLineCounCode) ? objitem.ddlMLandLineCounCode : null,
-                        MotherLandAreaCode: commonFactory.checkvals(objitem.txtMMobileNum2) ? null : (commonFactory.checkvals(objitem.txtmAreaCode) ? objitem.txtmAreaCode : null),
-                        MotherLandNumber: commonFactory.checkvals(objitem.txtMMobileNum2) ? objitem.txtMMobileNum2 : commonFactory.checkvals(objitem.txtMLandLineNum) ? objitem.txtMLandLineNum : null,
-                        MotherEmail: objitem.txtMEmail,
-                        MotherFatherFistname: objitem.txtMFatherFname,
-                        MotherFatherLastname: objitem.txtMFatherLname,
-                        FatherCustFamilyID: model.FatherCust_family_id,
-                        MotherCustFamilyID: model.MotherCust_family_id,
-                        FatherEducationDetails: objitem.txtFEducation,
-                        MotherEducationDetails: objitem.txtMEducation,
-                        FatherCountry: 1,
-                        FatherState: objitem.ddlFState,
-                        FatherDistric: objitem.ddlFDistric,
-                        FatherCity: objitem.txtFNativePlace,
-                        MotherCountry: 1,
-                        MotherState: objitem.ddlMState,
-                        MotherDistric: objitem.ddlMDistrict,
-                        MotherCity: objitem.txtMNativePlace,
-                        AreParentsInterCaste: objitem.rbtlParentIntercaste,
-                        FatherfatherMobileCountryID: objitem.ddlFatherfatherMobileCountryCode,
-                        FatherFatherMobileNumber: objitem.txtMobileFatherfather,
-                        FatherFatherLandCountryID: commonFactory.checkvals(objitem.ddlfatherfatherAlternative) ? objitem.ddlfatherfatherAlternative : (commonFactory.checkvals(objitem.ddlFatherFatherLandLineCode) ? objitem.ddlFatherFatherLandLineCode : null),
-                        FatherFatherLandAreaCode: commonFactory.checkvals(objitem.txtfatherfatherAlternative) ? null : (commonFactory.checkvals(objitem.txtGrandFatherArea) ? objitem.txtGrandFatherArea : null),
-                        FatherFatherLandNumber: commonFactory.checkvals(objitem.txtfatherfatherAlternative) ? objitem.txtfatherfatherAlternative : (commonFactory.checkvals(objitem.txtGrandFatherLandLinenum) ? objitem.txtGrandFatherLandLinenum : null),
-                        MotherfatherMobileCountryID: objitem.ddlMotherfatheMobileCountryCode,
-                        MotherFatherMobileNumber: objitem.txtMotherfatheMobilenumber,
-                        MotherFatherLandCountryID: commonFactory.checkvals(objitem.ddlmotherfatheralternative) ? objitem.ddlmotherfatheralternative : (commonFactory.checkvals(objitem.ddlMotherFatherLandLineCode) ? objitem.ddlMotherFatherLandLineCode : null),
-                        MotherFatherLandAreaCode: commonFactory.checkvals(objitem.txtmotherfatheralternative) ? null : (commonFactory.checkvals(objitem.txtMotherFatherLandLineareacode) ? objitem.txtMotherFatherLandLineareacode : null),
-                        MotherFatherLandNumber: commonFactory.checkvals(objitem.txtmotherfatheralternative) ? objitem.txtmotherfatheralternative : (commonFactory.checkvals(objitem.txtMotherFatherLandLinenum) ? objitem.txtMotherFatherLandLinenum : null),
-                        FatherCaste: objitem.ddlMotherCaste,
-                        MotherCaste: objitem.ddlFatherCaste,
-                        FatherProfessionCategoryID: objitem.ddlFprofessionCatgory,
-                        MotherProfessionCategoryID: objitem.ddlMprofessionCatgory
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-
-                };
-                model.submitPromise = editParentService.submitParentData(model.myData).then(function(response) {
-                    commonFactory.closepopup();
-                    if (response.data === 1) {
-                        model.parentBindData(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Parents Details submitted Succesfully', 4500);
-                        if (model.datagetInStatus === 1) {
-                            sessionStorage.removeItem('missingStatus');
-                            route.go('mobileverf', {});
-                        }
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Parents Details Updation failed', 4500);
-                    }
-                });
-
-            }
-
-        };
-
 
         model.updateData = function(inObj, type) {
 
@@ -347,117 +245,65 @@
                             }
                         });
                         break;
+                    case 'Contact Details':
+                        inObj.GetDetails.CustID = custID;
+                        inObj.GetDetails.Cust_Family_ID = model.Cust_Family_ID;
+                        model.submitPromise = editParentService.submitAddressData(inObj).then(function(response) {
+                            console.log(response);
+                            commonFactory.closepopup();
+                            if (response.data === 1) {
+                                model.parentBindData(custID);
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'Contact Address submitted Succesfully', 4500);
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Contact Address Updation failed', 4500);
+                            }
+                        });
+                        break;
 
+                    case 'Physical Attributes & Health Details of Candidate':
 
+                        inObj.GetDetails.CustID = custID;
+
+                        model.submitPromise = editParentService.submitPhysicalData(inObj).then(function(response) {
+                            console.log(response);
+                            commonFactory.closepopup();
+                            if (response.data === 1) {
+
+                                model.parentBindData(custID);
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'Physical Attribute & Health Details Of Candidate submitted Succesfully', 4500);
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Physical Attribute & Health Details Of Candidate Updation failed', 4500);
+                            }
+                        });
+
+                        break;
+
+                    case 'About My Family':
+
+                        model.submitPromise = editParentService.submitAboutFamilyData({ CustID: custID, AboutYourself: inObj.GetDetails.AboutYourself, flag: 1 }).then(function(response) {
+                            console.log(response);
+                            model.lblaboutMyfamily = inObj.GetDetails.AboutYourself;
+                            commonFactory.closepopup();
+                            if (parseInt(response.data) === 1) {
+                                model.AboutPageloadData(custID);
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'About My Family submitted Succesfully', 4500);
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'About My Family Updation failed', 4500);
+                            }
+                        });
+
+                        break;
                 }
-
-
-
-
-
             }
         };
 
-        model.contactAddressSubmit = function(objitem) {
 
-            if (isSubmit) {
-                isSubmit = false;
-
-                model.myAddrData = {
-                    GetDetails: {
-                        CustID: custID,
-                        HouseFlateNumber: objitem.txtHouse_flat,
-                        Apartmentname: objitem.txtApartmentName,
-                        Streetname: objitem.txtStreetName,
-                        AreaName: objitem.txtAreaName,
-                        Landmark: objitem.txtLandmark,
-                        Country: objitem.ddlCountryContact,
-                        STATE: objitem.ddlStateContact,
-                        District: objitem.ddlDistricContact,
-                        othercity: null,
-                        city: objitem.txtCity,
-                        ZipPin: objitem.txtZip_no,
-                        Cust_Family_ID: model.Cust_Family_ID
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-
-                };
-                model.submitPromise = editParentService.submitAddressData(model.myAddrData).then(function(response) {
-                    console.log(response);
-                    commonFactory.closepopup();
-                    if (response.data === 1) {
-
-                        model.parentBindData(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Contact Address submitted Succesfully', 4500);
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Contact Address Updation failed', 4500);
-                    }
-                });
-
-            }
-
-        };
-
-        model.physicalAtrrSubmit = function(objitem) {
-
-            if (isSubmit) {
-                isSubmit = false;
-                model.myPhysicalData = {
-                    GetDetails: {
-                        CustID: custID,
-                        BWKgs: objitem.txtBWKgs,
-                        BWlbs: objitem.txtlbs,
-                        BloodGroup: objitem.ddlBloodGroup,
-                        HealthConditions: objitem.ddlHealthConditions,
-                        HealthConditiondesc: objitem.txtHealthCondition,
-                        DietID: objitem.rbtlDiet,
-                        SmokeID: objitem.rbtlSmoke,
-                        DrinkID: objitem.rbtlDrink,
-                        BodyTypeID: objitem.ddlBodyType,
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-
-                };
-
-                model.submitPromise = editParentService.submitPhysicalData(model.myPhysicalData).then(function(response) {
-                    console.log(response);
-                    commonFactory.closepopup();
-                    if (response.data === 1) {
-
-                        model.parentBindData(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Physical Attribute & Health Details Of Candidate submitted Succesfully', 4500);
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Physical Attribute & Health Details Of Candidate Updation failed', 4500);
-                    }
-                });
-            }
-
-        };
 
         model.AboutMyfamilySubmit = function(obj) {
             if (isSubmit) {
                 isSubmit = false;
 
-                model.submitPromise = editParentService.submitAboutFamilyData({ CustID: custID, AboutYourself: obj.txtAboutUs, flag: 1 }).then(function(response) {
-                    console.log(response);
-                    model.lblaboutMyfamily = obj.txtAboutUs;
-                    commonFactory.closepopup();
-                    if (response.data === '1') {
 
-                        model.AboutPageloadData(custID);
-                        model.$broadcast("showAlertPopupccc", 'alert-success', 'About My Family submitted Succesfully', 1500);
-                    } else {
-                        model.$broadcast("showAlertPopupccc", 'alert-danger', 'About My Family Updation failed', 1500);
-                    }
-                });
             }
         };
 
@@ -550,7 +396,6 @@
                 countryshow: false,
                 cityshow: false,
                 othercity: false,
-                emailhide: false,
                 dstate: 'fStateid',
                 ddistrict: 'fDistrictid',
                 countryParameterValue: 'FatherCountry',
@@ -562,7 +407,7 @@
             { lblname: 'Mother Name', controlType: 'textbox', ngmodel: 'motherName', required: true, parameterValue: 'MotherName' },
             { lblname: 'Education', controlType: 'textbox', ngmodel: 'mEducation', parameterValue: 'MotherEducationDetails' },
             { lblname: 'Profession Category', controlType: 'select', ngmodel: 'mProfCtagory', typeofdata: 'ProfCatgory', parameterValue: 'MotherProfessionCategoryID' },
-            { lblname: 'Designation', controlType: 'housewife', ngmodelText: 'mDesignation', ngmodelChk: 'chkhousewife', parameterValue: 'MotherProfessiondetails' },
+            { lblname: 'Designation', controlType: 'housewife', ngmodelText: 'mDesignation', ngmodelChk: 'chkhousewife', parameterValueText: 'MotherProfessiondetails' },
             { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'mCompanyName', parameterValue: 'MotherCompanyName', parentDependecy: 'showHousewife' },
             { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'mJobLocation', parameterValue: 'MotherJobLocation', parentDependecy: 'showHousewife' },
             {
@@ -623,11 +468,11 @@
         ];
 
         model.Address = [
-            { lblname: 'House/Flat number', controlType: 'textbox', ngmodel: 'houseFlatNumber', parameterValue: 'OccupationDetails' },
-            { lblname: 'Apartment name', controlType: 'textbox', ngmodel: 'apartmentName', parameterValue: 'OccupationDetails' },
-            { lblname: 'Street name', controlType: 'textbox', ngmodel: 'streetName', parameterValue: 'OccupationDetails' },
-            { lblname: 'Area Name', controlType: 'textbox', ngmodel: 'areaName', parameterValue: 'OccupationDetails' },
-            { lblname: 'Landmark', controlType: 'textbox', ngmodel: 'landMark', parameterValue: 'OccupationDetails' },
+            { lblname: 'House/Flat number', controlType: 'textbox', ngmodel: 'houseFlatNumber', parameterValue: 'HouseFlateNumber' },
+            { lblname: 'Apartment name', controlType: 'textbox', ngmodel: 'apartmentName', parameterValue: 'Apartmentname' },
+            { lblname: 'Street name', controlType: 'textbox', ngmodel: 'streetName', parameterValue: 'Streetname' },
+            { lblname: 'Area Name', controlType: 'textbox', ngmodel: 'areaName', parameterValue: 'AreaName' },
+            { lblname: 'Landmark', controlType: 'textbox', ngmodel: 'landMark', parameterValue: 'Landmark' },
             {
                 controlType: 'country',
                 countryshow: true,
@@ -638,28 +483,28 @@
                 ddistrict: 'districtId',
                 require: true,
 
-                countryParameterValue: 'CountryID',
-                stateParameterValue: 'StateID',
-                districtParameterValue: 'DistrictID',
-                cityParameterValue: 'CityID'
+                countryParameterValue: 'Country',
+                stateParameterValue: 'STATE',
+                districtParameterValue: 'District',
+
             },
-            { lblname: 'City', controlType: 'textbox', ngmodel: 'cityId', parameterValue: 'OccupationDetails' },
-            { lblname: 'Zip/Pin', controlType: 'textbox', ngmodel: 'zipcode', parameterValue: 'OccupationDetails' }
+            { lblname: 'City', controlType: 'textbox', ngmodel: 'cityId', parameterValue: 'city' },
+            { lblname: 'Zip/Pin', controlType: 'textbox', ngmodel: 'zipcode', parameterValue: 'ZipPin' }
 
         ];
         model.physicalAttributes = [
-            { lblname: 'Diet', controlType: 'radio', ngmodel: 'dietId', parameterValue: 'OccupationDetails' },
-            { lblname: 'Drink', controlType: 'radio', ngmodel: 'drinkId', parameterValue: 'OccupationDetails' },
-            { lblname: 'Smoke', controlType: 'radio', ngmodel: 'smokeId', parameterValue: 'OccupationDetails' },
-            { lblname: 'Body Type', controlType: 'select', ngmodel: 'bodyTypeId', parameterValue: 'OccupationDetails' },
-            { lblname: 'Body weight', controlType: 'textbox', ngmodel: 'bodyWeight', parameterValue: 'OccupationDetails' },
-            { lblname: 'lbs', controlType: 'textbox', ngmodel: 'lbs', parameterValue: 'OccupationDetails' },
-            { lblname: 'Blood Group', controlType: 'select', ngmodel: 'bloodGroupId', parameterValue: 'OccupationDetails' },
-            { lblname: 'Health Conditions', controlType: 'select', ngmodel: 'healthConditionId', parameterValue: 'OccupationDetails' },
-            { lblname: 'Health Condition Description', controlType: 'textarea', ngmodel: 'healthDescritionId', parameterValue: 'OccupationDetails' },
+            { lblname: 'Diet', controlType: 'radio', ngmodel: 'dietId', arrbind: 'Diet', parameterValue: 'DietID' },
+            { lblname: 'Drink', controlType: 'radio', ngmodel: 'drinkId', arrbind: 'Drink', parameterValue: 'DrinkID' },
+            { lblname: 'Smoke', controlType: 'radio', ngmodel: 'smokeId', arrbind: 'Drink', parameterValue: 'SmokeID' },
+            { lblname: 'Body Type', controlType: 'select', ngmodel: 'bodyTypeId', typeofdata: 'bodyType', parameterValue: 'BodyTypeID' },
+            { lblname: 'Body weight', controlType: 'textbox', ngmodel: 'bodyWeight', parameterValue: 'BWKgs' },
+            { lblname: 'lbs', controlType: 'textbox', ngmodel: 'lbs', parameterValue: 'BWlbs' },
+            { lblname: 'Blood Group', controlType: 'select', ngmodel: 'bloodGroupId', typeofdata: 'bloodGroup', parameterValue: 'BloodGroup' },
+            { lblname: 'Health Conditions', controlType: 'select', ngmodel: 'healthConditionId', typeofdata: 'healthCondition', parameterValue: 'HealthConditions' },
+            { lblname: 'Health Condition Description', controlType: 'textarea', ngmodel: 'healthDescritionId', parameterValue: 'HealthConditiondesc' },
         ];
         model.aboutFamily = [
-            { lblname: '', controlType: 'about', required: true, displayTxt: '(Do Not Mention Any Contact Information Phone Numbers, Email Id’s or your Profile May be Rejected.)', ngmodel: 'aboutFamilyId', parameterValue: 'OccupationDetails' },
+            { lblname: '', controlType: 'about', required: true, displayTxt: '(Do Not Mention Any Contact Information Phone Numbers, Email Id’s or your Profile May be Rejected.)', ngmodel: 'aboutFamilyId', parameterValue: 'AboutYourself' },
         ];
 
         return model.init();

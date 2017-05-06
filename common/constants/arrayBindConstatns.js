@@ -339,6 +339,11 @@
             'StarPreference': [
                 { "label": "Preferredstars", "title": "Preferredstars", "value": 0 },
                 { "label": "NonPreferredstars", "title": "NonPreferredstars", "value": 1 }
+            ],
+            'Drink': [
+                { "label": "Yes", "title": "Yes", "value": 30 },
+                { "label": "No", "title": "No", "value": 31 },
+                { "label": "Occasional", "title": "Occasional", "value": 32 }
             ]
         });
 
