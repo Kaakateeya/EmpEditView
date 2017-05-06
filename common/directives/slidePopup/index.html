@@ -6,7 +6,7 @@
             </a>
         </h3>
     </div>
-    <div class="modal-body  ">
+    <div class="modal-body">
         <ul class="modal-body pop_content_my clearfix">
             <li ng-show="item.parentDependecy===undefined?true:model[item.parentDependecy](item)" class="clearfix form-group" ng-repeat="item in model.popupdata">
 
@@ -35,6 +35,7 @@
                     <textarea ng-model="model[item.ngmodel]" maxlength="500" rows="4" cols="20" ng-required="item.required" style="max-width:515px;width:100%;"></textarea>
                 </div>
                 <div ng-if="item.controlType==='textboxSelect'" class="pop_controls_right select-box-my select-box-my-double">
+
                     <select multiselectdropdown ng-model="model[item.ngmodelSelect]" typeofdata="item.typeofdata"></select>
                     <input ng-model="model[item.ngmodelText]" class="form-control" maxlength="7" onkeydown="return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));"
                     />
@@ -87,6 +88,11 @@
                 <div ng-if="item.controlType==='doublemultiselect'" class="pop_controls_right select-box-my select-box-my-double input-group">
                     <select multiselectdropdown ng-model="model[item.ngmodelSelect1]" typeofdata="item.typeofdata" ng-required="item.required" ng-change="ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)"></select>
                     <select multiselectdropdown ng-model="model[item.ngmodelSelect2]" typeofdata="item.typeofdata" ng-required="item.required" ng-change="ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)"></select>
+                </div>
+                <div ng-if="item.controlType==='astroTimeOfBirth'" class="pop_controls_right select-box-my select-box-my-trible select-box-my-trible3 input-group">
+                    <select multiselectdropdown ng-model="model.ddlFromHours" ng-options="item.value as item.label for item in model.hrsbindArr" required></select>
+                    <select multiselectdropdown ng-model="model.ddlFromMinutes" ng-options="item.value as item.label for item in model.minbindArr" required></select>
+                    <select multiselectdropdown ng-model="model.ddlFromSeconds" ng-options="item.value as item.label for item in model.secbindArr" required></select>
                 </div>
             </li>
             <li class="row">

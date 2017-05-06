@@ -136,7 +136,10 @@
                     } else if (item.controlType === 'housewife') {
                         parameters[item.parameterValueText] = commonFactory.listSelectedVal(scope.model[item.ngmodelText]);
                         parameters[item.parameterValueChk] = commonFactory.listSelectedVal(scope.model[item.ngmodelChk]);
+                    } else if (item.controlType === 'astroTimeOfBirth') {
+                        parameters.TimeofBirth = scope.model.ddlFromHours + ":" + scope.model.ddlFromMinutes + ":" + scope.model.ddlFromSeconds;
                     }
+
 
                 });
 

@@ -89,27 +89,28 @@
             model.minbindArr = commonFactory.numberBindWithZeros('Minutes', 0, 59);
             model.secbindArr = commonFactory.numberBindWithZeros('Seconds', 0, 59);
             isSubmit = true;
+            model.popupdata = model.astro;
+            model.popupHeader = "Astro details";
             if (item !== undefined) {
-                model.starArr = commonFactory.starBind(item.StarLanguageID);
-
+                model.eventType = 'edit';
                 if (item.TimeOfBirth !== undefined) {
                     model.strdot = ((item.TimeOfBirth).split(' '))[0].split(':');
-                    model.atroObj.ddlFromHours = parseInt(model.strdot[0]);
-                    model.atroObj.ddlFromMinutes = parseInt(model.strdot[1]);
-                    model.atroObj.ddlFromSeconds = parseInt(model.strdot[2]);
+                    model.ddlFromHours = parseInt(model.strdot[0]);
+                    model.ddlFromMinutes = parseInt(model.strdot[1]);
+                    model.ddlFromSeconds = parseInt(model.strdot[2]);
                 }
-                model.atroObj.ddlCountryOfBirthID = item.CountryOfBirthID;
-                model.atroObj.ddlStateOfBirthID = item.StateOfBirthID;
-                model.atroObj.ddlDistrictOfBirthID = item.DistrictOfBirthID;
-                model.atroObj.ddlcity = item.CityOfBirthID;
-                model.atroObj.ddlstarlanguage = item.StarLanguageID;
-                model.atroObj.ddlstar = item.StarID;
-                model.atroObj.ddlpaadam = item.PaadamID;
-                model.atroObj.ddlLagnam = item.LagnamID;
-                model.atroObj.ddlRaasiMoonsign = item.RaasiID;
-                model.atroObj.txtGothramGotra = item.Gothram;
-                model.atroObj.txtMaternalgothram = item.MeternalGothramID;
-                model.atroObj.rdlkujaDosham = item.manglikID;
+                model.ddlCountryOfBirthID = item.CountryOfBirthID;
+                model.ddlStateOfBirthID = item.StateOfBirthID;
+                model.ddlDistrictOfBirthID = item.DistrictOfBirthID;
+                model.ddlcity = item.CityOfBirthID;
+                model.ddlstarlanguage = item.StarLanguageID;
+                model.ddlstar = item.StarID;
+                model.ddlpaadam = item.PaadamID;
+                model.ddlLagnam = item.LagnamID;
+                model.ddlRaasiMoonsign = item.RaasiID;
+                model.txtGothramGotra = item.Gothram;
+                model.txtMaternalgothram = item.MeternalGothramID;
+                model.rdlkujaDosham = item.manglikID;
             }
             commonFactory.open('astroContent.html', model.scope, uibModal);
 
@@ -127,40 +128,12 @@
             }
         };
 
-        model.astroSubmit = function(obj) {
+        model.updateData = function(inObj, type) {
             if (isSubmit) {
                 isSubmit = false;
                 $('#ssss').prop('disabled', true);
-                var strFromTimeOfBirth = obj.ddlFromHours + ":" + obj.ddlFromMinutes + ":" + obj.ddlFromSeconds;
-
-                model.astroData = {
-                    GetDetails: {
-                        CustID: custID,
-                        TimeofBirth: strFromTimeOfBirth,
-                        CountryOfBirthID: obj.ddlCountryOfBirthID,
-                        StateOfBirthID: obj.ddlStateOfBirthID,
-                        DistrictOfBirthID: obj.ddlDistrictOfBirthID,
-                        CityOfBirthID: obj.ddlcity,
-                        Starlanguage: obj.ddlstarlanguage,
-                        Star: obj.ddlstar,
-                        Paadam: obj.ddlpaadam,
-                        Lagnam: obj.ddlLagnam,
-                        RasiMoonsign: obj.ddlRaasiMoonsign,
-                        GothramGotra: obj.txtGothramGotra,
-                        Maternalgothram: obj.txtMaternalgothram,
-                        ManglikKujadosham: obj.rdlkujaDosham,
-                        Pblongitude: obj.PBlongitude,
-                        pblatitude: obj.PBlatitude,
-                        TimeZone: null
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-
-                model.submitPromise = editAstroService.submitAstroData(model.astroData).then(function(response) {
+                inObj.GetDetails.CustID = custID;
+                model.submitPromise = editAstroService.submitAstroData(inObj).then(function(response) {
                     commonFactory.closepopup();
                     if (response.data === 1) {
                         if (model.datagetInStatus === 1) {
@@ -325,7 +298,40 @@
             commonFactory.closepopup();
         };
 
+        model.astro = [{
+                lblname: 'Time of Birth',
+                controlType: 'astroTimeOfBirth',
+            },
+            {
+                controlType: 'country',
+                countryshow: true,
+                cityshow: true,
+                othercity: false,
+                dcountry: 'ddlCountryOfBirthID',
+                dstate: 'ddlStateOfBirthID',
+                ddistrict: 'ddlDistrictOfBirthID',
+                dcity: 'ddlcity',
+                countryParameterValue: 'CountryOfBirthID',
+                stateParameterValue: 'StateOfBirthID',
+                districtParameterValue: 'DistrictOfBirthID',
+                cityParameterValue: 'CityOfBirthID'
 
+            },
+            { lblname: 'Star language', controlType: 'select', ngmodel: 'ddlstarlanguage', typeofdata: 'starLanguage', required: true, childName: 'star', changeApi: 'stars', parameterValue: 'Starlanguage' },
+            { lblname: 'Star', controlType: 'Changeselect', ngmodel: 'ddlstar', parentName: 'star', parameterValue: 'Star' },
+            { lblname: 'Paadam', controlType: 'select', ngmodel: 'ddlpaadam', required: true, typeofdata: 'paadam', parameterValue: 'Paadam' },
+            { lblname: 'Lagnam', controlType: 'select', ngmodel: 'ddlLagnam', required: true, typeofdata: 'lagnam', parameterValue: 'Lagnam' },
+            { lblname: 'Raasi/Moon sign', controlType: 'select', ngmodel: 'ddlRaasiMoonsign', required: true, typeofdata: 'ZodaicSign', parameterValue: 'RasiMoonsign' },
+            { lblname: 'Gothram/Gotra', controlType: 'textbox', ngmodel: 'txtGothramGotra', required: true, parameterValue: 'GothramGotra' },
+            { lblname: 'Maternal gothram', controlType: 'textbox', ngmodel: 'txtMaternalgothram', required: true, parameterValue: 'Maternalgothram' },
+            { lblname: 'Manglik/Kuja dosham', controlType: 'radio', ngmodel: 'rdlkujaDosham', ownArray: 'Manglik', parameterValue: 'ManglikKujadosham' },
+
+        ];
+        model.Manglik = [
+            { "label": "Yes", "title": "Yes", "value": 0 },
+            { "label": "No", "title": "No", "value": 1 },
+            { "label": "Dont't Know", "title": "Dont't Know", "value": 2 }
+        ];
 
 
 
