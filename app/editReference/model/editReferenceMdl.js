@@ -29,38 +29,40 @@
 
         model.referencePopulate = function(item) {
             isSubmit = true;
-            model.refObj.RefrenceCust_Reference_ID = null;
-            model.refObj = {};
-
+            model.eventType = 'add';
+            model.RefrenceCust_Reference_ID = null;
+            model.popupdata = model.Refrence;
+            model.popupHeader = 'Refrence';
             if (item !== undefined) {
-                model.refObj.intCusID = custID;
-                model.refObj.RefrenceCust_Reference_ID = item.RefrenceCust_Reference_ID;
-                model.refObj.ddlRelationshiptype = 318;
-                model.refObj.txtFname = item.ReferenceFirstName;
-                model.refObj.txtLname = item.ReferenceLastName;
-                model.refObj.txtProfessiondetails = item.RefrenceProfessionDetails;
-                model.refObj.ddlCountry = commonFactory.checkvals(item.RefrenceCountry) ? parseInt(item.RefrenceCountry) : null;
-                model.refObj.ddlState = commonFactory.checkvals(item.RefrenceStateID) ? parseInt(item.RefrenceStateID) : null;
-                model.refObj.ddlDistrict = commonFactory.checkvals(item.RefrenceDistrictID) ? parseInt(item.RefrenceDistrictID) : null;
-                model.refObj.txtNativePlace = item.RefrenceNativePlaceID;
-                model.refObj.txtPresentlocation = item.RefenceCurrentLocation;
+                model.eventType = 'edit';
+                model.intCusID = custID;
+                model.RefrenceCust_Reference_ID = item.RefrenceCust_Reference_ID;
+                model.ddlRelationshiptype = 318;
+                model.txtFname = item.ReferenceFirstName;
+                model.txtLname = item.ReferenceLastName;
+                model.txtProfessiondetails = item.RefrenceProfessionDetails;
+                model.ddlCountry = commonFactory.checkvals(item.RefrenceCountry) ? parseInt(item.RefrenceCountry) : null;
+                model.ddlState = commonFactory.checkvals(item.RefrenceStateID) ? parseInt(item.RefrenceStateID) : null;
+                model.ddlDistrict = commonFactory.checkvals(item.RefrenceDistrictID) ? parseInt(item.RefrenceDistrictID) : null;
+                model.txtNativePlace = item.RefrenceNativePlaceID;
+                model.txtPresentlocation = item.RefenceCurrentLocation;
 
-                model.refObj.ddlMobileCountryID = commonFactory.checkvals(item.RefrenceMobileCountryID) ? parseInt(item.RefrenceMobileCountryID) : null;
+                model.ddlMobileCountryID = commonFactory.checkvals(item.RefrenceMobileCountryID) ? parseInt(item.RefrenceMobileCountryID) : null;
 
-                model.refObj.txtMobileNumber = item.RefrenceMobileNumberID;
+                model.txtMobileNumber = item.RefrenceMobileNumberID;
 
                 if (commonFactory.checkvals(item.RefrenceAreaCode)) {
-                    model.refObj.ddlLandLineCountryID = commonFactory.checkvals(item.RefrenceLandCountryId) ? parseInt(item.RefrenceLandCountryId) : null;
-                    model.refObj.txtAreCode = item.RefrenceAreaCode;
-                    model.refObj.txtLandNumber = item.RefrenceLandNumber;
+                    model.ddlLandLineCountryID = commonFactory.checkvals(item.RefrenceLandCountryId) ? parseInt(item.RefrenceLandCountryId) : null;
+                    model.txtAreCode = item.RefrenceAreaCode;
+                    model.txtLandNumber = item.RefrenceLandNumber;
 
                 } else {
-                    model.refObj.ddlMobileCountryID2 = commonFactory.checkvals(item.RefrenceLandCountryId) ? parseInt(item.RefrenceLandCountryId) : null;
-                    model.refObj.txtMobileNumber2 = item.RefrenceLandNumber;
+                    model.ddlMobileCountryID2 = commonFactory.checkvals(item.RefrenceLandCountryId) ? parseInt(item.RefrenceLandCountryId) : null;
+                    model.txtMobileNumber2 = item.RefrenceLandNumber;
                 }
 
-                model.refObj.txtEmails = item.RefrenceEmail;
-                model.refObj.txtNarrations = item.RefrenceNarration;
+                model.txtEmails = item.RefrenceEmail;
+                model.txtNarrations = item.RefrenceNarration;
             }
             commonFactory.open('referenceContent.html', model.scope, uibModal);
 
@@ -74,42 +76,12 @@
             });
         };
 
-        model.refenceSubmit = function(obj) {
-
+        model.updateData = function(inObj, type) {
             if (isSubmit) {
                 isSubmit = false;
-
-                model.referenceData = {
-                    GetDetails: {
-                        CustID: custID,
-                        RelationshiptypeID: obj.ddlRelationshiptype,
-                        Firstname: obj.txtFname,
-                        Lastname: obj.txtLname,
-                        Employedin: null,
-                        Professiongroup: null,
-                        Profession: null,
-                        Professiondetails: obj.txtProfessiondetails,
-                        CountryID: obj.ddlCountry,
-                        StateID: obj.ddlState,
-                        DistrictID: obj.ddlDistrict,
-                        Nativeplace: obj.txtNativePlace,
-                        Presentlocation: obj.txtPresentlocation,
-                        MobileCountryID: obj.ddlMobileCountryID,
-                        MobileNumber: obj.txtMobileNumber,
-                        LandLineCountryID: commonFactory.checkvals(obj.ddlMobileCountryID2) ? obj.ddlMobileCountryID2 : (commonFactory.checkvals(obj.ddlLandLineCountryID) ? obj.ddlLandLineCountryID : null),
-                        LandLineAreaCode: commonFactory.checkvals(obj.txtMobileNumber2) ? null : (commonFactory.checkvals(obj.txtAreCode) ? obj.txtAreCode : null),
-                        LandLineNumber: commonFactory.checkvals(obj.txtMobileNumber2) ? obj.txtMobileNumber2 : (commonFactory.checkvals(obj.txtLandNumber) ? obj.txtLandNumber : null),
-                        Emails: obj.txtEmails,
-                        Narration: obj.txtNarrations,
-                        Cust_Reference_ID: model.refObj.RefrenceCust_Reference_ID
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-                model.submitPromise = editReferenceService.submitReferenceData(model.referenceData).then(function(response) {
+                inObj.GetDetails.CustID = custID;
+                inObj.GetDetails.Cust_Reference_ID = model.RefrenceCust_Reference_ID;
+                model.submitPromise = editReferenceService.submitReferenceData(inObj).then(function(response) {
                     console.log(response);
                     commonFactory.closepopup();
                     if (response.data === 1) {
@@ -141,7 +113,56 @@
             });
         };
 
+        //performance code
+        model.Refrence = [
+            { lblname: 'Relationship type', controlType: 'select', ngmodel: 'ddlRelationshiptype', required: true, typeofdata: 'RelationshipType', parameterValue: 'RelationshiptypeID' },
+            { lblname: 'First name', controlType: 'textbox', ngmodel: 'txtFname', required: true, parameterValue: 'Firstname' },
+            { lblname: 'Last name', controlType: 'textbox', ngmodel: 'txtLname', required: true, parameterValue: 'Lastname' },
+            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtProfessiondetails', required: true, parameterValue: 'Professiondetails' },
+            {
+                lblname: 'country',
+                controlType: 'country',
+                countryshow: true,
+                cityshow: false,
+                othercity: false,
+                dcountry: 'ddlCountry',
+                dstate: 'ddlState',
+                ddistrict: 'ddlDistrict',
+                countryParameterValue: 'CountryID',
+                stateParameterValue: 'StateID',
+                districtParameterValue: 'DistrictID',
 
+            },
+            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'txtNativePlace', required: true, parameterValue: 'Nativeplace' },
+            { lblname: 'Present location', controlType: 'textbox', ngmodel: 'txtPresentlocation', required: true, parameterValue: 'Presentlocation' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'ddlMobileCountryID',
+                strmobile: 'txtMobileNumber',
+                dalternative: 'ddlMobileCountryID2',
+                stralternative: 'txtMobileNumber2',
+                dland: 'ddlLandLineCountryID',
+                strareacode: 'txtAreCode',
+                strland: 'txtLandNumber',
+                strmail: 'txtEmails',
+
+                mobileCodeIdParameterValue: 'MobileCountryID',
+                mobileNumberParameterValue: 'MobileNumber',
+                landCountryCodeIdParameterValue: 'LandLineCountryID',
+                landAreaCodeIdParameterValue: 'LandLineAreaCode',
+                landNumberParameterValue: 'LandLineNumber',
+                emailParameterValue: 'Emails'
+
+            },
+            {
+                lblname: 'Narration',
+                controlType: 'textarea',
+                ngmodel: 'txtNarrations',
+                parameterValue: 'Narration'
+            }
+
+        ];
 
         return model.init();
     }
