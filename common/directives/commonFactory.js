@@ -27,15 +27,17 @@
                 modalpopupopen.close();
             },
             listSelectedVal: function(val) {
-              
+
                 var str = null;
                 if (val !== undefined && val !== null && val !== '') {
                     if (angular.isString(val)) {
                         str = val === '' ? null : val;
                     } else if (angular.isNumber(val)) {
                         str = val === '' ? null : val;
-                    } else {
+                    } else if (angular.isString(val)) {
                         str = val.join(',');
+                    } else {
+                        str = val;
                     }
                 }
                 return str;

@@ -27,7 +27,7 @@
                 if (response.data.length > 0) {
                     model.spouseArray = response.data[0].length > 0 ? JSON.parse(response.data[0]) : [];
                     model.ChildArray = response.data[1].length > 0 ? JSON.parse(response.data[1]) : [];
-                  
+
                     model.childCount = response.data !== undefined && response.data[0].length > 0 && (JSON.parse(response.data[0])).length > 0 ? (JSON.parse(response.data[0]))[0].NoOfChildrens : [];
 
                     console.log(model.spouseArray);
@@ -37,58 +37,61 @@
         };
 
         model.populatepopup = function(type, item) {
+            model.eventType = 'add';
             switch (type) {
 
                 case 'Spouse':
-                    model.spouObj.Cust_Spouse_ID = null;
-                    model.spouObj = {};
+                    model.popupdata = model.spouse;
+                    model.popupHeader = 'Spouse Details';
+                    model.Cust_Spouse_ID = null;
                     if (item !== undefined) {
-                        model.spouObj.Cust_Spouse_ID = item.Cust_Spouse_ID;
-                        model.spouObj.txtSpousename = item.NAME;
-                        model.spouObj.txtSpoueEducation = item.EducationDetails;
-                        model.spouObj.txtspouseProfession = item.ProfessionDetails;
-                        model.spouObj.txtHouseFlatnumber = item.HouseFlatNumberID;
-                        model.spouObj.txtApartmentname = item.AppartmentName;
-                        model.spouObj.txtStreetname = item.StreetName;
-                        model.spouObj.txtAreaname = item.AreaName;
-                        model.spouObj.txtLandmark = item.LandMark;
-                        model.spouObj.ddlspouseCountry = item.Country;
-                        model.spouObj.ddlspouseState = item.STATE;
-                        model.spouObj.ddlspouseDistrict = item.District;
-                        model.spouObj.ddlspouseCity = item.City;
-                        model.spouObj.txtspouseZip = item.Zip;
-                        model.spouObj.txtMarriedon = item.MarriageDate;
-                        model.spouObj.txtSeparateddate = item.SeperatedDate;
-                        model.spouObj.rbtspousediverse = item.LeagallyDivorceID;
-                        model.spouObj.txtLegalDivorsedate = item.DateofLegallDivorce;
-                        model.spouObj.txtspousefather = item.FatherFirstName;
-                        model.spouObj.txtspouselastname = item.FatherLastName;
-                        model.spouObj.txtpreviousmarriage = item.ReasonforDivorce;
-                        model.spouObj.rbtnspousefamily = item.MyFamilyPlanningID;
-                        model.spouObj.ddlspousechidrens = item.NoOfChildrens;
+                        model.eventType = 'edit';
+                        model.Cust_Spouse_ID = item.Cust_Spouse_ID;
+                        model.txtSpousename = item.NAME;
+                        model.txtSpoueEducation = item.EducationDetails;
+                        model.txtspouseProfession = item.ProfessionDetails;
+                        model.txtHouseFlatnumber = item.HouseFlatNumberID;
+                        model.txtApartmentname = item.AppartmentName;
+                        model.txtStreetname = item.StreetName;
+                        model.txtAreaname = item.AreaName;
+                        model.txtLandmark = item.LandMark;
+                        model.ddlspouseCountry = item.Country;
+                        model.ddlspouseState = item.STATE;
+                        model.ddlspouseDistrict = item.District;
+                        model.ddlspouseCity = item.City;
+                        model.txtspouseZip = item.Zip;
+                        model.txtMarriedon = item.MarriageDate;
+                        model.txtSeparateddate = item.SeperatedDate;
+                        model.rbtspousediverse = item.LeagallyDivorceID;
+                        model.txtLegalDivorsedate = item.DateofLegallDivorce;
+                        model.txtspousefather = item.FatherFirstName;
+                        model.txtspouselastname = item.FatherLastName;
+                        model.txtpreviousmarriage = item.ReasonforDivorce;
+                        model.rbtnspousefamily = item.MyFamilyPlanningID;
+                        model.ddlspousechidrens = item.NoOfChildrens;
                     }
 
-                    commonFactory.open('SpouseContent.html', model.scope, uibModal);
+                    commonFactory.open('modelContent.html', model.scope, uibModal);
                     break;
 
                 case 'Child':
-                    model.childObj.Cust_Children_ID = null;
-                    model.childObj = {};
-
+                    model.Cust_Children_ID = null;
+                    model.popupdata = model.child;
+                    model.popupHeader = 'Children Details';
                     if (item !== undefined) {
-
-                        model.childObj.Cust_Children_ID = item.Cust_Children_ID;
-                        model.childObj.txtchildname = item.ChildName;
-                        model.childObj.rdlgenderchild = item.ChildGender;
-                        model.childObj.txtdobchild = commonFactory.convertDateFormat(item.ChildDOB, 'DD-MM-YYYY');
-                        model.childObj.rbtChildstayingWith = item.ChildStayingWithID;
-                        model.childObj.ddlrelation = item.ChildStayingWithRelation;
-                        commonFactory.open('spouseChildContent.html', model.scope, uibModal);
+                        model.eventType = 'edit';
+                        model.Cust_Children_ID = item.Cust_Children_ID;
+                        model.txtchildname = item.ChildName;
+                        model.rdlgenderchild = item.ChildGender;
+                        model.txtdobchild = commonFactory.convertDateFormat(item.ChildDOB, 'DD-MM-YYYY');
+                        model.rbtChildstayingWith = item.ChildStayingWithID;
+                        model.ddlrelation = item.ChildStayingWithRelation;
+                        commonFactory.open('modelContent.html', model.scope, uibModal);
 
                     } else if (model.childCount !== undefined && model.childCount !== null &&
                         model.childCount !== 0 && model.ChildArray.length < model.childCount) {
 
-                        commonFactory.open('spouseChildContent.html', model.scope, uibModal);
+                        commonFactory.open('modelContent.html', model.scope, uibModal);
                     } else {
                         alertss.timeoutoldalerts(model.scope, 'alert-danger', 'cannot add more children', 4500);
                     }
@@ -101,44 +104,23 @@
             commonFactory.closepopup();
         };
 
-        model.spouseSubmit = function(obj) {
-            model.SpouseData = {
-                GetDetails: {
-                    CustID: custID,
-                    NAME: obj.txtSpousename,
-                    Education: obj.txtSpoueEducation,
-                    Profession: obj.txtspouseProfession,
-                    HouseFlatnumber: obj.txtHouseFlatnumber,
-                    Apartmentname: obj.txtApartmentname,
-                    Streetname: obj.txtStreetname,
-                    Areaname: obj.txtAreaname,
-                    Landmark: obj.txtLandmark,
-                    Country: obj.ddlspouseCountry,
-                    STATE: obj.ddlspouseState,
-                    District: obj.ddlspouseDistrict,
-                    City: obj.ddlspouseCity,
-                    Zip: obj.txtspouseZip,
-                    Marriedon: obj.txtMarriedon !== '' && obj.txtMarriedon !== 'Invalid date' ? filter('date')(obj.txtMarriedon, 'yyyy-MM-dd') : null,
-                    Separateddate: obj.txtSeparateddate !== '' && obj.txtSeparateddate !== 'Invalid date' ? filter('date')(obj.txtSeparateddate, 'yyyy-MM-dd') : null,
-                    Legallydivorced: obj.rbtspousediverse,
-                    Dateoflegaldivorce: obj.txtLegalDivorsedate !== '' && obj.txtLegalDivorsedate !== 'Invalid date' ? filter('date')(obj.txtLegalDivorsedate, 'yyyy-MM-dd') : null,
-                    Uploaddivorcedocument: null,
-                    Fatherfirstname: obj.txtspousefather,
-                    Fatherlastname: obj.txtspouselastname,
-                    Notesaboutpreviousmarriage: obj.txtpreviousmarriage,
-                    Familyplanning: obj.rbtnspousefamily,
-                    Noofchildren: obj.ddlspousechidrens,
-                    Cust_Spouse_ID: model.spouObj.Cust_Spouse_ID
-                },
-                customerpersonaldetails: {
-                    intCusID: custID,
-                    EmpID: loginEmpid,
-                    Admin: AdminID
-                }
-            };
-            model.childCount = obj.ddlspousechidrens;
+        model.updateData = function(inObj, type) {
+            switch (type) {
+                case "Spouse Details":
+                    model.spouseSubmit(inObj);
+                    break;
+                case "Children Details":
+                    model.childSubmit(inObj);
+                    break;
+            }
+        };
+        model.spouseSubmit = function(inObj) {
 
-            editSpouseService.submitSpouseData(model.SpouseData).then(function(response) {
+            inObj.GetDetails.CustID = custID;
+            inObj.GetDetails.Cust_Spouse_ID = model.Cust_Spouse_ID;
+            model.childCount = inObj.GetDetails.ddlspousechidrens;
+
+            editSpouseService.submitSpouseData(inObj).then(function(response) {
                 console.log(response);
                 commonFactory.closepopup();
                 if (response.data === 1) {
@@ -151,25 +133,10 @@
             });
         };
 
-        model.childSubmit = function(obj) {
-            model.childData = {
-                GetDetails: {
-                    CustID: custID,
-                    Nameofthechild: obj.txtchildname,
-                    Genderofthechild: obj.rdlgenderchild,
-                    DOB: obj.txtdobchild !== '' && obj.txtdobchild !== 'Invalid date' ? filter('date')(obj.txtdobchild, 'yyyy-MM-dd') : null,
-                    Childstayingwith: obj.rbtChildstayingWith,
-                    Childstayingwithrelation: obj.ddlrelation,
-                    Cust_Children_ID: model.childObj.Cust_Children_ID
-                },
-                customerpersonaldetails: {
-                    intCusID: custID,
-                    EmpID: loginEmpid,
-                    Admin: AdminID
-                }
-            };
-
-            editSpouseService.submitChildeData(model.childData).then(function(response) {
+        model.childSubmit = function(inObj) {
+            inObj.GetDetails.CustID = custID;
+            inObj.GetDetails.Cust_Children_ID = model.Cust_Children_ID;
+            editSpouseService.submitChildeData(inObj).then(function(response) {
                 console.log(response);
                 commonFactory.closepopup();
                 if (response.data === 1) {
@@ -182,7 +149,58 @@
 
 
         };
+        model.spouse = [
+            { lblname: 'Name', controlType: 'textbox', ngmodel: 'txtSpousename', required: true, parameterValue: 'NAME' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtSpoueEducation', required: true, parameterValue: 'Education' },
+            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtspouseProfession', required: true, parameterValue: 'Profession' },
+            { lblname: 'House/Flat number', controlType: 'textbox', ngmodel: 'txtHouseFlatnumber', required: true, parameterValue: 'HouseFlatnumber' },
+            { lblname: 'Apartment name', controlType: 'textbox', ngmodel: 'txtApartmentname', required: true, parameterValue: 'Apartmentname' },
+            { lblname: 'Street name', controlType: 'textbox', ngmodel: 'txtStreetname', required: true, parameterValue: 'Streetname' },
+            { lblname: 'Area name', controlType: 'textbox', ngmodel: 'txtAreaname', required: true, parameterValue: 'Areaname' },
+            { lblname: 'Landmark', controlType: 'textbox', ngmodel: 'txtLandmark', required: true, parameterValue: 'Landmark' },
+            {
+                lblname: 'country',
+                controlType: 'country',
+                countryshow: true,
+                cityshow: true,
+                othercity: false,
+                dcountry: 'ddlspouseCountry',
+                dstate: 'ddlspouseState',
+                ddistrict: 'ddlspouseDistrict',
+                dcity: 'ddlspouseCity',
+                countryParameterValue: 'Country',
+                stateParameterValue: 'STATE',
+                districtParameterValue: 'District',
+                cityParameterValue: 'City',
+            },
+            { lblname: 'Zip', controlType: 'textboxNumber', ngmodel: 'txtLandmark', required: true, maxLength: 8, parameterValue: 'Zip' },
+            { lblname: 'Married on', controlType: 'date', ngmodel: 'txtMarriedon', required: true, parameterValue: 'Marriedon' },
+            { lblname: 'Separated date', controlType: 'date', ngmodel: 'txtSeparateddate', required: true, parameterValue: 'Separateddate' },
+            { lblname: 'Legally divorced', controlType: 'radio', ngmodel: 'rbtspousediverse', arrbind: 'boolType', parameterValue: 'Legallydivorced' },
+            { lblname: 'Legally Divorced date', controlType: 'date', ngmodel: 'txtLegalDivorsedate', required: true, parameterValue: 'Dateoflegaldivorce' },
+            { lblname: 'Father first name', controlType: 'textbox', ngmodel: 'txtspousefather', required: true, parameterValue: 'Fatherfirstname' },
+            { lblname: 'Father last name', controlType: 'textbox', ngmodel: 'txtspouselastname', required: true, parameterValue: 'Fatherlastname' },
+            { lblname: 'Notes about previous marriage', controlType: 'textarea', ngmodel: 'txtpreviousmarriage', required: true, parameterValue: 'Notesaboutpreviousmarriage' },
+            { lblname: 'Family planning', controlType: 'radio', ngmodel: 'rbtspousediverse', arrbind: 'boolType', parameterValue: 'Familyplanning' },
+            { lblname: 'No of children', controlType: 'select', ngmodel: 'ddlspousechidrens', required: true, dataSource: model.noofChldrenAray, parameterValue: 'Noofchildren' },
 
+
+        ];
+        model.child = [
+            { lblname: 'Name of the child', controlType: 'textbox', ngmodel: 'txtchildname', required: true, parameterValue: 'Nameofthechild' },
+            { lblname: 'Gender of the child', controlType: 'radio', ngmodel: 'rdlgenderchild', ownArray: 'gender', required: true, parameterValue: 'Genderofthechild' },
+            { lblname: 'DOB of the child', controlType: 'date', ngmodel: 'txtdobchild', required: true, parameterValue: 'DOB' },
+            { lblname: 'Child staying with', controlType: 'radio', ngmodel: 'rbtChildstayingWith', ownArray: 'relation', required: true, parameterValue: 'Childstayingwith' },
+            { lblname: 'Child staying with Relation', controlType: 'select', ngmodel: 'ddlrelation', typeofdata: 'childStayingWith', required: true, parameterValue: 'Childstayingwithrelation' },
+        ];
+        model.gender = [
+            { "label": "Male", "title": "Male", "value": 1 },
+            { "label": "Female", "title": "Female", "value": 2 }
+        ];
+        model.relation = [
+            { "label": "Father Side", "title": "Father Side", "value": 1 },
+            { "label": "Mother Side", "title": "Mother Side", "value": 2 }
+        ];
         return model.init();
     }
 
