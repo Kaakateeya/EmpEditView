@@ -125,78 +125,8 @@
         </div>
 
         <script type="text/ng-template" id="referenceContent.html">
-            <form class="EditViewClass" name="refForm" novalidate role="form" ng-submit="page.model.refenceSubmit(page.model.refObj)" accessible-form>
-                <div class="modal-header">
-                    <h3 class="modal-title text-center">Reference Details
-                        <a href="javascript:void(0);" ng-click="page.model.cancel();">
-                            <ng-md-icon icon="close" style="fill:#665454" class="pull-right" size="25">Delete</ng-md-icon>
-                        </a>
-                    </h3>
-                </div>
-                <div class="modal-body clearfix pop_content_my" id="modal-body">
-                    <ul>
-                        <li class="clearfix form-group">
-                            <label for="Relationshiptype" class="pop_label_left">Relationship type<span style="color: red; margin-left: 3px;">*</span></label>
-                            <div class="pop_controls_right select-box-my input-group">
-                                <select multiselectdropdown ng-model="page.model.refObj.ddlRelationshiptype" typeofdata="'RelationshipType'" required></select>
-                            </div>
-                        </li>
-                        <li class="clearfix form-group">
-                            <label for="Firstname" class="pop_label_left">First name<span style="color: red; margin-left: 3px;">*</span></label>
-                            <div class="pop_controls_right select-box-my">
-                                <input ng-model="page.model.refObj.txtFname" class="form-control" tabindex="2" maxlength="100" required/>
-                            </div>
-                        </li>
-                        <li class="clearfix form-group">
-                            <label for="Lastname" class="pop_label_left">Last name<span style="color: red; margin-left: 3px;">*</span></label>
-                            <div class="pop_controls_right select-box-my">
-                                <input ng-model="page.model.refObj.txtLname" class="form-control" tabindex="3" maxlength="50" required/>
-                            </div>
-                        </li>
-
-                        <li class="clearfix form-group">
-                            <label for="Professiondetails" class="pop_label_left">Profession</label>
-                            <div class="pop_controls_right select-box-my">
-                                <input ng-model="page.model.refObj.txtProfessiondetails" class="form-control" tabindex="4" maxlength="200" />
-                            </div>
-
-                        </li>
-
-                        <country-directive countryshow="true" cityshow="false" othercity="false" dcountry="page.model.refObj.ddlCountry" dstate="page.model.refObj.ddlState" ddistrict="page.model.refObj.ddlDistrict"></country-directive>
-
-                        <li class="clearfix form-group">
-                            <label for="NativePlace" class="pop_label_left">Native Place</label>
-                            <div class="pop_controls_right select-box-my">
-                                <input ng-model="page.model.refObj.txtNativePlace" class="form-control" tabindex="8" maxlength="100" />
-
-                            </div>
-                        </li>
-                        <li class="clearfix form-group">
-                            <label for="lblPresentlocation" class="pop_label_left">Present location </label>
-                            <div class="pop_controls_right select-box-my">
-                                <input ng-model="page.model.refObj.txtPresentlocation" class="form-control" tabindex="9" maxlength="100" />
-                            </div>
-                        </li>
-                        <contact-directive emailhide="true" dmobile="page.model.refObj.ddlMobileCountryID" strmobile="page.model.refObj.txtMobileNumber" dalternative="page.model.refObj.ddlMobileCountryID2" stralternative="page.model.refObj.txtMobileNumber2" dland="page.model.refObj.ddlLandLineCountryID"
-                            strareacode="page.model.refObj.txtAreCode" strland="page.model.refObj.txtLandNumber" strmail="page.model.refObj.txtEmails"></contact-directive>
-
-                        <li class="clearfix form-group">
-                            <label for="lblNarration" class="pop_label_left">Narration</label>
-                            <div class="">
-                                <textarea ng-model="page.model.refObj.txtNarrations" class="form-control" textmode="MultiLine" tabindex="21" rows="4" width="515" maxlength="500"></textarea>
-
-                                <label style="color: #1e1c1c; font-size: 13px;"></label>
-                            </div>
-                        </li>
-                        <li class="row ">
-
-                            <edit-footer></edit-footer>
-                        </li>
-                    </ul>
-
-                </div>
-
-            </form>
+            <slide-popup model="page.model" eventtype="page.model.eventType">
+            </slide-popup>
         </script>
     </div>
 </div>

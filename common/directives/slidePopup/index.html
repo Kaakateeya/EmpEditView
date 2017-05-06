@@ -26,6 +26,11 @@
                 <div ng-if="item.controlType==='textbox'" class="pop_controls_right">
                     <input type="text" ng-model="model[item.ngmodel]" maxlength="150" class="form-control" ng-required="item.required" />
                 </div>
+                <div ng-if="item.controlType==='textboxNumber'" class="pop_controls_right">
+                    <input type="text" ng-model="model[item.ngmodel]" maxlength="{{item.maxLength}}" onkeydown="return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)))"
+                        class="form-control" ng-required="item.required" />
+                    <span ng-if="item.span" font-bold="true">{{item.spanText}}</span>
+                </div>
                 <div ng-if="item.controlType==='textarea'">
                     <textarea ng-model="model[item.ngmodel]" maxlength="500" rows="4" cols="20" ng-required="item.required" style="max-width:515px;width:100%;"></textarea>
                 </div>
