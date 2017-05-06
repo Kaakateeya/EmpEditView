@@ -14,6 +14,7 @@
         var isSubmit = true;
         model.deleteDisplayTxt = '';
         model.identityID = 0;
+        model.ddlFSHCountryID = 1;
         // var logincustid = authSvc.getCustId();
         var custid = model.CustID = stateParams.CustID;
         //  model. = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
@@ -43,177 +44,173 @@
 
         model.relativePopulatePopulate = function(type, item) {
             isSubmit = true;
+            model.eventType = 'add';
             switch (type) {
                 case 'FB':
-                    model.fbObj.FatherbrotherCustfamilyID = null;
-                    model.fbObj = {};
-
+                    model.FatherbrotherCustfamilyID = null;
+                    model.popupdata = model.fatherBrother;
+                    model.popupHeader = "Father's Brother Details";
                     if (item !== undefined) {
-                        model.fbObj.FatherbrotherCustfamilyID = item.FatherbrotherCustfamilyID;
-                        model.fbObj.rdlFBElderORyounger = item.FatherBrotherElderyounger == 'Elder' ? 324 : (item.FatherBrotherElderyounger == 'Younger' ? 323 : '-1');
-                        model.fbObj.txtFatherbrothername = item.FatherbrotherName;
-                        model.fbObj.txtFBEducationdetails = item.FatherBrotherEducationDetails;
-                        model.fbObj.txtFBProfessiondetails = item.FatherbrotherProfessionDetails;
+                        model.eventType = 'edit';
+                        model.FatherbrotherCustfamilyID = item.FatherbrotherCustfamilyID;
+                        model.rdlFBElderORyounger = item.FatherBrotherElderyounger == 'Elder' ? 324 : (item.FatherBrotherElderyounger == 'Younger' ? 323 : '-1');
+                        model.txtFatherbrothername = item.FatherbrotherName;
+                        model.txtFBEducationdetails = item.FatherBrotherEducationDetails;
+                        model.txtFBProfessiondetails = item.FatherbrotherProfessionDetails;
 
-                        model.fbObj.ddlFBMobileCountryID = item.FatherbrotherMobileCode;
-                        model.fbObj.txtFBMobileNumber = item.FatherbrotherMobileNumber;
+                        model.ddlFBMobileCountryID = item.FatherbrotherMobileCode;
+                        model.txtFBMobileNumber = item.FatherbrotherMobileNumber;
 
                         if (commonFactory.checkvals(item.FatherbrotherLandaraecode)) {
-                            model.fbObj.ddlFBLandLineCountry = item.FatherbrotherLandCountryCode;
-                            model.fbObj.txtFBAreCode = item.FatherbrotherLandaraecode;
-                            model.fbObj.txtFBLandNumber = item.FatherbrotherLandNumber;
+                            model.ddlFBLandLineCountry = item.FatherbrotherLandCountryCode;
+                            model.txtFBAreCode = item.FatherbrotherLandaraecode;
+                            model.txtFBLandNumber = item.FatherbrotherLandNumber;
                         } else {
-                            model.fbObj.ddlFBMobileCountryID2 = item.FatherbrotherLandCountryCode;
-                            model.fbObj.txtFBMobileNumber2 = item.FatherbrotherLandNumber;
+                            model.ddlFBMobileCountryID2 = item.FatherbrotherLandCountryCode;
+                            model.txtFBMobileNumber2 = item.FatherbrotherLandNumber;
                         }
 
-                        model.fbObj.txtFBEmails = item.FatherbrotherEmail;
-                        model.fbObj.txtCurrentLocation = item.FatherbrotherCurrentLocation;
+                        model.txtFBEmails = item.FatherbrotherEmail;
+                        model.txtCurrentLocation = item.FatherbrotherCurrentLocation;
 
                     }
-                    commonFactory.open('FBModalContent.html', model.scope, uibModal);
+                    commonFactory.open('ModalContent.html', model.scope, uibModal);
 
                     break;
 
                 case 'FS':
-                    model.fsObj.FatherSisterCustfamilyID = null;
-                    model.fsObj = {};
-
+                    model.FatherSisterCustfamilyID = null;
+                    model.popupdata = model.fatherSister;
+                    model.popupHeader = "Father's Sister Details";
                     if (item !== undefined) {
-                        model.fsObj.FatherSisterCustfamilyID = item.FatherSisterCustfamilyID;
-                        model.fsObj.rdlFSElderYounger = item.FatherSisterElderyounger == 'Elder' ? 326 : (item.FatherSisterElderyounger == 'Younger' ? 325 : '-1');
-                        model.fsObj.txtFathersistername = item.FatherSisterName;
-                        model.fsObj.txtFSHusbandfirstname = item.SpouceFName;
-                        model.fsObj.txtFSHusbandlastname = item.SpoucelName;
-                        model.fsObj.txtFSHEDucation = item.FatherSisterSpouseEducationDetails;
-                        model.fsObj.txtFSProfessiondetails = item.FathersisterSpouseProfessionDetails;
-                        model.fsObj.ddlFSHStateID = item.FatherSisterspousestateId;
-                        model.fsObj.ddlFSHDistrictID = item.FatherSisterspouseDistrictId;
-                        model.fsObj.txtFSHNativePlace = item.FathersisterSpouseNativePlace;
+                        model.eventType = 'edit';
+                        model.FatherSisterCustfamilyID = item.FatherSisterCustfamilyID;
+                        model.rdlFSElderYounger = item.FatherSisterElderyounger == 'Elder' ? 326 : (item.FatherSisterElderyounger == 'Younger' ? 325 : '-1');
+                        model.txtFathersistername = item.FatherSisterName;
+                        model.txtFSHusbandfirstname = item.SpouceFName;
+                        model.txtFSHusbandlastname = item.SpoucelName;
+                        model.txtFSHEDucation = item.FatherSisterSpouseEducationDetails;
+                        model.txtFSProfessiondetails = item.FathersisterSpouseProfessionDetails;
+                        model.ddlFSHStateID = item.FatherSisterspousestateId;
+                        model.ddlFSHDistrictID = item.FatherSisterspouseDistrictId;
+                        model.txtFSHNativePlace = item.FathersisterSpouseNativePlace;
 
-                        model.fsObj.ddlFSMObileCountryID = item.FatherSisterMobilecodeid;
-                        model.fsObj.txtFSMobileNumber = item.FatherSisterspouseMobileNumber;
+                        model.ddlFSMObileCountryID = item.FatherSisterMobilecodeid;
+                        model.txtFSMobileNumber = item.FatherSisterspouseMobileNumber;
 
 
                         if (commonFactory.checkvals(item.FatherSisterspouseLandaraecode)) {
-                            model.fsObj.ddlFSHLandCountryID = item.FatherSisterlandcontrycodeid;
-                            model.fsObj.txtFSHAreaNumber = item.FatherSisterspouseLandaraecode;
-                            model.fsObj.txtFSHNUmber = item.FatherSisterspouseLandNumber;
+                            model.ddlFSHLandCountryID = item.FatherSisterlandcontrycodeid;
+                            model.txtFSHAreaNumber = item.FatherSisterspouseLandaraecode;
+                            model.txtFSHNUmber = item.FatherSisterspouseLandNumber;
 
                         } else {
-                            model.fsObj.ddlFSMObileCountryID2 = item.FatherSisterlandcontrycodeid;
-                            model.fsObj.txtFSMobileNumber2 = item.FatherSisterspouseLandNumber;
+                            model.ddlFSMObileCountryID2 = item.FatherSisterlandcontrycodeid;
+                            model.txtFSMobileNumber2 = item.FatherSisterspouseLandNumber;
                         }
 
-                        model.fsObj.txtFSHEmails = item.FatherSisterspouseEmail;
-                        model.fsObj.txtFSHCurrentLocation = item.FatherSisterCurrentLocation;
+                        model.txtFSHEmails = item.FatherSisterspouseEmail;
+                        model.txtFSHCurrentLocation = item.FatherSisterCurrentLocation;
                     }
-                    commonFactory.open('FSModalContent.html', model.scope, uibModal);
+                    commonFactory.open('ModalContent.html', model.scope, uibModal);
 
                     break;
 
                 case 'MB':
-                    model.mbObj.MotherBrotherCustfamilyID = null;
-                    model.mbObj = {};
-
+                    model.MotherBrotherCustfamilyID = null;
+                    model.popupdata = model.motherBrother;
+                    model.popupHeader = "Mother's Brother Details";
                     if (item !== undefined) {
-                        model.mbObj.MotherBrotherCustfamilyID = item.MotherBrotherCustfamilyID;
-                        model.mbObj.rdlMBElderYounger = item.MotherBrotherElderyounger == 'Elder' ? 328 : (item.MotherBrotherElderyounger == 'Younger' ? 327 : '-1');
-                        model.mbObj.txtMBName = item.MotherBrotherName;
-                        model.mbObj.txtMBEducation = item.MotherBrotherEducationDetails;
-                        model.mbObj.txtMBProfessiondetails = item.MotherBrotherProfessionDetails;
+                        model.eventType = 'edit';
+                        model.MotherBrotherCustfamilyID = item.MotherBrotherCustfamilyID;
+                        model.rdlMBElderYounger = item.MotherBrotherElderyounger == 'Elder' ? 328 : (item.MotherBrotherElderyounger == 'Younger' ? 327 : '-1');
+                        model.txtMBName = item.MotherBrotherName;
+                        model.txtMBEducation = item.MotherBrotherEducationDetails;
+                        model.txtMBProfessiondetails = item.MotherBrotherProfessionDetails;
 
-                        model.mbObj.ddlMBCountriCode = item.MotherBrotherMobileCode;
-                        model.mbObj.txtMBMobileNum = item.MotherBrotherMobileNumber;
+                        model.ddlMBCountriCode = item.MotherBrotherMobileCode;
+                        model.txtMBMobileNum = item.MotherBrotherMobileNumber;
 
 
                         if (commonFactory.checkvals(item.MotherBrotherLandaraecode)) {
-                            model.mbObj.ddlMBLandLineCountryCode = item.MotherBrotherLandCountryCode;
-                            model.mbObj.txtMBAreaCode = item.MotherBrotherLandaraecode;
-                            model.mbObj.txtMBLandLineNum = item.MotherBrotherLandNumber;
+                            model.ddlMBLandLineCountryCode = item.MotherBrotherLandCountryCode;
+                            model.txtMBAreaCode = item.MotherBrotherLandaraecode;
+                            model.txtMBLandLineNum = item.MotherBrotherLandNumber;
 
                         } else {
-                            model.mbObj.ddlMBCountriCode2 = item.MotherBrotherLandCountryCode;
-                            model.mbObj.txtMBMobileNum2 = item.MotherBrotherLandNumber;
+                            model.ddlMBCountriCode2 = item.MotherBrotherLandCountryCode;
+                            model.txtMBMobileNum2 = item.MotherBrotherLandNumber;
                         }
 
-                        model.mbObj.txtMBEmails = item.MotherBrotherEmail;
-                        model.mbObj.txtMBCurrentLocation = item.MotherBrotherCurrentLocation;
+                        model.txtMBEmails = item.MotherBrotherEmail;
+                        model.txtMBCurrentLocation = item.MotherBrotherCurrentLocation;
                     }
-                    commonFactory.open('MBModalContent.html', model.scope, uibModal);
+                    commonFactory.open('ModalContent.html', model.scope, uibModal);
 
                     break;
                 case 'MS':
-                    model.msObj.MotherSisterCustfamilyID = null;
-                    model.msObj = {};
-
+                    model.MotherSisterCustfamilyID = null;
+                    model.popupdata = model.motherSister;
+                    model.popupHeader = "Mother's Sister Details";
                     if (item !== undefined) {
-                        model.msObj.MotherSisterCustfamilyID = item.MotherSisterCustfamilyID;
-                        model.msObj.rdlMSElderYounger = item.MotherSisterElderyounger == 'Elder' ? 330 : (item.MotherSisterElderyounger == 'Younger' ? 329 : '-1');
-                        model.msObj.txtMSName = item.MotherSisterName;
-                        model.msObj.txtMsHusbandfirstname = item.SpouceFName;
-                        model.msObj.txtMsHusbandlastname = item.SpoucelName;
-                        model.msObj.ddlMSisState = item.spousestateid;
-                        model.msObj.ddlMsDistrict = item.spousedistrictID;
-                        model.msObj.txtMSNativePlace = item.MotherSisterSpouseNativePlace;
-                        model.msObj.txtMSHEducation = item.MothersisterspouseEducationdetails;
-                        model.msObj.txtMSProfessiondetails = item.MotherSisterProfessionDetails;
+                        model.eventType = 'edit';
+                        model.MotherSisterCustfamilyID = item.MotherSisterCustfamilyID;
+                        model.rdlMSElderYounger = item.MotherSisterElderyounger == 'Elder' ? 330 : (item.MotherSisterElderyounger == 'Younger' ? 329 : '-1');
+                        model.txtMSName = item.MotherSisterName;
+                        model.txtMsHusbandfirstname = item.SpouceFName;
+                        model.txtMsHusbandlastname = item.SpoucelName;
+                        model.ddlMSisState = item.spousestateid;
+                        model.ddlMsDistrict = item.spousedistrictID;
+                        model.txtMSNativePlace = item.MotherSisterSpouseNativePlace;
+                        model.txtMSHEducation = item.MothersisterspouseEducationdetails;
+                        model.txtMSProfessiondetails = item.MotherSisterProfessionDetails;
 
-                        model.msObj.ddlMSCounCodeID = item.MotherSisterMobileCodeId;
-                        model.msObj.txtMSMObileNum = item.MotherSisterspouseMobileNumber;
+                        model.ddlMSCounCodeID = item.MotherSisterMobileCodeId;
+                        model.txtMSMObileNum = item.MotherSisterspouseMobileNumber;
 
                         if (commonFactory.checkvals(item.MotherSisterspouseLandaraecode)) {
-                            model.msObj.ddlMSLLCounCode = item.MotherSisterSpouselandcodeid;
-                            model.msObj.txtMSArea = item.MotherSisterspouseLandaraecode;
-                            model.msObj.txtLLNum = item.MotherSisterspouseLandNumber;
+                            model.ddlMSLLCounCode = item.MotherSisterSpouselandcodeid;
+                            model.txtMSArea = item.MotherSisterspouseLandaraecode;
+                            model.txtLLNum = item.MotherSisterspouseLandNumber;
                         } else {
-                            model.msObj.ddlMSCounCodeID2 = item.MotherSisterSpouselandcodeid;
-                            model.msObj.txtMSMObileNum2 = item.MotherSisterspouseLandNumber;
+                            model.ddlMSCounCodeID2 = item.MotherSisterSpouselandcodeid;
+                            model.txtMSMObileNum2 = item.MotherSisterspouseLandNumber;
                         }
 
-                        model.msObj.txtMSEmail = item.MotherSisterspouseEmail;
-                        model.msObj.txtMSCurrentLocation = item.MotherSisterCurrentLocation;
+                        model.txtMSEmail = item.MotherSisterspouseEmail;
+                        model.txtMSCurrentLocation = item.MotherSisterCurrentLocation;
                     }
-                    commonFactory.open('MSModalContent.html', model.scope, uibModal);
+                    commonFactory.open('ModalContent.html', model.scope, uibModal);
 
                     break;
             }
 
         };
+        model.updateData = function(inObj, type) {
 
+            switch (type) {
+                case "Father's Brother Details":
+                    model.FBSubmit(inObj);
+                    break;
+                case "Father's Sister Details":
+                    model.FSSubmit(inObj);
+                    break;
+                case "Mother's Brother Details":
+                    model.MBSubmit(inObj);
+                    break;
+                case "Mother's Sister Details":
+                    model.MSSubmit(inObj);
+                    break;
+            }
+        };
 
-        model.FBSubmit = function(obj) {
-
+        model.FBSubmit = function(inObj) {
             if (isSubmit) {
                 isSubmit = false;
-                model.FBData = {
-                    GetDetails: {
-                        CustID: custid,
-                        Fatherbrothername: obj.txtFatherbrothername,
-                        FBElderYounger: obj.rdlFBElderORyounger,
-                        FBEmployedin: null,
-                        FBProfessiongroup: null,
-                        FBProfession: null,
-                        FBProfessiondetails: obj.txtFBProfessiondetails,
-                        FBMobileCountryID: obj.ddlFBMobileCountryID,
-                        FBMobileNumber: obj.txtFBMobileNumber,
-                        FBLandLineCountryID: commonFactory.checkvals(obj.ddlFBMobileCountryID2) ? obj.ddlFBMobileCountryID2 : (commonFactory.checkvals(obj.ddlFBLandLineCountry) ? obj.ddlFBLandLineCountry : null),
-                        FBLandAreaCode: commonFactory.checkvals(obj.txtFBMobileNumber2) ? null : (commonFactory.checkvals(obj.txtFBAreCode) ? obj.txtFBAreCode : null),
-                        FBLandNumber: commonFactory.checkvals(obj.txtFBMobileNumber2) ? obj.txtFBMobileNumber2 : (commonFactory.checkvals(obj.txtFBLandNumber) ? obj.txtFBLandNumber : null),
-                        FBEmails: obj.txtFBEmails,
-                        FBCurrentLocation: obj.txtCurrentLocation,
-                        FatherbrotherCust_familyID: model.fbObj.FatherbrotherCustfamilyID,
-                        FatherBrotherEducationDetails: obj.txtFBEducationdetails,
+                inObj.GetDetails.CustID = custid;
+                inObj.GetDetails.FatherbrotherCust_familyID = model.FatherbrotherCustfamilyID;
 
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custid,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-
-                model.submitPromise = editRelativeService.submitFBData(model.FBData).then(function(response) {
+                model.submitPromise = editRelativeService.submitFBData(inObj).then(function(response) {
                     console.log(response);
                     commonFactory.closepopup();
                     if (response.data === 1) {
@@ -227,43 +224,13 @@
             }
         };
 
-        model.FSSubmit = function(obj) {
+        model.FSSubmit = function(inObj) {
 
             if (isSubmit) {
                 isSubmit = false;
-                model.FSData = {
-                    GetDetails: {
-                        CustID: custid,
-                        FSFathersistername: obj.txtFathersistername,
-                        FSElderYounger: obj.rdlFSElderYounger,
-                        FSHusbandfirstname: obj.txtFSHusbandfirstname,
-                        FSHusbandlastname: obj.txtFSHusbandlastname,
-                        FSCountryID: 1,
-                        FSHStateID: obj.ddlFSHStateID,
-                        FSHDistrict: obj.ddlFSHDistrictID,
-                        FSNativeplace: obj.txtFSHNativePlace,
-                        FSHEmployedin: null,
-                        FSHProfessiongroup: null,
-                        FSHProfession: null,
-                        FSHProfessiondetails: obj.txtFSProfessiondetails,
-                        FSHMobileCountryID: obj.ddlFSMObileCountryID,
-                        FSHMObileNumber: obj.txtFSMobileNumber,
-                        FSHLandCountryID: commonFactory.checkvals(obj.ddlFSMObileCountryID2) ? obj.ddlFSMObileCountryID2 : (commonFactory.checkvals(obj.ddlFSHLandCountryID) ? obj.ddlFSHLandCountryID : null),
-                        FSHLandAreaCode: commonFactory.checkvals(obj.txtFSMobileNumber2) ? null : (commonFactory.checkvals(obj.txtFSHAreaNumber) ? obj.txtFSHAreaNumber : null),
-                        FSHLandNumber: commonFactory.checkvals(obj.txtFSMobileNumber2) ? obj.txtFSMobileNumber2 : (commonFactory.checkvals(obj.txtFSHNUmber) ? obj.txtFSHNUmber : null),
-                        FSHEmails: obj.txtFSHEmails,
-                        FSCurrentLocation: obj.txtFSHCurrentLocation,
-                        FatherSisterCust_familyID: model.fsObj.FatherSisterCustfamilyID,
-                        FSHEducationdetails: obj.txtFSHEDucation
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custid,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-
-                model.submitPromise = editRelativeService.submitFSData(model.FSData).then(function(response) {
+                inObj.GetDetails.CustID = custid;
+                inObj.GetDetails.FatherSisterCust_familyID = model.FatherSisterCustfamilyID;
+                model.submitPromise = editRelativeService.submitFSData(inObj).then(function(response) {
                     console.log(response);
                     commonFactory.closepopup();
                     if (response.data === 1) {
@@ -277,37 +244,14 @@
             }
         };
 
-        model.MBSubmit = function(obj) {
+        model.MBSubmit = function(inObj) {
             if (isSubmit) {
                 isSubmit = false;
 
-                model.MBData = {
-                    GetDetails: {
-                        CustID: custid,
-                        Motherbrothername: obj.txtMBName,
-                        MBElderYounger: obj.rdlMBElderYounger,
-                        MBEmployedin: null,
-                        MBProfessiongroup: null,
-                        MBProfession: null,
-                        MBProfessiondetails: obj.txtMBProfessiondetails,
-                        MBMobileCountryID: obj.ddlMBCountriCode,
-                        MBMObileNumber: obj.txtMBMobileNum,
-                        MBLandLineCountryID: commonFactory.checkvals(obj.ddlMBCountriCode2) ? obj.ddlMBCountriCode2 : (commonFactory.checkvals(obj.ddlMBLandLineCountryCode) ? obj.ddlMBLandLineCountryCode : null),
-                        MBLandAreaCode: commonFactory.checkvals(obj.txtMBMobileNum2) ? null : (commonFactory.checkvals(obj.txtMBAreaCode) ? obj.txtMBAreaCode : null),
-                        MBLandNumber: commonFactory.checkvals(obj.txtMBMobileNum2) ? obj.txtMBMobileNum2 : (commonFactory.checkvals(obj.txtMBLandLineNum) ? obj.txtMBLandLineNum : null),
-                        MBEmails: obj.txtMBEmails,
-                        MBCurrentLocation: obj.txtMBCurrentLocation,
-                        MBMotherBrotherCust_familyID: model.mbObj.MotherBrotherCustfamilyID,
-                        MBEducationdetails: obj.txtMBEducation
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custid,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
 
-                model.submitPromise = editRelativeService.submitMBData(model.MBData).then(function(response) {
+                inObj.GetDetails.CustID = custid;
+                inObj.GetDetails.MBMotherBrotherCust_familyID = model.MotherBrotherCustfamilyID;
+                model.submitPromise = editRelativeService.submitMBData(inObj).then(function(response) {
                     console.log(response);
                     commonFactory.closepopup();
                     if (response.data === 1) {
@@ -322,41 +266,14 @@
 
         };
 
-        model.MSSubmit = function(obj) {
+        model.MSSubmit = function(inObj) {
 
             if (isSubmit) {
                 isSubmit = false;
-                model.MSData = {
-                    GetDetails: {
-                        CustID: custid,
-                        Mothersistername: obj.txtMSName,
-                        MSElderYounger: obj.rdlMSElderYounger,
-                        MSHusbandfirstname: obj.txtMsHusbandfirstname,
-                        MSHusbandlastname: obj.txtMsHusbandlastname,
-                        MSCountryID: 1,
-                        MSMSHStateID: obj.ddlMSisState,
-                        MSMSHDistrictID: obj.ddlMsDistrict,
-                        MSNativeplace: obj.txtMSNativePlace,
-                        MSEmployedin: null,
-                        MSProfession: null,
-                        MSProfessiondetails: obj.txtMSProfessiondetails,
-                        MSMSHMobileCountryID: obj.ddlMSCounCodeID,
-                        MSMObileNumber: obj.txtMSMObileNum,
-                        MSHLandlineCountryID: commonFactory.checkvals(obj.ddlMSCounCodeID2) ? obj.ddlMSCounCodeID2 : (commonFactory.checkvals(obj.ddlMSLLCounCode) ? obj.ddlMSLLCounCode : null),
-                        MSLandAreaCode: commonFactory.checkvals(obj.txtMSMObileNum2) ? null : (commonFactory.checkvals(obj.txtMSArea) ? obj.txtMSArea : null),
-                        MSLandNumber: commonFactory.checkvals(obj.txtMSMObileNum2) ? obj.txtMSMObileNum2 : (commonFactory.checkvals(obj.txtLLNum) ? obj.txtLLNum : null),
-                        MSHEmails: obj.txtMSEmail,
-                        MSCurrentLocation: obj.txtMSCurrentLocation,
-                        MSCust_familyID: model.msObj.MotherSisterCustfamilyID,
-                        MSEducationdetails: obj.txtMSHEducation
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custid,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-                model.submitPromise = editRelativeService.submitMSData(model.MSData).then(function(response) {
+
+                inObj.GetDetails.CustID = custid;
+                inObj.GetDetails.MSCust_familyID = model.MotherSisterCustfamilyID;
+                model.submitPromise = editRelativeService.submitMSData(inObj).then(function(response) {
                     console.log(response);
                     commonFactory.closepopup();
                     if (response.data === 1) {
@@ -388,7 +305,171 @@
                 commonFactory.closepopup();
             });
         };
+        //Father Details
+        model.fatherBrother = [
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFBElderORyounger', ownArray: 'FBElderYounger', parameterValue: 'FBElderYounger' },
+            { lblname: "Father's brother name", controlType: 'textbox', ngmodel: 'txtFatherbrothername', required: true, parameterValue: 'Fatherbrothername' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtFBEducationdetails', required: true, parameterValue: 'FatherBrotherEducationDetails' },
+            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtFBProfessiondetails', required: true, parameterValue: 'FBProfessiondetails' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'ddlFBMobileCountryID',
+                strmobile: 'txtFBMobileNumber',
+                dalternative: 'ddlFBMobileCountryID2',
+                stralternative: 'txtFBMobileNumber2',
+                dland: 'ddlFBLandLineCountry',
+                strareacode: 'txtFBAreCode',
+                strland: 'txtFBLandNumber',
+                strmail: 'txtFBEmails',
 
+                mobileCodeIdParameterValue: 'FBMobileCountryID',
+                mobileNumberParameterValue: 'FBMobileNumber',
+                landCountryCodeIdParameterValue: 'FBLandLineCountryID',
+                landAreaCodeIdParameterValue: 'FBLandAreaCode',
+                landNumberParameterValue: 'FBLandNumber',
+                emailParameterValue: 'FBEmails'
+
+            },
+            { lblname: 'Current Location', controlType: 'textbox', ngmodel: 'txtCurrentLocation', parameterValue: 'FBCurrentLocation' },
+        ];
+
+        model.fatherSister = [
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFSElderYounger', ownArray: 'FSElderYounger', parameterValue: 'FSElderYounger' },
+            { lblname: "Father's sister name", controlType: 'textbox', ngmodel: 'txtFathersistername', required: true, parameterValue: 'FSFathersistername' },
+            { lblname: "Husband first name", controlType: 'textbox', ngmodel: 'txtFSHusbandfirstname', required: true, parameterValue: 'FSHusbandfirstname' },
+            { lblname: "Husband last name", controlType: 'textbox', ngmodel: 'txtFSHusbandlastname', required: true, parameterValue: 'FSHusbandlastname' },
+            { lblname: 'FSH Education', controlType: 'textbox', ngmodel: 'txtFSHEDucation', required: true, parameterValue: 'FSHEducationdetails' },
+            { lblname: 'FSH Profession', controlType: 'textbox', ngmodel: 'txtFSProfessiondetails', required: true, parameterValue: 'FSHProfessiondetails' },
+
+            {
+                controlType: 'country',
+                countryshow: false,
+                cityshow: false,
+                othercity: false,
+                dcountry: 'ddlFSHCountryID',
+                dstate: 'ddlFSHStateID',
+                ddistrict: 'ddlFSHDistrictID',
+                countryParameterValue: 'FSCountryID',
+                stateParameterValue: 'FSHStateID',
+                districtParameterValue: 'FSHDistrict',
+
+            },
+            { lblname: 'Native place', controlType: 'textbox', ngmodel: 'txtFSHNativePlace', required: true, parameterValue: 'FSNativeplace' },
+
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'ddlFSMObileCountryID',
+                strmobile: 'txtFSMobileNumber',
+                dalternative: 'ddlFSMObileCountryID2',
+                stralternative: 'txtFSMobileNumber2',
+                dland: 'ddlFSHLandCountryID',
+                strareacode: 'txtFSHAreaNumber',
+                strland: 'txtFSHNUmber',
+                strmail: 'txtFSHEmails',
+
+                mobileCodeIdParameterValue: 'FSHMobileCountryID',
+                mobileNumberParameterValue: 'FSHMObileNumber',
+                landCountryCodeIdParameterValue: 'FSHLandCountryID',
+                landAreaCodeIdParameterValue: 'FSHLandAreaCode',
+                landNumberParameterValue: 'FSHLandNumber',
+                emailParameterValue: 'FSHEmails'
+
+            },
+            { lblname: 'Current Location', controlType: 'textbox', ngmodel: 'txtFSHCurrentLocation', parameterValue: 'FSCurrentLocation' },
+        ];
+
+        //mother Details
+        model.motherBrother = [
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFBElderORyounger', ownArray: 'MBElderYounger', parameterValue: 'MBElderYounger' },
+            { lblname: "Mother's brother name", controlType: 'textbox', ngmodel: 'txtMBName', required: true, parameterValue: 'Motherbrothername' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtMBEducation', required: true, parameterValue: 'MBEducationdetails' },
+            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtMBProfessiondetails', required: true, parameterValue: 'MBProfessiondetails' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'ddlMBCountriCode',
+                strmobile: 'txtMBMobileNum',
+                dalternative: 'ddlMBCountriCode2',
+                stralternative: 'txtMBMobileNum2',
+                dland: 'ddlMBLandLineCountryCode',
+                strareacode: 'txtMBAreaCode',
+                strland: 'txtMBLandLineNum',
+                strmail: 'txtMBEmails',
+
+                mobileCodeIdParameterValue: 'MBMobileCountryID',
+                mobileNumberParameterValue: 'MBMObileNumber',
+                landCountryCodeIdParameterValue: 'MBLandLineCountryID',
+                landAreaCodeIdParameterValue: 'MBLandAreaCode',
+                landNumberParameterValue: 'MBLandNumber',
+                emailParameterValue: 'MBEmails'
+
+            },
+            { lblname: 'Current Location', controlType: 'textbox', ngmodel: 'txtMBCurrentLocation', parameterValue: 'MBCurrentLocation' },
+        ];
+
+        model.motherSister = [
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlMSElderYounger', ownArray: 'MSElderYounger', parameterValue: 'MSElderYounger' },
+            { lblname: "Mother's sister name", controlType: 'textbox', ngmodel: 'txtMSName', required: true, parameterValue: 'Mothersistername' },
+            { lblname: "Husband first name", controlType: 'textbox', ngmodel: 'txtMsHusbandfirstname', required: true, parameterValue: 'MSHusbandfirstname' },
+            { lblname: "Husband last name", controlType: 'textbox', ngmodel: 'txtMsHusbandlastname', required: true, parameterValue: 'MSHusbandlastname' },
+            { lblname: 'FSH Education', controlType: 'textbox', ngmodel: 'txtMSHEducation', required: true, parameterValue: 'MSEducationdetails' },
+            { lblname: 'FSH Profession', controlType: 'textbox', ngmodel: 'txtMSProfessiondetails', required: true, parameterValue: 'MSProfessiondetails' },
+
+            {
+                controlType: 'country',
+                countryshow: false,
+                cityshow: false,
+                othercity: false,
+                dcountry: 'ddlFSHCountryID',
+                dstate: 'ddlMSisState',
+                ddistrict: 'ddlMsDistrict',
+                countryParameterValue: 'MSCountryID',
+                stateParameterValue: 'MSMSHStateID',
+                districtParameterValue: 'MSMSHDistrictID',
+
+            },
+            { lblname: 'Native place', controlType: 'textbox', ngmodel: 'txtMSNativePlace', required: true, parameterValue: 'MSNativeplace' },
+
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'ddlMSCounCodeID',
+                strmobile: 'txtMSMObileNum',
+                dalternative: 'ddlMSCounCodeID2',
+                stralternative: 'txtMSMObileNum2',
+                dland: 'ddlMSLLCounCode',
+                strareacode: 'txtMSArea',
+                strland: 'txtLLNum',
+                strmail: 'txtMSEmail',
+
+                mobileCodeIdParameterValue: 'MSMSHMobileCountryID',
+                mobileNumberParameterValue: 'MSMObileNumber',
+                landCountryCodeIdParameterValue: 'MSHLandlineCountryID',
+                landAreaCodeIdParameterValue: 'MSLandAreaCode',
+                landNumberParameterValue: 'MSLandNumber',
+                emailParameterValue: 'MSHEmails'
+
+            },
+            { lblname: 'Current Location', controlType: 'textbox', ngmodel: 'txtMSCurrentLocation', parameterValue: 'MSCurrentLocation' },
+        ];
+        model.MSElderYounger = [
+            { "label": "Elder", "title": "Elder", "value": 330 },
+            { "label": "Younger", "title": "Younger", "value": 329 }
+        ];
+        model.MBElderYounger = [
+            { "label": "Elder", "title": "Elder", "value": 328 },
+            { "label": "Younger", "title": "Younger", "value": 327 }
+        ];
+        model.FSElderYounger = [
+            { "label": "Elder", "title": "Elder", "value": 326 },
+            { "label": "Younger", "title": "Younger", "value": 325 }
+        ];
+        model.FBElderYounger = [
+            { "label": "Elder", "title": "Elder", "value": 324 },
+            { "label": "Younger", "title": "Younger", "value": 323 }
+        ];
         return model.init();
     }
 
