@@ -1,7 +1,6 @@
 (function(angular) {
     'use strict';
 
-
     function factory(editParentService, authSvc, alertss, commonFactory, uibModal, stateParams) {
         var model = {};
         model.model = {};
@@ -14,6 +13,7 @@
         model.dcountry = '1';
         model.parentArr = [];
         model.AboutFamilyReviewStatus = null;
+        model.eventType = 'add';
         var isSubmit = true;
         var loginEmpid = authSvc.LoginEmpid();
         var AdminID = authSvc.isAdmin();
@@ -22,7 +22,6 @@
         // var logincustid = authSvc.getCustId();
         var custID = model.CustID = stateParams.CustID;
         //  model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
-
 
         model.init = function() {
             custID = model.CustID = stateParams.CustID;
@@ -61,99 +60,101 @@
 
         model.populateModel = function(type, item) {
             isSubmit = true;
+            model.eventType = 'add';
             switch (type) {
                 case "parent":
-                    model.parent.FatherCust_family_id = null;
-                    model.parent.MotherCust_family_id = null;
-                    model.parent = {};
+
+                    model.popupdata = model.parent;
+                    model.popupHeader = 'Parent details';
+                    model.FatherCust_family_id = null;
+                    model.MotherCust_family_id = null;
 
                     if (item !== undefined) {
-                        model.parent = [];
+                        model.eventType = 'edit';
 
-                        model.parent.cust_id = item.cust_id;
-                        model.parent.FatherCust_family_id = item.FatherCust_family_id;
-                        model.parent.MotherCust_family_id = item.MotherCust_family_id;
+                        model.cust_id = item.cust_id;
+                        model.FatherCust_family_id = item.FatherCust_family_id;
+                        model.MotherCust_family_id = item.MotherCust_family_id;
 
-                        model.parent.txtFathername = item.FatherName;
-                        model.parent.txtFEducation = item.FatherEducationDetails;
-                        model.parent.txtFProfession = item.FatherProfDetails;
-                        model.parent.txtCompany = item.FathercompanyName;
-                        model.parent.txtJobLocation = item.FatherJoblocation;
+                        model.fatherName = item.FatherName;
+                        model.fEducation = item.FatherEducationDetails;
+                        model.fDesignation = item.FatherProfDetails;
+                        model.fCompany = item.FathercompanyName;
+                        model.fJobLocation = item.FatherJoblocation;
 
-                        model.parent.ddlMobile = item.FatherMobileCountryCodeId;
-                        model.parent.txtMobile = item.FathermobilenumberID;
+                        model.fMobileCodeId = item.FatherMobileCountryCodeId;
+                        model.fMobileNumber = item.FathermobilenumberID;
 
                         if (commonFactory.checkvals(item.FatherLandAreaCodeId)) {
-                            model.parent.ddlLandLineCountry = item.FatherLandCountryCodeId;
-                            model.parent.txtAreCode = item.FatherLandAreaCodeId;
-                            model.parent.txtLandNumber = item.FatherLandNumberID;
+                            model.flandCountryCodeId = item.FatherLandCountryCodeId;
+                            model.fAreaCodeid = item.FatherLandAreaCodeId;
+                            model.flandNumber = item.FatherLandNumberID;
                         } else {
-                            model.parent.ddlfathermobile2 = item.FatherLandCountryCodeId;
-                            model.parent.txtfathermobile2 = item.FatherLandNumberID;
+                            model.fAltermobileCodeId = item.FatherLandCountryCodeId;
+                            model.fAlterMobileNumber = item.FatherLandNumberID;
                         }
 
-                        model.parent.txtEmail = item.FatherEmail;
-                        model.parent.txtFatherFname = item.FatherFathername;
+                        model.fEmail = item.FatherEmail;
+                        model.fatherFatherName = item.FatherFathername;
 
-                        model.parent.ddlFatherfatherMobileCountryCode = item.FatherfatherMobileCountryID;
-                        model.parent.txtMobileFatherfather = item.FatherFatherMobileNumber;
+                        model.gfMobileCodeId = item.FatherfatherMobileCountryID;
+                        model.gfMobileNumber = item.FatherFatherMobileNumber;
 
                         if (commonFactory.checkvals(item.FatherFatherLandAreaCode)) {
-                            model.parent.ddlFatherFatherLandLineCode = item.FatherfatherLandCountryCodeID;
-                            model.parent.txtGrandFatherArea = item.FatherFatherLandAreaCode;
-                            model.parent.txtGrandFatherLandLinenum = item.FatherFatherLandNumber;
+                            model.gflandCountryCodeId = item.FatherfatherLandCountryCodeID;
+                            model.gfAreaCodeid = item.FatherFatherLandAreaCode;
+                            model.gflandNumber = item.FatherFatherLandNumber;
                         } else {
-                            model.parent.ddlfatherfatherAlternative = item.FatherfatherMobileCountrycode1;
-                            model.parent.txtfatherfatherAlternative = item.FatherFatherLandNumber;
+                            model.gfAltermobileCodeId = item.FatherfatherMobileCountrycode1;
+                            model.gfAlterMobileNumber = item.FatherFatherLandNumber;
                         }
 
-                        model.parent.ddlFState = item.FatherStateID;
-                        model.parent.ddlFDistric = item.FatherDistrictID;
-                        model.parent.txtFNativePlace = item.FatherNativeplace;
-                        model.parent.txtMName = item.MotherName;
-                        model.parent.txtMEducation = item.MotherEducationDetails;
-                        model.parent.txtMProfession = item.MotherProfedetails;
-                        model.parent.chkbox = item.MotherProfedetails == 'HouseWife' ? true : false;
-                        model.parent.txtMCompanyName = item.MothercompanyName;
-                        model.parent.txtMJobLocation = item.MotherJoblocation;
+                        model.fStateid = item.FatherStateID;
+                        model.fDistrictid = item.FatherDistrictID;
+                        model.fNative = item.FatherNativeplace;
+                        model.motherName = item.MotherName;
+                        model.mEducation = item.MotherEducationDetails;
+                        model.mDesignation = item.MotherProfedetails;
+                        model.chkbox = item.MotherProfedetails == 'HouseWife' ? true : false;
+                        model.mCompanyName = item.MothercompanyName;
+                        model.mJobLocation = item.MotherJoblocation;
 
-                        model.parent.ddlMMobileCounCodeID = item.MotherMobileCountryCodeId;
-                        model.parent.txtMMobileNum = item.MotherMobilenumberID;
+                        model.mMobileCodeId = item.MotherMobileCountryCodeId;
+                        model.mMobileNumber = item.MotherMobilenumberID;
 
                         if (commonFactory.checkvals(item.MotherLandAreaCodeId)) {
-                            model.parent.ddlMLandLineCounCode = item.MotherLandCountryCodeId;
-                            model.parent.txtmAreaCode = item.MotherLandAreaCodeId;
-                            model.parent.txtMLandLineNum = item.MotherLandNumberID;
+                            model.mlandCountryCodeId = item.MotherLandCountryCodeId;
+                            model.mAreaCodeid = item.MotherLandAreaCodeId;
+                            model.mlandNumber = item.MotherLandNumberID;
                         } else {
-                            model.parent.ddlMMobileCounCodeID2 = item.MotherMobileCountryCodeId;
-                            model.parent.txtMMobileNum2 = item.MotherLandNumberID;
-
+                            model.mAltermobileCodeId = item.MotherMobileCountryCodeId;
+                            model.mAlterMobileNumber = item.MotherLandNumberID;
                         }
 
-                        model.parent.txtMEmail = item.MotherEmail;
-                        model.parent.txtMFatherFname = item.MotherFatherName;
-                        model.parent.txtMFatherLname = item.MotherFatherLastName;
+                        model.mEmail = item.MotherEmail;
+                        model.mffirstName = item.MotherFatherName;
+                        model.mfLastName = item.MotherFatherLastName;
 
-                        model.parent.ddlMotherfatheMobileCountryCode = item.MotherfatherMobileCountryID;
-                        model.parent.txtMotherfatheMobilenumber = item.MotherFatherMobileNumber;
+                        model.mfMobileCodeId = item.MotherfatherMobileCountryID;
+                        model.mfMobileNumber = item.MotherFatherMobileNumber;
 
                         if (commonFactory.checkvals(item.MotherFatherLandAreaCode)) {
-                            model.parent.ddlMotherFatherLandLineCode = item.motherfatherLandCountryID;
-                            model.parent.txtMotherFatherLandLineareacode = item.MotherFatherLandAreaCode;
-                            model.parent.txtMotherFatherLandLinenum = item.MotherFatherLandNumber;
+                            model.mflandCodeId = item.motherfatherLandCountryID;
+                            model.mfAreaCodeid = item.MotherFatherLandAreaCode;
+                            model.mflandNumber = item.MotherFatherLandNumber;
                         } else {
-                            model.parent.ddlmotherfatheralternative = item.MotherfatherMobileCountryID1;
-                            model.parent.txtmotherfatheralternative = item.MotherFatherLandNumber;
+                            model.mfAltermobileCodeId = item.MotherfatherMobileCountryID1;
+                            model.mfAlterMobileNumber = item.MotherFatherLandNumber;
                         }
-                        model.parent.ddlMState = item.motherStateID;
-                        model.parent.ddlMDistrict = item.motherDistricID;
-                        model.parent.txtMNativePlace = item.MotherNativeplace;
-                        model.parent.rbtlParentIntercaste = item.Intercaste === 'Yes' ? 1 : 0;
-                        model.parent.ddlFatherCaste = item.FatherCasteID;
-                        model.parent.ddlMotherCaste = item.MotherCasteID;
+                        model.mStateid = item.motherStateID;
+                        model.mDistrictid = item.motherDistricID;
+                        model.mNativePlace = item.MotherNativeplace;
+                        model.areParentInterCasteId = item.Intercaste === 'Yes' ? 1 : 0;
+                        model.fCaste = item.FatherCasteID;
+                        model.mCaste = item.MotherCasteID;
 
-                        model.parent.ddlFprofessionCatgory = item.FatherProfessionCategoryID;
-                        model.parent.ddlMprofessionCatgory = item.MotherProfessionCategoryID;
+                        model.fProfCatgory = item.FatherProfessionCategoryID;
+                        model.mProfCtagory = item.MotherProfessionCategoryID;
 
                     }
                     commonFactory.open('parentModalContent.html', model.scope, uibModal);
@@ -161,22 +162,24 @@
                     break;
 
                 case "Address":
-                    model.AdrrObj.Cust_Family_ID = null;
-                    model.AdrrObj = {};
-                    if (item !== undefined) {
-                        model.AdrrObj.Cust_ID = item.Cust_ID;
-                        model.AdrrObj.Cust_Family_ID = item.Cust_Family_ID;
+                    model.popupdata = model.Address;
+                    model.popupHeader = 'Parent details';
+                    model.Cust_Family_ID = null;
 
-                        model.AdrrObj.txtHouse_flat = item.FlatNumber;
-                        model.AdrrObj.txtApartmentName = item.ApartmentName;
-                        model.AdrrObj.txtStreetName = item.StreetName;
-                        model.AdrrObj.txtAreaName = item.AreaName;
-                        model.AdrrObj.txtLandmark = item.LandMark;
-                        model.AdrrObj.ddlCountryContact = item.ParentCountryId;
-                        model.AdrrObj.ddlStateContact = item.ParentStateid;
-                        model.AdrrObj.ddlDistricContact = item.ParentDistrictId;
-                        model.AdrrObj.txtCity = item.CityName;
-                        model.AdrrObj.txtZip_no = item.Zip;
+                    if (item !== undefined) {
+                        model.eventType = 'edit';
+                        model.Cust_ID = item.Cust_ID;
+                        model.Cust_Family_ID = item.Cust_Family_ID;
+                        model.houseFlatNumber = item.FlatNumber;
+                        model.apartmentName = item.ApartmentName;
+                        model.streetName = item.StreetName;
+                        model.areaName = item.AreaName;
+                        model.landMark = item.LandMark;
+                        model.countryId = item.ParentCountryId;
+                        model.stateId = item.ParentStateid;
+                        model.districtId = item.ParentDistrictId;
+                        model.cityId = item.CityName;
+                        model.zipcode = item.Zip;
                     }
                     commonFactory.open('AddressModalContent.html', model.scope, uibModal);
 
@@ -184,19 +187,21 @@
                     break;
 
                 case "physicalAttributes":
-                    model.physicalObj = {};
 
+                    model.popupdata = model.physicalAttributes;
+                    model.popupHeader = 'Parent details';
                     if (item !== undefined) {
-                        model.physicalObj.Cust_ID = item.Cust_ID;
+                        model.eventType = 'edit';
+                        model.Cust_ID = item.Cust_ID;
 
-                        model.physicalObj.rbtlDiet = item.DietID;
-                        model.physicalObj.rbtlDrink = item.DrinkID;
-                        model.physicalObj.rbtlSmoke = item.SmokeID;
-                        model.physicalObj.ddlBodyType = item.BodyTypeID;
-                        model.physicalObj.txtBWKgs = item.BodyWeight;
-                        model.physicalObj.ddlBloodGroup = item.BloodGroupID;
-                        model.physicalObj.ddlHealthConditions = item.HealthConditionID;
-                        model.physicalObj.txtHealthCondition = item.HealthConditionDescription;
+                        model.dietId = item.DietID;
+                        model.drinkId = item.DrinkID;
+                        model.smokeId = item.SmokeID;
+                        model.bodyTypeId = item.BodyTypeID;
+                        model.bodyWeight = item.BodyWeight;
+                        model.bloodGroupId = item.BloodGroupID;
+                        model.healthConditionId = item.HealthConditionID;
+                        model.healthDescritionId = item.HealthConditionDescription;
                     }
                     commonFactory.open('PhysicalAttributeModalContent.html', model.scope, uibModal);
 
@@ -204,9 +209,11 @@
                     break;
 
                 case "AboutFamily":
-
+                    model.popupdata = model.aboutFamily;
+                    model.popupHeader = 'Parent details';
                     if (item !== undefined) {
-                        model.aboutFamilyObj.txtAboutUs = item;
+                        model.eventType = 'edit';
+                        model.aboutFamilyId = item;
                     }
                     commonFactory.open('AboutFamilyModalContent.html', model.scope, uibModal);
 
@@ -261,8 +268,8 @@
                         MotherEmail: objitem.txtMEmail,
                         MotherFatherFistname: objitem.txtMFatherFname,
                         MotherFatherLastname: objitem.txtMFatherLname,
-                        FatherCustFamilyID: model.parent.FatherCust_family_id,
-                        MotherCustFamilyID: model.parent.MotherCust_family_id,
+                        FatherCustFamilyID: model.FatherCust_family_id,
+                        MotherCustFamilyID: model.MotherCust_family_id,
                         FatherEducationDetails: objitem.txtFEducation,
                         MotherEducationDetails: objitem.txtMEducation,
                         FatherCountry: 1,
@@ -314,6 +321,43 @@
 
         };
 
+
+        model.updateData = function(inObj, type) {
+
+            if (isSubmit) {
+                isSubmit = false;
+
+                switch (type) {
+                    case 'Parent details':
+
+                        inObj.GetDetails.FatherCustFamilyID = model.FatherCust_family_id;
+                        inObj.GetDetails.MotherCustFamilyID = model.MotherCust_family_id;
+                        inObj.GetDetails.CustID = custID;
+                        model.submitPromise = editParentService.submitParentData(inObj).then(function(response) {
+                            commonFactory.closepopup();
+                            if (response.data === 1) {
+                                model.parentBindData(custID);
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'Parents Details submitted Succesfully', 4500);
+                                if (model.datagetInStatus === 1) {
+                                    sessionStorage.removeItem('missingStatus');
+                                    route.go('mobileverf', {});
+                                }
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Parents Details Updation failed', 4500);
+                            }
+                        });
+                        break;
+
+
+                }
+
+
+
+
+
+            }
+        };
+
         model.contactAddressSubmit = function(objitem) {
 
             if (isSubmit) {
@@ -333,7 +377,7 @@
                         othercity: null,
                         city: objitem.txtCity,
                         ZipPin: objitem.txtZip_no,
-                        Cust_Family_ID: model.AdrrObj.Cust_Family_ID
+                        Cust_Family_ID: model.Cust_Family_ID
                     },
                     customerpersonaldetails: {
                         intCusID: custID,
@@ -441,7 +485,6 @@
                 lbs = model.roundVal(lbs);
                 item.txtlbs = lbs;
                 if (lbs.toString() == 'NaN') {
-                    //jAlert("", 'Alert Dialog', x);
                     alert("invalid Number");
                     item.txtlbs = '';
                     item.txtBWKgs = '';
@@ -452,11 +495,174 @@
             }
         };
 
+       model.showHousewife=function(val){
+               return model.chkhousewife;
+        };
 
+        model.parent = [
+            { lblname: '', controlType: 'bindHtml', html: ' <h6>Father Details</h6>', classname: 'parentheader' },
+            { lblname: 'Father Name', controlType: 'textbox', ngmodel: 'fatherName', required: true, parameterValue: 'FatherName' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'fEducation', parameterValue: 'FatherEducationDetails' },
+            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'fProfCatgory', typeofdata: 'ProfCatgory', parameterValue: 'FatherProfessionCategoryID' },
+            { lblname: 'Designation', controlType: 'textbox', ngmodel: 'fDesignation', parameterValue: 'Professiondetails' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'fCompany', parameterValue: 'CompanyName' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'fJobLocation', parameterValue: 'JobLocation' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'fMobileCodeId',
+                strmobile: 'fMobileNumber',
+                dalternative: 'fAltermobileCodeId',
+                stralternative: 'fAlterMobileNumber',
+                dland: 'flandCountryCodeId',
+                strareacode: 'fAreaCodeid',
+                strland: 'flandNumber',
+                strmail: 'fEmail',
 
+                mobileCodeIdParameterValue: 'MobileCountry',
+                mobileNumberParameterValue: 'MobileNumber',
+                landCountryCodeIdParameterValue: 'LandlineCountry',
+                landAreaCodeIdParameterValue: 'LandAreCode',
+                landNumberParameterValue: 'landLineNumber',
+                emailParameterValue: 'Email'
+            },
+
+            { lblname: 'Fathers father name', controlType: 'textbox', ngmodel: 'fatherFatherName', parameterValue: 'FatherFatherName' },
+            {
+                controlType: 'contact',
+                emailhide: false,
+                dmobile: 'gfMobileCodeId',
+                strmobile: 'gfMobileNumber',
+                dalternative: 'gfAltermobileCodeId',
+                stralternative: 'gfAlterMobileNumber',
+                dland: 'gflandCountryCodeId',
+                strareacode: 'gfAreaCodeid',
+                strland: 'gflandNumber',
+
+                mobileCodeIdParameterValue: 'FatherfatherMobileCountryID',
+                mobileNumberParameterValue: 'FatherFatherMobileNumber',
+                landCountryCodeIdParameterValue: 'FatherFatherLandCountryID',
+                landAreaCodeIdParameterValue: 'FatherFatherLandAreaCode',
+                landNumberParameterValue: 'FatherFatherLandNumber',
+
+            }, {
+                controlType: 'country',
+                countryshow: false,
+                cityshow: false,
+                othercity: false,
+                emailhide: false,
+                dstate: 'fStateid',
+                ddistrict: 'fDistrictid',
+                countryParameterValue: 'FatherCountry',
+                stateParameterValue: 'FatherState',
+                districtParameterValue: 'FatherDistric'
+            },
+            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'fNative', parameterValue: 'FatherCity' },
+            { lblname: '', controlType: 'bindHtml', html: ' <h6>Mother Details</h6>', classname: 'parentheader' },
+            { lblname: 'Mother Name', controlType: 'textbox', ngmodel: 'motherName', required: true, parameterValue: 'MotherName' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'mEducation', parameterValue: 'MotherEducationDetails' },
+            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'mProfCtagory', typeofdata: 'ProfCatgory', parameterValue: 'MotherProfessionCategoryID' },
+            { lblname: 'Designation', controlType: 'housewife', ngmodelText: 'mDesignation', ngmodelChk: 'chkhousewife', parameterValue: 'MotherProfessiondetails' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'mCompanyName', parameterValue: 'MotherCompanyName', parentDependecy: 'showHousewife' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'mJobLocation', parameterValue: 'MotherJobLocation', parentDependecy: 'showHousewife' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'mMobileCodeId',
+                strmobile: 'mMobileNumber',
+                dalternative: 'mAltermobileCodeId',
+                stralternative: 'mAlterMobileNumber',
+                dland: 'mlandCountryCodeId',
+                strareacode: 'mAreaCodeid',
+                strland: 'mlandNumber',
+                strmail: 'mEmail',
+
+                mobileCodeIdParameterValue: 'MotherMobileCountryID',
+                mobileNumberParameterValue: 'MotherMobileNumber',
+                landCountryCodeIdParameterValue: 'MotherLandCountryID',
+                landAreaCodeIdParameterValue: 'MotherLandAreaCode',
+                landNumberParameterValue: 'MotherLandNumber',
+                emailParameterValue: 'MotherEmail'
+
+            },
+            { lblname: 'Mothers Father Name', controlType: 'textbox', ngmodel: 'mffirstName', parameterValue: 'MotherFatherFistname' },
+            { lblname: 'Mothers Last Name', controlType: 'textbox', ngmodel: 'mfLastName', parameterValue: 'MotherFatherLastname' },
+            {
+                controlType: 'contact',
+                emailhide: false,
+                dmobile: 'mfMobileCodeId',
+                strmobile: 'mfMobileNumber',
+                dalternative: 'mfAltermobileCodeId',
+                stralternative: 'mfAlterMobileNumber',
+                dland: 'mflandCodeId',
+                strareacode: 'mfAreaCodeid',
+                strland: 'mflandNumber',
+
+                mobileCodeIdParameterValue: 'MotherfatherMobileCountryID',
+                mobileNumberParameterValue: 'MotherFatherMobileNumber',
+                landCountryCodeIdParameterValue: 'MotherFatherLandCountryID',
+                landAreaCodeIdParameterValue: 'MotherFatherLandAreaCode',
+                landNumberParameterValue: 'MotherFatherLandNumber'
+
+            }, {
+                controlType: 'country',
+                countryshow: false,
+                cityshow: false,
+                othercity: false,
+                dstate: 'mStateid',
+                ddistrict: 'mDistrictid',
+                countryParameterValue: 'MotherCountry',
+                stateParameterValue: 'MotherState',
+                districtParameterValue: 'MotherDistric'
+            },
+            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'mNativePlace', parameterValue: 'MotherCity' },
+            { lblname: 'Are parents interCaste ? ', controlType: 'radio', ngmodel: 'areParentInterCasteId', arrbind: 'boolType', parameterValue: 'AreParentsInterCaste' },
+            { lblname: 'Father Caste', controlType: 'select', ngmodel: 'fCaste', typeofdata: 'caste', parameterValue: 'FatherCaste', parentDependecy: 'areParentInterCasteId' },
+            { lblname: 'Mother Caste', controlType: 'select', ngmodel: 'mCaste', typeofdata: 'caste', parameterValue: 'MotherCaste', parentDependecy: 'areParentInterCasteId' }
+
+        ];
+
+        model.Address = [
+            { lblname: 'House/Flat number', controlType: 'textbox', ngmodel: 'houseFlatNumber', parameterValue: 'OccupationDetails' },
+            { lblname: 'Apartment name', controlType: 'textbox', ngmodel: 'apartmentName', parameterValue: 'OccupationDetails' },
+            { lblname: 'Street name', controlType: 'textbox', ngmodel: 'streetName', parameterValue: 'OccupationDetails' },
+            { lblname: 'Area Name', controlType: 'textbox', ngmodel: 'areaName', parameterValue: 'OccupationDetails' },
+            { lblname: 'Landmark', controlType: 'textbox', ngmodel: 'landMark', parameterValue: 'OccupationDetails' },
+            {
+                controlType: 'country',
+                countryshow: true,
+                cityshow: false,
+                othercity: false,
+                dcountry: 'countryId',
+                dstate: 'stateId',
+                ddistrict: 'districtId',
+                require: true,
+
+                countryParameterValue: 'CountryID',
+                stateParameterValue: 'StateID',
+                districtParameterValue: 'DistrictID',
+                cityParameterValue: 'CityID'
+            },
+            { lblname: 'City', controlType: 'textbox', ngmodel: 'cityId', parameterValue: 'OccupationDetails' },
+            { lblname: 'Zip/Pin', controlType: 'textbox', ngmodel: 'zipcode', parameterValue: 'OccupationDetails' }
+
+        ];
+        model.physicalAttributes = [
+            { lblname: 'Diet', controlType: 'radio', ngmodel: 'dietId', parameterValue: 'OccupationDetails' },
+            { lblname: 'Drink', controlType: 'radio', ngmodel: 'drinkId', parameterValue: 'OccupationDetails' },
+            { lblname: 'Smoke', controlType: 'radio', ngmodel: 'smokeId', parameterValue: 'OccupationDetails' },
+            { lblname: 'Body Type', controlType: 'select', ngmodel: 'bodyTypeId', parameterValue: 'OccupationDetails' },
+            { lblname: 'Body weight', controlType: 'textbox', ngmodel: 'bodyWeight', parameterValue: 'OccupationDetails' },
+            { lblname: 'lbs', controlType: 'textbox', ngmodel: 'lbs', parameterValue: 'OccupationDetails' },
+            { lblname: 'Blood Group', controlType: 'select', ngmodel: 'bloodGroupId', parameterValue: 'OccupationDetails' },
+            { lblname: 'Health Conditions', controlType: 'select', ngmodel: 'healthConditionId', parameterValue: 'OccupationDetails' },
+            { lblname: 'Health Condition Description', controlType: 'textarea', ngmodel: 'healthDescritionId', parameterValue: 'OccupationDetails' },
+        ];
+        model.aboutFamily = [
+            { lblname: '', controlType: 'about', required: true, displayTxt: '(Do Not Mention Any Contact Information Phone Numbers, Email Id’s or your Profile May be Rejected.)', ngmodel: 'aboutFamilyId', parameterValue: 'OccupationDetails' },
+        ];
 
         return model.init();
-
     }
 
     angular

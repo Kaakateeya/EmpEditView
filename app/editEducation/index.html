@@ -432,7 +432,9 @@
         </div>
         <div id="AboutPopup">
             <script type="text/ng-template" id="AboutModalContent.html">
-                <form class="EditViewClass" name="aboutForm" novalidate role="form" ng-submit="page.model.AboutUrselfSubmit(page.model.aboutObj)">
+                <slide-popup model="page.model" eventtype="page.model.eventType">
+                </slide-popup>
+                <!--<form class="EditViewClass" name="aboutForm" novalidate role="form" ng-submit="page.model.AboutUrselfSubmit(page.model.aboutObj)">
                     <div class="modal-header">
                         <h3 class="modal-title text-center" id="modal-title">About your self
                             <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -457,7 +459,7 @@
                         </ul>
 
                     </div>
-                </form>
+                </form>-->
             </script>
         </div>
 
@@ -485,7 +487,9 @@
     </script>
 
     <script type="text/ng-template" id="CustomerDataContent.html">
-        <form class="EditViewClass" name="custForm" ng-class="'EditViewClass'" novalidate role="form" ng-submit="custForm.$valid && page.model.custdataSubmit(page.model.custObj)" accessible-form>
+        <slide-popup model="page.model" eventtype="page.model.eventType">
+        </slide-popup>
+        <!--<form class="EditViewClass" name="custForm" ng-class="'EditViewClass'" novalidate role="form" ng-submit="custForm.$valid && page.model.custdataSubmit(page.model.custObj)" accessible-form>
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Customer details
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -611,7 +615,7 @@
                 </ul>
 
             </div>
-        </form>
+        </form>-->
     </script>
 
 

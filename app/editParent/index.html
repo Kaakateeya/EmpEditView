@@ -606,7 +606,10 @@
 
     <div id="popupDiv">
         <script type="text/ng-template" id="parentModalContent.html">
-            <form name="parentForm" novalidate role="form" ng-submit="page.model.ParentSubmit(page.model.parent)">
+            <slide-popup model="page.model" eventtype="page.model.eventType">
+            </slide-popup>
+
+            <!--<form name="parentForm" novalidate role="form" ng-submit="page.model.ParentSubmit(page.model.parent)">
                 <div class="modal-header">
                     <h3 class="modal-title text-center" id="modal-title">Parent details
                         <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -802,10 +805,16 @@
                         </div>
                     </div>
 
-            </form>
+            </form>-->
         </script>
         <script type="text/ng-template" id="AddressModalContent.html">
-            <form name="addressForm" novalidate role="form" ng-submit="page.model.contactAddressSubmit(page.model.AdrrObj)">
+
+            <slide-popup model="page.model" eventtype="page.model.eventType">
+            </slide-popup>
+
+
+
+            <!--<form name="addressForm" novalidate role="form" ng-submit="page.model.contactAddressSubmit(page.model.AdrrObj)">
                 <div class="modal-header">
                     <h3 class="modal-title text-center" id="modal-title">Contact Details
                         <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -845,8 +854,6 @@
                             <li class="clearfix form-group">
                                 <label for="lbleducationGroup" class="pop_label_left">Landmark</label>
                                 <div class="pop_controls_right">
-
-
                                     <input ng-model="page.model.AdrrObj.txtLandmark" class="form-control" maxlength="150" tabindex="5" />
                                 </div>
                             </li>
@@ -866,7 +873,6 @@
                                 <label for="lblZip_pin" class="pop_label_left">Zip/Pin 	</label>
                                 <div class="pop_controls_right">
 
-
                                     <input ng-model="page.model.AdrrObj.txtZip_no" class="form-control" maxlength="8" tabindex="10" />
 
                                 </div>
@@ -884,11 +890,16 @@
 
                 </div>
 
-            </form>
+            </form>-->
         </script>
 
         <script type="text/ng-template" id="PhysicalAttributeModalContent.html">
-            <form name="PhysicalForm" novalidate role="form" ng-submit="page.model.physicalAtrrSubmit(page.model.physicalObj)">
+
+
+            <slide-popup model="page.model" eventtype="page.model.eventType">
+            </slide-popup>
+
+            <!--<form name="PhysicalForm" novalidate role="form" ng-submit="page.model.physicalAtrrSubmit(page.model.physicalObj)">
                 <div class="modal-header">
                     <h3 class="modal-title text-center" id="modal-title">Physical Attributes & Health Details of Candidate
                         <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -902,9 +913,6 @@
                             <li class="clearfix form-group">
                                 <label for="lblpDiet" class="pop_label_left">Diet</label>
                                 <div class="pop_controls_right">
-
-
-
                                     <md-radio-group name="rbtlDiet" style="font-weight: 700;color:black;" layout="row" ng-model="page.model.physicalObj.rbtlDiet" class="md-block" flex-gt-sm ng-disabled="manageakerts">
                                         <md-radio-button value="27" class="md-primary">Veg</md-radio-button>
                                         <md-radio-button value="28">Non Veg </md-radio-button>
@@ -992,7 +1000,7 @@
                     </div>
                 </div>
 
-            </form>
+            </form>-->
         </script>
         <script type="text/ng-template" id="AboutFamilyModalContent.html">
             <form name="AboutForm" novalidate role="form" ng-submit="page.model.AboutMyfamilySubmit(page.model.aboutFamilyObj)">
@@ -1021,11 +1029,11 @@
             </form>
         </script>
 
-        </div>
     </div>
-    <style>
-        .md-dialog-container {
-            z-index: 99999999999;
-        }
-    </style>
-    <script src="build/js/custom.js" type="text/javascript"></script>
+</div>
+<style>
+    .md-dialog-container {
+        z-index: 99999999999;
+    }
+</style>
+<script src="build/js/custom.js" type="text/javascript"></script>

@@ -85,7 +85,7 @@
                 return getSession('empBranchID');
             },
             isAdmin: function() {
-                return getSession('isAdmin');
+                return '1';
             },
             isManagement: function() {
                 return getSession('isManagement');

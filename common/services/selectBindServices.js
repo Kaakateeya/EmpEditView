@@ -27,7 +27,7 @@
                 return http.get(editviewapp.apipath + 'Dependency/getEducationDependency', { params: { dependencyName: "", dependencyValue: "" } });
             },
             EducationGroup: function(dependencyVal2) {
-                debugger;
+               
                 return http.get(editviewapp.apipath + 'Dependency/getEducationDependency', { params: { dependencyName: "educationGroup", dependencyValue: dependencyVal2 } });
             },
             EducationSpecialisation: function(dependencyVal2) {
@@ -60,7 +60,6 @@
                 return http.get(editviewapp.apipath + 'Dependency/getDropdownValues_dependency_injection', { params: { dependencyName: 'StarType', dependencyValue: obj, dependencyflagID: '' } });
             },
             castedependency: function(obj1, obj2) {
-
                 return http.get(editviewapp.apipath + 'Dependency/getDropdownValues_dependency_injection', { params: { dependencyName: 'Caste', dependencyValue: obj1, dependencyflagID: obj2 } });
             },
             subCasteBind: function(obj1) {

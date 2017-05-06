@@ -22,13 +22,18 @@
         return directive;
 
         function link(scope, element, attrs) {
-            debugger;
+
             var CustID = stateParams.CustID;
             var loginEmpid = authSvc.LoginEmpid();
             var AdminID = authSvc.isAdmin();
-            scope.ddlChange = function(value, text, apiPath) {
-                if (apiPath && value) {
-                    SelectBindService[apiPath](value).then(function(res) {
+            scope.getExpression=function(val){
+                console.log(val);
+                return val;
+            }
+            scope.ddlChange = function(value, value2, text, apiPath) {
+             
+                if (apiPath && value2) {
+                    SelectBindService[apiPath](commonFactory.listSelectedVal(value), commonFactory.listSelectedVal(value2)).then(function(res) {
                         _.map(_.where(scope.model.popupdata, { parentName: text }), function(item) {
                             var depData = [];
                             _.each(res.data, function(item) {
@@ -37,46 +42,89 @@
                             item.dataSource = depData;
                         });
                     });
+                } else {
+                    SelectBindService[apiPath](commonFactory.listSelectedVal(value)).then(function(res) {
+                        _.map(_.where(scope.model.popupdata, { parentName: text }), function(item) {
+                            var depData = [];
+                          
+                            _.each(res.data, function(item) {
+                                depData.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                            });
+                            item.dataSource = [];
+                            item.dataSource = depData;
+                        });
+                    });
                 }
             };
 
             _.each(scope.model.popupdata, function(item) {
                 if (item.arrbind) {
-                    item.dataSource = cons[item.arrbind];
+                    var Arr = cons[item.arrbind];
+                    if (Arr !== undefined && Arr.length > 0 && angular.lowercase(Arr[0].title) === '--select--') {
+                        Arr.splice(0, 1);
+                    }
+                    item.dataSource = Arr;
                 }
                 if (scope.eventtype === 'add') {
                     if (item.ngmodel)
                         scope.model[item.ngmodel] = undefined;
-                    else {
+                    else if (item.controlType === 'country') {
                         scope.model[item.dcountry] = undefined;
                         scope.model[item.dstate] = undefined;
                         scope.model[item.ddistrict] = undefined;
                         scope.model[item.dcity] = undefined;
                         scope.model[item.strothercity] = undefined;
+                    } else if (item.controlType === 'textboxSelect') {
+                        scope.model[item.ngmodelSelect] = undefined;
+                        scope.model[item.ngmodelText] = undefined;
+                    } else if (item.controlType === 'contact') {
+                        scope.model[item.dmobile] = undefined;
+                        scope.model[item.strmobile] = undefined;
+                        scope.model[item.dalternative] = undefined;
+                        scope.model[item.stralternative] = undefined;
+                        scope.model[item.dland] = undefined;
+                        scope.model[item.strareacode] = undefined;
+                        scope.model[item.strland] = undefined;
+                        scope.model[item.strmail] = undefined;
                     }
                 }
-                scope.ddlChange(scope.model[item.ngmodel], item.childName, item.changeApi);
+            
+                if (scope.model[item.ngmodel] && item.childName) {
+                    scope.ddlChange(scope.model[item.ngmodel], scope.model[item.secondParent], item.childName, item.changeApi);
+                }
             });
 
             scope.model.returnString = function(str) {
                 return 'dynamicForm.' + str + '.$invalid';
             };
             scope.submit = function() {
+
                 var parameters = {};
                 _.each(scope.model.popupdata, function(item) {
                     if (item.parameterValue) {
                         parameters[item.parameterValue] = scope.model[item.ngmodel];
-                    } else {
-                        parameters[item.countryParameterValue] = scope.model[item.dcountry];
+                    } else if (item.controlType === 'country') {
+                        parameters[item.countryParameterValue] = item.countryshow = false ? 1 : scope.model[item.dcountry];
                         parameters[item.stateParameterValue] = scope.model[item.dstate];
                         parameters[item.districtParameterValue] = scope.model[item.ddistrict];
                         parameters[item.cityParameterValue] = scope.model[item.dcity];
                         parameters[item.cityotherParameterValue] = scope.model[item.strothercity];
+                    } else if (item.controlType === 'textboxSelect') {
+                        parameters[item.parameterValueSelect] = scope.model[item.ngmodelSelect];
+                        parameters[item.parameterValueText] = scope.model[item.ngmodelText];
+                    } else if (item.controlType === 'contact') {
+                        parameters[item.mobileCodeIdParameterValue] = scope.model[item.dmobile];
+                        parameters[item.mobileNumberParameterValue] = scope.model[item.strmobile];
+                        parameters[item.landCountryCodeIdParameterValue] = commonFactory.checkvals(scope.model[item.dalternative]) ? scope.model[item.dalternative] : (commonFactory.checkvals(scope.model[item.dland]) ? scope.model[item.dland] : null);
+                        parameters[item.landAreaCodeIdParameterValue] = commonFactory.checkvals(scope.model[item.stralternative]) ? null : (commonFactory.checkvals(scope.model[item.strareacode]) ? scope.model[item.strareacode] : null);
+                        parameters[item.landNumberParameterValue] = commonFactory.checkvals(scope.model[item.stralternative]) ? scope.model[item.stralternative] : (commonFactory.checkvals(scope.model[item.strland]) ? scope.model[item.strland] : null);
+                        parameters[item.emailParameterValue] = scope.model[item.strmail];
                     }
+
                 });
 
                 var inputDataObj = {
-                    customerEducation: parameters,
+                    GetDetails: parameters,
                     customerpersonaldetails: {
                         intCusID: CustID,
                         EmpID: loginEmpid,
@@ -90,6 +138,23 @@
             scope.cancel = function() {
                 commonFactory.closepopup();
             };
+
+            scope.chkChange = function(chk) {
+                return chk === true ? 'HouseWife' : '';
+            };
+
+            scope.showHideDiv = function(val, type) {
+
+                // if (type === 'housewife') {
+                //     alert(11111);
+                //     return val === undefined ? true : !scope.model[val];
+                // } else if (type === 'radio')
+                //     return val === undefined ? true : scope.model[val];
+                // else
+                //     return true;
+            };
+
+
         }
     }
 

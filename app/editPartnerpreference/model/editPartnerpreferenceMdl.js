@@ -56,45 +56,44 @@
             isSubmit = true;
             model.partnerObj = {};
 
+            model.popupdata = model.partnerPreference;
+            model.popupHeader = 'Partnerprefernece details';
             if (item !== undefined) {
-                model.casteArr = model.removeSelect(commonFactory.casteDepedency(item.religionid, item.MotherTongueID));
-                model.stateArr = model.removeSelect(commonFactory.StateBind(item.CountryID));
-                model.eduGroupArr = model.removeSelect(commonFactory.educationGroupBind(item.EducationCategoryID));
-                model.starArr = model.removeSelect(commonFactory.starBind(item.StarLanguageID));
-                model.subCasteArr = model.removeSelect(commonFactory.subCaste(commonFactory.listSelectedVal(item.casteid)));
+                model.eventType = 'edit';
+                // model.casteArr = model.removeSelect(commonFactory.casteDepedency(item.religionid, item.MotherTongueID));
+                // model.stateArr = model.removeSelect(commonFactory.StateBind(item.CountryID));
+                // model.eduGroupArr = model.removeSelect(commonFactory.educationGroupBind(item.EducationCategoryID));
+                // model.starArr = model.removeSelect(commonFactory.starBind(item.StarLanguageID));
+                // model.subCasteArr = model.removeSelect(commonFactory.subCaste(commonFactory.listSelectedVal(item.casteid)));
 
-                model.partnerObj.intCusID = item.intCusID;
-                model.ageGapArr = commonFactory.numbersBind('years', 1, 80);
-
-                model.partnerObj.rbtlGender = item.Gender === 'Female' ? 2 : 1;
-                model.partnerObj.ddlFromAge = item.Agemin;
-                model.partnerObj.ddlToAge = item.AgeMax;
-                model.partnerObj.ddlFromheight = item.MinHeight;
-                model.partnerObj.ddltoHeight = item.MaxHeight;
-                model.partnerObj.lstReligion = model.SplitstringintoArray(item.religionid);
-                model.partnerObj.lstMothertongue = model.SplitstringintoArray(item.MotherTongueID);
-                model.partnerObj.lstCaste = model.SplitstringintoArray(item.casteid);
-                model.partnerObj.lstSubcaste = model.SplitstringintoArray(item.subcasteid);
-                model.partnerObj.lstMaritalstatus = item.maritalstatusid;
-                model.partnerObj.lstEducationcategory = model.SplitstringintoArray(item.EducationCategoryID);
-                model.partnerObj.lstEducationgroup = model.SplitstringintoArray(item.EducationGroupID);
-                model.partnerObj.lstEmployedin = model.SplitstringintoArray(item.ProfessionCategoryID);
-                model.partnerObj.lstProfessiongroup = model.SplitstringintoArray(item.ProfessionGroupID);
-                model.partnerObj.lstPreferredcountry = model.SplitstringintoArray(item.CountryID);
-                model.partnerObj.lstPreferredstate = model.SplitstringintoArray(item.StateID);
-                model.partnerObj.lstRegion = model.SplitstringintoArray(item.regionId);
-                model.partnerObj.lstBranch = model.SplitstringintoArray(item.branchid);
-                model.partnerObj.rbtDiet = item.DietID;
-                model.partnerObj.rbtManglikKujadosham = item.KujaDoshamID;
-                model.partnerObj.rbtPreferredstarLanguage = item.StarLanguageID;
-                model.partnerObj.rbtPreferredstars = item.TypeOfStar;
-                model.partnerObj.lstpreferedstars = model.SplitstringintoArray(item.PreferredStars);
-                model.partnerObj.rbtDomacile = item.Domicel === 'India' ? 0 : (item.Domicel === 'abroad' ? 1 : (item.Domicel === 'All' ? 2 : ''));
+                model.intCusID = item.intCusID;
+                model.genderId = item.Gender === 'Female' ? 2 : 1;
+                model.fromAgeId = item.Agemin;
+                model.toAgeId = item.AgeMax;
+                model.fromheightId = item.MinHeight;
+                model.toheightId = item.MaxHeight;
+                model.religionId = model.SplitstringintoArray(item.religionid);
+                model.mothertongueId = model.SplitstringintoArray(item.MotherTongueID);
+                model.casteId = model.SplitstringintoArray(item.casteid);
+                model.subCasteId = model.SplitstringintoArray(item.subcasteid);
+                model.maritalstatusId = item.maritalstatusid;
+                model.eduCatgoryId = model.SplitstringintoArray(item.EducationCategoryID);
+                model.eduGroupId = model.SplitstringintoArray(item.EducationGroupID);
+                model.employedinId = model.SplitstringintoArray(item.ProfessionCategoryID);
+                model.profGroupId = model.SplitstringintoArray(item.ProfessionGroupID);
+                model.countryId = model.SplitstringintoArray(item.CountryID);
+                model.stateId = model.SplitstringintoArray(item.StateID);
+                model.regionId = model.SplitstringintoArray(item.regionId);
+                model.branchId = model.SplitstringintoArray(item.branchid);
+                model.dietId = item.DietID;
+                model.kujadoshamId = item.KujaDoshamID;
+                model.starLanguageId = item.StarLanguageID;
+                model.rbtPreferredstars = item.TypeOfStar;
+                model.lstPreferredStars = model.SplitstringintoArray(item.PreferredStars);
+                model.Domicile = item.Domicel === 'India' ? 0 : (item.Domicel === 'abroad' ? 1 : (item.Domicel === 'All' ? 2 : ''));
 
             }
             commonFactory.open('partnerPrefContent.html', model.scope, uibModal);
-
-
         };
 
         model.partnerdescPopulate = function(item) {
@@ -216,6 +215,37 @@
                 });
             }
         };
+
+
+
+        model.partnerPreference = [
+            { lblname: 'Gender', controlType: 'radio', ngmodel: 'genderId', arrbind: 'gender', parameterValue: 'OccupationDetails' },
+            { lblname: 'Age Gap', controlType: 'doublemultiselect', ngmodelSelect1: 'fromAgeId', ngmodelSelect2: 'toAgeId', typeofdata: 'ageBind', parameterValue1: 'OccupationDetails', parameterValue2: 'OccupationDetails' },
+            { lblname: 'Height', controlType: 'doublemultiselect', ngmodelSelect1: 'fromheightId', ngmodelSelect2: 'toheightId', typeofdata: 'heightregistration', parameterValue1: 'OccupationDetails', parameterValue2: 'OccupationDetails' },
+            { lblname: 'Religion', controlType: 'multiselect', ngmodel: 'religionId', typeofdata: 'Religion', secondParent: 'mothertongueId', childName: 'caste', changeApi: 'castedependency', parameterValue: 'OccupationDetails' },
+            { lblname: 'Mother tongue', controlType: 'multiselect', ngmodel: 'mothertongueId', typeofdata: 'Mothertongue', secondParent: 'religionId', childName: 'caste', changeApi: 'castedependency', parameterValue: 'OccupationDetails' },
+            { lblname: 'Caste', controlType: 'Changemultiselect', ngmodel: 'casteId', parentName: 'caste', childName: 'subCaste', changeApi: 'subCasteBind', parameterValue: 'OccupationDetails' },
+            { lblname: 'Subcaste', controlType: 'Changemultiselect', ngmodel: 'subCasteId', typeofdata: 'Religion', parentName: 'subCaste', parameterValue: 'OccupationDetails' },
+            { lblname: 'Marital status', controlType: 'multiselect', ngmodel: 'maritalstatusId', typeofdata: 'MaritalStatus', parameterValue: 'OccupationDetails' },
+            { lblname: 'Education category', controlType: 'multiselect', ngmodel: 'eduCatgoryId', typeofdata: 'educationcategory', childName: 'educationgroup', changeApi: 'EducationGroup', parameterValue: 'OccupationDetails' },
+            { lblname: 'Education group', controlType: 'Changemultiselect', ngmodel: 'eduGroupId', typeofdata: 'Religion', parentName: 'educationgroup', parameterValue: 'OccupationDetails' },
+            { lblname: 'Employed in', controlType: 'multiselect', ngmodel: 'employedinId', typeofdata: 'ProfCatgory', parameterValue: 'OccupationDetails' },
+            { lblname: 'Profession group', controlType: 'multiselect', ngmodel: 'profGroupId', typeofdata: 'ProfGroup', parameterValue: 'OccupationDetails' },
+            { lblname: 'Domicile', controlType: 'radio', ngmodel: 'domicileId', arrbind: 'Domicile', parameterValue: 'OccupationDetails' },
+            { lblname: 'Preferred country', controlType: 'multiselect', ngmodel: 'countryId', typeofdata: 'Country', childName: 'state', changeApi: 'stateSelect', parameterValue: 'OccupationDetails' },
+            { lblname: 'Preferred state', controlType: 'Changemultiselect', ngmodel: 'stateId', typeofdata: 'Religion', parentName: 'state', parameterValue: 'OccupationDetails' },
+            { lblname: 'Region', controlType: 'multiselect', ngmodel: 'regionId', typeofdata: 'region', childName: 'branch', changeApi: 'branch', parameterValue: 'OccupationDetails' },
+            { lblname: 'Branch', controlType: 'Changemultiselect', ngmodel: 'branchId', parentName: 'branch', parameterValue: 'OccupationDetails' },
+            { lblname: 'Diet', controlType: 'radio', ngmodel: 'dietId', arrbind: 'Diet', parameterValue: 'OccupationDetails' },
+            { lblname: 'Manglik/Kuja dosham', controlType: 'radio', ngmodel: 'kujadoshamId', arrbind: 'Kujadosham', parameterValue: 'OccupationDetails' },
+            { lblname: 'Preferred star Language', controlType: 'radio', ngmodel: 'starLanguageId', arrbind: 'preferredStarlanguage', childName: 'star', changeApi: 'stars', parameterValue: 'OccupationDetails' },
+            { lblname: 'Star Preference', controlType: 'radio', ngmodel: 'starPreferenceId', arrbind: 'StarPreference', parameterValue: 'OccupationDetails' },
+            { lblname: '', controlType: 'Changemultiselect', ngmodel: 'lstPreferredStars', parentName: 'star', parameterValue: 'OccupationDetails' }
+        ];
+
+        model.aboutPartnerDescription = [
+            { lblname: '', controlType: 'about', required: true, ngmodel: 'partnerDescriptionId', parameterValue: 'OccupationDetails' },
+        ];
 
         return model.init();
     }

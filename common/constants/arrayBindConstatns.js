@@ -307,9 +307,38 @@
                 { "label": "Normal", "title": "Normal", "value": 25 },
                 { "label": "Physically Challenged", "title": "Physically Challenged", "value": 26 }
             ],
+            // added
             'boolType': [
                 { "label": "Yes", "title": "Yes", "value": 1 },
                 { "label": "No", "title": "No", "value": 0 }
+            ],
+            'gender': [
+                { "label": "Male", "title": "Male", "value": 1 },
+                { "label": "Female", "title": "Female", "value": 2 }
+            ],
+            'Domicile': [
+                { "label": "India", "title": "India", "value": 0 },
+                { "label": "Abroad", "title": "Abroad", "value": 1 },
+                { "label": "Both", "title": "Both", "value": 2 }
+            ],
+            'Diet': [
+                { "label": "Veg", "title": "Veg", "value": 27 },
+                { "label": "Non Veg", "title": "Non Veg", "value": 28 },
+                { "label": "Both", "title": "Both", "value": 29 }
+            ],
+            'Kujadosham': [
+                { "label": "Yes", "title": "Yes", "value": 0 },
+                { "label": "No", "title": "No", "value": 1 },
+                { "label": "Does Not Matter", "title": "Does Not Matter", "value": 2 }
+            ],
+            'preferredStarlanguage': [
+                { "label": "Telugu", "title": "Telugu", "value": 1 },
+                { "label": "Tamil", "title": "Tamil", "value": 2 },
+                { "label": "Kannada", "title": "Kannada", "value": 3 }
+            ],
+            'StarPreference': [
+                { "label": "Preferredstars", "title": "Preferredstars", "value": 0 },
+                { "label": "NonPreferredstars", "title": "NonPreferredstars", "value": 1 }
             ]
         });
 

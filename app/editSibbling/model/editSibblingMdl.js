@@ -510,6 +510,167 @@
 
         };
 
+
+        model.noOfSibblings = [
+            { lblname: 'No of Brothers', controlType: 'select', ngmodel: 'noOfBortherId', parameterValue: 'OccupationDetails' },
+            { lblname: 'Elder Brother', controlType: 'select', ngmodel: 'elderBroId', parameterValue: 'OccupationDetails' },
+            { lblname: 'Younger Brother', controlType: 'select', ngmodel: 'youngerBroId', parameterValue: 'OccupationDetails' },
+            { lblname: 'No of sisters', controlType: 'select', ngmodel: 'noOfSisterId', parameterValue: 'OccupationDetails' },
+            { lblname: 'Elder sisters', controlType: 'select', ngmodel: 'elderSisId', parameterValue: 'OccupationDetails' },
+            { lblname: 'Younger  sisters', controlType: 'select', ngmodel: 'youngerSisId', parameterValue: 'OccupationDetails' },
+        ];
+
+
+        model.brother = [
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderBro', parameterValue: 'OccupationDetails' },
+            { lblname: 'Name', controlType: 'textbox', ngmodel: 'broName', parameterValue: 'OccupationDetails' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'broEducation', parameterValue: 'OccupationDetails' },
+            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'broProfessionCatgory', parameterValue: 'OccupationDetails' },
+            { lblname: 'Designationt', controlType: 'textbox', ngmodel: 'broDesignation', parameterValue: 'OccupationDetails' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'broComapnyName', parameterValue: 'OccupationDetails' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'broJobLocation', parameterValue: 'OccupationDetails' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'broCountryCodeId',
+                strmobile: 'broMobileNumber',
+                dalternative: 'broAlternativeCountryCodeId',
+                stralternative: 'broAlternativeNumber',
+                dland: 'broLandountryCodeId',
+                strareacode: 'broLandAreaCodeId',
+                strland: 'broLandNumberId',
+                strmail: 'broEmail',
+
+                // mobileCodeIdParameterValue: 'MotherMobileCountryID',
+                // mobileNumberParameterValue: 'MotherMobileNumber',
+                // landCountryCodeIdParameterValue: 'MotherLandCountryID',
+                // landAreaCodeIdParameterValue: 'MotherLandAreaCode',
+                // landNumberParameterValue: 'MotherLandNumber',
+                // emailParameterValue: 'MotherEmail'
+            },
+            { lblname: 'Married', controlType: 'radio', ngmodel: 'broIsMarried', parameterValue: 'OccupationDetails' },
+            { lblname: 'Spouse Name', controlType: 'textbox', ngmodel: 'spouseName', parameterValue: 'OccupationDetails' },
+            { lblname: 'Spouse Education', controlType: 'textbox', ngmodel: 'spouseEducation', parameterValue: 'OccupationDetails' },
+            { lblname: 'Profession Category', controlType: 'textarea', ngmodel: 'spouseProfCatgory', parameterValue: 'OccupationDetails' },
+            { lblname: 'Spouse Designation', controlType: 'textbox', ngmodel: 'spouseDesignation', parameterValue: 'OccupationDetails' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'spouseCompany', parameterValue: 'OccupationDetails' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'spouseJobLocation', parameterValue: 'OccupationDetails' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'spouseCountryCodeId',
+                strmobile: 'spouseMobNumber',
+                dalternative: 'spouseAlternativeCountryCodeId',
+                stralternative: 'spouseAlternativeNumber',
+                dland: 'spouseLandCountryCodeId',
+                strareacode: 'spouseLandAreaCodeId',
+                strland: 'spouseLandNumberId',
+                strmail: 'spouseEmail',
+
+                // mobileCodeIdParameterValue: 'MotherMobileCountryID',
+                // mobileNumberParameterValue: 'MotherMobileNumber',
+                // landCountryCodeIdParameterValue: 'MotherLandCountryID',
+                // landAreaCodeIdParameterValue: 'MotherLandAreaCode',
+                // landNumberParameterValue: 'MotherLandNumber',
+                // emailParameterValue: 'MotherEmail'
+            },
+            { lblname: 'Spouse Father SurName', controlType: 'textbox', ngmodel: 'spouseFatherLastName', parameterValue: 'OccupationDetails' },
+            { lblname: 'Spouse Father Name', controlType: 'textbox', ngmodel: 'spouseFatherFirstName', parameterValue: 'OccupationDetails' },
+            { lblname: 'Spouse Father Caste', controlType: 'textbox', ngmodel: 'spouseFatherCaste', parameterValue: 'OccupationDetails' },
+            {
+                controlType: 'country',
+                countryshow: false,
+                cityshow: false,
+                othercity: false,
+                dstate: 'broSpouseFatherStateId',
+                ddistrict: 'broSpouseFatherDistrict',
+                // countryParameterValue: 'MotherCountry',
+                // stateParameterValue: 'MotherState',
+                // districtParameterValue: 'MotherDistric'
+            },
+            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'broSpouseCityId', parameterValue: 'OccupationDetails' }
+
+
+        ];
+
+
+
+
+        model.sister = [
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderSis', parameterValue: 'OccupationDetails' },
+            { lblname: 'Name', controlType: 'textbox', ngmodel: 'sisName', parameterValue: 'OccupationDetails' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'sisEducation', parameterValue: 'OccupationDetails' },
+            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'sisProfessionCatgory', parameterValue: 'OccupationDetails' },
+            { lblname: 'Designationt', controlType: 'textbox', ngmodel: 'sisDesignation', parameterValue: 'OccupationDetails' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'sisComapnyName', parameterValue: 'OccupationDetails' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'sisJobLocation', parameterValue: 'OccupationDetails' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'sisCountryCodeId',
+                strmobile: 'sisMobileNumber',
+                dalternative: 'sisAlternativeCountryCodeId',
+                stralternative: 'sisAlternativeNumber',
+                dland: 'sisLandountryCodeId',
+                strareacode: 'sisLandAreaCodeId',
+                strland: 'sisLandNumberId',
+                strmail: 'sisEmail',
+
+                // mobileCodeIdParameterValue: 'MotherMobileCountryID',
+                // mobileNumberParameterValue: 'MotherMobileNumber',
+                // landCountryCodeIdParameterValue: 'MotherLandCountryID',
+                // landAreaCodeIdParameterValue: 'MotherLandAreaCode',
+                // landNumberParameterValue: 'MotherLandNumber',
+                // emailParameterValue: 'MotherEmail'
+            },
+            { lblname: 'Is Married', controlType: 'radio', ngmodel: 'sisIsMarried', parameterValue: 'OccupationDetails' },
+            { lblname: 'Husband Name', controlType: 'textbox', ngmodel: 'husbandName', parameterValue: 'OccupationDetails' },
+            { lblname: 'Husband Education', controlType: 'textbox', ngmodel: 'husbandEducation', parameterValue: 'OccupationDetails' },
+            { lblname: 'Profession Category', controlType: 'textarea', ngmodel: 'husbandProfCatgory', parameterValue: 'OccupationDetails' },
+            { lblname: 'Husband Designation', controlType: 'textbox', ngmodel: 'husbandDesignation', parameterValue: 'OccupationDetails' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'husbandCompany', parameterValue: 'OccupationDetails' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'husbandJobLocation', parameterValue: 'OccupationDetails' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'husbandCountryCodeId',
+                strmobile: 'husbandMobNumber',
+                dalternative: 'husbandAlternativeCountryCodeId',
+                stralternative: 'husbandAlternativeNumber',
+                dland: 'husbandLandCountryCodeId',
+                strareacode: 'husbandLandAreaCodeId',
+                strland: 'husbandLandNumberId',
+                strmail: 'husbandEmail',
+
+                // mobileCodeIdParameterValue: 'MotherMobileCountryID',
+                // mobileNumberParameterValue: 'MotherMobileNumber',
+                // landCountryCodeIdParameterValue: 'MotherLandCountryID',
+                // landAreaCodeIdParameterValue: 'MotherLandAreaCode',
+                // landNumberParameterValue: 'MotherLandNumber',
+                // emailParameterValue: 'MotherEmail'
+            },
+            { lblname: 'Husband Father SurName', controlType: 'textbox', ngmodel: 'husbandFatherLastName', parameterValue: 'OccupationDetails' },
+            { lblname: 'Husband Father Name', controlType: 'textbox', ngmodel: 'spouseFatherFirstName', parameterValue: 'OccupationDetails' },
+            { lblname: 'Husband Father Caste', controlType: 'textbox', ngmodel: 'spouseFatherCaste', parameterValue: 'OccupationDetails' },
+            {
+                controlType: 'country',
+                countryshow: false,
+                cityshow: false,
+                othercity: false,
+                dstate: 'broSpouseFatherStateId',
+                ddistrict: 'broSpouseFatherDistrict',
+                // countryParameterValue: 'MotherCountry',
+                // stateParameterValue: 'MotherState',
+                // districtParameterValue: 'MotherDistric'
+            },
+            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'broSpouseCityId', parameterValue: 'OccupationDetails' }
+
+
+        ];
+
+
+
+
         return model.init();
     }
 

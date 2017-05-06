@@ -262,8 +262,9 @@
 
 
     <script type="text/ng-template" id="partnerPrefContent.html">
-
-        <form class="EditViewClass" name="partnerFormForm" novalidate role="form" ng-submit="page.model.partnerPrefSubmit(page.model.partnerObj)" accessible-form>
+        <slide-popup model="page.model" eventtype="page.model.eventType">
+        </slide-popup>
+        <!--<form class="EditViewClass" name="partnerFormForm" novalidate role="form" ng-submit="page.model.partnerPrefSubmit(page.model.partnerObj)" accessible-form>
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="modal-title">Partnerprefernece details
                     <a href="javascript:void(0);" ng-click="page.model.cancel();">
@@ -456,7 +457,7 @@
                 </ul>
             </div>
 
-        </form>
+        </form>-->
     </script>
 
     <script type="text/ng-template" id="partnerDescContent.html">

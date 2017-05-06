@@ -4,7 +4,6 @@
 
     function factory($http, authSvc, editEducationService, commonFactory, uibModal, filter, alertss, stateParams, SelectBindService, arrayConstantsEdit) {
         var model = {};
-        // var logincustid = authSvc.getCustId();
 
         model.scope = {};
         var loginEmpid = authSvc.LoginEmpid();
@@ -34,11 +33,9 @@
 
         var CustID = stateParams.CustID;
 
-        // logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
-        model.CustID = CustID;
         model.init = function() {
-
             CustID = stateParams.CustID;
+            model.CustID = CustID;
             model.getdata();
             return model;
         };
@@ -56,9 +53,7 @@
                 console.log(response.data);
                 if (commonFactory.checkvals(response.data)) {
                     model.educationSelectArray = response.data;
-
                     model.eduEmpLastModificationDate = model.educationSelectArray.length > 0 ? model.educationSelectArray[0].EmpLastModificationDate : '';
-
                 }
 
             });
@@ -130,33 +125,29 @@
                 case 'showProfModal':
                     model.popupdata = model.profession;
                     model.popupHeader = 'Profession details';
-
-                    model.profObj.Cust_Profession_ID = null;
-                    model.profObj = {};
+                    model.Cust_Profession_ID = null;
+                  
                     if (item !== undefined) {
-
-                        model.ProfSpecialisationArr = commonFactory.professionBind(item.ProfessionGroupID);
-
-                        model.profObj.intCusID = item.intCusID;
-                        model.profObj.ddlemployedin = item.ProfessionCategoryID;
-                        model.profObj.ddlprofgroup = item.ProfessionGroupID;
-                        model.profObj.ddlprofession = item.ProfessionID;
-                        model.profObj.txtcmpyname = item.CompanyName;
-                        model.profObj.txtsalary = item.Salary;
-
-                        model.profObj.ddlcurreny = item.SalaryCurrency;
-                        model.profObj.ddlCountryProf = item.CountryID;
-                        model.profObj.ddlStateProf = item.StateID;
-                        model.profObj.ddlDistrictProf = item.DistrictID;
-                        model.profObj.ddlcityworkingprofession = item.CityID;
-                        model.profObj.txtcityprofession = item.CityWorkingIn;
-                        model.profObj.txtworkingfrom = commonFactory.convertDateFormat(item.WorkingFromDate, 'DD-MM-YYYY');
-                        model.profObj.ddlvisastatus = item.VisaTypeID;
-                        model.profObj.txtssincedate = commonFactory.convertDateFormat(item.ResidingSince, 'DD-MM-YYYY');
-                        model.profObj.txtarrivaldate = commonFactory.convertDateFormat(item.ArrivingDate, 'DD-MM-YYYY');
-                        model.profObj.txtdeparture = commonFactory.convertDateFormat(item.DepartureDate, 'DD-MM-YYYY');
-                        model.profObj.txtoccupation = item.OccupationDetails;
-                        model.profObj.Cust_Profession_ID = item.Cust_Profession_ID;
+                        model.eventType = 'edit';
+                        model.intCusID = item.intCusID;
+                        model.EmployedInId = parseInt(item.ProfessionCategoryID);
+                        model.ProfessionGroupId = item.ProfessionGroupID;
+                        model.ProfessionId = item.ProfessionID;
+                        model.CompanyName = item.CompanyName;
+                        model.salary = item.Salary;
+                        model.currency = item.SalaryCurrency;
+                        model.profCountryId = item.CountryID;
+                        model.profStateId = item.StateID;
+                        model.profDistrictId = item.DistrictID;
+                        model.profCityId = item.CityID;
+                        model.profTxtcity = item.CityWorkingIn;
+                        model.WorkingForm = commonFactory.convertDateFormat(item.WorkingFromDate, 'DD-MM-YYYY');
+                        model.visaStatus = item.VisaTypeID;
+                        model.sinceDate = commonFactory.convertDateFormat(item.ResidingSince, 'DD-MM-YYYY');
+                        model.arrivalDate = commonFactory.convertDateFormat(item.ArrivingDate, 'DD-MM-YYYY');
+                        model.departureDate = commonFactory.convertDateFormat(item.DepartureDate, 'DD-MM-YYYY');
+                        model.occupationDetails = item.OccupationDetails;
+                        model.Cust_Profession_ID = item.Cust_Profession_ID;
                     }
 
                     commonFactory.open('profModalContent.html', model.scope, uibModal);
@@ -171,21 +162,26 @@
                     break;
 
                 case 'custData':
+
+                    model.popupdata = model.Custdata;
+                    model.popupHeader = 'Customer details';
+
                     if (item !== undefined) {
-                        model.subcasteArr = commonFactory.subCaste(item.CasteID);
-                        model.custObj.rdlGender = item.GenderID;
-                        model.custObj.txtSurName = item.LastName;
-                        model.custObj.txtName = item.FirstName;
-                        model.custObj.dropmaritalstatus = item.MaritalStatusID;
-                        model.custObj.txtdobcandidate = commonFactory.convertDateFormat(item.DateofBirthwithoutAge, 'DD-MM-YYYY');
-                        model.custObj.ddlHeightpersonal = item.HeightID;
-                        model.custObj.ddlcomplexion = item.ComplexionID;
-                        model.custObj.ddlreligioncandadate = item.ReligionID;
-                        model.custObj.ddlmothertongue = item.MotherTongueID;
-                        model.custObj.ddlcaste = item.CasteID;
-                        model.custObj.ddlsubcaste = item.SubCasteID;
-                        model.custObj.ddlBornCitizenship = item.CitizenshipID;
-                        model.custObj.rdlPhysicalStatus = item.PhysicalStatusID;
+                        // model.subcasteArr = commonFactory.subCaste(item.CasteID);
+                        model.eventType = 'edit';
+                        model.genderId = item.GenderID;
+                        model.surName = item.LastName;
+                        model.name = item.FirstName;
+                        model.maritalStatusId = item.MaritalStatusID;
+                        model.dob = commonFactory.convertDateFormat(item.DateofBirthwithoutAge, 'DD-MM-YYYY');
+                        model.heightId = item.HeightID;
+                        model.complexionId = item.ComplexionID;
+                        model.religionId = item.ReligionID;
+                        model.motherTongueId = item.MotherTongueID;
+                        model.casteId = item.CasteID;
+                        model.subcasteId = item.SubCasteID;
+                        model.bornCitizenShipId = item.CitizenshipID;
+                        model.physicalStausId = item.PhysicalStatusID;
 
                     }
                     commonFactory.open('CustomerDataContent.html', model.scope, uibModal);
@@ -197,31 +193,44 @@
         model.cancel = function() {
             commonFactory.closepopup();
         };
+        // model.custdataSubmit = function(obj) {
 
-        model.ProfchangeBind = function(type, parentval) {
-            switch (type) {
+        //     model.custData = {
+        //         GetDetails: {
+        //             CustID: CustID,
+        //             MaritalStatusID: obj.dropmaritalstatus,
+        //             DateofBirth: obj.txtdobcandidate !== '' && obj.txtdobcandidate !== 'Invalid date' ? filter('date')(obj.txtdobcandidate, 'MM/dd/yyyy hh:mm:ss a') : null,
+        //             HeightID: obj.ddlHeightpersonal,
+        //             ComplexionID: obj.ddlcomplexion,
+        //             ReligionID: obj.ddlreligioncandadate,
+        //             MotherTongueID: obj.ddlmothertongue,
+        //             CasteID: obj.ddlcaste,
+        //             CitizenshipID: obj.ddlBornCitizenship,
+        //             SubcasteID: obj.ddlsubcaste,
+        //             LastName: obj.txtSurName,
+        //             FirstName: obj.txtName,
+        //             Gender: obj.rdlGender,
+        //             PhysicallyChallenged: obj.rdlPhysicalStatus
+        //         },
+        //         customerpersonaldetails: {
+        //             intCusID: CustID,
+        //             EmpID: loginEmpid,
+        //             Admin: AdminID
+        //         }
+        //     };
 
-                case 'ProfessionGroup':
-                    model.ProfSpecialisationArr = commonFactory.professionBind(parentval);
-                    model.profObj.ddlprofession = "";
-                    break;
-            }
-        };
+        //     editEducationService.submitCustomerData(model.custData).then(function(response) {
+        //         console.log(response);
+        //         commonFactory.closepopup();
 
-        model.changeBind = function(type, parentval) {
-
-            if (commonFactory.checkvals(parentval)) {
-
-                switch (type) {
-                    case 'caste':
-
-                        model.subcasteArr = commonFactory.subCaste(parentval);
-
-                        break;
-                }
-            }
-        };
-
+        //         if (response.data === 1) {
+        //             model.custdatapageload();
+        //             alertss.timeoutoldalerts(model.scope, 'alert-success', 'Customer Personal Details submitted Succesfully', 4500);
+        //         } else {
+        //             alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Customer Personal Details Updation failed', 4500);
+        //         }
+        //     });
+        // };
         model.updateData = function(inObj, type) {
 
             if (isSubmit) {
@@ -247,59 +256,37 @@
                             }
                         });
                         break;
+                    case 'Profession details':
+                        inObj.customerProfession.profGridID = model.Cust_Profession_ID;
+                        inObj.customerProfession.ProfessionID = model.Cust_Profession_ID;
+                        inObj.customerProfession.CustID = CustID;
+                        model.submitPromise = editEducationService.submitProfessionData(inObj).then(function(response) {
+                            commonFactory.closepopup();
+                            if (response.data === 1) {
+                                model.ProfPageload();
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'Professional Details  submitted Succesfully', 4500);
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Professional Details  Updation failed', 4500);
+                            }
+                        });
+
+                        break;
+                    case 'Customer details':
+
+                        inObj.GetDetails.CustID = CustID;
+                        inObj.GetDetails.DateofBirth = inObj.GetDetails.DateofBirth !== '' && inObj.GetDetails.DateofBirth !== 'Invalid date' ? filter('date')(inObj.GetDetails.DateofBirth, 'MM/dd/yyyy hh:mm:ss a') : null,
+                            editEducationService.submitCustomerData(inObj).then(function(response) {
+                                console.log(response);
+                                commonFactory.closepopup();
+                                if (response.data === 1) {
+                                    model.custdatapageload();
+                                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Customer Personal Details submitted Succesfully', 4500);
+                                } else {
+                                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Customer Personal Details Updation failed', 4500);
+                                }
+                            });
+                        break;
                 }
-            }
-        };
-
-        model.ProfSubmit = function(objitem) {
-
-            if (isSubmit) {
-                isSubmit = false;
-                model.myprofData = {
-                    customerProfession: {
-                        CustID: CustID,
-                        EmployedIn: objitem.ddlemployedin,
-                        Professionalgroup: objitem.ddlprofgroup,
-                        Profession: objitem.ddlprofession,
-                        Companyname: objitem.txtcmpyname,
-                        Currency: objitem.ddlcurreny,
-                        Monthlysalary: objitem.txtsalary,
-                        CountryID: objitem.ddlCountryProf,
-                        StateID: objitem.ddlStateProf,
-                        DistrictID: objitem.ddlDistrictProf,
-                        CityID: objitem.ddlcityworkingprofession,
-                        OtherCity: objitem.txtcityprofession,
-                        Workingfromdate: filter('date')(objitem.txtworkingfrom, 'yyyy-MM-dd'),
-                        OccupationDetails: objitem.txtoccupation,
-                        visastatus: objitem.ddlvisastatus,
-                        Sincedate: objitem.txtssincedate !== '' && objitem.txtssincedate !== 'Invalid date' ? filter('date')(objitem.txtssincedate, 'yyyy-MM-dd') : null,
-                        ArrivalDate: objitem.txtarrivaldate !== '' && objitem.txtarrivaldate !== 'Invalid date' ? filter('date')(objitem.txtarrivaldate, 'yyyy-MM-dd') : null,
-                        DepartureDate: objitem.txtdeparture !== '' && objitem.txtdeparture !== 'Invalid date' ? filter('date')(objitem.txtdeparture, 'yyyy-MM-dd') : null,
-                        profGridID: model.profObj.Cust_Profession_ID,
-                        ProfessionID: model.profObj.Cust_Profession_ID,
-                    },
-                    customerpersonaldetails: {
-                        intCusID: CustID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-
-                model.submitPromise = editEducationService.submitProfessionData(model.myprofData).then(function(response) {
-
-                    commonFactory.closepopup();
-                    if (response.data === 1) {
-                        model.ProfPageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Professional Details  submitted Succesfully', 4500);
-                        if (scope.datagetInStatus === 1) {
-                            sessionStorage.removeItem('missingStatus');
-                            route.go('mobileverf', {});
-                        }
-
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Professional Details  Updation failed', 4500);
-                    }
-                });
             }
         };
 
@@ -332,46 +319,7 @@
             });
         };
 
-        model.custdataSubmit = function(obj) {
 
-            model.custData = {
-                GetDetails: {
-                    CustID: CustID,
-                    MaritalStatusID: obj.dropmaritalstatus,
-                    DateofBirth: obj.txtdobcandidate !== '' && obj.txtdobcandidate !== 'Invalid date' ? filter('date')(obj.txtdobcandidate, 'MM/dd/yyyy hh:mm:ss a') : null,
-                    HeightID: obj.ddlHeightpersonal,
-                    ComplexionID: obj.ddlcomplexion,
-                    ReligionID: obj.ddlreligioncandadate,
-                    MotherTongueID: obj.ddlmothertongue,
-                    CasteID: obj.ddlcaste,
-                    CitizenshipID: obj.ddlBornCitizenship,
-                    SubcasteID: obj.ddlsubcaste,
-                    LastName: obj.txtSurName,
-                    FirstName: obj.txtName,
-                    Gender: obj.rdlGender,
-                    PhysicallyChallenged: obj.rdlPhysicalStatus
-                },
-                customerpersonaldetails: {
-                    intCusID: CustID,
-                    EmpID: loginEmpid,
-                    Admin: AdminID
-                }
-            };
-
-            editEducationService.submitCustomerData(model.custData).then(function(response) {
-                console.log(response);
-                commonFactory.closepopup();
-
-                if (response.data === 1) {
-                    model.custdatapageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Customer Personal Details submitted Succesfully', 4500);
-                } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Customer Personal Details Updation failed', 4500);
-                }
-            });
-
-
-        };
 
         //performance code
         model.Education = [
@@ -408,15 +356,12 @@
 
         ];
 
-
-
-
         model.profession = [
-            { lblname: 'Employed In', controlType: 'select', ngmodel: 'IsHighestDegreeId', required: true, arrbind: 'boolType', parameterValue: 'Highestdegree' },
-            { lblname: 'Professional group', controlType: 'select', ngmodel: 'EduCatgoryId', required: true, typeofdata: 'educationcategory', parameterValue: 'Educationcategory', childName: 'EducationGroup', changeApi: 'EducationGroup' },
-            { lblname: 'Profession', controlType: 'Changeselect', ngmodel: 'EdugroupId', required: true, parentName: 'EducationGroup', parameterValue: 'Educationgroup', changeApi: 'EducationSpecialisation', childName: 'EducationSpecialisation' },
-            { lblname: 'Company name', controlType: 'textbox', ngmodel: 'EduspecializationId', required: true, parentName: 'EducationSpecialisation', parameterValue: 'EducationSpecialization' },
-            { lblname: 'Monthly salary', controlType: 'textboxSelect', ngmodel: 'universityId', parameterValue: 'University' },
+            { lblname: 'Employed In', controlType: 'select', ngmodel: 'EmployedInId', required: true, typeofdata: 'ProfCatgory', parameterValue: 'EmployedIn' },
+            { lblname: 'Professional group', controlType: 'select', ngmodel: 'ProfessionGroupId', required: true, typeofdata: 'ProfGroup', parameterValue: 'Professionalgroup', childName: 'Profession', changeApi: 'ProfessionSpecialisation' },
+            { lblname: 'Profession', controlType: 'Changeselect', ngmodel: 'ProfessionId', required: true, parentName: 'Profession', parameterValue: 'Profession' },
+            { lblname: 'Company name', controlType: 'textbox', ngmodel: 'CompanyName', parameterValue: 'Companyname' },
+            { lblname: 'Monthly salary', controlType: 'textboxSelect', ngmodelSelect: 'currency', ngmodelText: 'salary', typeofdata: 'currency', parameterValueSelect: 'Currency', parameterValueText: 'Monthlysalary' },
             {
                 controlType: 'country',
                 countryshow: true,
@@ -427,23 +372,45 @@
                 ddistrict: 'profDistrictId',
                 dcity: 'profCityId',
                 strothercity: 'profTxtcity',
-                // countryParameterValue: 'Countrystudyin',
-                // stateParameterValue: 'Statestudyin',
-                // districtParameterValue: 'Districtstudyin',
-                // cityParameterValue: 'CitystudyIn',
-                // cityotherParameterValue: 'OtherCity'
+
+                countryParameterValue: 'CountryID',
+                stateParameterValue: 'StateID',
+                districtParameterValue: 'DistrictID',
+                cityParameterValue: 'CityID',
+                cityotherParameterValue: 'OtherCity'
             },
-            {
-                lblname: 'Educational merits',
-                controlType: 'textarea',
-                ngmodel: 'Edumerits',
-                parameterValue: 'Educationalmerits'
-            }
+            { lblname: 'Working from date', controlType: 'date', ngmodel: 'WorkingForm', parameterValue: 'Workingfromdate' },
+            { lblname: 'visa status', controlType: 'select', ngmodel: 'visaStatus', typeofdata: 'visastatus', parameterValue: 'visastatus' },
+            { lblname: 'Since date', controlType: 'date', ngmodel: 'sinceDate', parameterValue: 'Sincedate' },
+            { lblname: 'Arrival Date', controlType: 'date', ngmodel: 'arrivalDate', parameterValue: 'ArrivalDate' },
+            { lblname: 'Departure Date', controlType: 'date', ngmodel: 'departureDate', parameterValue: 'DepartureDate' },
+            { lblname: 'Occupation Details', controlType: 'textarea', ngmodel: 'occupationDetails', parameterValue: 'OccupationDetails' }
 
         ];
 
+        model.Custdata = [
+            { lblname: 'Gender', controlType: 'radio', ngmodel: 'genderId', arrbind: 'gender', parameterValue: 'Gender' },
+            { lblname: 'SurName', controlType: 'textbox', ngmodel: 'surName', required: true, parameterValue: 'LastName' },
+            { lblname: 'Name', controlType: 'textbox', ngmodel: 'name', required: true, parameterValue: 'FirstName' },
+            { lblname: 'Marital Status', controlType: 'select', ngmodel: 'maritalStatusId', required: true, typeofdata: 'MaritalStatus', parameterValue: 'MaritalStatusID' },
+            { lblname: 'Date Of Birth', controlType: 'date', ngmodel: 'dob', required: true, parameterValue: 'DateofBirth' },
+            { lblname: 'Height', controlType: 'select', ngmodel: 'heightId', required: true, typeofdata: 'heightregistration', parameterValue: 'HeightID' },
+            { lblname: 'Complexion', controlType: 'select', ngmodel: 'complexionId', required: true, typeofdata: 'Complexion', parameterValue: 'ComplexionID' },
+            { lblname: 'Religion', controlType: 'select', ngmodel: 'religionId', secondParent: 'motherTongueId', required: true, typeofdata: 'Religion', childName: 'caste', changeApi: 'castedependency', parameterValue: 'ReligionID' },
+            { lblname: 'Mother Tongue', controlType: 'select', ngmodel: 'motherTongueId', secondParent: 'religionId', required: true, typeofdata: 'Mothertongue', childName: 'caste', changeApi: 'castedependency', parameterValue: 'MotherTongueID' },
+            { lblname: 'Caste', controlType: 'Changeselect', ngmodel: 'casteId', required: true, parentName: 'caste', childName: 'subCaste', changeApi: 'subCasteBind', parameterValue: 'CasteID' },
+            { lblname: 'SubCaste', controlType: 'Changeselect', ngmodel: 'subcasteId', parentName: 'subCaste', parameterValue: 'SubcasteID' },
+            { lblname: 'Born Citizenship', controlType: 'select', ngmodel: 'bornCitizenShipId', required: true, typeofdata: 'Country', parameterValue: 'CitizenshipID' },
+            { lblname: 'Physical Status', controlType: 'radio', ngmodel: 'physicalStausId', arrbind: 'PhysicalStatus', parameterValue: 'PhysicallyChallenged' }
+        ];
 
+        // model.aboutUrSelf = [
+        //     { lblname: 'Occupation Details', controlType: 'textarea', ngmodel: 'occupationDetails', parameterValue: 'OccupationDetails' }
+        // ];
 
+        model.aboutUrSelf = [
+            { lblname: '', controlType: 'about', maxlength: '100', displayTxt: "(Please don't write phone numbers/emails/any junk characters)*', ngmodel: 'aboutFamilyId", parameterValue: 'OccupationDetails' },
+        ];
 
         return model.init();
     }

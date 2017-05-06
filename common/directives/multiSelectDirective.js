@@ -9,9 +9,9 @@
         .module('KaakateeyaEmpEdit')
         .directive('multiselectdropdown', directive);
 
-    directive.$inject = ['arrayConstantsEdit', '$timeout', 'eduprofArrayModel', 'countryArrayModel', 'otherArrayModel'];
+    directive.$inject = ['arrayConstantsEdit', '$timeout', 'eduprofArrayModel', 'countryArrayModel', 'otherArrayModel', 'commonFactory'];
 
-    function directive(cons, timeout, eduprofArrayModel, countryArrayModel, otherArrayModel) {
+    function directive(cons, timeout, eduprofArrayModel, countryArrayModel, otherArrayModel, commonFactory) {
 
         var directive = {
             link: link,
@@ -194,6 +194,7 @@
                     case 'getrelationships':
                         scope.databind(scope.parentVal);
                         break;
+                        // extra added
                     case 'passOfYear':
                         var test = [];
                         var yr = 1,
@@ -205,6 +206,9 @@
                             yr += 1;
                         }
                         scope.databind(test);
+                        break;
+                    case 'ageBind':
+                        scope.databind(commonFactory.numbersBind('years', 1, 80));
                         break;
 
                 }
