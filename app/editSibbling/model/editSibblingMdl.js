@@ -46,15 +46,16 @@
                 model.broModifiedby = (model.BrotherArr.length > 0 && model.BrotherArr[0].EmpLastModificationDate !== undefined && model.BrotherArr[0].EmpLastModificationDate !== null) ? model.BrotherArr[0].EmpLastModificationDate : '';
                 model.sisModifiedby = (model.sisterArr.length > 0 && model.sisterArr[0].EmpLastModificationDate !== undefined && model.sisterArr[0].EmpLastModificationDate !== null) ? model.sisterArr[0].EmpLastModificationDate : '';
             });
-
         };
 
         model.sibblingPopulatePopulate = function(type, item) {
             isSubmit = true;
             switch (type) {
                 case 'sibCounrt':
-
+                    model.popupdata = model.noOfSibblings;
+                    model.popupHeader = 'Sibling Details';
                     if (item !== undefined) {
+                        model.eventType = 'edit';
                         model.noOfBorthersId = item.NoOfBrothers;
                         model.noOfelderBroId = item.NoOfElderBrothers;
                         model.noOfyoungerBroId = item.NoOfYoungerBrothers;
@@ -66,11 +67,14 @@
                     break;
 
                 case 'brother':
-
+                    model.popupdata = model.brother;
+                    model.popupHeader = 'Brother details';
+                    debugger;
                     if (item !== undefined && model.BrotherArr.length <= parseInt(model.BroCount)) {
                         model.SibilingCustfamilyID = null;
                         model.broObj = {};
                         if (item !== undefined) {
+                            model.eventType = 'edit';
                             model.SibilingCustfamilyID = item.SibilingCustfamilyID;
                             model.youngerElderBro = item.brotherYoungerORelder == 'Elder' ? 42 : (item.brotherYoungerORelder == 'Younger' ? 41 : '-1');
                             model.broName = item.SibilingName;
@@ -112,16 +116,16 @@
                             }
 
                             model.spouseEmail = item.SpouseEmail;
-                            model.txtBWifeFatherSurName = item.SFsurname;
-                            model.txtBWWifeFatherName = item.SFname;
-                            model.ddlborherspousefathercaste = item.SibilingSpouseFatherCasteID;
-                            model.ddlBroSpousefatherState = item.BroSpouseFatherStateID;
-                            model.ddlBroSpousefatherDistrict = item.BroSpouseFatherDistrictID;
-                            model.txtBroSpousefatherCity = item.BroSpouseFatherCity;
+                            model.spouseFatherLastName = item.SFsurname;
+                            model.spouseFatherFirstName = item.SFname;
+                            model.spouseFatherCaste = item.SibilingSpouseFatherCasteID;
+                            model.broSpouseFatherStateId = item.BroSpouseFatherStateID;
+                            model.broSpouseFatherDistrictId = item.BroSpouseFatherDistrictID;
+                            model.broSpouseCityId = item.BroSpouseFatherCity;
                             model.broProfessionCatgory = item.ProfessionCategoryID;
                             model.spouseProfCatgory = item.SpouceProfessionCategoryID;
                             //  
-                            commonFactory.open('brotherModalContent.html', model.scope, uibModal);
+                            commonFactory.open('commonSibblingpopup.html', model.scope, uibModal);
                         }
                     } else if (item === undefined && model.BrotherArr.length < parseInt(model.BroCount)) {
                         model.SibilingCustfamilyID = null;
@@ -134,71 +138,72 @@
                     break;
 
                 case 'sister':
-
+                    model.popupdata = model.sister;
+                    model.popupHeader = 'Sister details';
                     if (item !== undefined && model.sisterArr.length <= parseInt(model.SisCount)) {
 
-                        model.sisObj.SibilingCustfamilyID = null;
+                        model.SibilingCustfamilyID = null;
                         model.sisObj = {};
 
                         if (item !== undefined) {
+                            model.eventType = 'edit';
+                            model.SibilingCustfamilyID = item.SibilingCustfamilyID;
+                            model.youngerElderSis = item.SisterElderORyounger == 'Elder' ? '322' : (item.SisterElderORyounger == 'Younger' ? '321' : '-1');
+                            model.sisName = item.SibilingName;
+                            model.sisEducation = item.SibilingEducationDetails;
+                            model.sisDesignation = item.SibilingProfessionDetails;
+                            model.chksishousewife = item.SibilingProfessionDetails === 'HouseWife' ? true : false;
+                            model.sisComapnyName = item.SibilingCompany;
+                            model.sisJobLocation = item.SibilingJobPLace;
 
-                            model.sisObj.SibilingCustfamilyID = item.SibilingCustfamilyID;
-                            model.sisObj.rbtSElderyounger = item.SisterElderORyounger == 'Elder' ? '322' : (item.SisterElderORyounger == 'Younger' ? '321' : '-1');
-                            model.sisObj.txtSisterName = item.SibilingName;
-                            model.sisObj.txtsisEducation = item.SibilingEducationDetails;
-                            model.sisObj.txtsisProfession = item.SibilingProfessionDetails;
-                            model.sisObj.chksisProfession = item.SibilingProfessionDetails === 'HouseWife' ? true : false;
-                            model.sisObj.txtSCompanyName = item.SibilingCompany;
-                            model.sisObj.txtSjobloc = item.SibilingJobPLace;
-
-                            model.sisObj.ddlSMobileCountyCodeID = item.SibilingMobileCode;
-                            model.sisObj.txtSMobileNumber = item.SibilingMobileNumber;
+                            model.sisCountryCodeId = item.SibilingMobileCode;
+                            model.sisMobileNumber = item.SibilingMobileNumber;
 
                             if (item.SibilingLandaraecode !== '' && item.SibilingLandaraecode !== null) {
-                                model.sisObj.ddlSLandLineCountryCodeID = item.SibilngLandCountryCode;
-                                model.sisObj.txtSAreacoude = item.SibilingLandaraecode;
-                                model.sisObj.txtSNumber = item.SibilingLandNumber;
+                                model.sisLandountryCodeId = item.SibilngLandCountryCode;
+                                model.sisLandAreaCodeId = item.SibilingLandaraecode;
+                                model.sisLandNumberId = item.SibilingLandNumber;
                             } else {
-                                model.sisObj.ddlSMobileCountyCodeID2 = item.SibilngLandCountryCode;
-                                model.sisObj.txtSMobileNumber2 = item.SibilingLandNumber;
+                                model.sisAlternativeCountryCodeId = item.SibilngLandCountryCode;
+                                model.sisAlternativeNumber = item.SibilingLandNumber;
                             }
 
-                            model.sisObj.txtSEmails = item.SibilingEmail;
-                            model.sisObj.rdlSIsMarried = item.SibilingMarried;
+                            model.sisEmail = item.SibilingEmail;
+                            model.sisIsMarried = item.SibilingMarried;
 
-                            model.sisObj.txtShusName = item.SibilingName;
-                            model.sisObj.txtHusbandEducation = item.SibilingSpouseEducationDetails;
-                            model.sisObj.txtHusbandProfession = item.SibilingSpouseProfessionDetails;
-                            model.sisObj.txtShusCompanyName = item.spoucecompanyName;
-                            model.sisObj.txtShusjobloc = item.spoucejobloc;
+                            model.husbandName = item.SibilingName;
+                            model.husbandEducation = item.SibilingSpouseEducationDetails;
+                            model.husbandDesignation = item.SibilingSpouseProfessionDetails;
+                            model.husbandCompany = item.spoucecompanyName;
+                            model.husbandJobLocation = item.spoucejobloc;
 
-                            model.sisObj.ddlSHusMobileCountryID = item.sisterspousemobilecode;
-                            model.sisObj.txtSHusMobileNumber = item.SibilingSpouceMobileNumber;
+                            model.husbandCountryCodeId = item.sisterspousemobilecode;
+                            model.husbandMobNumber = item.SibilingSpouceMobileNumber;
 
                             if (item.SibilingSpouseLandareCode !== '' && item.SibilingSpouseLandareCode !== null) {
-                                model.sisObj.ddlSHusLandCountryID = item.SpousesisterLandCode;
-                                model.sisObj.txtSHusLandNumber = item.SibilngSpouseLandnumber;
-                                model.sisObj.txtSHusLandArea = item.SibilingSpouseLandareCode;
+                                model.husbandLandCountryCodeId = item.SpousesisterLandCode;
+                                model.husbandLandNumberId = item.SibilngSpouseLandnumber;
+                                model.husbandLandAreaCodeId = item.SibilingSpouseLandareCode;
                             } else {
-                                model.sisObj.ddlSHusMobileCountryID2 = item.SpousesisterLandCode;
-                                model.sisObj.txtSHusMobileNumber2 = item.SibilngSpouseLandnumber;
+                                model.husbandAlternativeCountryCodeId = item.SpousesisterLandCode;
+                                model.husbandAlternativeNumber = item.SibilngSpouseLandnumber;
 
                             }
 
-                            model.sisObj.txtHusbandEmail = item.SpouseEmail;
-                            model.sisObj.txtHusbandFatherSurName = item.SpouceFatherLName;
-                            model.sisObj.txtHusbandFatherName = item.SpouceFatherFName;
-                            model.sisObj.ddlsisterspusefathercaste = item.SibilingSpouseFatherCasteId;
-                            model.sisObj.ddlSisSpouceFatherState = item.SisSpouseFatherStateID;
-                            model.sisObj.ddlSisSpouceFatherDistrict = item.SisSpouseFatherDitrictID;
-                            model.sisObj.txtSisSpouceFatherCity = item.SisSpousefatherCity;
-                            model.sisObj.ddlsisprofessionCatgory = item.ProfessionCategoryID;
-                            model.sisObj.ddlsisSpouseprofessionCatgory = item.SpouceProfessionCategoryID;
-                            commonFactory.open('sisterModalContent.html', model.scope, uibModal);
+                            model.husbandEmail = item.SpouseEmail;
+                            model.husbandFatherLastName = item.SpouceFatherLName;
+                            model.spouseFatherFirstName = item.SpouceFatherFName;
+                            model.spouseFatherCaste = item.SibilingSpouseFatherCasteId;
+                            model.broSpouseFatherStateId = item.SisSpouseFatherStateID;
+                            model.broSpouseFatherDistrictId = item.SisSpouseFatherDitrictID;
+                            model.broSpouseCityId = item.SisSpousefatherCity;
+                            model.sisProfessionCatgory = item.ProfessionCategoryID;
+                            model.husbandProfCatgory = item.SpouceProfessionCategoryID;
+                            commonFactory.open('commonSibblingpopup.html', model.scope, uibModal);
                         }
                     } else if (item === undefined && model.sisterArr.length < parseInt(model.SisCount)) {
 
-                        model.sisObj.SibilingCustfamilyID = null;
+                        model.SibilingCustfamilyID = null;
                         model.sisObj = {};
                         commonFactory.open('commonSibblingpopup.html', model.scope, uibModal);
                     } else {
@@ -235,55 +240,6 @@
             return (val !== '' && val !== undefined) ? val : 0;
 
         };
-        model.sibblingCountsSubmit = function(obj) {
-
-
-            if (isSubmit) {
-                isSubmit = false;
-
-
-                var totalnofBrothers = parseInt(model.checkVal(obj.ddlnoofsiblings));
-                var elderBrotherCount = parseInt(model.checkVal(obj.ddlnoofelderrother));
-                var youngerBrotherCount = parseInt(model.checkVal(obj.ddlnoofyoungerbrother));
-
-                var totalnoFSister = parseInt(model.checkVal(obj.ddlnoofsisters));
-                var elderSisterCount = parseInt(model.checkVal(obj.ddlnoofeldersisters));
-                var youngerSisterCount = parseInt(model.checkVal(obj.ddlnoofyoungersisters));
-
-                if ((totalnofBrothers === 0 || totalnofBrothers === (elderBrotherCount + youngerBrotherCount)) && (totalnoFSister === 0 || totalnoFSister === (elderSisterCount + youngerSisterCount))) {
-
-                    var objinput = {
-                        CustID: custID,
-                        NoOfBrothers: obj.ddlnoofsiblings,
-                        NoOfSisters: obj.ddlnoofsisters,
-                        NoOfYoungerBrothers: totalnofBrothers === 0 ? '0' : obj.ddlnoofyoungerbrother,
-                        NoOfElderBrothers: totalnofBrothers === 0 ? '0' : obj.ddlnoofelderrother,
-                        NoOfElderSisters: totalnoFSister === 0 ? '0' : obj.ddlnoofeldersisters,
-                        NoOfYoungerSisters: totalnoFSister === 0 ? '0' : obj.ddlnoofyoungersisters
-                    };
-
-                    model.BroCount = obj.ddlnoofsiblings;
-                    model.SisCount = obj.ddlnoofsisters;
-
-                    model.submitPromise = editSibblingService.submitSibCountsData(objinput).then(function(response) {
-                        console.log(response);
-                        commonFactory.closepopup();
-                        if (response.data === 1) {
-                            model.sibPageload(custID);
-                            alertss.timeoutoldalerts(model.scope, 'alert-success', 'Sibling Details Submitted Succesfully', 4500);
-                        } else {
-                            alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Sibling Details Updation failed', 4500);
-                        }
-                    });
-                } else {
-
-                    alert('Please enter Correct Sibling count');
-                }
-
-            }
-
-
-        };
 
         model.BIsMarried = function(val) {
             if (val == '0') {
@@ -312,32 +268,30 @@
 
         model.SIsMarried = function(val) {
             if (val == '0') {
-                model.sisObj.txtShusName = '';
-                model.sisObj.txtHusbandEducation = '';
-                model.sisObj.txtHusbandProfession = '';
-                model.sisObj.txtShusCompanyName = '';
-                model.sisObj.txtShusjobloc = '';
-                model.sisObj.ddlSHusMobileCountryID = '';
-                model.sisObj.txtSHusMobileNumber = '';
-                model.sisObj.ddlSHusLandCountryID = '';
-                model.sisObj.txtSHusLandNumber = '';
-                model.sisObj.txtSHusLandArea = '';
-                model.sisObj.ddlSHusMobileCountryID2 = '';
-                model.sisObj.txtSHusMobileNumber2 = '';
-                model.sisObj.txtHusbandEmail = '';
-                model.sisObj.txtHusbandFatherSurName = '';
-                model.sisObj.txtHusbandFatherName = '';
-                model.sisObj.ddlsisterspusefathercaste = '';
-                model.sisObj.ddlSisSpouceFatherState = '';
-                model.sisObj.ddlSisSpouceFatherDistrict = '';
-                model.sisObj.txtSisSpouceFatherCity = '';
+                model.txtShusName = '';
+                model.txtHusbandEducation = '';
+                model.txtHusbandProfession = '';
+                model.txtShusCompanyName = '';
+                model.txtShusjobloc = '';
+                model.ddlSHusMobileCountryID = '';
+                model.txtSHusMobileNumber = '';
+                model.ddlSHusLandCountryID = '';
+                model.txtSHusLandNumber = '';
+                model.txtSHusLandArea = '';
+                model.ddlSHusMobileCountryID2 = '';
+                model.txtSHusMobileNumber2 = '';
+                model.txtHusbandEmail = '';
+                model.txtHusbandFatherSurName = '';
+                model.txtHusbandFatherName = '';
+                model.ddlsisterspusefathercaste = '';
+                model.ddlSisSpouceFatherState = '';
+                model.ddlSisSpouceFatherDistrict = '';
+                model.txtSisSpouceFatherCity = '';
             }
         };
 
         model.enableSubmit = function() {
             isSubmit = true;
-
-
         };
 
         model.deleteDisplayTxt = '';
@@ -355,177 +309,98 @@
             });
         };
 
-        model.sibBroSubmit = function(obj) {
+        model.updateData = function(inObj, type) {
 
             if (isSubmit) {
                 isSubmit = false;
-                model.sibBroData = {
-                    GetDetails: {
-                        CustID: custID,
-                        BroName: obj.txtBName,
-                        BroElderYounger: obj.rdlBElderYounger,
-                        BroEducationcategory: null,
-                        BroEducationgroup: null,
-                        BroEducationspecialization: null,
-                        BroEmployedin: null,
-                        BroProfessiongroup: null,
-                        BroProfession: null,
-                        BroCompanyName: obj.txtBCompanyname,
-                        BroJobLocation: obj.txtBJoblocation,
-                        BroMobileCountryCodeID: obj.ddlBMObileCountryID,
-                        BroMobileNumber: obj.txtBmobilenumber,
-                        BroLandCountryCodeID: commonFactory.checkvals(obj.ddlBMObileCountryID2) ? obj.ddlBMObileCountryID2 : (commonFactory.checkvals(obj.ddlBLandLineCountryID) ? obj.ddlBLandLineCountryID : null),
-                        BroLandAreaCode: commonFactory.checkvals(obj.txtBmobilenumber2) ? null : (obj.txtBAreCode !== '' && obj.txtBAreCode !== null ? obj.txtBAreCode : null),
-                        BroLandNumber: commonFactory.checkvals(obj.txtBmobilenumber2) ? obj.txtBmobilenumber2 : (commonFactory.checkvals(obj.txtBLandNumber) ? obj.txtBLandNumber : null),
-                        BroEmail: obj.txtBEmails,
-                        BIsMarried: obj.rdlBIsMarried,
-                        BroWifeName: obj.txtBWifeName,
-                        BroWifeEducationcategory: null,
-                        BroWifeEducationgroup: null,
-                        BroWifeEducationspecialization: null,
-                        BroWifeEmployedin: null,
-                        BroWifeProfessiongroup: null,
-                        BroWifeProfession: null,
-                        BroWifeCompanyName: obj.txtBWifeCompanyName,
-                        BroWifeJobLocation: obj.txtBwifeJoblocation,
-                        BroWifeMobileCountryCodeID: obj.ddlBWMobileCode,
-                        BroWifeMobileNumber: obj.txtBWifeMobileNumber,
-                        BroWifeLandCountryCodeID: commonFactory.checkvals(obj.ddlBWMobileCode2) ? obj.ddlBWMobileCode2 : commonFactory.checkvals(obj.ddlBWifeLandLineCountryCode) ? obj.ddlBWifeLandLineCountryCode : null,
-                        BroWifeLandAreacode: commonFactory.checkvals(obj.txtBWifeMobileNumber2) ? null : commonFactory.checkvals(obj.txtBWifeLandLineAreaCode) ? obj.txtBWifeLandLineAreaCode : null,
-                        BroWifeLandNumber: commonFactory.checkvals(obj.txtBWifeMobileNumber2) ? obj.txtBWifeMobileNumber2 : commonFactory.checkvals(obj.txtBWifeLandLineNumber) ? obj.txtBWifeLandLineNumber : null,
-                        BroWifeFatherSurName: obj.txtBWifeFatherSurName,
-                        BroWifeFatherName: obj.txtBWWifeFatherName,
-                        BroSibilingCustfamilyID: model.SibilingCustfamilyID,
-                        BroEducationDetails: obj.txtbrotherreducation,
-                        BrowifeEducationDetails: obj.txtbrotherwifeeducation,
-                        BroProfessionDetails: obj.txtbrotherprofession,
-                        BroWifeProfessionDetails: obj.txtbrotherwifeprofession,
-                        BroSpouseFatherCountryID: '1',
-                        BroSpouseFatherStateID: obj.ddlBroSpousefatherState,
-                        BroSpouseFatherDitrictID: obj.ddlBroSpousefatherDistrict,
-                        BroSpouseFatherNativePlace: obj.txtBroSpousefatherCity,
-                        BrotherSpouseEmail: obj.txtwifeEmail,
-                        SibilingSpouseFatherCasteID: obj.ddlborherspousefathercaste,
-                        BroProfessionCategoryID: obj.ddlbroprofessionCatgory,
-                        BroSpouseProfessionCategoryID: obj.ddlbroSpouseprofessionCatgory
+                switch (type) {
+                    case 'Sibling Details':
+                        var totalnofBrothers = parseInt(model.checkVal(model.noOfBorthersId));
+                        var elderBrotherCount = parseInt(model.checkVal(model.noOfelderBroId));
+                        var youngerBrotherCount = parseInt(model.checkVal(model.noOfyoungerBroId));
 
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
+                        var totalnoFSister = parseInt(model.checkVal(model.noOfSisterId));
+                        var elderSisterCount = parseInt(model.checkVal(model.noOfelderSisId));
+                        var youngerSisterCount = parseInt(model.checkVal(model.noOfyoungerSisId));
 
-                model.submitPromise = editSibblingService.submitSibBroData(model.sibBroData).then(function(response) {
-                    console.log(response);
-                    commonFactory.closepopup();
-                    if (response.data === 1) {
-                        model.sibPageload(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Brother Details Submitted Succesfully', 4500);
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Brother Details Updation failed', 4500);
-                    }
-                });
+                        if ((totalnofBrothers === 0 || totalnofBrothers === (elderBrotherCount + youngerBrotherCount)) && (totalnoFSister === 0 || totalnoFSister === (elderSisterCount + youngerSisterCount))) {
+
+                            var objinput = {};
+                            objinput = inObj.GetDetails;
+                            objinput.CustID = custID;
+
+                            model.BroCount = model.noOfBorthersId;
+                            model.SisCount = model.noOfSisterId;
+
+                            model.submitPromise = editSibblingService.submitSibCountsData(objinput).then(function(response) {
+                                console.log(response);
+                                commonFactory.closepopup();
+                                if (response.data === 1) {
+                                    model.sibPageload(custID);
+                                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Sibling Details Submitted Succesfully', 4500);
+                                } else {
+                                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Sibling Details Updation failed', 4500);
+                                }
+                            });
+                        } else {
+                            alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Please enter Correct Sibling count', 4500);
+                        }
+
+                        break;
+                    case 'Brother details':
+
+                        inObj.GetDetails.CustID = custID;
+                        inObj.GetDetails.BroSibilingCustfamilyID = model.SibilingCustfamilyID;
+                        model.submitPromise = editSibblingService.submitSibBroData(inObj).then(function(response) {
+                            console.log(response);
+                            commonFactory.closepopup();
+                            if (response.data === 1) {
+                                model.sibPageload(custID);
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'Brother Details Submitted Succesfully', 4500);
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Brother Details Updation failed', 4500);
+                            }
+                        });
+
+                        break;
+                    case 'Sister details':
+                        inObj.GetDetails.CustID = custID;
+                        inObj.GetDetails.SisSibilingCustfamilyID = model.SibilingCustfamilyID;
+                        model.submitPromise = editSibblingService.submitSibSisData(inObj).then(function(response) {
+                            console.log(response);
+                            commonFactory.closepopup();
+                            if (response.data === 1) {
+                                model.sibPageload(custID);
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'Sister Details Submitted Succesfully', 4500);
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Sister Details Updation failed', 4500);
+                            }
+                        });
+
+
+                        break;
+                }
             }
-
         };
-
-        model.sibSisSubmit = function(obj) {
-
-            if (isSubmit) {
-                isSubmit = false;
-                model.sibSisData = {
-                    GetDetails: {
-                        CustID: custID,
-                        SisName: obj.txtSisterName,
-                        SisElderYounger: obj.rbtSElderyounger,
-                        SisEducationcategory: null,
-                        SisEducationgroup: null,
-                        SisEducationspecialization: null,
-                        SisEmployedin: null,
-                        SisProfessiongroup: null,
-                        SisProfession: null,
-                        SisCompanyName: obj.txtSCompanyName,
-                        SisJobLocation: obj.txtSjobloc,
-                        SisMobileCountryCodeID: obj.ddlSMobileCountyCodeID,
-                        SisMobileNumber: obj.txtSMobileNumber,
-                        SisLandCountryCodeID: commonFactory.checkvals(obj.ddlSMobileCountyCodeID2) ? obj.ddlSMobileCountyCodeID2 : commonFactory.checkvals(obj.ddlSLandLineCountryCodeID) ? obj.ddlSLandLineCountryCodeID : null,
-                        SisLandAreaCode: commonFactory.checkvals(obj.txtSMobileNumber2) ? null : commonFactory.checkvals(obj.txtSAreacoude) ? obj.txtSAreacoude : null,
-                        SisLandNumber: commonFactory.checkvals(obj.txtSMobileNumber2) ? obj.txtSMobileNumber2 : commonFactory.checkvals(obj.txtSNumber) ? obj.txtSNumber : null,
-                        SisEmail: obj.txtSEmails,
-                        SIsMarried: obj.rdlSIsMarried,
-                        SisHusbandName: obj.txtShusName,
-                        SisHusbandEducationcategory: null,
-                        SisHusbandEducationgroup: null,
-                        SisHusbandEducationspecialization: null,
-                        SisHusbandEmployedin: null,
-                        SisHusbandProfessiongroup: null,
-                        SisHusbandProfession: null,
-                        SisHusCompanyName: obj.txtShusCompanyName,
-                        SisHusJobLocation: obj.txtShusjobloc,
-                        SisHusbandMobileCountryCodeID: obj.ddlSHusMobileCountryID,
-                        SisHusbandMobileNumber: obj.txtSHusMobileNumber,
-                        SisHusbandLandCountryCodeID: commonFactory.checkvals(obj.ddlSHusMobileCountryID2) ? obj.ddlSHusMobileCountryID2 : commonFactory.checkvals(obj.ddlSHusLandCountryID) ? obj.ddlSHusLandCountryID : null,
-                        SisHusbandLandAreacode: commonFactory.checkvals(obj.txtSHusMobileNumber2) ? null : commonFactory.checkvals(obj.txtSHusLandArea) ? obj.txtSHusLandArea : null,
-                        SisHusbandLandNumber: commonFactory.checkvals(obj.txtSHusMobileNumber2) ? obj.txtSHusMobileNumber2 : commonFactory.checkvals(obj.txtSHusLandNumber) ? obj.txtSHusLandNumber : null,
-                        SisHusbandFatherSurName: obj.txtHusbandFatherSurName,
-                        SisHusbandFatherName: obj.txtHusbandFatherName,
-                        SisSibilingCustfamilyID: model.sisObj.SibilingCustfamilyID,
-                        siseducationdetails: obj.txtsisEducation,
-                        sisprofessiondetails: obj.txtsisProfession,
-                        sisspouseeducationdetails: obj.txtHusbandEducation,
-                        sisspouseprofessiondetails: obj.txtHusbandProfession,
-                        SisSpouseFatherCountryID: '1',
-                        SisSpouseFatherStateID: obj.ddlSisSpouceFatherState,
-                        SisSpouseFatherDitrictID: obj.ddlSisSpouceFatherDistrict,
-                        SisSpouseFatherNativePlace: obj.txtSisSpouceFatherCity,
-                        SisSpouseEmail: obj.txtHusbandEmail,
-                        SibilingSpouseFatherCasteID: obj.ddlsisterspusefathercaste,
-                        SisProfessionCategoryID: obj.ddlsisprofessionCatgory,
-                        SisSpouseProfessionCategoryID: obj.ddlsisSpouseprofessionCatgory
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-                model.submitPromise = editSibblingService.submitSibSisData(model.sibSisData).then(function(response) {
-                    console.log(response);
-                    commonFactory.closepopup();
-                    if (response.data === 1) {
-
-                        model.sibPageload(custID);
-
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Sister Details Submitted Succesfully', 4500);
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Sister Details Updation failed', 4500);
-                    }
-                });
-            }
-
-        };
-
 
         model.noOfSibblings = [
-            { lblname: 'No of Brothers', controlType: 'select', ngmodel: 'noOfBorthersId', parameterValue: 'OccupationDetails' },
-            { lblname: 'Elder Brother', controlType: 'select', ngmodel: 'noOfelderBroId', parameterValue: 'OccupationDetails' },
-            { lblname: 'Younger Brother', controlType: 'select', ngmodel: 'noOfyoungerBroId', parameterValue: 'OccupationDetails' },
-            { lblname: 'No of sisters', controlType: 'select', ngmodel: 'noOfSisterId', parameterValue: 'OccupationDetails' },
-            { lblname: 'Elder sisters', controlType: 'select', ngmodel: 'noOfelderSisId', parameterValue: 'OccupationDetails' },
-            { lblname: 'Younger  sisters', controlType: 'select', ngmodel: 'noOfyoungerSisId', parameterValue: 'OccupationDetails' },
+            { lblname: 'No of Brothers', controlType: 'select', ngmodel: 'noOfBorthersId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfBrothers' },
+            { lblname: 'Elder Brother', controlType: 'select', ngmodel: 'noOfelderBroId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfElderBrothers' },
+            { lblname: 'Younger Brother', controlType: 'select', ngmodel: 'noOfyoungerBroId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfYoungerBrothers' },
+            { lblname: 'No of sisters', controlType: 'select', ngmodel: 'noOfSisterId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfSisters' },
+            { lblname: 'Elder sisters', controlType: 'select', ngmodel: 'noOfelderSisId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfElderSisters' },
+            { lblname: 'Younger  sisters', controlType: 'select', ngmodel: 'noOfyoungerSisId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfYoungerSisters' }
         ];
 
 
         model.brother = [
-            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderBro', parameterValue: 'OccupationDetails' },
-            { lblname: 'Name', controlType: 'textbox', ngmodel: 'broName', parameterValue: 'OccupationDetails' },
-            { lblname: 'Education', controlType: 'textbox', ngmodel: 'broEducation', parameterValue: 'OccupationDetails' },
-            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'broProfessionCatgory', parameterValue: 'OccupationDetails' },
-            { lblname: 'Designationt', controlType: 'textbox', ngmodel: 'broDesignation', parameterValue: 'OccupationDetails' },
-            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'broComapnyName', parameterValue: 'OccupationDetails' },
-            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'broJobLocation', parameterValue: 'OccupationDetails' },
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderBro', ownArray: 'broElderYoungerArr', parameterValue: 'BroElderYounger' },
+            { lblname: 'Name', controlType: 'textbox', ngmodel: 'broName', parameterValue: 'BroName' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'broEducation', parameterValue: 'BroEducationDetails' },
+            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'broProfessionCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'BroProfessionCategoryID' },
+            { lblname: 'Designationt', controlType: 'textbox', ngmodel: 'broDesignation', parameterValue: 'BroProfessionDetails' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'broComapnyName', parameterValue: 'BroCompanyName' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'broJobLocation', parameterValue: 'BroJobLocation' },
             {
                 controlType: 'contact',
                 emailhide: true,
@@ -538,20 +413,20 @@
                 strland: 'broLandNumberId',
                 strmail: 'broEmail',
 
-                // mobileCodeIdParameterValue: 'MotherMobileCountryID',
-                // mobileNumberParameterValue: 'MotherMobileNumber',
-                // landCountryCodeIdParameterValue: 'MotherLandCountryID',
-                // landAreaCodeIdParameterValue: 'MotherLandAreaCode',
-                // landNumberParameterValue: 'MotherLandNumber',
-                // emailParameterValue: 'MotherEmail'
+                mobileCodeIdParameterValue: 'BroMobileCountryCodeID',
+                mobileNumberParameterValue: 'BroMobileNumber',
+                landCountryCodeIdParameterValue: 'BroLandCountryCodeID',
+                landAreaCodeIdParameterValue: 'BroLandAreaCode',
+                landNumberParameterValue: 'BroLandNumber',
+                emailParameterValue: 'BroEmail'
             },
-            { lblname: 'Married', controlType: 'radio', ngmodel: 'broIsMarried', parameterValue: 'OccupationDetails' },
-            { lblname: 'Spouse Name', controlType: 'textbox', ngmodel: 'spouseName', parameterValue: 'OccupationDetails' },
-            { lblname: 'Spouse Education', controlType: 'textbox', ngmodel: 'spouseEducation', parameterValue: 'OccupationDetails' },
-            { lblname: 'Profession Category', controlType: 'textarea', ngmodel: 'spouseProfCatgory', parameterValue: 'OccupationDetails' },
-            { lblname: 'Spouse Designation', controlType: 'housewife', ngmodelText: 'spouseDesignation', ngmodelChk: 'chkspousehousewife', parameterValueText: 'MotherProfessiondetails', parameterValueChk: 'MotherProfessiondetails' },
-            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'spouseCompany', parameterValue: 'OccupationDetails' },
-            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'spouseJobLocation', parameterValue: 'OccupationDetails' },
+            { lblname: 'Is Married', controlType: 'radio', ngmodel: 'broIsMarried', arrbind: 'boolType', parameterValue: 'BIsMarried' },
+            { lblname: 'Spouse Name', controlType: 'textbox', ngmodel: 'spouseName', parameterValue: 'BroWifeName' },
+            { lblname: 'Spouse Education', controlType: 'textbox', ngmodel: 'spouseEducation', parameterValue: 'BrowifeEducationDetails' },
+            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'spouseProfCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'BroSpouseProfessionCategoryID' },
+            { lblname: 'Spouse Designation', controlType: 'housewife', ngmodelText: 'spouseDesignation', ngmodelChk: 'chkspousehousewife', parameterValueText: 'BroWifeProfessionDetails', parameterValueChk: 'MotherProfessiondetails' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'spouseCompany', parameterValue: 'BroWifeCompanyName' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'spouseJobLocation', parameterValue: 'BroWifeJobLocation' },
             {
                 controlType: 'contact',
                 emailhide: true,
@@ -564,29 +439,29 @@
                 strland: 'spouseLandNumberId',
                 strmail: 'spouseEmail',
 
-                // mobileCodeIdParameterValue: 'MotherMobileCountryID',
-                // mobileNumberParameterValue: 'MotherMobileNumber',
-                // landCountryCodeIdParameterValue: 'MotherLandCountryID',
-                // landAreaCodeIdParameterValue: 'MotherLandAreaCode',
-                // landNumberParameterValue: 'MotherLandNumber',
-                // emailParameterValue: 'MotherEmail'
+                mobileCodeIdParameterValue: 'BroWifeMobileCountryCodeID',
+                mobileNumberParameterValue: 'BroWifeMobileNumber',
+                landCountryCodeIdParameterValue: 'BroWifeLandCountryCodeID',
+                landAreaCodeIdParameterValue: 'BroWifeLandAreacode',
+                landNumberParameterValue: 'BroWifeLandNumber',
+                emailParameterValue: 'BrotherSpouseEmail'
+
             },
-            { lblname: 'Spouse Father SurName', controlType: 'textbox', ngmodel: 'spouseFatherLastName', parameterValue: 'OccupationDetails' },
-            { lblname: 'Spouse Father Name', controlType: 'textbox', ngmodel: 'spouseFatherFirstName', parameterValue: 'OccupationDetails' },
-            { lblname: 'Spouse Father Caste', controlType: 'textbox', ngmodel: 'spouseFatherCaste', parameterValue: 'OccupationDetails' },
+            { lblname: 'Spouse Father SurName', controlType: 'textbox', ngmodel: 'spouseFatherLastName', parameterValue: 'BroWifeFatherSurName' },
+            { lblname: 'Spouse Father Name', controlType: 'textbox', ngmodel: 'spouseFatherFirstName', parameterValue: 'BroWifeFatherName' },
+            { lblname: 'Spouse Father Caste', controlType: 'select', ngmodel: 'spouseFatherCaste', typeofdata: 'caste', parameterValue: 'SibilingSpouseFatherCasteID' },
             {
                 controlType: 'country',
                 countryshow: false,
                 cityshow: false,
                 othercity: false,
                 dstate: 'broSpouseFatherStateId',
-                ddistrict: 'broSpouseFatherDistrict',
-                // countryParameterValue: 'MotherCountry',
-                // stateParameterValue: 'MotherState',
-                // districtParameterValue: 'MotherDistric'
+                ddistrict: 'broSpouseFatherDistrictId',
+                countryParameterValue: 'BroSpouseFatherCountryID',
+                stateParameterValue: 'BroSpouseFatherStateID',
+                districtParameterValue: 'BroSpouseFatherDitrictID'
             },
-            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'broSpouseCityId', parameterValue: 'OccupationDetails' }
-
+            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'broSpouseCityId', parameterValue: 'BroSpouseFatherNativePlace' }
 
         ];
 
@@ -594,13 +469,13 @@
 
 
         model.sister = [
-            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderSis', parameterValue: 'OccupationDetails' },
-            { lblname: 'Name', controlType: 'textbox', ngmodel: 'sisName', parameterValue: 'OccupationDetails' },
-            { lblname: 'Education', controlType: 'textbox', ngmodel: 'sisEducation', parameterValue: 'OccupationDetails' },
-            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'sisProfessionCatgory', parameterValue: 'OccupationDetails' },
-            { lblname: 'Designationt', controlType: 'textbox', ngmodel: 'sisDesignation', parameterValue: 'OccupationDetails' },
-            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'sisComapnyName', parameterValue: 'OccupationDetails' },
-            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'sisJobLocation', parameterValue: 'OccupationDetails' },
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderSis', ownArray: 'sisElderYoungerArr', parameterValue: 'SisElderYounger' },
+            { lblname: 'Name', controlType: 'textbox', ngmodel: 'sisName', parameterValue: 'SisName' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'sisEducation', parameterValue: 'siseducationdetails' },
+            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'sisProfessionCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'SisProfessionCategoryID' },
+            { lblname: 'Designationt', controlType: 'housewife', ngmodelText: 'sisDesignation', ngmodelChk: 'chksishousewife', parameterValueText: 'sisprofessiondetails' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'sisComapnyName', parameterValue: 'SisCompanyName' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'sisJobLocation', parameterValue: 'SisJobLocation' },
             {
                 controlType: 'contact',
                 emailhide: true,
@@ -613,20 +488,20 @@
                 strland: 'sisLandNumberId',
                 strmail: 'sisEmail',
 
-                // mobileCodeIdParameterValue: 'MotherMobileCountryID',
-                // mobileNumberParameterValue: 'MotherMobileNumber',
-                // landCountryCodeIdParameterValue: 'MotherLandCountryID',
-                // landAreaCodeIdParameterValue: 'MotherLandAreaCode',
-                // landNumberParameterValue: 'MotherLandNumber',
-                // emailParameterValue: 'MotherEmail'
+                mobileCodeIdParameterValue: 'SisMobileCountryCodeID',
+                mobileNumberParameterValue: 'SisMobileNumber',
+                landCountryCodeIdParameterValue: 'SisLandCountryCodeID',
+                landAreaCodeIdParameterValue: 'SisLandAreaCode',
+                landNumberParameterValue: 'SisLandNumber',
+                emailParameterValue: 'SisEmail'
             },
-            { lblname: 'Is Married', controlType: 'radio', ngmodel: 'sisIsMarried', parameterValue: 'OccupationDetails' },
-            { lblname: 'Husband Name', controlType: 'textbox', ngmodel: 'husbandName', parameterValue: 'OccupationDetails' },
-            { lblname: 'Husband Education', controlType: 'textbox', ngmodel: 'husbandEducation', parameterValue: 'OccupationDetails' },
-            { lblname: 'Profession Category', controlType: 'textarea', ngmodel: 'husbandProfCatgory', parameterValue: 'OccupationDetails' },
-            { lblname: 'Husband Designation', controlType: 'textbox', ngmodel: 'husbandDesignation', parameterValue: 'OccupationDetails' },
-            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'husbandCompany', parameterValue: 'OccupationDetails' },
-            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'husbandJobLocation', parameterValue: 'OccupationDetails' },
+            { lblname: 'Is Married', controlType: 'radio', ngmodel: 'sisIsMarried', arrbind: 'boolType', parameterValue: 'SIsMarried' },
+            { lblname: 'Husband Name', controlType: 'textbox', ngmodel: 'husbandName', parameterValue: 'SisHusbandName' },
+            { lblname: 'Husband Education', controlType: 'textbox', ngmodel: 'husbandEducation', parameterValue: 'sisspouseeducationdetails' },
+            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'husbandProfCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'SisSpouseProfessionCategoryID' },
+            { lblname: 'Husband Designation', controlType: 'textbox', ngmodel: 'husbandDesignation', parameterValue: 'sisspouseprofessiondetails' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'husbandCompany', parameterValue: 'SisHusCompanyName' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'husbandJobLocation', parameterValue: 'SisHusJobLocation' },
             {
                 controlType: 'contact',
                 emailhide: true,
@@ -638,34 +513,40 @@
                 strareacode: 'husbandLandAreaCodeId',
                 strland: 'husbandLandNumberId',
                 strmail: 'husbandEmail',
-
-                // mobileCodeIdParameterValue: 'MotherMobileCountryID',
-                // mobileNumberParameterValue: 'MotherMobileNumber',
-                // landCountryCodeIdParameterValue: 'MotherLandCountryID',
-                // landAreaCodeIdParameterValue: 'MotherLandAreaCode',
-                // landNumberParameterValue: 'MotherLandNumber',
-                // emailParameterValue: 'MotherEmail'
+                mobileCodeIdParameterValue: 'SisHusbandMobileCountryCodeID',
+                mobileNumberParameterValue: 'SisHusbandMobileNumber',
+                landCountryCodeIdParameterValue: 'SisHusbandLandCountryCodeID',
+                landAreaCodeIdParameterValue: 'SisHusbandLandAreacode',
+                landNumberParameterValue: 'SisHusbandLandNumber',
+                emailParameterValue: 'SisSpouseEmail'
             },
-            { lblname: 'Husband Father SurName', controlType: 'textbox', ngmodel: 'husbandFatherLastName', parameterValue: 'OccupationDetails' },
-            { lblname: 'Husband Father Name', controlType: 'textbox', ngmodel: 'spouseFatherFirstName', parameterValue: 'OccupationDetails' },
-            { lblname: 'Husband Father Caste', controlType: 'textbox', ngmodel: 'spouseFatherCaste', parameterValue: 'OccupationDetails' },
+            { lblname: 'Husband Father SurName', controlType: 'textbox', ngmodel: 'husbandFatherLastName', parameterValue: 'SisHusbandFatherSurName' },
+            { lblname: 'Husband Father Name', controlType: 'textbox', ngmodel: 'spouseFatherFirstName', parameterValue: 'SisHusbandFatherName' },
+            { lblname: 'Husband Father Caste', controlType: 'select', ngmodel: 'spouseFatherCaste', typeofdata: 'caste', parameterValue: 'SibilingSpouseFatherCasteID' },
             {
                 controlType: 'country',
                 countryshow: false,
                 cityshow: false,
                 othercity: false,
                 dstate: 'broSpouseFatherStateId',
-                ddistrict: 'broSpouseFatherDistrict',
-                // countryParameterValue: 'MotherCountry',
-                // stateParameterValue: 'MotherState',
-                // districtParameterValue: 'MotherDistric'
+                ddistrict: 'broSpouseFatherDistrictId',
+                countryParameterValue: 'SisSpouseFatherCountryID',
+                stateParameterValue: 'SisSpouseFatherStateID',
+                districtParameterValue: 'SisSpouseFatherDitrictID'
             },
-            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'broSpouseCityId', parameterValue: 'OccupationDetails' }
+            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'broSpouseCityId', parameterValue: 'SisSpouseFatherNativePlace' }
 
         ];
 
 
-
+        model.broElderYoungerArr = [
+            { "label": "Elder", "title": "Elder", "value": 42 },
+            { "label": "Younger", "title": "Younger", "value": 41 }
+        ];
+        model.sisElderYoungerArr = [
+            { "label": "Elder", "title": "Elder", "value": 322 },
+            { "label": "Younger", "title": "Younger", "value": 321 }
+        ];
 
         return model.init();
     }

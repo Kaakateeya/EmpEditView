@@ -9,7 +9,7 @@
         var custID = stateParams.CustID;
         //  logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.dataval = '';
-        model.aboutObj = {};
+
 
         model.init = function() {
             custID = stateParams.CustID;
@@ -31,27 +31,39 @@
             commonFactory.closepopup();
         };
         model.showPopup = function(val) {
-            model.aboutObj.txtAboutprofile = '';
+
+            model.popupHeader = 'About Your Profile';
+            model.txtAboutprofile = '';
             if (val !== undefined) {
-                model.aboutObj.txtAboutprofile = val;
+                model.eventType = 'edit';
+                model.txtAboutprofile = val;
             }
             commonFactory.open('AboutModalContent.html', model.scope, uibModal);
         };
 
-        model.AboutProfleSubmit = function(str) {
-            editOfcePurposeService.getofficeData('2', custID, str).then(function(response) {
+        model.updateData = function(inObj, type) {
+
+            editOfcePurposeService.getofficeData('2', custID, inObj.GetDetails.txtAboutprofile).then(function(response) {
                 console.log(response);
                 commonFactory.closepopup();
-                if (response.data === 1) {
-                    model.dataval = str;
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'About Profile Details submitted Succesfully', 4500);
-                } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'About Profile Details Updation failed', 4500);
-                }
+                model.dataval = inObj.GetDetails.txtAboutprofile;
+                alertss.timeoutoldalerts(model.scope, 'alert-success', 'About Profile Details submitted Succesfully', 4500);
+                // if (response.data === 1) {
 
+                // } else {
+                //     alertss.timeoutoldalerts(model.scope, 'alert-danger', 'About Profile Details Updation failed', 4500);
+                // }
             });
 
         };
+
+
+        model.popupdata = [
+            { lblname: '', controlType: 'about', required: true, maxlength: '1000', displayTxt: '(You can write anything about this profile)*', ngmodel: 'txtAboutprofile', parameterValue: 'txtAboutprofile' }
+        ];
+
+
+
 
 
         return model.init();
