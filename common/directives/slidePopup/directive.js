@@ -34,6 +34,7 @@
                 if (apiPath) {
 
                     if (value2) {
+
                         SelectBindService[apiPath](commonFactory.listSelectedVal(value), commonFactory.listSelectedVal(value2)).then(function(res) {
                             _.map(_.where(scope.model.popupdata, { parentName: text }), function(item) {
                                 var depData = [];
@@ -115,7 +116,7 @@
                     if (item.parameterValue) {
                         parameters[item.parameterValue] = commonFactory.listSelectedVal(scope.model[item.ngmodel]);
                     } else if (item.controlType === 'country') {
-                        parameters[item.countryParameterValue] = item.countryshow = false ? 1 : scope.model[item.dcountry];
+                        parameters[item.countryParameterValue] = item.countryshow === false ? 1 : scope.model[item.dcountry];
                         parameters[item.stateParameterValue] = scope.model[item.dstate];
                         parameters[item.districtParameterValue] = scope.model[item.ddistrict];
                         parameters[item.cityParameterValue] = scope.model[item.dcity];
@@ -139,8 +140,6 @@
                     } else if (item.controlType === 'astroTimeOfBirth') {
                         parameters.TimeofBirth = scope.model.ddlFromHours + ":" + scope.model.ddlFromMinutes + ":" + scope.model.ddlFromSeconds;
                     }
-
-
                 });
 
                 var inputDataObj = {
@@ -162,18 +161,6 @@
             scope.chkChange = function(chk) {
                 return chk === true ? 'HouseWife' : '';
             };
-
-            scope.showHideDiv = function(val, type) {
-
-                // if (type === 'housewife') {
-                //     alert(11111);
-                //     return val === undefined ? true : !scope.model[val];
-                // } else if (type === 'radio')
-                //     return val === undefined ? true : scope.model[val];
-                // else
-                //     return true;
-            };
-
 
         }
     }

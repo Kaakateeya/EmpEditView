@@ -28,10 +28,10 @@
         return directive;
 
         function link(scope, element, attrs) {
-
+            debugger;
             scope.amob = (scope.stralternative !== null && scope.stralternative !== '' && scope.stralternative !== undefined) ? true : false;
             scope.land = (scope.strareacode !== null && scope.strareacode !== '' && scope.strareacode !== undefined) ? true : false;
-            scope.mail = (scope.strmail !== null && scope.strmail !== '' && scope.strmail !== undefined) ? true : false;
+            scope.mail = (scope.strmail !== null && scope.strmail !== '' && scope.strmail !== undefined && scope.emailhide === true) ? true : false;
             scope.pmob = (scope.strmobile !== null && scope.strmobile !== '' && scope.strmobile !== undefined) ? true : false;
 
             scope.showhidemob = function(ev, type) {

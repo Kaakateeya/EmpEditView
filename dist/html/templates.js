@@ -224,225 +224,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"astroContent.html\">\r" +
     "\n" +
-    "        <form name=\"astroForm\" novalidate role=\"form\" ng-submit=\"page.model.astroSubmit(page.model.atroObj);\" accessible-form>\r" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
     "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Astro details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul id=\"ulastro\">\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lbltimebirth\" class=\"pop_label_left\">Time of Birth<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my select-box-my-trible select-box-my-trible3 input-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromHours\" ng-options=\"item.value as item.label for item in page.model.hrsbindArr\" required></select>\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromMinutes\" ng-options=\"item.value as item.label for item in page.model.minbindArr\" required></select>\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromSeconds\" ng-options=\"item.value as item.label for item in page.model.secbindArr\" required></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <country-directive require=\"true\" countryshow=\"true\" cityshow=\"true\" othercity=\"false\" dcountry=\"page.model.atroObj.ddlCountryOfBirthID\" dstate=\"page.model.atroObj.ddlStateOfBirthID\" ddistrict=\"page.model.atroObj.ddlDistrictOfBirthID\" dcity=\"page.model.atroObj.ddlcity\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblstarlan\" class=\"pop_label_left\">Star language</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlstarlanguage\" typeofdata=\"'starLanguage'\" ng-change=\"page.model.changeBind('star',page.model.atroObj.ddlstarlanguage);\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblstar\" class=\"pop_label_left\">Star</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlstar\" ng-options=\"item.value as item.label for item in page.model.starArr\"></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblpaadam\" class=\"pop_label_left\">Paadam</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlpaadam\" typeofdata=\"'paadam'\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblLagnam\" class=\"pop_label_left\">Lagnam</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlLagnam\" typeofdata=\"'lagnam'\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblRaasiMoonsign\" class=\"pop_label_left\">Raasi/Moon sign</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlRaasiMoonsign\" typeofdata=\"'ZodaicSign'\"></select>\r" +
-    "\n" +
-    "                            </select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblGothramGotra\" class=\"pop_label_left\">Gothram/Gotra</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.atroObj.txtGothramGotra\" class=\"form-control\" tabindex=\"13\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblMaternalgothram\" class=\"pop_label_left\">Maternal gothram</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.atroObj.txtMaternalgothram\" class=\"form-control\" tabindex=\"14\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblManglikKujadosham\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Manglik/Kuja dosham</label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                            <md-radio-group name=\"rdlkujaDosham\" layout=\"row\" ng-model=\"page.model.atroObj.rdlkujaDosham\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"0\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"1\"> No </md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"2\"> Dont't Know </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                        </md-input-container>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
-    "\n" +
-    "                        <label for=\"lbllongitude\" class=\"pop_label_left\">Place of birth longitude</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input id=\"txtlogitude\" class=\"form-control\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddllongitude\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
-    "\n" +
-    "                        <label for=\"lbllatitude\" class=\"pop_label_left\">Place of birth latitude</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input id=\"txtlatitude\" class=\"form-control col-lg-3\" />\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddllatitude\"></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
-    "\n" +
-    "                        <label for=\"lbllatitude\">Place of birth latitude</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input type=\"checkbox\" ng-model=\"page.model.atroObj.Chkgenertehoro\" value=\"Generate HoroScope\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row\">\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </form>\r" +
+    "        </slide-popup>\r" +
     "\n" +
     "    </script>\r" +
     "\n" +
@@ -3386,464 +3170,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "        <div id=\"edupopupdiv\">\r" +
-    "\n" +
-    "            <script type=\"text/ng-template\" id=\"EduModalContent.html\">\r" +
-    "\n" +
-    "                <form class=\"EditViewClass\" name=\"eduForm\" novalidate role=\"form\" ng-submit=\"eduForm.$valid  && page.model.eduSubmit(page.model.edoObj);\" accessible-form>\r" +
-    "\n" +
-    "                    <div class=\"modal-header\">\r" +
-    "\n" +
-    "                        <h3 class=\"modal-title text-center\" id=\"modal-title\">Education Details\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                                <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
-    "\n" +
-    "                            </a>\r" +
-    "\n" +
-    "                        </h3>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div class=\"modal-body\" id=\"modal-body\">\r" +
-    "\n" +
-    "                        <ul id=\"uleducation\" class='modal-body clearfix pop_content_my'>\r" +
-    "\n" +
-    "                            <li class=\"clearfix\">\r" +
-    "\n" +
-    "                                <label for=\"lblIsHighestDegree\" class=\"pop_label_left\" style=\"padding-top: 2%;\">Is Highest Degree<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"radio-group-my\">\r" +
-    "\n" +
-    "                                    <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                                        <md-radio-group ng-required=\"true\" name=\"IsHighestDegree\" layout=\"row\" ng-model=\"page.model.edoObj.IsHighestDegree\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                            <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                            <md-radio-button value=\"0\"> No </md-radio-button>\r" +
-    "\n" +
-    "                                        </md-radio-group>\r" +
-    "\n" +
-    "                                        <div ng-messages=\"eduForm.IsHighestDegree.$invalid\">\r" +
-    "\n" +
-    "                                            <div ng-if=\"eduForm.IsHighestDegree.$invalid && (eduForm.$submitted)\">This field is required.</div>\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "                                    </md-input-container>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\">Education category<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown id=\"estt\" ng-model=\"page.model.edoObj.ddlEduCatgory\" typeofdata=\"'educationcategory'\" ng-change=\"page.model.changeBind('EducationCatgory',page.model.edoObj.ddlEduCatgory);\" required></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\">Education group<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.edoObj.ddlEdugroup\" ng-options=\"item.value as item.label for item in page.model.eduGroupArr\" ng-change=\"page.model.changeBind('EducationGroup',page.model.edoObj.ddlEdugroup);\" required></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\">Edu specialization<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.edoObj.ddlEduspecialization\" ng-options=\"item.value as item.label for item in page.model.eduSpecialisationArr\" required></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\" id=\"divuniversity\">\r" +
-    "\n" +
-    "                                <label for=\"lbluniversity\" class=\"pop_label_left\">University</label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.edoObj.txtuniversity\" maxlength=\"100\" class=\"form-control\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblcollege\" class=\"pop_label_left\">College</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.edoObj.txtcollege\" maxlength=\"150\" class=\"form-control\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblPassOfYear\" class=\"pop_label_left\">Pass of year</label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.edoObj.ddlpassOfyear\" ng-options=\"item1.value as item1.label for item1 in page.model.passOfyearArr\"></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <country-directive countryshow=\"true\" cityshow=\"true\" othercity=\"true\" dcountry=\"page.model.edoObj.ddlCountry\" dstate=\"page.model.edoObj.ddlState\" ddistrict=\"page.model.edoObj.ddlDistrict\" dcity=\"page.model.edoObj.ddlcity\" strothercity=\"page.model.edoObj.txtcity\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblEduMerits\" class=\"pop_label_left\">Educational merits</label>\r" +
-    "\n" +
-    "                                <div class=\"\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <textarea ng-model=\"page.model.edoObj.txtEdumerits\" maxlength=\"500\" rows=\"4\" cols=\"20\" style=\"max-width:515px;width:100%;\" tabindex=\"12\"></textarea>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"row\">\r" +
-    "\n" +
-    "                                <br/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </form>\r" +
-    "\n" +
-    "            </script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div id=\"profpopupdiv\">\r" +
-    "\n" +
-    "            <script type=\"text/ng-template\" id=\"profModalContent.html\">\r" +
-    "\n" +
-    "                <form class=\"EditViewClass\" name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.ProfSubmit(page.model.profObj);\" accessible-form>\r" +
-    "\n" +
-    "                    <div class=\"modal-header\">\r" +
-    "\n" +
-    "                        <h3 class=\"modal-title text-center\" id=\"modal-title\">Profession details\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                                <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                            </a>\r" +
-    "\n" +
-    "                        </h3>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                        <ul>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblempin\" class=\"pop_label_left\">Employed In<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.profObj.ddlemployedin\" typeofdata=\"'ProfCatgory'\" required></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblprofessiongroup\" class=\"pop_label_left\">Professional group<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.profObj.ddlprofgroup\" typeofdata=\"'ProfGroup'\" ng-change=\"page.model.ProfchangeBind('ProfessionGroup',page.model.profObj.ddlprofgroup);\" required></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblprofession\" class=\"pop_label_left\">Profession<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.profObj.ddlprofession\" ng-options=\"item.value as item.label for item in page.model.ProfSpecialisationArr\" required></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblcmpyname\" class=\"pop_label_left\">Company name</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.profObj.txtcmpyname\" class=\"form-control\" tabindex=\"4\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblsal\" class=\"pop_label_left\">Monthly salary</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.profObj.ddlcurreny\" typeofdata=\"'currency'\"></select>\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.profObj.txtsalary\" style=\"float:right\" class=\"form-control\" onchange=\"currency();\" maxlength=\"7\" tabindex=\"6\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));\"\r" +
-    "\n" +
-    "                                    />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <country-directive countryshow=\"true\" cityshow=\"true\" othercity=\"true\" dcountry=\"page.model.profObj.ddlCountryProf\" dstate=\"page.model.profObj.ddlStateProf\" ddistrict=\"page.model.profObj.ddlDistrictProf\" dcity=\"page.model.profObj.ddlcityworkingprofession\"\r" +
-    "\n" +
-    "                                strothercity=\"page.model.profObj.txtcityprofession\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblworkingfrome\" class=\"pop_label_left\">Working from date</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <date-picker strdate=\"page.model.profObj.txtworkingfrom\"></date-picker>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <div id=\"divfalseVisa\" ng-if=\"page.model.profObj.ddlCountryProf!=1\">\r" +
-    "\n" +
-    "                                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                    <label for=\"lblvisastatus\" class=\"pop_label_left\">visa status</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                        <div class=\"select-box-my\">\r" +
-    "\n" +
-    "                                            <select multiselectdropdown ng-model=\"page.model.profObj.ddlvisastatus\"></select>\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "                                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label class=\"pop_label_left\" for=\"lblsincedate\">Since date</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                        <date-picker strdate=\"page.model.profObj.txtssincedate\"></date-picker>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "                                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                    <label for=\"lblarrivaldate\" class=\"pop_label_left\">Arrival Date</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                        <date-picker strdate=\"page.model.profObj.txtarrivaldate\"></date-picker>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                    <label for=\"lbldeaparturedate\" class=\"pop_label_left\">Departure Date</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                        <date-picker strdate=\"page.model.profObj.txtdeparture\"></date-picker>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lbloccupation\" class=\"pop_label_left\">Occupation Details</label>\r" +
-    "\n" +
-    "                                <div class=\"\">\r" +
-    "\n" +
-    "                                    <textarea ng-model=\"page.model.profObj.txtoccupation\" style=\"width:515px;\" rows=\"4\" tabindex=\"16\" maxlength=\"500\" onkeydown=\"return CharacterCount()\"></textarea>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label id=\"lbloccupationcount\" style=\"color: #1e1c1c; font-size: 13px;\"></label>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"row\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                        </ul>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </form>\r" +
-    "\n" +
-    "            </script>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div id=\"AboutPopup\">\r" +
-    "\n" +
-    "            <script type=\"text/ng-template\" id=\"AboutModalContent.html\">\r" +
-    "\n" +
-    "                <form class=\"EditViewClass\" name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutUrselfSubmit(page.model.aboutObj)\">\r" +
-    "\n" +
-    "                    <div class=\"modal-header\">\r" +
-    "\n" +
-    "                        <h3 class=\"modal-title text-center\" id=\"modal-title\">About your self\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                                <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                            </a>\r" +
-    "\n" +
-    "                        </h3>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                        <ul>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label id=\"lblabout\" style=\"color: #9b2828; font-size: 13px;\">\r" +
-    "\n" +
-    "            				(Please don't write phone numbers/emails/any junk characters)*</label>\r" +
-    "\n" +
-    "                                <textarea ng-model=\"page.model.aboutObj.txtAboutUS\" style=\"width: 500px; height: 150px;\" class=\"col-lg-10\" maxlength=\"1000\" required ng-class=\"form-control\" required />\r" +
-    "\n" +
-    "                                <div>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                                <label id=\"Label1\" style=\"color: red; font-size: 13px;\" class=\"pull-right\">(max 1000 characters)</label>\r" +
-    "\n" +
-    "                                <label id=\"lblaboutcount\" style=\"color: #1e1c1c; font-size: 13px;\">{{aboutForm.txtAboutUS.length}}</label>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"row\">\r" +
-    "\n" +
-    "                                <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                        </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </form>\r" +
-    "\n" +
-    "            </script>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "    </div>\r" +
     "\n" +
     "\r" +
@@ -3890,273 +3216,21 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <script type=\"text/ng-template\" id=\"CustomerDataContent.html\">\r" +
-    "\n" +
-    "        <form class=\"EditViewClass\" name=\"custForm\" ng-class=\"'EditViewClass'\" novalidate role=\"form\" ng-submit=\"custForm.$valid && page.model.custdataSubmit(page.model.custObj)\" accessible-form>\r" +
-    "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Customer details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblElderYounger\" class=\"pop_label_left\" style=\"padding-top: 4%;\">Gender<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right pop_radios_list\">\r" +
-    "\n" +
-    "                            <md-input-container style=\"font-weight: 700; color: black;\">\r" +
-    "\n" +
-    "                                <md-radio-group ng-required=\"true\" name=\"rdlGender\" layout=\"row\" ng-model=\"page.model.custObj.rdlGender\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                    <md-radio-button value=\"2\" class=\"md-primary\">Female</md-radio-button>\r" +
-    "\n" +
-    "                                    <md-radio-button value=\"1\"> Male </md-radio-button>\r" +
-    "\n" +
-    "                                </md-radio-group>\r" +
-    "\n" +
-    "                                <div ng-messages=\"custForm.rdlGender.$invalid\">\r" +
-    "\n" +
-    "                                    <div ng-if=\"custForm.rdlGender.$invalid && (custForm.$submitted)\">This field is required.</div>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </md-input-container>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblname\" class=\"pop_label_left\">Sur Name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.custObj.txtSurName\" class=\"form-control\" required/>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblname\" class=\"pop_label_left\">Name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.custObj.txtName\" class=\"form-control\" required/>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblMaritalstatus\" class=\"pop_label_left\">Marital Status<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.custObj.dropmaritalstatus\" typeofdata=\"'MaritalStatus'\" required></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lbldob\" class=\"pop_label_left\">Date Of Birth<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                            <date-picker strdate=\"page.model.custObj.txtdobcandidate\" required></date-picker>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblheight\" class=\"pop_label_left\">Height<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlHeightpersonal\" typeofdata=\"'heightregistration'\" required></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblheight\" class=\"pop_label_left\">Complexion<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlcomplexion\" typeofdata=\"'Complexion'\" required></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Religion\" class=\"pop_label_left\">Religion<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                            <div class=\"select-box-my\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <select multiselectdropdown ng-model=\"page.model.custObj.ddlreligioncandadate\" typeofdata=\"'Religion'\" required></select>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\" id=\"divMotherTongue\">\r" +
-    "\n" +
-    "                        <label for=\"lblPersonalMotherTongue\" class=\"pop_label_left\">Mother Tongue<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlmothertongue\" typeofdata=\"'Mothertongue'\" required></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblCaste\" class=\"pop_label_left\">Caste<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlcaste\" typeofdata=\"'caste'\" ng-change=\"page.model.changeBind('caste',page.model.custObj.ddlcaste);\" required></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblCaste\" class=\"pop_label_left\">SubCaste</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlsubcaste\" ng-options=\"item.value as item.label for item in page.model.subcasteArr\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblborncitizenship\" class=\"pop_label_left\">Born Citizenship<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlBornCitizenship\" typeofdata=\"'Country'\" required></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblMaritalstatus\" class=\"pop_label_left\">Physical Status<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\" style=\"font-weight: 700; color: black;\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"rdlPhysicalStatus\" layout=\"row\" ng-model=\"page.model.custObj.rdlPhysicalStatus\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"25\" class=\"md-primary\">Normal</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"26\"> Physically Challenged </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                            <div ng-if=\"custForm.rdlPhysicalStatus.$invalid && (custForm.$submitted)\" style=\"color:#a94442;\">This field is required.</div>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row\">\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        </form>\r" +
+    "    <script type=\"text/ng-template\" id=\"commonEduCatiobpopup.html\">\r" +
+    "\n" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
+    "\n" +
+    "        </slide-popup>\r" +
     "\n" +
     "    </script>\r" +
     "\n" +
     "</div>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -4182,7 +3256,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "</style>\r" +
     "\n" +
-    "<!--<alert-directive></alert-directive>-->\r" +
+    "\r" +
     "\n" +
     "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
@@ -4774,7 +3848,15 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"AboutModalContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\" name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutProfleSubmit(page.model.aboutObj.txtAboutprofile)\">\r" +
+    "\r" +
+    "\n" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
+    "\n" +
+    "        </slide-popup>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <!--<form class=\"EditViewClass\" name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutProfleSubmit(page.model.aboutObj.txtAboutprofile)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -4824,7 +3906,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            </div>\r" +
     "\n" +
-    "        </form>\r" +
+    "        </form>-->\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "    </script>\r" +
     "\n" +
@@ -6049,853 +5133,33 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <div id=\"popupDiv\">\r" +
     "\n" +
-    "        <script type=\"text/ng-template\" id=\"parentModalContent.html\">\r" +
+    "        <script type=\"text/ng-template\" id=\"commonParentpopup.html\">\r" +
     "\n" +
-    "            <form name=\"parentForm\" novalidate role=\"form\" ng-submit=\"page.model.ParentSubmit(page.model.parent)\">\r" +
+    "            <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
     "\n" +
-    "                <div class=\"modal-header\">\r" +
-    "\n" +
-    "                    <h3 class=\"modal-title text-center\" id=\"modal-title\">Parent details\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </h3>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"modal-body\" id=\"modal-body\">\r" +
-    "\n" +
-    "                    <div class='modal-body clearfix pop_content_my'>\r" +
-    "\n" +
-    "                        <ul>\r" +
-    "\n" +
-    "                            <li>\r" +
-    "\n" +
-    "                                <h6>Father Details</h6>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\" style=\"color: red;\">Father Name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right form-group\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.parent.txtFathername\" class=\"form-control\" tabindex=\"1\" required/>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblFEducation\" class=\"pop_label_left\">Education</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.parent.txtFEducation\" class=\"form-control\" maxlength=\"150\" tabindex=\"2\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblFprofessioncat\" class=\"pop_label_left\">Profession Category</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.parent.ddlFprofessionCatgory\" typeofdata=\"'newProfessionCatgory'\"></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblFProfession\" class=\"pop_label_left\">Designation</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.parent.txtFProfession\" class=\"form-control\" maxlength=\"200\" tabindex=\"3\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblCompanyName\" class=\"pop_label_left\">Company Name </label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.parent.txtCompany\" class=\"form-control\" maxlength=\"100\" tabindex=\"4\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblJobLocation\" class=\"pop_label_left\">Job Location</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.parent.txtJobLocation\" class=\"form-control\" maxlength=\"100\" tabindex=\"5\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <contact-directive emailhide=\"true\" dmobile=\"page.model.parent.ddlMobile\" strmobile=\"page.model.parent.txtMobile\" dalternative=\"page.model.parent.ddlfathermobile2\" stralternative=\"page.model.parent.txtfathermobile2\" dland=\"page.model.parent.ddlLandLineCountry\"\r" +
-    "\n" +
-    "                                strareacode=\"page.model.parent.txtAreCode\" strland=\"page.model.parent.txtLandNumber\" strmail=\"page.model.parent.txtEmail\"></contact-directive>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblFatherFname\" class=\"pop_label_left\">Father's father name </label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=text ng-model=\"page.model.parent.txtFatherFname\" class=\"form-control\" placeholder=\"Enter Father's father name\" maxlength=\"100\" tabindex=\"17\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <contact-directive emailhide=\"false\" dmobile=\"page.model.parent.ddlFatherfatherMobileCountryCode\" strmobile=\"page.model.parent.txtMobileFatherfather\" dalternative=\"page.model.parent.ddlfatherfatherAlternative\" stralternative=\"page.model.parent.txtfatherfatherAlternative\"\r" +
-    "\n" +
-    "                                dland=\"page.model.parent.ddlFatherFatherLandLineCode\" strareacode=\"page.model.parent.txtGrandFatherArea\" strland=\"page.model.parent.txtGrandFatherLandLinenum\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <country-directive countryshow=\"false\" dcountry=\"dcountry\" cityshow=\"false\" othercity=\"false\" dstate=\"page.model.parent.ddlFState\" ddistrict=\"page.model.parent.ddlFDistric\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"FNativePlace\" class=\"pop_label_left\">Native Place</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.parent.txtFNativePlace\" class=\"form-control\" maxlength=\"100\" tabindex=\"29\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li>\r" +
-    "\n" +
-    "                                <h6>Mother Details</h6>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblMotherName\" class=\"pop_label_left\" style=\"color: red;\">Mother Name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right form-group\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.parent.txtMName\" class=\"form-control\" maxlength=\"100\" tabindex=\"30\" required/>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblMEducation\" class=\"pop_label_left\">Education</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.parent.txtMEducation\" class=\"form-control\" maxlength=\"150\" tabindex=\"31\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblFprofessioncat\" class=\"pop_label_left\">Profession Category</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.parent.ddlMprofessionCatgory\" typeofdata=\"'newProfessionCatgory'\"></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblMProfession\" class=\"pop_label_left\">Designation</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.parent.txtMProfession\" class=\"form-control\" maxlength=\"200\" tabindex=\"32\" />\r" +
-    "\n" +
-    "                                    <label class=\"checkbox-inline checkbox_my\" style=\"padding: 5px 0 0 0;\">\r" +
-    "\n" +
-    "                <input type=checkbox ng-model=\"page.model.parent.chkbox\"  tabindex=\"33\"  ng-change=\"page.model.housewiseChk(page.model.parent);\"/><span>&nbsp;HouseWife</span>\r" +
-    "\n" +
-    "            </label>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <div id=\"divmotherprofesseion\" ng-hide=\"page.model.parent.chkbox==true\">\r" +
-    "\n" +
-    "                                <li id=\"divComLocation\" class=\"clearfix form-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label for=\"lblMCompanyName\" class=\"pop_label_left\">Company Name </label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                        <input ng-model=\"page.model.parent.txtMCompanyName\" class=\"form-control\" maxlength=\"100\" tabindex=\"34\" />\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                    <label for=\"lblMJobLocation\" class=\"pop_label_left\">Job Location</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                        <input ng-model=\"page.model.parent.txtMJobLocation\" class=\"form-control\" maxlength=\"100\" tabindex=\"35\" />\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div style=\"height: 15px;\"></div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <contact-directive emailhide=\"true\" dmobile=\"page.model.parent.ddlMMobileCounCodeID\" strmobile=\"page.model.parent.txtMMobileNum\" dalternative=\"page.model.parent.ddlMMobileCounCodeID2\" stralternative=\"page.model.parent.txtMMobileNum2\" dland=\"page.model.parent.ddlMLandLineCounCode\"\r" +
-    "\n" +
-    "                                strareacode=\"page.model.parent.txtmAreaCode\" strland=\"page.model.parent.txtMLandLineNum\" strmail=\"page.model.parent.txtMEmail\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblMotherFname\" class=\"pop_label_left\">Mother's Father Name </label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                    <input type=text ng-model=\"page.model.parent.txtMFatherFname\" class=\"form-control\" placeholder=\"FIRST NAME\" tabindex=\"47\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblMotherFname\" class=\"pop_label_left\">Mother's Last Name </label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                    <input type=text ng-model=\"page.model.parent.txtMFatherLname\" class=\"form-control\" placeholder=\"LAST NAME\" tabindex=\"48\" maxlength=\"50\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <contact-directive emailhide=\"false\" dmobile=\"page.model.parent.ddlMotherfatheMobileCountryCode\" strmobile=\"page.model.parent.txtMotherfatheMobilenumber\" dalternative=\"page.model.parent.ddlmotherfatheralternative\" stralternative=\"page.model.parent.txtmotherfatheralternative\"\r" +
-    "\n" +
-    "                                dland=\"page.model.parent.ddlMotherFatherLandLineCode\" strareacode=\"page.model.parent.txtMotherFatherLandLineareacode\" strland=\"page.model.parent.txtMotherFatherLandLinenum\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <country-directive countryshow=\"false\" dcountry=\"dcountry\" cityshow=\"false\" othercity=\"false\" dstate=\"page.model.parent.ddlMState\" ddistrict=\"page.model.parent.ddlMDistrict\"></country-directive>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"MNativePlace\" class=\"pop_label_left\">Native Place</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=text ng-model=\"page.model.parent.txtMNativePlace\" class=\"form-control\" maxlength=\"150\" tabindex=\"60\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"ParentIntercaste\" class=\"pop_label_left\">Are parents interCaste ? </label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <md-radio-group name=\"rbtlParentIntercaste\" style=\"font-weight: 700;color:black;\" layout=\"row\" ng-model=\"page.model.parent.rbtlParentIntercaste\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                    <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                    <md-radio-button value=\"0\">No </md-radio-button>\r" +
-    "\n" +
-    "                                </md-radio-group>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div ng-if=\"page.model.parent.rbtlParentIntercaste==='1' || page.model.parent.rbtlParentIntercaste===1\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <li id=\"divddlFatherCaste\" class=\"clearfix form-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label for=\"lblFCaste\" class=\"pop_label_left\">Father Caste</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <select multiselectdropdown ng-model=\"page.model.parent.ddlFatherCaste\" typeofdata=\"'caste'\" required></select>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "                                <li id=\"divddlMotherCaste\" class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                    <label for=\"lblMCaste\" class=\"pop_label_left\">Mother Caste</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                        <select multiselectdropdown ng-model=\"page.model.parent.ddlMotherCaste\" typeofdata=\"'caste'\"></select>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"row \">\r" +
-    "\n" +
-    "                                <br/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                        </ul>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </form>\r" +
-    "\n" +
-    "        </script>\r" +
-    "\n" +
-    "        <script type=\"text/ng-template\" id=\"AddressModalContent.html\">\r" +
-    "\n" +
-    "            <form name=\"addressForm\" novalidate role=\"form\" ng-submit=\"page.model.contactAddressSubmit(page.model.AdrrObj)\">\r" +
-    "\n" +
-    "                <div class=\"modal-header\">\r" +
-    "\n" +
-    "                    <h3 class=\"modal-title text-center\" id=\"modal-title\">Contact Details\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </h3>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"modal-body\" id=\"modal-body\">\r" +
-    "\n" +
-    "                    <div class=\"modal-body clearfix pop_content_my\">\r" +
-    "\n" +
-    "                        <ul>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblHouse_flat\" class=\"pop_label_left\">House/Flat number<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right form-group\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtHouse_flat\" class=\"form-control\" maxlength=\"50\" tabindex=\"1\" required/>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblApartmentName\" class=\"pop_label_left\">Apartment name</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtApartmentName\" class=\"form-control\" maxlength=\"150\" tabindex=\"2\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblStreetName\" class=\"pop_label_left\">Street name</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtStreetName\" class=\"form-control\" maxlength=\"150\" tabindex=\"3\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblAreaName\" class=\"pop_label_left\">Area Name</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtAreaName\" class=\"form-control\" maxlength=\"150\" tabindex=\"4\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\">Landmark</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtLandmark\" class=\"form-control\" maxlength=\"150\" tabindex=\"5\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <country-directive countryshow=\"true\" cityshow=\"false\" othercity=\"false\" dcountry=\"page.model.AdrrObj.ddlCountryContact\" dstate=\"page.model.AdrrObj.ddlStateContact\" ddistrict=\"page.model.AdrrObj.ddlDistricContact\" require=true></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblCityParentContactPopupgroup\" class=\"pop_label_left\">City<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtCity\" class=\"form-control\" tabindex=\"9\" maxlength=\"100\" required/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblZip_pin\" class=\"pop_label_left\">Zip/Pin 	</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtZip_no\" class=\"form-control\" maxlength=\"8\" tabindex=\"10\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"row\">\r" +
-    "\n" +
-    "                                <br/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                        </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </form>\r" +
+    "            </slide-popup>\r" +
     "\n" +
     "        </script>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        <script type=\"text/ng-template\" id=\"PhysicalAttributeModalContent.html\">\r" +
-    "\n" +
-    "            <form name=\"PhysicalForm\" novalidate role=\"form\" ng-submit=\"page.model.physicalAtrrSubmit(page.model.physicalObj)\">\r" +
-    "\n" +
-    "                <div class=\"modal-header\">\r" +
-    "\n" +
-    "                    <h3 class=\"modal-title text-center\" id=\"modal-title\">Physical Attributes & Health Details of Candidate\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </h3>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"modal-body\" id=\"modal-body\">\r" +
-    "\n" +
-    "                    <div class=\"modal-body clearfix pop_content_my\">\r" +
-    "\n" +
-    "                        <ul id=\"HealthDivClear\">\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblpDiet\" class=\"pop_label_left\">Diet</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
     "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <md-radio-group name=\"rbtlDiet\" style=\"font-weight: 700;color:black;\" layout=\"row\" ng-model=\"page.model.physicalObj.rbtlDiet\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"27\" class=\"md-primary\">Veg</md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"28\">Non Veg </md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"29\">Both </md-radio-button>\r" +
-    "\n" +
-    "                                    </md-radio-group>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblpDrink\" class=\"pop_label_left\">Drink</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <md-radio-group name=\"rbtlDrink\" style=\"font-weight: 700;color:black;\" layout=\"row\" ng-model=\"page.model.physicalObj.rbtlDrink\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"30\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"31\">No </md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"32\">Occasional </md-radio-button>\r" +
-    "\n" +
-    "                                    </md-radio-group>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblpSmoke\" class=\"pop_label_left\">Smoke</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <md-radio-group name=\"rbtlSmoke\" style=\"font-weight: 700;color:black;\" layout=\"row\" ng-model=\"page.model.physicalObj.rbtlSmoke\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"30\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"31\">No </md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"32\">Occasional </md-radio-button>\r" +
-    "\n" +
-    "                                    </md-radio-group>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblpBodyType\" class=\"pop_label_left\">Body Type</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right  select-box-my\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.physicalObj.ddlBodyType\" typeofdata=\"'bodyType'\"></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblBodtWeight\" class=\"pop_label_left\">Body weight</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
-    "\n" +
-    "                                    <span>kgs</span>\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.physicalObj.txtBWKgs\" class=\"form-control\" tabindex=\"5\" width=\"200px\" ng-keyup=\"page.model.converttolbs(page.model.physicalObj);\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label id=\"lbllbs\" class=\"pop_label_left\">lbs</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <div>\r" +
-    "\n" +
-    "                                        <input ng-model=\"page.model.physicalObj.txtlbs\" class=\"form-control\" text=\"\" onkeyup=\"converttokgs(this.id);\" onkeydown=\"return checkwhitespace(event,this.id);\" onblur=\"validateLbs(this)\" tabindex=\"6\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblBloodGroup\" class=\"pop_label_left\">Blood Group</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.physicalObj.ddlBloodGroup\" typeofdata=\"'bloodGroup'\"></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblHealthConditions\" class=\"pop_label_left\">Health Conditions</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <div class=\"select-box-my\">\r" +
-    "\n" +
-    "                                        <select multiselectdropdown ng-model=\"page.model.physicalObj.ddlHealthConditions\" typeofdata=\"'healthCondition'\"></select>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblHealthCondition\" class=\"pop_label_left\">Health Condition Description</label>\r" +
-    "\n" +
-    "                                <div class=\"\">\r" +
-    "\n" +
-    "                                    <textarea ng-model=\"page.model.physicalObj.txtHealthCondition\" class=\"form-control\" tabindex=\"9\" rows=\"4\" style=\"width: 515px;\" maxlength=\"200\"></textarea>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"row\">\r" +
-    "\n" +
-    "                                <br/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                        </ul>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </form>\r" +
-    "\n" +
-    "        </script>\r" +
-    "\n" +
-    "        <script type=\"text/ng-template\" id=\"AboutFamilyModalContent.html\">\r" +
-    "\n" +
-    "            <form name=\"AboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutMyfamilySubmit(page.model.aboutFamilyObj)\">\r" +
-    "\n" +
-    "                <div class=\"modal-header\">\r" +
-    "\n" +
-    "                    <h3 class=\"modal-title text-center\" id=\"modal-title\">About My Family\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </h3>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div class=\"form-group\">\r" +
-    "\n" +
-    "                        <label class=\"control-label\">(Do Not Mention Any Contact Information Phone Numbers, Email Id’s or your Profile May be Rejected.)</label>\r" +
-    "\n" +
-    "                        <textarea class=\"form-control\" ng-model=\"page.model.aboutFamilyObj.txtAboutUs\" required=\"required\" type=\"text\"> </textarea>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div class=\"row\">\r" +
-    "\n" +
-    "                        <br/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </form>\r" +
-    "\n" +
-    "        </script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
-    "    <style>\r" +
+    "</div>\r" +
     "\n" +
-    "        .md-dialog-container {\r" +
+    "<style>\r" +
     "\n" +
-    "            z-index: 99999999999;\r" +
+    "    .md-dialog-container {\r" +
     "\n" +
-    "        }\r" +
+    "        z-index: 99999999999;\r" +
     "\n" +
-    "    </style>\r" +
+    "    }\r" +
     "\n" +
-    "    <script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
+    "</style>\r" +
+    "\n" +
+    "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
 
 
@@ -7428,9 +5692,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"partnerPrefContent.html\">\r" +
     "\n" +
-    "\r" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\" name=\"partnerFormForm\" novalidate role=\"form\" ng-submit=\"page.model.partnerPrefSubmit(page.model.partnerObj)\" accessible-form>\r" +
+    "        </slide-popup>\r" +
+    "\n" +
+    "        <!--<form class=\"EditViewClass\" name=\"partnerFormForm\" novalidate role=\"form\" ng-submit=\"page.model.partnerPrefSubmit(page.model.partnerObj)\" accessible-form>\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -7816,7 +6082,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "        </form>\r" +
+    "        </form>-->\r" +
     "\n" +
     "    </script>\r" +
     "\n" +
@@ -7824,7 +6090,15 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"partnerDescContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\" name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.partnerDescriptionSubmit(page.model.partnerDescObj)\">\r" +
+    "\r" +
+    "\n" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
+    "\n" +
+    "        </slide-popup>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <!--<form class=\"EditViewClass\" name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.partnerDescriptionSubmit(page.model.partnerDescObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -7864,7 +6138,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "        </form>\r" +
+    "        </form>-->\r" +
     "\n" +
     "    </script>\r" +
     "\n" +
@@ -9073,6 +7347,16 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
+    "    <script type=\"text/ng-template\" id=\"commonProfileSettingpopup.html\">\r" +
+    "\n" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
+    "\n" +
+    "        </slide-popup>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "</div>\r" +
     "\n" +
     "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
@@ -9214,151 +7498,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        <script type=\"text/ng-template\" id=\"propertyContent.html\">\r" +
     "\n" +
-    "            <form class=\"EditViewClass\" name=\"propertyForm\" novalidate role=\"form\" ng-submit=\"page.model.propertySubmit(page.model.proObj)\">\r" +
+    "            <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
     "\n" +
-    "                <div class=\"modal-header\">\r" +
-    "\n" +
-    "                    <h3 class=\"modal-title text-center\">Property Details\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </h3>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <ul id=\"ulproperty\">\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lblfamilyStatus\" class=\"pop_label_left\">Family Status</label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                <select multiselectdropdown ng-model=\"page.model.proObj.ddlFamilyStatus\" typeofdata=\"'familyStatus'\"></select>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix\">\r" +
-    "\n" +
-    "                            <label for=\"lblSharedProperty\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Is shared property</label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                                <md-radio-group name=\"rdlSharedProperty\" layout=\"row\" ng-model=\"page.model.proObj.rdlSharedProperty\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                    <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                    <md-radio-button value=\"0\"> No </md-radio-button>\r" +
-    "\n" +
-    "                                </md-radio-group>\r" +
-    "\n" +
-    "                            </md-input-container>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
-    "\n" +
-    "                            <label for=\"lblQuantity\" class=\"pop_label_left\">Quantity</label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                <input ng-model=\"page.model.proObj.txtQuantity\" class=\"form-control col-lg-3\" />\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lblValueofproperty\" class=\"pop_label_left\">Value of property</label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
-    "\n" +
-    "                                <input ng-model=\"page.model.proObj.txtValueofproperty\" class=\"form-control\" maxlength=\"5\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));\"\r" +
-    "\n" +
-    "                                />\r" +
-    "\n" +
-    "                                <span font-bold=\"true\">Lakhs</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <label for=\"lblQuantity\" class=\"pop_label_left\">Property description</label>\r" +
-    "\n" +
-    "                            <div class=\"\">\r" +
-    "\n" +
-    "                                <textarea ng-model=\"page.model.proObj.txtPropertydesc\" style=\"width:100%;\" maxlength=\"500\" rows=\"5\" width=\"515\"></textarea>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <div style=\"display: none;\">\r" +
-    "\n" +
-    "                                <label for=\"lblShowingviewprofile\" class=\"pop_label_left\">Showing view profile</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right pop_radios_list\">\r" +
-    "\n" +
-    "                                    <label class=\"\">\r" +
-    "\n" +
-    "                    <input ng-model=\"page.model.proObj.rbtShowViewProfile\" value=\"1\" type=\"radio\" checked><span>&nbsp;Yes</span>\r" +
-    "\n" +
-    "                </label> &nbsp;\r" +
-    "\n" +
-    "                                    <label class=\"\"><input ng-model=\"page.model.proObj.rbtShowViewProfile\" value=\"0\" type=\"radio\"><span>&nbsp;No</span>\r" +
-    "\n" +
-    "                </label>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"row \">\r" +
-    "\n" +
-    "                            <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                    </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </form>\r" +
+    "            </slide-popup>\r" +
     "\n" +
     "        </script>\r" +
     "\n" +
@@ -9629,149 +7771,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        <script type=\"text/ng-template\" id=\"referenceContent.html\">\r" +
     "\n" +
-    "            <form class=\"EditViewClass\" name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.refenceSubmit(page.model.refObj)\" accessible-form>\r" +
+    "            <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
     "\n" +
-    "                <div class=\"modal-header\">\r" +
-    "\n" +
-    "                    <h3 class=\"modal-title text-center\">Reference Details\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#665454\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </h3>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                    <ul>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"Relationshiptype\" class=\"pop_label_left\">Relationship type<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                <select multiselectdropdown ng-model=\"page.model.refObj.ddlRelationshiptype\" typeofdata=\"'RelationshipType'\" required></select>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"Firstname\" class=\"pop_label_left\">First name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                <input ng-model=\"page.model.refObj.txtFname\" class=\"form-control\" tabindex=\"2\" maxlength=\"100\" required/>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"Lastname\" class=\"pop_label_left\">Last name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                <input ng-model=\"page.model.refObj.txtLname\" class=\"form-control\" tabindex=\"3\" maxlength=\"50\" required/>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"Professiondetails\" class=\"pop_label_left\">Profession</label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                <input ng-model=\"page.model.refObj.txtProfessiondetails\" class=\"form-control\" tabindex=\"4\" maxlength=\"200\" />\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <country-directive countryshow=\"true\" cityshow=\"false\" othercity=\"false\" dcountry=\"page.model.refObj.ddlCountry\" dstate=\"page.model.refObj.ddlState\" ddistrict=\"page.model.refObj.ddlDistrict\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"NativePlace\" class=\"pop_label_left\">Native Place</label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                <input ng-model=\"page.model.refObj.txtNativePlace\" class=\"form-control\" tabindex=\"8\" maxlength=\"100\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lblPresentlocation\" class=\"pop_label_left\">Present location </label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                <input ng-model=\"page.model.refObj.txtPresentlocation\" class=\"form-control\" tabindex=\"9\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <contact-directive emailhide=\"true\" dmobile=\"page.model.refObj.ddlMobileCountryID\" strmobile=\"page.model.refObj.txtMobileNumber\" dalternative=\"page.model.refObj.ddlMobileCountryID2\" stralternative=\"page.model.refObj.txtMobileNumber2\" dland=\"page.model.refObj.ddlLandLineCountryID\"\r" +
-    "\n" +
-    "                            strareacode=\"page.model.refObj.txtAreCode\" strland=\"page.model.refObj.txtLandNumber\" strmail=\"page.model.refObj.txtEmails\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lblNarration\" class=\"pop_label_left\">Narration</label>\r" +
-    "\n" +
-    "                            <div class=\"\">\r" +
-    "\n" +
-    "                                <textarea ng-model=\"page.model.refObj.txtNarrations\" class=\"form-control\" textmode=\"MultiLine\" tabindex=\"21\" rows=\"4\" width=\"515\" maxlength=\"500\"></textarea>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <label style=\"color: #1e1c1c; font-size: 13px;\"></label>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"row \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                    </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </form>\r" +
+    "            </slide-popup>\r" +
     "\n" +
     "        </script>\r" +
     "\n" +
@@ -10714,671 +8716,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <script type=\"text/ng-template\" id=\"FBModalContent.html\">\r" +
+    "    <script type=\"text/ng-template\" id=\"ModalContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\" name=\"FBForm\" novalidate role=\"form\" ng-submit=\"FBForm.$valid  && page.model.FBSubmit(page.model.fbObj)\">\r" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
     "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Father's Brother Details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul id=\"ulFatherBrother\">\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"ElderYounger\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Elder/Younger<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"rdlFBElderORyounger\" layout=\"row\" ng-model=\"page.model.fbObj.rdlFBElderORyounger\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"324\" class=\"md-primary\">Elder</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"323\"> Younger </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                            <div ng-messages=\"FBForm.rdlFBElderORyounger.$invalid\">\r" +
-    "\n" +
-    "                                <div ng-if=\"FBForm.rdlFBElderORyounger.$invalid && (FBForm.$submitted)\">This field is required.</div>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </md-input-container>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Fatherbrothername\" class=\"pop_label_left\">Father's brother name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fbObj.txtFatherbrothername\" class=\"form-control\" maxlength=\"100\" tabindex=\"2\" required/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Educationdetails\" class=\"pop_label_left\">Education</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fbObj.txtFBEducationdetails\" class=\"form-control\" tabindex=\"3\" maxlength=\"150\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Professiondetails\" class=\"pop_label_left\">Profession</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fbObj.txtFBProfessiondetails\" class=\"form-control\" tabindex=\"4\" maxlength=\"200\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <contact-directive emailhide=\"true\" dmobile=\"page.model.fbObj.ddlFBMobileCountryID\" strmobile=\"page.model.fbObj.txtFBMobileNumber\" dalternative=\"page.model.fbObj.ddlFBMobileCountryID2\" stralternative=\"page.model.fbObj.txtFBMobileNumber2\" dland=\"page.model.fbObj.ddlFBLandLineCountry\"\r" +
-    "\n" +
-    "                        strareacode=\"page.model.fbObj.txtFBAreCode\" strland=\"page.model.fbObj.txtFBLandNumber\" strmail=\"page.model.fbObj.txtFBEmails\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblCurrentLocation\" class=\"pop_label_left\">Current Location</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fbObj.txtCurrentLocation\" class=\"form-control\" maxlength=\"150\" tabindex=\"16\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </form>\r" +
-    "\n" +
-    "    </script>\r" +
-    "\n" +
-    "    <script type=\"text/ng-template\" id=\"FSModalContent.html\">\r" +
-    "\n" +
-    "        <form class=\"EditViewClass\" name=\"FSForm\" novalidate role=\"form\" ng-submit=\"FSForm.$valid  && page.model.FSSubmit(page.model.fsObj)\">\r" +
-    "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Father's Sister Details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"FSElderYounger\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Elder/Younger<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"rdlFSElderYounger\" layout=\"row\" ng-model=\"page.model.fsObj.rdlFSElderYounger\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"326\" class=\"md-primary\">Elder</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"325\"> Younger </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                            <div ng-messages=\"FSForm.rdlFSElderYounger.$invalid\">\r" +
-    "\n" +
-    "                                <div ng-if=\"FSForm.rdlFSElderYounger.$invalid && (FSForm.$submitted)\">This field is required.</div>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </md-input-container>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Fathersistername\" class=\"pop_label_left\">Father's sister name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fsObj.txtFathersistername\" class=\"form-control\" maxlength=\"100\" tabindex=\"2\" required/>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Husbandfirstname\" class=\"pop_label_left\">Husband first name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fsObj.txtFSHusbandfirstname\" class=\"form-control\" maxlength=\"100\" tabindex=\"3\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Husbandlastname\" class=\"pop_label_left\">Husband last name </label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fsObj.txtFSHusbandlastname\" class=\"form-control\" maxlength=\"50\" tabindex=\"4\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"FSHEDucation\" class=\"pop_label_left\">FSH Education</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fsObj.txtFSHEDucation\" class=\"form-control\" tabindex=\"5\" maxlength=\"150\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Professiondetails\" class=\"pop_label_left\">FSH Profession</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fsObj.txtFSProfessiondetails\" class=\"form-control\" tabindex=\"6\" maxlength=\"200\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <country-directive countryshow=\"false\" dcountry=\"'1'\" cityshow=\"false\" othercity=\"false\" dstate=\"page.model.fsObj.ddlFSHStateID\" ddistrict=\"page.model.fsObj.ddlFSHDistrictID\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"FSHNativePlace\" class=\"pop_label_left\">Native place </label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fsObj.txtFSHNativePlace\" class=\"form-control\" tabindex=\"9\" maxlength=\"100\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <contact-directive emailhide=\"true\" dmobile=\"page.model.fsObj.ddlFSMObileCountryID\" strmobile=\"page.model.fsObj.txtFSMobileNumber\" dalternative=\"page.model.fsObj.ddlFSMObileCountryID2\" stralternative=\"page.model.fsObj.txtFSMobileNumber2\" dland=\"page.model.fsObj.ddlFSHLandCountryID\"\r" +
-    "\n" +
-    "                        strareacode=\"page.model.fsObj.txtFSHAreaNumber\" strland=\"page.model.fsObj.txtFSHNUmber\" strmail=\"page.model.fsObj.txtFSHEmails\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblCurrentLocation\" class=\"pop_label_left\">Current Location</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fsObj.txtFSHCurrentLocation\" class=\"form-control\" tabindex=\"21\" maxlength=\"100\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </form>\r" +
-    "\n" +
-    "    </script>\r" +
-    "\n" +
-    "    <script type=\"text/ng-template\" id=\"MBModalContent.html\">\r" +
-    "\n" +
-    "        <form class=\"EditViewClass\" name=\"MBForm\" novalidate role=\"form\" ng-submit=\"MBForm.$valid  && page.model.MBSubmit(page.model.mbObj)\">\r" +
-    "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Mother's Brother Details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul id=\"ulmotherbrother\">\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"MotherElderYounger\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Elder/Younger<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"rdlMBElderYounger\" layout=\"row\" ng-model=\"page.model.mbObj.rdlMBElderYounger\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"328\" class=\"md-primary\">Elder</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"327\"> Younger </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                            <div ng-messages=\"MBForm.rdlMBElderYounger.$invalid\">\r" +
-    "\n" +
-    "                                <div ng-if=\"MBForm.rdlMBElderYounger.$invalid && (MBForm.$submitted)\">This field is required.</div>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </md-input-container>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Motherbrothername\" class=\"pop_label_left\">Mother's brother name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.mbObj.txtMBName\" class=\"form-control\" maxlength=\"100\" tabindex=\"2\" required/>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"MBEducation\" class=\"pop_label_left\">Education</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.mbObj.txtMBEducation\" class=\"form-control\" tabindex=\"3\" maxlength=\"150\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"MBProfessiondetails\" class=\"pop_label_left\">Profession</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.mbObj.txtMBProfessiondetails\" class=\"form-control\" tabindex=\"4\" maxlength=\"200\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <contact-directive emailhide=\"true\" dmobile=\"page.model.mbObj.ddlMBCountriCode\" strmobile=\"page.model.mbObj.txtMBMobileNum\" dalternative=\"page.model.mbObj.ddlMBCountriCode2\" stralternative=\"page.model.mbObj.txtMBMobileNum2\" dland=\"page.model.mbObj.ddlMBLandLineCountryCode\"\r" +
-    "\n" +
-    "                        strareacode=\"page.model.mbObj.txtMBAreaCode\" strland=\"page.model.mbObj.txtMBLandLineNum\" strmail=\"page.model.mbObj.txtMBEmails\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"MBCurrentLocation\" class=\"pop_label_left\">Current Location</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.mbObj.txtMBCurrentLocation\" class=\"form-control\" tabindex=\"16\" maxlength=\"100\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row \">\r" +
-    "\n" +
-    "                        <!--<div class=\"col-lg-9\">\r" +
-    "\n" +
-    "                        <input value=\"Submit\" class=\"button_custom  pull-right\" type=\"submit\">\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div class=\"col-lg-3\">\r" +
-    "\n" +
-    "                        <input value=\"Cancel\" class=\"button_custom button_custom_reset pull-right\" ng-click=\"page.model.cancel();\" type=\"button\">\r" +
-    "\n" +
-    "                    </div>-->\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </form>\r" +
-    "\n" +
-    "    </script>\r" +
-    "\n" +
-    "    <script type=\"text/ng-template\" id=\"MSModalContent.html\">\r" +
-    "\n" +
-    "        <form class=\"EditViewClass\" name=\"MSForm\" novalidate=\"true\" ng-submit=\"MSForm.$valid  && page.model.MSSubmit(page.model.msObj)\">\r" +
-    "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Mother's Sister Details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul id=\"ulmothersister\">\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"MsElderYounger\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Elder/Younger<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"rdlMSElderYounger\" layout=\"row\" ng-model=\"page.model.msObj.rdlMSElderYounger\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"330\" class=\"md-primary\">Elder</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"329\"> Younger </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                            <div ng-messages=\"MSForm.rdlMSElderYounger.$invalid\">\r" +
-    "\n" +
-    "                                <div ng-if=\"MSForm.rdlMSElderYounger.$invalid && (MSForm.$submitted)\">This field is required.</div>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </md-input-container>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Fathersistername\" class=\"pop_label_left\">Mother's sister name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.msObj.txtMSName\" class=\"form-control\" maxlength=\"100\" tabindex=\"2\" required/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"MsHusbandfirstname\" class=\"pop_label_left\">Husband first name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.msObj.txtMsHusbandfirstname\" class=\"form-control\" maxlength=\"100\" tabindex=\"3\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"MsHusbandlastname\" class=\"pop_label_left\">Husband last name </label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.msObj.txtMsHusbandlastname\" class=\"form-control\" maxlength=\"50\" tabindex=\"4\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <country-directive countryshow=\"false\" dcountry=\"'1'\" cityshow=\"false\" othercity=\"false\" dstate=\"page.model.msObj.ddlMSisState\" ddistrict=\"page.model.msObj.ddlMsDistrict\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"MSHNativePlace\" class=\"pop_label_left\">Native place </label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.msObj.txtMSNativePlace\" class=\"form-control\" tabindex=\"7\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"MSHEducationdet\" class=\"pop_label_left\">Education</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.msObj.txtMSHEducation\" class=\"form-control\" tabindex=\"8\" maxlength=\"150\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"MSProfessiondetails\" class=\"pop_label_left\">Profession</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.msObj.txtMSProfessiondetails\" class=\"form-control\" tabindex=\"9\" maxlength=\"200\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <contact-directive emailhide=\"true\" dmobile=\"page.model.msObj.ddlMSCounCodeID\" strmobile=\"page.model.msObj.txtMSMObileNum\" dalternative=\"page.model.msObj.ddlMSCounCodeID2\" stralternative=\"page.model.msObj.txtMSMObileNum2\" dland=\"page.model.msObj.ddlMSLLCounCode\"\r" +
-    "\n" +
-    "                        strareacode=\"page.model.msObj.txtMSArea\" strland=\"page.model.msObj.txtLLNum\" strmail=\"page.model.msObj.txtMSEmail\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblMSCurrentLocation\" class=\"pop_label_left\">Current Location</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.msObj.txtMSCurrentLocation\" class=\"form-control\" maxlength=\"100\" tabindex=\"21\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row \">\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </form>\r" +
+    "        </slide-popup>\r" +
     "\n" +
     "    </script>\r" +
     "\n" +
@@ -12873,7 +10215,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <script type=\"text/ng-template\" id=\"SibblingCountPopup.html\">\r" +
+    "    <!--<script type=\"text/ng-template\" id=\"SibblingCountPopup.html\">\r" +
     "\n" +
     "        <form class=\"EditViewClass\" name=\"sibblingCoutForm\" novalidate role=\"form\" ng-submit=\"page.model.sibblingCountsSubmit(page.model.SibCountObj)\">\r" +
     "\n" +
@@ -13331,7 +10673,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <div class=\"pop_controls_right select-box-my\">\r" +
     "\n" +
-    "                                    <input ng-model=\"page.model.broObj.txtBroSpousefatherCity\" class=\"form-control\" tabindex=\"41\" maxlength=\"100\" />\r" +
+    "                                    <input ng-model=\"page.model.broObj.txtBroSpousefatherCity\" <cl></cl>ass=\"form-control\" tabindex=\"41\" maxlength=\"100\" />\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
@@ -13392,8 +10734,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "                    <li class=\"clearfix\">\r" +
     "\n" +
     "                        <label for=\"lblElderYounger\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Elder/Younger<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "                        <div class=\"radio-group-my\">\r" +
     "\n" +
@@ -13727,19 +11067,19 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        </form>\r" +
     "\n" +
+    "    </script>-->\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"commonSibblingpopup.html\">\r" +
+    "\n" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
+    "\n" +
+    "        </slide-popup>\r" +
+    "\n" +
     "    </script>\r" +
     "\n" +
     "</div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -14538,409 +11878,335 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <script type=\"text/ng-template\" id=\"SpouseContent.html\">\r" +
+    "    <script type=\"text/ng-template\" id=\"modelContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\" name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.spouseSubmit(page.model.spouObj);\" accessible-form>\r" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
     "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Spouse Details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"Fathersistername\" class=\"pop_label_left\">Name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtSpousename\" class=\"form-control\" maxlength=\"150\" tabindex=\"1\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"spouceEducation\" class=\"pop_label_left\">Education</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtSpoueEducation\" class=\"form-control\" maxlength=\"150\" tabindex=\"2\" />\r" +
-    "\n" +
-    "                            <label id=\"identityspouse\" visible=\"false\"></label>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"spouseProfession\" class=\"pop_label_left\">Profession</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtspouseProfession\" class=\"form-control\" maxlength=\"200\" tabindex=\"3\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblspouseHouseFlatnumber\" class=\"pop_label_left\">House/Flat number</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtHouseFlatnumber\" class=\"form-control\" maxlength=\"100\" tabindex=\"4\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblApartmentname\" class=\"pop_label_left\">Apartment name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtApartmentname\" class=\"form-control\" maxlength=\"100\" tabindex=\"5\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"Streetname\" class=\"pop_label_left\">Street name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtStreetname\" class=\"form-control\" maxlength=\"100\" tabindex=\"6\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblAreaname\" class=\"pop_label_left\">Area name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtAreaname\" class=\"form-control\" maxlength=\"100\" tabindex=\"7\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblLandmark\" class=\"pop_label_left\">Landmark</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtLandmark\" class=\"form-control\" maxlength=\"100\" tabindex=\"8\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <country-directive countryshow=\"true\" cityshow=\"true\" dcountry=\"page.model.spouObj.ddlspouseCountry\" dstate=\"page.model.spouObj.ddlspouseState\" ddistrict=\"page.model.spouObj.ddlspouseDistrict\" dcity=\"page.model.spouObj.ddlspouseCity\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblZip\" class=\"pop_label_left\">Zip</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtspouseZip\" class=\"form-control\" maxlength=\"8\" tabindex=\"13\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblMarriedon\" class=\"pop_label_left\">Married on</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <date-picker strdate=\"page.model.spouObj.txtMarriedon\"></date-picker>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblSeparateddate\" class=\"pop_label_left\">Separated date</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <date-picker strdate=\"page.model.spouObj.txtSeparateddate\"></date-picker>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"divorse\" class=\"pop_label_left\">Legally divorced</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right pop_radios_list\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"IsHighestDegree\" layout=\"row\" ng-model=\"page.model.spouObj.rbtspousediverse\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"0\"> No </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblLegalDivorsedate\" class=\"pop_label_left\">Legally Divorced date</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <date-picker strdate=\"page.model.spouObj.txtLegalDivorsedate\"></date-picker>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblfatherspouse\" class=\"pop_label_left\">Father first name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtspousefather\" class=\"form-control\" maxlength=\"100\" tabindex=\"18\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblfatherspouselastname\" class=\"pop_label_left\">Father last name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtspouselastname\" class=\"form-control\" maxlength=\"50\" tabindex=\"19\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblpreviousmarriage\" class=\"pop_label_left\">Notes about previous marriage</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtpreviousmarriage\" class=\"form-control\" maxlength=\"500\" tabindex=\"20\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"spousefamily\" class=\"pop_label_left\">Family planning</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right pop_radios_list\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"rbtnspousefamily\" layout=\"row\" ng-model=\"page.model.spouObj.rbtnspousefamily\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"0\"> No </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblspousechidrens\" class=\"pop_label_left\">No of children</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown id=\"Select4\" ng-model=\"page.model.spouObj.ddlspousechidrens\" ng-options=\"item1.value as item1.label for item1 in page.model.noofChldrenAray\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row\">\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </form>\r" +
+    "        </slide-popup>\r" +
     "\n" +
     "    </script>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <script type=\"text/ng-template\" id=\"spouseChildContent.html\">\r" +
-    "\n" +
-    "        <form class=\"EditViewClass\" name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.childSubmit(page.model.childObj);\" accessible-form>\r" +
-    "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Children Details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"childname\" class=\"pop_label_left\">Name of the child </label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.childObj.txtchildname\" class=\"form-control\" maxlength=\"150\" tabindex=\"1\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"genderchild\" class=\"pop_label_left\">Gender of the child</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right pop_radios_list\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"rdlgenderchild\" layout=\"row\" ng-model=\"page.model.childObj.rdlgenderchild\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"1\" class=\"md-primary\">Male</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"2\"> Female </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lbldobchild\" class=\"pop_label_left\">DOB of the child</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <date-picker strdate=\"page.model.childObj.txtdobchild\"></date-picker>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"genderchild\" class=\"pop_label_left\">Child staying with</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right pop_radios_list\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"rbtChildstayingWith\" layout=\"row\" ng-model=\"page.model.childObj.rbtChildstayingWith\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"1\" class=\"md-primary\">Father Side</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"2\"> Mother Side </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblspouserelation\" class=\"pop_label_left\">Child staying with Relation</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.childObj.ddlrelation\" typeofdata=\"'childStayingWith'\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row\">\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
     "\r" +
-    "\n" +
-    "        </form>\r" +
-    "\n" +
-    "    </script>\r" +
     "\n" +
     "</div>\r" +
     "\n" +
     "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
+  );
+
+
+  $templateCache.put('app/popup/index.html',
+    "<div ng-class=\"'EditViewClass'\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <button ng-click=\"openModel();\">    Add</button>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <slide-popup model=\"model\">\r" +
+    "\n" +
+    "    </slide-popup>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('common/directives/slidePopup/index.html',
+    "<form class=\"EditViewClass\" name=\"dynamicForm\" novalidate role=\"form\" ng-submit=\"dynamicForm.$valid && submit();\" accessible-form>\r" +
+    "\n" +
+    "    <div class=\"modal-header\">\r" +
+    "\n" +
+    "        <h3 class=\"modal-title text-center\" id=\"modal-title\">{{model.popupHeader}}\r" +
+    "\n" +
+    "            <a href=\"javascript:void(0);\" ng-click=\"cancel();\">\r" +
+    "\n" +
+    "                <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"> </ng-md-icon>\r" +
+    "\n" +
+    "            </a>\r" +
+    "\n" +
+    "        </h3>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div class=\"modal-body\">\r" +
+    "\n" +
+    "        <ul class=\"modal-body pop_content_my clearfix\">\r" +
+    "\n" +
+    "            <li ng-show=\"item.parentDependecy===undefined?true:model[item.parentDependecy](item)\" class=\"clearfix form-group\" ng-repeat=\"item in model.popupdata\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <label ng-if=\"item.controlType!=='country' && item.controlType!=='contact'  && item.controlType!=='bindHtml' && item.controlType!=='about'\" for=\"item.lblname\" ng-class=\"{'radiocls':item.controlType==='radio'}\" class=\"pop_label_left\">{{item.lblname}}<span ng-if=\"item.required\" style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                <label class=\"col-lg-12\" ng-class=\"item.classname\" ng-if=\"item.controlType==='bindHtml'\">\r" +
+    "\n" +
+    "               <span ng-bind-html=\"item.html\"></span>\r" +
+    "\n" +
+    "                </label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"!item.dataSource && item.controlType==='select'\" class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" typeofdata=\"item.typeofdata\" ng-required=\"item.required\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='select' && item.dataSource\" class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" ng-required=\"item.required\" ng-options=\"item1.value as item1.label for item1 in item.dataSource\"></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='Changeselect'\" class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" ng-required=\"item.required\" ng-options=\"itm.value as itm.label for itm in item.dataSource\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='textbox'\" class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                    <input type=\"text\" ng-model=\"model[item.ngmodel]\" maxlength=\"150\" class=\"form-control\" ng-required=\"item.required\" />\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='textboxNumber'\" class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                    <input type=\"text\" ng-model=\"model[item.ngmodel]\" maxlength=\"{{item.maxLength}}\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)))\"\r" +
+    "\n" +
+    "                        class=\"form-control\" ng-required=\"item.required\" />\r" +
+    "\n" +
+    "                    <span ng-if=\"item.span\" font-bold=\"true\">{{item.spanText}}</span>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='textarea'\">\r" +
+    "\n" +
+    "                    <textarea ng-model=\"model[item.ngmodel]\" maxlength=\"500\" rows=\"4\" cols=\"20\" ng-required=\"item.required\" style=\"max-width:515px;width:100%;\"></textarea>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='textareaSide'\" class=\"pop_controls_right select-box-my\" style=\"padding-bottom:2%;\">\r" +
+    "\n" +
+    "                    <textarea type=\"text\" ng-model=\"model[item.ngmodel]\" rows=\"2\" class=\"form-control\" ng-required=\"item.required\" style=\"width:96%;\" />\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='textboxSelect'\" class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodelSelect]\" typeofdata=\"item.typeofdata\"></select>\r" +
+    "\n" +
+    "                    <input ng-model=\"model[item.ngmodelText]\" class=\"form-control\" maxlength=\"7\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));\"\r" +
+    "\n" +
+    "                    />\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <md-input-container ng-if=\"item.controlType==='radio'\" style=\"font-weight: 700; color: black;\">\r" +
+    "\n" +
+    "                    <md-radio-group ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\" layout=\"row\" ng-model=\"model[item.ngmodel]\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "\n" +
+    "                        <md-radio-button ng-value=\"rd.value\" ng-repeat=\"rd in item.dataSource\" class=\"md-primary\">{{rd.label}}</md-radio-button>\r" +
+    "\n" +
+    "                    </md-radio-group>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </md-input-container>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='checkbox'\" class=\"pop_controls_right\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <md-checkbox ng-model=\"model[item.ngmodel]\" name=\"chkisconfidential\" aria-label=\"Checkbox 1\" ng-change=\"model[item.method](model[item.ngmodel],item.ngmodel)\">\r" +
+    "\n" +
+    "                    </md-checkbox>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='date'\" class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                    <date-picker strdate=\"model[item.ngmodel]\"></date-picker>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='country'\">\r" +
+    "\n" +
+    "                    <country-directive countryshow=\"item.countryshow\" cityshow=\"item.cityshow\" othercity=\"item.othercity\" dcountry=\"model[item.dcountry]\" dstate=\"model[item.dstate]\" ddistrict=\"model[item.ddistrict]\" dcity=\"model[item.dcity]\" strothercity=\"model[item.strothercity]\"></country-directive>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='contact'\">\r" +
+    "\n" +
+    "                    <contact-directive emailhide=\"item.emailhide\" dmobile=\"model[item.dmobile]\" strmobile=\"model[item.strmobile]\" dalternative=\"model[item.dalternative]\" stralternative=\"model[item.stralternative]\" dland=\"model[item.dland]\" strareacode=\"model[item.strareacode]\"\r" +
+    "\n" +
+    "                        strland=\"model[item.strland]\" strmail=\"model[item.strmail]\"></contact-directive>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='housewife'\" class=\"pop_controls_right\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <input ng-model=\"model[item.ngmodelText]\" class=\"form-control\" maxlength=\"200\" tabindex=\"32\" />\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <label class=\"checkbox-inline checkbox_my\" style=\"padding: 5px 0 6px 0;\">\r" +
+    "\n" +
+    "                <input type=checkbox ng-model=\"model[item.ngmodelChk]\"  ng-change=\"model[item.ngmodelText]=chkChange(model[item.ngmodelChk]);\"/><span>&nbsp;HouseWife</span>\r" +
+    "\n" +
+    "                    </label>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='about'\" class=\"form-group\">\r" +
+    "\n" +
+    "                    <label class=\"control-label\" style=\"color: #9b2828; font-size: 13px;\">{{item.displayTxt}}</label>\r" +
+    "\n" +
+    "                    <textarea ng-model=\"model[item.ngmodel]\" ng-maxlength=\"item.maxlength\" rows=\"4\" cols=\"20\" ng-required=\"item.required\" style=\"max-width:515px;width:100%;\"></textarea>\r" +
+    "\n" +
+    "                    <label id=\"Label1\" style=\"color: red; font-size: 13px;\" class=\"pull-right\" ng-if=\"item.maxlength!=undefined\">(max {{item.maxlength}} characters)</label>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='multiselect'\" class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" multiple typeofdata=\"item.typeofdata\" ng-required=\"item.required\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='Changemultiselect'\" class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" multiple ng-required=\"item.required\" ng-options=\"itm.value as itm.label for itm in item.dataSource\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='doublemultiselect'\" class=\"pop_controls_right select-box-my select-box-my-double input-group\">\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodelSelect1]\" typeofdata=\"item.typeofdata\" ng-required=\"item.required\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodelSelect2]\" typeofdata=\"item.typeofdata\" ng-required=\"item.required\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='astroTimeOfBirth'\" class=\"pop_controls_right select-box-my select-box-my-trible select-box-my-trible3 input-group\">\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model.ddlFromHours\" ng-options=\"item.value as item.label for item in model.hrsbindArr\" required></select>\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model.ddlFromMinutes\" ng-options=\"item.value as item.label for item in model.minbindArr\" required></select>\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model.ddlFromSeconds\" ng-options=\"item.value as item.label for item in model.secbindArr\" required></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </li>\r" +
+    "\n" +
+    "            <li class=\"row\">\r" +
+    "\n" +
+    "                <br/>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"col-lg-9\">\r" +
+    "\n" +
+    "                    <button class=\"button_custom  pull-right\" ng-disabled=\"loading\" type=\"submit\" promise-btn=\"page.model.submitPromise\">Submit</button>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"col-lg-3\">\r" +
+    "\n" +
+    "                    <input value=\"Cancel\" class=\"button_custom button_custom_reset pull-right\" ng-click=\"cancel();\" type=\"button\"></div>\r" +
+    "\n" +
+    "            </li>\r" +
+    "\n" +
+    "        </ul>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</form>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "<style>\r" +
+    "\n" +
+    "    .requiredStar::after {\r" +
+    "\n" +
+    "        content: \" * \";\r" +
+    "\n" +
+    "        float: right;\r" +
+    "\n" +
+    "        color: red;\r" +
+    "\n" +
+    "        font-size: 22px !important;\r" +
+    "\n" +
+    "        padding-left: 6px;\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    .radiocls {\r" +
+    "\n" +
+    "        padding-top: 2%;\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    .multiselect {\r" +
+    "\n" +
+    "        border: solid 1px #ADA2A2 !important;\r" +
+    "\n" +
+    "        color: #000;\r" +
+    "\n" +
+    "        background: #fff !important;\r" +
+    "\n" +
+    "        box-shadow: none !important;\r" +
+    "\n" +
+    "        height: 34px !important;\r" +
+    "\n" +
+    "        margin: 0 !important;\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    .help-block {\r" +
+    "\n" +
+    "        padding-left: 40%;\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "</style>"
   );
 
 

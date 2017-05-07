@@ -37,6 +37,12 @@
                 <div ng-if="item.controlType==='textarea'">
                     <textarea ng-model="model[item.ngmodel]" maxlength="500" rows="4" cols="20" ng-required="item.required" style="max-width:515px;width:100%;"></textarea>
                 </div>
+
+                <div ng-if="item.controlType==='textareaSide'" class="pop_controls_right select-box-my" style="padding-bottom:2%;">
+                    <textarea type="text" ng-model="model[item.ngmodel]" rows="2" class="form-control" ng-required="item.required" style="width:96%;" />
+                </div>
+
+
                 <div ng-if="item.controlType==='textboxSelect'" class="pop_controls_right select-box-my select-box-my-double">
 
                     <select multiselectdropdown ng-model="model[item.ngmodelSelect]" typeofdata="item.typeofdata"></select>
@@ -78,7 +84,7 @@
                 </div>
 
                 <div ng-if="item.controlType==='about'" class="form-group">
-                    <label class="control-label">{{item.displayTxt}}</label>
+                    <label class="control-label" style="color: #9b2828; font-size: 13px;">{{item.displayTxt}}</label>
                     <textarea ng-model="model[item.ngmodel]" ng-maxlength="item.maxlength" rows="4" cols="20" ng-required="item.required" style="max-width:515px;width:100%;"></textarea>
                     <label id="Label1" style="color: red; font-size: 13px;" class="pull-right" ng-if="item.maxlength!=undefined">(max {{item.maxlength}} characters)</label>
                 </div>
@@ -100,6 +106,7 @@
             </li>
             <li class="row">
                 <br/>
+
                 <div class="col-lg-9">
                     <button class="button_custom  pull-right" ng-disabled="loading" type="submit" promise-btn="page.model.submitPromise">Submit</button>
                 </div>

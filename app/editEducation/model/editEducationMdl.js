@@ -83,8 +83,7 @@
             editEducationService.getCustomerData(CustID).then(function(response) {
                 model.CustomerDataArr = response.data !== undefined && response.data.length > 0 ? JSON.parse(response.data) : [];
                 model.custEmpLastModificationDate = model.CustomerDataArr[0].EmpLastModificationDate;
-                console.log('custdata');
-                console.log(model.CustomerDataArr);
+
             });
         };
 
@@ -109,7 +108,9 @@
                         model.universityId = item.EduUniversity;
                         model.collegeId = item.EduCollege;
                         model.passOfyear = commonFactory.checkvals(item.EduPassOfYear) ? parseInt(item.EduPassOfYear) : null;
+                        debugger;
                         model.countryId = item.CountryID;
+
                         model.stateId = item.StateID;
                         model.districtId = item.DistrictID;
                         model.cityId = item.CityID;
@@ -119,14 +120,13 @@
                         model.EducationID = item.EducationID;
                     }
 
-                    commonFactory.open('EduModalContent.html', model.scope, uibModal);
                     break;
 
                 case 'showProfModal':
                     model.popupdata = model.profession;
                     model.popupHeader = 'Profession details';
                     model.Cust_Profession_ID = null;
-                  
+
                     if (item !== undefined) {
                         model.eventType = 'edit';
                         model.intCusID = item.intCusID;
@@ -150,15 +150,15 @@
                         model.Cust_Profession_ID = item.Cust_Profession_ID;
                     }
 
-                    commonFactory.open('profModalContent.html', model.scope, uibModal);
                     break;
 
                 case 'showAboutModal':
-
+                    model.popupdata = model.aboutUrSelf;
+                    model.popupHeader = 'About your self';
                     if (item !== undefined) {
-                        model.aboutObj.txtAboutUS = item;
+                        model.eventType = 'edit';
+                        model.txtAboutUS = item;
                     }
-                    commonFactory.open('AboutModalContent.html', model.scope, uibModal);
                     break;
 
                 case 'custData':
@@ -167,7 +167,7 @@
                     model.popupHeader = 'Customer details';
 
                     if (item !== undefined) {
-                        // model.subcasteArr = commonFactory.subCaste(item.CasteID);
+
                         model.eventType = 'edit';
                         model.genderId = item.GenderID;
                         model.surName = item.LastName;
@@ -184,59 +184,25 @@
                         model.physicalStausId = item.PhysicalStatusID;
 
                     }
-                    commonFactory.open('CustomerDataContent.html', model.scope, uibModal);
                     break;
             }
+
+            commonFactory.open('commonEduCatiobpopup.html', model.scope, uibModal);
 
         };
 
         model.cancel = function() {
             commonFactory.closepopup();
         };
-        // model.custdataSubmit = function(obj) {
 
-        //     model.custData = {
-        //         GetDetails: {
-        //             CustID: CustID,
-        //             MaritalStatusID: obj.dropmaritalstatus,
-        //             DateofBirth: obj.txtdobcandidate !== '' && obj.txtdobcandidate !== 'Invalid date' ? filter('date')(obj.txtdobcandidate, 'MM/dd/yyyy hh:mm:ss a') : null,
-        //             HeightID: obj.ddlHeightpersonal,
-        //             ComplexionID: obj.ddlcomplexion,
-        //             ReligionID: obj.ddlreligioncandadate,
-        //             MotherTongueID: obj.ddlmothertongue,
-        //             CasteID: obj.ddlcaste,
-        //             CitizenshipID: obj.ddlBornCitizenship,
-        //             SubcasteID: obj.ddlsubcaste,
-        //             LastName: obj.txtSurName,
-        //             FirstName: obj.txtName,
-        //             Gender: obj.rdlGender,
-        //             PhysicallyChallenged: obj.rdlPhysicalStatus
-        //         },
-        //         customerpersonaldetails: {
-        //             intCusID: CustID,
-        //             EmpID: loginEmpid,
-        //             Admin: AdminID
-        //         }
-        //     };
-
-        //     editEducationService.submitCustomerData(model.custData).then(function(response) {
-        //         console.log(response);
-        //         commonFactory.closepopup();
-
-        //         if (response.data === 1) {
-        //             model.custdatapageload();
-        //             alertss.timeoutoldalerts(model.scope, 'alert-success', 'Customer Personal Details submitted Succesfully', 4500);
-        //         } else {
-        //             alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Customer Personal Details Updation failed', 4500);
-        //         }
-        //     });
-        // };
         model.updateData = function(inObj, type) {
 
             if (isSubmit) {
                 isSubmit = false;
                 switch (type) {
                     case 'Education Details':
+                        inObj.customerEducation = {};
+                        inObj.customerEducation = inObj.GetDetails;
                         inObj.customerEducation.Cust_Education_ID = model.EducationID;
                         inObj.customerEducation.intEduID = model.EducationID;
                         inObj.customerEducation.CustID = model.CustID;
@@ -257,6 +223,9 @@
                         });
                         break;
                     case 'Profession details':
+
+                        inObj.customerProfession = {};
+                        inObj.customerProfession = inObj.GetDetails;
                         inObj.customerProfession.profGridID = model.Cust_Profession_ID;
                         inObj.customerProfession.ProfessionID = model.Cust_Profession_ID;
                         inObj.customerProfession.CustID = CustID;
@@ -286,25 +255,23 @@
                                 }
                             });
                         break;
+
+                    case 'About your self':
+
+                        model.submitPromise = editEducationService.submitAboutUrData({ CustID: CustID, AboutYourself: inObj.GetDetails.txtAboutUS, flag: 1 }).then(function(response) {
+                            commonFactory.closepopup();
+                            if (response.data === '1') {
+                                model.aboutPageload();
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'About Yourself submitted Succesfully', 4500);
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'About Yourself Updation failed', 4500);
+                            }
+                        });
+                        break;
                 }
             }
         };
 
-        model.AboutUrselfSubmit = function(obj) {
-            if (isSubmit) {
-                isSubmit = false;
-                model.submitPromise = editEducationService.submitAboutUrData({ CustID: CustID, AboutYourself: obj.txtAboutUS, flag: 1 }).then(function(response) {
-                    commonFactory.closepopup();
-                    if (response.data === '1') {
-                        model.aboutPageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'About Yourself submitted Succesfully', 4500);
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'About Yourself Updation failed', 4500);
-                    }
-                });
-            }
-
-        };
 
         model.DeleteEduPopup = function(id) {
             model.educationID = id;
@@ -318,7 +285,9 @@
                 commonFactory.closepopup();
             });
         };
-
+        model.showHideVisastatus = function(item) {
+            return parseInt(model.profCountryId) !== 1 ? true : false;
+        };
 
 
         //performance code
@@ -380,10 +349,10 @@
                 cityotherParameterValue: 'OtherCity'
             },
             { lblname: 'Working from date', controlType: 'date', ngmodel: 'WorkingForm', parameterValue: 'Workingfromdate' },
-            { lblname: 'visa status', controlType: 'select', ngmodel: 'visaStatus', typeofdata: 'visastatus', parameterValue: 'visastatus' },
-            { lblname: 'Since date', controlType: 'date', ngmodel: 'sinceDate', parameterValue: 'Sincedate' },
-            { lblname: 'Arrival Date', controlType: 'date', ngmodel: 'arrivalDate', parameterValue: 'ArrivalDate' },
-            { lblname: 'Departure Date', controlType: 'date', ngmodel: 'departureDate', parameterValue: 'DepartureDate' },
+            { lblname: 'visa status', controlType: 'select', ngmodel: 'visaStatus', typeofdata: 'visastatus', parameterValue: 'visastatus', parentDependecy: 'showHideVisastatus' },
+            { lblname: 'Since date', controlType: 'date', ngmodel: 'sinceDate', parameterValue: 'Sincedate', parentDependecy: 'showHideVisastatus' },
+            { lblname: 'Arrival Date', controlType: 'date', ngmodel: 'arrivalDate', parameterValue: 'ArrivalDate', parentDependecy: 'showHideVisastatus' },
+            { lblname: 'Departure Date', controlType: 'date', ngmodel: 'departureDate', parameterValue: 'DepartureDate', parentDependecy: 'showHideVisastatus' },
             { lblname: 'Occupation Details', controlType: 'textarea', ngmodel: 'occupationDetails', parameterValue: 'OccupationDetails' }
 
         ];
@@ -404,13 +373,10 @@
             { lblname: 'Physical Status', controlType: 'radio', ngmodel: 'physicalStausId', arrbind: 'PhysicalStatus', parameterValue: 'PhysicallyChallenged' }
         ];
 
-        // model.aboutUrSelf = [
-        //     { lblname: 'Occupation Details', controlType: 'textarea', ngmodel: 'occupationDetails', parameterValue: 'OccupationDetails' }
-        // ];
-
         model.aboutUrSelf = [
-            { lblname: '', controlType: 'about', maxlength: '100', displayTxt: "(Please don't write phone numbers/emails/any junk characters)*', ngmodel: 'aboutFamilyId", parameterValue: 'OccupationDetails' },
+            { lblname: '', controlType: 'about', maxlength: '1000', ngmodel: 'txtAboutUS', displayTxt: "(Please don't write phone numbers/emails/any junk characters)*', ngmodel: 'aboutFamilyId", parameterValue: 'txtAboutUS' },
         ];
+
 
         return model.init();
     }

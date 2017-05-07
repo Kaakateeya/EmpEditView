@@ -4,7 +4,7 @@
  */
 
 var editviewapp = angular.module('KaakateeyaEmpEdit', ['ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'ngIdle', 'ngMaterial',
-    'ngMessages', 'ngAria', 'ngPassword', 'jcs-autoValidate', 'angularPromiseButtons', 'oc.lazyLoad'
+    'ngMessages', 'ngAria', 'ngPassword', 'jcs-autoValidate', 'angularPromiseButtons', 'oc.lazyLoad', 'ngMdIcons'
 ]);
 editviewapp.apipath = 'http://183.82.0.58:8025/Api/';
 editviewapp.apipathold = 'http://183.82.0.58:8010/Api/';
@@ -37,7 +37,8 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         { name: 'editview.editSpouse', url: '/Spouse/:CustID', subname: ['common/directives/datePickerDirective.js'] },
         { name: 'editview.editContact', url: '/Contact/:CustID', subname: [] },
         { name: 'editview.editOfcePurpose', url: '/OfcePurpose/:CustID', subname: [] },
-        { name: 'editview.editProfileSetting', url: '/ProfileSetting/:CustID', subname: [] }
+        { name: 'editview.editProfileSetting', url: '/ProfileSetting/:CustID', subname: [] },
+        { name: 'editview.popup', url: '/popup', subname: [] }
     ];
     $ocLazyLoadProvider.config({
         debug: true
@@ -65,18 +66,18 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         $stateProvider.state(item.name, {
             url: item.url,
             views: innerView,
-            // resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-            //     loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-            //         // you can lazy load files for an existing module
-            //         var edit = item.name.slice(9);
-            //         if (editviewapp.env === 'dev') {
-            //             return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-            //         } else {
-            //             return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
-            //         }
-            //         // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-            //     }]
-            // }
+            resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+                loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                    // you can lazy load files for an existing module
+                    var edit = item.name.slice(9);
+                    if (editviewapp.env === 'dev') {
+                        return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+                    } else {
+                        return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
+                    }
+                    // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+                }]
+            }
         });
         $locationProvider.html5Mode(true);
     });
@@ -195,27 +196,28 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             model.minbindArr = commonFactory.numberBindWithZeros('Minutes', 0, 59);
             model.secbindArr = commonFactory.numberBindWithZeros('Seconds', 0, 59);
             isSubmit = true;
+            model.popupdata = model.astro;
+            model.popupHeader = "Astro details";
             if (item !== undefined) {
-                model.starArr = commonFactory.starBind(item.StarLanguageID);
-
+                model.eventType = 'edit';
                 if (item.TimeOfBirth !== undefined) {
                     model.strdot = ((item.TimeOfBirth).split(' '))[0].split(':');
-                    model.atroObj.ddlFromHours = parseInt(model.strdot[0]);
-                    model.atroObj.ddlFromMinutes = parseInt(model.strdot[1]);
-                    model.atroObj.ddlFromSeconds = parseInt(model.strdot[2]);
+                    model.ddlFromHours = parseInt(model.strdot[0]);
+                    model.ddlFromMinutes = parseInt(model.strdot[1]);
+                    model.ddlFromSeconds = parseInt(model.strdot[2]);
                 }
-                model.atroObj.ddlCountryOfBirthID = item.CountryOfBirthID;
-                model.atroObj.ddlStateOfBirthID = item.StateOfBirthID;
-                model.atroObj.ddlDistrictOfBirthID = item.DistrictOfBirthID;
-                model.atroObj.ddlcity = item.CityOfBirthID;
-                model.atroObj.ddlstarlanguage = item.StarLanguageID;
-                model.atroObj.ddlstar = item.StarID;
-                model.atroObj.ddlpaadam = item.PaadamID;
-                model.atroObj.ddlLagnam = item.LagnamID;
-                model.atroObj.ddlRaasiMoonsign = item.RaasiID;
-                model.atroObj.txtGothramGotra = item.Gothram;
-                model.atroObj.txtMaternalgothram = item.MeternalGothramID;
-                model.atroObj.rdlkujaDosham = item.manglikID;
+                model.ddlCountryOfBirthID = item.CountryOfBirthID;
+                model.ddlStateOfBirthID = item.StateOfBirthID;
+                model.ddlDistrictOfBirthID = item.DistrictOfBirthID;
+                model.ddlcity = item.CityOfBirthID;
+                model.ddlstarlanguage = item.StarLanguageID;
+                model.ddlstar = item.StarID;
+                model.ddlpaadam = item.PaadamID;
+                model.ddlLagnam = item.LagnamID;
+                model.ddlRaasiMoonsign = item.RaasiID;
+                model.txtGothramGotra = item.Gothram;
+                model.txtMaternalgothram = item.MeternalGothramID;
+                model.rdlkujaDosham = item.manglikID;
             }
             commonFactory.open('astroContent.html', model.scope, uibModal);
 
@@ -233,40 +235,12 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             }
         };
 
-        model.astroSubmit = function(obj) {
+        model.updateData = function(inObj, type) {
             if (isSubmit) {
                 isSubmit = false;
                 $('#ssss').prop('disabled', true);
-                var strFromTimeOfBirth = obj.ddlFromHours + ":" + obj.ddlFromMinutes + ":" + obj.ddlFromSeconds;
-
-                model.astroData = {
-                    GetDetails: {
-                        CustID: custID,
-                        TimeofBirth: strFromTimeOfBirth,
-                        CountryOfBirthID: obj.ddlCountryOfBirthID,
-                        StateOfBirthID: obj.ddlStateOfBirthID,
-                        DistrictOfBirthID: obj.ddlDistrictOfBirthID,
-                        CityOfBirthID: obj.ddlcity,
-                        Starlanguage: obj.ddlstarlanguage,
-                        Star: obj.ddlstar,
-                        Paadam: obj.ddlpaadam,
-                        Lagnam: obj.ddlLagnam,
-                        RasiMoonsign: obj.ddlRaasiMoonsign,
-                        GothramGotra: obj.txtGothramGotra,
-                        Maternalgothram: obj.txtMaternalgothram,
-                        ManglikKujadosham: obj.rdlkujaDosham,
-                        Pblongitude: obj.PBlongitude,
-                        pblatitude: obj.PBlatitude,
-                        TimeZone: null
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-
-                model.submitPromise = editAstroService.submitAstroData(model.astroData).then(function(response) {
+                inObj.GetDetails.CustID = custID;
+                model.submitPromise = editAstroService.submitAstroData(inObj).then(function(response) {
                     commonFactory.closepopup();
                     if (response.data === 1) {
                         if (model.datagetInStatus === 1) {
@@ -431,7 +405,40 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             commonFactory.closepopup();
         };
 
+        model.astro = [{
+                lblname: 'Time of Birth',
+                controlType: 'astroTimeOfBirth',
+            },
+            {
+                controlType: 'country',
+                countryshow: true,
+                cityshow: true,
+                othercity: false,
+                dcountry: 'ddlCountryOfBirthID',
+                dstate: 'ddlStateOfBirthID',
+                ddistrict: 'ddlDistrictOfBirthID',
+                dcity: 'ddlcity',
+                countryParameterValue: 'CountryOfBirthID',
+                stateParameterValue: 'StateOfBirthID',
+                districtParameterValue: 'DistrictOfBirthID',
+                cityParameterValue: 'CityOfBirthID'
 
+            },
+            { lblname: 'Star language', controlType: 'select', ngmodel: 'ddlstarlanguage', typeofdata: 'starLanguage', required: true, childName: 'star', changeApi: 'stars', parameterValue: 'Starlanguage' },
+            { lblname: 'Star', controlType: 'Changeselect', ngmodel: 'ddlstar', parentName: 'star', parameterValue: 'Star' },
+            { lblname: 'Paadam', controlType: 'select', ngmodel: 'ddlpaadam', required: true, typeofdata: 'paadam', parameterValue: 'Paadam' },
+            { lblname: 'Lagnam', controlType: 'select', ngmodel: 'ddlLagnam', required: true, typeofdata: 'lagnam', parameterValue: 'Lagnam' },
+            { lblname: 'Raasi/Moon sign', controlType: 'select', ngmodel: 'ddlRaasiMoonsign', required: true, typeofdata: 'ZodaicSign', parameterValue: 'RasiMoonsign' },
+            { lblname: 'Gothram/Gotra', controlType: 'textbox', ngmodel: 'txtGothramGotra', required: true, parameterValue: 'GothramGotra' },
+            { lblname: 'Maternal gothram', controlType: 'textbox', ngmodel: 'txtMaternalgothram', required: true, parameterValue: 'Maternalgothram' },
+            { lblname: 'Manglik/Kuja dosham', controlType: 'radio', ngmodel: 'rdlkujaDosham', ownArray: 'Manglik', parameterValue: 'ManglikKujadosham' },
+
+        ];
+        model.Manglik = [
+            { "label": "Yes", "title": "Yes", "value": 0 },
+            { "label": "No", "title": "No", "value": 1 },
+            { "label": "Dont't Know", "title": "Dont't Know", "value": 2 }
+        ];
 
 
 
@@ -966,7 +973,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
      function controller(editEducationModel, scope, baseModel, window) {
          var vm = this;
          var model;
-
+         scope.model = {};
          vm.scope = scope;
          vm.init = function() {
              window.scrollTo(0, 0);
@@ -987,13 +994,13 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     'use strict';
 
 
-    function factory($http, authSvc, editEducationService, commonFactory, uibModal, filter, alertss, stateParams, SelectBindService) {
+    function factory($http, authSvc, editEducationService, commonFactory, uibModal, filter, alertss, stateParams, SelectBindService, arrayConstantsEdit) {
         var model = {};
-        // var logincustid = authSvc.getCustId();
 
         model.scope = {};
         var loginEmpid = authSvc.LoginEmpid();
         var AdminID = model.Admin = authSvc.isAdmin();
+        model.Education = {};
         //start declaration block
         model.stateArr = [];
         model.districtArr = [];
@@ -1006,23 +1013,21 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.ProfdistrictArr = [];
         model.ProfcityeArr = [];
         model.profObj = {};
-        model.edoObj = {};
+
         model.aboutObj = {};
         model.custObj = {};
-        model.edoObj.IsHighestDegree = '';
         var isSubmit = true;
         model.educationID = 0;
         model.CustomerDataArr = [];
         model.reviewdisplay = 'Education details';
+        model.eventType = 'add';
         //end declaration block
-
 
         var CustID = stateParams.CustID;
 
-        // logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
-        model.CustID = CustID;
         model.init = function() {
             CustID = stateParams.CustID;
+            model.CustID = CustID;
             model.getdata();
             return model;
         };
@@ -1040,9 +1045,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 console.log(response.data);
                 if (commonFactory.checkvals(response.data)) {
                     model.educationSelectArray = response.data;
-
                     model.eduEmpLastModificationDate = model.educationSelectArray.length > 0 ? model.educationSelectArray[0].EmpLastModificationDate : '';
-
                 }
 
             });
@@ -1072,116 +1075,111 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             editEducationService.getCustomerData(CustID).then(function(response) {
                 model.CustomerDataArr = response.data !== undefined && response.data.length > 0 ? JSON.parse(response.data) : [];
                 model.custEmpLastModificationDate = model.CustomerDataArr[0].EmpLastModificationDate;
-                console.log('custdata');
-                console.log(model.CustomerDataArr);
-            });
-        };
 
-        model.passOfYear = function(maxyr, no_year) {
-            var yr = 1;
-            model.passOfyearArr.push({ "label": "--select--", "title": "--select--", "value": 0 });
-            for (var i = maxyr; i >= no_year; i--) {
-                model.passOfyearArr.push({ "label": i, "title": i, "value": i });
-                yr += 1;
-            }
+            });
         };
 
         model.showpopup = function(type, item) {
             isSubmit = true;
+            model.eventType = 'add';
             switch (type) {
                 case 'showEduModal':
-                    model.passOfYear(2020, 1975);
-                    model.edoObj.EducationID = null;
-                    model.edoObj = {};
-                    if (item !== undefined) {
 
+                    model.popupdata = model.Education;
+                    model.popupHeader = 'Education Details';
+                    model.EducationID = null;
+
+                    if (item !== undefined) {
+                        model.eventType = 'edit';
                         model.eduGroupArr = commonFactory.checkvals(item.EducationCategoryID) ? commonFactory.educationGroupBind(item.EducationCategoryID) : [];
                         model.eduSpecialisationArr = commonFactory.checkvals(item.EducationGroupID) ? commonFactory.educationSpeciakisationBind(item.EducationGroupID) : [];
+                        model.IsHighestDegreeId = item.EduHighestDegree;
+                        model.EduCatgoryId = commonFactory.checkvals(item.EducationCategoryID) ? parseInt(item.EducationCategoryID) : null;
+                        model.EdugroupId = item.EducationGroupID;
+                        model.EduspecializationId = item.EducationSpecializationID;
+                        model.universityId = item.EduUniversity;
+                        model.collegeId = item.EduCollege;
+                        model.passOfyear = commonFactory.checkvals(item.EduPassOfYear) ? parseInt(item.EduPassOfYear) : null;
+                        debugger;
+                        model.countryId = item.CountryID;
 
-                        model.edoObj.IsHighestDegree = item.EduHighestDegree;
-                        console.log(item.EduPassOfYear);
-
-                        model.edoObj.ddlEduCatgory = commonFactory.checkvals(item.EducationCategoryID) ? parseInt(item.EducationCategoryID) : null;
-                        model.edoObj.ddlEdugroup = item.EducationGroupID;
-                        model.edoObj.ddlEduspecialization = item.EducationSpecializationID;
-                        model.edoObj.txtuniversity = item.EduUniversity;
-                        model.edoObj.txtcollege = item.EduCollege;
-                        model.edoObj.ddlpassOfyear = commonFactory.checkvals(item.EduPassOfYear) ? parseInt(item.EduPassOfYear) : null;
-                        model.edoObj.ddlCountry = item.CountryID;
-                        model.edoObj.ddlState = item.StateID;
-                        model.edoObj.ddlDistrict = item.DistrictID;
-                        model.edoObj.ddlcity = item.CityID;
-                        model.edoObj.txtcity = "";
-                        model.edoObj.txtEdumerits = item.Educationdesc;
-                        model.edoObj.intCusID = item.intCusID;
-                        model.edoObj.EducationID = item.EducationID;
+                        model.stateId = item.StateID;
+                        model.districtId = item.DistrictID;
+                        model.cityId = item.CityID;
+                        model.txtcity = "";
+                        model.Edumerits = item.Educationdesc;
+                        model.intCusID = item.intCusID;
+                        model.EducationID = item.EducationID;
                     }
 
-
-                    commonFactory.open('EduModalContent.html', model.scope, uibModal);
                     break;
 
                 case 'showProfModal':
-                    model.profObj.Cust_Profession_ID = null;
-                    model.profObj = {};
+                    model.popupdata = model.profession;
+                    model.popupHeader = 'Profession details';
+                    model.Cust_Profession_ID = null;
+
                     if (item !== undefined) {
-
-                        model.ProfSpecialisationArr = commonFactory.professionBind(item.ProfessionGroupID);
-
-                        model.profObj.intCusID = item.intCusID;
-                        model.profObj.ddlemployedin = item.ProfessionCategoryID;
-                        model.profObj.ddlprofgroup = item.ProfessionGroupID;
-                        model.profObj.ddlprofession = item.ProfessionID;
-                        model.profObj.txtcmpyname = item.CompanyName;
-                        model.profObj.txtsalary = item.Salary;
-
-                        model.profObj.ddlcurreny = item.SalaryCurrency;
-                        model.profObj.ddlCountryProf = item.CountryID;
-                        model.profObj.ddlStateProf = item.StateID;
-                        model.profObj.ddlDistrictProf = item.DistrictID;
-                        model.profObj.ddlcityworkingprofession = item.CityID;
-                        model.profObj.txtcityprofession = item.CityWorkingIn;
-                        model.profObj.txtworkingfrom = commonFactory.convertDateFormat(item.WorkingFromDate, 'DD-MM-YYYY');
-                        model.profObj.ddlvisastatus = item.VisaTypeID;
-                        model.profObj.txtssincedate = commonFactory.convertDateFormat(item.ResidingSince, 'DD-MM-YYYY');
-                        model.profObj.txtarrivaldate = commonFactory.convertDateFormat(item.ArrivingDate, 'DD-MM-YYYY');
-                        model.profObj.txtdeparture = commonFactory.convertDateFormat(item.DepartureDate, 'DD-MM-YYYY');
-                        model.profObj.txtoccupation = item.OccupationDetails;
-                        model.profObj.Cust_Profession_ID = item.Cust_Profession_ID;
+                        model.eventType = 'edit';
+                        model.intCusID = item.intCusID;
+                        model.EmployedInId = parseInt(item.ProfessionCategoryID);
+                        model.ProfessionGroupId = item.ProfessionGroupID;
+                        model.ProfessionId = item.ProfessionID;
+                        model.CompanyName = item.CompanyName;
+                        model.salary = item.Salary;
+                        model.currency = item.SalaryCurrency;
+                        model.profCountryId = item.CountryID;
+                        model.profStateId = item.StateID;
+                        model.profDistrictId = item.DistrictID;
+                        model.profCityId = item.CityID;
+                        model.profTxtcity = item.CityWorkingIn;
+                        model.WorkingForm = commonFactory.convertDateFormat(item.WorkingFromDate, 'DD-MM-YYYY');
+                        model.visaStatus = item.VisaTypeID;
+                        model.sinceDate = commonFactory.convertDateFormat(item.ResidingSince, 'DD-MM-YYYY');
+                        model.arrivalDate = commonFactory.convertDateFormat(item.ArrivingDate, 'DD-MM-YYYY');
+                        model.departureDate = commonFactory.convertDateFormat(item.DepartureDate, 'DD-MM-YYYY');
+                        model.occupationDetails = item.OccupationDetails;
+                        model.Cust_Profession_ID = item.Cust_Profession_ID;
                     }
 
-                    commonFactory.open('profModalContent.html', model.scope, uibModal);
                     break;
 
                 case 'showAboutModal':
-
+                    model.popupdata = model.aboutUrSelf;
+                    model.popupHeader = 'About your self';
                     if (item !== undefined) {
-                        model.aboutObj.txtAboutUS = item;
+                        model.eventType = 'edit';
+                        model.txtAboutUS = item;
                     }
-                    commonFactory.open('AboutModalContent.html', model.scope, uibModal);
                     break;
 
                 case 'custData':
+
+                    model.popupdata = model.Custdata;
+                    model.popupHeader = 'Customer details';
+
                     if (item !== undefined) {
-                        model.subcasteArr = commonFactory.subCaste(item.CasteID);
-                        model.custObj.rdlGender = item.GenderID;
-                        model.custObj.txtSurName = item.LastName;
-                        model.custObj.txtName = item.FirstName;
-                        model.custObj.dropmaritalstatus = item.MaritalStatusID;
-                        model.custObj.txtdobcandidate = commonFactory.convertDateFormat(item.DateofBirthwithoutAge, 'DD-MM-YYYY');
-                        model.custObj.ddlHeightpersonal = item.HeightID;
-                        model.custObj.ddlcomplexion = item.ComplexionID;
-                        model.custObj.ddlreligioncandadate = item.ReligionID;
-                        model.custObj.ddlmothertongue = item.MotherTongueID;
-                        model.custObj.ddlcaste = item.CasteID;
-                        model.custObj.ddlsubcaste = item.SubCasteID;
-                        model.custObj.ddlBornCitizenship = item.CitizenshipID;
-                        model.custObj.rdlPhysicalStatus = item.PhysicalStatusID;
+
+                        model.eventType = 'edit';
+                        model.genderId = item.GenderID;
+                        model.surName = item.LastName;
+                        model.name = item.FirstName;
+                        model.maritalStatusId = item.MaritalStatusID;
+                        model.dob = commonFactory.convertDateFormat(item.DateofBirthwithoutAge, 'DD-MM-YYYY');
+                        model.heightId = item.HeightID;
+                        model.complexionId = item.ComplexionID;
+                        model.religionId = item.ReligionID;
+                        model.motherTongueId = item.MotherTongueID;
+                        model.casteId = item.CasteID;
+                        model.subcasteId = item.SubCasteID;
+                        model.bornCitizenShipId = item.CitizenshipID;
+                        model.physicalStausId = item.PhysicalStatusID;
 
                     }
-                    commonFactory.open('CustomerDataContent.html', model.scope, uibModal);
                     break;
             }
+
+            commonFactory.open('commonEduCatiobpopup.html', model.scope, uibModal);
 
         };
 
@@ -1189,164 +1187,83 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             commonFactory.closepopup();
         };
 
+        model.updateData = function(inObj, type) {
 
-        model.ProfchangeBind = function(type, parentval) {
-
-            switch (type) {
-
-                case 'ProfessionGroup':
-                    model.ProfSpecialisationArr = commonFactory.professionBind(parentval);
-                    model.profObj.ddlprofession = "";
-                    break;
-            }
-        };
-
-        model.changeBind = function(type, parentval) {
-
-
-            if (commonFactory.checkvals(parentval)) {
-
+            if (isSubmit) {
+                isSubmit = false;
                 switch (type) {
+                    case 'Education Details':
+                        inObj.customerEducation = {};
+                        inObj.customerEducation = inObj.GetDetails;
+                        inObj.customerEducation.Cust_Education_ID = model.EducationID;
+                        inObj.customerEducation.intEduID = model.EducationID;
+                        inObj.customerEducation.CustID = model.CustID;
 
-                    case 'EducationCatgory':
+                        model.submitPromise = editEducationService.submitEducationData(inObj).then(function(response) {
+                            console.log(response);
+                            commonFactory.closepopup();
+                            if (response.data === 1) {
+                                model.eduPageload();
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'Education Details submitted Succesfully', 4500);
+                                if (model.datagetInStatus === 1) {
+                                    sessionStorage.removeItem('missingStatus');
+                                    route.go('mobileverf', {});
+                                }
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Education Details Updation failed', 4500);
+                            }
+                        });
+                        break;
+                    case 'Profession details':
 
-                        model.eduGroupArr = commonFactory.educationGroupBind(parentval);
-                        model.edoObj.ddlEdugroup = "";
+                        inObj.customerProfession = {};
+                        inObj.customerProfession = inObj.GetDetails;
+                        inObj.customerProfession.profGridID = model.Cust_Profession_ID;
+                        inObj.customerProfession.ProfessionID = model.Cust_Profession_ID;
+                        inObj.customerProfession.CustID = CustID;
+                        model.submitPromise = editEducationService.submitProfessionData(inObj).then(function(response) {
+                            commonFactory.closepopup();
+                            if (response.data === 1) {
+                                model.ProfPageload();
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'Professional Details  submitted Succesfully', 4500);
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Professional Details  Updation failed', 4500);
+                            }
+                        });
 
                         break;
+                    case 'Customer details':
 
-                    case 'EducationGroup':
-
-                        model.eduSpecialisationArr = commonFactory.educationSpeciakisationBind(parentval);
-                        model.edoObj.ddlEduspecialization = "";
-
+                        inObj.GetDetails.CustID = CustID;
+                        inObj.GetDetails.DateofBirth = inObj.GetDetails.DateofBirth !== '' && inObj.GetDetails.DateofBirth !== 'Invalid date' ? filter('date')(inObj.GetDetails.DateofBirth, 'MM/dd/yyyy hh:mm:ss a') : null,
+                            editEducationService.submitCustomerData(inObj).then(function(response) {
+                                console.log(response);
+                                commonFactory.closepopup();
+                                if (response.data === 1) {
+                                    model.custdatapageload();
+                                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Customer Personal Details submitted Succesfully', 4500);
+                                } else {
+                                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Customer Personal Details Updation failed', 4500);
+                                }
+                            });
                         break;
 
-                    case 'caste':
+                    case 'About your self':
 
-                        model.subcasteArr = commonFactory.subCaste(parentval);
-
+                        model.submitPromise = editEducationService.submitAboutUrData({ CustID: CustID, AboutYourself: inObj.GetDetails.txtAboutUS, flag: 1 }).then(function(response) {
+                            commonFactory.closepopup();
+                            if (response.data === '1') {
+                                model.aboutPageload();
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'About Yourself submitted Succesfully', 4500);
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'About Yourself Updation failed', 4500);
+                            }
+                        });
                         break;
                 }
             }
         };
 
-        model.eduSubmit = function(objitem) {
-
-            if (isSubmit) {
-                isSubmit = false;
-                model.myData = {
-                    customerEducation: {
-                        CustID: CustID,
-                        Educationcategory: objitem.ddlEduCatgory,
-                        Educationgroup: objitem.ddlEdugroup,
-                        EducationSpecialization: objitem.ddlEduspecialization,
-                        University: objitem.txtuniversity,
-                        College: objitem.txtcollege,
-                        Passofyear: objitem.ddlpassOfyear,
-                        Countrystudyin: objitem.ddlCountry,
-                        Statestudyin: objitem.ddlState,
-                        Districtstudyin: objitem.ddlDistrict,
-                        CitystudyIn: objitem.ddlcity,
-                        OtherCity: objitem.txtcity,
-                        Highestdegree: objitem.IsHighestDegree,
-                        Educationalmerits: objitem.txtEdumerits,
-                        Cust_Education_ID: model.edoObj.EducationID,
-                        intEduID: model.edoObj.EducationID,
-                    },
-                    customerpersonaldetails: {
-                        intCusID: CustID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-
-                model.submitPromise = editEducationService.submitEducationData(model.myData).then(function(response) {
-                    console.log(response);
-                    commonFactory.closepopup();
-                    if (response.data === 1) {
-
-                        model.eduPageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Education Details submitted Succesfully', 4500);
-                        if (model.datagetInStatus === 1) {
-                            sessionStorage.removeItem('missingStatus');
-                            route.go('mobileverf', {});
-                        }
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Education Details Updation failed', 4500);
-                    }
-                });
-            }
-
-        };
-
-        model.ProfSubmit = function(objitem) {
-
-            if (isSubmit) {
-                isSubmit = false;
-                model.myprofData = {
-                    customerProfession: {
-                        CustID: CustID,
-                        EmployedIn: objitem.ddlemployedin,
-                        Professionalgroup: objitem.ddlprofgroup,
-                        Profession: objitem.ddlprofession,
-                        Companyname: objitem.txtcmpyname,
-                        Currency: objitem.ddlcurreny,
-                        Monthlysalary: objitem.txtsalary,
-                        CountryID: objitem.ddlCountryProf,
-                        StateID: objitem.ddlStateProf,
-                        DistrictID: objitem.ddlDistrictProf,
-                        CityID: objitem.ddlcityworkingprofession,
-                        OtherCity: objitem.txtcityprofession,
-                        Workingfromdate: filter('date')(objitem.txtworkingfrom, 'yyyy-MM-dd'),
-                        OccupationDetails: objitem.txtoccupation,
-                        visastatus: objitem.ddlvisastatus,
-                        Sincedate: objitem.txtssincedate !== '' && objitem.txtssincedate !== 'Invalid date' ? filter('date')(objitem.txtssincedate, 'yyyy-MM-dd') : null,
-                        ArrivalDate: objitem.txtarrivaldate !== '' && objitem.txtarrivaldate !== 'Invalid date' ? filter('date')(objitem.txtarrivaldate, 'yyyy-MM-dd') : null,
-                        DepartureDate: objitem.txtdeparture !== '' && objitem.txtdeparture !== 'Invalid date' ? filter('date')(objitem.txtdeparture, 'yyyy-MM-dd') : null,
-                        profGridID: model.profObj.Cust_Profession_ID,
-                        ProfessionID: model.profObj.Cust_Profession_ID,
-                    },
-                    customerpersonaldetails: {
-                        intCusID: CustID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-
-                model.submitPromise = editEducationService.submitProfessionData(model.myprofData).then(function(response) {
-
-                    commonFactory.closepopup();
-                    if (response.data === 1) {
-                        model.ProfPageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Professional Details  submitted Succesfully', 4500);
-                        if (scope.datagetInStatus === 1) {
-                            sessionStorage.removeItem('missingStatus');
-                            route.go('mobileverf', {});
-                        }
-
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Professional Details  Updation failed', 4500);
-                    }
-                });
-            }
-        };
-
-        model.AboutUrselfSubmit = function(obj) {
-            if (isSubmit) {
-                isSubmit = false;
-                model.submitPromise = editEducationService.submitAboutUrData({ CustID: CustID, AboutYourself: obj.txtAboutUS, flag: 1 }).then(function(response) {
-                    commonFactory.closepopup();
-                    if (response.data === '1') {
-                        model.aboutPageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'About Yourself submitted Succesfully', 4500);
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'About Yourself Updation failed', 4500);
-                    }
-                });
-            }
-
-        };
 
         model.DeleteEduPopup = function(id) {
             model.educationID = id;
@@ -1360,60 +1277,97 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 commonFactory.closepopup();
             });
         };
-
-        model.custdataSubmit = function(obj) {
-
-            model.custData = {
-                GetDetails: {
-                    CustID: CustID,
-                    MaritalStatusID: obj.dropmaritalstatus,
-                    DateofBirth: obj.txtdobcandidate !== '' && obj.txtdobcandidate !== 'Invalid date' ? filter('date')(obj.txtdobcandidate, 'MM/dd/yyyy hh:mm:ss a') : null,
-                    HeightID: obj.ddlHeightpersonal,
-                    ComplexionID: obj.ddlcomplexion,
-                    ReligionID: obj.ddlreligioncandadate,
-                    MotherTongueID: obj.ddlmothertongue,
-                    CasteID: obj.ddlcaste,
-                    CitizenshipID: obj.ddlBornCitizenship,
-                    SubcasteID: obj.ddlsubcaste,
-                    LastName: obj.txtSurName,
-                    FirstName: obj.txtName,
-                    Gender: obj.rdlGender,
-                    PhysicallyChallenged: obj.rdlPhysicalStatus
-                },
-                customerpersonaldetails: {
-                    intCusID: CustID,
-                    EmpID: loginEmpid,
-                    Admin: AdminID
-                }
-            };
-
-            editEducationService.submitCustomerData(model.custData).then(function(response) {
-                console.log(response);
-                commonFactory.closepopup();
-
-                if (response.data === 1) {
-                    model.custdatapageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Customer Personal Details submitted Succesfully', 4500);
-                } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Customer Personal Details Updation failed', 4500);
-                }
-            });
-
-
+        model.showHideVisastatus = function(item) {
+            return parseInt(model.profCountryId) !== 1 ? true : false;
         };
 
 
-        // model.reviewonchange = function(booltype) {
-        //     if (booltype === true)
-        //         commonFactory.open('common/templates/reviewConfirmationPopup.html', model.scope, uibModal, 'sm');
-        // };
+        //performance code
+        model.Education = [
+            { lblname: 'Is Highest Degree', controlType: 'radio', ngmodel: 'IsHighestDegreeId', required: true, arrbind: 'boolType', parameterValue: 'Highestdegree' },
+            { lblname: 'Education category', controlType: 'select', ngmodel: 'EduCatgoryId', required: true, typeofdata: 'educationcategory', parameterValue: 'Educationcategory', childName: 'EducationGroup', changeApi: 'EducationGroup' },
+            { lblname: 'Education group', controlType: 'Changeselect', ngmodel: 'EdugroupId', required: true, parentName: 'EducationGroup', parameterValue: 'Educationgroup', changeApi: 'EducationSpecialisation', childName: 'EducationSpecialisation' },
+            { lblname: 'Edu specialization', controlType: 'Changeselect', ngmodel: 'EduspecializationId', required: true, parentName: 'EducationSpecialisation', parameterValue: 'EducationSpecialization' },
+            { lblname: 'University', controlType: 'textbox', ngmodel: 'universityId', parameterValue: 'University' },
+            { lblname: 'College', controlType: 'textbox', ngmodel: 'collegeId', parameterValue: 'College' },
+            { lblname: 'Pass of year', controlType: 'select', ngmodel: 'passOfyear', typeofdata: 'passOfYear', parameterValue: 'Passofyear' },
+            {
+                lblname: 'country',
+                controlType: 'country',
+                countryshow: true,
+                cityshow: true,
+                othercity: true,
+                dcountry: 'countryId',
+                dstate: 'stateId',
+                ddistrict: 'districtId',
+                dcity: 'cityId',
+                strothercity: 'txtcity',
+                countryParameterValue: 'Countrystudyin',
+                stateParameterValue: 'Statestudyin',
+                districtParameterValue: 'Districtstudyin',
+                cityParameterValue: 'CitystudyIn',
+                cityotherParameterValue: 'OtherCity'
+            },
+            {
+                lblname: 'Educational merits',
+                controlType: 'textarea',
+                ngmodel: 'Edumerits',
+                parameterValue: 'Educationalmerits'
+            }
 
+        ];
 
-        // model.reviewSubmit = function() {
-        //     baseService.menuReviewstatus(CustID, '1', '6,7,8').then(function(response) {
-        //         console.log(response.data);
-        //     });
-        // };
+        model.profession = [
+            { lblname: 'Employed In', controlType: 'select', ngmodel: 'EmployedInId', required: true, typeofdata: 'ProfCatgory', parameterValue: 'EmployedIn' },
+            { lblname: 'Professional group', controlType: 'select', ngmodel: 'ProfessionGroupId', required: true, typeofdata: 'ProfGroup', parameterValue: 'Professionalgroup', childName: 'Profession', changeApi: 'ProfessionSpecialisation' },
+            { lblname: 'Profession', controlType: 'Changeselect', ngmodel: 'ProfessionId', required: true, parentName: 'Profession', parameterValue: 'Profession' },
+            { lblname: 'Company name', controlType: 'textbox', ngmodel: 'CompanyName', parameterValue: 'Companyname' },
+            { lblname: 'Monthly salary', controlType: 'textboxSelect', ngmodelSelect: 'currency', ngmodelText: 'salary', typeofdata: 'currency', parameterValueSelect: 'Currency', parameterValueText: 'Monthlysalary' },
+            {
+                controlType: 'country',
+                countryshow: true,
+                cityshow: true,
+                othercity: true,
+                dcountry: 'profCountryId',
+                dstate: 'profStateId',
+                ddistrict: 'profDistrictId',
+                dcity: 'profCityId',
+                strothercity: 'profTxtcity',
+
+                countryParameterValue: 'CountryID',
+                stateParameterValue: 'StateID',
+                districtParameterValue: 'DistrictID',
+                cityParameterValue: 'CityID',
+                cityotherParameterValue: 'OtherCity'
+            },
+            { lblname: 'Working from date', controlType: 'date', ngmodel: 'WorkingForm', parameterValue: 'Workingfromdate' },
+            { lblname: 'visa status', controlType: 'select', ngmodel: 'visaStatus', typeofdata: 'visastatus', parameterValue: 'visastatus', parentDependecy: 'showHideVisastatus' },
+            { lblname: 'Since date', controlType: 'date', ngmodel: 'sinceDate', parameterValue: 'Sincedate', parentDependecy: 'showHideVisastatus' },
+            { lblname: 'Arrival Date', controlType: 'date', ngmodel: 'arrivalDate', parameterValue: 'ArrivalDate', parentDependecy: 'showHideVisastatus' },
+            { lblname: 'Departure Date', controlType: 'date', ngmodel: 'departureDate', parameterValue: 'DepartureDate', parentDependecy: 'showHideVisastatus' },
+            { lblname: 'Occupation Details', controlType: 'textarea', ngmodel: 'occupationDetails', parameterValue: 'OccupationDetails' }
+
+        ];
+
+        model.Custdata = [
+            { lblname: 'Gender', controlType: 'radio', ngmodel: 'genderId', arrbind: 'gender', parameterValue: 'Gender' },
+            { lblname: 'SurName', controlType: 'textbox', ngmodel: 'surName', required: true, parameterValue: 'LastName' },
+            { lblname: 'Name', controlType: 'textbox', ngmodel: 'name', required: true, parameterValue: 'FirstName' },
+            { lblname: 'Marital Status', controlType: 'select', ngmodel: 'maritalStatusId', required: true, typeofdata: 'MaritalStatus', parameterValue: 'MaritalStatusID' },
+            { lblname: 'Date Of Birth', controlType: 'date', ngmodel: 'dob', required: true, parameterValue: 'DateofBirth' },
+            { lblname: 'Height', controlType: 'select', ngmodel: 'heightId', required: true, typeofdata: 'heightregistration', parameterValue: 'HeightID' },
+            { lblname: 'Complexion', controlType: 'select', ngmodel: 'complexionId', required: true, typeofdata: 'Complexion', parameterValue: 'ComplexionID' },
+            { lblname: 'Religion', controlType: 'select', ngmodel: 'religionId', secondParent: 'motherTongueId', required: true, typeofdata: 'Religion', childName: 'caste', changeApi: 'castedependency', parameterValue: 'ReligionID' },
+            { lblname: 'Mother Tongue', controlType: 'select', ngmodel: 'motherTongueId', secondParent: 'religionId', required: true, typeofdata: 'Mothertongue', childName: 'caste', changeApi: 'castedependency', parameterValue: 'MotherTongueID' },
+            { lblname: 'Caste', controlType: 'Changeselect', ngmodel: 'casteId', required: true, parentName: 'caste', childName: 'subCaste', changeApi: 'subCasteBind', parameterValue: 'CasteID' },
+            { lblname: 'SubCaste', controlType: 'Changeselect', ngmodel: 'subcasteId', parentName: 'subCaste', parameterValue: 'SubcasteID' },
+            { lblname: 'Born Citizenship', controlType: 'select', ngmodel: 'bornCitizenShipId', required: true, typeofdata: 'Country', parameterValue: 'CitizenshipID' },
+            { lblname: 'Physical Status', controlType: 'radio', ngmodel: 'physicalStausId', arrbind: 'PhysicalStatus', parameterValue: 'PhysicallyChallenged' }
+        ];
+
+        model.aboutUrSelf = [
+            { lblname: '', controlType: 'about', maxlength: '1000', ngmodel: 'txtAboutUS', displayTxt: "(Please don't write phone numbers/emails/any junk characters)*', ngmodel: 'aboutFamilyId", parameterValue: 'txtAboutUS' },
+        ];
 
 
         return model.init();
@@ -1423,7 +1377,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         .module('KaakateeyaEmpEdit')
         .factory('editEducationModel', factory);
 
-    factory.$inject = ['$http', 'authSvc', 'editEducationService', 'commonFactory', '$uibModal', '$filter', 'alert', '$stateParams', 'SelectBindService'];
+    factory.$inject = ['$http', 'authSvc', 'editEducationService', 'commonFactory', '$uibModal', '$filter', 'alert', '$stateParams', 'SelectBindService', 'arrayConstantsEdit'];
 
 })(angular);
 (function(angular) {
@@ -1770,7 +1724,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         var custID = stateParams.CustID;
         //  logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
         model.dataval = '';
-        model.aboutObj = {};
+
 
         model.init = function() {
             custID = stateParams.CustID;
@@ -1792,27 +1746,39 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             commonFactory.closepopup();
         };
         model.showPopup = function(val) {
-            model.aboutObj.txtAboutprofile = '';
+
+            model.popupHeader = 'About Your Profile';
+            model.txtAboutprofile = '';
             if (val !== undefined) {
-                model.aboutObj.txtAboutprofile = val;
+                model.eventType = 'edit';
+                model.txtAboutprofile = val;
             }
             commonFactory.open('AboutModalContent.html', model.scope, uibModal);
         };
 
-        model.AboutProfleSubmit = function(str) {
-            editOfcePurposeService.getofficeData('2', custID, str).then(function(response) {
+        model.updateData = function(inObj, type) {
+
+            editOfcePurposeService.getofficeData('2', custID, inObj.GetDetails.txtAboutprofile).then(function(response) {
                 console.log(response);
                 commonFactory.closepopup();
-                if (response.data === 1) {
-                    model.dataval = str;
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'About Profile Details submitted Succesfully', 4500);
-                } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'About Profile Details Updation failed', 4500);
-                }
+                model.dataval = inObj.GetDetails.txtAboutprofile;
+                alertss.timeoutoldalerts(model.scope, 'alert-success', 'About Profile Details submitted Succesfully', 4500);
+                // if (response.data === 1) {
 
+                // } else {
+                //     alertss.timeoutoldalerts(model.scope, 'alert-danger', 'About Profile Details Updation failed', 4500);
+                // }
             });
 
         };
+
+
+        model.popupdata = [
+            { lblname: '', controlType: 'about', required: true, maxlength: '1000', displayTxt: '(You can write anything about this profile)*', ngmodel: 'txtAboutprofile', parameterValue: 'txtAboutprofile' }
+        ];
+
+
+
 
 
         return model.init();
@@ -1864,7 +1830,6 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 (function(angular) {
     'use strict';
 
-
     function factory(editParentService, authSvc, alertss, commonFactory, uibModal, stateParams) {
         var model = {};
         model.model = {};
@@ -1877,6 +1842,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.dcountry = '1';
         model.parentArr = [];
         model.AboutFamilyReviewStatus = null;
+        model.eventType = 'add';
         var isSubmit = true;
         var loginEmpid = authSvc.LoginEmpid();
         var AdminID = authSvc.isAdmin();
@@ -1885,7 +1851,6 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         // var logincustid = authSvc.getCustId();
         var custID = model.CustID = stateParams.CustID;
         //  model.CustID = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
-
 
         model.init = function() {
             custID = model.CustID = stateParams.CustID;
@@ -1921,367 +1886,252 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             });
         };
 
-
         model.populateModel = function(type, item) {
             isSubmit = true;
+            model.eventType = 'add';
             switch (type) {
                 case "parent":
-                    model.parent.FatherCust_family_id = null;
-                    model.parent.MotherCust_family_id = null;
-                    model.parent = {};
+
+                    model.popupdata = model.parent;
+                    model.popupHeader = 'Parent details';
+                    model.FatherCust_family_id = null;
+                    model.MotherCust_family_id = null;
 
                     if (item !== undefined) {
-                        model.parent = [];
+                        model.eventType = 'edit';
 
-                        model.parent.cust_id = item.cust_id;
-                        model.parent.FatherCust_family_id = item.FatherCust_family_id;
-                        model.parent.MotherCust_family_id = item.MotherCust_family_id;
+                        model.cust_id = item.cust_id;
+                        model.FatherCust_family_id = item.FatherCust_family_id;
+                        model.MotherCust_family_id = item.MotherCust_family_id;
 
-                        model.parent.txtFathername = item.FatherName;
-                        model.parent.txtFEducation = item.FatherEducationDetails;
-                        model.parent.txtFProfession = item.FatherProfDetails;
-                        model.parent.txtCompany = item.FathercompanyName;
-                        model.parent.txtJobLocation = item.FatherJoblocation;
+                        model.fatherName = item.FatherName;
+                        model.fEducation = item.FatherEducationDetails;
+                        model.fDesignation = item.FatherProfDetails;
+                        model.fCompany = item.FathercompanyName;
+                        model.fJobLocation = item.FatherJoblocation;
 
-                        model.parent.ddlMobile = item.FatherMobileCountryCodeId;
-                        model.parent.txtMobile = item.FathermobilenumberID;
+                        model.fMobileCodeId = item.FatherMobileCountryCodeId;
+                        model.fMobileNumber = item.FathermobilenumberID;
 
                         if (commonFactory.checkvals(item.FatherLandAreaCodeId)) {
-                            model.parent.ddlLandLineCountry = item.FatherLandCountryCodeId;
-                            model.parent.txtAreCode = item.FatherLandAreaCodeId;
-                            model.parent.txtLandNumber = item.FatherLandNumberID;
+                            model.flandCountryCodeId = item.FatherLandCountryCodeId;
+                            model.fAreaCodeid = item.FatherLandAreaCodeId;
+                            model.flandNumber = item.FatherLandNumberID;
                         } else {
-                            model.parent.ddlfathermobile2 = item.FatherLandCountryCodeId;
-                            model.parent.txtfathermobile2 = item.FatherLandNumberID;
+                            model.fAltermobileCodeId = item.FatherLandCountryCodeId;
+                            model.fAlterMobileNumber = item.FatherLandNumberID;
                         }
 
-                        model.parent.txtEmail = item.FatherEmail;
-                        model.parent.txtFatherFname = item.FatherFathername;
+                        model.fEmail = item.FatherEmail;
+                        model.fatherFatherName = item.FatherFathername;
 
-                        model.parent.ddlFatherfatherMobileCountryCode = item.FatherfatherMobileCountryID;
-                        model.parent.txtMobileFatherfather = item.FatherFatherMobileNumber;
+                        model.gfMobileCodeId = item.FatherfatherMobileCountryID;
+                        model.gfMobileNumber = item.FatherFatherMobileNumber;
 
                         if (commonFactory.checkvals(item.FatherFatherLandAreaCode)) {
-                            model.parent.ddlFatherFatherLandLineCode = item.FatherfatherLandCountryCodeID;
-                            model.parent.txtGrandFatherArea = item.FatherFatherLandAreaCode;
-                            model.parent.txtGrandFatherLandLinenum = item.FatherFatherLandNumber;
+                            model.gflandCountryCodeId = item.FatherfatherLandCountryCodeID;
+                            model.gfAreaCodeid = item.FatherFatherLandAreaCode;
+                            model.gflandNumber = item.FatherFatherLandNumber;
                         } else {
-                            model.parent.ddlfatherfatherAlternative = item.FatherfatherMobileCountrycode1;
-                            model.parent.txtfatherfatherAlternative = item.FatherFatherLandNumber;
+                            model.gfAltermobileCodeId = item.FatherfatherMobileCountrycode1;
+                            model.gfAlterMobileNumber = item.FatherFatherLandNumber;
                         }
 
-                        model.parent.ddlFState = item.FatherStateID;
-                        model.parent.ddlFDistric = item.FatherDistrictID;
-                        model.parent.txtFNativePlace = item.FatherNativeplace;
-                        model.parent.txtMName = item.MotherName;
-                        model.parent.txtMEducation = item.MotherEducationDetails;
-                        model.parent.txtMProfession = item.MotherProfedetails;
-                        model.parent.chkbox = item.MotherProfedetails == 'HouseWife' ? true : false;
-                        model.parent.txtMCompanyName = item.MothercompanyName;
-                        model.parent.txtMJobLocation = item.MotherJoblocation;
+                        model.fStateid = item.FatherStateID;
+                        model.fDistrictid = item.FatherDistrictID;
+                        model.fNative = item.FatherNativeplace;
+                        model.motherName = item.MotherName;
+                        model.mEducation = item.MotherEducationDetails;
+                        model.mDesignation = item.MotherProfedetails;
+                        model.chkhousewife = item.MotherProfedetails == 'HouseWife' ? true : false;
+                        model.mCompanyName = item.MothercompanyName;
+                        model.mJobLocation = item.MotherJoblocation;
 
-                        model.parent.ddlMMobileCounCodeID = item.MotherMobileCountryCodeId;
-                        model.parent.txtMMobileNum = item.MotherMobilenumberID;
+                        model.mMobileCodeId = item.MotherMobileCountryCodeId;
+                        model.mMobileNumber = item.MotherMobilenumberID;
 
                         if (commonFactory.checkvals(item.MotherLandAreaCodeId)) {
-                            model.parent.ddlMLandLineCounCode = item.MotherLandCountryCodeId;
-                            model.parent.txtmAreaCode = item.MotherLandAreaCodeId;
-                            model.parent.txtMLandLineNum = item.MotherLandNumberID;
+                            model.mlandCountryCodeId = item.MotherLandCountryCodeId;
+                            model.mAreaCodeid = item.MotherLandAreaCodeId;
+                            model.mlandNumber = item.MotherLandNumberID;
                         } else {
-                            model.parent.ddlMMobileCounCodeID2 = item.MotherMobileCountryCodeId;
-                            model.parent.txtMMobileNum2 = item.MotherLandNumberID;
-
+                            model.mAltermobileCodeId = item.MotherMobileCountryCodeId;
+                            model.mAlterMobileNumber = item.MotherLandNumberID;
                         }
 
-                        model.parent.txtMEmail = item.MotherEmail;
-                        model.parent.txtMFatherFname = item.MotherFatherName;
-                        model.parent.txtMFatherLname = item.MotherFatherLastName;
+                        model.mEmail = item.MotherEmail;
+                        model.mffirstName = item.MotherFatherName;
+                        model.mfLastName = item.MotherFatherLastName;
 
-                        model.parent.ddlMotherfatheMobileCountryCode = item.MotherfatherMobileCountryID;
-                        model.parent.txtMotherfatheMobilenumber = item.MotherFatherMobileNumber;
+                        model.mfMobileCodeId = item.MotherfatherMobileCountryID;
+                        model.mfMobileNumber = item.MotherFatherMobileNumber;
 
                         if (commonFactory.checkvals(item.MotherFatherLandAreaCode)) {
-                            model.parent.ddlMotherFatherLandLineCode = item.motherfatherLandCountryID;
-                            model.parent.txtMotherFatherLandLineareacode = item.MotherFatherLandAreaCode;
-                            model.parent.txtMotherFatherLandLinenum = item.MotherFatherLandNumber;
+                            model.mflandCodeId = item.motherfatherLandCountryID;
+                            model.mfAreaCodeid = item.MotherFatherLandAreaCode;
+                            model.mflandNumber = item.MotherFatherLandNumber;
                         } else {
-                            model.parent.ddlmotherfatheralternative = item.MotherfatherMobileCountryID1;
-                            model.parent.txtmotherfatheralternative = item.MotherFatherLandNumber;
+                            model.mfAltermobileCodeId = item.MotherfatherMobileCountryID1;
+                            model.mfAlterMobileNumber = item.MotherFatherLandNumber;
                         }
-                        model.parent.ddlMState = item.motherStateID;
-                        model.parent.ddlMDistrict = item.motherDistricID;
-                        model.parent.txtMNativePlace = item.MotherNativeplace;
-                        model.parent.rbtlParentIntercaste = item.Intercaste === 'Yes' ? 1 : 0;
-                        model.parent.ddlFatherCaste = item.FatherCasteID;
-                        model.parent.ddlMotherCaste = item.MotherCasteID;
+                        model.mStateid = item.motherStateID;
+                        model.mDistrictid = item.motherDistricID;
+                        model.mNativePlace = item.MotherNativeplace;
+                        model.areParentInterCasteId = item.Intercaste === 'Yes' ? 1 : 0;
+                        model.fCaste = item.FatherCasteID;
+                        model.mCaste = item.MotherCasteID;
 
-                        model.parent.ddlFprofessionCatgory = item.FatherProfessionCategoryID;
-                        model.parent.ddlMprofessionCatgory = item.MotherProfessionCategoryID;
+                        model.fProfCatgory = item.FatherProfessionCategoryID;
+                        model.mProfCtagory = item.MotherProfessionCategoryID;
 
                     }
-                    commonFactory.open('parentModalContent.html', model.scope, uibModal);
 
                     break;
 
                 case "Address":
-                    model.AdrrObj.Cust_Family_ID = null;
-                    model.AdrrObj = {};
+                    model.popupdata = model.Address;
+                    model.popupHeader = 'Contact Details';
+                    model.Cust_Family_ID = null;
+
                     if (item !== undefined) {
-                        model.AdrrObj.Cust_ID = item.Cust_ID;
-                        model.AdrrObj.Cust_Family_ID = item.Cust_Family_ID;
-
-                        model.AdrrObj.txtHouse_flat = item.FlatNumber;
-                        model.AdrrObj.txtApartmentName = item.ApartmentName;
-                        model.AdrrObj.txtStreetName = item.StreetName;
-                        model.AdrrObj.txtAreaName = item.AreaName;
-                        model.AdrrObj.txtLandmark = item.LandMark;
-                        model.AdrrObj.ddlCountryContact = item.ParentCountryId;
-                        model.AdrrObj.ddlStateContact = item.ParentStateid;
-                        model.AdrrObj.ddlDistricContact = item.ParentDistrictId;
-                        model.AdrrObj.txtCity = item.CityName;
-                        model.AdrrObj.txtZip_no = item.Zip;
+                        model.eventType = 'edit';
+                        model.Cust_ID = item.Cust_ID;
+                        model.Cust_Family_ID = item.Cust_Family_ID;
+                        model.houseFlatNumber = item.FlatNumber;
+                        model.apartmentName = item.ApartmentName;
+                        model.streetName = item.StreetName;
+                        model.areaName = item.AreaName;
+                        model.landMark = item.LandMark;
+                        model.countryId = item.ParentCountryId;
+                        model.stateId = item.ParentStateid;
+                        model.districtId = item.ParentDistrictId;
+                        model.cityId = item.CityName;
+                        model.zipcode = item.Zip;
                     }
-                    commonFactory.open('AddressModalContent.html', model.scope, uibModal);
-
 
                     break;
 
                 case "physicalAttributes":
-                    model.physicalObj = {};
 
+                    model.popupdata = model.physicalAttributes;
+                    model.popupHeader = 'Physical Attributes & Health Details of Candidate';
                     if (item !== undefined) {
-                        model.physicalObj.Cust_ID = item.Cust_ID;
-
-                        model.physicalObj.rbtlDiet = item.DietID;
-                        model.physicalObj.rbtlDrink = item.DrinkID;
-                        model.physicalObj.rbtlSmoke = item.SmokeID;
-                        model.physicalObj.ddlBodyType = item.BodyTypeID;
-                        model.physicalObj.txtBWKgs = item.BodyWeight;
-                        model.physicalObj.ddlBloodGroup = item.BloodGroupID;
-                        model.physicalObj.ddlHealthConditions = item.HealthConditionID;
-                        model.physicalObj.txtHealthCondition = item.HealthConditionDescription;
+                        model.eventType = 'edit';
+                        model.Cust_ID = item.Cust_ID;
+                        model.dietId = item.DietID;
+                        model.drinkId = item.DrinkID;
+                        model.smokeId = item.SmokeID;
+                        model.bodyTypeId = item.BodyTypeID;
+                        model.bodyWeight = item.BodyWeight;
+                        model.bloodGroupId = item.BloodGroupID;
+                        model.healthConditionId = item.HealthConditionID;
+                        model.healthDescritionId = item.HealthConditionDescription;
                     }
-                    commonFactory.open('PhysicalAttributeModalContent.html', model.scope, uibModal);
-
 
                     break;
 
                 case "AboutFamily":
 
+                    model.popupdata = model.aboutFamily;
+                    model.popupHeader = 'About My Family';
                     if (item !== undefined) {
-                        model.aboutFamilyObj.txtAboutUs = item;
+                        model.eventType = 'edit';
+                        model.aboutFamilyId = item;
                     }
-                    commonFactory.open('AboutFamilyModalContent.html', model.scope, uibModal);
 
                     break;
             }
+            commonFactory.open('commonParentpopup.html', model.scope, uibModal);
         };
 
         model.cancel = function() {
             commonFactory.closepopup();
         };
 
-        model.ParentSubmit = function(objitem) {
-            if (isSubmit) {
-                isSubmit = false;
-
-                model.myData = {
-                    GetDetails: {
-                        CustID: custID,
-                        FatherName: objitem.txtFathername,
-                        Educationcategory: null,
-                        Educationgroup: null,
-                        Educationspecialization: null,
-                        Employedin: null,
-                        Professiongroup: null,
-                        Profession: null,
-                        CompanyName: objitem.txtCompany,
-                        JobLocation: objitem.txtJobLocation,
-                        Professiondetails: objitem.txtFProfession,
-                        MobileCountry: objitem.ddlMobile,
-                        MobileNumber: objitem.txtMobile,
-                        LandlineCountry: commonFactory.checkvals(objitem.ddlfathermobile2) ? objitem.ddlfathermobile2 : (commonFactory.checkvals(objitem.ddlLandLineCountry) ? objitem.ddlLandLineCountry : null),
-                        LandAreCode: commonFactory.checkvals(objitem.txtfathermobile2) ? null : (commonFactory.checkvals(objitem.txtAreCode) ? objitem.txtAreCode : null),
-                        landLineNumber: commonFactory.checkvals(objitem.txtfathermobile2) ? objitem.txtfathermobile2 : (commonFactory.checkvals(objitem.txtLandNumber) ? objitem.txtLandNumber : null),
-                        Email: objitem.txtEmail,
-                        FatherFatherName: objitem.txtFatherFname,
-
-                        MotherName: objitem.txtMName,
-                        MotherEducationcategory: null,
-                        MotherEducationgroup: null,
-                        MotherEducationspecialization: null,
-                        MotherEmployedIn: null,
-                        MotherProfessiongroup: null,
-                        MotherProfession: null,
-                        MotherCompanyName: objitem.txtMCompanyName,
-                        MotherJobLocation: objitem.txtMJobLocation,
-                        MotherProfessiondetails: objitem.txtMProfession,
-                        MotherMobileCountryID: objitem.ddlMMobileCounCodeID,
-                        MotherMobileNumber: objitem.txtMMobileNum,
-                        MotherLandCountryID: commonFactory.checkvals(objitem.ddlMMobileCounCodeID2) ? objitem.ddlMMobileCounCodeID2 : commonFactory.checkvals(objitem.ddlMLandLineCounCode) ? objitem.ddlMLandLineCounCode : null,
-                        MotherLandAreaCode: commonFactory.checkvals(objitem.txtMMobileNum2) ? null : (commonFactory.checkvals(objitem.txtmAreaCode) ? objitem.txtmAreaCode : null),
-                        MotherLandNumber: commonFactory.checkvals(objitem.txtMMobileNum2) ? objitem.txtMMobileNum2 : commonFactory.checkvals(objitem.txtMLandLineNum) ? objitem.txtMLandLineNum : null,
-                        MotherEmail: objitem.txtMEmail,
-                        MotherFatherFistname: objitem.txtMFatherFname,
-                        MotherFatherLastname: objitem.txtMFatherLname,
-                        FatherCustFamilyID: model.parent.FatherCust_family_id,
-                        MotherCustFamilyID: model.parent.MotherCust_family_id,
-                        FatherEducationDetails: objitem.txtFEducation,
-                        MotherEducationDetails: objitem.txtMEducation,
-                        FatherCountry: 1,
-                        FatherState: objitem.ddlFState,
-                        FatherDistric: objitem.ddlFDistric,
-                        FatherCity: objitem.txtFNativePlace,
-                        MotherCountry: 1,
-                        MotherState: objitem.ddlMState,
-                        MotherDistric: objitem.ddlMDistrict,
-                        MotherCity: objitem.txtMNativePlace,
-                        AreParentsInterCaste: objitem.rbtlParentIntercaste,
-                        FatherfatherMobileCountryID: objitem.ddlFatherfatherMobileCountryCode,
-                        FatherFatherMobileNumber: objitem.txtMobileFatherfather,
-                        FatherFatherLandCountryID: commonFactory.checkvals(objitem.ddlfatherfatherAlternative) ? objitem.ddlfatherfatherAlternative : (commonFactory.checkvals(objitem.ddlFatherFatherLandLineCode) ? objitem.ddlFatherFatherLandLineCode : null),
-                        FatherFatherLandAreaCode: commonFactory.checkvals(objitem.txtfatherfatherAlternative) ? null : (commonFactory.checkvals(objitem.txtGrandFatherArea) ? objitem.txtGrandFatherArea : null),
-                        FatherFatherLandNumber: commonFactory.checkvals(objitem.txtfatherfatherAlternative) ? objitem.txtfatherfatherAlternative : (commonFactory.checkvals(objitem.txtGrandFatherLandLinenum) ? objitem.txtGrandFatherLandLinenum : null),
-                        MotherfatherMobileCountryID: objitem.ddlMotherfatheMobileCountryCode,
-                        MotherFatherMobileNumber: objitem.txtMotherfatheMobilenumber,
-                        MotherFatherLandCountryID: commonFactory.checkvals(objitem.ddlmotherfatheralternative) ? objitem.ddlmotherfatheralternative : (commonFactory.checkvals(objitem.ddlMotherFatherLandLineCode) ? objitem.ddlMotherFatherLandLineCode : null),
-                        MotherFatherLandAreaCode: commonFactory.checkvals(objitem.txtmotherfatheralternative) ? null : (commonFactory.checkvals(objitem.txtMotherFatherLandLineareacode) ? objitem.txtMotherFatherLandLineareacode : null),
-                        MotherFatherLandNumber: commonFactory.checkvals(objitem.txtmotherfatheralternative) ? objitem.txtmotherfatheralternative : (commonFactory.checkvals(objitem.txtMotherFatherLandLinenum) ? objitem.txtMotherFatherLandLinenum : null),
-                        FatherCaste: objitem.ddlMotherCaste,
-                        MotherCaste: objitem.ddlFatherCaste,
-                        FatherProfessionCategoryID: objitem.ddlFprofessionCatgory,
-                        MotherProfessionCategoryID: objitem.ddlMprofessionCatgory
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-
-                };
-                model.submitPromise = editParentService.submitParentData(model.myData).then(function(response) {
-                    commonFactory.closepopup();
-                    if (response.data === 1) {
-                        model.parentBindData(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Parents Details submitted Succesfully', 4500);
-                        if (model.datagetInStatus === 1) {
-                            sessionStorage.removeItem('missingStatus');
-                            route.go('mobileverf', {});
-                        }
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Parents Details Updation failed', 4500);
-                    }
-                });
-
-            }
-
-        };
-
-        model.contactAddressSubmit = function(objitem) {
+        model.updateData = function(inObj, type) {
 
             if (isSubmit) {
                 isSubmit = false;
 
-                model.myAddrData = {
-                    GetDetails: {
-                        CustID: custID,
-                        HouseFlateNumber: objitem.txtHouse_flat,
-                        Apartmentname: objitem.txtApartmentName,
-                        Streetname: objitem.txtStreetName,
-                        AreaName: objitem.txtAreaName,
-                        Landmark: objitem.txtLandmark,
-                        Country: objitem.ddlCountryContact,
-                        STATE: objitem.ddlStateContact,
-                        District: objitem.ddlDistricContact,
-                        othercity: null,
-                        city: objitem.txtCity,
-                        ZipPin: objitem.txtZip_no,
-                        Cust_Family_ID: model.AdrrObj.Cust_Family_ID
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
+                switch (type) {
+                    case 'Parent details':
 
-                };
-                model.submitPromise = editParentService.submitAddressData(model.myAddrData).then(function(response) {
-                    console.log(response);
-                    commonFactory.closepopup();
-                    if (response.data === 1) {
+                        inObj.GetDetails.FatherCustFamilyID = model.FatherCust_family_id;
+                        inObj.GetDetails.MotherCustFamilyID = model.MotherCust_family_id;
+                        inObj.GetDetails.CustID = custID;
+                        model.submitPromise = editParentService.submitParentData(inObj).then(function(response) {
+                            commonFactory.closepopup();
+                            if (response.data === 1) {
+                                model.parentBindData(custID);
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'Parents Details submitted Succesfully', 4500);
+                                if (model.datagetInStatus === 1) {
+                                    sessionStorage.removeItem('missingStatus');
+                                    route.go('mobileverf', {});
+                                }
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Parents Details Updation failed', 4500);
+                            }
+                        });
+                        break;
+                    case 'Contact Details':
+                        inObj.GetDetails.CustID = custID;
+                        inObj.GetDetails.Cust_Family_ID = model.Cust_Family_ID;
+                        model.submitPromise = editParentService.submitAddressData(inObj).then(function(response) {
+                            console.log(response);
+                            commonFactory.closepopup();
+                            if (response.data === 1) {
+                                model.parentBindData(custID);
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'Contact Address submitted Succesfully', 4500);
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Contact Address Updation failed', 4500);
+                            }
+                        });
+                        break;
 
-                        model.parentBindData(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Contact Address submitted Succesfully', 4500);
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Contact Address Updation failed', 4500);
-                    }
-                });
+                    case 'Physical Attributes & Health Details of Candidate':
 
+                        inObj.GetDetails.CustID = custID;
+
+                        model.submitPromise = editParentService.submitPhysicalData(inObj).then(function(response) {
+                            console.log(response);
+                            commonFactory.closepopup();
+                            if (response.data === 1) {
+
+                                model.parentBindData(custID);
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'Physical Attribute & Health Details Of Candidate submitted Succesfully', 4500);
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Physical Attribute & Health Details Of Candidate Updation failed', 4500);
+                            }
+                        });
+
+                        break;
+
+                    case 'About My Family':
+
+                        model.submitPromise = editParentService.submitAboutFamilyData({ CustID: custID, AboutYourself: inObj.GetDetails.AboutYourself, flag: 1 }).then(function(response) {
+                            console.log(response);
+                            model.lblaboutMyfamily = inObj.GetDetails.AboutYourself;
+                            commonFactory.closepopup();
+                            if (parseInt(response.data) === 1) {
+                                model.AboutPageloadData(custID);
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'About My Family submitted Succesfully', 4500);
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'About My Family Updation failed', 4500);
+                            }
+                        });
+
+                        break;
+                }
             }
-
-        };
-
-        model.physicalAtrrSubmit = function(objitem) {
-
-            if (isSubmit) {
-                isSubmit = false;
-                model.myPhysicalData = {
-                    GetDetails: {
-                        CustID: custID,
-                        BWKgs: objitem.txtBWKgs,
-                        BWlbs: objitem.txtlbs,
-                        BloodGroup: objitem.ddlBloodGroup,
-                        HealthConditions: objitem.ddlHealthConditions,
-                        HealthConditiondesc: objitem.txtHealthCondition,
-                        DietID: objitem.rbtlDiet,
-                        SmokeID: objitem.rbtlSmoke,
-                        DrinkID: objitem.rbtlDrink,
-                        BodyTypeID: objitem.ddlBodyType,
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-
-                };
-
-                model.submitPromise = editParentService.submitPhysicalData(model.myPhysicalData).then(function(response) {
-                    console.log(response);
-                    commonFactory.closepopup();
-                    if (response.data === 1) {
-
-                        model.parentBindData(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Physical Attribute & Health Details Of Candidate submitted Succesfully', 4500);
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Physical Attribute & Health Details Of Candidate Updation failed', 4500);
-                    }
-                });
-            }
-
         };
 
         model.AboutMyfamilySubmit = function(obj) {
             if (isSubmit) {
                 isSubmit = false;
 
-                model.submitPromise = editParentService.submitAboutFamilyData({ CustID: custID, AboutYourself: obj.txtAboutUs, flag: 1 }).then(function(response) {
-                    console.log(response);
-                    model.lblaboutMyfamily = obj.txtAboutUs;
-                    commonFactory.closepopup();
-                    if (response.data === '1') {
 
-                        model.AboutPageloadData(custID);
-                        model.$broadcast("showAlertPopupccc", 'alert-success', 'About My Family submitted Succesfully', 1500);
-                    } else {
-                        model.$broadcast("showAlertPopupccc", 'alert-danger', 'About My Family Updation failed', 1500);
-                    }
-                });
             }
         };
-
-
-
 
         model.housewiseChk = function(item) {
             if (item.chkbox === true) {
@@ -2304,7 +2154,6 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 lbs = model.roundVal(lbs);
                 item.txtlbs = lbs;
                 if (lbs.toString() == 'NaN') {
-                    //jAlert("", 'Alert Dialog', x);
                     alert("invalid Number");
                     item.txtlbs = '';
                     item.txtBWKgs = '';
@@ -2315,11 +2164,179 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             }
         };
 
+        model.showHousewife = function(val) {
+            return model.chkhousewife === true ? false : true;
+        };
+
+        model.ParentInterCasteId = function(val) {
+            debugger;
+            return model.areParentInterCasteId === 1 ? true : false;
+        };
 
 
+        model.parent = [
+            { lblname: '', controlType: 'bindHtml', html: ' <h6>Father Details</h6>', classname: 'parentheader' },
+            { lblname: 'Father Name', controlType: 'textbox', ngmodel: 'fatherName', required: true, parameterValue: 'FatherName' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'fEducation', parameterValue: 'FatherEducationDetails' },
+            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'fProfCatgory', typeofdata: 'ProfCatgory', parameterValue: 'FatherProfessionCategoryID' },
+            { lblname: 'Designation', controlType: 'textbox', ngmodel: 'fDesignation', parameterValue: 'Professiondetails' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'fCompany', parameterValue: 'CompanyName' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'fJobLocation', parameterValue: 'JobLocation' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'fMobileCodeId',
+                strmobile: 'fMobileNumber',
+                dalternative: 'fAltermobileCodeId',
+                stralternative: 'fAlterMobileNumber',
+                dland: 'flandCountryCodeId',
+                strareacode: 'fAreaCodeid',
+                strland: 'flandNumber',
+                strmail: 'fEmail',
+
+                mobileCodeIdParameterValue: 'MobileCountry',
+                mobileNumberParameterValue: 'MobileNumber',
+                landCountryCodeIdParameterValue: 'LandlineCountry',
+                landAreaCodeIdParameterValue: 'LandAreCode',
+                landNumberParameterValue: 'landLineNumber',
+                emailParameterValue: 'Email'
+            },
+
+            { lblname: 'Fathers father name', controlType: 'textbox', ngmodel: 'fatherFatherName', parameterValue: 'FatherFatherName' },
+            {
+                controlType: 'contact',
+                emailhide: false,
+                dmobile: 'gfMobileCodeId',
+                strmobile: 'gfMobileNumber',
+                dalternative: 'gfAltermobileCodeId',
+                stralternative: 'gfAlterMobileNumber',
+                dland: 'gflandCountryCodeId',
+                strareacode: 'gfAreaCodeid',
+                strland: 'gflandNumber',
+
+                mobileCodeIdParameterValue: 'FatherfatherMobileCountryID',
+                mobileNumberParameterValue: 'FatherFatherMobileNumber',
+                landCountryCodeIdParameterValue: 'FatherFatherLandCountryID',
+                landAreaCodeIdParameterValue: 'FatherFatherLandAreaCode',
+                landNumberParameterValue: 'FatherFatherLandNumber',
+
+            }, {
+                controlType: 'country',
+                countryshow: false,
+                cityshow: false,
+                othercity: false,
+                dstate: 'fStateid',
+                ddistrict: 'fDistrictid',
+                countryParameterValue: 'FatherCountry',
+                stateParameterValue: 'FatherState',
+                districtParameterValue: 'FatherDistric'
+            },
+            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'fNative', parameterValue: 'FatherCity' },
+            { lblname: '', controlType: 'bindHtml', html: ' <h6>Mother Details</h6>', classname: 'parentheader' },
+            { lblname: 'Mother Name', controlType: 'textbox', ngmodel: 'motherName', required: true, parameterValue: 'MotherName' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'mEducation', parameterValue: 'MotherEducationDetails' },
+            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'mProfCtagory', typeofdata: 'ProfCatgory', parameterValue: 'MotherProfessionCategoryID' },
+            { lblname: 'Designation', controlType: 'housewife', ngmodelText: 'mDesignation', ngmodelChk: 'chkhousewife', parameterValueText: 'MotherProfessiondetails' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'mCompanyName', parameterValue: 'MotherCompanyName', parentDependecy: 'showHousewife' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'mJobLocation', parameterValue: 'MotherJobLocation', parentDependecy: 'showHousewife' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'mMobileCodeId',
+                strmobile: 'mMobileNumber',
+                dalternative: 'mAltermobileCodeId',
+                stralternative: 'mAlterMobileNumber',
+                dland: 'mlandCountryCodeId',
+                strareacode: 'mAreaCodeid',
+                strland: 'mlandNumber',
+                strmail: 'mEmail',
+
+                mobileCodeIdParameterValue: 'MotherMobileCountryID',
+                mobileNumberParameterValue: 'MotherMobileNumber',
+                landCountryCodeIdParameterValue: 'MotherLandCountryID',
+                landAreaCodeIdParameterValue: 'MotherLandAreaCode',
+                landNumberParameterValue: 'MotherLandNumber',
+                emailParameterValue: 'MotherEmail'
+
+            },
+            { lblname: 'Mothers Father Name', controlType: 'textbox', ngmodel: 'mffirstName', parameterValue: 'MotherFatherFistname' },
+            { lblname: 'Mothers Last Name', controlType: 'textbox', ngmodel: 'mfLastName', parameterValue: 'MotherFatherLastname' },
+            {
+                controlType: 'contact',
+                emailhide: false,
+                dmobile: 'mfMobileCodeId',
+                strmobile: 'mfMobileNumber',
+                dalternative: 'mfAltermobileCodeId',
+                stralternative: 'mfAlterMobileNumber',
+                dland: 'mflandCodeId',
+                strareacode: 'mfAreaCodeid',
+                strland: 'mflandNumber',
+
+                mobileCodeIdParameterValue: 'MotherfatherMobileCountryID',
+                mobileNumberParameterValue: 'MotherFatherMobileNumber',
+                landCountryCodeIdParameterValue: 'MotherFatherLandCountryID',
+                landAreaCodeIdParameterValue: 'MotherFatherLandAreaCode',
+                landNumberParameterValue: 'MotherFatherLandNumber'
+            },
+            {
+                controlType: 'country',
+                countryshow: false,
+                cityshow: false,
+                othercity: false,
+                dstate: 'mStateid',
+                ddistrict: 'mDistrictid',
+                countryParameterValue: 'MotherCountry',
+                stateParameterValue: 'MotherState',
+                districtParameterValue: 'MotherDistric'
+            },
+            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'mNativePlace', parameterValue: 'MotherCity' },
+            { lblname: 'Are parents interCaste ? ', controlType: 'radio', ngmodel: 'areParentInterCasteId', arrbind: 'boolType', parameterValue: 'AreParentsInterCaste' },
+            { lblname: 'Father Caste', controlType: 'select', ngmodel: 'fCaste', typeofdata: 'caste', parameterValue: 'FatherCaste', parentDependecy: 'ParentInterCasteId' },
+            { lblname: 'Mother Caste', controlType: 'select', ngmodel: 'mCaste', typeofdata: 'caste', parameterValue: 'MotherCaste', parentDependecy: 'ParentInterCasteId' }
+
+        ];
+
+        model.Address = [
+            { lblname: 'House/Flat number', controlType: 'textbox', ngmodel: 'houseFlatNumber', parameterValue: 'HouseFlateNumber' },
+            { lblname: 'Apartment name', controlType: 'textbox', ngmodel: 'apartmentName', parameterValue: 'Apartmentname' },
+            { lblname: 'Street name', controlType: 'textbox', ngmodel: 'streetName', parameterValue: 'Streetname' },
+            { lblname: 'Area Name', controlType: 'textbox', ngmodel: 'areaName', parameterValue: 'AreaName' },
+            { lblname: 'Landmark', controlType: 'textbox', ngmodel: 'landMark', parameterValue: 'Landmark' },
+            {
+                controlType: 'country',
+                countryshow: true,
+                cityshow: false,
+                othercity: false,
+                dcountry: 'countryId',
+                dstate: 'stateId',
+                ddistrict: 'districtId',
+                require: true,
+
+                countryParameterValue: 'Country',
+                stateParameterValue: 'STATE',
+                districtParameterValue: 'District',
+
+            },
+            { lblname: 'City', controlType: 'textbox', ngmodel: 'cityId', parameterValue: 'city' },
+            { lblname: 'Zip/Pin', controlType: 'textbox', ngmodel: 'zipcode', parameterValue: 'ZipPin' }
+
+        ];
+        model.physicalAttributes = [
+            { lblname: 'Diet', controlType: 'radio', ngmodel: 'dietId', arrbind: 'Diet', parameterValue: 'DietID' },
+            { lblname: 'Drink', controlType: 'radio', ngmodel: 'drinkId', arrbind: 'Drink', parameterValue: 'DrinkID' },
+            { lblname: 'Smoke', controlType: 'radio', ngmodel: 'smokeId', arrbind: 'Drink', parameterValue: 'SmokeID' },
+            { lblname: 'Body Type', controlType: 'select', ngmodel: 'bodyTypeId', typeofdata: 'bodyType', parameterValue: 'BodyTypeID' },
+            { lblname: 'Body weight', controlType: 'textbox', ngmodel: 'bodyWeight', parameterValue: 'BWKgs' },
+            { lblname: 'lbs', controlType: 'textbox', ngmodel: 'lbs', parameterValue: 'BWlbs' },
+            { lblname: 'Blood Group', controlType: 'select', ngmodel: 'bloodGroupId', typeofdata: 'bloodGroup', parameterValue: 'BloodGroup' },
+            { lblname: 'Health Conditions', controlType: 'select', ngmodel: 'healthConditionId', typeofdata: 'healthCondition', parameterValue: 'HealthConditions' },
+            { lblname: 'Health Condition Description', controlType: 'textarea', ngmodel: 'healthDescritionId', parameterValue: 'HealthConditiondesc' },
+        ];
+        model.aboutFamily = [
+            { lblname: '', controlType: 'about', required: true, displayTxt: '(Do Not Mention Any Contact Information Phone Numbers, Email Id’s or your Profile May be Rejected.)', ngmodel: 'aboutFamilyId', parameterValue: 'AboutYourself' },
+        ];
 
         return model.init();
-
     }
 
     angular
@@ -2441,52 +2458,49 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             isSubmit = true;
             model.partnerObj = {};
 
+            model.popupdata = model.partnerPreference;
+            model.popupHeader = 'Partnerprefernece details';
             if (item !== undefined) {
-                model.casteArr = model.removeSelect(commonFactory.casteDepedency(item.religionid, item.MotherTongueID));
-                model.stateArr = model.removeSelect(commonFactory.StateBind(item.CountryID));
-                model.eduGroupArr = model.removeSelect(commonFactory.educationGroupBind(item.EducationCategoryID));
-                model.starArr = model.removeSelect(commonFactory.starBind(item.StarLanguageID));
-                model.subCasteArr = model.removeSelect(commonFactory.subCaste(commonFactory.listSelectedVal(item.casteid)));
+                model.eventType = 'edit';
 
-                model.partnerObj.intCusID = item.intCusID;
-                model.ageGapArr = commonFactory.numbersBind('years', 1, 80);
-
-                model.partnerObj.rbtlGender = item.Gender === 'Female' ? 2 : 1;
-                model.partnerObj.ddlFromAge = item.Agemin;
-                model.partnerObj.ddlToAge = item.AgeMax;
-                model.partnerObj.ddlFromheight = item.MinHeight;
-                model.partnerObj.ddltoHeight = item.MaxHeight;
-                model.partnerObj.lstReligion = model.SplitstringintoArray(item.religionid);
-                model.partnerObj.lstMothertongue = model.SplitstringintoArray(item.MotherTongueID);
-                model.partnerObj.lstCaste = model.SplitstringintoArray(item.casteid);
-                model.partnerObj.lstSubcaste = model.SplitstringintoArray(item.subcasteid);
-                model.partnerObj.lstMaritalstatus = item.maritalstatusid;
-                model.partnerObj.lstEducationcategory = model.SplitstringintoArray(item.EducationCategoryID);
-                model.partnerObj.lstEducationgroup = model.SplitstringintoArray(item.EducationGroupID);
-                model.partnerObj.lstEmployedin = model.SplitstringintoArray(item.ProfessionCategoryID);
-                model.partnerObj.lstProfessiongroup = model.SplitstringintoArray(item.ProfessionGroupID);
-                model.partnerObj.lstPreferredcountry = model.SplitstringintoArray(item.CountryID);
-                model.partnerObj.lstPreferredstate = model.SplitstringintoArray(item.StateID);
-                model.partnerObj.lstRegion = model.SplitstringintoArray(item.regionId);
-                model.partnerObj.lstBranch = model.SplitstringintoArray(item.branchid);
-                model.partnerObj.rbtDiet = item.DietID;
-                model.partnerObj.rbtManglikKujadosham = item.KujaDoshamID;
-                model.partnerObj.rbtPreferredstarLanguage = item.StarLanguageID;
-                model.partnerObj.rbtPreferredstars = item.TypeOfStar;
-                model.partnerObj.lstpreferedstars = model.SplitstringintoArray(item.PreferredStars);
-                model.partnerObj.rbtDomacile = item.Domicel === 'India' ? 0 : (item.Domicel === 'abroad' ? 1 : (item.Domicel === 'All' ? 2 : ''));
+                model.intCusID = item.intCusID;
+                model.genderId = item.Gender === 'Female' ? 2 : 1;
+                model.fromAgeId = item.Agemin;
+                model.toAgeId = item.AgeMax;
+                model.fromheightId = item.MinHeight;
+                model.toheightId = item.MaxHeight;
+                model.religionId = model.SplitstringintoArray(item.religionid);
+                model.mothertongueId = model.SplitstringintoArray(item.MotherTongueID);
+                model.casteId = model.SplitstringintoArray(item.casteid);
+                model.subCasteId = model.SplitstringintoArray(item.subcasteid);
+                model.maritalstatusId = item.maritalstatusid;
+                model.eduCatgoryId = model.SplitstringintoArray(item.EducationCategoryID);
+                model.eduGroupId = model.SplitstringintoArray(item.EducationGroupID);
+                model.employedinId = model.SplitstringintoArray(item.ProfessionCategoryID);
+                model.profGroupId = model.SplitstringintoArray(item.ProfessionGroupID);
+                model.countryId = model.SplitstringintoArray(item.CountryID);
+                model.stateId = model.SplitstringintoArray(item.StateID);
+                model.regionId = model.SplitstringintoArray(item.regionId);
+                model.branchId = model.SplitstringintoArray(item.branchid);
+                model.dietId = item.DietID;
+                model.kujadoshamId = item.KujaDoshamID;
+                model.starLanguageId = item.StarLanguageID;
+                model.starPreferenceId = item.TypeOfStar;
+                model.lstPreferredStars = model.SplitstringintoArray(item.PreferredStars);
+                model.Domicile = item.Domicel === 'India' ? 0 : (item.Domicel === 'abroad' ? 1 : (item.Domicel === 'All' ? 2 : ''));
 
             }
             commonFactory.open('partnerPrefContent.html', model.scope, uibModal);
-
-
         };
 
         model.partnerdescPopulate = function(item) {
             isSubmit = true;
-            model.partnerDescObj = {};
+
+            model.popupdata = model.aboutPartnerDescription;
+            model.popupHeader = 'Partner Description';
             if (item !== undefined) {
-                model.partnerDescObj.txtpartnerdescription = item.PartnerDescripition;
+                model.eventType = 'edit';
+                model.partnerDescriptionId = item.PartnerDescripition;
             }
             commonFactory.open('partnerDescContent.html', model.scope, uibModal);
 
@@ -2495,112 +2509,82 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             commonFactory.closepopup();
         };
 
-        model.changeBind = function(type, parentval, parentval2) {
-
-            switch (type) {
-                case 'Country':
-                    model.stateArr = model.removeSelect(commonFactory.StateBind(commonFactory.listSelectedVal(parentval)));
-                    break;
-
-                case 'EducationCatgory':
-                    model.eduGroupArr = model.removeSelect(commonFactory.educationGroupBind(commonFactory.listSelectedVal(parentval)));
-                    break;
-
-                case 'caste':
-                    model.casteArr = model.removeSelect(commonFactory.casteDepedency(commonFactory.listSelectedVal(parentval), commonFactory.listSelectedVal(parentval2)));
-                    break;
-
-                case 'subCaste':
-                    model.subCasteArr = model.removeSelect(commonFactory.subCaste(commonFactory.listSelectedVal(parentval)));
-                    break;
-
-                case 'star':
-                    model.starArr = model.removeSelect(commonFactory.starBind(commonFactory.listSelectedVal(parentval)));
-                    break;
-
-                case 'region':
-                    model.branchArr = model.removeSelect(commonFactory.branch(commonFactory.listSelectedVal(parentval)));
-                    break;
-            }
-        };
-
-
-        model.partnerPrefSubmit = function(objitem) {
-
-            if (isSubmit) {
-                isSubmit = false;
-                model.partnerPrefData = {
-                    GetDetails: {
-                        CustID: custID,
-                        AgeGapFrom: objitem.ddlFromAge,
-                        AgeGapTo: objitem.ddlToAge,
-                        HeightFrom: objitem.ddlFromheight,
-                        HeightTo: objitem.ddltoHeight,
-                        Religion: commonFactory.listSelectedVal(objitem.lstReligion),
-                        Mothertongue: commonFactory.listSelectedVal(objitem.lstMothertongue),
-                        Caste: commonFactory.listSelectedVal(objitem.lstCaste),
-                        Subcaste: commonFactory.listSelectedVal(objitem.lstSubcaste),
-                        Maritalstatus: commonFactory.listSelectedVal(objitem.lstMaritalstatus),
-                        ManglikKujadosham: objitem.rbtManglikKujadosham,
-                        PreferredstarLanguage: objitem.rbtPreferredstarLanguage,
-                        Educationcategory: commonFactory.listSelectedVal(objitem.lstEducationcategory),
-                        Educationgroup: commonFactory.listSelectedVal(objitem.lstEducationgroup),
-                        Employedin: commonFactory.listSelectedVal(objitem.lstEmployedin),
-                        Professiongroup: commonFactory.listSelectedVal(objitem.lstProfessiongroup),
-                        Diet: objitem.rbtDiet,
-                        Preferredcountry: commonFactory.listSelectedVal(objitem.lstPreferredcountry),
-                        Preferredstate: commonFactory.listSelectedVal(objitem.lstPreferredstate),
-                        Preferreddistrict: null,
-                        Preferredlocation: null,
-                        TypeofStar: objitem.rbtPreferredstars,
-                        PrefredStars: commonFactory.listSelectedVal(objitem.lstpreferedstars),
-                        GenderID: objitem.rbtlGender,
-                        Region: commonFactory.listSelectedVal(objitem.lstRegion),
-                        Branch: commonFactory.listSelectedVal(objitem.lstBranch),
-                        Domacile: commonFactory.checkvals(objitem.rbtDomacile) ? parseInt(objitem.rbtDomacile) : ''
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-
-                console.log(JSON.stringify(model.partnerPrefData));
-                model.submitPromise = editPartnerpreferenceService.submitPartnerPrefData(model.partnerPrefData).then(function(response) {
-                    console.log(response);
-                    commonFactory.closepopup();
-                    if (response.data === 1) {
-                        editPartnerpreferenceService.getPartnerPreferenceData(custID).then(function(response) {
-                            model.partnerPrefArr = response.data;
-                            console.log(model.partnerPrefArr);
-                        });
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'PartnerPreference Details Submitted Succesfully', 4500);
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'PartnerPreference Details Updation failed', 4500);
-                    }
-                });
-
-            }
-        };
-
 
         model.partnerDescriptionSubmit = function(obj) {
 
             if (isSubmit) {
                 isSubmit = false;
-                model.submitPromise = editPartnerpreferenceService.submitPartnerDescData({ CustID: custID, AboutYourself: obj.txtpartnerdescription, flag: 1 }).then(function(response) {
-                    console.log(response);
-                    commonFactory.closepopup();
-                    if (response.data === '1') {
-                        model.partnerDescription = obj.txtpartnerdescription;
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Partner Description Submitted Succesfully', 4500);
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Partner Description Updation failed', 4500);
-                    }
-                });
+
             }
         };
+        model.updateData = function(inObj, type) {
+            if (isSubmit) {
+                isSubmit = false;
+                switch (type) {
+                    case 'Partnerprefernece details':
+
+                        inObj.GetDetails.CustID = custID;
+
+                        model.submitPromise = editPartnerpreferenceService.submitPartnerPrefData(inObj).then(function(response) {
+                            console.log(response);
+                            commonFactory.closepopup();
+                            if (response.data === 1) {
+                                editPartnerpreferenceService.getPartnerPreferenceData(custID).then(function(response) {
+                                    model.partnerPrefArr = response.data;
+                                    console.log(model.partnerPrefArr);
+                                });
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'PartnerPreference Details Submitted Succesfully', 4500);
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'PartnerPreference Details Updation failed', 4500);
+                            }
+                        });
+                        break;
+                    case 'Partner Description':
+                        model.submitPromise = editPartnerpreferenceService.submitPartnerDescData({ CustID: custID, AboutYourself: inObj.GetDetails.AboutYourself, flag: 1 }).then(function(response) {
+                            console.log(response);
+                            commonFactory.closepopup();
+                            if (response.data === '1') {
+                                model.partnerDescription = inObj.GetDetails.AboutYourself;
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'Partner Description Submitted Succesfully', 4500);
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Partner Description Updation failed', 4500);
+                            }
+                        });
+
+                        break;
+                };
+            }
+
+        };
+
+        model.partnerPreference = [
+            { lblname: 'Gender', controlType: 'radio', ngmodel: 'genderId', arrbind: 'gender', parameterValue: 'GenderID' },
+            { lblname: 'Age Gap', controlType: 'doublemultiselect', ngmodelSelect1: 'fromAgeId', ngmodelSelect2: 'toAgeId', typeofdata: 'ageBind', parameterValue1: 'AgeGapFrom', parameterValue2: 'AgeGapTo' },
+            { lblname: 'Height', controlType: 'doublemultiselect', ngmodelSelect1: 'fromheightId', ngmodelSelect2: 'toheightId', typeofdata: 'heightregistration', parameterValue1: 'HeightFrom', parameterValue2: 'HeightTo' },
+            { lblname: 'Religion', controlType: 'multiselect', ngmodel: 'religionId', typeofdata: 'Religion', secondParent: 'mothertongueId', childName: 'caste', changeApi: 'castedependency', parameterValue: 'Religion' },
+            { lblname: 'Mother tongue', controlType: 'multiselect', ngmodel: 'mothertongueId', typeofdata: 'Mothertongue', secondParent: 'religionId', childName: 'caste', changeApi: 'castedependency', parameterValue: 'Mothertongue' },
+            { lblname: 'Caste', controlType: 'Changemultiselect', ngmodel: 'casteId', parentName: 'caste', childName: 'subCaste', changeApi: 'subCasteBind', parameterValue: 'Caste' },
+            { lblname: 'Subcaste', controlType: 'Changemultiselect', ngmodel: 'subCasteId', typeofdata: 'Religion', parentName: 'subCaste', parameterValue: 'Subcaste' },
+            { lblname: 'Marital status', controlType: 'multiselect', ngmodel: 'maritalstatusId', typeofdata: 'MaritalStatus', parameterValue: 'Maritalstatus' },
+            { lblname: 'Education category', controlType: 'multiselect', ngmodel: 'eduCatgoryId', typeofdata: 'educationcategory', childName: 'educationgroup', changeApi: 'EducationGroup', parameterValue: 'Educationcategory' },
+            { lblname: 'Education group', controlType: 'Changemultiselect', ngmodel: 'eduGroupId', typeofdata: 'Religion', parentName: 'educationgroup', parameterValue: 'Educationgroup' },
+            { lblname: 'Employed in', controlType: 'multiselect', ngmodel: 'employedinId', typeofdata: 'ProfCatgory', parameterValue: 'Employedin' },
+            { lblname: 'Profession group', controlType: 'multiselect', ngmodel: 'profGroupId', typeofdata: 'ProfGroup', parameterValue: 'Professiongroup' },
+            { lblname: 'Domicile', controlType: 'radio', ngmodel: 'domicileId', arrbind: 'Domicile', parameterValue: 'Domacile' },
+            { lblname: 'Preferred country', controlType: 'multiselect', ngmodel: 'countryId', typeofdata: 'Country', childName: 'state', changeApi: 'stateSelect', parameterValue: 'Preferredcountry' },
+            { lblname: 'Preferred state', controlType: 'Changemultiselect', ngmodel: 'stateId', typeofdata: 'Religion', parentName: 'state', parameterValue: 'Preferredstate' },
+            { lblname: 'Region', controlType: 'multiselect', ngmodel: 'regionId', typeofdata: 'region', childName: 'branch', changeApi: 'branch', parameterValue: 'Region' },
+            { lblname: 'Branch', controlType: 'Changemultiselect', ngmodel: 'branchId', parentName: 'branch', parameterValue: 'Branch' },
+            { lblname: 'Diet', controlType: 'radio', ngmodel: 'dietId', arrbind: 'Diet', parameterValue: 'Diet' },
+            { lblname: 'Manglik/Kuja dosham', controlType: 'radio', ngmodel: 'kujadoshamId', arrbind: 'Kujadosham', parameterValue: 'ManglikKujadosham' },
+            { lblname: 'Preferred star Language', controlType: 'radio', ngmodel: 'starLanguageId', arrbind: 'preferredStarlanguage', childName: 'star', changeApi: 'stars', parameterValue: 'PreferredstarLanguage' },
+            { lblname: 'Star Preference', controlType: 'radio', ngmodel: 'starPreferenceId', arrbind: 'StarPreference', parameterValue: 'TypeofStar' },
+            { lblname: '', controlType: 'Changemultiselect', ngmodel: 'lstPreferredStars', parentName: 'star', parameterValue: 'PrefredStars' }
+        ];
+
+        model.aboutPartnerDescription = [
+            { lblname: '', controlType: 'about', required: true, ngmodel: 'partnerDescriptionId', parameterValue: 'AboutYourself' },
+        ];
 
         return model.init();
     }
@@ -2710,88 +2694,61 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             switch (type) {
 
                 case 'profileSetting':
-
+                    model.popupdata = model.profileSetting;
+                    model.popupHeader = 'Profile Settings';
                     if (item !== undefined) {
-                        model.psObj.rdlapplicationstatus = item.ProfileStatusID;
-                        model.psObj.txtnoofdaysinactive = item.NoofDaysinactivated;
-                        model.psObj.txtreasonforinactive = item.Reason4InActive;
-                        model.psObj.ddlrequestedby = item.RequestedByGenericID;
-                        model.psObj.rdlprofilegrade = item.ProfileGradeID;
-
+                        model.eventType = 'edit';
+                        model.rdlapplicationstatus = item.ProfileStatusID;
+                        model.txtnoofdaysinactive = item.NoofDaysinactivated;
+                        model.txtreasonforinactive = item.Reason4InActive;
+                        model.ddlrequestedby = item.RequestedByGenericID;
+                        model.rdlprofilegrade = item.ProfileGradeID;
                     }
-
-                    commonFactory.open('profileSettingContent.html', model.scope, uibModal);
 
                     break;
 
                 case 'profileDisplay':
-
-
+                    model.popupdata = model.profileSettingDisplay;
+                    model.popupHeader = 'Profile Display Settings';
                     if (item !== undefined) {
-                        model.psdObj.rdldisplayin = item.ProfileDisplayNameID;
-                        model.psdObj.rdlpwdblock = item.LoginStatusNameID;
-                        model.psdObj.txtblockedreason = item.ProfileBlockReason;
-
+                        model.eventType = 'edit';
+                        model.rdldisplayin = item.ProfileDisplayNameID;
+                        model.rdlpwdblock = item.LoginStatusNameID;
+                        model.txtblockedreason = item.ProfileBlockReason;
                     }
-
-
-                    commonFactory.open('profileDisplayContent.html', model.scope, uibModal);
 
                     break;
 
                 case 'confidential':
-
-                    model.csObj.chkisconfidential = item.ConfindentialStatusID === true ? true : false;
-                    model.csObj.chkvryhighconfidential = item.HighConfidentialStatusID === 1 ? true : false;
-
-                    commonFactory.open('confidentialContent.html', model.scope, uibModal);
-
+                    model.eventType = 'edit';
+                    model.popupdata = model.confidentialSetting;
+                    model.popupHeader = 'Confidential Settings';
+                    model.chkisconfidential = item.ConfindentialStatusID === true ? true : false;
+                    model.chkvryhighconfidential = item.HighConfidentialStatusID === 1 ? true : false;
                     break;
 
                 case 'grading':
-
+                    model.popupdata = model.gradeSelection;
+                    model.popupHeader = 'Grade Selections';
                     if (item !== undefined) {
-
-                        model.gradeObj.ddlfamilyGrade = model.populategrade(item.FamilyGrade);
-                        model.gradeObj.ddlphotoGrade = model.populategrade(item.PhotoGrade);
-                        model.gradeObj.ddlEducationgrade = model.populategrade(item.EducationGrade);
-                        model.gradeObj.ddlProfessionGrade = model.populategrade(item.ProfileGrade);
-                        model.gradeObj.ddlpropertyGrade = model.populategrade(item.PropertyGrade);
+                        model.eventType = 'edit';
+                        model.ddlfamilyGrade = model.populategrade(item.FamilyGrade);
+                        model.ddlphotoGrade = model.populategrade(item.PhotoGrade);
+                        model.ddlEducationgrade = model.populategrade(item.EducationGrade);
+                        model.ddlProfessionGrade = model.populategrade(item.ProfileGrade);
+                        model.ddlpropertyGrade = model.populategrade(item.PropertyGrade);
                     }
-
-                    commonFactory.open('gradeSelectionContent.html', model.scope, uibModal);
 
                     break;
             }
+
+            commonFactory.open('commonProfileSettingpopup.html', model.scope, uibModal);
         };
 
         model.cancel = function() {
             commonFactory.closepopup();
         };
 
-        model.gradeSubmit = function(obj) {
-            model.Mobj = {
-                CustID: custID,
-                EmpID: '2',
-                GFamily: obj.ddlfamilyGrade,
-                GPhotos: obj.ddlphotoGrade,
-                GEducation: obj.ddlEducationgrade,
-                GProfession: obj.ddlProfessionGrade,
-                GProperty: obj.ddlpropertyGrade
-            };
-
-            editProfileSettingService.submitGradeData(model.Mobj).then(function(response) {
-                console.log(response);
-
-                commonFactory.closepopup();
-                if (response.data === 1) {
-                    model.pageload();
-                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Grade Selections Submitted Succesfully', 4500);
-                } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Grade Selections Updation failed', 4500);
-                }
-            });
-        };
 
         model.profileSettingAndDispalySubmit = function(IProfileDisplayName, ILoginStatusName, IBlockedreason, ITypeofReport, Icurrentprofilestatusid, Iprofilegrade, INoofDaysinactivated, IReason4InActive,
             IRequestedBy) {
@@ -2827,34 +2784,117 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         };
 
-        model.profileSettingSubmit = function(obj) {
-            model.profileSettingAndDispalySubmit('', '', '', "ProfileSettings", obj.rdlapplicationstatus, obj.rdlprofilegrade, obj.txtnoofdaysinactive, obj.txtreasonforinactive,
-                obj.ddlrequestedby);
-        };
-
-        model.profileSettingDisplaySubmit = function(obj) {
-            model.profileSettingAndDispalySubmit(obj.rdldisplayin, obj.rdlpwdblock, obj.txtblockedreason, 'DisplaySettings');
-        };
 
         model.getChkVals = function(val) {
             return val === true ? 1 : 0;
         };
 
-        model.confidentialSubmit = function(obj) {
 
-            editProfileSettingService.confidentialSubmit(custID, model.getChkVals(obj.chkisconfidential), model.getChkVals(obj.chkvryhighconfidential), '2').then(function(response) {
-                console.log(response);
-                commonFactory.closepopup();
-                if (response.data !== undefined && response.data.length > 0) {
-                    if (JSON.parse(response.data[0])[0].STATUS === 1) {
-                        model.pageload();
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Confidential Status Submitted Succesfully', 4500);
-                    }
-                } else {
-                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Confidential Status Updation failed', 4500);
-                }
-            });
+
+        model.updateData = function(inObj, type) {
+
+            switch (type) {
+                case 'Profile Settings':
+
+                    model.profileSettingAndDispalySubmit('', '', '', "ProfileSettings", inObj.GetDetails.rdlapplicationstatus, inObj.GetDetails.rdlprofilegrade, inObj.GetDetails.txtnoofdaysinactive, inObj.GetDetails.txtreasonforinactive,
+                        inObj.GetDetails.ddlrequestedby);
+
+                    break;
+
+                case 'Profile Display Settings':
+                    model.profileSettingAndDispalySubmit(inObj.GetDetails.rdldisplayin, inObj.GetDetails.rdlpwdblock, inObj.GetDetails.txtblockedreason, 'DisplaySettings');
+                    break;
+
+                case 'Confidential Settings':
+                    editProfileSettingService.confidentialSubmit(custID, model.getChkVals(inObj.GetDetails.chkisconfidential), model.getChkVals(inObj.GetDetails.chkvryhighconfidential), '2').then(function(response) {
+                        console.log(response);
+                        commonFactory.closepopup();
+                        if (response.data !== undefined && response.data.length > 0) {
+                            if (JSON.parse(response.data[0])[0].STATUS === 1) {
+                                model.pageload();
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'Confidential Status Submitted Succesfully', 4500);
+                            }
+                        } else {
+                            alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Confidential Status Updation failed', 4500);
+                        }
+                    });
+                    break;
+
+                case 'Grade Selections':
+                    model.Mobj = inObj.GetDetails;
+                    model.Mobj.CustID = custID;
+                    model.Mobj.EmpID = inObj.customerpersonaldetails.EmpID;
+
+                    editProfileSettingService.submitGradeData(model.Mobj).then(function(response) {
+                        console.log(response);
+
+                        commonFactory.closepopup();
+                        if (response.data === 1) {
+                            model.pageload();
+                            alertss.timeoutoldalerts(model.scope, 'alert-success', 'Grade Selections Submitted Succesfully', 4500);
+                        } else {
+                            alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Grade Selections Updation failed', 4500);
+                        }
+                    });
+
+                    break;
+            }
+
         };
+
+
+        model.profileSetting = [
+            { lblname: 'Application Status', controlType: 'radio', ngmodel: 'rdlapplicationstatus', ownArray: 'AplicationStatusArr', parameterValue: 'rdlapplicationstatus' },
+            { lblname: 'No of Days to be inactivated ', controlType: 'textbox', ngmodel: 'txtnoofdaysinactive', parameterValue: 'txtnoofdaysinactive' },
+            { lblname: 'Reason for InActive', controlType: 'textareaSide', ngmodel: 'txtreasonforinactive', parameterValue: 'txtreasonforinactive' },
+            { lblname: 'Requested By', controlType: 'select', ngmodel: 'ddlrequestedby', typeofdata: 'childStayingWith', parameterValue: 'ddlrequestedby' },
+            { lblname: 'Profile Grade', controlType: 'radio', ngmodel: 'rdlprofilegrade', ownArray: 'profileGrade', parameterValue: 'rdlprofilegrade' },
+        ];
+
+        model.profileSettingDisplay = [
+            { lblname: 'Display In', controlType: 'radio', ngmodel: 'rdldisplayin', ownArray: 'profileDisplayIn', parameterValue: 'rdldisplayin' },
+            { lblname: 'Password Block/Release ', controlType: 'radio', ngmodel: 'rdlpwdblock', ownArray: 'blockReleseArr', parameterValue: 'rdlpwdblock' },
+            { lblname: 'Reason', controlType: 'textarea', ngmodel: 'txtblockedreason', parameterValue: 'txtblockedreason' }
+        ];
+
+        model.confidentialSetting = [
+            { lblname: 'isConfidential', controlType: 'checkbox', ngmodel: 'chkisconfidential', ownArray: 'AplicationStatusArr', parameterValue: 'chkisconfidential' },
+            { lblname: 'Very High Confidential', controlType: 'checkbox', ngmodel: 'chkvryhighconfidential', parameterValue: 'chkvryhighconfidential' }
+        ];
+
+        model.gradeSelection = [
+            { lblname: 'Education', controlType: 'select', ngmodel: 'ddlEducationgrade', typeofdata: 'gradeSelection', parameterValue: 'GEducation' },
+            { lblname: 'Profession', controlType: 'select', ngmodel: 'ddlProfessionGrade', typeofdata: 'gradeSelection', parameterValue: 'GProfession' },
+            { lblname: 'Property', controlType: 'select', ngmodel: 'ddlpropertyGrade', typeofdata: 'gradeSelection', parameterValue: 'GProperty' },
+            { lblname: 'Family', controlType: 'select', ngmodel: 'ddlfamilyGrade', typeofdata: 'gradeSelection', parameterValue: 'GFamily' },
+            { lblname: 'Photo', controlType: 'select', ngmodel: 'ddlphotoGrade', typeofdata: 'gradeSelection', parameterValue: 'GPhotos' }
+        ];
+
+        model.profileDisplayIn = [
+            { "label": "Only Online", "title": "Only Online", "value": 279 },
+            { "label": "Onlly Offline", "title": "Onlly Offline", "value": 280 },
+            { "label": "Both", "title": "Both", "value": 434 }
+        ];
+
+        model.blockReleseArr = [
+            { "label": "Allow", "title": "Allow", "value": 439 },
+            { "label": "Block", "title": "Block", "value": 440 },
+        ];
+
+
+        model.AplicationStatusArr = [
+            { "label": "Active", "title": "Active", "value": 54 },
+            { "label": "Inactive", "title": "Inactive", "value": 55 }
+        ];
+
+        model.profileGrade = [
+            { "label": "A", "title": "A", "value": 1 },
+            { "label": "B", "title": "B", "value": 2 },
+            { "label": "C", "title": "C", "value": 3 }
+        ];
+
+
+
 
         return model.init();
     }
@@ -2951,44 +2991,33 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         model.populateProperty = function(item) {
             isSubmit = true;
-            model.proObj = {};
-            model.proObj.Custpropertyid = null;
+            model.Custpropertyid = null;
+            model.eventType = 'add';
+            model.RefrenceCust_Reference_ID = null;
+            model.popupdata = model.Refrence;
+            model.popupHeader = 'Refrence';
             if (item !== undefined) {
-                model.proObj.Custpropertyid = item.Custpropertyid;
-                model.proObj.ddlFamilyStatus = item.FamilyValuesID;
-                model.proObj.rdlSharedProperty = item.SharedPropertyID === true ? 1 : 0;
-                model.proObj.txtValueofproperty = item.PropertyValue;
-                model.proObj.txtPropertydesc = item.PropertyDetails;
+                model.eventType = 'edit';
+                model.Custpropertyid = item.Custpropertyid;
+                model.ddlFamilyStatus = item.FamilyValuesID;
+                model.rdlSharedProperty = item.SharedPropertyID === true ? 1 : 0;
+                model.txtValueofproperty = item.PropertyValue;
+                model.txtPropertydesc = item.PropertyDetails;
             }
             commonFactory.open('propertyContent.html', model.scope, uibModal);
 
         };
 
 
-        model.propertySubmit = function(obj) {
+        model.updateData = function(inObj, type) {
 
             if (isSubmit) {
                 isSubmit = false;
-                model.propertyData = {
-                    GetDetails: {
-                        FamilyStatus: obj.ddlFamilyStatus,
-                        Issharedproperty: obj.rdlSharedProperty,
-                        Valueofproperty: obj.txtValueofproperty,
-                        PropertyType: '281',
-                        Propertydescription: obj.txtPropertydesc,
-                        Showingviewprofile: obj.rbtShowViewProfile,
-                        Custpropertyid: model.proObj.Custpropertyid,
-                        PropertyID: model.proObj.Custpropertyid,
-                        CustId: custID
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-
-                model.submitPromise = editPropertyService.submitPropertyData(model.propertyData).then(function(response) {
+                inObj.GetDetails.PropertyType = '281';
+                inObj.GetDetails.Custpropertyid = model.Custpropertyid;
+                inObj.GetDetails.PropertyID = model.Custpropertyid;
+                inObj.GetDetails.CustId = custID;
+                model.submitPromise = editPropertyService.submitPropertyData(inObj).then(function(response) {
                     console.log(response);
                     commonFactory.closepopup();
                     if (response.data === 1) {
@@ -3008,6 +3037,19 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.cancel = function() {
             commonFactory.closepopup();
         };
+        //performance code
+        model.Refrence = [
+            { lblname: 'Family Status', controlType: 'select', ngmodel: 'ddlFamilyStatus', required: true, typeofdata: 'familyStatus', parameterValue: 'FamilyStatus' },
+            { lblname: 'Is shared property', controlType: 'radio', ngmodel: 'rdlSharedProperty', arrbind: 'boolType', parameterValue: 'Issharedproperty' },
+            { lblname: 'Value of property', controlType: 'textboxNumber', maxLength: 5, span: true, spanText: 'Lakhs', ngmodel: 'txtFname', required: true, parameterValue: 'Valueofproperty' },
+            {
+                lblname: 'Property description',
+                controlType: 'textarea',
+                ngmodel: 'txtPropertydesc',
+                parameterValue: 'Propertydescription'
+            }
+
+        ];
         return model.init();
     }
 
@@ -3089,38 +3131,40 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         model.referencePopulate = function(item) {
             isSubmit = true;
-            model.refObj.RefrenceCust_Reference_ID = null;
-            model.refObj = {};
-
+            model.eventType = 'add';
+            model.RefrenceCust_Reference_ID = null;
+            model.popupdata = model.Refrence;
+            model.popupHeader = 'Refrence';
             if (item !== undefined) {
-                model.refObj.intCusID = custID;
-                model.refObj.RefrenceCust_Reference_ID = item.RefrenceCust_Reference_ID;
-                model.refObj.ddlRelationshiptype = 318;
-                model.refObj.txtFname = item.ReferenceFirstName;
-                model.refObj.txtLname = item.ReferenceLastName;
-                model.refObj.txtProfessiondetails = item.RefrenceProfessionDetails;
-                model.refObj.ddlCountry = commonFactory.checkvals(item.RefrenceCountry) ? parseInt(item.RefrenceCountry) : null;
-                model.refObj.ddlState = commonFactory.checkvals(item.RefrenceStateID) ? parseInt(item.RefrenceStateID) : null;
-                model.refObj.ddlDistrict = commonFactory.checkvals(item.RefrenceDistrictID) ? parseInt(item.RefrenceDistrictID) : null;
-                model.refObj.txtNativePlace = item.RefrenceNativePlaceID;
-                model.refObj.txtPresentlocation = item.RefenceCurrentLocation;
+                model.eventType = 'edit';
+                model.intCusID = custID;
+                model.RefrenceCust_Reference_ID = item.RefrenceCust_Reference_ID;
+                model.ddlRelationshiptype = 318;
+                model.txtFname = item.ReferenceFirstName;
+                model.txtLname = item.ReferenceLastName;
+                model.txtProfessiondetails = item.RefrenceProfessionDetails;
+                model.ddlCountry = commonFactory.checkvals(item.RefrenceCountry) ? parseInt(item.RefrenceCountry) : null;
+                model.ddlState = commonFactory.checkvals(item.RefrenceStateID) ? parseInt(item.RefrenceStateID) : null;
+                model.ddlDistrict = commonFactory.checkvals(item.RefrenceDistrictID) ? parseInt(item.RefrenceDistrictID) : null;
+                model.txtNativePlace = item.RefrenceNativePlaceID;
+                model.txtPresentlocation = item.RefenceCurrentLocation;
 
-                model.refObj.ddlMobileCountryID = commonFactory.checkvals(item.RefrenceMobileCountryID) ? parseInt(item.RefrenceMobileCountryID) : null;
+                model.ddlMobileCountryID = commonFactory.checkvals(item.RefrenceMobileCountryID) ? parseInt(item.RefrenceMobileCountryID) : null;
 
-                model.refObj.txtMobileNumber = item.RefrenceMobileNumberID;
+                model.txtMobileNumber = item.RefrenceMobileNumberID;
 
                 if (commonFactory.checkvals(item.RefrenceAreaCode)) {
-                    model.refObj.ddlLandLineCountryID = commonFactory.checkvals(item.RefrenceLandCountryId) ? parseInt(item.RefrenceLandCountryId) : null;
-                    model.refObj.txtAreCode = item.RefrenceAreaCode;
-                    model.refObj.txtLandNumber = item.RefrenceLandNumber;
+                    model.ddlLandLineCountryID = commonFactory.checkvals(item.RefrenceLandCountryId) ? parseInt(item.RefrenceLandCountryId) : null;
+                    model.txtAreCode = item.RefrenceAreaCode;
+                    model.txtLandNumber = item.RefrenceLandNumber;
 
                 } else {
-                    model.refObj.ddlMobileCountryID2 = commonFactory.checkvals(item.RefrenceLandCountryId) ? parseInt(item.RefrenceLandCountryId) : null;
-                    model.refObj.txtMobileNumber2 = item.RefrenceLandNumber;
+                    model.ddlMobileCountryID2 = commonFactory.checkvals(item.RefrenceLandCountryId) ? parseInt(item.RefrenceLandCountryId) : null;
+                    model.txtMobileNumber2 = item.RefrenceLandNumber;
                 }
 
-                model.refObj.txtEmails = item.RefrenceEmail;
-                model.refObj.txtNarrations = item.RefrenceNarration;
+                model.txtEmails = item.RefrenceEmail;
+                model.txtNarrations = item.RefrenceNarration;
             }
             commonFactory.open('referenceContent.html', model.scope, uibModal);
 
@@ -3134,42 +3178,12 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             });
         };
 
-        model.refenceSubmit = function(obj) {
-
+        model.updateData = function(inObj, type) {
             if (isSubmit) {
                 isSubmit = false;
-
-                model.referenceData = {
-                    GetDetails: {
-                        CustID: custID,
-                        RelationshiptypeID: obj.ddlRelationshiptype,
-                        Firstname: obj.txtFname,
-                        Lastname: obj.txtLname,
-                        Employedin: null,
-                        Professiongroup: null,
-                        Profession: null,
-                        Professiondetails: obj.txtProfessiondetails,
-                        CountryID: obj.ddlCountry,
-                        StateID: obj.ddlState,
-                        DistrictID: obj.ddlDistrict,
-                        Nativeplace: obj.txtNativePlace,
-                        Presentlocation: obj.txtPresentlocation,
-                        MobileCountryID: obj.ddlMobileCountryID,
-                        MobileNumber: obj.txtMobileNumber,
-                        LandLineCountryID: commonFactory.checkvals(obj.ddlMobileCountryID2) ? obj.ddlMobileCountryID2 : (commonFactory.checkvals(obj.ddlLandLineCountryID) ? obj.ddlLandLineCountryID : null),
-                        LandLineAreaCode: commonFactory.checkvals(obj.txtMobileNumber2) ? null : (commonFactory.checkvals(obj.txtAreCode) ? obj.txtAreCode : null),
-                        LandLineNumber: commonFactory.checkvals(obj.txtMobileNumber2) ? obj.txtMobileNumber2 : (commonFactory.checkvals(obj.txtLandNumber) ? obj.txtLandNumber : null),
-                        Emails: obj.txtEmails,
-                        Narration: obj.txtNarrations,
-                        Cust_Reference_ID: model.refObj.RefrenceCust_Reference_ID
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-                model.submitPromise = editReferenceService.submitReferenceData(model.referenceData).then(function(response) {
+                inObj.GetDetails.CustID = custID;
+                inObj.GetDetails.Cust_Reference_ID = model.RefrenceCust_Reference_ID;
+                model.submitPromise = editReferenceService.submitReferenceData(inObj).then(function(response) {
                     console.log(response);
                     commonFactory.closepopup();
                     if (response.data === 1) {
@@ -3201,7 +3215,56 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             });
         };
 
+        //performance code
+        model.Refrence = [
+            { lblname: 'Relationship type', controlType: 'select', ngmodel: 'ddlRelationshiptype', required: true, typeofdata: 'RelationshipType', parameterValue: 'RelationshiptypeID' },
+            { lblname: 'First name', controlType: 'textbox', ngmodel: 'txtFname', required: true, parameterValue: 'Firstname' },
+            { lblname: 'Last name', controlType: 'textbox', ngmodel: 'txtLname', required: true, parameterValue: 'Lastname' },
+            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtProfessiondetails', required: true, parameterValue: 'Professiondetails' },
+            {
+                lblname: 'country',
+                controlType: 'country',
+                countryshow: true,
+                cityshow: false,
+                othercity: false,
+                dcountry: 'ddlCountry',
+                dstate: 'ddlState',
+                ddistrict: 'ddlDistrict',
+                countryParameterValue: 'CountryID',
+                stateParameterValue: 'StateID',
+                districtParameterValue: 'DistrictID',
 
+            },
+            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'txtNativePlace', required: true, parameterValue: 'Nativeplace' },
+            { lblname: 'Present location', controlType: 'textbox', ngmodel: 'txtPresentlocation', required: true, parameterValue: 'Presentlocation' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'ddlMobileCountryID',
+                strmobile: 'txtMobileNumber',
+                dalternative: 'ddlMobileCountryID2',
+                stralternative: 'txtMobileNumber2',
+                dland: 'ddlLandLineCountryID',
+                strareacode: 'txtAreCode',
+                strland: 'txtLandNumber',
+                strmail: 'txtEmails',
+
+                mobileCodeIdParameterValue: 'MobileCountryID',
+                mobileNumberParameterValue: 'MobileNumber',
+                landCountryCodeIdParameterValue: 'LandLineCountryID',
+                landAreaCodeIdParameterValue: 'LandLineAreaCode',
+                landNumberParameterValue: 'LandLineNumber',
+                emailParameterValue: 'Emails'
+
+            },
+            {
+                lblname: 'Narration',
+                controlType: 'textarea',
+                ngmodel: 'txtNarrations',
+                parameterValue: 'Narration'
+            }
+
+        ];
 
         return model.init();
     }
@@ -3269,6 +3332,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         var isSubmit = true;
         model.deleteDisplayTxt = '';
         model.identityID = 0;
+        model.ddlFSHCountryID = 1;
         // var logincustid = authSvc.getCustId();
         var custid = model.CustID = stateParams.CustID;
         //  model. = logincustid !== undefined && logincustid !== null && logincustid !== "" ? logincustid : null;
@@ -3298,177 +3362,173 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         model.relativePopulatePopulate = function(type, item) {
             isSubmit = true;
+            model.eventType = 'add';
             switch (type) {
                 case 'FB':
-                    model.fbObj.FatherbrotherCustfamilyID = null;
-                    model.fbObj = {};
-
+                    model.FatherbrotherCustfamilyID = null;
+                    model.popupdata = model.fatherBrother;
+                    model.popupHeader = "Father's Brother Details";
                     if (item !== undefined) {
-                        model.fbObj.FatherbrotherCustfamilyID = item.FatherbrotherCustfamilyID;
-                        model.fbObj.rdlFBElderORyounger = item.FatherBrotherElderyounger == 'Elder' ? 324 : (item.FatherBrotherElderyounger == 'Younger' ? 323 : '-1');
-                        model.fbObj.txtFatherbrothername = item.FatherbrotherName;
-                        model.fbObj.txtFBEducationdetails = item.FatherBrotherEducationDetails;
-                        model.fbObj.txtFBProfessiondetails = item.FatherbrotherProfessionDetails;
+                        model.eventType = 'edit';
+                        model.FatherbrotherCustfamilyID = item.FatherbrotherCustfamilyID;
+                        model.rdlFBElderORyounger = item.FatherBrotherElderyounger == 'Elder' ? 324 : (item.FatherBrotherElderyounger == 'Younger' ? 323 : '-1');
+                        model.txtFatherbrothername = item.FatherbrotherName;
+                        model.txtFBEducationdetails = item.FatherBrotherEducationDetails;
+                        model.txtFBProfessiondetails = item.FatherbrotherProfessionDetails;
 
-                        model.fbObj.ddlFBMobileCountryID = item.FatherbrotherMobileCode;
-                        model.fbObj.txtFBMobileNumber = item.FatherbrotherMobileNumber;
+                        model.ddlFBMobileCountryID = item.FatherbrotherMobileCode;
+                        model.txtFBMobileNumber = item.FatherbrotherMobileNumber;
 
                         if (commonFactory.checkvals(item.FatherbrotherLandaraecode)) {
-                            model.fbObj.ddlFBLandLineCountry = item.FatherbrotherLandCountryCode;
-                            model.fbObj.txtFBAreCode = item.FatherbrotherLandaraecode;
-                            model.fbObj.txtFBLandNumber = item.FatherbrotherLandNumber;
+                            model.ddlFBLandLineCountry = item.FatherbrotherLandCountryCode;
+                            model.txtFBAreCode = item.FatherbrotherLandaraecode;
+                            model.txtFBLandNumber = item.FatherbrotherLandNumber;
                         } else {
-                            model.fbObj.ddlFBMobileCountryID2 = item.FatherbrotherLandCountryCode;
-                            model.fbObj.txtFBMobileNumber2 = item.FatherbrotherLandNumber;
+                            model.ddlFBMobileCountryID2 = item.FatherbrotherLandCountryCode;
+                            model.txtFBMobileNumber2 = item.FatherbrotherLandNumber;
                         }
 
-                        model.fbObj.txtFBEmails = item.FatherbrotherEmail;
-                        model.fbObj.txtCurrentLocation = item.FatherbrotherCurrentLocation;
+                        model.txtFBEmails = item.FatherbrotherEmail;
+                        model.txtCurrentLocation = item.FatherbrotherCurrentLocation;
 
                     }
-                    commonFactory.open('FBModalContent.html', model.scope, uibModal);
+                    commonFactory.open('ModalContent.html', model.scope, uibModal);
 
                     break;
 
                 case 'FS':
-                    model.fsObj.FatherSisterCustfamilyID = null;
-                    model.fsObj = {};
-
+                    model.FatherSisterCustfamilyID = null;
+                    model.popupdata = model.fatherSister;
+                    model.popupHeader = "Father's Sister Details";
                     if (item !== undefined) {
-                        model.fsObj.FatherSisterCustfamilyID = item.FatherSisterCustfamilyID;
-                        model.fsObj.rdlFSElderYounger = item.FatherSisterElderyounger == 'Elder' ? 326 : (item.FatherSisterElderyounger == 'Younger' ? 325 : '-1');
-                        model.fsObj.txtFathersistername = item.FatherSisterName;
-                        model.fsObj.txtFSHusbandfirstname = item.SpouceFName;
-                        model.fsObj.txtFSHusbandlastname = item.SpoucelName;
-                        model.fsObj.txtFSHEDucation = item.FatherSisterSpouseEducationDetails;
-                        model.fsObj.txtFSProfessiondetails = item.FathersisterSpouseProfessionDetails;
-                        model.fsObj.ddlFSHStateID = item.FatherSisterspousestateId;
-                        model.fsObj.ddlFSHDistrictID = item.FatherSisterspouseDistrictId;
-                        model.fsObj.txtFSHNativePlace = item.FathersisterSpouseNativePlace;
+                        model.eventType = 'edit';
+                        model.FatherSisterCustfamilyID = item.FatherSisterCustfamilyID;
+                        model.rdlFSElderYounger = item.FatherSisterElderyounger == 'Elder' ? 326 : (item.FatherSisterElderyounger == 'Younger' ? 325 : '-1');
+                        model.txtFathersistername = item.FatherSisterName;
+                        model.txtFSHusbandfirstname = item.SpouceFName;
+                        model.txtFSHusbandlastname = item.SpoucelName;
+                        model.txtFSHEDucation = item.FatherSisterSpouseEducationDetails;
+                        model.txtFSProfessiondetails = item.FathersisterSpouseProfessionDetails;
+                        model.ddlFSHStateID = item.FatherSisterspousestateId;
+                        model.ddlFSHDistrictID = item.FatherSisterspouseDistrictId;
+                        model.txtFSHNativePlace = item.FathersisterSpouseNativePlace;
 
-                        model.fsObj.ddlFSMObileCountryID = item.FatherSisterMobilecodeid;
-                        model.fsObj.txtFSMobileNumber = item.FatherSisterspouseMobileNumber;
+                        model.ddlFSMObileCountryID = item.FatherSisterMobilecodeid;
+                        model.txtFSMobileNumber = item.FatherSisterspouseMobileNumber;
 
 
                         if (commonFactory.checkvals(item.FatherSisterspouseLandaraecode)) {
-                            model.fsObj.ddlFSHLandCountryID = item.FatherSisterlandcontrycodeid;
-                            model.fsObj.txtFSHAreaNumber = item.FatherSisterspouseLandaraecode;
-                            model.fsObj.txtFSHNUmber = item.FatherSisterspouseLandNumber;
+                            model.ddlFSHLandCountryID = item.FatherSisterlandcontrycodeid;
+                            model.txtFSHAreaNumber = item.FatherSisterspouseLandaraecode;
+                            model.txtFSHNUmber = item.FatherSisterspouseLandNumber;
 
                         } else {
-                            model.fsObj.ddlFSMObileCountryID2 = item.FatherSisterlandcontrycodeid;
-                            model.fsObj.txtFSMobileNumber2 = item.FatherSisterspouseLandNumber;
+                            model.ddlFSMObileCountryID2 = item.FatherSisterlandcontrycodeid;
+                            model.txtFSMobileNumber2 = item.FatherSisterspouseLandNumber;
                         }
 
-                        model.fsObj.txtFSHEmails = item.FatherSisterspouseEmail;
-                        model.fsObj.txtFSHCurrentLocation = item.FatherSisterCurrentLocation;
+                        model.txtFSHEmails = item.FatherSisterspouseEmail;
+                        model.txtFSHCurrentLocation = item.FatherSisterCurrentLocation;
                     }
-                    commonFactory.open('FSModalContent.html', model.scope, uibModal);
+                    commonFactory.open('ModalContent.html', model.scope, uibModal);
 
                     break;
 
                 case 'MB':
-                    model.mbObj.MotherBrotherCustfamilyID = null;
-                    model.mbObj = {};
-
+                    model.MotherBrotherCustfamilyID = null;
+                    model.popupdata = model.motherBrother;
+                    model.popupHeader = "Mother's Brother Details";
                     if (item !== undefined) {
-                        model.mbObj.MotherBrotherCustfamilyID = item.MotherBrotherCustfamilyID;
-                        model.mbObj.rdlMBElderYounger = item.MotherBrotherElderyounger == 'Elder' ? 328 : (item.MotherBrotherElderyounger == 'Younger' ? 327 : '-1');
-                        model.mbObj.txtMBName = item.MotherBrotherName;
-                        model.mbObj.txtMBEducation = item.MotherBrotherEducationDetails;
-                        model.mbObj.txtMBProfessiondetails = item.MotherBrotherProfessionDetails;
+                        model.eventType = 'edit';
+                        model.MotherBrotherCustfamilyID = item.MotherBrotherCustfamilyID;
+                        model.rdlMBElderYounger = item.MotherBrotherElderyounger == 'Elder' ? 328 : (item.MotherBrotherElderyounger == 'Younger' ? 327 : '-1');
+                        model.txtMBName = item.MotherBrotherName;
+                        model.txtMBEducation = item.MotherBrotherEducationDetails;
+                        model.txtMBProfessiondetails = item.MotherBrotherProfessionDetails;
 
-                        model.mbObj.ddlMBCountriCode = item.MotherBrotherMobileCode;
-                        model.mbObj.txtMBMobileNum = item.MotherBrotherMobileNumber;
+                        model.ddlMBCountriCode = item.MotherBrotherMobileCode;
+                        model.txtMBMobileNum = item.MotherBrotherMobileNumber;
 
 
                         if (commonFactory.checkvals(item.MotherBrotherLandaraecode)) {
-                            model.mbObj.ddlMBLandLineCountryCode = item.MotherBrotherLandCountryCode;
-                            model.mbObj.txtMBAreaCode = item.MotherBrotherLandaraecode;
-                            model.mbObj.txtMBLandLineNum = item.MotherBrotherLandNumber;
+                            model.ddlMBLandLineCountryCode = item.MotherBrotherLandCountryCode;
+                            model.txtMBAreaCode = item.MotherBrotherLandaraecode;
+                            model.txtMBLandLineNum = item.MotherBrotherLandNumber;
 
                         } else {
-                            model.mbObj.ddlMBCountriCode2 = item.MotherBrotherLandCountryCode;
-                            model.mbObj.txtMBMobileNum2 = item.MotherBrotherLandNumber;
+                            model.ddlMBCountriCode2 = item.MotherBrotherLandCountryCode;
+                            model.txtMBMobileNum2 = item.MotherBrotherLandNumber;
                         }
 
-                        model.mbObj.txtMBEmails = item.MotherBrotherEmail;
-                        model.mbObj.txtMBCurrentLocation = item.MotherBrotherCurrentLocation;
+                        model.txtMBEmails = item.MotherBrotherEmail;
+                        model.txtMBCurrentLocation = item.MotherBrotherCurrentLocation;
                     }
-                    commonFactory.open('MBModalContent.html', model.scope, uibModal);
+                    commonFactory.open('ModalContent.html', model.scope, uibModal);
 
                     break;
                 case 'MS':
-                    model.msObj.MotherSisterCustfamilyID = null;
-                    model.msObj = {};
-
+                    model.MotherSisterCustfamilyID = null;
+                    model.popupdata = model.motherSister;
+                    model.popupHeader = "Mother's Sister Details";
                     if (item !== undefined) {
-                        model.msObj.MotherSisterCustfamilyID = item.MotherSisterCustfamilyID;
-                        model.msObj.rdlMSElderYounger = item.MotherSisterElderyounger == 'Elder' ? 330 : (item.MotherSisterElderyounger == 'Younger' ? 329 : '-1');
-                        model.msObj.txtMSName = item.MotherSisterName;
-                        model.msObj.txtMsHusbandfirstname = item.SpouceFName;
-                        model.msObj.txtMsHusbandlastname = item.SpoucelName;
-                        model.msObj.ddlMSisState = item.spousestateid;
-                        model.msObj.ddlMsDistrict = item.spousedistrictID;
-                        model.msObj.txtMSNativePlace = item.MotherSisterSpouseNativePlace;
-                        model.msObj.txtMSHEducation = item.MothersisterspouseEducationdetails;
-                        model.msObj.txtMSProfessiondetails = item.MotherSisterProfessionDetails;
+                        model.eventType = 'edit';
+                        model.MotherSisterCustfamilyID = item.MotherSisterCustfamilyID;
+                        model.rdlMSElderYounger = item.MotherSisterElderyounger == 'Elder' ? 330 : (item.MotherSisterElderyounger == 'Younger' ? 329 : '-1');
+                        model.txtMSName = item.MotherSisterName;
+                        model.txtMsHusbandfirstname = item.SpouceFName;
+                        model.txtMsHusbandlastname = item.SpoucelName;
+                        model.ddlMSisState = item.spousestateid;
+                        model.ddlMsDistrict = item.spousedistrictID;
+                        model.txtMSNativePlace = item.MotherSisterSpouseNativePlace;
+                        model.txtMSHEducation = item.MothersisterspouseEducationdetails;
+                        model.txtMSProfessiondetails = item.MotherSisterProfessionDetails;
 
-                        model.msObj.ddlMSCounCodeID = item.MotherSisterMobileCodeId;
-                        model.msObj.txtMSMObileNum = item.MotherSisterspouseMobileNumber;
+                        model.ddlMSCounCodeID = item.MotherSisterMobileCodeId;
+                        model.txtMSMObileNum = item.MotherSisterspouseMobileNumber;
 
                         if (commonFactory.checkvals(item.MotherSisterspouseLandaraecode)) {
-                            model.msObj.ddlMSLLCounCode = item.MotherSisterSpouselandcodeid;
-                            model.msObj.txtMSArea = item.MotherSisterspouseLandaraecode;
-                            model.msObj.txtLLNum = item.MotherSisterspouseLandNumber;
+                            model.ddlMSLLCounCode = item.MotherSisterSpouselandcodeid;
+                            model.txtMSArea = item.MotherSisterspouseLandaraecode;
+                            model.txtLLNum = item.MotherSisterspouseLandNumber;
                         } else {
-                            model.msObj.ddlMSCounCodeID2 = item.MotherSisterSpouselandcodeid;
-                            model.msObj.txtMSMObileNum2 = item.MotherSisterspouseLandNumber;
+                            model.ddlMSCounCodeID2 = item.MotherSisterSpouselandcodeid;
+                            model.txtMSMObileNum2 = item.MotherSisterspouseLandNumber;
                         }
 
-                        model.msObj.txtMSEmail = item.MotherSisterspouseEmail;
-                        model.msObj.txtMSCurrentLocation = item.MotherSisterCurrentLocation;
+                        model.txtMSEmail = item.MotherSisterspouseEmail;
+                        model.txtMSCurrentLocation = item.MotherSisterCurrentLocation;
                     }
-                    commonFactory.open('MSModalContent.html', model.scope, uibModal);
+                    commonFactory.open('ModalContent.html', model.scope, uibModal);
 
                     break;
             }
 
         };
+        model.updateData = function(inObj, type) {
 
+            switch (type) {
+                case "Father's Brother Details":
+                    model.FBSubmit(inObj);
+                    break;
+                case "Father's Sister Details":
+                    model.FSSubmit(inObj);
+                    break;
+                case "Mother's Brother Details":
+                    model.MBSubmit(inObj);
+                    break;
+                case "Mother's Sister Details":
+                    model.MSSubmit(inObj);
+                    break;
+            }
+        };
 
-        model.FBSubmit = function(obj) {
-
+        model.FBSubmit = function(inObj) {
             if (isSubmit) {
                 isSubmit = false;
-                model.FBData = {
-                    GetDetails: {
-                        CustID: custid,
-                        Fatherbrothername: obj.txtFatherbrothername,
-                        FBElderYounger: obj.rdlFBElderORyounger,
-                        FBEmployedin: null,
-                        FBProfessiongroup: null,
-                        FBProfession: null,
-                        FBProfessiondetails: obj.txtFBProfessiondetails,
-                        FBMobileCountryID: obj.ddlFBMobileCountryID,
-                        FBMobileNumber: obj.txtFBMobileNumber,
-                        FBLandLineCountryID: commonFactory.checkvals(obj.ddlFBMobileCountryID2) ? obj.ddlFBMobileCountryID2 : (commonFactory.checkvals(obj.ddlFBLandLineCountry) ? obj.ddlFBLandLineCountry : null),
-                        FBLandAreaCode: commonFactory.checkvals(obj.txtFBMobileNumber2) ? null : (commonFactory.checkvals(obj.txtFBAreCode) ? obj.txtFBAreCode : null),
-                        FBLandNumber: commonFactory.checkvals(obj.txtFBMobileNumber2) ? obj.txtFBMobileNumber2 : (commonFactory.checkvals(obj.txtFBLandNumber) ? obj.txtFBLandNumber : null),
-                        FBEmails: obj.txtFBEmails,
-                        FBCurrentLocation: obj.txtCurrentLocation,
-                        FatherbrotherCust_familyID: model.fbObj.FatherbrotherCustfamilyID,
-                        FatherBrotherEducationDetails: obj.txtFBEducationdetails,
+                inObj.GetDetails.CustID = custid;
+                inObj.GetDetails.FatherbrotherCust_familyID = model.FatherbrotherCustfamilyID;
 
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custid,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-
-                model.submitPromise = editRelativeService.submitFBData(model.FBData).then(function(response) {
+                model.submitPromise = editRelativeService.submitFBData(inObj).then(function(response) {
                     console.log(response);
                     commonFactory.closepopup();
                     if (response.data === 1) {
@@ -3482,43 +3542,13 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             }
         };
 
-        model.FSSubmit = function(obj) {
+        model.FSSubmit = function(inObj) {
 
             if (isSubmit) {
                 isSubmit = false;
-                model.FSData = {
-                    GetDetails: {
-                        CustID: custid,
-                        FSFathersistername: obj.txtFathersistername,
-                        FSElderYounger: obj.rdlFSElderYounger,
-                        FSHusbandfirstname: obj.txtFSHusbandfirstname,
-                        FSHusbandlastname: obj.txtFSHusbandlastname,
-                        FSCountryID: 1,
-                        FSHStateID: obj.ddlFSHStateID,
-                        FSHDistrict: obj.ddlFSHDistrictID,
-                        FSNativeplace: obj.txtFSHNativePlace,
-                        FSHEmployedin: null,
-                        FSHProfessiongroup: null,
-                        FSHProfession: null,
-                        FSHProfessiondetails: obj.txtFSProfessiondetails,
-                        FSHMobileCountryID: obj.ddlFSMObileCountryID,
-                        FSHMObileNumber: obj.txtFSMobileNumber,
-                        FSHLandCountryID: commonFactory.checkvals(obj.ddlFSMObileCountryID2) ? obj.ddlFSMObileCountryID2 : (commonFactory.checkvals(obj.ddlFSHLandCountryID) ? obj.ddlFSHLandCountryID : null),
-                        FSHLandAreaCode: commonFactory.checkvals(obj.txtFSMobileNumber2) ? null : (commonFactory.checkvals(obj.txtFSHAreaNumber) ? obj.txtFSHAreaNumber : null),
-                        FSHLandNumber: commonFactory.checkvals(obj.txtFSMobileNumber2) ? obj.txtFSMobileNumber2 : (commonFactory.checkvals(obj.txtFSHNUmber) ? obj.txtFSHNUmber : null),
-                        FSHEmails: obj.txtFSHEmails,
-                        FSCurrentLocation: obj.txtFSHCurrentLocation,
-                        FatherSisterCust_familyID: model.fsObj.FatherSisterCustfamilyID,
-                        FSHEducationdetails: obj.txtFSHEDucation
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custid,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-
-                model.submitPromise = editRelativeService.submitFSData(model.FSData).then(function(response) {
+                inObj.GetDetails.CustID = custid;
+                inObj.GetDetails.FatherSisterCust_familyID = model.FatherSisterCustfamilyID;
+                model.submitPromise = editRelativeService.submitFSData(inObj).then(function(response) {
                     console.log(response);
                     commonFactory.closepopup();
                     if (response.data === 1) {
@@ -3532,37 +3562,14 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             }
         };
 
-        model.MBSubmit = function(obj) {
+        model.MBSubmit = function(inObj) {
             if (isSubmit) {
                 isSubmit = false;
 
-                model.MBData = {
-                    GetDetails: {
-                        CustID: custid,
-                        Motherbrothername: obj.txtMBName,
-                        MBElderYounger: obj.rdlMBElderYounger,
-                        MBEmployedin: null,
-                        MBProfessiongroup: null,
-                        MBProfession: null,
-                        MBProfessiondetails: obj.txtMBProfessiondetails,
-                        MBMobileCountryID: obj.ddlMBCountriCode,
-                        MBMObileNumber: obj.txtMBMobileNum,
-                        MBLandLineCountryID: commonFactory.checkvals(obj.ddlMBCountriCode2) ? obj.ddlMBCountriCode2 : (commonFactory.checkvals(obj.ddlMBLandLineCountryCode) ? obj.ddlMBLandLineCountryCode : null),
-                        MBLandAreaCode: commonFactory.checkvals(obj.txtMBMobileNum2) ? null : (commonFactory.checkvals(obj.txtMBAreaCode) ? obj.txtMBAreaCode : null),
-                        MBLandNumber: commonFactory.checkvals(obj.txtMBMobileNum2) ? obj.txtMBMobileNum2 : (commonFactory.checkvals(obj.txtMBLandLineNum) ? obj.txtMBLandLineNum : null),
-                        MBEmails: obj.txtMBEmails,
-                        MBCurrentLocation: obj.txtMBCurrentLocation,
-                        MBMotherBrotherCust_familyID: model.mbObj.MotherBrotherCustfamilyID,
-                        MBEducationdetails: obj.txtMBEducation
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custid,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
 
-                model.submitPromise = editRelativeService.submitMBData(model.MBData).then(function(response) {
+                inObj.GetDetails.CustID = custid;
+                inObj.GetDetails.MBMotherBrotherCust_familyID = model.MotherBrotherCustfamilyID;
+                model.submitPromise = editRelativeService.submitMBData(inObj).then(function(response) {
                     console.log(response);
                     commonFactory.closepopup();
                     if (response.data === 1) {
@@ -3577,41 +3584,14 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         };
 
-        model.MSSubmit = function(obj) {
+        model.MSSubmit = function(inObj) {
 
             if (isSubmit) {
                 isSubmit = false;
-                model.MSData = {
-                    GetDetails: {
-                        CustID: custid,
-                        Mothersistername: obj.txtMSName,
-                        MSElderYounger: obj.rdlMSElderYounger,
-                        MSHusbandfirstname: obj.txtMsHusbandfirstname,
-                        MSHusbandlastname: obj.txtMsHusbandlastname,
-                        MSCountryID: 1,
-                        MSMSHStateID: obj.ddlMSisState,
-                        MSMSHDistrictID: obj.ddlMsDistrict,
-                        MSNativeplace: obj.txtMSNativePlace,
-                        MSEmployedin: null,
-                        MSProfession: null,
-                        MSProfessiondetails: obj.txtMSProfessiondetails,
-                        MSMSHMobileCountryID: obj.ddlMSCounCodeID,
-                        MSMObileNumber: obj.txtMSMObileNum,
-                        MSHLandlineCountryID: commonFactory.checkvals(obj.ddlMSCounCodeID2) ? obj.ddlMSCounCodeID2 : (commonFactory.checkvals(obj.ddlMSLLCounCode) ? obj.ddlMSLLCounCode : null),
-                        MSLandAreaCode: commonFactory.checkvals(obj.txtMSMObileNum2) ? null : (commonFactory.checkvals(obj.txtMSArea) ? obj.txtMSArea : null),
-                        MSLandNumber: commonFactory.checkvals(obj.txtMSMObileNum2) ? obj.txtMSMObileNum2 : (commonFactory.checkvals(obj.txtLLNum) ? obj.txtLLNum : null),
-                        MSHEmails: obj.txtMSEmail,
-                        MSCurrentLocation: obj.txtMSCurrentLocation,
-                        MSCust_familyID: model.msObj.MotherSisterCustfamilyID,
-                        MSEducationdetails: obj.txtMSHEducation
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custid,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-                model.submitPromise = editRelativeService.submitMSData(model.MSData).then(function(response) {
+
+                inObj.GetDetails.CustID = custid;
+                inObj.GetDetails.MSCust_familyID = model.MotherSisterCustfamilyID;
+                model.submitPromise = editRelativeService.submitMSData(inObj).then(function(response) {
                     console.log(response);
                     commonFactory.closepopup();
                     if (response.data === 1) {
@@ -3643,7 +3623,171 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 commonFactory.closepopup();
             });
         };
+        //Father Details
+        model.fatherBrother = [
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFBElderORyounger', ownArray: 'FBElderYounger', parameterValue: 'FBElderYounger' },
+            { lblname: "Father's brother name", controlType: 'textbox', ngmodel: 'txtFatherbrothername', required: true, parameterValue: 'Fatherbrothername' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtFBEducationdetails', required: true, parameterValue: 'FatherBrotherEducationDetails' },
+            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtFBProfessiondetails', required: true, parameterValue: 'FBProfessiondetails' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'ddlFBMobileCountryID',
+                strmobile: 'txtFBMobileNumber',
+                dalternative: 'ddlFBMobileCountryID2',
+                stralternative: 'txtFBMobileNumber2',
+                dland: 'ddlFBLandLineCountry',
+                strareacode: 'txtFBAreCode',
+                strland: 'txtFBLandNumber',
+                strmail: 'txtFBEmails',
 
+                mobileCodeIdParameterValue: 'FBMobileCountryID',
+                mobileNumberParameterValue: 'FBMobileNumber',
+                landCountryCodeIdParameterValue: 'FBLandLineCountryID',
+                landAreaCodeIdParameterValue: 'FBLandAreaCode',
+                landNumberParameterValue: 'FBLandNumber',
+                emailParameterValue: 'FBEmails'
+
+            },
+            { lblname: 'Current Location', controlType: 'textbox', ngmodel: 'txtCurrentLocation', parameterValue: 'FBCurrentLocation' },
+        ];
+
+        model.fatherSister = [
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFSElderYounger', ownArray: 'FSElderYounger', parameterValue: 'FSElderYounger' },
+            { lblname: "Father's sister name", controlType: 'textbox', ngmodel: 'txtFathersistername', required: true, parameterValue: 'FSFathersistername' },
+            { lblname: "Husband first name", controlType: 'textbox', ngmodel: 'txtFSHusbandfirstname', required: true, parameterValue: 'FSHusbandfirstname' },
+            { lblname: "Husband last name", controlType: 'textbox', ngmodel: 'txtFSHusbandlastname', required: true, parameterValue: 'FSHusbandlastname' },
+            { lblname: 'FSH Education', controlType: 'textbox', ngmodel: 'txtFSHEDucation', required: true, parameterValue: 'FSHEducationdetails' },
+            { lblname: 'FSH Profession', controlType: 'textbox', ngmodel: 'txtFSProfessiondetails', required: true, parameterValue: 'FSHProfessiondetails' },
+
+            {
+                controlType: 'country',
+                countryshow: false,
+                cityshow: false,
+                othercity: false,
+                dcountry: 'ddlFSHCountryID',
+                dstate: 'ddlFSHStateID',
+                ddistrict: 'ddlFSHDistrictID',
+                countryParameterValue: 'FSCountryID',
+                stateParameterValue: 'FSHStateID',
+                districtParameterValue: 'FSHDistrict',
+
+            },
+            { lblname: 'Native place', controlType: 'textbox', ngmodel: 'txtFSHNativePlace', required: true, parameterValue: 'FSNativeplace' },
+
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'ddlFSMObileCountryID',
+                strmobile: 'txtFSMobileNumber',
+                dalternative: 'ddlFSMObileCountryID2',
+                stralternative: 'txtFSMobileNumber2',
+                dland: 'ddlFSHLandCountryID',
+                strareacode: 'txtFSHAreaNumber',
+                strland: 'txtFSHNUmber',
+                strmail: 'txtFSHEmails',
+
+                mobileCodeIdParameterValue: 'FSHMobileCountryID',
+                mobileNumberParameterValue: 'FSHMObileNumber',
+                landCountryCodeIdParameterValue: 'FSHLandCountryID',
+                landAreaCodeIdParameterValue: 'FSHLandAreaCode',
+                landNumberParameterValue: 'FSHLandNumber',
+                emailParameterValue: 'FSHEmails'
+
+            },
+            { lblname: 'Current Location', controlType: 'textbox', ngmodel: 'txtFSHCurrentLocation', parameterValue: 'FSCurrentLocation' },
+        ];
+
+        //mother Details
+        model.motherBrother = [
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFBElderORyounger', ownArray: 'MBElderYounger', parameterValue: 'MBElderYounger' },
+            { lblname: "Mother's brother name", controlType: 'textbox', ngmodel: 'txtMBName', required: true, parameterValue: 'Motherbrothername' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtMBEducation', required: true, parameterValue: 'MBEducationdetails' },
+            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtMBProfessiondetails', required: true, parameterValue: 'MBProfessiondetails' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'ddlMBCountriCode',
+                strmobile: 'txtMBMobileNum',
+                dalternative: 'ddlMBCountriCode2',
+                stralternative: 'txtMBMobileNum2',
+                dland: 'ddlMBLandLineCountryCode',
+                strareacode: 'txtMBAreaCode',
+                strland: 'txtMBLandLineNum',
+                strmail: 'txtMBEmails',
+
+                mobileCodeIdParameterValue: 'MBMobileCountryID',
+                mobileNumberParameterValue: 'MBMObileNumber',
+                landCountryCodeIdParameterValue: 'MBLandLineCountryID',
+                landAreaCodeIdParameterValue: 'MBLandAreaCode',
+                landNumberParameterValue: 'MBLandNumber',
+                emailParameterValue: 'MBEmails'
+
+            },
+            { lblname: 'Current Location', controlType: 'textbox', ngmodel: 'txtMBCurrentLocation', parameterValue: 'MBCurrentLocation' },
+        ];
+
+        model.motherSister = [
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlMSElderYounger', ownArray: 'MSElderYounger', parameterValue: 'MSElderYounger' },
+            { lblname: "Mother's sister name", controlType: 'textbox', ngmodel: 'txtMSName', required: true, parameterValue: 'Mothersistername' },
+            { lblname: "Husband first name", controlType: 'textbox', ngmodel: 'txtMsHusbandfirstname', required: true, parameterValue: 'MSHusbandfirstname' },
+            { lblname: "Husband last name", controlType: 'textbox', ngmodel: 'txtMsHusbandlastname', required: true, parameterValue: 'MSHusbandlastname' },
+            { lblname: 'FSH Education', controlType: 'textbox', ngmodel: 'txtMSHEducation', required: true, parameterValue: 'MSEducationdetails' },
+            { lblname: 'FSH Profession', controlType: 'textbox', ngmodel: 'txtMSProfessiondetails', required: true, parameterValue: 'MSProfessiondetails' },
+
+            {
+                controlType: 'country',
+                countryshow: false,
+                cityshow: false,
+                othercity: false,
+                dcountry: 'ddlFSHCountryID',
+                dstate: 'ddlMSisState',
+                ddistrict: 'ddlMsDistrict',
+                countryParameterValue: 'MSCountryID',
+                stateParameterValue: 'MSMSHStateID',
+                districtParameterValue: 'MSMSHDistrictID',
+
+            },
+            { lblname: 'Native place', controlType: 'textbox', ngmodel: 'txtMSNativePlace', required: true, parameterValue: 'MSNativeplace' },
+
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'ddlMSCounCodeID',
+                strmobile: 'txtMSMObileNum',
+                dalternative: 'ddlMSCounCodeID2',
+                stralternative: 'txtMSMObileNum2',
+                dland: 'ddlMSLLCounCode',
+                strareacode: 'txtMSArea',
+                strland: 'txtLLNum',
+                strmail: 'txtMSEmail',
+
+                mobileCodeIdParameterValue: 'MSMSHMobileCountryID',
+                mobileNumberParameterValue: 'MSMObileNumber',
+                landCountryCodeIdParameterValue: 'MSHLandlineCountryID',
+                landAreaCodeIdParameterValue: 'MSLandAreaCode',
+                landNumberParameterValue: 'MSLandNumber',
+                emailParameterValue: 'MSHEmails'
+
+            },
+            { lblname: 'Current Location', controlType: 'textbox', ngmodel: 'txtMSCurrentLocation', parameterValue: 'MSCurrentLocation' },
+        ];
+        model.MSElderYounger = [
+            { "label": "Elder", "title": "Elder", "value": 330 },
+            { "label": "Younger", "title": "Younger", "value": 329 }
+        ];
+        model.MBElderYounger = [
+            { "label": "Elder", "title": "Elder", "value": 328 },
+            { "label": "Younger", "title": "Younger", "value": 327 }
+        ];
+        model.FSElderYounger = [
+            { "label": "Elder", "title": "Elder", "value": 326 },
+            { "label": "Younger", "title": "Younger", "value": 325 }
+        ];
+        model.FBElderYounger = [
+            { "label": "Elder", "title": "Elder", "value": 324 },
+            { "label": "Younger", "title": "Younger", "value": 323 }
+        ];
         return model.init();
     }
 
@@ -3752,90 +3896,91 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 model.broModifiedby = (model.BrotherArr.length > 0 && model.BrotherArr[0].EmpLastModificationDate !== undefined && model.BrotherArr[0].EmpLastModificationDate !== null) ? model.BrotherArr[0].EmpLastModificationDate : '';
                 model.sisModifiedby = (model.sisterArr.length > 0 && model.sisterArr[0].EmpLastModificationDate !== undefined && model.sisterArr[0].EmpLastModificationDate !== null) ? model.sisterArr[0].EmpLastModificationDate : '';
             });
-
         };
 
         model.sibblingPopulatePopulate = function(type, item) {
             isSubmit = true;
             switch (type) {
                 case 'sibCounrt':
-
+                    model.popupdata = model.noOfSibblings;
+                    model.popupHeader = 'Sibling Details';
                     if (item !== undefined) {
-                        model.SibCountObj.ddlnoofsiblings = item.NoOfBrothers;
-                        model.SibCountObj.ddlnoofelderrother = item.NoOfElderBrothers;
-                        model.SibCountObj.ddlnoofyoungerbrother = item.NoOfYoungerBrothers;
-                        model.SibCountObj.ddlnoofsisters = item.NoOfSisters;
-                        model.SibCountObj.ddlnoofeldersisters = item.NoOfElderSisters;
-                        model.SibCountObj.ddlnoofyoungersisters = item.NoOfYoungerSisters;
+                        model.eventType = 'edit';
+                        model.noOfBorthersId = item.NoOfBrothers;
+                        model.noOfelderBroId = item.NoOfElderBrothers;
+                        model.noOfyoungerBroId = item.NoOfYoungerBrothers;
+                        model.noOfSisterId = item.NoOfSisters;
+                        model.noOfelderSisId = item.NoOfElderSisters;
+                        model.noOfyoungerSisId = item.NoOfYoungerSisters;
                     }
-
-                    commonFactory.open('SibblingCountPopup.html', model.scope, uibModal);
-
+                    commonFactory.open('commonSibblingpopup.html', model.scope, uibModal);
                     break;
 
                 case 'brother':
-
+                    model.popupdata = model.brother;
+                    model.popupHeader = 'Brother details';
+                    debugger;
                     if (item !== undefined && model.BrotherArr.length <= parseInt(model.BroCount)) {
-                        model.broObj.SibilingCustfamilyID = null;
+                        model.SibilingCustfamilyID = null;
                         model.broObj = {};
                         if (item !== undefined) {
-                            model.broObj.SibilingCustfamilyID = item.SibilingCustfamilyID;
-                            model.broObj.rdlBElderYounger = item.brotherYoungerORelder == 'Elder' ? 42 : (item.brotherYoungerORelder == 'Younger' ? 41 : '-1');
-                            model.broObj.txtBName = item.SibilingName;
-                            model.broObj.txtbrotherreducation = item.SibilingEducationDetails;
-                            model.broObj.txtbrotherprofession = item.SibilingProfessionDetails;
-                            model.broObj.txtBCompanyname = item.SibilingCompany;
-                            model.broObj.txtBJoblocation = item.SibilingJobPLace;
+                            model.eventType = 'edit';
+                            model.SibilingCustfamilyID = item.SibilingCustfamilyID;
+                            model.youngerElderBro = item.brotherYoungerORelder == 'Elder' ? 42 : (item.brotherYoungerORelder == 'Younger' ? 41 : '-1');
+                            model.broName = item.SibilingName;
+                            model.broEducation = item.SibilingEducationDetails;
+                            model.broDesignation = item.SibilingProfessionDetails;
+                            model.broComapnyName = item.SibilingCompany;
+                            model.broJobLocation = item.SibilingJobPLace;
 
-                            model.broObj.ddlBMObileCountryID = item.SibilingMobileCode;
-                            model.broObj.txtBmobilenumber = item.SibilingMobileNumber;
+                            model.broCountryCodeId = item.SibilingMobileCode;
+                            model.broMobileNumber = item.SibilingMobileNumber;
 
                             if (item.SibilingLandaraecode !== '' && item.SibilingLandaraecode !== null) {
-                                model.broObj.ddlBLandLineCountryID = item.SibilngLandCountryCode;
-                                model.broObj.txtBAreCode = item.SibilingLandaraecode;
-                                model.broObj.txtBLandNumber = item.SibilingLandNumber;
+                                model.broLandountryCodeId = item.SibilngLandCountryCode;
+                                model.broLandAreaCodeId = item.SibilingLandaraecode;
+                                model.broLandNumberId = item.SibilingLandNumber;
                             } else {
-                                model.broObj.ddlBMObileCountryID2 = item.SibilngLandCountryCode;
-                                model.broObj.txtBmobilenumber2 = item.SibilingLandNumber;
-
+                                model.broAlternativeCountryCodeId = item.SibilngLandCountryCode;
+                                model.broAlternativeNumber = item.SibilingLandNumber;
                             }
 
-                            model.broObj.txtBEmails = item.SibilingEmail;
-                            model.broObj.rdlBIsMarried = item.SibilingMarried;
+                            model.broEmail = item.SibilingEmail;
+                            model.broIsMarried = item.SibilingMarried;
 
-                            model.broObj.txtBWifeName = item.SibilingSpouseName;
-                            model.broObj.txtbrotherwifeeducation = item.SibilingSpouseEducationDetails;
-                            model.broObj.txtbrotherwifeprofession = item.SibilingSpouseProfessionDetails;
-                            model.broObj.chkboxbrotherwifeprofession = item.SibilingSpouseProfessionDetails === 'HouseWife' ? true : false;
-                            model.broObj.txtBWifeCompanyName = item.spoucecompanyName;
-                            model.broObj.txtBwifeJoblocation = item.spoucejobloc;
-                            model.broObj.ddlBWMobileCode = item.SibilingSpouseMobileCode;
-                            model.broObj.txtBWifeMobileNumber = item.SibilingSpouceMobileNumber;
+                            model.spouseName = item.SibilingSpouseName;
+                            model.spouseEducation = item.SibilingSpouseEducationDetails;
+                            model.spouseDesignation = item.SibilingSpouseProfessionDetails;
+                            model.chkspousehousewife = item.SibilingSpouseProfessionDetails === 'HouseWife' ? true : false;
+                            model.spouseCompany = item.spoucecompanyName;
+                            model.spouseJobLocation = item.spoucejobloc;
+                            model.spouseCountryCodeId = item.SibilingSpouseMobileCode;
+                            model.spouseMobNumber = item.SibilingSpouceMobileNumber;
                             if (item.SibilingSpouseLandareCode !== '' && item.SibilingSpouseLandareCode !== null) {
-                                model.broObj.ddlBWifeLandLineCountryCode = item.SibilingSpouseLandCode;
-                                model.broObj.txtBWifeLandLineAreaCode = item.SibilingSpouseLandareCode;
-                                model.broObj.txtBWifeLandLineNumber = item.SibilngSpouseLandnumber;
+                                model.spouseLandCountryCodeId = item.SibilingSpouseLandCode;
+                                model.spouseLandAreaCodeId = item.SibilingSpouseLandareCode;
+                                model.spouseLandNumberId = item.SibilngSpouseLandnumber;
                             } else {
-                                model.broObj.ddlBWMobileCode2 = item.SibilingSpouseLandCode;
-                                model.broObj.txtBWifeMobileNumber2 = item.SibilngSpouseLandnumber;
+                                model.spouseAlternativeCountryCodeId = item.SibilingSpouseLandCode;
+                                model.spouseAlternativeNumber = item.SibilngSpouseLandnumber;
                             }
 
-                            model.broObj.txtwifeEmail = item.SpouseEmail;
-                            model.broObj.txtBWifeFatherSurName = item.SFsurname;
-                            model.broObj.txtBWWifeFatherName = item.SFname;
-                            model.broObj.ddlborherspousefathercaste = item.SibilingSpouseFatherCasteID;
-                            model.broObj.ddlBroSpousefatherState = item.BroSpouseFatherStateID;
-                            model.broObj.ddlBroSpousefatherDistrict = item.BroSpouseFatherDistrictID;
-                            model.broObj.txtBroSpousefatherCity = item.BroSpouseFatherCity;
-                            model.broObj.ddlbroprofessionCatgory = item.ProfessionCategoryID;
-                            model.broObj.ddlbroSpouseprofessionCatgory = item.SpouceProfessionCategoryID;
+                            model.spouseEmail = item.SpouseEmail;
+                            model.spouseFatherLastName = item.SFsurname;
+                            model.spouseFatherFirstName = item.SFname;
+                            model.spouseFatherCaste = item.SibilingSpouseFatherCasteID;
+                            model.broSpouseFatherStateId = item.BroSpouseFatherStateID;
+                            model.broSpouseFatherDistrictId = item.BroSpouseFatherDistrictID;
+                            model.broSpouseCityId = item.BroSpouseFatherCity;
+                            model.broProfessionCatgory = item.ProfessionCategoryID;
+                            model.spouseProfCatgory = item.SpouceProfessionCategoryID;
                             //  
-                            commonFactory.open('brotherModalContent.html', model.scope, uibModal);
+                            commonFactory.open('commonSibblingpopup.html', model.scope, uibModal);
                         }
                     } else if (item === undefined && model.BrotherArr.length < parseInt(model.BroCount)) {
-                        model.broObj.SibilingCustfamilyID = null;
+                        model.SibilingCustfamilyID = null;
                         model.broObj = {};
-                        commonFactory.open('brotherModalContent.html', model.scope, uibModal);
+                        commonFactory.open('commonSibblingpopup.html', model.scope, uibModal);
                     } else {
                         alertss.timeoutoldalerts(model.model, 'alert-danger', 'Cannot add more brothers', 4500);
                     }
@@ -3843,73 +3988,74 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     break;
 
                 case 'sister':
-
+                    model.popupdata = model.sister;
+                    model.popupHeader = 'Sister details';
                     if (item !== undefined && model.sisterArr.length <= parseInt(model.SisCount)) {
 
-                        model.sisObj.SibilingCustfamilyID = null;
+                        model.SibilingCustfamilyID = null;
                         model.sisObj = {};
 
                         if (item !== undefined) {
+                            model.eventType = 'edit';
+                            model.SibilingCustfamilyID = item.SibilingCustfamilyID;
+                            model.youngerElderSis = item.SisterElderORyounger == 'Elder' ? '322' : (item.SisterElderORyounger == 'Younger' ? '321' : '-1');
+                            model.sisName = item.SibilingName;
+                            model.sisEducation = item.SibilingEducationDetails;
+                            model.sisDesignation = item.SibilingProfessionDetails;
+                            model.chksishousewife = item.SibilingProfessionDetails === 'HouseWife' ? true : false;
+                            model.sisComapnyName = item.SibilingCompany;
+                            model.sisJobLocation = item.SibilingJobPLace;
 
-                            model.sisObj.SibilingCustfamilyID = item.SibilingCustfamilyID;
-                            model.sisObj.rbtSElderyounger = item.SisterElderORyounger == 'Elder' ? '322' : (item.SisterElderORyounger == 'Younger' ? '321' : '-1');
-                            model.sisObj.txtSisterName = item.SibilingName;
-                            model.sisObj.txtsisEducation = item.SibilingEducationDetails;
-                            model.sisObj.txtsisProfession = item.SibilingProfessionDetails;
-                            model.sisObj.chksisProfession = item.SibilingProfessionDetails === 'HouseWife' ? true : false;
-                            model.sisObj.txtSCompanyName = item.SibilingCompany;
-                            model.sisObj.txtSjobloc = item.SibilingJobPLace;
-
-                            model.sisObj.ddlSMobileCountyCodeID = item.SibilingMobileCode;
-                            model.sisObj.txtSMobileNumber = item.SibilingMobileNumber;
+                            model.sisCountryCodeId = item.SibilingMobileCode;
+                            model.sisMobileNumber = item.SibilingMobileNumber;
 
                             if (item.SibilingLandaraecode !== '' && item.SibilingLandaraecode !== null) {
-                                model.sisObj.ddlSLandLineCountryCodeID = item.SibilngLandCountryCode;
-                                model.sisObj.txtSAreacoude = item.SibilingLandaraecode;
-                                model.sisObj.txtSNumber = item.SibilingLandNumber;
+                                model.sisLandountryCodeId = item.SibilngLandCountryCode;
+                                model.sisLandAreaCodeId = item.SibilingLandaraecode;
+                                model.sisLandNumberId = item.SibilingLandNumber;
                             } else {
-                                model.sisObj.ddlSMobileCountyCodeID2 = item.SibilngLandCountryCode;
-                                model.sisObj.txtSMobileNumber2 = item.SibilingLandNumber;
+                                model.sisAlternativeCountryCodeId = item.SibilngLandCountryCode;
+                                model.sisAlternativeNumber = item.SibilingLandNumber;
                             }
 
-                            model.sisObj.txtSEmails = item.SibilingEmail;
-                            model.sisObj.rdlSIsMarried = item.SibilingMarried;
+                            model.sisEmail = item.SibilingEmail;
+                            model.sisIsMarried = item.SibilingMarried;
 
-                            model.sisObj.txtShusName = item.SibilingName;
-                            model.sisObj.txtHusbandEducation = item.SibilingSpouseEducationDetails;
-                            model.sisObj.txtHusbandProfession = item.SibilingSpouseProfessionDetails;
-                            model.sisObj.txtShusCompanyName = item.spoucecompanyName;
-                            model.sisObj.txtShusjobloc = item.spoucejobloc;
+                            model.husbandName = item.SibilingName;
+                            model.husbandEducation = item.SibilingSpouseEducationDetails;
+                            model.husbandDesignation = item.SibilingSpouseProfessionDetails;
+                            model.husbandCompany = item.spoucecompanyName;
+                            model.husbandJobLocation = item.spoucejobloc;
 
-                            model.sisObj.ddlSHusMobileCountryID = item.sisterspousemobilecode;
-                            model.sisObj.txtSHusMobileNumber = item.SibilingSpouceMobileNumber;
+                            model.husbandCountryCodeId = item.sisterspousemobilecode;
+                            model.husbandMobNumber = item.SibilingSpouceMobileNumber;
 
                             if (item.SibilingSpouseLandareCode !== '' && item.SibilingSpouseLandareCode !== null) {
-                                model.sisObj.ddlSHusLandCountryID = item.SpousesisterLandCode;
-                                model.sisObj.txtSHusLandNumber = item.SibilngSpouseLandnumber;
-                                model.sisObj.txtSHusLandArea = item.SibilingSpouseLandareCode;
+                                model.husbandLandCountryCodeId = item.SpousesisterLandCode;
+                                model.husbandLandNumberId = item.SibilngSpouseLandnumber;
+                                model.husbandLandAreaCodeId = item.SibilingSpouseLandareCode;
                             } else {
-                                model.sisObj.ddlSHusMobileCountryID2 = item.SpousesisterLandCode;
-                                model.sisObj.txtSHusMobileNumber2 = item.SibilngSpouseLandnumber;
+                                model.husbandAlternativeCountryCodeId = item.SpousesisterLandCode;
+                                model.husbandAlternativeNumber = item.SibilngSpouseLandnumber;
 
                             }
 
-                            model.sisObj.txtHusbandEmail = item.SpouseEmail;
-                            model.sisObj.txtHusbandFatherSurName = item.SpouceFatherLName;
-                            model.sisObj.txtHusbandFatherName = item.SpouceFatherFName;
-                            model.sisObj.ddlsisterspusefathercaste = item.SibilingSpouseFatherCasteId;
-                            model.sisObj.ddlSisSpouceFatherState = item.SisSpouseFatherStateID;
-                            model.sisObj.ddlSisSpouceFatherDistrict = item.SisSpouseFatherDitrictID;
-                            model.sisObj.txtSisSpouceFatherCity = item.SisSpousefatherCity;
-                            model.sisObj.ddlsisprofessionCatgory = item.ProfessionCategoryID;
-                            model.sisObj.ddlsisSpouseprofessionCatgory = item.SpouceProfessionCategoryID;
-                            commonFactory.open('sisterModalContent.html', model.scope, uibModal);
+                            model.husbandEmail = item.SpouseEmail;
+                            model.husbandFatherLastName = item.SpouceFatherLName;
+                            model.spouseFatherFirstName = item.SpouceFatherFName;
+                            model.spouseFatherCaste = item.SibilingSpouseFatherCasteId;
+                            model.broSpouseFatherStateId = item.SisSpouseFatherStateID;
+                            model.broSpouseFatherDistrictId = item.SisSpouseFatherDitrictID;
+                            model.broSpouseCityId = item.SisSpousefatherCity;
+                            model.sisProfessionCatgory = item.ProfessionCategoryID;
+                            model.husbandProfCatgory = item.SpouceProfessionCategoryID;
+                            commonFactory.open('commonSibblingpopup.html', model.scope, uibModal);
                         }
                     } else if (item === undefined && model.sisterArr.length < parseInt(model.SisCount)) {
 
-                        model.sisObj.SibilingCustfamilyID = null;
+                        model.SibilingCustfamilyID = null;
                         model.sisObj = {};
-                        commonFactory.open('sisterModalContent.html', model.scope, uibModal);
+                        commonFactory.open('commonSibblingpopup.html', model.scope, uibModal);
                     } else {
                         alertss.timeoutoldalerts(model.model, 'alert-danger', 'Cannot add more sisters', 4500);
                         break;
@@ -3944,109 +4090,58 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             return (val !== '' && val !== undefined) ? val : 0;
 
         };
-        model.sibblingCountsSubmit = function(obj) {
-
-
-            if (isSubmit) {
-                isSubmit = false;
-
-
-                var totalnofBrothers = parseInt(model.checkVal(obj.ddlnoofsiblings));
-                var elderBrotherCount = parseInt(model.checkVal(obj.ddlnoofelderrother));
-                var youngerBrotherCount = parseInt(model.checkVal(obj.ddlnoofyoungerbrother));
-
-                var totalnoFSister = parseInt(model.checkVal(obj.ddlnoofsisters));
-                var elderSisterCount = parseInt(model.checkVal(obj.ddlnoofeldersisters));
-                var youngerSisterCount = parseInt(model.checkVal(obj.ddlnoofyoungersisters));
-
-                if ((totalnofBrothers === 0 || totalnofBrothers === (elderBrotherCount + youngerBrotherCount)) && (totalnoFSister === 0 || totalnoFSister === (elderSisterCount + youngerSisterCount))) {
-
-                    var objinput = {
-                        CustID: custID,
-                        NoOfBrothers: obj.ddlnoofsiblings,
-                        NoOfSisters: obj.ddlnoofsisters,
-                        NoOfYoungerBrothers: totalnofBrothers === 0 ? '0' : obj.ddlnoofyoungerbrother,
-                        NoOfElderBrothers: totalnofBrothers === 0 ? '0' : obj.ddlnoofelderrother,
-                        NoOfElderSisters: totalnoFSister === 0 ? '0' : obj.ddlnoofeldersisters,
-                        NoOfYoungerSisters: totalnoFSister === 0 ? '0' : obj.ddlnoofyoungersisters
-                    };
-
-                    model.BroCount = obj.ddlnoofsiblings;
-                    model.SisCount = obj.ddlnoofsisters;
-
-                    model.submitPromise = editSibblingService.submitSibCountsData(objinput).then(function(response) {
-                        console.log(response);
-                        commonFactory.closepopup();
-                        if (response.data === 1) {
-                            model.sibPageload(custID);
-                            alertss.timeoutoldalerts(model.scope, 'alert-success', 'Sibling Details Submitted Succesfully', 4500);
-                        } else {
-                            alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Sibling Details Updation failed', 4500);
-                        }
-                    });
-                } else {
-
-                    alert('Please enter Correct Sibling count');
-                }
-
-            }
-
-
-        };
 
         model.BIsMarried = function(val) {
             if (val == '0') {
-                model.broObj.txtBWifeName = '';
-                model.broObj.txtbrotherwifeeducation = '';
-                model.broObj.txtbrotherwifeprofession = '';
-                model.broObj.chkboxbrotherwifeprofession = '';
-                model.broObj.txtBWifeCompanyName = '';
-                model.broObj.txtBwifeJoblocation = '';
-                model.broObj.ddlBWMobileCode = '';
-                model.broObj.txtBWifeMobileNumber = '';
-                model.broObj.ddlBWifeLandLineCountryCode = '';
-                model.broObj.txtBWifeLandLineAreaCode = '';
-                model.broObj.txtBWifeLandLineNumber = '';
-                model.broObj.ddlBWMobileCode2 = '';
-                model.broObj.txtBWifeMobileNumber2 = '';
-                model.broObj.txtwifeEmail = '';
-                model.broObj.txtBWifeFatherSurName = '';
-                model.broObj.txtBWWifeFatherName = '';
-                model.broObj.ddlborherspousefathercaste = '';
-                model.broObj.ddlBroSpousefatherState = '';
-                model.broObj.ddlBroSpousefatherDistrict = '';
-                model.broObj.txtBroSpousefatherCity = '';
+                model.txtBWifeName = '';
+                model.txtbrotherwifeeducation = '';
+                model.txtbrotherwifeprofession = '';
+                model.chkboxbrotherwifeprofession = '';
+                model.txtBWifeCompanyName = '';
+                model.txtBwifeJoblocation = '';
+                model.ddlBWMobileCode = '';
+                model.txtBWifeMobileNumber = '';
+                model.ddlBWifeLandLineCountryCode = '';
+                model.txtBWifeLandLineAreaCode = '';
+                model.txtBWifeLandLineNumber = '';
+                model.ddlBWMobileCode2 = '';
+                model.txtBWifeMobileNumber2 = '';
+                model.txtwifeEmail = '';
+                model.txtBWifeFatherSurName = '';
+                model.txtBWWifeFatherName = '';
+                model.ddlborherspousefathercaste = '';
+                model.ddlBroSpousefatherState = '';
+                model.ddlBroSpousefatherDistrict = '';
+                model.txtBroSpousefatherCity = '';
             }
         };
 
         model.SIsMarried = function(val) {
             if (val == '0') {
-                model.sisObj.txtShusName = '';
-                model.sisObj.txtHusbandEducation = '';
-                model.sisObj.txtHusbandProfession = '';
-                model.sisObj.txtShusCompanyName = '';
-                model.sisObj.txtShusjobloc = '';
-                model.sisObj.ddlSHusMobileCountryID = '';
-                model.sisObj.txtSHusMobileNumber = '';
-                model.sisObj.ddlSHusLandCountryID = '';
-                model.sisObj.txtSHusLandNumber = '';
-                model.sisObj.txtSHusLandArea = '';
-                model.sisObj.ddlSHusMobileCountryID2 = '';
-                model.sisObj.txtSHusMobileNumber2 = '';
-                model.sisObj.txtHusbandEmail = '';
-                model.sisObj.txtHusbandFatherSurName = '';
-                model.sisObj.txtHusbandFatherName = '';
-                model.sisObj.ddlsisterspusefathercaste = '';
-                model.sisObj.ddlSisSpouceFatherState = '';
-                model.sisObj.ddlSisSpouceFatherDistrict = '';
-                model.sisObj.txtSisSpouceFatherCity = '';
+                model.txtShusName = '';
+                model.txtHusbandEducation = '';
+                model.txtHusbandProfession = '';
+                model.txtShusCompanyName = '';
+                model.txtShusjobloc = '';
+                model.ddlSHusMobileCountryID = '';
+                model.txtSHusMobileNumber = '';
+                model.ddlSHusLandCountryID = '';
+                model.txtSHusLandNumber = '';
+                model.txtSHusLandArea = '';
+                model.ddlSHusMobileCountryID2 = '';
+                model.txtSHusMobileNumber2 = '';
+                model.txtHusbandEmail = '';
+                model.txtHusbandFatherSurName = '';
+                model.txtHusbandFatherName = '';
+                model.ddlsisterspusefathercaste = '';
+                model.ddlSisSpouceFatherState = '';
+                model.ddlSisSpouceFatherDistrict = '';
+                model.txtSisSpouceFatherCity = '';
             }
         };
 
         model.enableSubmit = function() {
             isSubmit = true;
-
-
         };
 
         model.deleteDisplayTxt = '';
@@ -4064,157 +4159,244 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             });
         };
 
-        model.sibBroSubmit = function(obj) {
+        model.updateData = function(inObj, type) {
 
             if (isSubmit) {
                 isSubmit = false;
-                model.sibBroData = {
-                    GetDetails: {
-                        CustID: custID,
-                        BroName: obj.txtBName,
-                        BroElderYounger: obj.rdlBElderYounger,
-                        BroEducationcategory: null,
-                        BroEducationgroup: null,
-                        BroEducationspecialization: null,
-                        BroEmployedin: null,
-                        BroProfessiongroup: null,
-                        BroProfession: null,
-                        BroCompanyName: obj.txtBCompanyname,
-                        BroJobLocation: obj.txtBJoblocation,
-                        BroMobileCountryCodeID: obj.ddlBMObileCountryID,
-                        BroMobileNumber: obj.txtBmobilenumber,
-                        BroLandCountryCodeID: commonFactory.checkvals(obj.ddlBMObileCountryID2) ? obj.ddlBMObileCountryID2 : (commonFactory.checkvals(obj.ddlBLandLineCountryID) ? obj.ddlBLandLineCountryID : null),
-                        BroLandAreaCode: commonFactory.checkvals(obj.txtBmobilenumber2) ? null : (obj.txtBAreCode !== '' && obj.txtBAreCode !== null ? obj.txtBAreCode : null),
-                        BroLandNumber: commonFactory.checkvals(obj.txtBmobilenumber2) ? obj.txtBmobilenumber2 : (commonFactory.checkvals(obj.txtBLandNumber) ? obj.txtBLandNumber : null),
-                        BroEmail: obj.txtBEmails,
-                        BIsMarried: obj.rdlBIsMarried,
-                        BroWifeName: obj.txtBWifeName,
-                        BroWifeEducationcategory: null,
-                        BroWifeEducationgroup: null,
-                        BroWifeEducationspecialization: null,
-                        BroWifeEmployedin: null,
-                        BroWifeProfessiongroup: null,
-                        BroWifeProfession: null,
-                        BroWifeCompanyName: obj.txtBWifeCompanyName,
-                        BroWifeJobLocation: obj.txtBwifeJoblocation,
-                        BroWifeMobileCountryCodeID: obj.ddlBWMobileCode,
-                        BroWifeMobileNumber: obj.txtBWifeMobileNumber,
-                        BroWifeLandCountryCodeID: commonFactory.checkvals(obj.ddlBWMobileCode2) ? obj.ddlBWMobileCode2 : commonFactory.checkvals(obj.ddlBWifeLandLineCountryCode) ? obj.ddlBWifeLandLineCountryCode : null,
-                        BroWifeLandAreacode: commonFactory.checkvals(obj.txtBWifeMobileNumber2) ? null : commonFactory.checkvals(obj.txtBWifeLandLineAreaCode) ? obj.txtBWifeLandLineAreaCode : null,
-                        BroWifeLandNumber: commonFactory.checkvals(obj.txtBWifeMobileNumber2) ? obj.txtBWifeMobileNumber2 : commonFactory.checkvals(obj.txtBWifeLandLineNumber) ? obj.txtBWifeLandLineNumber : null,
-                        BroWifeFatherSurName: obj.txtBWifeFatherSurName,
-                        BroWifeFatherName: obj.txtBWWifeFatherName,
-                        BroSibilingCustfamilyID: model.broObj.SibilingCustfamilyID,
-                        BroEducationDetails: obj.txtbrotherreducation,
-                        BrowifeEducationDetails: obj.txtbrotherwifeeducation,
-                        BroProfessionDetails: obj.txtbrotherprofession,
-                        BroWifeProfessionDetails: obj.txtbrotherwifeprofession,
-                        BroSpouseFatherCountryID: '1',
-                        BroSpouseFatherStateID: obj.ddlBroSpousefatherState,
-                        BroSpouseFatherDitrictID: obj.ddlBroSpousefatherDistrict,
-                        BroSpouseFatherNativePlace: obj.txtBroSpousefatherCity,
-                        BrotherSpouseEmail: obj.txtwifeEmail,
-                        SibilingSpouseFatherCasteID: obj.ddlborherspousefathercaste,
-                        BroProfessionCategoryID: obj.ddlbroprofessionCatgory,
-                        BroSpouseProfessionCategoryID: obj.ddlbroSpouseprofessionCatgory
+                switch (type) {
+                    case 'Sibling Details':
+                        var totalnofBrothers = parseInt(model.checkVal(model.noOfBorthersId));
+                        var elderBrotherCount = parseInt(model.checkVal(model.noOfelderBroId));
+                        var youngerBrotherCount = parseInt(model.checkVal(model.noOfyoungerBroId));
 
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
+                        var totalnoFSister = parseInt(model.checkVal(model.noOfSisterId));
+                        var elderSisterCount = parseInt(model.checkVal(model.noOfelderSisId));
+                        var youngerSisterCount = parseInt(model.checkVal(model.noOfyoungerSisId));
 
-                model.submitPromise = editSibblingService.submitSibBroData(model.sibBroData).then(function(response) {
-                    console.log(response);
-                    commonFactory.closepopup();
-                    if (response.data === 1) {
-                        model.sibPageload(custID);
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Brother Details Submitted Succesfully', 4500);
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Brother Details Updation failed', 4500);
-                    }
-                });
+                        if ((totalnofBrothers === 0 || totalnofBrothers === (elderBrotherCount + youngerBrotherCount)) && (totalnoFSister === 0 || totalnoFSister === (elderSisterCount + youngerSisterCount))) {
+
+                            var objinput = {};
+                            objinput = inObj.GetDetails;
+                            objinput.CustID = custID;
+
+                            model.BroCount = model.noOfBorthersId;
+                            model.SisCount = model.noOfSisterId;
+
+                            model.submitPromise = editSibblingService.submitSibCountsData(objinput).then(function(response) {
+                                console.log(response);
+                                commonFactory.closepopup();
+                                if (response.data === 1) {
+                                    model.sibPageload(custID);
+                                    alertss.timeoutoldalerts(model.scope, 'alert-success', 'Sibling Details Submitted Succesfully', 4500);
+                                } else {
+                                    alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Sibling Details Updation failed', 4500);
+                                }
+                            });
+                        } else {
+                            alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Please enter Correct Sibling count', 4500);
+                        }
+
+                        break;
+                    case 'Brother details':
+
+                        inObj.GetDetails.CustID = custID;
+                        inObj.GetDetails.BroSibilingCustfamilyID = model.SibilingCustfamilyID;
+                        model.submitPromise = editSibblingService.submitSibBroData(inObj).then(function(response) {
+                            console.log(response);
+                            commonFactory.closepopup();
+                            if (response.data === 1) {
+                                model.sibPageload(custID);
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'Brother Details Submitted Succesfully', 4500);
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Brother Details Updation failed', 4500);
+                            }
+                        });
+
+                        break;
+                    case 'Sister details':
+                        inObj.GetDetails.CustID = custID;
+                        inObj.GetDetails.SisSibilingCustfamilyID = model.SibilingCustfamilyID;
+                        model.submitPromise = editSibblingService.submitSibSisData(inObj).then(function(response) {
+                            console.log(response);
+                            commonFactory.closepopup();
+                            if (response.data === 1) {
+                                model.sibPageload(custID);
+                                alertss.timeoutoldalerts(model.scope, 'alert-success', 'Sister Details Submitted Succesfully', 4500);
+                            } else {
+                                alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Sister Details Updation failed', 4500);
+                            }
+                        });
+
+
+                        break;
+                }
             }
-
         };
 
-        model.sibSisSubmit = function(obj) {
+        model.noOfSibblings = [
+            { lblname: 'No of Brothers', controlType: 'select', ngmodel: 'noOfBorthersId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfBrothers' },
+            { lblname: 'Elder Brother', controlType: 'select', ngmodel: 'noOfelderBroId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfElderBrothers' },
+            { lblname: 'Younger Brother', controlType: 'select', ngmodel: 'noOfyoungerBroId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfYoungerBrothers' },
+            { lblname: 'No of sisters', controlType: 'select', ngmodel: 'noOfSisterId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfSisters' },
+            { lblname: 'Elder sisters', controlType: 'select', ngmodel: 'noOfelderSisId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfElderSisters' },
+            { lblname: 'Younger  sisters', controlType: 'select', ngmodel: 'noOfyoungerSisId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfYoungerSisters' }
+        ];
 
-            if (isSubmit) {
-                isSubmit = false;
-                model.sibSisData = {
-                    GetDetails: {
-                        CustID: custID,
-                        SisName: obj.txtSisterName,
-                        SisElderYounger: obj.rbtSElderyounger,
-                        SisEducationcategory: null,
-                        SisEducationgroup: null,
-                        SisEducationspecialization: null,
-                        SisEmployedin: null,
-                        SisProfessiongroup: null,
-                        SisProfession: null,
-                        SisCompanyName: obj.txtSCompanyName,
-                        SisJobLocation: obj.txtSjobloc,
-                        SisMobileCountryCodeID: obj.ddlSMobileCountyCodeID,
-                        SisMobileNumber: obj.txtSMobileNumber,
-                        SisLandCountryCodeID: commonFactory.checkvals(obj.ddlSMobileCountyCodeID2) ? obj.ddlSMobileCountyCodeID2 : commonFactory.checkvals(obj.ddlSLandLineCountryCodeID) ? obj.ddlSLandLineCountryCodeID : null,
-                        SisLandAreaCode: commonFactory.checkvals(obj.txtSMobileNumber2) ? null : commonFactory.checkvals(obj.txtSAreacoude) ? obj.txtSAreacoude : null,
-                        SisLandNumber: commonFactory.checkvals(obj.txtSMobileNumber2) ? obj.txtSMobileNumber2 : commonFactory.checkvals(obj.txtSNumber) ? obj.txtSNumber : null,
-                        SisEmail: obj.txtSEmails,
-                        SIsMarried: obj.rdlSIsMarried,
-                        SisHusbandName: obj.txtShusName,
-                        SisHusbandEducationcategory: null,
-                        SisHusbandEducationgroup: null,
-                        SisHusbandEducationspecialization: null,
-                        SisHusbandEmployedin: null,
-                        SisHusbandProfessiongroup: null,
-                        SisHusbandProfession: null,
-                        SisHusCompanyName: obj.txtShusCompanyName,
-                        SisHusJobLocation: obj.txtShusjobloc,
-                        SisHusbandMobileCountryCodeID: obj.ddlSHusMobileCountryID,
-                        SisHusbandMobileNumber: obj.txtSHusMobileNumber,
-                        SisHusbandLandCountryCodeID: commonFactory.checkvals(obj.ddlSHusMobileCountryID2) ? obj.ddlSHusMobileCountryID2 : commonFactory.checkvals(obj.ddlSHusLandCountryID) ? obj.ddlSHusLandCountryID : null,
-                        SisHusbandLandAreacode: commonFactory.checkvals(obj.txtSHusMobileNumber2) ? null : commonFactory.checkvals(obj.txtSHusLandArea) ? obj.txtSHusLandArea : null,
-                        SisHusbandLandNumber: commonFactory.checkvals(obj.txtSHusMobileNumber2) ? obj.txtSHusMobileNumber2 : commonFactory.checkvals(obj.txtSHusLandNumber) ? obj.txtSHusLandNumber : null,
-                        SisHusbandFatherSurName: obj.txtHusbandFatherSurName,
-                        SisHusbandFatherName: obj.txtHusbandFatherName,
-                        SisSibilingCustfamilyID: model.sisObj.SibilingCustfamilyID,
-                        siseducationdetails: obj.txtsisEducation,
-                        sisprofessiondetails: obj.txtsisProfession,
-                        sisspouseeducationdetails: obj.txtHusbandEducation,
-                        sisspouseprofessiondetails: obj.txtHusbandProfession,
-                        SisSpouseFatherCountryID: '1',
-                        SisSpouseFatherStateID: obj.ddlSisSpouceFatherState,
-                        SisSpouseFatherDitrictID: obj.ddlSisSpouceFatherDistrict,
-                        SisSpouseFatherNativePlace: obj.txtSisSpouceFatherCity,
-                        SisSpouseEmail: obj.txtHusbandEmail,
-                        SibilingSpouseFatherCasteID: obj.ddlsisterspusefathercaste,
-                        SisProfessionCategoryID: obj.ddlsisprofessionCatgory,
-                        SisSpouseProfessionCategoryID: obj.ddlsisSpouseprofessionCatgory
-                    },
-                    customerpersonaldetails: {
-                        intCusID: custID,
-                        EmpID: loginEmpid,
-                        Admin: AdminID
-                    }
-                };
-                model.submitPromise = editSibblingService.submitSibSisData(model.sibSisData).then(function(response) {
-                    console.log(response);
-                    commonFactory.closepopup();
-                    if (response.data === 1) {
 
-                        model.sibPageload(custID);
+        model.brother = [
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderBro', ownArray: 'broElderYoungerArr', parameterValue: 'BroElderYounger' },
+            { lblname: 'Name', controlType: 'textbox', ngmodel: 'broName', parameterValue: 'BroName' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'broEducation', parameterValue: 'BroEducationDetails' },
+            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'broProfessionCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'BroProfessionCategoryID' },
+            { lblname: 'Designationt', controlType: 'textbox', ngmodel: 'broDesignation', parameterValue: 'BroProfessionDetails' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'broComapnyName', parameterValue: 'BroCompanyName' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'broJobLocation', parameterValue: 'BroJobLocation' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'broCountryCodeId',
+                strmobile: 'broMobileNumber',
+                dalternative: 'broAlternativeCountryCodeId',
+                stralternative: 'broAlternativeNumber',
+                dland: 'broLandountryCodeId',
+                strareacode: 'broLandAreaCodeId',
+                strland: 'broLandNumberId',
+                strmail: 'broEmail',
 
-                        alertss.timeoutoldalerts(model.scope, 'alert-success', 'Sister Details Submitted Succesfully', 4500);
-                    } else {
-                        alertss.timeoutoldalerts(model.scope, 'alert-danger', 'Sister Details Updation failed', 4500);
-                    }
-                });
-            }
+                mobileCodeIdParameterValue: 'BroMobileCountryCodeID',
+                mobileNumberParameterValue: 'BroMobileNumber',
+                landCountryCodeIdParameterValue: 'BroLandCountryCodeID',
+                landAreaCodeIdParameterValue: 'BroLandAreaCode',
+                landNumberParameterValue: 'BroLandNumber',
+                emailParameterValue: 'BroEmail'
+            },
+            { lblname: 'Is Married', controlType: 'radio', ngmodel: 'broIsMarried', arrbind: 'boolType', parameterValue: 'BIsMarried' },
+            { lblname: 'Spouse Name', controlType: 'textbox', ngmodel: 'spouseName', parameterValue: 'BroWifeName' },
+            { lblname: 'Spouse Education', controlType: 'textbox', ngmodel: 'spouseEducation', parameterValue: 'BrowifeEducationDetails' },
+            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'spouseProfCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'BroSpouseProfessionCategoryID' },
+            { lblname: 'Spouse Designation', controlType: 'housewife', ngmodelText: 'spouseDesignation', ngmodelChk: 'chkspousehousewife', parameterValueText: 'BroWifeProfessionDetails', parameterValueChk: 'MotherProfessiondetails' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'spouseCompany', parameterValue: 'BroWifeCompanyName' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'spouseJobLocation', parameterValue: 'BroWifeJobLocation' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'spouseCountryCodeId',
+                strmobile: 'spouseMobNumber',
+                dalternative: 'spouseAlternativeCountryCodeId',
+                stralternative: 'spouseAlternativeNumber',
+                dland: 'spouseLandCountryCodeId',
+                strareacode: 'spouseLandAreaCodeId',
+                strland: 'spouseLandNumberId',
+                strmail: 'spouseEmail',
 
-        };
+                mobileCodeIdParameterValue: 'BroWifeMobileCountryCodeID',
+                mobileNumberParameterValue: 'BroWifeMobileNumber',
+                landCountryCodeIdParameterValue: 'BroWifeLandCountryCodeID',
+                landAreaCodeIdParameterValue: 'BroWifeLandAreacode',
+                landNumberParameterValue: 'BroWifeLandNumber',
+                emailParameterValue: 'BrotherSpouseEmail'
+
+            },
+            { lblname: 'Spouse Father SurName', controlType: 'textbox', ngmodel: 'spouseFatherLastName', parameterValue: 'BroWifeFatherSurName' },
+            { lblname: 'Spouse Father Name', controlType: 'textbox', ngmodel: 'spouseFatherFirstName', parameterValue: 'BroWifeFatherName' },
+            { lblname: 'Spouse Father Caste', controlType: 'select', ngmodel: 'spouseFatherCaste', typeofdata: 'caste', parameterValue: 'SibilingSpouseFatherCasteID' },
+            {
+                controlType: 'country',
+                countryshow: false,
+                cityshow: false,
+                othercity: false,
+                dstate: 'broSpouseFatherStateId',
+                ddistrict: 'broSpouseFatherDistrictId',
+                countryParameterValue: 'BroSpouseFatherCountryID',
+                stateParameterValue: 'BroSpouseFatherStateID',
+                districtParameterValue: 'BroSpouseFatherDitrictID'
+            },
+            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'broSpouseCityId', parameterValue: 'BroSpouseFatherNativePlace' }
+
+        ];
+
+
+
+
+        model.sister = [
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderSis', ownArray: 'sisElderYoungerArr', parameterValue: 'SisElderYounger' },
+            { lblname: 'Name', controlType: 'textbox', ngmodel: 'sisName', parameterValue: 'SisName' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'sisEducation', parameterValue: 'siseducationdetails' },
+            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'sisProfessionCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'SisProfessionCategoryID' },
+            { lblname: 'Designationt', controlType: 'housewife', ngmodelText: 'sisDesignation', ngmodelChk: 'chksishousewife', parameterValueText: 'sisprofessiondetails' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'sisComapnyName', parameterValue: 'SisCompanyName' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'sisJobLocation', parameterValue: 'SisJobLocation' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'sisCountryCodeId',
+                strmobile: 'sisMobileNumber',
+                dalternative: 'sisAlternativeCountryCodeId',
+                stralternative: 'sisAlternativeNumber',
+                dland: 'sisLandountryCodeId',
+                strareacode: 'sisLandAreaCodeId',
+                strland: 'sisLandNumberId',
+                strmail: 'sisEmail',
+
+                mobileCodeIdParameterValue: 'SisMobileCountryCodeID',
+                mobileNumberParameterValue: 'SisMobileNumber',
+                landCountryCodeIdParameterValue: 'SisLandCountryCodeID',
+                landAreaCodeIdParameterValue: 'SisLandAreaCode',
+                landNumberParameterValue: 'SisLandNumber',
+                emailParameterValue: 'SisEmail'
+            },
+            { lblname: 'Is Married', controlType: 'radio', ngmodel: 'sisIsMarried', arrbind: 'boolType', parameterValue: 'SIsMarried' },
+            { lblname: 'Husband Name', controlType: 'textbox', ngmodel: 'husbandName', parameterValue: 'SisHusbandName' },
+            { lblname: 'Husband Education', controlType: 'textbox', ngmodel: 'husbandEducation', parameterValue: 'sisspouseeducationdetails' },
+            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'husbandProfCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'SisSpouseProfessionCategoryID' },
+            { lblname: 'Husband Designation', controlType: 'textbox', ngmodel: 'husbandDesignation', parameterValue: 'sisspouseprofessiondetails' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'husbandCompany', parameterValue: 'SisHusCompanyName' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'husbandJobLocation', parameterValue: 'SisHusJobLocation' },
+            {
+                controlType: 'contact',
+                emailhide: true,
+                dmobile: 'husbandCountryCodeId',
+                strmobile: 'husbandMobNumber',
+                dalternative: 'husbandAlternativeCountryCodeId',
+                stralternative: 'husbandAlternativeNumber',
+                dland: 'husbandLandCountryCodeId',
+                strareacode: 'husbandLandAreaCodeId',
+                strland: 'husbandLandNumberId',
+                strmail: 'husbandEmail',
+                mobileCodeIdParameterValue: 'SisHusbandMobileCountryCodeID',
+                mobileNumberParameterValue: 'SisHusbandMobileNumber',
+                landCountryCodeIdParameterValue: 'SisHusbandLandCountryCodeID',
+                landAreaCodeIdParameterValue: 'SisHusbandLandAreacode',
+                landNumberParameterValue: 'SisHusbandLandNumber',
+                emailParameterValue: 'SisSpouseEmail'
+            },
+            { lblname: 'Husband Father SurName', controlType: 'textbox', ngmodel: 'husbandFatherLastName', parameterValue: 'SisHusbandFatherSurName' },
+            { lblname: 'Husband Father Name', controlType: 'textbox', ngmodel: 'spouseFatherFirstName', parameterValue: 'SisHusbandFatherName' },
+            { lblname: 'Husband Father Caste', controlType: 'select', ngmodel: 'spouseFatherCaste', typeofdata: 'caste', parameterValue: 'SibilingSpouseFatherCasteID' },
+            {
+                controlType: 'country',
+                countryshow: false,
+                cityshow: false,
+                othercity: false,
+                dstate: 'broSpouseFatherStateId',
+                ddistrict: 'broSpouseFatherDistrictId',
+                countryParameterValue: 'SisSpouseFatherCountryID',
+                stateParameterValue: 'SisSpouseFatherStateID',
+                districtParameterValue: 'SisSpouseFatherDitrictID'
+            },
+            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'broSpouseCityId', parameterValue: 'SisSpouseFatherNativePlace' }
+
+        ];
+
+
+        model.broElderYoungerArr = [
+            { "label": "Elder", "title": "Elder", "value": 42 },
+            { "label": "Younger", "title": "Younger", "value": 41 }
+        ];
+        model.sisElderYoungerArr = [
+            { "label": "Elder", "title": "Elder", "value": 322 },
+            { "label": "Younger", "title": "Younger", "value": 321 }
+        ];
 
         return model.init();
     }
@@ -4305,7 +4487,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 if (response.data.length > 0) {
                     model.spouseArray = response.data[0].length > 0 ? JSON.parse(response.data[0]) : [];
                     model.ChildArray = response.data[1].length > 0 ? JSON.parse(response.data[1]) : [];
-                   
+
                     model.childCount = response.data !== undefined && response.data[0].length > 0 && (JSON.parse(response.data[0])).length > 0 ? (JSON.parse(response.data[0]))[0].NoOfChildrens : [];
 
                     console.log(model.spouseArray);
@@ -4315,58 +4497,61 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         };
 
         model.populatepopup = function(type, item) {
+            model.eventType = 'add';
             switch (type) {
 
                 case 'Spouse':
-                    model.spouObj.Cust_Spouse_ID = null;
-                    model.spouObj = {};
+                    model.popupdata = model.spouse;
+                    model.popupHeader = 'Spouse Details';
+                    model.Cust_Spouse_ID = null;
                     if (item !== undefined) {
-                        model.spouObj.Cust_Spouse_ID = item.Cust_Spouse_ID;
-                        model.spouObj.txtSpousename = item.NAME;
-                        model.spouObj.txtSpoueEducation = item.EducationDetails;
-                        model.spouObj.txtspouseProfession = item.ProfessionDetails;
-                        model.spouObj.txtHouseFlatnumber = item.HouseFlatNumberID;
-                        model.spouObj.txtApartmentname = item.AppartmentName;
-                        model.spouObj.txtStreetname = item.StreetName;
-                        model.spouObj.txtAreaname = item.AreaName;
-                        model.spouObj.txtLandmark = item.LandMark;
-                        model.spouObj.ddlspouseCountry = item.Country;
-                        model.spouObj.ddlspouseState = item.STATE;
-                        model.spouObj.ddlspouseDistrict = item.District;
-                        model.spouObj.ddlspouseCity = item.City;
-                        model.spouObj.txtspouseZip = item.Zip;
-                        model.spouObj.txtMarriedon = item.MarriageDate;
-                        model.spouObj.txtSeparateddate = item.SeperatedDate;
-                        model.spouObj.rbtspousediverse = item.LeagallyDivorceID;
-                        model.spouObj.txtLegalDivorsedate = item.DateofLegallDivorce;
-                        model.spouObj.txtspousefather = item.FatherFirstName;
-                        model.spouObj.txtspouselastname = item.FatherLastName;
-                        model.spouObj.txtpreviousmarriage = item.ReasonforDivorce;
-                        model.spouObj.rbtnspousefamily = item.MyFamilyPlanningID;
-                        model.spouObj.ddlspousechidrens = item.NoOfChildrens;
+                        model.eventType = 'edit';
+                        model.Cust_Spouse_ID = item.Cust_Spouse_ID;
+                        model.txtSpousename = item.NAME;
+                        model.txtSpoueEducation = item.EducationDetails;
+                        model.txtspouseProfession = item.ProfessionDetails;
+                        model.txtHouseFlatnumber = item.HouseFlatNumberID;
+                        model.txtApartmentname = item.AppartmentName;
+                        model.txtStreetname = item.StreetName;
+                        model.txtAreaname = item.AreaName;
+                        model.txtLandmark = item.LandMark;
+                        model.ddlspouseCountry = item.Country;
+                        model.ddlspouseState = item.STATE;
+                        model.ddlspouseDistrict = item.District;
+                        model.ddlspouseCity = item.City;
+                        model.txtspouseZip = item.Zip;
+                        model.txtMarriedon = item.MarriageDate;
+                        model.txtSeparateddate = item.SeperatedDate;
+                        model.rbtspousediverse = item.LeagallyDivorceID;
+                        model.txtLegalDivorsedate = item.DateofLegallDivorce;
+                        model.txtspousefather = item.FatherFirstName;
+                        model.txtspouselastname = item.FatherLastName;
+                        model.txtpreviousmarriage = item.ReasonforDivorce;
+                        model.rbtnspousefamily = item.MyFamilyPlanningID;
+                        model.ddlspousechidrens = item.NoOfChildrens;
                     }
 
-                    commonFactory.open('SpouseContent.html', model.scope, uibModal);
+                    commonFactory.open('modelContent.html', model.scope, uibModal);
                     break;
 
                 case 'Child':
-                    model.childObj.Cust_Children_ID = null;
-                    model.childObj = {};
-
+                    model.Cust_Children_ID = null;
+                    model.popupdata = model.child;
+                    model.popupHeader = 'Children Details';
                     if (item !== undefined) {
-
-                        model.childObj.Cust_Children_ID = item.Cust_Children_ID;
-                        model.childObj.txtchildname = item.ChildName;
-                        model.childObj.rdlgenderchild = item.ChildGender;
-                        model.childObj.txtdobchild = commonFactory.convertDateFormat(item.ChildDOB, 'DD-MM-YYYY');
-                        model.childObj.rbtChildstayingWith = item.ChildStayingWithID;
-                        model.childObj.ddlrelation = item.ChildStayingWithRelation;
-                        commonFactory.open('spouseChildContent.html', model.scope, uibModal);
+                        model.eventType = 'edit';
+                        model.Cust_Children_ID = item.Cust_Children_ID;
+                        model.txtchildname = item.ChildName;
+                        model.rdlgenderchild = item.ChildGender;
+                        model.txtdobchild = commonFactory.convertDateFormat(item.ChildDOB, 'DD-MM-YYYY');
+                        model.rbtChildstayingWith = item.ChildStayingWithID;
+                        model.ddlrelation = item.ChildStayingWithRelation;
+                        commonFactory.open('modelContent.html', model.scope, uibModal);
 
                     } else if (model.childCount !== undefined && model.childCount !== null &&
                         model.childCount !== 0 && model.ChildArray.length < model.childCount) {
 
-                        commonFactory.open('spouseChildContent.html', model.scope, uibModal);
+                        commonFactory.open('modelContent.html', model.scope, uibModal);
                     } else {
                         alertss.timeoutoldalerts(model.scope, 'alert-danger', 'cannot add more children', 4500);
                     }
@@ -4379,44 +4564,23 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             commonFactory.closepopup();
         };
 
-        model.spouseSubmit = function(obj) {
-            model.SpouseData = {
-                GetDetails: {
-                    CustID: custID,
-                    NAME: obj.txtSpousename,
-                    Education: obj.txtSpoueEducation,
-                    Profession: obj.txtspouseProfession,
-                    HouseFlatnumber: obj.txtHouseFlatnumber,
-                    Apartmentname: obj.txtApartmentname,
-                    Streetname: obj.txtStreetname,
-                    Areaname: obj.txtAreaname,
-                    Landmark: obj.txtLandmark,
-                    Country: obj.ddlspouseCountry,
-                    STATE: obj.ddlspouseState,
-                    District: obj.ddlspouseDistrict,
-                    City: obj.ddlspouseCity,
-                    Zip: obj.txtspouseZip,
-                    Marriedon: obj.txtMarriedon !== '' && obj.txtMarriedon !== 'Invalid date' ? filter('date')(obj.txtMarriedon, 'yyyy-MM-dd') : null,
-                    Separateddate: obj.txtSeparateddate !== '' && obj.txtSeparateddate !== 'Invalid date' ? filter('date')(obj.txtSeparateddate, 'yyyy-MM-dd') : null,
-                    Legallydivorced: obj.rbtspousediverse,
-                    Dateoflegaldivorce: obj.txtLegalDivorsedate !== '' && obj.txtLegalDivorsedate !== 'Invalid date' ? filter('date')(obj.txtLegalDivorsedate, 'yyyy-MM-dd') : null,
-                    Uploaddivorcedocument: null,
-                    Fatherfirstname: obj.txtspousefather,
-                    Fatherlastname: obj.txtspouselastname,
-                    Notesaboutpreviousmarriage: obj.txtpreviousmarriage,
-                    Familyplanning: obj.rbtnspousefamily,
-                    Noofchildren: obj.ddlspousechidrens,
-                    Cust_Spouse_ID: model.spouObj.Cust_Spouse_ID
-                },
-                customerpersonaldetails: {
-                    intCusID: custID,
-                    EmpID: loginEmpid,
-                    Admin: AdminID
-                }
-            };
-            model.childCount = obj.ddlspousechidrens;
+        model.updateData = function(inObj, type) {
+            switch (type) {
+                case "Spouse Details":
+                    model.spouseSubmit(inObj);
+                    break;
+                case "Children Details":
+                    model.childSubmit(inObj);
+                    break;
+            }
+        };
+        model.spouseSubmit = function(inObj) {
 
-            editSpouseService.submitSpouseData(model.SpouseData).then(function(response) {
+            inObj.GetDetails.CustID = custID;
+            inObj.GetDetails.Cust_Spouse_ID = model.Cust_Spouse_ID;
+            model.childCount = inObj.GetDetails.ddlspousechidrens;
+
+            editSpouseService.submitSpouseData(inObj).then(function(response) {
                 console.log(response);
                 commonFactory.closepopup();
                 if (response.data === 1) {
@@ -4429,25 +4593,10 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             });
         };
 
-        model.childSubmit = function(obj) {
-            model.childData = {
-                GetDetails: {
-                    CustID: custID,
-                    Nameofthechild: obj.txtchildname,
-                    Genderofthechild: obj.rdlgenderchild,
-                    DOB: obj.txtdobchild !== '' && obj.txtdobchild !== 'Invalid date' ? filter('date')(obj.txtdobchild, 'yyyy-MM-dd') : null,
-                    Childstayingwith: obj.rbtChildstayingWith,
-                    Childstayingwithrelation: obj.ddlrelation,
-                    Cust_Children_ID: model.childObj.Cust_Children_ID
-                },
-                customerpersonaldetails: {
-                    intCusID: custID,
-                    EmpID: loginEmpid,
-                    Admin: AdminID
-                }
-            };
-
-            editSpouseService.submitChildeData(model.childData).then(function(response) {
+        model.childSubmit = function(inObj) {
+            inObj.GetDetails.CustID = custID;
+            inObj.GetDetails.Cust_Children_ID = model.Cust_Children_ID;
+            editSpouseService.submitChildeData(inObj).then(function(response) {
                 console.log(response);
                 commonFactory.closepopup();
                 if (response.data === 1) {
@@ -4460,7 +4609,58 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
 
         };
+        model.spouse = [
+            { lblname: 'Name', controlType: 'textbox', ngmodel: 'txtSpousename', required: true, parameterValue: 'NAME' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtSpoueEducation', required: true, parameterValue: 'Education' },
+            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtspouseProfession', required: true, parameterValue: 'Profession' },
+            { lblname: 'House/Flat number', controlType: 'textbox', ngmodel: 'txtHouseFlatnumber', required: true, parameterValue: 'HouseFlatnumber' },
+            { lblname: 'Apartment name', controlType: 'textbox', ngmodel: 'txtApartmentname', required: true, parameterValue: 'Apartmentname' },
+            { lblname: 'Street name', controlType: 'textbox', ngmodel: 'txtStreetname', required: true, parameterValue: 'Streetname' },
+            { lblname: 'Area name', controlType: 'textbox', ngmodel: 'txtAreaname', required: true, parameterValue: 'Areaname' },
+            { lblname: 'Landmark', controlType: 'textbox', ngmodel: 'txtLandmark', required: true, parameterValue: 'Landmark' },
+            {
+                lblname: 'country',
+                controlType: 'country',
+                countryshow: true,
+                cityshow: true,
+                othercity: false,
+                dcountry: 'ddlspouseCountry',
+                dstate: 'ddlspouseState',
+                ddistrict: 'ddlspouseDistrict',
+                dcity: 'ddlspouseCity',
+                countryParameterValue: 'Country',
+                stateParameterValue: 'STATE',
+                districtParameterValue: 'District',
+                cityParameterValue: 'City',
+            },
+            { lblname: 'Zip', controlType: 'textboxNumber', ngmodel: 'txtLandmark', required: true, maxLength: 8, parameterValue: 'Zip' },
+            { lblname: 'Married on', controlType: 'date', ngmodel: 'txtMarriedon', required: true, parameterValue: 'Marriedon' },
+            { lblname: 'Separated date', controlType: 'date', ngmodel: 'txtSeparateddate', required: true, parameterValue: 'Separateddate' },
+            { lblname: 'Legally divorced', controlType: 'radio', ngmodel: 'rbtspousediverse', arrbind: 'boolType', parameterValue: 'Legallydivorced' },
+            { lblname: 'Legally Divorced date', controlType: 'date', ngmodel: 'txtLegalDivorsedate', required: true, parameterValue: 'Dateoflegaldivorce' },
+            { lblname: 'Father first name', controlType: 'textbox', ngmodel: 'txtspousefather', required: true, parameterValue: 'Fatherfirstname' },
+            { lblname: 'Father last name', controlType: 'textbox', ngmodel: 'txtspouselastname', required: true, parameterValue: 'Fatherlastname' },
+            { lblname: 'Notes about previous marriage', controlType: 'textarea', ngmodel: 'txtpreviousmarriage', required: true, parameterValue: 'Notesaboutpreviousmarriage' },
+            { lblname: 'Family planning', controlType: 'radio', ngmodel: 'rbtspousediverse', arrbind: 'boolType', parameterValue: 'Familyplanning' },
+            { lblname: 'No of children', controlType: 'select', ngmodel: 'ddlspousechidrens', required: true, dataSource: model.noofChldrenAray, parameterValue: 'Noofchildren' },
 
+
+        ];
+        model.child = [
+            { lblname: 'Name of the child', controlType: 'textbox', ngmodel: 'txtchildname', required: true, parameterValue: 'Nameofthechild' },
+            { lblname: 'Gender of the child', controlType: 'radio', ngmodel: 'rdlgenderchild', ownArray: 'gender', required: true, parameterValue: 'Genderofthechild' },
+            { lblname: 'DOB of the child', controlType: 'date', ngmodel: 'txtdobchild', required: true, parameterValue: 'DOB' },
+            { lblname: 'Child staying with', controlType: 'radio', ngmodel: 'rbtChildstayingWith', ownArray: 'relation', required: true, parameterValue: 'Childstayingwith' },
+            { lblname: 'Child staying with Relation', controlType: 'select', ngmodel: 'ddlrelation', typeofdata: 'childStayingWith', required: true, parameterValue: 'Childstayingwithrelation' },
+        ];
+        model.gender = [
+            { "label": "Male", "title": "Male", "value": 1 },
+            { "label": "Female", "title": "Female", "value": 2 }
+        ];
+        model.relation = [
+            { "label": "Father Side", "title": "Father Side", "value": 1 },
+            { "label": "Mother Side", "title": "Mother Side", "value": 2 }
+        ];
         return model.init();
     }
 
@@ -4494,6 +4694,137 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
     factory.$inject = ['$http'];
 })(angular);
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .controller('popupCtrl', controller)
+
+    controller.$inject = ['commonFactory', '$uibModal', '$scope'];
+
+    function controller(commonFactory, uibModal, scope) {
+        var vm = this;
+        scope.model = {};
+        scope.openModel = function() {
+            commonFactory.open('popup.html', scope, uibModal);
+        };
+        // scope.model.education.updateData = function(response) {
+        //     //call back functuon after submitting api in edit view popup
+        // };
+        // scope.model.profession.updateData = function(response) {
+        //     //call back functuon after submitting api in edit view popup
+        // };
+        scope.model.mainArray = { popupHeader: 'Education Details', formName: 'eduform', apiPath: '' };
+        //parameterValue =name for sending in submit object
+        scope.model.popupdata = [
+            { lblname: 'Is Highest Degree', controlType: 'radio', ngmodel: 'IsHighestDegreeId', required: true, arrbind: 'boolType', parameterValue: 'IsHighestDegree' },
+            { lblname: 'Education category', typeofdata: 'educationcategory', controlType: 'select', ngmodel: 'EduCatgoryId', required: true, parameterValue: 'EduCatgory', method: 'dllChange', childName: 'EducationGroup', changeApi: 'EducationGroup' },
+            { lblname: 'Education group', parentName: 'EducationGroup', controlType: 'Changeselect', ngmodel: 'EdugroupId', required: true, parameterValue: 'EdugroupId', changeApi: 'EducationSpecialisation' },
+            { lblname: 'Edu specialization', controlType: 'select', ngmodel: 'EduspecializationId', required: true, childArrar: 'height', parameterValue: 'Eduspecialization' },
+            { lblname: 'University', controlType: 'textbox', ngmodel: 'universityId', parameterValue: 'university' },
+            { lblname: 'College', controlType: 'textbox', ngmodel: 'collegeId', parameterValue: 'college' },
+            { lblname: 'Pass of year', controlType: 'select', ngmodel: 'passOfyear', childArrar: 'height', parameterValue: 'passOfyear' },
+            {
+                lblname: 'country',
+                controlType: 'country',
+                countryshow: 'countryshow',
+                cityshow: 'cityshow',
+                othercity: 'othercity',
+                dcountry: 'ddlCountry',
+                dstate: 'ddlState',
+                ddistrict: 'ddlDistrict',
+                dcity: 'ddlcity',
+                strothercity: 'txtcity',
+                countryParameterValue: 'country',
+                stateParameterValue: 'state',
+                districtParameterValue: 'district',
+                cityParameterValue: 'city',
+                cityotherParameterValue: 'cityother'
+            },
+            {
+                lblname: 'Educational merits',
+                controlType: 'textarea',
+                ngmodel: 'Edumerits',
+                parameterValue: 'Edumerits'
+            }
+
+        ];
+        scope.model.profession = [];
+        //controller=
+        /*
+        ..education edit button click lo
+          vm.popupData=model.education;
+          //whenever user click on profession edit click
+          vm.popupData=model.profession;
+          
+        */
+        /*<slide-popup model="popupData">
+    </slide-popup>*/
+        // scope.model.IsHighestDegreeId = '1';
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .factory('popupmdl', factory)
+
+    factory.$inject = ['$http'];
+
+    function factory($http) {
+        var model = {};
+
+        scope.model = {};
+        scope.openModel = function() {
+            commonFactory.open('popup.html', scope, uibModal);
+        };
+        // scope.model.education.updateData = function(response) {
+        //     //call back functuon after submitting api in edit view popup
+        // };
+        // scope.model.profession.updateData = function(response) {
+        //     //call back functuon after submitting api in edit view popup
+        // };
+        scope.model.mainArray = { popupHeader: 'Education Details', formName: 'eduform', apiPath: '' };
+        //parameterValue =name for sending in submit object
+        scope.model.popupdata = [
+            { lblname: 'Is Highest Degree', controlType: 'radio', ngmodel: 'IsHighestDegreeId', required: true, arrbind: 'boolType', parameterValue: 'IsHighestDegree' },
+            { lblname: 'Education category', typeofdata: 'educationcategory', controlType: 'select', ngmodel: 'EduCatgoryId', required: true, parameterValue: 'EduCatgory', method: 'dllChange', childName: 'EducationGroup', changeApi: 'EducationGroup' },
+            { lblname: 'Education group', parentName: 'EducationGroup', controlType: 'Changeselect', ngmodel: 'EdugroupId', required: true, parameterValue: 'EdugroupId', changeApi: 'EducationSpecialisation' },
+            { lblname: 'Edu specialization', controlType: 'select', ngmodel: 'EduspecializationId', required: true, childArrar: 'height', parameterValue: 'Eduspecialization' },
+            { lblname: 'University', controlType: 'textbox', ngmodel: 'universityId', parameterValue: 'university' },
+            { lblname: 'College', controlType: 'textbox', ngmodel: 'collegeId', parameterValue: 'college' },
+            { lblname: 'Pass of year', controlType: 'select', ngmodel: 'passOfyear', childArrar: 'height', parameterValue: 'passOfyear' },
+            {
+                lblname: 'country',
+                controlType: 'country',
+                countryshow: 'countryshow',
+                cityshow: 'cityshow',
+                othercity: 'othercity',
+                dcountry: 'ddlCountry',
+                dstate: 'ddlState',
+                ddistrict: 'ddlDistrict',
+                dcity: 'ddlcity',
+                strothercity: 'txtcity',
+                countryParameterValue: 'country',
+                stateParameterValue: 'state',
+                districtParameterValue: 'district',
+                cityParameterValue: 'city',
+                cityotherParameterValue: 'cityother'
+            },
+            {
+                lblname: 'Educational merits',
+                controlType: 'textarea',
+                ngmodel: 'Edumerits',
+                parameterValue: 'Edumerits'
+            }
+
+        ];
+        scope.model.profession = [];
+    }
+})();
+
 angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCache) {
   'use strict';
 
@@ -4720,225 +5051,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"astroContent.html\">\r" +
     "\n" +
-    "        <form name=\"astroForm\" novalidate role=\"form\" ng-submit=\"page.model.astroSubmit(page.model.atroObj);\" accessible-form>\r" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
     "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Astro details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul id=\"ulastro\">\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lbltimebirth\" class=\"pop_label_left\">Time of Birth<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my select-box-my-trible select-box-my-trible3 input-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromHours\" ng-options=\"item.value as item.label for item in page.model.hrsbindArr\" required></select>\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromMinutes\" ng-options=\"item.value as item.label for item in page.model.minbindArr\" required></select>\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlFromSeconds\" ng-options=\"item.value as item.label for item in page.model.secbindArr\" required></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <country-directive require=\"true\" countryshow=\"true\" cityshow=\"true\" othercity=\"false\" dcountry=\"page.model.atroObj.ddlCountryOfBirthID\" dstate=\"page.model.atroObj.ddlStateOfBirthID\" ddistrict=\"page.model.atroObj.ddlDistrictOfBirthID\" dcity=\"page.model.atroObj.ddlcity\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblstarlan\" class=\"pop_label_left\">Star language</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlstarlanguage\" typeofdata=\"'starLanguage'\" ng-change=\"page.model.changeBind('star',page.model.atroObj.ddlstarlanguage);\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblstar\" class=\"pop_label_left\">Star</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlstar\" ng-options=\"item.value as item.label for item in page.model.starArr\"></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblpaadam\" class=\"pop_label_left\">Paadam</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlpaadam\" typeofdata=\"'paadam'\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblLagnam\" class=\"pop_label_left\">Lagnam</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlLagnam\" typeofdata=\"'lagnam'\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblRaasiMoonsign\" class=\"pop_label_left\">Raasi/Moon sign</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddlRaasiMoonsign\" typeofdata=\"'ZodaicSign'\"></select>\r" +
-    "\n" +
-    "                            </select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblGothramGotra\" class=\"pop_label_left\">Gothram/Gotra</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.atroObj.txtGothramGotra\" class=\"form-control\" tabindex=\"13\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblMaternalgothram\" class=\"pop_label_left\">Maternal gothram</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.atroObj.txtMaternalgothram\" class=\"form-control\" tabindex=\"14\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblManglikKujadosham\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Manglik/Kuja dosham</label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                            <md-radio-group name=\"rdlkujaDosham\" layout=\"row\" ng-model=\"page.model.atroObj.rdlkujaDosham\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"0\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"1\"> No </md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"2\"> Dont't Know </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                        </md-input-container>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
-    "\n" +
-    "                        <label for=\"lbllongitude\" class=\"pop_label_left\">Place of birth longitude</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input id=\"txtlogitude\" class=\"form-control\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddllongitude\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
-    "\n" +
-    "                        <label for=\"lbllatitude\" class=\"pop_label_left\">Place of birth latitude</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input id=\"txtlatitude\" class=\"form-control col-lg-3\" />\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.atroObj.ddllatitude\"></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
-    "\n" +
-    "                        <label for=\"lbllatitude\">Place of birth latitude</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input type=\"checkbox\" ng-model=\"page.model.atroObj.Chkgenertehoro\" value=\"Generate HoroScope\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row\">\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </form>\r" +
+    "        </slide-popup>\r" +
     "\n" +
     "    </script>\r" +
     "\n" +
@@ -7882,464 +7997,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "        <div id=\"edupopupdiv\">\r" +
-    "\n" +
-    "            <script type=\"text/ng-template\" id=\"EduModalContent.html\">\r" +
-    "\n" +
-    "                <form class=\"EditViewClass\" name=\"eduForm\" novalidate role=\"form\" ng-submit=\"eduForm.$valid  && page.model.eduSubmit(page.model.edoObj);\" accessible-form>\r" +
-    "\n" +
-    "                    <div class=\"modal-header\">\r" +
-    "\n" +
-    "                        <h3 class=\"modal-title text-center\" id=\"modal-title\">Education Details\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                                <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
-    "\n" +
-    "                            </a>\r" +
-    "\n" +
-    "                        </h3>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div class=\"modal-body\" id=\"modal-body\">\r" +
-    "\n" +
-    "                        <ul id=\"uleducation\" class='modal-body clearfix pop_content_my'>\r" +
-    "\n" +
-    "                            <li class=\"clearfix\">\r" +
-    "\n" +
-    "                                <label for=\"lblIsHighestDegree\" class=\"pop_label_left\" style=\"padding-top: 2%;\">Is Highest Degree<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"radio-group-my\">\r" +
-    "\n" +
-    "                                    <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                                        <md-radio-group ng-required=\"true\" name=\"IsHighestDegree\" layout=\"row\" ng-model=\"page.model.edoObj.IsHighestDegree\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                            <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                            <md-radio-button value=\"0\"> No </md-radio-button>\r" +
-    "\n" +
-    "                                        </md-radio-group>\r" +
-    "\n" +
-    "                                        <div ng-messages=\"eduForm.IsHighestDegree.$invalid\">\r" +
-    "\n" +
-    "                                            <div ng-if=\"eduForm.IsHighestDegree.$invalid && (eduForm.$submitted)\">This field is required.</div>\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "                                    </md-input-container>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\">Education category<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown id=\"estt\" ng-model=\"page.model.edoObj.ddlEduCatgory\" typeofdata=\"'educationcategory'\" ng-change=\"page.model.changeBind('EducationCatgory',page.model.edoObj.ddlEduCatgory);\" required></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\">Education group<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.edoObj.ddlEdugroup\" ng-options=\"item.value as item.label for item in page.model.eduGroupArr\" ng-change=\"page.model.changeBind('EducationGroup',page.model.edoObj.ddlEdugroup);\" required></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\">Edu specialization<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.edoObj.ddlEduspecialization\" ng-options=\"item.value as item.label for item in page.model.eduSpecialisationArr\" required></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\" id=\"divuniversity\">\r" +
-    "\n" +
-    "                                <label for=\"lbluniversity\" class=\"pop_label_left\">University</label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.edoObj.txtuniversity\" maxlength=\"100\" class=\"form-control\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblcollege\" class=\"pop_label_left\">College</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.edoObj.txtcollege\" maxlength=\"150\" class=\"form-control\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblPassOfYear\" class=\"pop_label_left\">Pass of year</label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.edoObj.ddlpassOfyear\" ng-options=\"item1.value as item1.label for item1 in page.model.passOfyearArr\"></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <country-directive countryshow=\"true\" cityshow=\"true\" othercity=\"true\" dcountry=\"page.model.edoObj.ddlCountry\" dstate=\"page.model.edoObj.ddlState\" ddistrict=\"page.model.edoObj.ddlDistrict\" dcity=\"page.model.edoObj.ddlcity\" strothercity=\"page.model.edoObj.txtcity\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblEduMerits\" class=\"pop_label_left\">Educational merits</label>\r" +
-    "\n" +
-    "                                <div class=\"\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <textarea ng-model=\"page.model.edoObj.txtEdumerits\" maxlength=\"500\" rows=\"4\" cols=\"20\" style=\"max-width:515px;width:100%;\" tabindex=\"12\"></textarea>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"row\">\r" +
-    "\n" +
-    "                                <br/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </form>\r" +
-    "\n" +
-    "            </script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div id=\"profpopupdiv\">\r" +
-    "\n" +
-    "            <script type=\"text/ng-template\" id=\"profModalContent.html\">\r" +
-    "\n" +
-    "                <form class=\"EditViewClass\" name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.ProfSubmit(page.model.profObj);\" accessible-form>\r" +
-    "\n" +
-    "                    <div class=\"modal-header\">\r" +
-    "\n" +
-    "                        <h3 class=\"modal-title text-center\" id=\"modal-title\">Profession details\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                                <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                            </a>\r" +
-    "\n" +
-    "                        </h3>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                        <ul>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblempin\" class=\"pop_label_left\">Employed In<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.profObj.ddlemployedin\" typeofdata=\"'ProfCatgory'\" required></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblprofessiongroup\" class=\"pop_label_left\">Professional group<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.profObj.ddlprofgroup\" typeofdata=\"'ProfGroup'\" ng-change=\"page.model.ProfchangeBind('ProfessionGroup',page.model.profObj.ddlprofgroup);\" required></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblprofession\" class=\"pop_label_left\">Profession<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.profObj.ddlprofession\" ng-options=\"item.value as item.label for item in page.model.ProfSpecialisationArr\" required></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblcmpyname\" class=\"pop_label_left\">Company name</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.profObj.txtcmpyname\" class=\"form-control\" tabindex=\"4\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblsal\" class=\"pop_label_left\">Monthly salary</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.profObj.ddlcurreny\" typeofdata=\"'currency'\"></select>\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.profObj.txtsalary\" style=\"float:right\" class=\"form-control\" onchange=\"currency();\" maxlength=\"7\" tabindex=\"6\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));\"\r" +
-    "\n" +
-    "                                    />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <country-directive countryshow=\"true\" cityshow=\"true\" othercity=\"true\" dcountry=\"page.model.profObj.ddlCountryProf\" dstate=\"page.model.profObj.ddlStateProf\" ddistrict=\"page.model.profObj.ddlDistrictProf\" dcity=\"page.model.profObj.ddlcityworkingprofession\"\r" +
-    "\n" +
-    "                                strothercity=\"page.model.profObj.txtcityprofession\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblworkingfrome\" class=\"pop_label_left\">Working from date</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <date-picker strdate=\"page.model.profObj.txtworkingfrom\"></date-picker>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <div id=\"divfalseVisa\" ng-if=\"page.model.profObj.ddlCountryProf!=1\">\r" +
-    "\n" +
-    "                                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                    <label for=\"lblvisastatus\" class=\"pop_label_left\">visa status</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                        <div class=\"select-box-my\">\r" +
-    "\n" +
-    "                                            <select multiselectdropdown ng-model=\"page.model.profObj.ddlvisastatus\"></select>\r" +
-    "\n" +
-    "                                        </div>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "                                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label class=\"pop_label_left\" for=\"lblsincedate\">Since date</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                        <date-picker strdate=\"page.model.profObj.txtssincedate\"></date-picker>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "                                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                    <label for=\"lblarrivaldate\" class=\"pop_label_left\">Arrival Date</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                        <date-picker strdate=\"page.model.profObj.txtarrivaldate\"></date-picker>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                    <label for=\"lbldeaparturedate\" class=\"pop_label_left\">Departure Date</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                        <date-picker strdate=\"page.model.profObj.txtdeparture\"></date-picker>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lbloccupation\" class=\"pop_label_left\">Occupation Details</label>\r" +
-    "\n" +
-    "                                <div class=\"\">\r" +
-    "\n" +
-    "                                    <textarea ng-model=\"page.model.profObj.txtoccupation\" style=\"width:515px;\" rows=\"4\" tabindex=\"16\" maxlength=\"500\" onkeydown=\"return CharacterCount()\"></textarea>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label id=\"lbloccupationcount\" style=\"color: #1e1c1c; font-size: 13px;\"></label>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"row\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                        </ul>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </form>\r" +
-    "\n" +
-    "            </script>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div id=\"AboutPopup\">\r" +
-    "\n" +
-    "            <script type=\"text/ng-template\" id=\"AboutModalContent.html\">\r" +
-    "\n" +
-    "                <form class=\"EditViewClass\" name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutUrselfSubmit(page.model.aboutObj)\">\r" +
-    "\n" +
-    "                    <div class=\"modal-header\">\r" +
-    "\n" +
-    "                        <h3 class=\"modal-title text-center\" id=\"modal-title\">About your self\r" +
-    "\n" +
-    "                            <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                                <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                            </a>\r" +
-    "\n" +
-    "                        </h3>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                        <ul>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label id=\"lblabout\" style=\"color: #9b2828; font-size: 13px;\">\r" +
-    "\n" +
-    "            				(Please don't write phone numbers/emails/any junk characters)*</label>\r" +
-    "\n" +
-    "                                <textarea ng-model=\"page.model.aboutObj.txtAboutUS\" style=\"width: 500px; height: 150px;\" class=\"col-lg-10\" maxlength=\"1000\" required ng-class=\"form-control\" required />\r" +
-    "\n" +
-    "                                <div>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                                <label id=\"Label1\" style=\"color: red; font-size: 13px;\" class=\"pull-right\">(max 1000 characters)</label>\r" +
-    "\n" +
-    "                                <label id=\"lblaboutcount\" style=\"color: #1e1c1c; font-size: 13px;\">{{aboutForm.txtAboutUS.length}}</label>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"row\">\r" +
-    "\n" +
-    "                                <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                        </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </form>\r" +
-    "\n" +
-    "            </script>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "    </div>\r" +
     "\n" +
     "\r" +
@@ -8386,273 +8043,21 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <script type=\"text/ng-template\" id=\"CustomerDataContent.html\">\r" +
-    "\n" +
-    "        <form class=\"EditViewClass\" name=\"custForm\" ng-class=\"'EditViewClass'\" novalidate role=\"form\" ng-submit=\"custForm.$valid && page.model.custdataSubmit(page.model.custObj)\" accessible-form>\r" +
-    "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Customer details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblElderYounger\" class=\"pop_label_left\" style=\"padding-top: 4%;\">Gender<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right pop_radios_list\">\r" +
-    "\n" +
-    "                            <md-input-container style=\"font-weight: 700; color: black;\">\r" +
-    "\n" +
-    "                                <md-radio-group ng-required=\"true\" name=\"rdlGender\" layout=\"row\" ng-model=\"page.model.custObj.rdlGender\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                    <md-radio-button value=\"2\" class=\"md-primary\">Female</md-radio-button>\r" +
-    "\n" +
-    "                                    <md-radio-button value=\"1\"> Male </md-radio-button>\r" +
-    "\n" +
-    "                                </md-radio-group>\r" +
-    "\n" +
-    "                                <div ng-messages=\"custForm.rdlGender.$invalid\">\r" +
-    "\n" +
-    "                                    <div ng-if=\"custForm.rdlGender.$invalid && (custForm.$submitted)\">This field is required.</div>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </md-input-container>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblname\" class=\"pop_label_left\">Sur Name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.custObj.txtSurName\" class=\"form-control\" required/>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblname\" class=\"pop_label_left\">Name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.custObj.txtName\" class=\"form-control\" required/>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblMaritalstatus\" class=\"pop_label_left\">Marital Status<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.custObj.dropmaritalstatus\" typeofdata=\"'MaritalStatus'\" required></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lbldob\" class=\"pop_label_left\">Date Of Birth<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                            <date-picker strdate=\"page.model.custObj.txtdobcandidate\" required></date-picker>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblheight\" class=\"pop_label_left\">Height<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlHeightpersonal\" typeofdata=\"'heightregistration'\" required></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblheight\" class=\"pop_label_left\">Complexion<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlcomplexion\" typeofdata=\"'Complexion'\" required></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Religion\" class=\"pop_label_left\">Religion<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                            <div class=\"select-box-my\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <select multiselectdropdown ng-model=\"page.model.custObj.ddlreligioncandadate\" typeofdata=\"'Religion'\" required></select>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\" id=\"divMotherTongue\">\r" +
-    "\n" +
-    "                        <label for=\"lblPersonalMotherTongue\" class=\"pop_label_left\">Mother Tongue<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlmothertongue\" typeofdata=\"'Mothertongue'\" required></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblCaste\" class=\"pop_label_left\">Caste<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlcaste\" typeofdata=\"'caste'\" ng-change=\"page.model.changeBind('caste',page.model.custObj.ddlcaste);\" required></select>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblCaste\" class=\"pop_label_left\">SubCaste</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlsubcaste\" ng-options=\"item.value as item.label for item in page.model.subcasteArr\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblborncitizenship\" class=\"pop_label_left\">Born Citizenship<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.custObj.ddlBornCitizenship\" typeofdata=\"'Country'\" required></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblMaritalstatus\" class=\"pop_label_left\">Physical Status<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\" style=\"font-weight: 700; color: black;\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"rdlPhysicalStatus\" layout=\"row\" ng-model=\"page.model.custObj.rdlPhysicalStatus\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"25\" class=\"md-primary\">Normal</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"26\"> Physically Challenged </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                            <div ng-if=\"custForm.rdlPhysicalStatus.$invalid && (custForm.$submitted)\" style=\"color:#a94442;\">This field is required.</div>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row\">\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        </form>\r" +
+    "    <script type=\"text/ng-template\" id=\"commonEduCatiobpopup.html\">\r" +
+    "\n" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
+    "\n" +
+    "        </slide-popup>\r" +
     "\n" +
     "    </script>\r" +
     "\n" +
     "</div>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -8678,7 +8083,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "</style>\r" +
     "\n" +
-    "<!--<alert-directive></alert-directive>-->\r" +
+    "\r" +
     "\n" +
     "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
@@ -9270,7 +8675,15 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"AboutModalContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\" name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutProfleSubmit(page.model.aboutObj.txtAboutprofile)\">\r" +
+    "\r" +
+    "\n" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
+    "\n" +
+    "        </slide-popup>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <!--<form class=\"EditViewClass\" name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutProfleSubmit(page.model.aboutObj.txtAboutprofile)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -9320,7 +8733,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            </div>\r" +
     "\n" +
-    "        </form>\r" +
+    "        </form>-->\r" +
+    "\n" +
+    "\r" +
     "\n" +
     "    </script>\r" +
     "\n" +
@@ -10545,853 +9960,33 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <div id=\"popupDiv\">\r" +
     "\n" +
-    "        <script type=\"text/ng-template\" id=\"parentModalContent.html\">\r" +
+    "        <script type=\"text/ng-template\" id=\"commonParentpopup.html\">\r" +
     "\n" +
-    "            <form name=\"parentForm\" novalidate role=\"form\" ng-submit=\"page.model.ParentSubmit(page.model.parent)\">\r" +
+    "            <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
     "\n" +
-    "                <div class=\"modal-header\">\r" +
-    "\n" +
-    "                    <h3 class=\"modal-title text-center\" id=\"modal-title\">Parent details\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </h3>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"modal-body\" id=\"modal-body\">\r" +
-    "\n" +
-    "                    <div class='modal-body clearfix pop_content_my'>\r" +
-    "\n" +
-    "                        <ul>\r" +
-    "\n" +
-    "                            <li>\r" +
-    "\n" +
-    "                                <h6>Father Details</h6>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\" style=\"color: red;\">Father Name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right form-group\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.parent.txtFathername\" class=\"form-control\" tabindex=\"1\" required/>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblFEducation\" class=\"pop_label_left\">Education</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.parent.txtFEducation\" class=\"form-control\" maxlength=\"150\" tabindex=\"2\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblFprofessioncat\" class=\"pop_label_left\">Profession Category</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.parent.ddlFprofessionCatgory\" typeofdata=\"'newProfessionCatgory'\"></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblFProfession\" class=\"pop_label_left\">Designation</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.parent.txtFProfession\" class=\"form-control\" maxlength=\"200\" tabindex=\"3\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblCompanyName\" class=\"pop_label_left\">Company Name </label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.parent.txtCompany\" class=\"form-control\" maxlength=\"100\" tabindex=\"4\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblJobLocation\" class=\"pop_label_left\">Job Location</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=\"text\" ng-model=\"page.model.parent.txtJobLocation\" class=\"form-control\" maxlength=\"100\" tabindex=\"5\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <contact-directive emailhide=\"true\" dmobile=\"page.model.parent.ddlMobile\" strmobile=\"page.model.parent.txtMobile\" dalternative=\"page.model.parent.ddlfathermobile2\" stralternative=\"page.model.parent.txtfathermobile2\" dland=\"page.model.parent.ddlLandLineCountry\"\r" +
-    "\n" +
-    "                                strareacode=\"page.model.parent.txtAreCode\" strland=\"page.model.parent.txtLandNumber\" strmail=\"page.model.parent.txtEmail\"></contact-directive>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblFatherFname\" class=\"pop_label_left\">Father's father name </label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=text ng-model=\"page.model.parent.txtFatherFname\" class=\"form-control\" placeholder=\"Enter Father's father name\" maxlength=\"100\" tabindex=\"17\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <contact-directive emailhide=\"false\" dmobile=\"page.model.parent.ddlFatherfatherMobileCountryCode\" strmobile=\"page.model.parent.txtMobileFatherfather\" dalternative=\"page.model.parent.ddlfatherfatherAlternative\" stralternative=\"page.model.parent.txtfatherfatherAlternative\"\r" +
-    "\n" +
-    "                                dland=\"page.model.parent.ddlFatherFatherLandLineCode\" strareacode=\"page.model.parent.txtGrandFatherArea\" strland=\"page.model.parent.txtGrandFatherLandLinenum\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <country-directive countryshow=\"false\" dcountry=\"dcountry\" cityshow=\"false\" othercity=\"false\" dstate=\"page.model.parent.ddlFState\" ddistrict=\"page.model.parent.ddlFDistric\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"FNativePlace\" class=\"pop_label_left\">Native Place</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.parent.txtFNativePlace\" class=\"form-control\" maxlength=\"100\" tabindex=\"29\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li>\r" +
-    "\n" +
-    "                                <h6>Mother Details</h6>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblMotherName\" class=\"pop_label_left\" style=\"color: red;\">Mother Name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right form-group\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.parent.txtMName\" class=\"form-control\" maxlength=\"100\" tabindex=\"30\" required/>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblMEducation\" class=\"pop_label_left\">Education</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.parent.txtMEducation\" class=\"form-control\" maxlength=\"150\" tabindex=\"31\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblFprofessioncat\" class=\"pop_label_left\">Profession Category</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.parent.ddlMprofessionCatgory\" typeofdata=\"'newProfessionCatgory'\"></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblMProfession\" class=\"pop_label_left\">Designation</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.parent.txtMProfession\" class=\"form-control\" maxlength=\"200\" tabindex=\"32\" />\r" +
-    "\n" +
-    "                                    <label class=\"checkbox-inline checkbox_my\" style=\"padding: 5px 0 0 0;\">\r" +
-    "\n" +
-    "                <input type=checkbox ng-model=\"page.model.parent.chkbox\"  tabindex=\"33\"  ng-change=\"page.model.housewiseChk(page.model.parent);\"/><span>&nbsp;HouseWife</span>\r" +
-    "\n" +
-    "            </label>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <div id=\"divmotherprofesseion\" ng-hide=\"page.model.parent.chkbox==true\">\r" +
-    "\n" +
-    "                                <li id=\"divComLocation\" class=\"clearfix form-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label for=\"lblMCompanyName\" class=\"pop_label_left\">Company Name </label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                        <input ng-model=\"page.model.parent.txtMCompanyName\" class=\"form-control\" maxlength=\"100\" tabindex=\"34\" />\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                    <label for=\"lblMJobLocation\" class=\"pop_label_left\">Job Location</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                        <input ng-model=\"page.model.parent.txtMJobLocation\" class=\"form-control\" maxlength=\"100\" tabindex=\"35\" />\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                            <div style=\"height: 15px;\"></div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <contact-directive emailhide=\"true\" dmobile=\"page.model.parent.ddlMMobileCounCodeID\" strmobile=\"page.model.parent.txtMMobileNum\" dalternative=\"page.model.parent.ddlMMobileCounCodeID2\" stralternative=\"page.model.parent.txtMMobileNum2\" dland=\"page.model.parent.ddlMLandLineCounCode\"\r" +
-    "\n" +
-    "                                strareacode=\"page.model.parent.txtmAreaCode\" strland=\"page.model.parent.txtMLandLineNum\" strmail=\"page.model.parent.txtMEmail\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblMotherFname\" class=\"pop_label_left\">Mother's Father Name </label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                    <input type=text ng-model=\"page.model.parent.txtMFatherFname\" class=\"form-control\" placeholder=\"FIRST NAME\" tabindex=\"47\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblMotherFname\" class=\"pop_label_left\">Mother's Last Name </label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                    <input type=text ng-model=\"page.model.parent.txtMFatherLname\" class=\"form-control\" placeholder=\"LAST NAME\" tabindex=\"48\" maxlength=\"50\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <contact-directive emailhide=\"false\" dmobile=\"page.model.parent.ddlMotherfatheMobileCountryCode\" strmobile=\"page.model.parent.txtMotherfatheMobilenumber\" dalternative=\"page.model.parent.ddlmotherfatheralternative\" stralternative=\"page.model.parent.txtmotherfatheralternative\"\r" +
-    "\n" +
-    "                                dland=\"page.model.parent.ddlMotherFatherLandLineCode\" strareacode=\"page.model.parent.txtMotherFatherLandLineareacode\" strland=\"page.model.parent.txtMotherFatherLandLinenum\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <country-directive countryshow=\"false\" dcountry=\"dcountry\" cityshow=\"false\" othercity=\"false\" dstate=\"page.model.parent.ddlMState\" ddistrict=\"page.model.parent.ddlMDistrict\"></country-directive>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"MNativePlace\" class=\"pop_label_left\">Native Place</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input type=text ng-model=\"page.model.parent.txtMNativePlace\" class=\"form-control\" maxlength=\"150\" tabindex=\"60\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"ParentIntercaste\" class=\"pop_label_left\">Are parents interCaste ? </label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <md-radio-group name=\"rbtlParentIntercaste\" style=\"font-weight: 700;color:black;\" layout=\"row\" ng-model=\"page.model.parent.rbtlParentIntercaste\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                    <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                    <md-radio-button value=\"0\">No </md-radio-button>\r" +
-    "\n" +
-    "                                </md-radio-group>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <div ng-if=\"page.model.parent.rbtlParentIntercaste==='1' || page.model.parent.rbtlParentIntercaste===1\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <li id=\"divddlFatherCaste\" class=\"clearfix form-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <label for=\"lblFCaste\" class=\"pop_label_left\">Father Caste</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                        <select multiselectdropdown ng-model=\"page.model.parent.ddlFatherCaste\" typeofdata=\"'caste'\" required></select>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "                                <li id=\"divddlMotherCaste\" class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                    <label for=\"lblMCaste\" class=\"pop_label_left\">Mother Caste</label>\r" +
-    "\n" +
-    "                                    <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                        <select multiselectdropdown ng-model=\"page.model.parent.ddlMotherCaste\" typeofdata=\"'caste'\"></select>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </li>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"row \">\r" +
-    "\n" +
-    "                                <br/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                        </ul>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </form>\r" +
-    "\n" +
-    "        </script>\r" +
-    "\n" +
-    "        <script type=\"text/ng-template\" id=\"AddressModalContent.html\">\r" +
-    "\n" +
-    "            <form name=\"addressForm\" novalidate role=\"form\" ng-submit=\"page.model.contactAddressSubmit(page.model.AdrrObj)\">\r" +
-    "\n" +
-    "                <div class=\"modal-header\">\r" +
-    "\n" +
-    "                    <h3 class=\"modal-title text-center\" id=\"modal-title\">Contact Details\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </h3>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"modal-body\" id=\"modal-body\">\r" +
-    "\n" +
-    "                    <div class=\"modal-body clearfix pop_content_my\">\r" +
-    "\n" +
-    "                        <ul>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblHouse_flat\" class=\"pop_label_left\">House/Flat number<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right form-group\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtHouse_flat\" class=\"form-control\" maxlength=\"50\" tabindex=\"1\" required/>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblApartmentName\" class=\"pop_label_left\">Apartment name</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtApartmentName\" class=\"form-control\" maxlength=\"150\" tabindex=\"2\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblStreetName\" class=\"pop_label_left\">Street name</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtStreetName\" class=\"form-control\" maxlength=\"150\" tabindex=\"3\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblAreaName\" class=\"pop_label_left\">Area Name</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtAreaName\" class=\"form-control\" maxlength=\"150\" tabindex=\"4\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lbleducationGroup\" class=\"pop_label_left\">Landmark</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtLandmark\" class=\"form-control\" maxlength=\"150\" tabindex=\"5\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <country-directive countryshow=\"true\" cityshow=\"false\" othercity=\"false\" dcountry=\"page.model.AdrrObj.ddlCountryContact\" dstate=\"page.model.AdrrObj.ddlStateContact\" ddistrict=\"page.model.AdrrObj.ddlDistricContact\" require=true></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblCityParentContactPopupgroup\" class=\"pop_label_left\">City<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtCity\" class=\"form-control\" tabindex=\"9\" maxlength=\"100\" required/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblZip_pin\" class=\"pop_label_left\">Zip/Pin 	</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.AdrrObj.txtZip_no\" class=\"form-control\" maxlength=\"8\" tabindex=\"10\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <li class=\"row\">\r" +
-    "\n" +
-    "                                <br/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                        </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </form>\r" +
+    "            </slide-popup>\r" +
     "\n" +
     "        </script>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "        <script type=\"text/ng-template\" id=\"PhysicalAttributeModalContent.html\">\r" +
-    "\n" +
-    "            <form name=\"PhysicalForm\" novalidate role=\"form\" ng-submit=\"page.model.physicalAtrrSubmit(page.model.physicalObj)\">\r" +
-    "\n" +
-    "                <div class=\"modal-header\">\r" +
-    "\n" +
-    "                    <h3 class=\"modal-title text-center\" id=\"modal-title\">Physical Attributes & Health Details of Candidate\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </h3>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"modal-body\" id=\"modal-body\">\r" +
-    "\n" +
-    "                    <div class=\"modal-body clearfix pop_content_my\">\r" +
-    "\n" +
-    "                        <ul id=\"HealthDivClear\">\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblpDiet\" class=\"pop_label_left\">Diet</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
     "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <md-radio-group name=\"rbtlDiet\" style=\"font-weight: 700;color:black;\" layout=\"row\" ng-model=\"page.model.physicalObj.rbtlDiet\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"27\" class=\"md-primary\">Veg</md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"28\">Non Veg </md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"29\">Both </md-radio-button>\r" +
-    "\n" +
-    "                                    </md-radio-group>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblpDrink\" class=\"pop_label_left\">Drink</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <md-radio-group name=\"rbtlDrink\" style=\"font-weight: 700;color:black;\" layout=\"row\" ng-model=\"page.model.physicalObj.rbtlDrink\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"30\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"31\">No </md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"32\">Occasional </md-radio-button>\r" +
-    "\n" +
-    "                                    </md-radio-group>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblpSmoke\" class=\"pop_label_left\">Smoke</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    <md-radio-group name=\"rbtlSmoke\" style=\"font-weight: 700;color:black;\" layout=\"row\" ng-model=\"page.model.physicalObj.rbtlSmoke\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"30\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"31\">No </md-radio-button>\r" +
-    "\n" +
-    "                                        <md-radio-button value=\"32\">Occasional </md-radio-button>\r" +
-    "\n" +
-    "                                    </md-radio-group>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblpBodyType\" class=\"pop_label_left\">Body Type</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right  select-box-my\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.physicalObj.ddlBodyType\" typeofdata=\"'bodyType'\"></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblBodtWeight\" class=\"pop_label_left\">Body weight</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
-    "\n" +
-    "                                    <span>kgs</span>\r" +
-    "\n" +
-    "                                    <input ng-model=\"page.model.physicalObj.txtBWKgs\" class=\"form-control\" tabindex=\"5\" width=\"200px\" ng-keyup=\"page.model.converttolbs(page.model.physicalObj);\" />\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label id=\"lbllbs\" class=\"pop_label_left\">lbs</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <div>\r" +
-    "\n" +
-    "                                        <input ng-model=\"page.model.physicalObj.txtlbs\" class=\"form-control\" text=\"\" onkeyup=\"converttokgs(this.id);\" onkeydown=\"return checkwhitespace(event,this.id);\" onblur=\"validateLbs(this)\" tabindex=\"6\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblBloodGroup\" class=\"pop_label_left\">Blood Group</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                    <select multiselectdropdown ng-model=\"page.model.physicalObj.ddlBloodGroup\" typeofdata=\"'bloodGroup'\"></select>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblHealthConditions\" class=\"pop_label_left\">Health Conditions</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                                    <div class=\"select-box-my\">\r" +
-    "\n" +
-    "                                        <select multiselectdropdown ng-model=\"page.model.physicalObj.ddlHealthConditions\" typeofdata=\"'healthCondition'\"></select>\r" +
-    "\n" +
-    "                                    </div>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                                <label for=\"lblHealthCondition\" class=\"pop_label_left\">Health Condition Description</label>\r" +
-    "\n" +
-    "                                <div class=\"\">\r" +
-    "\n" +
-    "                                    <textarea ng-model=\"page.model.physicalObj.txtHealthCondition\" class=\"form-control\" tabindex=\"9\" rows=\"4\" style=\"width: 515px;\" maxlength=\"200\"></textarea>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                            <li class=\"row\">\r" +
-    "\n" +
-    "                                <br/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                            </li>\r" +
-    "\n" +
-    "                        </ul>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </form>\r" +
-    "\n" +
-    "        </script>\r" +
-    "\n" +
-    "        <script type=\"text/ng-template\" id=\"AboutFamilyModalContent.html\">\r" +
-    "\n" +
-    "            <form name=\"AboutForm\" novalidate role=\"form\" ng-submit=\"page.model.AboutMyfamilySubmit(page.model.aboutFamilyObj)\">\r" +
-    "\n" +
-    "                <div class=\"modal-header\">\r" +
-    "\n" +
-    "                    <h3 class=\"modal-title text-center\" id=\"modal-title\">About My Family\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"></ng-md-icon>\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </h3>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div class=\"form-group\">\r" +
-    "\n" +
-    "                        <label class=\"control-label\">(Do Not Mention Any Contact Information Phone Numbers, Email Id’s or your Profile May be Rejected.)</label>\r" +
-    "\n" +
-    "                        <textarea class=\"form-control\" ng-model=\"page.model.aboutFamilyObj.txtAboutUs\" required=\"required\" type=\"text\"> </textarea>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <div class=\"row\">\r" +
-    "\n" +
-    "                        <br/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </form>\r" +
-    "\n" +
-    "        </script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
-    "    <style>\r" +
+    "</div>\r" +
     "\n" +
-    "        .md-dialog-container {\r" +
+    "<style>\r" +
     "\n" +
-    "            z-index: 99999999999;\r" +
+    "    .md-dialog-container {\r" +
     "\n" +
-    "        }\r" +
+    "        z-index: 99999999999;\r" +
     "\n" +
-    "    </style>\r" +
+    "    }\r" +
     "\n" +
-    "    <script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
+    "</style>\r" +
+    "\n" +
+    "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
   );
 
 
@@ -11924,9 +10519,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"partnerPrefContent.html\">\r" +
     "\n" +
-    "\r" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\" name=\"partnerFormForm\" novalidate role=\"form\" ng-submit=\"page.model.partnerPrefSubmit(page.model.partnerObj)\" accessible-form>\r" +
+    "        </slide-popup>\r" +
+    "\n" +
+    "        <!--<form class=\"EditViewClass\" name=\"partnerFormForm\" novalidate role=\"form\" ng-submit=\"page.model.partnerPrefSubmit(page.model.partnerObj)\" accessible-form>\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -12312,7 +10909,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "        </form>\r" +
+    "        </form>-->\r" +
     "\n" +
     "    </script>\r" +
     "\n" +
@@ -12320,7 +10917,15 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "    <script type=\"text/ng-template\" id=\"partnerDescContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\" name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.partnerDescriptionSubmit(page.model.partnerDescObj)\">\r" +
+    "\r" +
+    "\n" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
+    "\n" +
+    "        </slide-popup>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <!--<form class=\"EditViewClass\" name=\"aboutForm\" novalidate role=\"form\" ng-submit=\"page.model.partnerDescriptionSubmit(page.model.partnerDescObj)\">\r" +
     "\n" +
     "            <div class=\"modal-header\">\r" +
     "\n" +
@@ -12360,7 +10965,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "        </form>\r" +
+    "        </form>-->\r" +
     "\n" +
     "    </script>\r" +
     "\n" +
@@ -13569,6 +12174,16 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
+    "    <script type=\"text/ng-template\" id=\"commonProfileSettingpopup.html\">\r" +
+    "\n" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
+    "\n" +
+    "        </slide-popup>\r" +
+    "\n" +
+    "    </script>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "</div>\r" +
     "\n" +
     "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
@@ -13710,151 +12325,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        <script type=\"text/ng-template\" id=\"propertyContent.html\">\r" +
     "\n" +
-    "            <form class=\"EditViewClass\" name=\"propertyForm\" novalidate role=\"form\" ng-submit=\"page.model.propertySubmit(page.model.proObj)\">\r" +
+    "            <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
     "\n" +
-    "                <div class=\"modal-header\">\r" +
-    "\n" +
-    "                    <h3 class=\"modal-title text-center\">Property Details\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </h3>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <ul id=\"ulproperty\">\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lblfamilyStatus\" class=\"pop_label_left\">Family Status</label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                <select multiselectdropdown ng-model=\"page.model.proObj.ddlFamilyStatus\" typeofdata=\"'familyStatus'\"></select>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix\">\r" +
-    "\n" +
-    "                            <label for=\"lblSharedProperty\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Is shared property</label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                                <md-radio-group name=\"rdlSharedProperty\" layout=\"row\" ng-model=\"page.model.proObj.rdlSharedProperty\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                    <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                    <md-radio-button value=\"0\"> No </md-radio-button>\r" +
-    "\n" +
-    "                                </md-radio-group>\r" +
-    "\n" +
-    "                            </md-input-container>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\" style=\"display: none;\">\r" +
-    "\n" +
-    "                            <label for=\"lblQuantity\" class=\"pop_label_left\">Quantity</label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                <input ng-model=\"page.model.proObj.txtQuantity\" class=\"form-control col-lg-3\" />\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lblValueofproperty\" class=\"pop_label_left\">Value of property</label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
-    "\n" +
-    "                                <input ng-model=\"page.model.proObj.txtValueofproperty\" class=\"form-control\" maxlength=\"5\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));\"\r" +
-    "\n" +
-    "                                />\r" +
-    "\n" +
-    "                                <span font-bold=\"true\">Lakhs</span>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <label for=\"lblQuantity\" class=\"pop_label_left\">Property description</label>\r" +
-    "\n" +
-    "                            <div class=\"\">\r" +
-    "\n" +
-    "                                <textarea ng-model=\"page.model.proObj.txtPropertydesc\" style=\"width:100%;\" maxlength=\"500\" rows=\"5\" width=\"515\"></textarea>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <div style=\"display: none;\">\r" +
-    "\n" +
-    "                                <label for=\"lblShowingviewprofile\" class=\"pop_label_left\">Showing view profile</label>\r" +
-    "\n" +
-    "                                <div class=\"pop_controls_right pop_radios_list\">\r" +
-    "\n" +
-    "                                    <label class=\"\">\r" +
-    "\n" +
-    "                    <input ng-model=\"page.model.proObj.rbtShowViewProfile\" value=\"1\" type=\"radio\" checked><span>&nbsp;Yes</span>\r" +
-    "\n" +
-    "                </label> &nbsp;\r" +
-    "\n" +
-    "                                    <label class=\"\"><input ng-model=\"page.model.proObj.rbtShowViewProfile\" value=\"0\" type=\"radio\"><span>&nbsp;No</span>\r" +
-    "\n" +
-    "                </label>\r" +
-    "\n" +
-    "                                </div>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"row \">\r" +
-    "\n" +
-    "                            <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                    </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </form>\r" +
+    "            </slide-popup>\r" +
     "\n" +
     "        </script>\r" +
     "\n" +
@@ -14125,149 +12598,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        <script type=\"text/ng-template\" id=\"referenceContent.html\">\r" +
     "\n" +
-    "            <form class=\"EditViewClass\" name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.refenceSubmit(page.model.refObj)\" accessible-form>\r" +
+    "            <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
     "\n" +
-    "                <div class=\"modal-header\">\r" +
-    "\n" +
-    "                    <h3 class=\"modal-title text-center\">Reference Details\r" +
-    "\n" +
-    "                        <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                            <ng-md-icon icon=\"close\" style=\"fill:#665454\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                        </a>\r" +
-    "\n" +
-    "                    </h3>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                    <ul>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"Relationshiptype\" class=\"pop_label_left\">Relationship type<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my input-group\">\r" +
-    "\n" +
-    "                                <select multiselectdropdown ng-model=\"page.model.refObj.ddlRelationshiptype\" typeofdata=\"'RelationshipType'\" required></select>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"Firstname\" class=\"pop_label_left\">First name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                <input ng-model=\"page.model.refObj.txtFname\" class=\"form-control\" tabindex=\"2\" maxlength=\"100\" required/>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"Lastname\" class=\"pop_label_left\">Last name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                <input ng-model=\"page.model.refObj.txtLname\" class=\"form-control\" tabindex=\"3\" maxlength=\"50\" required/>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"Professiondetails\" class=\"pop_label_left\">Profession</label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                <input ng-model=\"page.model.refObj.txtProfessiondetails\" class=\"form-control\" tabindex=\"4\" maxlength=\"200\" />\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <country-directive countryshow=\"true\" cityshow=\"false\" othercity=\"false\" dcountry=\"page.model.refObj.ddlCountry\" dstate=\"page.model.refObj.ddlState\" ddistrict=\"page.model.refObj.ddlDistrict\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"NativePlace\" class=\"pop_label_left\">Native Place</label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                <input ng-model=\"page.model.refObj.txtNativePlace\" class=\"form-control\" tabindex=\"8\" maxlength=\"100\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lblPresentlocation\" class=\"pop_label_left\">Present location </label>\r" +
-    "\n" +
-    "                            <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                                <input ng-model=\"page.model.refObj.txtPresentlocation\" class=\"form-control\" tabindex=\"9\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <contact-directive emailhide=\"true\" dmobile=\"page.model.refObj.ddlMobileCountryID\" strmobile=\"page.model.refObj.txtMobileNumber\" dalternative=\"page.model.refObj.ddlMobileCountryID2\" stralternative=\"page.model.refObj.txtMobileNumber2\" dland=\"page.model.refObj.ddlLandLineCountryID\"\r" +
-    "\n" +
-    "                            strareacode=\"page.model.refObj.txtAreCode\" strland=\"page.model.refObj.txtLandNumber\" strmail=\"page.model.refObj.txtEmails\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                            <label for=\"lblNarration\" class=\"pop_label_left\">Narration</label>\r" +
-    "\n" +
-    "                            <div class=\"\">\r" +
-    "\n" +
-    "                                <textarea ng-model=\"page.model.refObj.txtNarrations\" class=\"form-control\" textmode=\"MultiLine\" tabindex=\"21\" rows=\"4\" width=\"515\" maxlength=\"500\"></textarea>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                                <label style=\"color: #1e1c1c; font-size: 13px;\"></label>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                        <li class=\"row \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                        </li>\r" +
-    "\n" +
-    "                    </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </form>\r" +
+    "            </slide-popup>\r" +
     "\n" +
     "        </script>\r" +
     "\n" +
@@ -15210,671 +13543,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <script type=\"text/ng-template\" id=\"FBModalContent.html\">\r" +
+    "    <script type=\"text/ng-template\" id=\"ModalContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\" name=\"FBForm\" novalidate role=\"form\" ng-submit=\"FBForm.$valid  && page.model.FBSubmit(page.model.fbObj)\">\r" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
     "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Father's Brother Details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul id=\"ulFatherBrother\">\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"ElderYounger\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Elder/Younger<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"rdlFBElderORyounger\" layout=\"row\" ng-model=\"page.model.fbObj.rdlFBElderORyounger\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"324\" class=\"md-primary\">Elder</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"323\"> Younger </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                            <div ng-messages=\"FBForm.rdlFBElderORyounger.$invalid\">\r" +
-    "\n" +
-    "                                <div ng-if=\"FBForm.rdlFBElderORyounger.$invalid && (FBForm.$submitted)\">This field is required.</div>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </md-input-container>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Fatherbrothername\" class=\"pop_label_left\">Father's brother name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fbObj.txtFatherbrothername\" class=\"form-control\" maxlength=\"100\" tabindex=\"2\" required/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Educationdetails\" class=\"pop_label_left\">Education</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fbObj.txtFBEducationdetails\" class=\"form-control\" tabindex=\"3\" maxlength=\"150\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Professiondetails\" class=\"pop_label_left\">Profession</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fbObj.txtFBProfessiondetails\" class=\"form-control\" tabindex=\"4\" maxlength=\"200\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <contact-directive emailhide=\"true\" dmobile=\"page.model.fbObj.ddlFBMobileCountryID\" strmobile=\"page.model.fbObj.txtFBMobileNumber\" dalternative=\"page.model.fbObj.ddlFBMobileCountryID2\" stralternative=\"page.model.fbObj.txtFBMobileNumber2\" dland=\"page.model.fbObj.ddlFBLandLineCountry\"\r" +
-    "\n" +
-    "                        strareacode=\"page.model.fbObj.txtFBAreCode\" strland=\"page.model.fbObj.txtFBLandNumber\" strmail=\"page.model.fbObj.txtFBEmails\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblCurrentLocation\" class=\"pop_label_left\">Current Location</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fbObj.txtCurrentLocation\" class=\"form-control\" maxlength=\"150\" tabindex=\"16\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </form>\r" +
-    "\n" +
-    "    </script>\r" +
-    "\n" +
-    "    <script type=\"text/ng-template\" id=\"FSModalContent.html\">\r" +
-    "\n" +
-    "        <form class=\"EditViewClass\" name=\"FSForm\" novalidate role=\"form\" ng-submit=\"FSForm.$valid  && page.model.FSSubmit(page.model.fsObj)\">\r" +
-    "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Father's Sister Details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"FSElderYounger\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Elder/Younger<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"rdlFSElderYounger\" layout=\"row\" ng-model=\"page.model.fsObj.rdlFSElderYounger\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"326\" class=\"md-primary\">Elder</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"325\"> Younger </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                            <div ng-messages=\"FSForm.rdlFSElderYounger.$invalid\">\r" +
-    "\n" +
-    "                                <div ng-if=\"FSForm.rdlFSElderYounger.$invalid && (FSForm.$submitted)\">This field is required.</div>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </md-input-container>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Fathersistername\" class=\"pop_label_left\">Father's sister name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fsObj.txtFathersistername\" class=\"form-control\" maxlength=\"100\" tabindex=\"2\" required/>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Husbandfirstname\" class=\"pop_label_left\">Husband first name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fsObj.txtFSHusbandfirstname\" class=\"form-control\" maxlength=\"100\" tabindex=\"3\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Husbandlastname\" class=\"pop_label_left\">Husband last name </label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fsObj.txtFSHusbandlastname\" class=\"form-control\" maxlength=\"50\" tabindex=\"4\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"FSHEDucation\" class=\"pop_label_left\">FSH Education</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fsObj.txtFSHEDucation\" class=\"form-control\" tabindex=\"5\" maxlength=\"150\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Professiondetails\" class=\"pop_label_left\">FSH Profession</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fsObj.txtFSProfessiondetails\" class=\"form-control\" tabindex=\"6\" maxlength=\"200\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <country-directive countryshow=\"false\" dcountry=\"'1'\" cityshow=\"false\" othercity=\"false\" dstate=\"page.model.fsObj.ddlFSHStateID\" ddistrict=\"page.model.fsObj.ddlFSHDistrictID\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"FSHNativePlace\" class=\"pop_label_left\">Native place </label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fsObj.txtFSHNativePlace\" class=\"form-control\" tabindex=\"9\" maxlength=\"100\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <contact-directive emailhide=\"true\" dmobile=\"page.model.fsObj.ddlFSMObileCountryID\" strmobile=\"page.model.fsObj.txtFSMobileNumber\" dalternative=\"page.model.fsObj.ddlFSMObileCountryID2\" stralternative=\"page.model.fsObj.txtFSMobileNumber2\" dland=\"page.model.fsObj.ddlFSHLandCountryID\"\r" +
-    "\n" +
-    "                        strareacode=\"page.model.fsObj.txtFSHAreaNumber\" strland=\"page.model.fsObj.txtFSHNUmber\" strmail=\"page.model.fsObj.txtFSHEmails\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblCurrentLocation\" class=\"pop_label_left\">Current Location</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.fsObj.txtFSHCurrentLocation\" class=\"form-control\" tabindex=\"21\" maxlength=\"100\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row \">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </form>\r" +
-    "\n" +
-    "    </script>\r" +
-    "\n" +
-    "    <script type=\"text/ng-template\" id=\"MBModalContent.html\">\r" +
-    "\n" +
-    "        <form class=\"EditViewClass\" name=\"MBForm\" novalidate role=\"form\" ng-submit=\"MBForm.$valid  && page.model.MBSubmit(page.model.mbObj)\">\r" +
-    "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Mother's Brother Details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul id=\"ulmotherbrother\">\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"MotherElderYounger\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Elder/Younger<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"rdlMBElderYounger\" layout=\"row\" ng-model=\"page.model.mbObj.rdlMBElderYounger\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"328\" class=\"md-primary\">Elder</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"327\"> Younger </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                            <div ng-messages=\"MBForm.rdlMBElderYounger.$invalid\">\r" +
-    "\n" +
-    "                                <div ng-if=\"MBForm.rdlMBElderYounger.$invalid && (MBForm.$submitted)\">This field is required.</div>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </md-input-container>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Motherbrothername\" class=\"pop_label_left\">Mother's brother name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.mbObj.txtMBName\" class=\"form-control\" maxlength=\"100\" tabindex=\"2\" required/>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"MBEducation\" class=\"pop_label_left\">Education</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.mbObj.txtMBEducation\" class=\"form-control\" tabindex=\"3\" maxlength=\"150\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"MBProfessiondetails\" class=\"pop_label_left\">Profession</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.mbObj.txtMBProfessiondetails\" class=\"form-control\" tabindex=\"4\" maxlength=\"200\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <contact-directive emailhide=\"true\" dmobile=\"page.model.mbObj.ddlMBCountriCode\" strmobile=\"page.model.mbObj.txtMBMobileNum\" dalternative=\"page.model.mbObj.ddlMBCountriCode2\" stralternative=\"page.model.mbObj.txtMBMobileNum2\" dland=\"page.model.mbObj.ddlMBLandLineCountryCode\"\r" +
-    "\n" +
-    "                        strareacode=\"page.model.mbObj.txtMBAreaCode\" strland=\"page.model.mbObj.txtMBLandLineNum\" strmail=\"page.model.mbObj.txtMBEmails\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"MBCurrentLocation\" class=\"pop_label_left\">Current Location</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.mbObj.txtMBCurrentLocation\" class=\"form-control\" tabindex=\"16\" maxlength=\"100\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row \">\r" +
-    "\n" +
-    "                        <!--<div class=\"col-lg-9\">\r" +
-    "\n" +
-    "                        <input value=\"Submit\" class=\"button_custom  pull-right\" type=\"submit\">\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                    <div class=\"col-lg-3\">\r" +
-    "\n" +
-    "                        <input value=\"Cancel\" class=\"button_custom button_custom_reset pull-right\" ng-click=\"page.model.cancel();\" type=\"button\">\r" +
-    "\n" +
-    "                    </div>-->\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </form>\r" +
-    "\n" +
-    "    </script>\r" +
-    "\n" +
-    "    <script type=\"text/ng-template\" id=\"MSModalContent.html\">\r" +
-    "\n" +
-    "        <form class=\"EditViewClass\" name=\"MSForm\" novalidate=\"true\" ng-submit=\"MSForm.$valid  && page.model.MSSubmit(page.model.msObj)\">\r" +
-    "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Mother's Sister Details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul id=\"ulmothersister\">\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"MsElderYounger\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Elder/Younger<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        <md-input-container style=\"font-weight: 700;color:black;\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"rdlMSElderYounger\" layout=\"row\" ng-model=\"page.model.msObj.rdlMSElderYounger\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"330\" class=\"md-primary\">Elder</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"329\"> Younger </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                            <div ng-messages=\"MSForm.rdlMSElderYounger.$invalid\">\r" +
-    "\n" +
-    "                                <div ng-if=\"MSForm.rdlMSElderYounger.$invalid && (MSForm.$submitted)\">This field is required.</div>\r" +
-    "\n" +
-    "                            </div>\r" +
-    "\n" +
-    "                        </md-input-container>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"Fathersistername\" class=\"pop_label_left\">Mother's sister name<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.msObj.txtMSName\" class=\"form-control\" maxlength=\"100\" tabindex=\"2\" required/>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"MsHusbandfirstname\" class=\"pop_label_left\">Husband first name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.msObj.txtMsHusbandfirstname\" class=\"form-control\" maxlength=\"100\" tabindex=\"3\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"MsHusbandlastname\" class=\"pop_label_left\">Husband last name </label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.msObj.txtMsHusbandlastname\" class=\"form-control\" maxlength=\"50\" tabindex=\"4\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <country-directive countryshow=\"false\" dcountry=\"'1'\" cityshow=\"false\" othercity=\"false\" dstate=\"page.model.msObj.ddlMSisState\" ddistrict=\"page.model.msObj.ddlMsDistrict\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"MSHNativePlace\" class=\"pop_label_left\">Native place </label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.msObj.txtMSNativePlace\" class=\"form-control\" tabindex=\"7\" maxlength=\"100\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"MSHEducationdet\" class=\"pop_label_left\">Education</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.msObj.txtMSHEducation\" class=\"form-control\" tabindex=\"8\" maxlength=\"150\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"MSProfessiondetails\" class=\"pop_label_left\">Profession</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.msObj.txtMSProfessiondetails\" class=\"form-control\" tabindex=\"9\" maxlength=\"200\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <contact-directive emailhide=\"true\" dmobile=\"page.model.msObj.ddlMSCounCodeID\" strmobile=\"page.model.msObj.txtMSMObileNum\" dalternative=\"page.model.msObj.ddlMSCounCodeID2\" stralternative=\"page.model.msObj.txtMSMObileNum2\" dland=\"page.model.msObj.ddlMSLLCounCode\"\r" +
-    "\n" +
-    "                        strareacode=\"page.model.msObj.txtMSArea\" strland=\"page.model.msObj.txtLLNum\" strmail=\"page.model.msObj.txtMSEmail\"></contact-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix form-group\">\r" +
-    "\n" +
-    "                        <label for=\"lblMSCurrentLocation\" class=\"pop_label_left\">Current Location</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input ng-model=\"page.model.msObj.txtMSCurrentLocation\" class=\"form-control\" maxlength=\"100\" tabindex=\"21\" />\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row \">\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </form>\r" +
+    "        </slide-popup>\r" +
     "\n" +
     "    </script>\r" +
     "\n" +
@@ -17369,7 +15042,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <script type=\"text/ng-template\" id=\"SibblingCountPopup.html\">\r" +
+    "    <!--<script type=\"text/ng-template\" id=\"SibblingCountPopup.html\">\r" +
     "\n" +
     "        <form class=\"EditViewClass\" name=\"sibblingCoutForm\" novalidate role=\"form\" ng-submit=\"page.model.sibblingCountsSubmit(page.model.SibCountObj)\">\r" +
     "\n" +
@@ -17827,7 +15500,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <div class=\"pop_controls_right select-box-my\">\r" +
     "\n" +
-    "                                    <input ng-model=\"page.model.broObj.txtBroSpousefatherCity\" class=\"form-control\" tabindex=\"41\" maxlength=\"100\" />\r" +
+    "                                    <input ng-model=\"page.model.broObj.txtBroSpousefatherCity\" <cl></cl>ass=\"form-control\" tabindex=\"41\" maxlength=\"100\" />\r" +
     "\n" +
     "                                </div>\r" +
     "\n" +
@@ -17888,8 +15561,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "                    <li class=\"clearfix\">\r" +
     "\n" +
     "                        <label for=\"lblElderYounger\" style=\"padding-top: 2%;\" class=\"pop_label_left\">Elder/Younger<span style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "                        <div class=\"radio-group-my\">\r" +
     "\n" +
@@ -18223,19 +15894,19 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        </form>\r" +
     "\n" +
+    "    </script>-->\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"commonSibblingpopup.html\">\r" +
+    "\n" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
+    "\n" +
+    "        </slide-popup>\r" +
+    "\n" +
     "    </script>\r" +
     "\n" +
     "</div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -19034,409 +16705,335 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <script type=\"text/ng-template\" id=\"SpouseContent.html\">\r" +
+    "    <script type=\"text/ng-template\" id=\"modelContent.html\">\r" +
     "\n" +
-    "        <form class=\"EditViewClass\" name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.spouseSubmit(page.model.spouObj);\" accessible-form>\r" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
     "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Spouse Details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"Fathersistername\" class=\"pop_label_left\">Name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtSpousename\" class=\"form-control\" maxlength=\"150\" tabindex=\"1\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"spouceEducation\" class=\"pop_label_left\">Education</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtSpoueEducation\" class=\"form-control\" maxlength=\"150\" tabindex=\"2\" />\r" +
-    "\n" +
-    "                            <label id=\"identityspouse\" visible=\"false\"></label>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"spouseProfession\" class=\"pop_label_left\">Profession</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtspouseProfession\" class=\"form-control\" maxlength=\"200\" tabindex=\"3\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblspouseHouseFlatnumber\" class=\"pop_label_left\">House/Flat number</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtHouseFlatnumber\" class=\"form-control\" maxlength=\"100\" tabindex=\"4\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblApartmentname\" class=\"pop_label_left\">Apartment name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtApartmentname\" class=\"form-control\" maxlength=\"100\" tabindex=\"5\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"Streetname\" class=\"pop_label_left\">Street name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtStreetname\" class=\"form-control\" maxlength=\"100\" tabindex=\"6\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblAreaname\" class=\"pop_label_left\">Area name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtAreaname\" class=\"form-control\" maxlength=\"100\" tabindex=\"7\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblLandmark\" class=\"pop_label_left\">Landmark</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtLandmark\" class=\"form-control\" maxlength=\"100\" tabindex=\"8\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <country-directive countryshow=\"true\" cityshow=\"true\" dcountry=\"page.model.spouObj.ddlspouseCountry\" dstate=\"page.model.spouObj.ddlspouseState\" ddistrict=\"page.model.spouObj.ddlspouseDistrict\" dcity=\"page.model.spouObj.ddlspouseCity\"></country-directive>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblZip\" class=\"pop_label_left\">Zip</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtspouseZip\" class=\"form-control\" maxlength=\"8\" tabindex=\"13\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblMarriedon\" class=\"pop_label_left\">Married on</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <date-picker strdate=\"page.model.spouObj.txtMarriedon\"></date-picker>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblSeparateddate\" class=\"pop_label_left\">Separated date</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                            <date-picker strdate=\"page.model.spouObj.txtSeparateddate\"></date-picker>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"divorse\" class=\"pop_label_left\">Legally divorced</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right pop_radios_list\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"IsHighestDegree\" layout=\"row\" ng-model=\"page.model.spouObj.rbtspousediverse\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"0\"> No </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblLegalDivorsedate\" class=\"pop_label_left\">Legally Divorced date</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <date-picker strdate=\"page.model.spouObj.txtLegalDivorsedate\"></date-picker>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblfatherspouse\" class=\"pop_label_left\">Father first name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtspousefather\" class=\"form-control\" maxlength=\"100\" tabindex=\"18\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblfatherspouselastname\" class=\"pop_label_left\">Father last name</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtspouselastname\" class=\"form-control\" maxlength=\"50\" tabindex=\"19\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblpreviousmarriage\" class=\"pop_label_left\">Notes about previous marriage</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.spouObj.txtpreviousmarriage\" class=\"form-control\" maxlength=\"500\" tabindex=\"20\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"spousefamily\" class=\"pop_label_left\">Family planning</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right pop_radios_list\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"rbtnspousefamily\" layout=\"row\" ng-model=\"page.model.spouObj.rbtnspousefamily\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"1\" class=\"md-primary\">Yes</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"0\"> No </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblspousechidrens\" class=\"pop_label_left\">No of children</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown id=\"Select4\" ng-model=\"page.model.spouObj.ddlspousechidrens\" ng-options=\"item1.value as item1.label for item1 in page.model.noofChldrenAray\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row\">\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        </form>\r" +
+    "        </slide-popup>\r" +
     "\n" +
     "    </script>\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    <script type=\"text/ng-template\" id=\"spouseChildContent.html\">\r" +
-    "\n" +
-    "        <form class=\"EditViewClass\" name=\"profForm\" novalidate role=\"form\" ng-submit=\"page.model.childSubmit(page.model.childObj);\" accessible-form>\r" +
-    "\n" +
-    "            <div class=\"modal-header\">\r" +
-    "\n" +
-    "                <h3 class=\"modal-title text-center\" id=\"modal-title\">Children Details\r" +
-    "\n" +
-    "                    <a href=\"javascript:void(0);\" ng-click=\"page.model.cancel();\">\r" +
-    "\n" +
-    "                        <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"25\">Delete</ng-md-icon>\r" +
-    "\n" +
-    "                    </a>\r" +
-    "\n" +
-    "                </h3>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"modal-body clearfix pop_content_my\" id=\"modal-body\">\r" +
-    "\n" +
-    "                <ul>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"childname\" class=\"pop_label_left\">Name of the child </label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <input type=\"text\" ng-model=\"page.model.childObj.txtchildname\" class=\"form-control\" maxlength=\"150\" tabindex=\"1\" />\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"genderchild\" class=\"pop_label_left\">Gender of the child</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right pop_radios_list\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"rdlgenderchild\" layout=\"row\" ng-model=\"page.model.childObj.rdlgenderchild\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"1\" class=\"md-primary\">Male</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"2\"> Female </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lbldobchild\" class=\"pop_label_left\">DOB of the child</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <date-picker strdate=\"page.model.childObj.txtdobchild\"></date-picker>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"genderchild\" class=\"pop_label_left\">Child staying with</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right pop_radios_list\">\r" +
-    "\n" +
-    "                            <md-radio-group ng-required=\"true\" name=\"rbtChildstayingWith\" layout=\"row\" ng-model=\"page.model.childObj.rbtChildstayingWith\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
-    "\n" +
-    "                                <md-radio-button value=\"1\" class=\"md-primary\">Father Side</md-radio-button>\r" +
-    "\n" +
-    "                                <md-radio-button value=\"2\"> Mother Side </md-radio-button>\r" +
-    "\n" +
-    "                            </md-radio-group>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"clearfix\">\r" +
-    "\n" +
-    "                        <label for=\"lblspouserelation\" class=\"pop_label_left\">Child staying with Relation</label>\r" +
-    "\n" +
-    "                        <div class=\"pop_controls_right select-box-my\">\r" +
-    "\n" +
-    "                            <select multiselectdropdown ng-model=\"page.model.childObj.ddlrelation\" typeofdata=\"'childStayingWith'\"></select>\r" +
-    "\n" +
-    "                        </div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                    <li class=\"row\">\r" +
-    "\n" +
-    "                        <edit-footer></edit-footer>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
     "\r" +
-    "\n" +
-    "        </form>\r" +
-    "\n" +
-    "    </script>\r" +
     "\n" +
     "</div>\r" +
     "\n" +
     "<script src=\"build/js/custom.js\" type=\"text/javascript\"></script>"
+  );
+
+
+  $templateCache.put('app/popup/index.html',
+    "<div ng-class=\"'EditViewClass'\" class=\"right_col\" style=\"padding-top: 6%;padding-left: 1%;\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <button ng-click=\"openModel();\">    Add</button>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <slide-popup model=\"model\">\r" +
+    "\n" +
+    "    </slide-popup>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('common/directives/slidePopup/index.html',
+    "<form class=\"EditViewClass\" name=\"dynamicForm\" novalidate role=\"form\" ng-submit=\"dynamicForm.$valid && submit();\" accessible-form>\r" +
+    "\n" +
+    "    <div class=\"modal-header\">\r" +
+    "\n" +
+    "        <h3 class=\"modal-title text-center\" id=\"modal-title\">{{model.popupHeader}}\r" +
+    "\n" +
+    "            <a href=\"javascript:void(0);\" ng-click=\"cancel();\">\r" +
+    "\n" +
+    "                <ng-md-icon icon=\"close\" style=\"fill:#c73e5f\" class=\"pull-right\" size=\"20\"> </ng-md-icon>\r" +
+    "\n" +
+    "            </a>\r" +
+    "\n" +
+    "        </h3>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div class=\"modal-body\">\r" +
+    "\n" +
+    "        <ul class=\"modal-body pop_content_my clearfix\">\r" +
+    "\n" +
+    "            <li ng-show=\"item.parentDependecy===undefined?true:model[item.parentDependecy](item)\" class=\"clearfix form-group\" ng-repeat=\"item in model.popupdata\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <label ng-if=\"item.controlType!=='country' && item.controlType!=='contact'  && item.controlType!=='bindHtml' && item.controlType!=='about'\" for=\"item.lblname\" ng-class=\"{'radiocls':item.controlType==='radio'}\" class=\"pop_label_left\">{{item.lblname}}<span ng-if=\"item.required\" style=\"color: red; margin-left: 3px;\">*</span></label>\r" +
+    "\n" +
+    "                <label class=\"col-lg-12\" ng-class=\"item.classname\" ng-if=\"item.controlType==='bindHtml'\">\r" +
+    "\n" +
+    "               <span ng-bind-html=\"item.html\"></span>\r" +
+    "\n" +
+    "                </label>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"!item.dataSource && item.controlType==='select'\" class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" typeofdata=\"item.typeofdata\" ng-required=\"item.required\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='select' && item.dataSource\" class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" ng-required=\"item.required\" ng-options=\"item1.value as item1.label for item1 in item.dataSource\"></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='Changeselect'\" class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" ng-required=\"item.required\" ng-options=\"itm.value as itm.label for itm in item.dataSource\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='textbox'\" class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                    <input type=\"text\" ng-model=\"model[item.ngmodel]\" maxlength=\"150\" class=\"form-control\" ng-required=\"item.required\" />\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='textboxNumber'\" class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                    <input type=\"text\" ng-model=\"model[item.ngmodel]\" maxlength=\"{{item.maxLength}}\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)))\"\r" +
+    "\n" +
+    "                        class=\"form-control\" ng-required=\"item.required\" />\r" +
+    "\n" +
+    "                    <span ng-if=\"item.span\" font-bold=\"true\">{{item.spanText}}</span>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='textarea'\">\r" +
+    "\n" +
+    "                    <textarea ng-model=\"model[item.ngmodel]\" maxlength=\"500\" rows=\"4\" cols=\"20\" ng-required=\"item.required\" style=\"max-width:515px;width:100%;\"></textarea>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='textareaSide'\" class=\"pop_controls_right select-box-my\" style=\"padding-bottom:2%;\">\r" +
+    "\n" +
+    "                    <textarea type=\"text\" ng-model=\"model[item.ngmodel]\" rows=\"2\" class=\"form-control\" ng-required=\"item.required\" style=\"width:96%;\" />\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='textboxSelect'\" class=\"pop_controls_right select-box-my select-box-my-double\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodelSelect]\" typeofdata=\"item.typeofdata\"></select>\r" +
+    "\n" +
+    "                    <input ng-model=\"model[item.ngmodelText]\" class=\"form-control\" maxlength=\"7\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)));\"\r" +
+    "\n" +
+    "                    />\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <md-input-container ng-if=\"item.controlType==='radio'\" style=\"font-weight: 700; color: black;\">\r" +
+    "\n" +
+    "                    <md-radio-group ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\" layout=\"row\" ng-model=\"model[item.ngmodel]\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "\n" +
+    "                        <md-radio-button ng-value=\"rd.value\" ng-repeat=\"rd in item.dataSource\" class=\"md-primary\">{{rd.label}}</md-radio-button>\r" +
+    "\n" +
+    "                    </md-radio-group>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </md-input-container>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='checkbox'\" class=\"pop_controls_right\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <md-checkbox ng-model=\"model[item.ngmodel]\" name=\"chkisconfidential\" aria-label=\"Checkbox 1\" ng-change=\"model[item.method](model[item.ngmodel],item.ngmodel)\">\r" +
+    "\n" +
+    "                    </md-checkbox>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='date'\" class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                    <date-picker strdate=\"model[item.ngmodel]\"></date-picker>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='country'\">\r" +
+    "\n" +
+    "                    <country-directive countryshow=\"item.countryshow\" cityshow=\"item.cityshow\" othercity=\"item.othercity\" dcountry=\"model[item.dcountry]\" dstate=\"model[item.dstate]\" ddistrict=\"model[item.ddistrict]\" dcity=\"model[item.dcity]\" strothercity=\"model[item.strothercity]\"></country-directive>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='contact'\">\r" +
+    "\n" +
+    "                    <contact-directive emailhide=\"item.emailhide\" dmobile=\"model[item.dmobile]\" strmobile=\"model[item.strmobile]\" dalternative=\"model[item.dalternative]\" stralternative=\"model[item.stralternative]\" dland=\"model[item.dland]\" strareacode=\"model[item.strareacode]\"\r" +
+    "\n" +
+    "                        strland=\"model[item.strland]\" strmail=\"model[item.strmail]\"></contact-directive>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='housewife'\" class=\"pop_controls_right\">\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <input ng-model=\"model[item.ngmodelText]\" class=\"form-control\" maxlength=\"200\" tabindex=\"32\" />\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                    <label class=\"checkbox-inline checkbox_my\" style=\"padding: 5px 0 6px 0;\">\r" +
+    "\n" +
+    "                <input type=checkbox ng-model=\"model[item.ngmodelChk]\"  ng-change=\"model[item.ngmodelText]=chkChange(model[item.ngmodelChk]);\"/><span>&nbsp;HouseWife</span>\r" +
+    "\n" +
+    "                    </label>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='about'\" class=\"form-group\">\r" +
+    "\n" +
+    "                    <label class=\"control-label\" style=\"color: #9b2828; font-size: 13px;\">{{item.displayTxt}}</label>\r" +
+    "\n" +
+    "                    <textarea ng-model=\"model[item.ngmodel]\" ng-maxlength=\"item.maxlength\" rows=\"4\" cols=\"20\" ng-required=\"item.required\" style=\"max-width:515px;width:100%;\"></textarea>\r" +
+    "\n" +
+    "                    <label id=\"Label1\" style=\"color: red; font-size: 13px;\" class=\"pull-right\" ng-if=\"item.maxlength!=undefined\">(max {{item.maxlength}} characters)</label>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='multiselect'\" class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" multiple typeofdata=\"item.typeofdata\" ng-required=\"item.required\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='Changemultiselect'\" class=\"pop_controls_right select-box-my input-group\">\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" multiple ng-required=\"item.required\" ng-options=\"itm.value as itm.label for itm in item.dataSource\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='doublemultiselect'\" class=\"pop_controls_right select-box-my select-box-my-double input-group\">\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodelSelect1]\" typeofdata=\"item.typeofdata\" ng-required=\"item.required\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodelSelect2]\" typeofdata=\"item.typeofdata\" ng-required=\"item.required\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='astroTimeOfBirth'\" class=\"pop_controls_right select-box-my select-box-my-trible select-box-my-trible3 input-group\">\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model.ddlFromHours\" ng-options=\"item.value as item.label for item in model.hrsbindArr\" required></select>\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model.ddlFromMinutes\" ng-options=\"item.value as item.label for item in model.minbindArr\" required></select>\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model.ddlFromSeconds\" ng-options=\"item.value as item.label for item in model.secbindArr\" required></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </li>\r" +
+    "\n" +
+    "            <li class=\"row\">\r" +
+    "\n" +
+    "                <br/>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                <div class=\"col-lg-9\">\r" +
+    "\n" +
+    "                    <button class=\"button_custom  pull-right\" ng-disabled=\"loading\" type=\"submit\" promise-btn=\"page.model.submitPromise\">Submit</button>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"col-lg-3\">\r" +
+    "\n" +
+    "                    <input value=\"Cancel\" class=\"button_custom button_custom_reset pull-right\" ng-click=\"cancel();\" type=\"button\"></div>\r" +
+    "\n" +
+    "            </li>\r" +
+    "\n" +
+    "        </ul>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</form>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "<style>\r" +
+    "\n" +
+    "    .requiredStar::after {\r" +
+    "\n" +
+    "        content: \" * \";\r" +
+    "\n" +
+    "        float: right;\r" +
+    "\n" +
+    "        color: red;\r" +
+    "\n" +
+    "        font-size: 22px !important;\r" +
+    "\n" +
+    "        padding-left: 6px;\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    .radiocls {\r" +
+    "\n" +
+    "        padding-top: 2%;\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    .multiselect {\r" +
+    "\n" +
+    "        border: solid 1px #ADA2A2 !important;\r" +
+    "\n" +
+    "        color: #000;\r" +
+    "\n" +
+    "        background: #fff !important;\r" +
+    "\n" +
+    "        box-shadow: none !important;\r" +
+    "\n" +
+    "        height: 34px !important;\r" +
+    "\n" +
+    "        margin: 0 !important;\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    .help-block {\r" +
+    "\n" +
+    "        padding-left: 40%;\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "</style>"
   );
 
 
@@ -20094,8 +17691,45 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                 { "label": "--select-- ", "title": "--select--", "value": "" },
                 { "label": "Normal", "title": "Normal", "value": 25 },
                 { "label": "Physically Challenged", "title": "Physically Challenged", "value": 26 }
+            ],
+            // added
+            'boolType': [
+                { "label": "Yes", "title": "Yes", "value": 1 },
+                { "label": "No", "title": "No", "value": 0 }
+            ],
+            'gender': [
+                { "label": "Male", "title": "Male", "value": 1 },
+                { "label": "Female", "title": "Female", "value": 2 }
+            ],
+            'Domicile': [
+                { "label": "India", "title": "India", "value": 0 },
+                { "label": "Abroad", "title": "Abroad", "value": 1 },
+                { "label": "Both", "title": "Both", "value": 2 }
+            ],
+            'Diet': [
+                { "label": "Veg", "title": "Veg", "value": 27 },
+                { "label": "Non Veg", "title": "Non Veg", "value": 28 },
+                { "label": "Both", "title": "Both", "value": 29 }
+            ],
+            'Kujadosham': [
+                { "label": "Yes", "title": "Yes", "value": 0 },
+                { "label": "No", "title": "No", "value": 1 },
+                { "label": "Does Not Matter", "title": "Does Not Matter", "value": 2 }
+            ],
+            'preferredStarlanguage': [
+                { "label": "Telugu", "title": "Telugu", "value": 1 },
+                { "label": "Tamil", "title": "Tamil", "value": 2 },
+                { "label": "Kannada", "title": "Kannada", "value": 3 }
+            ],
+            'StarPreference': [
+                { "label": "Preferredstars", "title": "Preferredstars", "value": 0 },
+                { "label": "NonPreferredstars", "title": "NonPreferredstars", "value": 1 }
+            ],
+            'Drink': [
+                { "label": "Yes", "title": "Yes", "value": 30 },
+                { "label": "No", "title": "No", "value": 31 },
+                { "label": "Occasional", "title": "Occasional", "value": 32 }
             ]
-
         });
 
 }());
@@ -20173,12 +17807,17 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                 modalpopupopen.close();
             },
             listSelectedVal: function(val) {
+                debugger;
                 var str = null;
                 if (val !== undefined && val !== null && val !== '') {
                     if (angular.isString(val)) {
                         str = val === '' ? null : val;
-                    } else {
+                    } else if (angular.isNumber(val)) {
+                        str = val === '' ? null : val;
+                    } else if (angular.isArray(val)) {
                         str = val.join(',');
+                    } else {
+                        str = val;
                     }
                 }
                 return str;
@@ -20405,10 +18044,10 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
         return directive;
 
         function link(scope, element, attrs) {
-
+            debugger;
             scope.amob = (scope.stralternative !== null && scope.stralternative !== '' && scope.stralternative !== undefined) ? true : false;
             scope.land = (scope.strareacode !== null && scope.strareacode !== '' && scope.strareacode !== undefined) ? true : false;
-            scope.mail = (scope.strmail !== null && scope.strmail !== '' && scope.strmail !== undefined) ? true : false;
+            scope.mail = (scope.strmail !== null && scope.strmail !== '' && scope.strmail !== undefined && scope.emailhide === true) ? true : false;
             scope.pmob = (scope.strmobile !== null && scope.strmobile !== '' && scope.strmobile !== undefined) ? true : false;
 
             scope.showhidemob = function(ev, type) {
@@ -20508,9 +18147,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
         function link(scope, element, attrs) {
 
-            // scope.model = countryArrayModel;
             if (scope.countryshow === true) {
-
                 if (scope.dcountry !== undefined) {
                     scope.stateArr = commonFactory.StateBind(scope.dcountry);
                 }
@@ -20669,6 +18306,30 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
     angular
         .module('KaakateeyaEmpEdit')
+        .directive('openPopup', directive);
+
+    directive.$inject = ['$window'];
+
+    function directive($window) {
+        // Usage:
+        //     <directive></directive>
+        // Creates:
+        //
+        var directive = {
+            link: link,
+            restrict: 'EA'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {}
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
         .directive('pageReview', directive);
 
     directive.$inject = ['commonFactory', '$uibModal', 'baseService', 'baseModel', 'authSvc'];
@@ -20809,6 +18470,192 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
         }
     }
 
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .directive('slidePopup', directive);
+
+    directive.$inject = ['commonFactory', '$uibModal', 'arrayConstantsEdit', 'SelectBindService', 'popupSvc', 'authSvc', '$stateParams'];
+
+    function directive(commonFactory, uibModal, cons, SelectBindService, popupSvc, authSvc, stateParams) {
+
+        var directive = {
+            link: link,
+            restrict: 'EA',
+            transclude: true,
+            scope: {
+                model: '=',
+                eventtype: '='
+            },
+            templateUrl: 'common/directives/slidePopup/index.html'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+
+            var CustID = stateParams.CustID;
+            var loginEmpid = authSvc.LoginEmpid();
+            var AdminID = authSvc.isAdmin();
+            scope.getExpression = function(val) {
+                console.log(val);
+                return val;
+            }
+            scope.ddlChange = function(value, value2, text, apiPath) {
+                if (apiPath) {
+
+                    if (value2) {
+
+                        SelectBindService[apiPath](commonFactory.listSelectedVal(value), commonFactory.listSelectedVal(value2)).then(function(res) {
+                            _.map(_.where(scope.model.popupdata, { parentName: text }), function(item) {
+                                var depData = [];
+                                _.each(res.data, function(item) {
+                                    depData.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                                });
+                                item.dataSource = depData;
+                            });
+                        });
+                    } else {
+                        SelectBindService[apiPath](commonFactory.listSelectedVal(value)).then(function(res) {
+                            _.map(_.where(scope.model.popupdata, { parentName: text }), function(item) {
+                                var depData = [];
+
+                                _.each(res.data, function(item) {
+                                    depData.push({ "label": item.Name, "title": item.Name, "value": item.ID });
+                                });
+                                item.dataSource = [];
+                                item.dataSource = depData;
+                            });
+                        });
+                    }
+                }
+
+            };
+
+            _.each(scope.model.popupdata, function(item) {
+                if (item.arrbind) {
+                    var Arr = cons[item.arrbind];
+                    if (Arr !== undefined && Arr.length > 0 && angular.lowercase(Arr[0].title) === '--select--') {
+                        Arr.splice(0, 1);
+                    }
+                    item.dataSource = Arr;
+                }
+                if (item.ownArray) {
+                    var Array = scope.model[item.ownArray];
+                    if (Array !== undefined && Array.length > 0 && angular.lowercase(Array[0].title) === '--select--') {
+                        Array.splice(0, 1);
+                    }
+                    item.dataSource = Array;
+                }
+                if (scope.eventtype === 'add') {
+                    if (item.ngmodel)
+                        scope.model[item.ngmodel] = undefined;
+                    else if (item.controlType === 'country') {
+                        scope.model[item.dcountry] = undefined;
+                        scope.model[item.dstate] = undefined;
+                        scope.model[item.ddistrict] = undefined;
+                        scope.model[item.dcity] = undefined;
+                        scope.model[item.strothercity] = undefined;
+                    } else if (item.controlType === 'textboxSelect') {
+                        scope.model[item.ngmodelSelect] = undefined;
+                        scope.model[item.ngmodelText] = undefined;
+                    } else if (item.controlType === 'contact') {
+                        scope.model[item.dmobile] = undefined;
+                        scope.model[item.strmobile] = undefined;
+                        scope.model[item.dalternative] = undefined;
+                        scope.model[item.stralternative] = undefined;
+                        scope.model[item.dland] = undefined;
+                        scope.model[item.strareacode] = undefined;
+                        scope.model[item.strland] = undefined;
+                        scope.model[item.strmail] = undefined;
+                    }
+
+                }
+
+                if (scope.model[item.ngmodel] && item.childName) {
+                    scope.ddlChange(scope.model[item.ngmodel], scope.model[item.secondParent], item.childName, item.changeApi);
+                }
+            });
+
+            scope.model.returnString = function(str) {
+                return 'dynamicForm.' + str + '.$invalid';
+            };
+            scope.submit = function() {
+
+                var parameters = {};
+                _.each(scope.model.popupdata, function(item) {
+                    if (item.parameterValue) {
+                        parameters[item.parameterValue] = commonFactory.listSelectedVal(scope.model[item.ngmodel]);
+                    } else if (item.controlType === 'country') {
+                        parameters[item.countryParameterValue] = item.countryshow === false ? 1 : scope.model[item.dcountry];
+                        parameters[item.stateParameterValue] = scope.model[item.dstate];
+                        parameters[item.districtParameterValue] = scope.model[item.ddistrict];
+                        parameters[item.cityParameterValue] = scope.model[item.dcity];
+                        parameters[item.cityotherParameterValue] = scope.model[item.strothercity];
+                    } else if (item.controlType === 'textboxSelect') {
+                        parameters[item.parameterValueSelect] = scope.model[item.ngmodelSelect];
+                        parameters[item.parameterValueText] = scope.model[item.ngmodelText];
+                    } else if (item.controlType === 'contact') {
+                        parameters[item.mobileCodeIdParameterValue] = scope.model[item.dmobile];
+                        parameters[item.mobileNumberParameterValue] = scope.model[item.strmobile];
+                        parameters[item.landCountryCodeIdParameterValue] = commonFactory.checkvals(scope.model[item.dalternative]) ? scope.model[item.dalternative] : (commonFactory.checkvals(scope.model[item.dland]) ? scope.model[item.dland] : null);
+                        parameters[item.landAreaCodeIdParameterValue] = commonFactory.checkvals(scope.model[item.stralternative]) ? null : (commonFactory.checkvals(scope.model[item.strareacode]) ? scope.model[item.strareacode] : null);
+                        parameters[item.landNumberParameterValue] = commonFactory.checkvals(scope.model[item.stralternative]) ? scope.model[item.stralternative] : (commonFactory.checkvals(scope.model[item.strland]) ? scope.model[item.strland] : null);
+                        parameters[item.emailParameterValue] = scope.model[item.strmail];
+                    } else if (item.controlType === 'doublemultiselect') {
+                        parameters[item.parameterValue1] = commonFactory.listSelectedVal(scope.model[item.ngmodelSelect1]);
+                        parameters[item.parameterValue2] = commonFactory.listSelectedVal(scope.model[item.ngmodelSelect2]);
+                    } else if (item.controlType === 'housewife') {
+                        parameters[item.parameterValueText] = commonFactory.listSelectedVal(scope.model[item.ngmodelText]);
+                        parameters[item.parameterValueChk] = commonFactory.listSelectedVal(scope.model[item.ngmodelChk]);
+                    } else if (item.controlType === 'astroTimeOfBirth') {
+                        parameters.TimeofBirth = scope.model.ddlFromHours + ":" + scope.model.ddlFromMinutes + ":" + scope.model.ddlFromSeconds;
+                    }
+                });
+
+                var inputDataObj = {
+                    GetDetails: parameters,
+                    customerpersonaldetails: {
+                        intCusID: CustID,
+                        EmpID: loginEmpid,
+                        Admin: AdminID
+                    }
+                };
+
+                scope.model.updateData(inputDataObj, scope.model.popupHeader);
+
+            };
+            scope.cancel = function() {
+                commonFactory.closepopup();
+            };
+
+            scope.chkChange = function(chk) {
+                return chk === true ? 'HouseWife' : '';
+            };
+
+        }
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
+        .factory('popupSvc', factory)
+
+    factory.$inject = ['$http'];
+
+    function factory(http) {
+        return {
+            editSubmit: function(apiname, obj) {
+                return http.post(editviewapp.apipath + 'CustomerPersonalUpdate/' + apiname, JSON.stringify(obj));
+            }
+        }
+    }
 })();
 (function(angular) {
     'use strict';
@@ -21046,7 +18893,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                 return getSession('empBranchID');
             },
             isAdmin: function() {
-                return getSession('isAdmin');
+                return '1';
             },
             isManagement: function() {
                 return getSession('isManagement');
@@ -21202,7 +19049,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                 return http.get(editviewapp.apipath + 'Dependency/getDropdownValues_dependency_injection', { params: { dependencyName: 'StarType', dependencyValue: obj, dependencyflagID: '' } });
             },
             castedependency: function(obj1, obj2) {
-
                 return http.get(editviewapp.apipath + 'Dependency/getDropdownValues_dependency_injection', { params: { dependencyName: 'Caste', dependencyValue: obj1, dependencyflagID: obj2 } });
             },
             subCasteBind: function(obj1) {

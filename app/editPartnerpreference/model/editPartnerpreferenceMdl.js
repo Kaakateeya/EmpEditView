@@ -155,13 +155,6 @@
 
         };
 
-
-
-
-
-
-
-
         model.partnerPreference = [
             { lblname: 'Gender', controlType: 'radio', ngmodel: 'genderId', arrbind: 'gender', parameterValue: 'GenderID' },
             { lblname: 'Age Gap', controlType: 'doublemultiselect', ngmodelSelect1: 'fromAgeId', ngmodelSelect2: 'toAgeId', typeofdata: 'ageBind', parameterValue1: 'AgeGapFrom', parameterValue2: 'AgeGapTo' },

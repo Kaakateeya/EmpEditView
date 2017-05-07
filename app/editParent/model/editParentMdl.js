@@ -57,7 +57,6 @@
             });
         };
 
-
         model.populateModel = function(type, item) {
             isSubmit = true;
             model.eventType = 'add';
@@ -115,7 +114,7 @@
                         model.motherName = item.MotherName;
                         model.mEducation = item.MotherEducationDetails;
                         model.mDesignation = item.MotherProfedetails;
-                        model.chkbox = item.MotherProfedetails == 'HouseWife' ? true : false;
+                        model.chkhousewife = item.MotherProfedetails == 'HouseWife' ? true : false;
                         model.mCompanyName = item.MothercompanyName;
                         model.mJobLocation = item.MotherJoblocation;
 
@@ -297,8 +296,6 @@
             }
         };
 
-
-
         model.AboutMyfamilySubmit = function(obj) {
             if (isSubmit) {
                 isSubmit = false;
@@ -306,9 +303,6 @@
 
             }
         };
-
-
-
 
         model.housewiseChk = function(item) {
             if (item.chkbox === true) {
@@ -342,8 +336,14 @@
         };
 
         model.showHousewife = function(val) {
-            return model.chkhousewife;
+            return model.chkhousewife === true ? false : true;
         };
+
+        model.ParentInterCasteId = function(val) {
+            debugger;
+            return model.areParentInterCasteId === 1 ? true : false;
+        };
+
 
         model.parent = [
             { lblname: '', controlType: 'bindHtml', html: ' <h6>Father Details</h6>', classname: 'parentheader' },
@@ -448,8 +448,8 @@
                 landCountryCodeIdParameterValue: 'MotherFatherLandCountryID',
                 landAreaCodeIdParameterValue: 'MotherFatherLandAreaCode',
                 landNumberParameterValue: 'MotherFatherLandNumber'
-
-            }, {
+            },
+            {
                 controlType: 'country',
                 countryshow: false,
                 cityshow: false,
@@ -462,8 +462,8 @@
             },
             { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'mNativePlace', parameterValue: 'MotherCity' },
             { lblname: 'Are parents interCaste ? ', controlType: 'radio', ngmodel: 'areParentInterCasteId', arrbind: 'boolType', parameterValue: 'AreParentsInterCaste' },
-            { lblname: 'Father Caste', controlType: 'select', ngmodel: 'fCaste', typeofdata: 'caste', parameterValue: 'FatherCaste', parentDependecy: 'areParentInterCasteId' },
-            { lblname: 'Mother Caste', controlType: 'select', ngmodel: 'mCaste', typeofdata: 'caste', parameterValue: 'MotherCaste', parentDependecy: 'areParentInterCasteId' }
+            { lblname: 'Father Caste', controlType: 'select', ngmodel: 'fCaste', typeofdata: 'caste', parameterValue: 'FatherCaste', parentDependecy: 'ParentInterCasteId' },
+            { lblname: 'Mother Caste', controlType: 'select', ngmodel: 'mCaste', typeofdata: 'caste', parameterValue: 'MotherCaste', parentDependecy: 'ParentInterCasteId' }
 
         ];
 

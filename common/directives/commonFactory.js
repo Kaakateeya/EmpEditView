@@ -27,14 +27,14 @@
                 modalpopupopen.close();
             },
             listSelectedVal: function(val) {
-
+                debugger;
                 var str = null;
                 if (val !== undefined && val !== null && val !== '') {
                     if (angular.isString(val)) {
                         str = val === '' ? null : val;
                     } else if (angular.isNumber(val)) {
                         str = val === '' ? null : val;
-                    } else if (angular.isString(val)) {
+                    } else if (angular.isArray(val)) {
                         str = val.join(',');
                     } else {
                         str = val;

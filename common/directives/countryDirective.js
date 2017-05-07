@@ -29,9 +29,7 @@
 
         function link(scope, element, attrs) {
 
-            // scope.model = countryArrayModel;
             if (scope.countryshow === true) {
-
                 if (scope.dcountry !== undefined) {
                     scope.stateArr = commonFactory.StateBind(scope.dcountry);
                 }
