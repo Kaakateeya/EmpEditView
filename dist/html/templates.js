@@ -12356,9 +12356,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <select multiselectdropdown ng-model=\"dland\" typeofdata=\"'countryCode'\"></select>\r" +
     "\n" +
-    "                <input type=text ng-model=\"strareacode\" maxlength=\"4\" tabindex=\"14\" />\r" +
+    "                <input type=text ng-model=\"strareacode\" class=\"form-control\" maxlength=\"4\" tabindex=\"14\" />\r" +
     "\n" +
-    "                <input type=text ng-model=\"strland\" maxlength=\"8\" tabindex=\"15\" />\r" +
+    "                <input type=text ng-model=\"strland\" class=\"form-control\" maxlength=\"8\" tabindex=\"15\" />\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
