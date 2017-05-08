@@ -447,7 +447,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div ng-repeat=\"item in page.model.candidateContactArr\">\r" +
+    "                <div ng-if=\"page.model.candidateContactArr\" ng-repeat=\"item in page.model.candidateContactArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -623,7 +623,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div ID=\"listcontactadressDetails\" ng-repeat=\"item in page.model.candidateAddrArr\">\r" +
+    "                <div ng-if=\"page.model.candidateAddrArr\" ng-repeat=\"item in page.model.candidateAddrArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -827,7 +827,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div ID=\"listparentsinfo\" ng-repeat=\"item in page.model.parentContactArr\">\r" +
+    "                <div ng-if=\"page.model.parentContactArr\" ng-repeat=\"item in page.model.parentContactArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -1037,7 +1037,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                <div ID=\"listSiblingsContac\" ng-repeat=\"item in page.model.SiiblingContactArr\">\r" +
+    "                <div ng-if=\"page.model.SiiblingContactArr\" ng-repeat=\"item in page.model.SiiblingContactArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -1397,7 +1397,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div ID=\"listRelativecontacts\" ng-repeat=\"item in page.model.relativeContactArr\">\r" +
+    "                <div ng-if=\"page.model.relativeContactArr\" ng-repeat=\"item in page.model.relativeContactArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -1619,7 +1619,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item \">\r" +
     "\n" +
-    "                <div ID=\"listreference\" ng-repeat=\"item in page.model.referenceContactArr\">\r" +
+    "                <div ng-if=\"page.model.referenceContactArr\" ng-repeat=\"item in page.model.referenceContactArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -2570,7 +2570,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"listpersonaldetails\" ng-repeat=\"item in page.model.CustomerDataArr\">\r" +
+    "                <div ng-if=\"page.model.CustomerDataArr\" ng-repeat=\"item in page.model.CustomerDataArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -2814,7 +2814,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div ng-repeat=\"item in page.model.educationSelectArray \">\r" +
+    "                <div ng-if=\"page.model.educationSelectArray\" ng-repeat=\"item in page.model.educationSelectArray\">\r" +
     "\n" +
     "                    <div id=\"reviewdiv \" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls': 'edit_page_details_item_desc clearfix' \">\r" +
     "\n" +
@@ -2954,7 +2954,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item \">\r" +
     "\n" +
-    "                <div id=\"lstProfession \" ng-repeat=\"item in page.model.ProfessionSelectArray \">\r" +
+    "                <div ng-if=\"page.model.ProfessionSelectArray\" ng-repeat=\"item in page.model.ProfessionSelectArray\">\r" +
     "\n" +
     "                    <div id=\"reviewdiv \" ng-class=\"item.reviewstatus===false? 'reviewCls': '' \">\r" +
     "\n" +
@@ -3299,7 +3299,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            <!--<p class=\"clearfix\"><span>Upload your three different photos</span></p>-->\r" +
     "\n" +
-    "                            <div id=\"dtimagephoto\" class=\"clearfix\" ng-repeat=\"item in page.model.manageArr\" style=\"width:33%;float:left;\">\r" +
+    "                            <div ng-if=\"page.model.manageArr\" class=\"clearfix\" ng-repeat=\"item in page.model.manageArr\" style=\"width:33%;float:left;\">\r" +
     "\n" +
     "                                <div class=\"photos\">\r" +
     "\n" +
@@ -3961,7 +3961,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"listparents\" ng-repeat=\"item in page.model.parentArr\">\r" +
+    "                <div ng-if=\"page.model.parentArr\" ng-repeat=\"item in page.model.parentArr\">\r" +
     "\n" +
     "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
@@ -4683,7 +4683,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                <div ng-repeat=\"item in page.model.addressArr\">\r" +
+    "                <div ng-if=\"page.model.addressArr\" ng-repeat=\"item in page.model.addressArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -4871,7 +4871,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                <div ng-repeat=\"item in page.model.physicalArr\">\r" +
+    "                <divng-if=\"page.model.physicalArr\" ng-repeat=\"item in page.model.physicalArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -5057,11 +5057,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "                </div>\r" +
+    "            </div>\r" +
     "\n" +
     "\r" +
-    "\n" +
-    "            </div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
@@ -5131,21 +5129,25 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <div id=\"popupDiv\">\r" +
+    "</div>\r" +
     "\n" +
-    "        <script type=\"text/ng-template\" id=\"commonParentpopup.html\">\r" +
+    "\r" +
     "\n" +
-    "            <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
+    "<div id=\"popupDiv\">\r" +
     "\n" +
-    "            </slide-popup>\r" +
+    "    <script type=\"text/ng-template\" id=\"commonParentpopup.html\">\r" +
     "\n" +
-    "        </script>\r" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
+    "\n" +
+    "        </slide-popup>\r" +
+    "\n" +
+    "    </script>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    </div>\r" +
+    "</div>\r" +
     "\n" +
     "</div>\r" +
     "\n" +
@@ -5182,7 +5184,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        <page-review dispaly-name=\"'PartnerPreference details'\" sectionid=\"'16,17,18,20,21,22'\" custid=\"page.model.CustID\"></page-review>\r" +
     "\n" +
-    "        <div ng-repeat=\"item in page.model.partnerPrefArr\">\r" +
+    "        <div ng-if=\"page.model.partnerPrefArr\" ng-repeat=\"item in page.model.partnerPrefArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -5636,7 +5638,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    <div class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
-    "                        <div ng-if=\"item.PartnerDescripition==='' || item.PartnerDescripition===null\">\r" +
+    "                        <div ng-if=\"page.model.partnerDescription==='' || page.model.partnerDescription===null\">\r" +
     "\n" +
     "                            <a id=\"lnkpartnerdesc\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.partnerdescPopulate();\"> Add</a>\r" +
     "\n" +
@@ -6177,7 +6179,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div class=\"edit_page_details_item\" ng-repeat=\"item in page.model.profileSettingArr\">\r" +
+    "            <div ng-if=\"page.model.profileSettingArr\" class=\"edit_page_details_item\" ng-repeat=\"item in page.model.profileSettingArr\">\r" +
     "\n" +
     "                <div id=\"fullupdatefatherbrother\">\r" +
     "\n" +
@@ -6427,7 +6429,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div class=\"edit_page_details_item\" ng-repeat=\"item in page.model.ConfidentialArr\">\r" +
+    "            <div ng-if=\"page.model.ConfidentialArr\" class=\"edit_page_details_item\" ng-repeat=\"item in page.model.ConfidentialArr\">\r" +
     "\n" +
     "                <div id=\"UpdatePanel2\">\r" +
     "\n" +
@@ -6521,7 +6523,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div class=\"edit_page_details_item\" ng-repeat=\"item in page.model.profileDisplayArr\">\r" +
+    "            <div class=\"edit_page_details_item\" ng-if=\"page.model.profileDisplayArr\" ng-repeat=\"item in page.model.profileDisplayArr\">\r" +
     "\n" +
     "                <div id=\"UpdatePanel4\">\r" +
     "\n" +
@@ -6709,7 +6711,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div class=\"edit_page_details_item\" ng-repeat=\"item in page.model.gradeSelectionArr\">\r" +
+    "            <div class=\"edit_page_details_item\" ng-if=\"page.model.gradeSelectionArr\" ng-repeat=\"item in page.model.gradeSelectionArr\">\r" +
     "\n" +
     "                <div id=\"UpdatePanel14\">\r" +
     "\n" +
@@ -6915,7 +6917,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
+    "    <!--\r" +
     "\n" +
     "    <script type=\"text/ng-template\" id=\"profileSettingContent.html\">\r" +
     "\n" +
@@ -7047,8 +7049,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
-    "\n" +
     "    <script type=\"text/ng-template\" id=\"confidentialContent.html\">\r" +
     "\n" +
     "        <form class=\"EditViewClass\" name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.confidentialSubmit(page.model.csObj)\">\r" +
@@ -7120,8 +7120,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "        </form>\r" +
     "\n" +
     "    </script>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -7222,8 +7220,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "        </form>\r" +
     "\n" +
     "    </script>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -7339,11 +7335,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        </form>\r" +
     "\n" +
-    "    </script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
+    "    </script>-->\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -7412,7 +7404,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.propertyArr\">\r" +
+    "                <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-if=\"page.model.propertyArr\" ng-repeat=\"item in page.model.propertyArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -7559,7 +7551,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div id=\"fullupdate\">\r" +
     "\n" +
-    "                    <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.ReferenceArr\">\r" +
+    "                    <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-if=\"page.model.ReferenceArr\" ng-repeat=\"item in page.model.ReferenceArr\">\r" +
     "\n" +
     "                        <div>\r" +
     "\n" +
@@ -7840,7 +7832,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"fullupdatefatherbrother\" ng-repeat=\"item in page.model.FBArr\">\r" +
+    "                <div ng-if=\"page.model.FBArr\" ng-repeat=\"item in page.model.FBArr\">\r" +
     "\n" +
     "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
@@ -8044,7 +8036,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"fullupdatefathersister\" ng-repeat=\"item in page.model.FSArr\">\r" +
+    "                <div ng-if=\"page.model.FSArr\" ng-repeat=\"item in page.model.FSArr\">\r" +
     "\n" +
     "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
@@ -8294,7 +8286,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"fullupdatemotherbrother\" ng-repeat=\"item in page.model.MBrr\">\r" +
+    "                <div ng-if=\"page.model.MBrr\" ng-repeat=\"item in page.model.MBrr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -8498,7 +8490,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"fullupdatemothersister\" ng-repeat=\"item in page.model.MSArr\">\r" +
+    "                <div ng-if=\"page.model.MSArr\" ng-repeat=\"item in page.model.MSArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -8789,7 +8781,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div id=\"lstnoofbros\">\r" +
     "\n" +
-    "                    <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.sibblingCountArr\">\r" +
+    "                    <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-if=\"page.model.sibblingCountArr\" ng-repeat=\"item in page.model.sibblingCountArr\">\r" +
     "\n" +
     "                        <div>\r" +
     "\n" +
@@ -9023,7 +9015,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div id=\"uplstSibbling\" class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"lstSibbling\" ng-repeat=\"item in page.model.BrotherArr\">\r" +
+    "                <div ng-if=\"page.model.BrotherArr\" ng-repeat=\"item in page.model.BrotherArr\">\r" +
     "\n" +
     "                    <div>\r" +
     "\n" +
@@ -9611,7 +9603,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                <div id=\"listsister\" ng-repeat=\"item in page.model.sisterArr\">\r" +
+    "                <div ng-if=\"page.model.sisterArr\" ng-repeat=\"item in page.model.sisterArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -11140,7 +11132,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"fullSpouseDetails\" ng-repeat=\"item in page.model.spouseArray\">\r" +
+    "                <div ng-if=\"page.model.spouseArray\" ng-repeat=\"item in page.model.spouseArray\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -11706,7 +11698,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                    <div ID=\"listChildrenDetails\" ng-repeat=\"item in page.model.ChildArray\">\r" +
+    "                    <div ng-if=\"page.model.ChildArray\" ng-repeat=\"item in page.model.ChildArray\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -11978,7 +11970,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                </div>\r" +
     "\n" +
-    "                <div ng-if=\"item.controlType==='textboxNumber'\" class=\"pop_controls_right\">\r" +
+    "                <div ng-if=\"item.controlType==='textboxNumber'\" class=\"pop_controls_right select-box-my-double\">\r" +
     "\n" +
     "                    <input type=\"text\" ng-model=\"model[item.ngmodel]\" maxlength=\"{{item.maxLength}}\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)))\"\r" +
     "\n" +
@@ -12052,7 +12044,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-if=\"item.controlType==='country'\">\r" +
     "\n" +
-    "                    <country-directive countryshow=\"item.countryshow\" cityshow=\"item.cityshow\" othercity=\"item.othercity\" dcountry=\"model[item.dcountry]\" dstate=\"model[item.dstate]\" ddistrict=\"model[item.ddistrict]\" dcity=\"model[item.dcity]\" strothercity=\"model[item.strothercity]\"></country-directive>\r" +
+    "                    <country-directive require=\"item.require\" countryshow=\"item.countryshow\" cityshow=\"item.cityshow\" othercity=\"item.othercity\" dcountry=\"model[item.dcountry]\" dstate=\"model[item.dstate]\" ddistrict=\"model[item.ddistrict]\" dcity=\"model[item.dcity]\" strothercity=\"model[item.strothercity]\"></country-directive>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -12104,8 +12096,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-if=\"item.controlType==='Changemultiselect'\" class=\"pop_controls_right select-box-my input-group\">\r" +
     "\n" +
-    "                    {{item.dataSource.length}} ----{{item.dataSource[0]}}\r" +
-    "\n" +
     "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" multiple ng-required=\"item.required\" ng-options=\"inneritem.value as inneritem.label for inneritem in item.dataSource\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
     "\n" +
     "                </div>\r" +
@@ -12125,6 +12115,12 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "                    <select multiselectdropdown ng-model=\"model.ddlFromMinutes\" ng-options=\"item.value as item.label for item in model.minbindArr\" required></select>\r" +
     "\n" +
     "                    <select multiselectdropdown ng-model=\"model.ddlFromSeconds\" ng-options=\"item.value as item.label for item in model.secbindArr\" required></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='break'\">\r" +
+    "\n" +
+    "                    <br>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -12160,7 +12156,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "<style>\r" +
     "\n" +
-    "    .requiredStar::after {\r" +
+    "    /*.requiredStar::after {\r" +
     "\n" +
     "        content: \" * \";\r" +
     "\n" +
@@ -12198,15 +12194,13 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        margin: 0 !important;\r" +
     "\n" +
-    "    }\r" +
+    "    }*/\r" +
     "\n" +
-    "    \r" +
-    "\n" +
-    "    .help-block {\r" +
+    "    /*.help-block {\r" +
     "\n" +
     "        padding-left: 40%;\r" +
     "\n" +
-    "    }\r" +
+    "    }*/\r" +
     "\n" +
     "</style>"
   );

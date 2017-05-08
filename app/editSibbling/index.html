@@ -19,7 +19,7 @@
             <div id="upnoofSibblings" class="edit_page_details_item">
 
                 <div id="lstnoofbros">
-                    <div ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'" ng-repeat="item in page.model.sibblingCountArr">
+                    <div ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'" ng-if="page.model.sibblingCountArr" ng-repeat="item in page.model.sibblingCountArr">
                         <div>
                             <div>
                                 <div class="form-group">
@@ -136,7 +136,7 @@
 
 
             <div id="uplstSibbling" class="edit_page_details_item">
-                <div id="lstSibbling" ng-repeat="item in page.model.BrotherArr">
+                <div ng-if="page.model.BrotherArr" ng-repeat="item in page.model.BrotherArr">
                     <div>
                         <div id="Div1" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
                             <div>
@@ -430,7 +430,7 @@
 
             <div id="uplistsister" class="edit_page_details_item">
 
-                <div id="listsister" ng-repeat="item in page.model.sisterArr">
+                <div ng-if="page.model.sisterArr" ng-repeat="item in page.model.sisterArr">
 
                     <div>
                         <div id="Div2" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">

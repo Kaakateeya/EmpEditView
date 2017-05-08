@@ -307,10 +307,10 @@
         };
         //Father Details
         model.fatherBrother = [
-            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFBElderORyounger', ownArray: 'FBElderYounger', parameterValue: 'FBElderYounger' },
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFBElderORyounger', required: true, ownArray: 'FBElderYounger', parameterValue: 'FBElderYounger' },
             { lblname: "Father's brother name", controlType: 'textbox', ngmodel: 'txtFatherbrothername', required: true, parameterValue: 'Fatherbrothername' },
-            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtFBEducationdetails', required: true, parameterValue: 'FatherBrotherEducationDetails' },
-            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtFBProfessiondetails', required: true, parameterValue: 'FBProfessiondetails' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtFBEducationdetails', parameterValue: 'FatherBrotherEducationDetails' },
+            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtFBProfessiondetails', parameterValue: 'FBProfessiondetails' },
             {
                 controlType: 'contact',
                 emailhide: true,
@@ -335,12 +335,12 @@
         ];
 
         model.fatherSister = [
-            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFSElderYounger', ownArray: 'FSElderYounger', parameterValue: 'FSElderYounger' },
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFSElderYounger', required: true, ownArray: 'FSElderYounger', parameterValue: 'FSElderYounger' },
             { lblname: "Father's sister name", controlType: 'textbox', ngmodel: 'txtFathersistername', required: true, parameterValue: 'FSFathersistername' },
-            { lblname: "Husband first name", controlType: 'textbox', ngmodel: 'txtFSHusbandfirstname', required: true, parameterValue: 'FSHusbandfirstname' },
-            { lblname: "Husband last name", controlType: 'textbox', ngmodel: 'txtFSHusbandlastname', required: true, parameterValue: 'FSHusbandlastname' },
-            { lblname: 'FSH Education', controlType: 'textbox', ngmodel: 'txtFSHEDucation', required: true, parameterValue: 'FSHEducationdetails' },
-            { lblname: 'FSH Profession', controlType: 'textbox', ngmodel: 'txtFSProfessiondetails', required: true, parameterValue: 'FSHProfessiondetails' },
+            { lblname: "Husband first name", controlType: 'textbox', ngmodel: 'txtFSHusbandfirstname', parameterValue: 'FSHusbandfirstname' },
+            { lblname: "Husband last name", controlType: 'textbox', ngmodel: 'txtFSHusbandlastname', parameterValue: 'FSHusbandlastname' },
+            { lblname: 'FSH Education', controlType: 'textbox', ngmodel: 'txtFSHEDucation', parameterValue: 'FSHEducationdetails' },
+            { lblname: 'FSH Profession', controlType: 'textbox', ngmodel: 'txtFSProfessiondetails', parameterValue: 'FSHProfessiondetails' },
 
             {
                 controlType: 'country',
@@ -355,7 +355,7 @@
                 districtParameterValue: 'FSHDistrict',
 
             },
-            { lblname: 'Native place', controlType: 'textbox', ngmodel: 'txtFSHNativePlace', required: true, parameterValue: 'FSNativeplace' },
+            { lblname: 'Native place', controlType: 'textbox', ngmodel: 'txtFSHNativePlace', parameterValue: 'FSNativeplace' },
 
             {
                 controlType: 'contact',
@@ -382,10 +382,10 @@
 
         //mother Details
         model.motherBrother = [
-            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFBElderORyounger', ownArray: 'MBElderYounger', parameterValue: 'MBElderYounger' },
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFBElderORyounger', required: true, ownArray: 'MBElderYounger', parameterValue: 'MBElderYounger' },
             { lblname: "Mother's brother name", controlType: 'textbox', ngmodel: 'txtMBName', required: true, parameterValue: 'Motherbrothername' },
-            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtMBEducation', required: true, parameterValue: 'MBEducationdetails' },
-            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtMBProfessiondetails', required: true, parameterValue: 'MBProfessiondetails' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtMBEducation', parameterValue: 'MBEducationdetails' },
+            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtMBProfessiondetails', parameterValue: 'MBProfessiondetails' },
             {
                 controlType: 'contact',
                 emailhide: true,
@@ -410,12 +410,12 @@
         ];
 
         model.motherSister = [
-            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlMSElderYounger', ownArray: 'MSElderYounger', parameterValue: 'MSElderYounger' },
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlMSElderYounger', required: true, ownArray: 'MSElderYounger', parameterValue: 'MSElderYounger' },
             { lblname: "Mother's sister name", controlType: 'textbox', ngmodel: 'txtMSName', required: true, parameterValue: 'Mothersistername' },
-            { lblname: "Husband first name", controlType: 'textbox', ngmodel: 'txtMsHusbandfirstname', required: true, parameterValue: 'MSHusbandfirstname' },
-            { lblname: "Husband last name", controlType: 'textbox', ngmodel: 'txtMsHusbandlastname', required: true, parameterValue: 'MSHusbandlastname' },
-            { lblname: 'FSH Education', controlType: 'textbox', ngmodel: 'txtMSHEducation', required: true, parameterValue: 'MSEducationdetails' },
-            { lblname: 'FSH Profession', controlType: 'textbox', ngmodel: 'txtMSProfessiondetails', required: true, parameterValue: 'MSProfessiondetails' },
+            { lblname: "Husband first name", controlType: 'textbox', ngmodel: 'txtMsHusbandfirstname', parameterValue: 'MSHusbandfirstname' },
+            { lblname: "Husband last name", controlType: 'textbox', ngmodel: 'txtMsHusbandlastname', parameterValue: 'MSHusbandlastname' },
+            { lblname: 'FSH Education', controlType: 'textbox', ngmodel: 'txtMSHEducation', parameterValue: 'MSEducationdetails' },
+            { lblname: 'FSH Profession', controlType: 'textbox', ngmodel: 'txtMSProfessiondetails', parameterValue: 'MSProfessiondetails' },
 
             {
                 controlType: 'country',
@@ -430,7 +430,7 @@
                 districtParameterValue: 'MSMSHDistrictID',
 
             },
-            { lblname: 'Native place', controlType: 'textbox', ngmodel: 'txtMSNativePlace', required: true, parameterValue: 'MSNativeplace' },
+            { lblname: 'Native place', controlType: 'textbox', ngmodel: 'txtMSNativePlace', parameterValue: 'MSNativeplace' },
 
             {
                 controlType: 'contact',

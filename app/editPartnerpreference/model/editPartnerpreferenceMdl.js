@@ -157,13 +157,13 @@
 
         model.partnerPreference = [
             { lblname: 'Gender', controlType: 'radio', ngmodel: 'genderId', arrbind: 'gender', parameterValue: 'GenderID' },
-            { lblname: 'Age Gap', controlType: 'doublemultiselect', ngmodelSelect1: 'fromAgeId', ngmodelSelect2: 'toAgeId', typeofdata: 'ageBind', parameterValue1: 'AgeGapFrom', parameterValue2: 'AgeGapTo' },
-            { lblname: 'Height', controlType: 'doublemultiselect', ngmodelSelect1: 'fromheightId', ngmodelSelect2: 'toheightId', typeofdata: 'heightregistration', parameterValue1: 'HeightFrom', parameterValue2: 'HeightTo' },
-            { lblname: 'Religion', controlType: 'multiselect', ngmodel: 'religionId', typeofdata: 'Religion', secondParent: 'mothertongueId', childName: 'caste', changeApi: 'castedependency', parameterValue: 'Religion' },
-            { lblname: 'Mother tongue', controlType: 'multiselect', ngmodel: 'mothertongueId', typeofdata: 'Mothertongue', secondParent: 'religionId', childName: 'caste', changeApi: 'castedependency', parameterValue: 'Mothertongue' },
-            { lblname: 'Caste', controlType: 'Changemultiselect', ngmodel: 'casteId', parentName: 'caste', childName: 'subCaste', changeApi: 'subCasteBind', parameterValue: 'Caste' },
+            { lblname: 'Age Gap', controlType: 'doublemultiselect', ngmodelSelect1: 'fromAgeId', ngmodelSelect2: 'toAgeId', typeofdata: 'ageBind', required: true, parameterValue1: 'AgeGapFrom', parameterValue2: 'AgeGapTo' },
+            { lblname: 'Height', controlType: 'doublemultiselect', ngmodelSelect1: 'fromheightId', ngmodelSelect2: 'toheightId', required: true, typeofdata: 'heightregistration', parameterValue1: 'HeightFrom', parameterValue2: 'HeightTo' },
+            { lblname: 'Religion', controlType: 'multiselect', ngmodel: 'religionId', typeofdata: 'Religion', required: true, secondParent: 'mothertongueId', childName: 'caste', changeApi: 'castedependency', parameterValue: 'Religion' },
+            { lblname: 'Mother tongue', controlType: 'multiselect', ngmodel: 'mothertongueId', typeofdata: 'Mothertongue', required: true, secondParent: 'religionId', childName: 'caste', changeApi: 'castedependency', parameterValue: 'Mothertongue' },
+            { lblname: 'Caste', controlType: 'Changemultiselect', ngmodel: 'casteId', parentName: 'caste', required: true, childName: 'subCaste', changeApi: 'subCasteBind', parameterValue: 'Caste' },
             { lblname: 'Subcaste', controlType: 'Changemultiselect', ngmodel: 'subCasteId', typeofdata: 'Religion', parentName: 'subCaste', parameterValue: 'Subcaste' },
-            { lblname: 'Marital status', controlType: 'multiselect', ngmodel: 'maritalstatusId', typeofdata: 'MaritalStatus', parameterValue: 'Maritalstatus' },
+            { lblname: 'Marital status', controlType: 'multiselect', ngmodel: 'maritalstatusId', typeofdata: 'MaritalStatus', required: true, parameterValue: 'Maritalstatus' },
             { lblname: 'Education category', controlType: 'multiselect', ngmodel: 'eduCatgoryId', typeofdata: 'educationcategory', childName: 'educationgroup', changeApi: 'EducationGroup', parameterValue: 'Educationcategory' },
             { lblname: 'Education group', controlType: 'Changemultiselect', ngmodel: 'eduGroupId', typeofdata: 'Religion', parentName: 'educationgroup', parameterValue: 'Educationgroup' },
             { lblname: 'Employed in', controlType: 'multiselect', ngmodel: 'employedinId', typeofdata: 'ProfCatgory', parameterValue: 'Employedin' },
@@ -177,7 +177,9 @@
             { lblname: 'Manglik/Kuja dosham', controlType: 'radio', ngmodel: 'kujadoshamId', arrbind: 'Kujadosham', parameterValue: 'ManglikKujadosham' },
             { lblname: 'Preferred star Language', controlType: 'radio', ngmodel: 'starLanguageId', arrbind: 'preferredStarlanguage', childName: 'star', changeApi: 'stars', parameterValue: 'PreferredstarLanguage' },
             { lblname: 'Star Preference', controlType: 'radio', ngmodel: 'starPreferenceId', arrbind: 'StarPreference', parameterValue: 'TypeofStar' },
-            { lblname: '', controlType: 'Changemultiselect', ngmodel: 'lstPreferredStars', parentName: 'star', parameterValue: 'PrefredStars' }
+            { lblname: '', controlType: 'Changemultiselect', ngmodel: 'lstPreferredStars', parentName: 'star', parameterValue: 'PrefredStars' },
+            { lblname: '', controlType: 'break' }
+
         ];
 
         model.aboutPartnerDescription = [

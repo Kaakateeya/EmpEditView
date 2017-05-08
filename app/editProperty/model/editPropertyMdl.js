@@ -39,7 +39,7 @@
             model.eventType = 'add';
             model.RefrenceCust_Reference_ID = null;
             model.popupdata = model.Refrence;
-            model.popupHeader = 'Refrence';
+            model.popupHeader = 'Property Details';
             if (item !== undefined) {
                 model.eventType = 'edit';
                 model.Custpropertyid = item.Custpropertyid;
@@ -83,9 +83,9 @@
         };
         //performance code
         model.Refrence = [
-            { lblname: 'Family Status', controlType: 'select', ngmodel: 'ddlFamilyStatus', required: true, typeofdata: 'familyStatus', parameterValue: 'FamilyStatus' },
+            { lblname: 'Family Status', controlType: 'select', ngmodel: 'ddlFamilyStatus', typeofdata: 'familyStatus', parameterValue: 'FamilyStatus' },
             { lblname: 'Is shared property', controlType: 'radio', ngmodel: 'rdlSharedProperty', arrbind: 'boolType', parameterValue: 'Issharedproperty' },
-            { lblname: 'Value of property', controlType: 'textboxNumber', maxLength: 5, span: true, spanText: 'Lakhs', ngmodel: 'txtFname', required: true, parameterValue: 'Valueofproperty' },
+            { lblname: 'Value of property', controlType: 'textboxNumber', maxLength: 5, span: true, spanText: 'Lakhs', ngmodel: 'txtFname', parameterValue: 'Valueofproperty' },
             {
                 lblname: 'Property description',
                 controlType: 'textarea',

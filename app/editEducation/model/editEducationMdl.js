@@ -381,7 +381,7 @@
         ];
 
         model.aboutUrSelf = [
-            { lblname: '', controlType: 'about', maxlength: '1000', ngmodel: 'txtAboutUS', displayTxt: "(Please don't write phone numbers/emails/any junk characters)*', ngmodel: 'aboutFamilyId", parameterValue: 'txtAboutUS' },
+            { lblname: '', controlType: 'about', maxlength: '1000', ngmodel: 'txtAboutUS', displayTxt: "(Please don't write phone numbers/emails/any junk characters)*", ngmodel: "aboutFamilyId", parameterValue: 'txtAboutUS' }
         ];
 
 

@@ -22,7 +22,7 @@
 
             <div class="edit_page_details_item">
 
-                <div id="reviewdiv" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'" ng-repeat="item in page.model.propertyArr">
+                <div id="reviewdiv" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'" ng-if="page.model.propertyArr" ng-repeat="item in page.model.propertyArr">
 
                     <div>
                         <div id="uplFamilyStatus" class="edit_page_details_item_desc clearfix">

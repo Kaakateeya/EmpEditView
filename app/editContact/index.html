@@ -24,7 +24,7 @@
 
             </div>
             <div class="edit_page_details_item">
-                <div ng-repeat="item in page.model.candidateContactArr">
+                <div ng-if="page.model.candidateContactArr" ng-repeat="item in page.model.candidateContactArr">
 
                     <div id="reviewdiv" class="edit_page_details_item_desc clearfix">
                         <div ID="updatecandMoblie" class="edit_page_details_item_desc clearfix">
@@ -112,7 +112,7 @@
                 </div>
             </div>
             <div class="edit_page_details_item">
-                <div ID="listcontactadressDetails" ng-repeat="item in page.model.candidateAddrArr">
+                <div ng-if="page.model.candidateAddrArr" ng-repeat="item in page.model.candidateAddrArr">
 
 
                     <div id="Div1" class="edit_page_details_item_desc clearfix">
@@ -214,7 +214,7 @@
                 </div>
             </div>
             <div class="edit_page_details_item">
-                <div ID="listparentsinfo" ng-repeat="item in page.model.parentContactArr">
+                <div ng-if="page.model.parentContactArr" ng-repeat="item in page.model.parentContactArr">
 
                     <div id="Div2" class="edit_page_details_item_desc clearfix">
 
@@ -319,7 +319,7 @@
 
             <div class="edit_page_details_item">
 
-                <div ID="listSiblingsContac" ng-repeat="item in page.model.SiiblingContactArr">
+                <div ng-if="page.model.SiiblingContactArr" ng-repeat="item in page.model.SiiblingContactArr">
 
                     <div id="Div3" class="edit_page_details_item_desc clearfix">
 
@@ -499,7 +499,7 @@
                 </div>
             </div>
             <div class="edit_page_details_item">
-                <div ID="listRelativecontacts" ng-repeat="item in page.model.relativeContactArr">
+                <div ng-if="page.model.relativeContactArr" ng-repeat="item in page.model.relativeContactArr">
 
                     <div id="Div4" class="edit_page_details_item_desc clearfix">
 
@@ -610,7 +610,7 @@
 
             </div>
             <div class="edit_page_details_item ">
-                <div ID="listreference" ng-repeat="item in page.model.referenceContactArr">
+                <div ng-if="page.model.referenceContactArr" ng-repeat="item in page.model.referenceContactArr">
 
                     <div id="Div5 " class="edit_page_details_item_desc clearfix ">
 

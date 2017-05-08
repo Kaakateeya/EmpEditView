@@ -234,7 +234,8 @@
             { lblname: 'Profession', controlType: 'select', ngmodel: 'ddlProfessionGrade', typeofdata: 'gradeSelection', parameterValue: 'GProfession' },
             { lblname: 'Property', controlType: 'select', ngmodel: 'ddlpropertyGrade', typeofdata: 'gradeSelection', parameterValue: 'GProperty' },
             { lblname: 'Family', controlType: 'select', ngmodel: 'ddlfamilyGrade', typeofdata: 'gradeSelection', parameterValue: 'GFamily' },
-            { lblname: 'Photo', controlType: 'select', ngmodel: 'ddlphotoGrade', typeofdata: 'gradeSelection', parameterValue: 'GPhotos' }
+            { lblname: 'Photo', controlType: 'select', ngmodel: 'ddlphotoGrade', typeofdata: 'gradeSelection', parameterValue: 'GPhotos' },
+            { lblname: '', controlType: 'break' }
         ];
 
         model.profileDisplayIn = [

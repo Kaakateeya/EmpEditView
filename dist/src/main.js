@@ -408,6 +408,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.astro = [{
                 lblname: 'Time of Birth',
                 controlType: 'astroTimeOfBirth',
+                required: true,
             },
             {
                 controlType: 'country',
@@ -421,16 +422,16 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 countryParameterValue: 'CountryOfBirthID',
                 stateParameterValue: 'StateOfBirthID',
                 districtParameterValue: 'DistrictOfBirthID',
-                cityParameterValue: 'CityOfBirthID'
-
+                cityParameterValue: 'CityOfBirthID',
+                require: true
             },
-            { lblname: 'Star language', controlType: 'select', ngmodel: 'ddlstarlanguage', typeofdata: 'starLanguage', required: true, childName: 'star', changeApi: 'stars', parameterValue: 'Starlanguage' },
+            { lblname: 'Star language', controlType: 'select', ngmodel: 'ddlstarlanguage', typeofdata: 'starLanguage', childName: 'star', changeApi: 'stars', parameterValue: 'Starlanguage' },
             { lblname: 'Star', controlType: 'Changeselect', ngmodel: 'ddlstar', parentName: 'star', parameterValue: 'Star' },
-            { lblname: 'Paadam', controlType: 'select', ngmodel: 'ddlpaadam', required: true, typeofdata: 'paadam', parameterValue: 'Paadam' },
-            { lblname: 'Lagnam', controlType: 'select', ngmodel: 'ddlLagnam', required: true, typeofdata: 'lagnam', parameterValue: 'Lagnam' },
-            { lblname: 'Raasi/Moon sign', controlType: 'select', ngmodel: 'ddlRaasiMoonsign', required: true, typeofdata: 'ZodaicSign', parameterValue: 'RasiMoonsign' },
-            { lblname: 'Gothram/Gotra', controlType: 'textbox', ngmodel: 'txtGothramGotra', required: true, parameterValue: 'GothramGotra' },
-            { lblname: 'Maternal gothram', controlType: 'textbox', ngmodel: 'txtMaternalgothram', required: true, parameterValue: 'Maternalgothram' },
+            { lblname: 'Paadam', controlType: 'select', ngmodel: 'ddlpaadam', typeofdata: 'paadam', parameterValue: 'Paadam' },
+            { lblname: 'Lagnam', controlType: 'select', ngmodel: 'ddlLagnam', typeofdata: 'lagnam', parameterValue: 'Lagnam' },
+            { lblname: 'Raasi/Moon sign', controlType: 'select', ngmodel: 'ddlRaasiMoonsign', typeofdata: 'ZodaicSign', parameterValue: 'RasiMoonsign' },
+            { lblname: 'Gothram/Gotra', controlType: 'textbox', ngmodel: 'txtGothramGotra', parameterValue: 'GothramGotra' },
+            { lblname: 'Maternal gothram', controlType: 'textbox', ngmodel: 'txtMaternalgothram', parameterValue: 'Maternalgothram' },
             { lblname: 'Manglik/Kuja dosham', controlType: 'radio', ngmodel: 'rdlkujaDosham', ownArray: 'Manglik', parameterValue: 'ManglikKujadosham' },
 
         ];
@@ -1373,7 +1374,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         ];
 
         model.aboutUrSelf = [
-            { lblname: '', controlType: 'about', maxlength: '1000', ngmodel: 'txtAboutUS', displayTxt: "(Please don't write phone numbers/emails/any junk characters)*', ngmodel: 'aboutFamilyId", parameterValue: 'txtAboutUS' },
+            { lblname: '', controlType: 'about', maxlength: '1000', ngmodel: 'txtAboutUS', displayTxt: "(Please don't write phone numbers/emails/any junk characters)*", ngmodel: "aboutFamilyId", parameterValue: 'txtAboutUS' }
         ];
 
 
@@ -2298,12 +2299,13 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'mNativePlace', parameterValue: 'MotherCity' },
             { lblname: 'Are parents interCaste ? ', controlType: 'radio', ngmodel: 'areParentInterCasteId', arrbind: 'boolType', parameterValue: 'AreParentsInterCaste' },
             { lblname: 'Father Caste', controlType: 'select', ngmodel: 'fCaste', typeofdata: 'caste', parameterValue: 'FatherCaste', parentDependecy: 'ParentInterCasteId' },
-            { lblname: 'Mother Caste', controlType: 'select', ngmodel: 'mCaste', typeofdata: 'caste', parameterValue: 'MotherCaste', parentDependecy: 'ParentInterCasteId' }
+            { lblname: 'Mother Caste', controlType: 'select', ngmodel: 'mCaste', typeofdata: 'caste', parameterValue: 'MotherCaste', parentDependecy: 'ParentInterCasteId' },
+            { lblname: '', controlType: 'break' }
 
         ];
 
         model.Address = [
-            { lblname: 'House/Flat number', controlType: 'textbox', ngmodel: 'houseFlatNumber', parameterValue: 'HouseFlateNumber' },
+            { lblname: 'House/Flat number', controlType: 'textbox', ngmodel: 'houseFlatNumber', required: true, parameterValue: 'HouseFlateNumber' },
             { lblname: 'Apartment name', controlType: 'textbox', ngmodel: 'apartmentName', parameterValue: 'Apartmentname' },
             { lblname: 'Street name', controlType: 'textbox', ngmodel: 'streetName', parameterValue: 'Streetname' },
             { lblname: 'Area Name', controlType: 'textbox', ngmodel: 'areaName', parameterValue: 'AreaName' },
@@ -2317,13 +2319,12 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 dstate: 'stateId',
                 ddistrict: 'districtId',
                 require: true,
-
                 countryParameterValue: 'Country',
                 stateParameterValue: 'STATE',
                 districtParameterValue: 'District',
 
             },
-            { lblname: 'City', controlType: 'textbox', ngmodel: 'cityId', parameterValue: 'city' },
+            { lblname: 'City', controlType: 'textbox', ngmodel: 'cityId', required: true, parameterValue: 'city' },
             { lblname: 'Zip/Pin', controlType: 'textbox', ngmodel: 'zipcode', parameterValue: 'ZipPin' }
 
         ];
@@ -2332,7 +2333,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             { lblname: 'Drink', controlType: 'radio', ngmodel: 'drinkId', arrbind: 'Drink', parameterValue: 'DrinkID' },
             { lblname: 'Smoke', controlType: 'radio', ngmodel: 'smokeId', arrbind: 'Drink', parameterValue: 'SmokeID' },
             { lblname: 'Body Type', controlType: 'select', ngmodel: 'bodyTypeId', typeofdata: 'bodyType', parameterValue: 'BodyTypeID' },
-            { lblname: 'Body weight', controlType: 'textbox', ngmodel: 'bodyWeight', method: 'converttolbs', parameterValue: 'BWKgs' },
+            { lblname: 'Body weight', controlType: 'textboxNumber', ngmodel: 'bodyWeight', method: 'converttolbs', parameterValue: 'BWKgs', span: true, spanText: 'kgs' },
             { lblname: 'lbs', controlType: 'textbox', ngmodel: 'lbs', parameterValue: 'BWlbs' },
             { lblname: 'Blood Group', controlType: 'select', ngmodel: 'bloodGroupId', typeofdata: 'bloodGroup', parameterValue: 'BloodGroup' },
             { lblname: 'Health Conditions', controlType: 'select', ngmodel: 'healthConditionId', typeofdata: 'healthCondition', parameterValue: 'HealthConditions' },
@@ -2565,13 +2566,13 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         model.partnerPreference = [
             { lblname: 'Gender', controlType: 'radio', ngmodel: 'genderId', arrbind: 'gender', parameterValue: 'GenderID' },
-            { lblname: 'Age Gap', controlType: 'doublemultiselect', ngmodelSelect1: 'fromAgeId', ngmodelSelect2: 'toAgeId', typeofdata: 'ageBind', parameterValue1: 'AgeGapFrom', parameterValue2: 'AgeGapTo' },
-            { lblname: 'Height', controlType: 'doublemultiselect', ngmodelSelect1: 'fromheightId', ngmodelSelect2: 'toheightId', typeofdata: 'heightregistration', parameterValue1: 'HeightFrom', parameterValue2: 'HeightTo' },
-            { lblname: 'Religion', controlType: 'multiselect', ngmodel: 'religionId', typeofdata: 'Religion', secondParent: 'mothertongueId', childName: 'caste', changeApi: 'castedependency', parameterValue: 'Religion' },
-            { lblname: 'Mother tongue', controlType: 'multiselect', ngmodel: 'mothertongueId', typeofdata: 'Mothertongue', secondParent: 'religionId', childName: 'caste', changeApi: 'castedependency', parameterValue: 'Mothertongue' },
-            { lblname: 'Caste', controlType: 'Changemultiselect', ngmodel: 'casteId', parentName: 'caste', childName: 'subCaste', changeApi: 'subCasteBind', parameterValue: 'Caste' },
+            { lblname: 'Age Gap', controlType: 'doublemultiselect', ngmodelSelect1: 'fromAgeId', ngmodelSelect2: 'toAgeId', typeofdata: 'ageBind', required: true, parameterValue1: 'AgeGapFrom', parameterValue2: 'AgeGapTo' },
+            { lblname: 'Height', controlType: 'doublemultiselect', ngmodelSelect1: 'fromheightId', ngmodelSelect2: 'toheightId', required: true, typeofdata: 'heightregistration', parameterValue1: 'HeightFrom', parameterValue2: 'HeightTo' },
+            { lblname: 'Religion', controlType: 'multiselect', ngmodel: 'religionId', typeofdata: 'Religion', required: true, secondParent: 'mothertongueId', childName: 'caste', changeApi: 'castedependency', parameterValue: 'Religion' },
+            { lblname: 'Mother tongue', controlType: 'multiselect', ngmodel: 'mothertongueId', typeofdata: 'Mothertongue', required: true, secondParent: 'religionId', childName: 'caste', changeApi: 'castedependency', parameterValue: 'Mothertongue' },
+            { lblname: 'Caste', controlType: 'Changemultiselect', ngmodel: 'casteId', parentName: 'caste', required: true, childName: 'subCaste', changeApi: 'subCasteBind', parameterValue: 'Caste' },
             { lblname: 'Subcaste', controlType: 'Changemultiselect', ngmodel: 'subCasteId', typeofdata: 'Religion', parentName: 'subCaste', parameterValue: 'Subcaste' },
-            { lblname: 'Marital status', controlType: 'multiselect', ngmodel: 'maritalstatusId', typeofdata: 'MaritalStatus', parameterValue: 'Maritalstatus' },
+            { lblname: 'Marital status', controlType: 'multiselect', ngmodel: 'maritalstatusId', typeofdata: 'MaritalStatus', required: true, parameterValue: 'Maritalstatus' },
             { lblname: 'Education category', controlType: 'multiselect', ngmodel: 'eduCatgoryId', typeofdata: 'educationcategory', childName: 'educationgroup', changeApi: 'EducationGroup', parameterValue: 'Educationcategory' },
             { lblname: 'Education group', controlType: 'Changemultiselect', ngmodel: 'eduGroupId', typeofdata: 'Religion', parentName: 'educationgroup', parameterValue: 'Educationgroup' },
             { lblname: 'Employed in', controlType: 'multiselect', ngmodel: 'employedinId', typeofdata: 'ProfCatgory', parameterValue: 'Employedin' },
@@ -2585,7 +2586,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             { lblname: 'Manglik/Kuja dosham', controlType: 'radio', ngmodel: 'kujadoshamId', arrbind: 'Kujadosham', parameterValue: 'ManglikKujadosham' },
             { lblname: 'Preferred star Language', controlType: 'radio', ngmodel: 'starLanguageId', arrbind: 'preferredStarlanguage', childName: 'star', changeApi: 'stars', parameterValue: 'PreferredstarLanguage' },
             { lblname: 'Star Preference', controlType: 'radio', ngmodel: 'starPreferenceId', arrbind: 'StarPreference', parameterValue: 'TypeofStar' },
-            { lblname: '', controlType: 'Changemultiselect', ngmodel: 'lstPreferredStars', parentName: 'star', parameterValue: 'PrefredStars' }
+            { lblname: '', controlType: 'Changemultiselect', ngmodel: 'lstPreferredStars', parentName: 'star', parameterValue: 'PrefredStars' },
+            { lblname: '', controlType: 'break' }
+
         ];
 
         model.aboutPartnerDescription = [
@@ -2881,7 +2884,8 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             { lblname: 'Profession', controlType: 'select', ngmodel: 'ddlProfessionGrade', typeofdata: 'gradeSelection', parameterValue: 'GProfession' },
             { lblname: 'Property', controlType: 'select', ngmodel: 'ddlpropertyGrade', typeofdata: 'gradeSelection', parameterValue: 'GProperty' },
             { lblname: 'Family', controlType: 'select', ngmodel: 'ddlfamilyGrade', typeofdata: 'gradeSelection', parameterValue: 'GFamily' },
-            { lblname: 'Photo', controlType: 'select', ngmodel: 'ddlphotoGrade', typeofdata: 'gradeSelection', parameterValue: 'GPhotos' }
+            { lblname: 'Photo', controlType: 'select', ngmodel: 'ddlphotoGrade', typeofdata: 'gradeSelection', parameterValue: 'GPhotos' },
+            { lblname: '', controlType: 'break' }
         ];
 
         model.profileDisplayIn = [
@@ -3009,7 +3013,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             model.eventType = 'add';
             model.RefrenceCust_Reference_ID = null;
             model.popupdata = model.Refrence;
-            model.popupHeader = 'Refrence';
+            model.popupHeader = 'Property Details';
             if (item !== undefined) {
                 model.eventType = 'edit';
                 model.Custpropertyid = item.Custpropertyid;
@@ -3053,9 +3057,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         };
         //performance code
         model.Refrence = [
-            { lblname: 'Family Status', controlType: 'select', ngmodel: 'ddlFamilyStatus', required: true, typeofdata: 'familyStatus', parameterValue: 'FamilyStatus' },
+            { lblname: 'Family Status', controlType: 'select', ngmodel: 'ddlFamilyStatus', typeofdata: 'familyStatus', parameterValue: 'FamilyStatus' },
             { lblname: 'Is shared property', controlType: 'radio', ngmodel: 'rdlSharedProperty', arrbind: 'boolType', parameterValue: 'Issharedproperty' },
-            { lblname: 'Value of property', controlType: 'textboxNumber', maxLength: 5, span: true, spanText: 'Lakhs', ngmodel: 'txtFname', required: true, parameterValue: 'Valueofproperty' },
+            { lblname: 'Value of property', controlType: 'textboxNumber', maxLength: 5, span: true, spanText: 'Lakhs', ngmodel: 'txtFname', parameterValue: 'Valueofproperty' },
             {
                 lblname: 'Property description',
                 controlType: 'textarea',
@@ -3234,7 +3238,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             { lblname: 'Relationship type', controlType: 'select', ngmodel: 'ddlRelationshiptype', required: true, typeofdata: 'RelationshipType', parameterValue: 'RelationshiptypeID' },
             { lblname: 'First name', controlType: 'textbox', ngmodel: 'txtFname', required: true, parameterValue: 'Firstname' },
             { lblname: 'Last name', controlType: 'textbox', ngmodel: 'txtLname', required: true, parameterValue: 'Lastname' },
-            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtProfessiondetails', required: true, parameterValue: 'Professiondetails' },
+            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtProfessiondetails', parameterValue: 'Professiondetails' },
             {
                 lblname: 'country',
                 controlType: 'country',
@@ -3249,8 +3253,8 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 districtParameterValue: 'DistrictID',
 
             },
-            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'txtNativePlace', required: true, parameterValue: 'Nativeplace' },
-            { lblname: 'Present location', controlType: 'textbox', ngmodel: 'txtPresentlocation', required: true, parameterValue: 'Presentlocation' },
+            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'txtNativePlace', parameterValue: 'Nativeplace' },
+            { lblname: 'Present location', controlType: 'textbox', ngmodel: 'txtPresentlocation', parameterValue: 'Presentlocation' },
             {
                 controlType: 'contact',
                 emailhide: true,
@@ -3639,10 +3643,10 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         };
         //Father Details
         model.fatherBrother = [
-            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFBElderORyounger', ownArray: 'FBElderYounger', parameterValue: 'FBElderYounger' },
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFBElderORyounger', required: true, ownArray: 'FBElderYounger', parameterValue: 'FBElderYounger' },
             { lblname: "Father's brother name", controlType: 'textbox', ngmodel: 'txtFatherbrothername', required: true, parameterValue: 'Fatherbrothername' },
-            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtFBEducationdetails', required: true, parameterValue: 'FatherBrotherEducationDetails' },
-            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtFBProfessiondetails', required: true, parameterValue: 'FBProfessiondetails' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtFBEducationdetails', parameterValue: 'FatherBrotherEducationDetails' },
+            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtFBProfessiondetails', parameterValue: 'FBProfessiondetails' },
             {
                 controlType: 'contact',
                 emailhide: true,
@@ -3667,12 +3671,12 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         ];
 
         model.fatherSister = [
-            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFSElderYounger', ownArray: 'FSElderYounger', parameterValue: 'FSElderYounger' },
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFSElderYounger', required: true, ownArray: 'FSElderYounger', parameterValue: 'FSElderYounger' },
             { lblname: "Father's sister name", controlType: 'textbox', ngmodel: 'txtFathersistername', required: true, parameterValue: 'FSFathersistername' },
-            { lblname: "Husband first name", controlType: 'textbox', ngmodel: 'txtFSHusbandfirstname', required: true, parameterValue: 'FSHusbandfirstname' },
-            { lblname: "Husband last name", controlType: 'textbox', ngmodel: 'txtFSHusbandlastname', required: true, parameterValue: 'FSHusbandlastname' },
-            { lblname: 'FSH Education', controlType: 'textbox', ngmodel: 'txtFSHEDucation', required: true, parameterValue: 'FSHEducationdetails' },
-            { lblname: 'FSH Profession', controlType: 'textbox', ngmodel: 'txtFSProfessiondetails', required: true, parameterValue: 'FSHProfessiondetails' },
+            { lblname: "Husband first name", controlType: 'textbox', ngmodel: 'txtFSHusbandfirstname', parameterValue: 'FSHusbandfirstname' },
+            { lblname: "Husband last name", controlType: 'textbox', ngmodel: 'txtFSHusbandlastname', parameterValue: 'FSHusbandlastname' },
+            { lblname: 'FSH Education', controlType: 'textbox', ngmodel: 'txtFSHEDucation', parameterValue: 'FSHEducationdetails' },
+            { lblname: 'FSH Profession', controlType: 'textbox', ngmodel: 'txtFSProfessiondetails', parameterValue: 'FSHProfessiondetails' },
 
             {
                 controlType: 'country',
@@ -3687,7 +3691,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 districtParameterValue: 'FSHDistrict',
 
             },
-            { lblname: 'Native place', controlType: 'textbox', ngmodel: 'txtFSHNativePlace', required: true, parameterValue: 'FSNativeplace' },
+            { lblname: 'Native place', controlType: 'textbox', ngmodel: 'txtFSHNativePlace', parameterValue: 'FSNativeplace' },
 
             {
                 controlType: 'contact',
@@ -3714,10 +3718,10 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         //mother Details
         model.motherBrother = [
-            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFBElderORyounger', ownArray: 'MBElderYounger', parameterValue: 'MBElderYounger' },
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlFBElderORyounger', required: true, ownArray: 'MBElderYounger', parameterValue: 'MBElderYounger' },
             { lblname: "Mother's brother name", controlType: 'textbox', ngmodel: 'txtMBName', required: true, parameterValue: 'Motherbrothername' },
-            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtMBEducation', required: true, parameterValue: 'MBEducationdetails' },
-            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtMBProfessiondetails', required: true, parameterValue: 'MBProfessiondetails' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtMBEducation', parameterValue: 'MBEducationdetails' },
+            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtMBProfessiondetails', parameterValue: 'MBProfessiondetails' },
             {
                 controlType: 'contact',
                 emailhide: true,
@@ -3742,12 +3746,12 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         ];
 
         model.motherSister = [
-            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlMSElderYounger', ownArray: 'MSElderYounger', parameterValue: 'MSElderYounger' },
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'rdlMSElderYounger', required: true, ownArray: 'MSElderYounger', parameterValue: 'MSElderYounger' },
             { lblname: "Mother's sister name", controlType: 'textbox', ngmodel: 'txtMSName', required: true, parameterValue: 'Mothersistername' },
-            { lblname: "Husband first name", controlType: 'textbox', ngmodel: 'txtMsHusbandfirstname', required: true, parameterValue: 'MSHusbandfirstname' },
-            { lblname: "Husband last name", controlType: 'textbox', ngmodel: 'txtMsHusbandlastname', required: true, parameterValue: 'MSHusbandlastname' },
-            { lblname: 'FSH Education', controlType: 'textbox', ngmodel: 'txtMSHEducation', required: true, parameterValue: 'MSEducationdetails' },
-            { lblname: 'FSH Profession', controlType: 'textbox', ngmodel: 'txtMSProfessiondetails', required: true, parameterValue: 'MSProfessiondetails' },
+            { lblname: "Husband first name", controlType: 'textbox', ngmodel: 'txtMsHusbandfirstname', parameterValue: 'MSHusbandfirstname' },
+            { lblname: "Husband last name", controlType: 'textbox', ngmodel: 'txtMsHusbandlastname', parameterValue: 'MSHusbandlastname' },
+            { lblname: 'FSH Education', controlType: 'textbox', ngmodel: 'txtMSHEducation', parameterValue: 'MSEducationdetails' },
+            { lblname: 'FSH Profession', controlType: 'textbox', ngmodel: 'txtMSProfessiondetails', parameterValue: 'MSProfessiondetails' },
 
             {
                 controlType: 'country',
@@ -3762,7 +3766,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 districtParameterValue: 'MSMSHDistrictID',
 
             },
-            { lblname: 'Native place', controlType: 'textbox', ngmodel: 'txtMSNativePlace', required: true, parameterValue: 'MSNativeplace' },
+            { lblname: 'Native place', controlType: 'textbox', ngmodel: 'txtMSNativePlace', parameterValue: 'MSNativeplace' },
 
             {
                 controlType: 'contact',
@@ -4104,17 +4108,6 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             return (val !== '' && val !== undefined) ? val : 0;
         };
 
-        // model.BIsMarried = function(val) {
-        //     if (val == '0') {
-
-        //     }
-        // };
-
-        // model.SIsMarried = function(val) {
-        //     if (val == '0') {
-
-        //     }
-        // };
 
         model.enableSubmit = function() {
             isSubmit = true;
@@ -4293,13 +4286,14 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             { lblname: 'Younger Brother', controlType: 'select', ngmodel: 'noOfyoungerBroId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfYoungerBrothers', parentDependecy: 'hideSibbroIfZero' },
             { lblname: 'No of sisters', controlType: 'select', ngmodel: 'noOfSisterId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfSisters' },
             { lblname: 'Elder sisters', controlType: 'select', ngmodel: 'noOfelderSisId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfElderSisters', parentDependecy: 'hideSibsisIfZero' },
-            { lblname: 'Younger  sisters', controlType: 'select', ngmodel: 'noOfyoungerSisId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfYoungerSisters', parentDependecy: 'hideSibsisIfZero' }
+            { lblname: 'Younger  sisters', controlType: 'select', ngmodel: 'noOfyoungerSisId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfYoungerSisters', parentDependecy: 'hideSibsisIfZero' },
+            { lblname: '', controlType: 'break' }
         ];
 
 
         model.brother = [
-            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderBro', ownArray: 'broElderYoungerArr', parameterValue: 'BroElderYounger' },
-            { lblname: 'Name', controlType: 'textbox', ngmodel: 'broName', parameterValue: 'BroName' },
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderBro', required: true, ownArray: 'broElderYoungerArr', parameterValue: 'BroElderYounger' },
+            { lblname: 'Name', controlType: 'textbox', ngmodel: 'broName', required: true, parameterValue: 'BroName' },
             { lblname: 'Education', controlType: 'textbox', ngmodel: 'broEducation', parameterValue: 'BroEducationDetails' },
             { lblname: 'Profession Category', controlType: 'select', ngmodel: 'broProfessionCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'BroProfessionCategoryID' },
             { lblname: 'Designationt', controlType: 'textbox', ngmodel: 'broDesignation', parameterValue: 'BroProfessionDetails' },
@@ -4324,7 +4318,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 landNumberParameterValue: 'BroLandNumber',
                 emailParameterValue: 'BroEmail'
             },
-            { lblname: 'Is Married', controlType: 'radio', ngmodel: 'broIsMarried', arrbind: 'boolType', parameterValue: 'BIsMarried', },
+            { lblname: 'Is Married', controlType: 'radio', ngmodel: 'broIsMarried', required: true, arrbind: 'boolType', parameterValue: 'BIsMarried', },
             { lblname: 'Spouse Name', controlType: 'textbox', ngmodel: 'spouseName', parameterValue: 'BroWifeName', parentDependecy: 'ismarried' },
             { lblname: 'Spouse Education', controlType: 'textbox', ngmodel: 'spouseEducation', parameterValue: 'BrowifeEducationDetails', parentDependecy: 'ismarried' },
             { lblname: 'Profession Category', controlType: 'select', ngmodel: 'spouseProfCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'BroSpouseProfessionCategoryID', parentDependecy: 'ismarried' },
@@ -4371,8 +4365,8 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         ];
 
         model.sister = [
-            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderSis', ownArray: 'sisElderYoungerArr', parameterValue: 'SisElderYounger' },
-            { lblname: 'Name', controlType: 'textbox', ngmodel: 'sisName', parameterValue: 'SisName' },
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderSis', required: true, ownArray: 'sisElderYoungerArr', parameterValue: 'SisElderYounger' },
+            { lblname: 'Name', controlType: 'textbox', ngmodel: 'sisName', required: true, parameterValue: 'SisName' },
             { lblname: 'Education', controlType: 'textbox', ngmodel: 'sisEducation', parameterValue: 'siseducationdetails' },
             { lblname: 'Profession Category', controlType: 'select', ngmodel: 'sisProfessionCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'SisProfessionCategoryID' },
             { lblname: 'Designationt', controlType: 'housewife', ngmodelText: 'sisDesignation', ngmodelChk: 'chksishousewife', parameterValueText: 'sisprofessiondetails' },
@@ -4397,7 +4391,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 landNumberParameterValue: 'SisLandNumber',
                 emailParameterValue: 'SisEmail'
             },
-            { lblname: 'Is Married', controlType: 'radio', ngmodel: 'sisIsMarried', arrbind: 'boolType', parameterValue: 'SIsMarried' },
+            { lblname: 'Is Married', controlType: 'radio', ngmodel: 'sisIsMarried', required: true, arrbind: 'boolType', parameterValue: 'SIsMarried' },
             { lblname: 'Husband Name', controlType: 'textbox', ngmodel: 'husbandName', parameterValue: 'SisHusbandName', parentDependecy: 'isSismarried' },
             { lblname: 'Husband Education', controlType: 'textbox', ngmodel: 'husbandEducation', parameterValue: 'sisspouseeducationdetails', parentDependecy: 'isSismarried' },
             { lblname: 'Profession Category', controlType: 'select', ngmodel: 'husbandProfCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'SisSpouseProfessionCategoryID', parentDependecy: 'isSismarried' },
@@ -5327,7 +5321,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div ng-repeat=\"item in page.model.candidateContactArr\">\r" +
+    "                <div ng-if=\"page.model.candidateContactArr\" ng-repeat=\"item in page.model.candidateContactArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -5503,7 +5497,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div ID=\"listcontactadressDetails\" ng-repeat=\"item in page.model.candidateAddrArr\">\r" +
+    "                <div ng-if=\"page.model.candidateAddrArr\" ng-repeat=\"item in page.model.candidateAddrArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -5707,7 +5701,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div ID=\"listparentsinfo\" ng-repeat=\"item in page.model.parentContactArr\">\r" +
+    "                <div ng-if=\"page.model.parentContactArr\" ng-repeat=\"item in page.model.parentContactArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -5917,7 +5911,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                <div ID=\"listSiblingsContac\" ng-repeat=\"item in page.model.SiiblingContactArr\">\r" +
+    "                <div ng-if=\"page.model.SiiblingContactArr\" ng-repeat=\"item in page.model.SiiblingContactArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -6277,7 +6271,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div ID=\"listRelativecontacts\" ng-repeat=\"item in page.model.relativeContactArr\">\r" +
+    "                <div ng-if=\"page.model.relativeContactArr\" ng-repeat=\"item in page.model.relativeContactArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -6499,7 +6493,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item \">\r" +
     "\n" +
-    "                <div ID=\"listreference\" ng-repeat=\"item in page.model.referenceContactArr\">\r" +
+    "                <div ng-if=\"page.model.referenceContactArr\" ng-repeat=\"item in page.model.referenceContactArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -7450,7 +7444,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"listpersonaldetails\" ng-repeat=\"item in page.model.CustomerDataArr\">\r" +
+    "                <div ng-if=\"page.model.CustomerDataArr\" ng-repeat=\"item in page.model.CustomerDataArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -7694,7 +7688,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div ng-repeat=\"item in page.model.educationSelectArray \">\r" +
+    "                <div ng-if=\"page.model.educationSelectArray\" ng-repeat=\"item in page.model.educationSelectArray\">\r" +
     "\n" +
     "                    <div id=\"reviewdiv \" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls': 'edit_page_details_item_desc clearfix' \">\r" +
     "\n" +
@@ -7834,7 +7828,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item \">\r" +
     "\n" +
-    "                <div id=\"lstProfession \" ng-repeat=\"item in page.model.ProfessionSelectArray \">\r" +
+    "                <div ng-if=\"page.model.ProfessionSelectArray\" ng-repeat=\"item in page.model.ProfessionSelectArray\">\r" +
     "\n" +
     "                    <div id=\"reviewdiv \" ng-class=\"item.reviewstatus===false? 'reviewCls': '' \">\r" +
     "\n" +
@@ -8179,7 +8173,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            <!--<p class=\"clearfix\"><span>Upload your three different photos</span></p>-->\r" +
     "\n" +
-    "                            <div id=\"dtimagephoto\" class=\"clearfix\" ng-repeat=\"item in page.model.manageArr\" style=\"width:33%;float:left;\">\r" +
+    "                            <div ng-if=\"page.model.manageArr\" class=\"clearfix\" ng-repeat=\"item in page.model.manageArr\" style=\"width:33%;float:left;\">\r" +
     "\n" +
     "                                <div class=\"photos\">\r" +
     "\n" +
@@ -8841,7 +8835,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"listparents\" ng-repeat=\"item in page.model.parentArr\">\r" +
+    "                <div ng-if=\"page.model.parentArr\" ng-repeat=\"item in page.model.parentArr\">\r" +
     "\n" +
     "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
@@ -9563,7 +9557,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                <div ng-repeat=\"item in page.model.addressArr\">\r" +
+    "                <div ng-if=\"page.model.addressArr\" ng-repeat=\"item in page.model.addressArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -9751,7 +9745,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                <div ng-repeat=\"item in page.model.physicalArr\">\r" +
+    "                <divng-if=\"page.model.physicalArr\" ng-repeat=\"item in page.model.physicalArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -9937,11 +9931,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "                </div>\r" +
+    "            </div>\r" +
     "\n" +
     "\r" +
-    "\n" +
-    "            </div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
@@ -10011,21 +10003,25 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <div id=\"popupDiv\">\r" +
+    "</div>\r" +
     "\n" +
-    "        <script type=\"text/ng-template\" id=\"commonParentpopup.html\">\r" +
+    "\r" +
     "\n" +
-    "            <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
+    "<div id=\"popupDiv\">\r" +
     "\n" +
-    "            </slide-popup>\r" +
+    "    <script type=\"text/ng-template\" id=\"commonParentpopup.html\">\r" +
     "\n" +
-    "        </script>\r" +
+    "        <slide-popup model=\"page.model\" eventtype=\"page.model.eventType\">\r" +
+    "\n" +
+    "        </slide-popup>\r" +
+    "\n" +
+    "    </script>\r" +
     "\n" +
     "\r" +
     "\n" +
     "\r" +
     "\n" +
-    "    </div>\r" +
+    "</div>\r" +
     "\n" +
     "</div>\r" +
     "\n" +
@@ -10062,7 +10058,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        <page-review dispaly-name=\"'PartnerPreference details'\" sectionid=\"'16,17,18,20,21,22'\" custid=\"page.model.CustID\"></page-review>\r" +
     "\n" +
-    "        <div ng-repeat=\"item in page.model.partnerPrefArr\">\r" +
+    "        <div ng-if=\"page.model.partnerPrefArr\" ng-repeat=\"item in page.model.partnerPrefArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -10516,7 +10512,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    <div class=\"edit_page_item_ui clearfix\">\r" +
     "\n" +
-    "                        <div ng-if=\"item.PartnerDescripition==='' || item.PartnerDescripition===null\">\r" +
+    "                        <div ng-if=\"page.model.partnerDescription==='' || page.model.partnerDescription===null\">\r" +
     "\n" +
     "                            <a id=\"lnkpartnerdesc\" class=\"edit_page_add_button\" href=\"javascript:void(0);\" ng-click=\"page.model.partnerdescPopulate();\"> Add</a>\r" +
     "\n" +
@@ -11057,7 +11053,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div class=\"edit_page_details_item\" ng-repeat=\"item in page.model.profileSettingArr\">\r" +
+    "            <div ng-if=\"page.model.profileSettingArr\" class=\"edit_page_details_item\" ng-repeat=\"item in page.model.profileSettingArr\">\r" +
     "\n" +
     "                <div id=\"fullupdatefatherbrother\">\r" +
     "\n" +
@@ -11307,7 +11303,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div class=\"edit_page_details_item\" ng-repeat=\"item in page.model.ConfidentialArr\">\r" +
+    "            <div ng-if=\"page.model.ConfidentialArr\" class=\"edit_page_details_item\" ng-repeat=\"item in page.model.ConfidentialArr\">\r" +
     "\n" +
     "                <div id=\"UpdatePanel2\">\r" +
     "\n" +
@@ -11401,7 +11397,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div class=\"edit_page_details_item\" ng-repeat=\"item in page.model.profileDisplayArr\">\r" +
+    "            <div class=\"edit_page_details_item\" ng-if=\"page.model.profileDisplayArr\" ng-repeat=\"item in page.model.profileDisplayArr\">\r" +
     "\n" +
     "                <div id=\"UpdatePanel4\">\r" +
     "\n" +
@@ -11589,7 +11585,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div class=\"edit_page_details_item\" ng-repeat=\"item in page.model.gradeSelectionArr\">\r" +
+    "            <div class=\"edit_page_details_item\" ng-if=\"page.model.gradeSelectionArr\" ng-repeat=\"item in page.model.gradeSelectionArr\">\r" +
     "\n" +
     "                <div id=\"UpdatePanel14\">\r" +
     "\n" +
@@ -11795,7 +11791,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
+    "    <!--\r" +
     "\n" +
     "    <script type=\"text/ng-template\" id=\"profileSettingContent.html\">\r" +
     "\n" +
@@ -11927,8 +11923,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
-    "\n" +
     "    <script type=\"text/ng-template\" id=\"confidentialContent.html\">\r" +
     "\n" +
     "        <form class=\"EditViewClass\" name=\"refForm\" novalidate role=\"form\" ng-submit=\"page.model.confidentialSubmit(page.model.csObj)\">\r" +
@@ -12000,8 +11994,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "        </form>\r" +
     "\n" +
     "    </script>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -12102,8 +12094,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "        </form>\r" +
     "\n" +
     "    </script>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -12219,11 +12209,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        </form>\r" +
     "\n" +
-    "    </script>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
+    "    </script>-->\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -12292,7 +12278,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.propertyArr\">\r" +
+    "                <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-if=\"page.model.propertyArr\" ng-repeat=\"item in page.model.propertyArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -12439,7 +12425,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div id=\"fullupdate\">\r" +
     "\n" +
-    "                    <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.ReferenceArr\">\r" +
+    "                    <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-if=\"page.model.ReferenceArr\" ng-repeat=\"item in page.model.ReferenceArr\">\r" +
     "\n" +
     "                        <div>\r" +
     "\n" +
@@ -12720,7 +12706,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"fullupdatefatherbrother\" ng-repeat=\"item in page.model.FBArr\">\r" +
+    "                <div ng-if=\"page.model.FBArr\" ng-repeat=\"item in page.model.FBArr\">\r" +
     "\n" +
     "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
@@ -12924,7 +12910,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"fullupdatefathersister\" ng-repeat=\"item in page.model.FSArr\">\r" +
+    "                <div ng-if=\"page.model.FSArr\" ng-repeat=\"item in page.model.FSArr\">\r" +
     "\n" +
     "                    <div id=\"reviewdiv\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\">\r" +
     "\n" +
@@ -13174,7 +13160,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"fullupdatemotherbrother\" ng-repeat=\"item in page.model.MBrr\">\r" +
+    "                <div ng-if=\"page.model.MBrr\" ng-repeat=\"item in page.model.MBrr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -13378,7 +13364,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"fullupdatemothersister\" ng-repeat=\"item in page.model.MSArr\">\r" +
+    "                <div ng-if=\"page.model.MSArr\" ng-repeat=\"item in page.model.MSArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -13669,7 +13655,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div id=\"lstnoofbros\">\r" +
     "\n" +
-    "                    <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.sibblingCountArr\">\r" +
+    "                    <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-if=\"page.model.sibblingCountArr\" ng-repeat=\"item in page.model.sibblingCountArr\">\r" +
     "\n" +
     "                        <div>\r" +
     "\n" +
@@ -13903,7 +13889,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div id=\"uplstSibbling\" class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"lstSibbling\" ng-repeat=\"item in page.model.BrotherArr\">\r" +
+    "                <div ng-if=\"page.model.BrotherArr\" ng-repeat=\"item in page.model.BrotherArr\">\r" +
     "\n" +
     "                    <div>\r" +
     "\n" +
@@ -14491,7 +14477,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                <div id=\"listsister\" ng-repeat=\"item in page.model.sisterArr\">\r" +
+    "                <div ng-if=\"page.model.sisterArr\" ng-repeat=\"item in page.model.sisterArr\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -16020,7 +16006,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div id=\"fullSpouseDetails\" ng-repeat=\"item in page.model.spouseArray\">\r" +
+    "                <div ng-if=\"page.model.spouseArray\" ng-repeat=\"item in page.model.spouseArray\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -16586,7 +16572,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                    <div ID=\"listChildrenDetails\" ng-repeat=\"item in page.model.ChildArray\">\r" +
+    "                    <div ng-if=\"page.model.ChildArray\" ng-repeat=\"item in page.model.ChildArray\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -16858,7 +16844,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                </div>\r" +
     "\n" +
-    "                <div ng-if=\"item.controlType==='textboxNumber'\" class=\"pop_controls_right\">\r" +
+    "                <div ng-if=\"item.controlType==='textboxNumber'\" class=\"pop_controls_right select-box-my-double\">\r" +
     "\n" +
     "                    <input type=\"text\" ng-model=\"model[item.ngmodel]\" maxlength=\"{{item.maxLength}}\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)))\"\r" +
     "\n" +
@@ -16932,7 +16918,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-if=\"item.controlType==='country'\">\r" +
     "\n" +
-    "                    <country-directive countryshow=\"item.countryshow\" cityshow=\"item.cityshow\" othercity=\"item.othercity\" dcountry=\"model[item.dcountry]\" dstate=\"model[item.dstate]\" ddistrict=\"model[item.ddistrict]\" dcity=\"model[item.dcity]\" strothercity=\"model[item.strothercity]\"></country-directive>\r" +
+    "                    <country-directive require=\"item.require\" countryshow=\"item.countryshow\" cityshow=\"item.cityshow\" othercity=\"item.othercity\" dcountry=\"model[item.dcountry]\" dstate=\"model[item.dstate]\" ddistrict=\"model[item.ddistrict]\" dcity=\"model[item.dcity]\" strothercity=\"model[item.strothercity]\"></country-directive>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -16984,8 +16970,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-if=\"item.controlType==='Changemultiselect'\" class=\"pop_controls_right select-box-my input-group\">\r" +
     "\n" +
-    "                    {{item.dataSource.length}} ----{{item.dataSource[0]}}\r" +
-    "\n" +
     "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" multiple ng-required=\"item.required\" ng-options=\"inneritem.value as inneritem.label for inneritem in item.dataSource\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
     "\n" +
     "                </div>\r" +
@@ -17005,6 +16989,12 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "                    <select multiselectdropdown ng-model=\"model.ddlFromMinutes\" ng-options=\"item.value as item.label for item in model.minbindArr\" required></select>\r" +
     "\n" +
     "                    <select multiselectdropdown ng-model=\"model.ddlFromSeconds\" ng-options=\"item.value as item.label for item in model.secbindArr\" required></select>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='break'\">\r" +
+    "\n" +
+    "                    <br>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -17040,7 +17030,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "<style>\r" +
     "\n" +
-    "    .requiredStar::after {\r" +
+    "    /*.requiredStar::after {\r" +
     "\n" +
     "        content: \" * \";\r" +
     "\n" +
@@ -17078,15 +17068,13 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "        margin: 0 !important;\r" +
     "\n" +
-    "    }\r" +
+    "    }*/\r" +
     "\n" +
-    "    \r" +
-    "\n" +
-    "    .help-block {\r" +
+    "    /*.help-block {\r" +
     "\n" +
     "        padding-left: 40%;\r" +
     "\n" +
-    "    }\r" +
+    "    }*/\r" +
     "\n" +
     "</style>"
   );
@@ -18334,8 +18322,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                 $mdDialog.hide();
             },
             timeoutoldalerts: function($scope, cls, msg, time) {
-                $scope.typecls = cls;
-                $scope.msgs = msg;
+                // $scope.typecls = '';
+                // $scope.typecls = cls;
+                // $scope.msgs = msg;
                 modalinstance = uibModal.open({
                     ariaLabelledBy: 'modal-title',
                     ariaDescribedBy: 'modal-body',

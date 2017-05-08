@@ -118,7 +118,7 @@
             { lblname: 'Relationship type', controlType: 'select', ngmodel: 'ddlRelationshiptype', required: true, typeofdata: 'RelationshipType', parameterValue: 'RelationshiptypeID' },
             { lblname: 'First name', controlType: 'textbox', ngmodel: 'txtFname', required: true, parameterValue: 'Firstname' },
             { lblname: 'Last name', controlType: 'textbox', ngmodel: 'txtLname', required: true, parameterValue: 'Lastname' },
-            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtProfessiondetails', required: true, parameterValue: 'Professiondetails' },
+            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtProfessiondetails', parameterValue: 'Professiondetails' },
             {
                 lblname: 'country',
                 controlType: 'country',
@@ -133,8 +133,8 @@
                 districtParameterValue: 'DistrictID',
 
             },
-            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'txtNativePlace', required: true, parameterValue: 'Nativeplace' },
-            { lblname: 'Present location', controlType: 'textbox', ngmodel: 'txtPresentlocation', required: true, parameterValue: 'Presentlocation' },
+            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'txtNativePlace', parameterValue: 'Nativeplace' },
+            { lblname: 'Present location', controlType: 'textbox', ngmodel: 'txtPresentlocation', parameterValue: 'Presentlocation' },
             {
                 controlType: 'contact',
                 emailhide: true,

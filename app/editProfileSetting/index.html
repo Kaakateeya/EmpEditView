@@ -12,7 +12,7 @@
                 </h4>
 
             </div>
-            <div class="edit_page_details_item" ng-repeat="item in page.model.profileSettingArr">
+            <div ng-if="page.model.profileSettingArr" class="edit_page_details_item" ng-repeat="item in page.model.profileSettingArr">
                 <div id="fullupdatefatherbrother">
                     <div>
                         <div id="UpdatePanelFBProfession" class="edit_page_details_item_desc clearfix">
@@ -137,7 +137,7 @@
                 </h4>
 
             </div>
-            <div class="edit_page_details_item" ng-repeat="item in page.model.ConfidentialArr">
+            <div ng-if="page.model.ConfidentialArr" class="edit_page_details_item" ng-repeat="item in page.model.ConfidentialArr">
                 <div id="UpdatePanel2">
                     <div>
                         <div id="UpdatePanelFBCurrentLocation" class="edit_page_details_item_desc clearfix">
@@ -184,7 +184,7 @@
                 </h4>
 
             </div>
-            <div class="edit_page_details_item" ng-repeat="item in page.model.profileDisplayArr">
+            <div class="edit_page_details_item" ng-if="page.model.profileDisplayArr" ng-repeat="item in page.model.profileDisplayArr">
                 <div id="UpdatePanel4">
                     <div>
 
@@ -278,7 +278,7 @@
 
                 </div>
             </div>
-            <div class="edit_page_details_item" ng-repeat="item in page.model.gradeSelectionArr">
+            <div class="edit_page_details_item" ng-if="page.model.gradeSelectionArr" ng-repeat="item in page.model.gradeSelectionArr">
                 <div id="UpdatePanel14">
                     <div>
 
@@ -381,7 +381,7 @@
     </div>
 
 
-
+    <!--
     <script type="text/ng-template" id="profileSettingContent.html">
         <form class="EditViewClass" name="psForm" novalidate role="form" ng-submit="page.model.profileSettingSubmit(page.model.psObj)">
             <div class="modal-header">
@@ -447,7 +447,6 @@
         </form>
     </script>
 
-
     <script type="text/ng-template" id="confidentialContent.html">
         <form class="EditViewClass" name="refForm" novalidate role="form" ng-submit="page.model.confidentialSubmit(page.model.csObj)">
             <div class="modal-header">
@@ -484,7 +483,6 @@
             </div>
         </form>
     </script>
-
 
     <script type="text/ng-template" id="profileDisplayContent.html">
         <form class="EditViewClass" name="psdForm" novalidate role="form" ng-submit="page.model.profileSettingDisplaySubmit(page.model.psdObj)">
@@ -535,7 +533,6 @@
             </div>
         </form>
     </script>
-
 
     <script type="text/ng-template" id="gradeSelectionContent.html">
         <form class="EditViewClass" name="gradeForm" novalidate role="form" ng-submit="page.model.gradeSubmit(page.model.gradeObj)">
@@ -593,9 +590,7 @@
 
             </div>
         </form>
-    </script>
-
-
+    </script>-->
 
     <script type="text/ng-template" id="commonProfileSettingpopup.html">
         <slide-popup model="page.model" eventtype="page.model.eventType">

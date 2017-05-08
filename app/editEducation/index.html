@@ -15,7 +15,7 @@
             </div>
 
             <div class="edit_page_details_item">
-                <div id="listpersonaldetails" ng-repeat="item in page.model.CustomerDataArr">
+                <div ng-if="page.model.CustomerDataArr" ng-repeat="item in page.model.CustomerDataArr">
 
                     <div id="reviewdivpersonal" class="edit_page_details_item_desc clearfix">
                         <div id="UpdatePanel6" class="edit_page_details_item_desc clearfix">
@@ -137,7 +137,7 @@
                 </div>
             </div>
             <div class="edit_page_details_item">
-                <div ng-repeat="item in page.model.educationSelectArray ">
+                <div ng-if="page.model.educationSelectArray" ng-repeat="item in page.model.educationSelectArray">
                     <div id="reviewdiv " ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls': 'edit_page_details_item_desc clearfix' ">
                         <div id="lbleducationgroup " class="edit_page_details_item_desc clearfix ">
                             <h6>
@@ -207,7 +207,7 @@
             </div>
 
             <div class="edit_page_details_item ">
-                <div id="lstProfession " ng-repeat="item in page.model.ProfessionSelectArray ">
+                <div ng-if="page.model.ProfessionSelectArray" ng-repeat="item in page.model.ProfessionSelectArray">
                     <div id="reviewdiv " ng-class="item.reviewstatus===false? 'reviewCls': '' ">
                         <div class="edit_page_details_item_desc clearfix ">
                             <h6>

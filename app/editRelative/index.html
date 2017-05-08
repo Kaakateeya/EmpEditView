@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="edit_page_details_item">
-                <div id="fullupdatefatherbrother" ng-repeat="item in page.model.FBArr">
+                <div ng-if="page.model.FBArr" ng-repeat="item in page.model.FBArr">
                     <div id="reviewdiv" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
                         <div>
                             <div>
@@ -117,7 +117,7 @@
                 </div>
             </div>
             <div class="edit_page_details_item">
-                <div id="fullupdatefathersister" ng-repeat="item in page.model.FSArr">
+                <div ng-if="page.model.FSArr" ng-repeat="item in page.model.FSArr">
                     <div id="reviewdiv" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
                         <div>
                             <div>
@@ -242,7 +242,7 @@
                 </div>
             </div>
             <div class="edit_page_details_item">
-                <div id="fullupdatemotherbrother" ng-repeat="item in page.model.MBrr">
+                <div ng-if="page.model.MBrr" ng-repeat="item in page.model.MBrr">
 
                     <div id="reviewdiv" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
                         <div>
@@ -344,7 +344,7 @@
                 </div>
             </div>
             <div class="edit_page_details_item">
-                <div id="fullupdatemothersister" ng-repeat="item in page.model.MSArr">
+                <div ng-if="page.model.MSArr" ng-repeat="item in page.model.MSArr">
 
                     <div id="reviewdiv" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
                         <div>

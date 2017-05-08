@@ -19,7 +19,7 @@
             </div>
 
             <div class="edit_page_details_item">
-                <div id="fullSpouseDetails" ng-repeat="item in page.model.spouseArray">
+                <div ng-if="page.model.spouseArray" ng-repeat="item in page.model.spouseArray">
 
                     <div id="reviewdiv" class="edit_page_details_item_desc clearfix">
 
@@ -302,7 +302,7 @@
             <div class="edit_page_details_item">
                 <div ID="UpdatePanelfullChildrenDetails">
 
-                    <div ID="listChildrenDetails" ng-repeat="item in page.model.ChildArray">
+                    <div ng-if="page.model.ChildArray" ng-repeat="item in page.model.ChildArray">
 
                         <div id="reviewdiv" class="edit_page_details_item_desc clearfix">
 

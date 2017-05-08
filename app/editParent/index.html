@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="edit_page_details_item">
-                <div id="listparents" ng-repeat="item in page.model.parentArr">
+                <div ng-if="page.model.parentArr" ng-repeat="item in page.model.parentArr">
                     <div id="reviewdiv" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
                         <div>
                             <div>
@@ -380,7 +380,7 @@
             </div>
             <div class="edit_page_details_item">
 
-                <div ng-repeat="item in page.model.addressArr">
+                <div ng-if="page.model.addressArr" ng-repeat="item in page.model.addressArr">
 
                     <div id="Div1" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
 
@@ -474,7 +474,7 @@
             </div>
             <div class="edit_page_details_item">
 
-                <div ng-repeat="item in page.model.physicalArr">
+                <divng-if="page.model.physicalArr" ng-repeat="item in page.model.physicalArr">
 
                     <div id="Div2" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'">
 
@@ -567,9 +567,8 @@
                             </h5>
                         </div>
                     </div>
-                </div>
-
             </div>
+
         </div>
         <div class="edit_page_item" id="divlnkaboutt">
             <div class="edit_page_item_head clearfix">
@@ -604,14 +603,16 @@
         </div>
     </div>
 
-    <div id="popupDiv">
-        <script type="text/ng-template" id="commonParentpopup.html">
-            <slide-popup model="page.model" eventtype="page.model.eventType">
-            </slide-popup>
-        </script>
+</div>
+
+<div id="popupDiv">
+    <script type="text/ng-template" id="commonParentpopup.html">
+        <slide-popup model="page.model" eventtype="page.model.eventType">
+        </slide-popup>
+    </script>
 
 
-    </div>
+</div>
 </div>
 <style>
     .md-dialog-container {

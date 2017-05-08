@@ -7,7 +7,7 @@
     <div class="edit_pages_content_main clearfix">
 
         <page-review dispaly-name="'PartnerPreference details'" sectionid="'16,17,18,20,21,22'" custid="page.model.CustID"></page-review>
-        <div ng-repeat="item in page.model.partnerPrefArr">
+        <div ng-if="page.model.partnerPrefArr" ng-repeat="item in page.model.partnerPrefArr">
 
             <div class="edit_page_item">
                 <div class="edit_page_item_head clearfix">
@@ -234,7 +234,7 @@
                 <div class="edit_page_item_head clearfix">
                     <h4>Partner Description ( Describe qualities you are looking for in your partner)</h4>
                     <div class="edit_page_item_ui clearfix">
-                        <div ng-if="item.PartnerDescripition==='' || item.PartnerDescripition===null">
+                        <div ng-if="page.model.partnerDescription==='' || page.model.partnerDescription===null">
                             <a id="lnkpartnerdesc" class="edit_page_add_button" href="javascript:void(0);" ng-click="page.model.partnerdescPopulate();"> Add</a>
                         </div>
 

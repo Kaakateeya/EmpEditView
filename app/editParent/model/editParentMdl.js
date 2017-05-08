@@ -462,12 +462,13 @@
             { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'mNativePlace', parameterValue: 'MotherCity' },
             { lblname: 'Are parents interCaste ? ', controlType: 'radio', ngmodel: 'areParentInterCasteId', arrbind: 'boolType', parameterValue: 'AreParentsInterCaste' },
             { lblname: 'Father Caste', controlType: 'select', ngmodel: 'fCaste', typeofdata: 'caste', parameterValue: 'FatherCaste', parentDependecy: 'ParentInterCasteId' },
-            { lblname: 'Mother Caste', controlType: 'select', ngmodel: 'mCaste', typeofdata: 'caste', parameterValue: 'MotherCaste', parentDependecy: 'ParentInterCasteId' }
+            { lblname: 'Mother Caste', controlType: 'select', ngmodel: 'mCaste', typeofdata: 'caste', parameterValue: 'MotherCaste', parentDependecy: 'ParentInterCasteId' },
+            { lblname: '', controlType: 'break' }
 
         ];
 
         model.Address = [
-            { lblname: 'House/Flat number', controlType: 'textbox', ngmodel: 'houseFlatNumber', parameterValue: 'HouseFlateNumber' },
+            { lblname: 'House/Flat number', controlType: 'textbox', ngmodel: 'houseFlatNumber', required: true, parameterValue: 'HouseFlateNumber' },
             { lblname: 'Apartment name', controlType: 'textbox', ngmodel: 'apartmentName', parameterValue: 'Apartmentname' },
             { lblname: 'Street name', controlType: 'textbox', ngmodel: 'streetName', parameterValue: 'Streetname' },
             { lblname: 'Area Name', controlType: 'textbox', ngmodel: 'areaName', parameterValue: 'AreaName' },
@@ -481,13 +482,12 @@
                 dstate: 'stateId',
                 ddistrict: 'districtId',
                 require: true,
-
                 countryParameterValue: 'Country',
                 stateParameterValue: 'STATE',
                 districtParameterValue: 'District',
 
             },
-            { lblname: 'City', controlType: 'textbox', ngmodel: 'cityId', parameterValue: 'city' },
+            { lblname: 'City', controlType: 'textbox', ngmodel: 'cityId', required: true, parameterValue: 'city' },
             { lblname: 'Zip/Pin', controlType: 'textbox', ngmodel: 'zipcode', parameterValue: 'ZipPin' }
 
         ];
@@ -496,7 +496,7 @@
             { lblname: 'Drink', controlType: 'radio', ngmodel: 'drinkId', arrbind: 'Drink', parameterValue: 'DrinkID' },
             { lblname: 'Smoke', controlType: 'radio', ngmodel: 'smokeId', arrbind: 'Drink', parameterValue: 'SmokeID' },
             { lblname: 'Body Type', controlType: 'select', ngmodel: 'bodyTypeId', typeofdata: 'bodyType', parameterValue: 'BodyTypeID' },
-            { lblname: 'Body weight', controlType: 'textbox', ngmodel: 'bodyWeight', method: 'converttolbs', parameterValue: 'BWKgs' },
+            { lblname: 'Body weight', controlType: 'textboxNumber', ngmodel: 'bodyWeight', method: 'converttolbs', parameterValue: 'BWKgs', span: true, spanText: 'kgs' },
             { lblname: 'lbs', controlType: 'textbox', ngmodel: 'lbs', parameterValue: 'BWlbs' },
             { lblname: 'Blood Group', controlType: 'select', ngmodel: 'bloodGroupId', typeofdata: 'bloodGroup', parameterValue: 'BloodGroup' },
             { lblname: 'Health Conditions', controlType: 'select', ngmodel: 'healthConditionId', typeofdata: 'healthCondition', parameterValue: 'HealthConditions' },

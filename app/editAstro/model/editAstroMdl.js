@@ -301,6 +301,7 @@
         model.astro = [{
                 lblname: 'Time of Birth',
                 controlType: 'astroTimeOfBirth',
+                required: true,
             },
             {
                 controlType: 'country',
@@ -314,16 +315,16 @@
                 countryParameterValue: 'CountryOfBirthID',
                 stateParameterValue: 'StateOfBirthID',
                 districtParameterValue: 'DistrictOfBirthID',
-                cityParameterValue: 'CityOfBirthID'
-
+                cityParameterValue: 'CityOfBirthID',
+                require: true
             },
-            { lblname: 'Star language', controlType: 'select', ngmodel: 'ddlstarlanguage', typeofdata: 'starLanguage', required: true, childName: 'star', changeApi: 'stars', parameterValue: 'Starlanguage' },
+            { lblname: 'Star language', controlType: 'select', ngmodel: 'ddlstarlanguage', typeofdata: 'starLanguage', childName: 'star', changeApi: 'stars', parameterValue: 'Starlanguage' },
             { lblname: 'Star', controlType: 'Changeselect', ngmodel: 'ddlstar', parentName: 'star', parameterValue: 'Star' },
-            { lblname: 'Paadam', controlType: 'select', ngmodel: 'ddlpaadam', required: true, typeofdata: 'paadam', parameterValue: 'Paadam' },
-            { lblname: 'Lagnam', controlType: 'select', ngmodel: 'ddlLagnam', required: true, typeofdata: 'lagnam', parameterValue: 'Lagnam' },
-            { lblname: 'Raasi/Moon sign', controlType: 'select', ngmodel: 'ddlRaasiMoonsign', required: true, typeofdata: 'ZodaicSign', parameterValue: 'RasiMoonsign' },
-            { lblname: 'Gothram/Gotra', controlType: 'textbox', ngmodel: 'txtGothramGotra', required: true, parameterValue: 'GothramGotra' },
-            { lblname: 'Maternal gothram', controlType: 'textbox', ngmodel: 'txtMaternalgothram', required: true, parameterValue: 'Maternalgothram' },
+            { lblname: 'Paadam', controlType: 'select', ngmodel: 'ddlpaadam', typeofdata: 'paadam', parameterValue: 'Paadam' },
+            { lblname: 'Lagnam', controlType: 'select', ngmodel: 'ddlLagnam', typeofdata: 'lagnam', parameterValue: 'Lagnam' },
+            { lblname: 'Raasi/Moon sign', controlType: 'select', ngmodel: 'ddlRaasiMoonsign', typeofdata: 'ZodaicSign', parameterValue: 'RasiMoonsign' },
+            { lblname: 'Gothram/Gotra', controlType: 'textbox', ngmodel: 'txtGothramGotra', parameterValue: 'GothramGotra' },
+            { lblname: 'Maternal gothram', controlType: 'textbox', ngmodel: 'txtMaternalgothram', parameterValue: 'Maternalgothram' },
             { lblname: 'Manglik/Kuja dosham', controlType: 'radio', ngmodel: 'rdlkujaDosham', ownArray: 'Manglik', parameterValue: 'ManglikKujadosham' },
 
         ];

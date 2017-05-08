@@ -19,7 +19,7 @@
 
             <div class="edit_page_details_item">
                 <div id="fullupdate">
-                    <div ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'" ng-repeat="item in page.model.ReferenceArr">
+                    <div ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'" ng-if="page.model.ReferenceArr" ng-repeat="item in page.model.ReferenceArr">
                         <div>
                             <div id="uplRelationShipType">
 

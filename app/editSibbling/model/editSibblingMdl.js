@@ -240,17 +240,6 @@
             return (val !== '' && val !== undefined) ? val : 0;
         };
 
-        // model.BIsMarried = function(val) {
-        //     if (val == '0') {
-
-        //     }
-        // };
-
-        // model.SIsMarried = function(val) {
-        //     if (val == '0') {
-
-        //     }
-        // };
 
         model.enableSubmit = function() {
             isSubmit = true;
@@ -429,13 +418,14 @@
             { lblname: 'Younger Brother', controlType: 'select', ngmodel: 'noOfyoungerBroId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfYoungerBrothers', parentDependecy: 'hideSibbroIfZero' },
             { lblname: 'No of sisters', controlType: 'select', ngmodel: 'noOfSisterId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfSisters' },
             { lblname: 'Elder sisters', controlType: 'select', ngmodel: 'noOfelderSisId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfElderSisters', parentDependecy: 'hideSibsisIfZero' },
-            { lblname: 'Younger  sisters', controlType: 'select', ngmodel: 'noOfyoungerSisId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfYoungerSisters', parentDependecy: 'hideSibsisIfZero' }
+            { lblname: 'Younger  sisters', controlType: 'select', ngmodel: 'noOfyoungerSisId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfYoungerSisters', parentDependecy: 'hideSibsisIfZero' },
+            { lblname: '', controlType: 'break' }
         ];
 
 
         model.brother = [
-            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderBro', ownArray: 'broElderYoungerArr', parameterValue: 'BroElderYounger' },
-            { lblname: 'Name', controlType: 'textbox', ngmodel: 'broName', parameterValue: 'BroName' },
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderBro', required: true, ownArray: 'broElderYoungerArr', parameterValue: 'BroElderYounger' },
+            { lblname: 'Name', controlType: 'textbox', ngmodel: 'broName', required: true, parameterValue: 'BroName' },
             { lblname: 'Education', controlType: 'textbox', ngmodel: 'broEducation', parameterValue: 'BroEducationDetails' },
             { lblname: 'Profession Category', controlType: 'select', ngmodel: 'broProfessionCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'BroProfessionCategoryID' },
             { lblname: 'Designationt', controlType: 'textbox', ngmodel: 'broDesignation', parameterValue: 'BroProfessionDetails' },
@@ -460,7 +450,7 @@
                 landNumberParameterValue: 'BroLandNumber',
                 emailParameterValue: 'BroEmail'
             },
-            { lblname: 'Is Married', controlType: 'radio', ngmodel: 'broIsMarried', arrbind: 'boolType', parameterValue: 'BIsMarried', },
+            { lblname: 'Is Married', controlType: 'radio', ngmodel: 'broIsMarried', required: true, arrbind: 'boolType', parameterValue: 'BIsMarried', },
             { lblname: 'Spouse Name', controlType: 'textbox', ngmodel: 'spouseName', parameterValue: 'BroWifeName', parentDependecy: 'ismarried' },
             { lblname: 'Spouse Education', controlType: 'textbox', ngmodel: 'spouseEducation', parameterValue: 'BrowifeEducationDetails', parentDependecy: 'ismarried' },
             { lblname: 'Profession Category', controlType: 'select', ngmodel: 'spouseProfCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'BroSpouseProfessionCategoryID', parentDependecy: 'ismarried' },
@@ -507,8 +497,8 @@
         ];
 
         model.sister = [
-            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderSis', ownArray: 'sisElderYoungerArr', parameterValue: 'SisElderYounger' },
-            { lblname: 'Name', controlType: 'textbox', ngmodel: 'sisName', parameterValue: 'SisName' },
+            { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderSis', required: true, ownArray: 'sisElderYoungerArr', parameterValue: 'SisElderYounger' },
+            { lblname: 'Name', controlType: 'textbox', ngmodel: 'sisName', required: true, parameterValue: 'SisName' },
             { lblname: 'Education', controlType: 'textbox', ngmodel: 'sisEducation', parameterValue: 'siseducationdetails' },
             { lblname: 'Profession Category', controlType: 'select', ngmodel: 'sisProfessionCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'SisProfessionCategoryID' },
             { lblname: 'Designationt', controlType: 'housewife', ngmodelText: 'sisDesignation', ngmodelChk: 'chksishousewife', parameterValueText: 'sisprofessiondetails' },
@@ -533,7 +523,7 @@
                 landNumberParameterValue: 'SisLandNumber',
                 emailParameterValue: 'SisEmail'
             },
-            { lblname: 'Is Married', controlType: 'radio', ngmodel: 'sisIsMarried', arrbind: 'boolType', parameterValue: 'SIsMarried' },
+            { lblname: 'Is Married', controlType: 'radio', ngmodel: 'sisIsMarried', required: true, arrbind: 'boolType', parameterValue: 'SIsMarried' },
             { lblname: 'Husband Name', controlType: 'textbox', ngmodel: 'husbandName', parameterValue: 'SisHusbandName', parentDependecy: 'isSismarried' },
             { lblname: 'Husband Education', controlType: 'textbox', ngmodel: 'husbandEducation', parameterValue: 'sisspouseeducationdetails', parentDependecy: 'isSismarried' },
             { lblname: 'Profession Category', controlType: 'select', ngmodel: 'husbandProfCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'SisSpouseProfessionCategoryID', parentDependecy: 'isSismarried' },

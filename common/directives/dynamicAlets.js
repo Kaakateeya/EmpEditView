@@ -67,8 +67,9 @@
                 $mdDialog.hide();
             },
             timeoutoldalerts: function($scope, cls, msg, time) {
-                $scope.typecls = cls;
-                $scope.msgs = msg;
+                // $scope.typecls = '';
+                // $scope.typecls = cls;
+                // $scope.msgs = msg;
                 modalinstance = uibModal.open({
                     ariaLabelledBy: 'modal-title',
                     ariaDescribedBy: 'modal-body',

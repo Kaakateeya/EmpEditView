@@ -16,7 +16,7 @@
                     <div class="pics_selected_list_main clearfix">
                         <div class="pics_selected_list_main_lt clearfix">
                             <!--<p class="clearfix"><span>Upload your three different photos</span></p>-->
-                            <div id="dtimagephoto" class="clearfix" ng-repeat="item in page.model.manageArr" style="width:33%;float:left;">
+                            <div ng-if="page.model.manageArr" class="clearfix" ng-repeat="item in page.model.manageArr" style="width:33%;float:left;">
                                 <div class="photos">
                                     <div class="pics_selected_list_item clearfix">
 
