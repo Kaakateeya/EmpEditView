@@ -36,7 +36,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.AstroArr track by $index\">\r" +
+    "                <div ng-if=\"page.model.AstroArr\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.AstroArr track by $index\">\r" +
     "\n" +
     "                    <div>\r" +
     "\n" +
@@ -2844,7 +2844,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                            <a href=\"javascript:void(0); \" class=\"edit_page_del_button \" ng-click=\"page.model.DeleteEduPopup(item.EducationID); \">Delete</a>\r" +
+    "                            <a ng-if=\"item.EduHighestDegree!==1\" href=\"javascript:void(0); \" class=\"edit_page_del_button \" ng-click=\"page.model.DeleteEduPopup(item.EducationID); \">Delete</a>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
@@ -11974,7 +11974,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-if=\"item.controlType==='textbox'\" class=\"pop_controls_right\">\r" +
     "\n" +
-    "                    <input type=\"text\" ng-model=\"model[item.ngmodel]\" maxlength=\"150\" class=\"form-control\" ng-required=\"item.required\" />\r" +
+    "                    <input type=\"text\" ng-model=\"model[item.ngmodel]\" ng-change=\"model[item.method]();\" maxlength=\"150\" class=\"form-control\" ng-required=\"item.required\" />\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -12104,7 +12104,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-if=\"item.controlType==='Changemultiselect'\" class=\"pop_controls_right select-box-my input-group\">\r" +
     "\n" +
-    "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" multiple ng-required=\"item.required\" ng-options=\"itm.value as itm.label for itm in item.dataSource\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
+    "                    {{item.dataSource.length}} ----{{item.dataSource[0]}}\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" multiple ng-required=\"item.required\" ng-options=\"inneritem.value as inneritem.label for inneritem in item.dataSource\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +

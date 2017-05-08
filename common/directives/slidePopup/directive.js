@@ -41,6 +41,7 @@
                                 _.each(res.data, function(item) {
                                     depData.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                                 });
+                                item.dataSource = [];
                                 item.dataSource = depData;
                             });
                         });
@@ -48,7 +49,6 @@
                         SelectBindService[apiPath](commonFactory.listSelectedVal(value)).then(function(res) {
                             _.map(_.where(scope.model.popupdata, { parentName: text }), function(item) {
                                 var depData = [];
-
                                 _.each(res.data, function(item) {
                                     depData.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                                 });
@@ -58,7 +58,6 @@
                         });
                     }
                 }
-
             };
 
             _.each(scope.model.popupdata, function(item) {
@@ -67,6 +66,7 @@
                     if (Arr !== undefined && Arr.length > 0 && angular.lowercase(Arr[0].title) === '--select--') {
                         Arr.splice(0, 1);
                     }
+                    item.dataSource = [];
                     item.dataSource = Arr;
                 }
                 if (item.ownArray) {
@@ -74,6 +74,7 @@
                     if (Array !== undefined && Array.length > 0 && angular.lowercase(Array[0].title) === '--select--') {
                         Array.splice(0, 1);
                     }
+                    item.dataSource = [];
                     item.dataSource = Array;
                 }
                 if (scope.eventtype === 'add') {

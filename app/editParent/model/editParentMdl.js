@@ -318,20 +318,20 @@
             return result;
         };
         model.converttolbs = function(item) {
-            var value = item.txtBWKgs;
-            item.txtlbs = '';
+            var value = model.bodyWeight;
+            model.lbs = '';
             if (value.length > 0) {
                 var lbs = value * 2.2;
                 lbs = model.roundVal(lbs);
-                item.txtlbs = lbs;
+                model.lbs = lbs;
                 if (lbs.toString() == 'NaN') {
                     alert("invalid Number");
-                    item.txtlbs = '';
-                    item.txtBWKgs = '';
+                    model.lbs = '';
+                    model.bodyWeight = '';
                 }
             } else {
-                item.txtBWKgs = '';
-                item.txtlbs = '';
+                model.bodyWeight = '';
+                model.lbs = '';
             }
         };
 
@@ -340,10 +340,9 @@
         };
 
         model.ParentInterCasteId = function(val) {
-            debugger;
+
             return model.areParentInterCasteId === 1 ? true : false;
         };
-
 
         model.parent = [
             { lblname: '', controlType: 'bindHtml', html: ' <h6>Father Details</h6>', classname: 'parentheader' },
@@ -497,7 +496,7 @@
             { lblname: 'Drink', controlType: 'radio', ngmodel: 'drinkId', arrbind: 'Drink', parameterValue: 'DrinkID' },
             { lblname: 'Smoke', controlType: 'radio', ngmodel: 'smokeId', arrbind: 'Drink', parameterValue: 'SmokeID' },
             { lblname: 'Body Type', controlType: 'select', ngmodel: 'bodyTypeId', typeofdata: 'bodyType', parameterValue: 'BodyTypeID' },
-            { lblname: 'Body weight', controlType: 'textbox', ngmodel: 'bodyWeight', parameterValue: 'BWKgs' },
+            { lblname: 'Body weight', controlType: 'textbox', ngmodel: 'bodyWeight', method: 'converttolbs', parameterValue: 'BWKgs' },
             { lblname: 'lbs', controlType: 'textbox', ngmodel: 'lbs', parameterValue: 'BWlbs' },
             { lblname: 'Blood Group', controlType: 'select', ngmodel: 'bloodGroupId', typeofdata: 'bloodGroup', parameterValue: 'BloodGroup' },
             { lblname: 'Health Conditions', controlType: 'select', ngmodel: 'healthConditionId', typeofdata: 'healthCondition', parameterValue: 'HealthConditions' },

@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="edit_page_details_item">
-                <div ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'" ng-repeat="item in page.model.AstroArr track by $index">
+                <div ng-if="page.model.AstroArr" ng-class="item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'" ng-repeat="item in page.model.AstroArr track by $index">
                     <div>
                         <div ng-hide="item.TimeOfBirth===null" class="edit_page_details_item_desc clearfix">
                             <h6>

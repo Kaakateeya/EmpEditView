@@ -286,7 +286,14 @@
             });
         };
         model.showHideVisastatus = function(item) {
-            return parseInt(model.profCountryId) !== 1 ? true : false;
+            if (parseInt(model.profCountryId) === 1) {
+                model.visaStatus = '';
+                model.sinceDate = '';
+                model.arrivalDate = '';
+                model.departureDate = '';
+                return false;
+            }
+            return true;
         };
 
 
@@ -370,7 +377,7 @@
             { lblname: 'Caste', controlType: 'Changeselect', ngmodel: 'casteId', required: true, parentName: 'caste', childName: 'subCaste', changeApi: 'subCasteBind', parameterValue: 'CasteID' },
             { lblname: 'SubCaste', controlType: 'Changeselect', ngmodel: 'subcasteId', parentName: 'subCaste', parameterValue: 'SubcasteID' },
             { lblname: 'Born Citizenship', controlType: 'select', ngmodel: 'bornCitizenShipId', required: true, typeofdata: 'Country', parameterValue: 'CitizenshipID' },
-            { lblname: 'Physical Status', controlType: 'radio', ngmodel: 'physicalStausId', arrbind: 'PhysicalStatus', parameterValue: 'PhysicallyChallenged' }
+            { lblname: 'Physical Status', controlType: 'radio', ngmodel: 'physicalStausId', required: true, arrbind: 'PhysicalStatus', parameterValue: 'PhysicallyChallenged' }
         ];
 
         model.aboutUrSelf = [

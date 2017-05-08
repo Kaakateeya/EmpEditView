@@ -65,19 +65,19 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         $stateProvider.state(item.name, {
             url: item.url,
-            views: innerView,
-            resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-                loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                    // you can lazy load files for an existing module
-                    var edit = item.name.slice(9);
-                    if (editviewapp.env === 'dev') {
-                        return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-                    } else {
-                        return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
-                    }
-                    // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
-                }]
-            }
+            views: innerView
+                // resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+                //     loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                //         // you can lazy load files for an existing module
+                //         var edit = item.name.slice(9);
+                //         if (editviewapp.env === 'dev') {
+                //             return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+                //         } else {
+                //             return $ocLazyLoad.load(['app/' + edit + '/src/script.min.js', item.subname]);
+                //         }
+                //         // return $ocLazyLoad.load(['app/' + edit + '/controller/' + edit + 'ctrl.js', 'app/' + edit + '/model/' + edit + 'Mdl.js', 'app/' + edit + '/service/' + edit + 'service.js', item.subname]);
+                //     }]
+                // }
         });
         $locationProvider.html5Mode(true);
     });
@@ -1278,7 +1278,14 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             });
         };
         model.showHideVisastatus = function(item) {
-            return parseInt(model.profCountryId) !== 1 ? true : false;
+            if (parseInt(model.profCountryId) === 1) {
+                model.visaStatus = '';
+                model.sinceDate = '';
+                model.arrivalDate = '';
+                model.departureDate = '';
+                return false;
+            }
+            return true;
         };
 
 
@@ -1362,7 +1369,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             { lblname: 'Caste', controlType: 'Changeselect', ngmodel: 'casteId', required: true, parentName: 'caste', childName: 'subCaste', changeApi: 'subCasteBind', parameterValue: 'CasteID' },
             { lblname: 'SubCaste', controlType: 'Changeselect', ngmodel: 'subcasteId', parentName: 'subCaste', parameterValue: 'SubcasteID' },
             { lblname: 'Born Citizenship', controlType: 'select', ngmodel: 'bornCitizenShipId', required: true, typeofdata: 'Country', parameterValue: 'CitizenshipID' },
-            { lblname: 'Physical Status', controlType: 'radio', ngmodel: 'physicalStausId', arrbind: 'PhysicalStatus', parameterValue: 'PhysicallyChallenged' }
+            { lblname: 'Physical Status', controlType: 'radio', ngmodel: 'physicalStausId', required: true, arrbind: 'PhysicalStatus', parameterValue: 'PhysicallyChallenged' }
         ];
 
         model.aboutUrSelf = [
@@ -2147,20 +2154,20 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             return result;
         };
         model.converttolbs = function(item) {
-            var value = item.txtBWKgs;
-            item.txtlbs = '';
+            var value = model.bodyWeight;
+            model.lbs = '';
             if (value.length > 0) {
                 var lbs = value * 2.2;
                 lbs = model.roundVal(lbs);
-                item.txtlbs = lbs;
+                model.lbs = lbs;
                 if (lbs.toString() == 'NaN') {
                     alert("invalid Number");
-                    item.txtlbs = '';
-                    item.txtBWKgs = '';
+                    model.lbs = '';
+                    model.bodyWeight = '';
                 }
             } else {
-                item.txtBWKgs = '';
-                item.txtlbs = '';
+                model.bodyWeight = '';
+                model.lbs = '';
             }
         };
 
@@ -2169,10 +2176,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         };
 
         model.ParentInterCasteId = function(val) {
-            debugger;
+
             return model.areParentInterCasteId === 1 ? true : false;
         };
-
 
         model.parent = [
             { lblname: '', controlType: 'bindHtml', html: ' <h6>Father Details</h6>', classname: 'parentheader' },
@@ -2326,7 +2332,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             { lblname: 'Drink', controlType: 'radio', ngmodel: 'drinkId', arrbind: 'Drink', parameterValue: 'DrinkID' },
             { lblname: 'Smoke', controlType: 'radio', ngmodel: 'smokeId', arrbind: 'Drink', parameterValue: 'SmokeID' },
             { lblname: 'Body Type', controlType: 'select', ngmodel: 'bodyTypeId', typeofdata: 'bodyType', parameterValue: 'BodyTypeID' },
-            { lblname: 'Body weight', controlType: 'textbox', ngmodel: 'bodyWeight', parameterValue: 'BWKgs' },
+            { lblname: 'Body weight', controlType: 'textbox', ngmodel: 'bodyWeight', method: 'converttolbs', parameterValue: 'BWKgs' },
             { lblname: 'lbs', controlType: 'textbox', ngmodel: 'lbs', parameterValue: 'BWlbs' },
             { lblname: 'Blood Group', controlType: 'select', ngmodel: 'bloodGroupId', typeofdata: 'bloodGroup', parameterValue: 'BloodGroup' },
             { lblname: 'Health Conditions', controlType: 'select', ngmodel: 'healthConditionId', typeofdata: 'healthCondition', parameterValue: 'HealthConditions' },
@@ -2841,13 +2847,21 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             }
 
         };
-
+        model.hideifActive = function() {
+            if (parseInt(model.rdlapplicationstatus) === 54) {
+                model.txtnoofdaysinactive = '';
+                model.txtreasonforinactive = '';
+                model.ddlrequestedby = '';
+                return false;
+            }
+            return true;
+        };
 
         model.profileSetting = [
             { lblname: 'Application Status', controlType: 'radio', ngmodel: 'rdlapplicationstatus', ownArray: 'AplicationStatusArr', parameterValue: 'rdlapplicationstatus' },
-            { lblname: 'No of Days to be inactivated ', controlType: 'textbox', ngmodel: 'txtnoofdaysinactive', parameterValue: 'txtnoofdaysinactive' },
-            { lblname: 'Reason for InActive', controlType: 'textareaSide', ngmodel: 'txtreasonforinactive', parameterValue: 'txtreasonforinactive' },
-            { lblname: 'Requested By', controlType: 'select', ngmodel: 'ddlrequestedby', typeofdata: 'childStayingWith', parameterValue: 'ddlrequestedby' },
+            { lblname: 'No of Days to be inactivated ', controlType: 'textbox', ngmodel: 'txtnoofdaysinactive', parameterValue: 'txtnoofdaysinactive', parentDependecy: 'hideifActive' },
+            { lblname: 'Reason for InActive', controlType: 'textareaSide', ngmodel: 'txtreasonforinactive', parameterValue: 'txtreasonforinactive', parentDependecy: 'hideifActive' },
+            { lblname: 'Requested By', controlType: 'select', ngmodel: 'ddlrequestedby', typeofdata: 'childStayingWith', parameterValue: 'ddlrequestedby', parentDependecy: 'hideifActive' },
             { lblname: 'Profile Grade', controlType: 'radio', ngmodel: 'rdlprofilegrade', ownArray: 'profileGrade', parameterValue: 'rdlprofilegrade' },
         ];
 
@@ -4088,57 +4102,19 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         model.checkVal = function(val) {
             return (val !== '' && val !== undefined) ? val : 0;
-
         };
 
-        model.BIsMarried = function(val) {
-            if (val == '0') {
-                model.txtBWifeName = '';
-                model.txtbrotherwifeeducation = '';
-                model.txtbrotherwifeprofession = '';
-                model.chkboxbrotherwifeprofession = '';
-                model.txtBWifeCompanyName = '';
-                model.txtBwifeJoblocation = '';
-                model.ddlBWMobileCode = '';
-                model.txtBWifeMobileNumber = '';
-                model.ddlBWifeLandLineCountryCode = '';
-                model.txtBWifeLandLineAreaCode = '';
-                model.txtBWifeLandLineNumber = '';
-                model.ddlBWMobileCode2 = '';
-                model.txtBWifeMobileNumber2 = '';
-                model.txtwifeEmail = '';
-                model.txtBWifeFatherSurName = '';
-                model.txtBWWifeFatherName = '';
-                model.ddlborherspousefathercaste = '';
-                model.ddlBroSpousefatherState = '';
-                model.ddlBroSpousefatherDistrict = '';
-                model.txtBroSpousefatherCity = '';
-            }
-        };
+        // model.BIsMarried = function(val) {
+        //     if (val == '0') {
 
-        model.SIsMarried = function(val) {
-            if (val == '0') {
-                model.txtShusName = '';
-                model.txtHusbandEducation = '';
-                model.txtHusbandProfession = '';
-                model.txtShusCompanyName = '';
-                model.txtShusjobloc = '';
-                model.ddlSHusMobileCountryID = '';
-                model.txtSHusMobileNumber = '';
-                model.ddlSHusLandCountryID = '';
-                model.txtSHusLandNumber = '';
-                model.txtSHusLandArea = '';
-                model.ddlSHusMobileCountryID2 = '';
-                model.txtSHusMobileNumber2 = '';
-                model.txtHusbandEmail = '';
-                model.txtHusbandFatherSurName = '';
-                model.txtHusbandFatherName = '';
-                model.ddlsisterspusefathercaste = '';
-                model.ddlSisSpouceFatherState = '';
-                model.ddlSisSpouceFatherDistrict = '';
-                model.txtSisSpouceFatherCity = '';
-            }
-        };
+        //     }
+        // };
+
+        // model.SIsMarried = function(val) {
+        //     if (val == '0') {
+
+        //     }
+        // };
 
         model.enableSubmit = function() {
             isSubmit = true;
@@ -4233,13 +4209,91 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             }
         };
 
+        model.hideSibbroIfZero = function() {
+            if (parseInt(model.noOfBorthersId) === 0) {
+                model.noOfelderBroId = 0;
+                model.noOfyoungerBroId = 0;
+                return false;
+            }
+            return true;
+        };
+        model.hideSibsisIfZero = function() {
+            if (parseInt(model.noOfSisterId) === 0) {
+                model.noOfelderSisId = 0;
+                model.noOfyoungerSisId = 0;
+                return false;
+            }
+            return true;
+        };
+        model.ismarried = function() {
+
+            if (parseInt(model.broIsMarried) === 0) {
+                model.spouseName = '';
+                model.spouseEducation = '';
+                model.spouseDesignation = '';
+                model.chkspousehousewife = '';
+                model.spouseCompany = '';
+                model.spouseJobLocation = '';
+                model.spouseCountryCodeId = '';
+                model.spouseMobNumber = '';
+                model.spouseLandCountryCodeId = '';
+                model.spouseLandAreaCodeId = '';
+                model.spouseLandNumberId = '';
+                model.spouseAlternativeCountryCodeId = '';
+                model.spouseAlternativeNumber = '';
+                model.spouseEmail = '';
+                model.spouseFatherLastName = '';
+                model.spouseFatherFirstName = '';
+                model.spouseFatherCaste = '';
+                model.broSpouseFatherStateId = '';
+                model.broSpouseFatherDistrictId = '';
+                model.broSpouseCityId = '';
+                model.spouseProfCatgory = '';
+                return false;
+            }
+            return true;
+        };
+        model.isSismarried = function() {
+
+            if (parseInt(model.sisIsMarried) === 0) {
+                model.husbandName = '';
+                model.husbandEducation = '';
+                model.husbandProfCatgory = '';
+                model.husbandDesignation = '';
+                model.husbandCompany = '';
+                model.husbandJobLocation = '';
+                model.husbandCountryCodeId = '';
+                model.husbandMobNumber = '';
+                model.husbandAlternativeCountryCodeId = '';
+                model.husbandAlternativeNumber = '';
+                model.husbandLandCountryCodeId = '';
+                model.husbandLandAreaCodeId = '';
+                model.husbandLandNumberId = '';
+                model.husbandEmail = '';
+                model.husbandFatherLastName = '';
+                model.spouseFatherFirstName = '';
+                model.spouseFatherCaste = '';
+                model.broSpouseFatherStateId = '';
+                model.broSpouseFatherDistrictId = '';
+                model.broSpouseCityId = '';
+
+                return false;
+            }
+            return true;
+        };
+
+
+
+
+
+
         model.noOfSibblings = [
             { lblname: 'No of Brothers', controlType: 'select', ngmodel: 'noOfBorthersId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfBrothers' },
-            { lblname: 'Elder Brother', controlType: 'select', ngmodel: 'noOfelderBroId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfElderBrothers' },
-            { lblname: 'Younger Brother', controlType: 'select', ngmodel: 'noOfyoungerBroId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfYoungerBrothers' },
+            { lblname: 'Elder Brother', controlType: 'select', ngmodel: 'noOfelderBroId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfElderBrothers', parentDependecy: 'hideSibbroIfZero' },
+            { lblname: 'Younger Brother', controlType: 'select', ngmodel: 'noOfyoungerBroId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfYoungerBrothers', parentDependecy: 'hideSibbroIfZero' },
             { lblname: 'No of sisters', controlType: 'select', ngmodel: 'noOfSisterId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfSisters' },
-            { lblname: 'Elder sisters', controlType: 'select', ngmodel: 'noOfelderSisId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfElderSisters' },
-            { lblname: 'Younger  sisters', controlType: 'select', ngmodel: 'noOfyoungerSisId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfYoungerSisters' }
+            { lblname: 'Elder sisters', controlType: 'select', ngmodel: 'noOfelderSisId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfElderSisters', parentDependecy: 'hideSibsisIfZero' },
+            { lblname: 'Younger  sisters', controlType: 'select', ngmodel: 'noOfyoungerSisId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfYoungerSisters', parentDependecy: 'hideSibsisIfZero' }
         ];
 
 
@@ -4270,13 +4324,13 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 landNumberParameterValue: 'BroLandNumber',
                 emailParameterValue: 'BroEmail'
             },
-            { lblname: 'Is Married', controlType: 'radio', ngmodel: 'broIsMarried', arrbind: 'boolType', parameterValue: 'BIsMarried' },
-            { lblname: 'Spouse Name', controlType: 'textbox', ngmodel: 'spouseName', parameterValue: 'BroWifeName' },
-            { lblname: 'Spouse Education', controlType: 'textbox', ngmodel: 'spouseEducation', parameterValue: 'BrowifeEducationDetails' },
-            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'spouseProfCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'BroSpouseProfessionCategoryID' },
-            { lblname: 'Spouse Designation', controlType: 'housewife', ngmodelText: 'spouseDesignation', ngmodelChk: 'chkspousehousewife', parameterValueText: 'BroWifeProfessionDetails', parameterValueChk: 'MotherProfessiondetails' },
-            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'spouseCompany', parameterValue: 'BroWifeCompanyName' },
-            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'spouseJobLocation', parameterValue: 'BroWifeJobLocation' },
+            { lblname: 'Is Married', controlType: 'radio', ngmodel: 'broIsMarried', arrbind: 'boolType', parameterValue: 'BIsMarried', },
+            { lblname: 'Spouse Name', controlType: 'textbox', ngmodel: 'spouseName', parameterValue: 'BroWifeName', parentDependecy: 'ismarried' },
+            { lblname: 'Spouse Education', controlType: 'textbox', ngmodel: 'spouseEducation', parameterValue: 'BrowifeEducationDetails', parentDependecy: 'ismarried' },
+            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'spouseProfCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'BroSpouseProfessionCategoryID', parentDependecy: 'ismarried' },
+            { lblname: 'Spouse Designation', controlType: 'housewife', ngmodelText: 'spouseDesignation', ngmodelChk: 'chkspousehousewife', parameterValueText: 'BroWifeProfessionDetails', parameterValueChk: 'MotherProfessiondetails', parentDependecy: 'ismarried' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'spouseCompany', parameterValue: 'BroWifeCompanyName', parentDependecy: 'ismarried' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'spouseJobLocation', parameterValue: 'BroWifeJobLocation', parentDependecy: 'ismarried' },
             {
                 controlType: 'contact',
                 emailhide: true,
@@ -4288,7 +4342,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 strareacode: 'spouseLandAreaCodeId',
                 strland: 'spouseLandNumberId',
                 strmail: 'spouseEmail',
-
+                parentDependecy: 'ismarried',
                 mobileCodeIdParameterValue: 'BroWifeMobileCountryCodeID',
                 mobileNumberParameterValue: 'BroWifeMobileNumber',
                 landCountryCodeIdParameterValue: 'BroWifeLandCountryCodeID',
@@ -4297,9 +4351,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 emailParameterValue: 'BrotherSpouseEmail'
 
             },
-            { lblname: 'Spouse Father SurName', controlType: 'textbox', ngmodel: 'spouseFatherLastName', parameterValue: 'BroWifeFatherSurName' },
-            { lblname: 'Spouse Father Name', controlType: 'textbox', ngmodel: 'spouseFatherFirstName', parameterValue: 'BroWifeFatherName' },
-            { lblname: 'Spouse Father Caste', controlType: 'select', ngmodel: 'spouseFatherCaste', typeofdata: 'caste', parameterValue: 'SibilingSpouseFatherCasteID' },
+            { lblname: 'Spouse Father SurName', controlType: 'textbox', ngmodel: 'spouseFatherLastName', parameterValue: 'BroWifeFatherSurName', parentDependecy: 'ismarried' },
+            { lblname: 'Spouse Father Name', controlType: 'textbox', ngmodel: 'spouseFatherFirstName', parameterValue: 'BroWifeFatherName', parentDependecy: 'ismarried' },
+            { lblname: 'Spouse Father Caste', controlType: 'select', ngmodel: 'spouseFatherCaste', typeofdata: 'caste', parameterValue: 'SibilingSpouseFatherCasteID', parentDependecy: 'ismarried' },
             {
                 controlType: 'country',
                 countryshow: false,
@@ -4307,16 +4361,14 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 othercity: false,
                 dstate: 'broSpouseFatherStateId',
                 ddistrict: 'broSpouseFatherDistrictId',
+                parentDependecy: 'ismarried',
                 countryParameterValue: 'BroSpouseFatherCountryID',
                 stateParameterValue: 'BroSpouseFatherStateID',
                 districtParameterValue: 'BroSpouseFatherDitrictID'
             },
-            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'broSpouseCityId', parameterValue: 'BroSpouseFatherNativePlace' }
+            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'broSpouseCityId', parameterValue: 'BroSpouseFatherNativePlace', parentDependecy: 'ismarried' }
 
         ];
-
-
-
 
         model.sister = [
             { lblname: 'Elder/Younger', controlType: 'radio', ngmodel: 'youngerElderSis', ownArray: 'sisElderYoungerArr', parameterValue: 'SisElderYounger' },
@@ -4346,12 +4398,12 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 emailParameterValue: 'SisEmail'
             },
             { lblname: 'Is Married', controlType: 'radio', ngmodel: 'sisIsMarried', arrbind: 'boolType', parameterValue: 'SIsMarried' },
-            { lblname: 'Husband Name', controlType: 'textbox', ngmodel: 'husbandName', parameterValue: 'SisHusbandName' },
-            { lblname: 'Husband Education', controlType: 'textbox', ngmodel: 'husbandEducation', parameterValue: 'sisspouseeducationdetails' },
-            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'husbandProfCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'SisSpouseProfessionCategoryID' },
-            { lblname: 'Husband Designation', controlType: 'textbox', ngmodel: 'husbandDesignation', parameterValue: 'sisspouseprofessiondetails' },
-            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'husbandCompany', parameterValue: 'SisHusCompanyName' },
-            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'husbandJobLocation', parameterValue: 'SisHusJobLocation' },
+            { lblname: 'Husband Name', controlType: 'textbox', ngmodel: 'husbandName', parameterValue: 'SisHusbandName', parentDependecy: 'isSismarried' },
+            { lblname: 'Husband Education', controlType: 'textbox', ngmodel: 'husbandEducation', parameterValue: 'sisspouseeducationdetails', parentDependecy: 'isSismarried' },
+            { lblname: 'Profession Category', controlType: 'select', ngmodel: 'husbandProfCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'SisSpouseProfessionCategoryID', parentDependecy: 'isSismarried' },
+            { lblname: 'Husband Designation', controlType: 'textbox', ngmodel: 'husbandDesignation', parameterValue: 'sisspouseprofessiondetails', parentDependecy: 'isSismarried' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'husbandCompany', parameterValue: 'SisHusCompanyName', parentDependecy: 'isSismarried' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'husbandJobLocation', parameterValue: 'SisHusJobLocation', parentDependecy: 'isSismarried' },
             {
                 controlType: 'contact',
                 emailhide: true,
@@ -4363,6 +4415,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 strareacode: 'husbandLandAreaCodeId',
                 strland: 'husbandLandNumberId',
                 strmail: 'husbandEmail',
+                parentDependecy: 'isSismarried',
                 mobileCodeIdParameterValue: 'SisHusbandMobileCountryCodeID',
                 mobileNumberParameterValue: 'SisHusbandMobileNumber',
                 landCountryCodeIdParameterValue: 'SisHusbandLandCountryCodeID',
@@ -4370,9 +4423,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 landNumberParameterValue: 'SisHusbandLandNumber',
                 emailParameterValue: 'SisSpouseEmail'
             },
-            { lblname: 'Husband Father SurName', controlType: 'textbox', ngmodel: 'husbandFatherLastName', parameterValue: 'SisHusbandFatherSurName' },
-            { lblname: 'Husband Father Name', controlType: 'textbox', ngmodel: 'spouseFatherFirstName', parameterValue: 'SisHusbandFatherName' },
-            { lblname: 'Husband Father Caste', controlType: 'select', ngmodel: 'spouseFatherCaste', typeofdata: 'caste', parameterValue: 'SibilingSpouseFatherCasteID' },
+            { lblname: 'Husband Father SurName', controlType: 'textbox', ngmodel: 'husbandFatherLastName', parameterValue: 'SisHusbandFatherSurName', parentDependecy: 'isSismarried' },
+            { lblname: 'Husband Father Name', controlType: 'textbox', ngmodel: 'spouseFatherFirstName', parameterValue: 'SisHusbandFatherName', parentDependecy: 'isSismarried' },
+            { lblname: 'Husband Father Caste', controlType: 'select', ngmodel: 'spouseFatherCaste', typeofdata: 'caste', parameterValue: 'SibilingSpouseFatherCasteID', parentDependecy: 'isSismarried' },
             {
                 controlType: 'country',
                 countryshow: false,
@@ -4380,14 +4433,14 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 othercity: false,
                 dstate: 'broSpouseFatherStateId',
                 ddistrict: 'broSpouseFatherDistrictId',
+                parentDependecy: 'isSismarried',
                 countryParameterValue: 'SisSpouseFatherCountryID',
                 stateParameterValue: 'SisSpouseFatherStateID',
                 districtParameterValue: 'SisSpouseFatherDitrictID'
             },
-            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'broSpouseCityId', parameterValue: 'SisSpouseFatherNativePlace' }
+            { lblname: 'Native Place', controlType: 'textbox', ngmodel: 'broSpouseCityId', parameterValue: 'SisSpouseFatherNativePlace', parentDependecy: 'isSismarried' }
 
         ];
-
 
         model.broElderYoungerArr = [
             { "label": "Elder", "title": "Elder", "value": 42 },
@@ -4863,7 +4916,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "            <div class=\"edit_page_details_item\">\r" +
     "\n" +
-    "                <div ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.AstroArr track by $index\">\r" +
+    "                <div ng-if=\"page.model.AstroArr\" ng-class=\"item.reviewstatus===false?'edit_page_details_item_desc clearfix reviewCls':'edit_page_details_item_desc clearfix'\" ng-repeat=\"item in page.model.AstroArr track by $index\">\r" +
     "\n" +
     "                    <div>\r" +
     "\n" +
@@ -7671,7 +7724,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                            <a href=\"javascript:void(0); \" class=\"edit_page_del_button \" ng-click=\"page.model.DeleteEduPopup(item.EducationID); \">Delete</a>\r" +
+    "                            <a ng-if=\"item.EduHighestDegree!==1\" href=\"javascript:void(0); \" class=\"edit_page_del_button \" ng-click=\"page.model.DeleteEduPopup(item.EducationID); \">Delete</a>\r" +
     "\n" +
     "                        </div>\r" +
     "\n" +
@@ -16801,7 +16854,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-if=\"item.controlType==='textbox'\" class=\"pop_controls_right\">\r" +
     "\n" +
-    "                    <input type=\"text\" ng-model=\"model[item.ngmodel]\" maxlength=\"150\" class=\"form-control\" ng-required=\"item.required\" />\r" +
+    "                    <input type=\"text\" ng-model=\"model[item.ngmodel]\" ng-change=\"model[item.method]();\" maxlength=\"150\" class=\"form-control\" ng-required=\"item.required\" />\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -16931,7 +16984,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-if=\"item.controlType==='Changemultiselect'\" class=\"pop_controls_right select-box-my input-group\">\r" +
     "\n" +
-    "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" multiple ng-required=\"item.required\" ng-options=\"itm.value as itm.label for itm in item.dataSource\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
+    "                    {{item.dataSource.length}} ----{{item.dataSource[0]}}\r" +
+    "\n" +
+    "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" multiple ng-required=\"item.required\" ng-options=\"inneritem.value as inneritem.label for inneritem in item.dataSource\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -18515,6 +18570,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                                 _.each(res.data, function(item) {
                                     depData.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                                 });
+                                item.dataSource = [];
                                 item.dataSource = depData;
                             });
                         });
@@ -18522,7 +18578,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                         SelectBindService[apiPath](commonFactory.listSelectedVal(value)).then(function(res) {
                             _.map(_.where(scope.model.popupdata, { parentName: text }), function(item) {
                                 var depData = [];
-
                                 _.each(res.data, function(item) {
                                     depData.push({ "label": item.Name, "title": item.Name, "value": item.ID });
                                 });
@@ -18532,7 +18587,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                         });
                     }
                 }
-
             };
 
             _.each(scope.model.popupdata, function(item) {
@@ -18541,6 +18595,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                     if (Arr !== undefined && Arr.length > 0 && angular.lowercase(Arr[0].title) === '--select--') {
                         Arr.splice(0, 1);
                     }
+                    item.dataSource = [];
                     item.dataSource = Arr;
                 }
                 if (item.ownArray) {
@@ -18548,6 +18603,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                     if (Array !== undefined && Array.length > 0 && angular.lowercase(Array[0].title) === '--select--') {
                         Array.splice(0, 1);
                     }
+                    item.dataSource = [];
                     item.dataSource = Array;
                 }
                 if (scope.eventtype === 'add') {

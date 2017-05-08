@@ -152,7 +152,7 @@
                         <div id="editeducationbutton " class="edit_page_item_ui clearfix ">
                             <a id="LinkButton1dfd " href="javascript:void(0); " ng-click="page.model.showpopup( 'showEduModal',item) ">Edit</a>
 
-                            <a href="javascript:void(0); " class="edit_page_del_button " ng-click="page.model.DeleteEduPopup(item.EducationID); ">Delete</a>
+                            <a ng-if="item.EduHighestDegree!==1" href="javascript:void(0); " class="edit_page_del_button " ng-click="page.model.DeleteEduPopup(item.EducationID); ">Delete</a>
                         </div>
 
                         <div id="divuniversityhiding " class="edit_page_details_item_desc clearfix " ng-hide="item.EduUniversity===null ">
