@@ -2898,7 +2898,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            <h5>\r" +
     "\n" +
-    "                                <span id=\"lblcountry \">{{item.EduCityIn+\", \"+item.EduDistrictIn+\", \"+item.EduStateIn+\", \"+item.EduCountryIn}}</span>\r" +
+    "                                <span id=\"lblcountry \">{{item.EduCityIn+\", \"+ (item.EduDistrictIn!==null?item.EduDistrictIn+\", \":'')+ item.EduStateIn+\", \"+item.EduCountryIn}}</span>\r" +
     "\n" +
     "                            </h5>\r" +
     "\n" +
@@ -4601,7 +4601,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\" ng-if=\"item.Intercaste==='Yes'\">\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -4619,7 +4619,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
+    "                                <div class=\"edit_page_details_item_desc clearfix\" ng-if=\"item.Intercaste==='Yes'\">\r" +
     "\n" +
     "\r" +
     "\n" +

@@ -179,7 +179,7 @@
                                 <span id="Label3 " font-bold="true ">City Study In</span>
                             </h6>
                             <h5>
-                                <span id="lblcountry ">{{item.EduCityIn+", "+item.EduDistrictIn+", "+item.EduStateIn+", "+item.EduCountryIn}}</span>
+                                <span id="lblcountry ">{{item.EduCityIn+", "+ (item.EduDistrictIn!==null?item.EduDistrictIn+", ":'')+ item.EduStateIn+", "+item.EduCountryIn}}</span>
                             </h5>
                         </div>
                         <div id="divmerit " class="edit_page_details_item_desc clearfix " ng-hide="item.Educationdesc==null ">
