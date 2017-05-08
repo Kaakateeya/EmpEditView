@@ -140,7 +140,8 @@
                         model.profStateId = item.StateID;
                         model.profDistrictId = item.DistrictID;
                         model.profCityId = item.CityID;
-                        model.profTxtcity = item.CityWorkingIn;
+                        // model.profTxtcity = item.CityWorkingIn;
+                        debugger;
                         model.WorkingForm = commonFactory.convertDateFormat(item.WorkingFromDate, 'DD-MM-YYYY');
                         model.visaStatus = item.VisaTypeID;
                         model.sinceDate = commonFactory.convertDateFormat(item.ResidingSince, 'DD-MM-YYYY');
@@ -355,11 +356,11 @@
                 cityParameterValue: 'CityID',
                 cityotherParameterValue: 'OtherCity'
             },
-            { lblname: 'Working from date', controlType: 'date', ngmodel: 'WorkingForm', parameterValue: 'Workingfromdate' },
+            { lblname: 'Working from date', controlType: 'date', ngmodel: 'WorkingForm', parameterValueDate: 'Workingfromdate' },
             { lblname: 'visa status', controlType: 'select', ngmodel: 'visaStatus', typeofdata: 'visastatus', parameterValue: 'visastatus', parentDependecy: 'showHideVisastatus' },
-            { lblname: 'Since date', controlType: 'date', ngmodel: 'sinceDate', parameterValue: 'Sincedate', parentDependecy: 'showHideVisastatus' },
-            { lblname: 'Arrival Date', controlType: 'date', ngmodel: 'arrivalDate', parameterValue: 'ArrivalDate', parentDependecy: 'showHideVisastatus' },
-            { lblname: 'Departure Date', controlType: 'date', ngmodel: 'departureDate', parameterValue: 'DepartureDate', parentDependecy: 'showHideVisastatus' },
+            { lblname: 'Since date', controlType: 'date', ngmodel: 'sinceDate', parameterValueDate: 'Sincedate', parentDependecy: 'showHideVisastatus' },
+            { lblname: 'Arrival Date', controlType: 'date', ngmodel: 'arrivalDate', parameterValueDate: 'ArrivalDate', parentDependecy: 'showHideVisastatus' },
+            { lblname: 'Departure Date', controlType: 'date', ngmodel: 'departureDate', parameterValueDate: 'DepartureDate', parentDependecy: 'showHideVisastatus' },
             { lblname: 'Occupation Details', controlType: 'textarea', ngmodel: 'occupationDetails', parameterValue: 'OccupationDetails' }
 
         ];
@@ -368,7 +369,7 @@
             { lblname: 'Gender', controlType: 'radio', ngmodel: 'genderId', arrbind: 'gender', parameterValue: 'Gender' },
             { lblname: 'SurName', controlType: 'textbox', ngmodel: 'surName', required: true, parameterValue: 'LastName' },
             { lblname: 'Name', controlType: 'textbox', ngmodel: 'name', required: true, parameterValue: 'FirstName' },
-            { lblname: 'Marital Status', controlType: 'select', ngmodel: 'maritalStatusId', required: true, typeofdata: 'MaritalStatus', parameterValue: 'MaritalStatusID' },
+            { lblname: 'Marital Status', controlType: 'select', ngmodel: 'maritalStatusId', required: true, typeofdata: 'MaritalStatus', parameterValueDate: 'MaritalStatusID' },
             { lblname: 'Date Of Birth', controlType: 'date', ngmodel: 'dob', required: true, parameterValue: 'DateofBirth' },
             { lblname: 'Height', controlType: 'select', ngmodel: 'heightId', required: true, typeofdata: 'heightregistration', parameterValue: 'HeightID' },
             { lblname: 'Complexion', controlType: 'select', ngmodel: 'complexionId', required: true, typeofdata: 'Complexion', parameterValue: 'ComplexionID' },

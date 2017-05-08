@@ -64,6 +64,9 @@
                 </div>
                 <div ng-if="item.controlType==='date'" class="pop_controls_right">
                     <date-picker strdate="model[item.ngmodel]"></date-picker>
+
+                    <!--<custom-datepickeredit ng-model="model[item.ngmodel]" ngClass="'dateclass'" date-options="dateOptions"></custom-datepickeredit>-->
+
                 </div>
                 <div ng-if="item.controlType==='country'">
                     <country-directive require="item.require" countryshow="item.countryshow" cityshow="item.cityshow" othercity="item.othercity" dcountry="model[item.dcountry]" dstate="model[item.dstate]" ddistrict="model[item.ddistrict]" dcity="model[item.dcity]" strothercity="model[item.strothercity]"></country-directive>
@@ -145,4 +148,22 @@
     /*.help-block {
         padding-left: 40%;
     }*/
+    
+    .datepicker3 {
+        background: url(src/images/date_icon.png) no-repeat 98% 44% !important;
+        /*height: 35px !important;*/
+    }
+    
+    .datepicker3 {
+        background: url(src/images/date_icon.png) no-repeat 98% 44% !important;
+    }
+    
+    .datepicker4 {
+        background: url(src/images/date_icon.png) no-repeat 98% 44% !important;
+        background-color: #f0f0cc !important;
+    }
+    
+    .dateclass {
+        width: 96% !important;
+    }
 </style>

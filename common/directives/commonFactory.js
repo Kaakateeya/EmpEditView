@@ -5,9 +5,9 @@
         .module('KaakateeyaEmpEdit')
         .factory('commonFactory', factory)
 
-    factory.$inject = ['SelectBindService'];
+    factory.$inject = ['SelectBindService', '$filter'];
 
-    function factory(SelectBindService) {
+    function factory(SelectBindService, filter) {
         var modalpopupopen;
 
         return {
@@ -211,7 +211,7 @@
                 return (val !== undefined && val !== null && val !== '') ? true : false;
             },
             convertDateFormat: function(val, format) {
-
+                debugger;
                 format = format || 'DD-MM-YYYY';
                 if (val !== undefined && val !== null && val !== '') {
                     return moment(val, format).format();

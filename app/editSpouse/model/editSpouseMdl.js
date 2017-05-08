@@ -150,14 +150,14 @@
 
         };
         model.spouse = [
-            { lblname: 'Name', controlType: 'textbox', ngmodel: 'txtSpousename', required: true, parameterValue: 'NAME' },
-            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtSpoueEducation', required: true, parameterValue: 'Education' },
-            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtspouseProfession', required: true, parameterValue: 'Profession' },
-            { lblname: 'House/Flat number', controlType: 'textbox', ngmodel: 'txtHouseFlatnumber', required: true, parameterValue: 'HouseFlatnumber' },
-            { lblname: 'Apartment name', controlType: 'textbox', ngmodel: 'txtApartmentname', required: true, parameterValue: 'Apartmentname' },
-            { lblname: 'Street name', controlType: 'textbox', ngmodel: 'txtStreetname', required: true, parameterValue: 'Streetname' },
-            { lblname: 'Area name', controlType: 'textbox', ngmodel: 'txtAreaname', required: true, parameterValue: 'Areaname' },
-            { lblname: 'Landmark', controlType: 'textbox', ngmodel: 'txtLandmark', required: true, parameterValue: 'Landmark' },
+            { lblname: 'Name', controlType: 'textbox', ngmodel: 'txtSpousename', parameterValue: 'NAME' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtSpoueEducation', parameterValue: 'Education' },
+            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtspouseProfession', parameterValue: 'Profession' },
+            { lblname: 'House/Flat number', controlType: 'textbox', ngmodel: 'txtHouseFlatnumber', parameterValue: 'HouseFlatnumber' },
+            { lblname: 'Apartment name', controlType: 'textbox', ngmodel: 'txtApartmentname', parameterValue: 'Apartmentname' },
+            { lblname: 'Street name', controlType: 'textbox', ngmodel: 'txtStreetname', parameterValue: 'Streetname' },
+            { lblname: 'Area name', controlType: 'textbox', ngmodel: 'txtAreaname', parameterValue: 'Areaname' },
+            { lblname: 'Landmark', controlType: 'textbox', ngmodel: 'txtLandmark', parameterValue: 'Landmark' },
             {
                 lblname: 'country',
                 controlType: 'country',
@@ -173,25 +173,25 @@
                 districtParameterValue: 'District',
                 cityParameterValue: 'City',
             },
-            { lblname: 'Zip', controlType: 'textboxNumber', ngmodel: 'txtLandmark', required: true, maxLength: 8, parameterValue: 'Zip' },
-            { lblname: 'Married on', controlType: 'date', ngmodel: 'txtMarriedon', required: true, parameterValue: 'Marriedon' },
-            { lblname: 'Separated date', controlType: 'date', ngmodel: 'txtSeparateddate', required: true, parameterValue: 'Separateddate' },
+            { lblname: 'Zip', controlType: 'textboxNumber', ngmodel: 'txtLandmark', maxLength: 8, parameterValue: 'Zip' },
+            { lblname: 'Married on', controlType: 'date', ngmodel: 'txtMarriedon', parameterValueDate: 'Marriedon' },
+            { lblname: 'Separated date', controlType: 'date', ngmodel: 'txtSeparateddate', parameterValueDate: 'Separateddate' },
             { lblname: 'Legally divorced', controlType: 'radio', ngmodel: 'rbtspousediverse', arrbind: 'boolType', parameterValue: 'Legallydivorced' },
-            { lblname: 'Legally Divorced date', controlType: 'date', ngmodel: 'txtLegalDivorsedate', required: true, parameterValue: 'Dateoflegaldivorce' },
-            { lblname: 'Father first name', controlType: 'textbox', ngmodel: 'txtspousefather', required: true, parameterValue: 'Fatherfirstname' },
-            { lblname: 'Father last name', controlType: 'textbox', ngmodel: 'txtspouselastname', required: true, parameterValue: 'Fatherlastname' },
-            { lblname: 'Notes about previous marriage', controlType: 'textarea', ngmodel: 'txtpreviousmarriage', required: true, parameterValue: 'Notesaboutpreviousmarriage' },
+            { lblname: 'Legally Divorced date', controlType: 'date', ngmodel: 'txtLegalDivorsedate', parameterValueDate: 'Dateoflegaldivorce' },
+            { lblname: 'Father first name', controlType: 'textbox', ngmodel: 'txtspousefather', parameterValue: 'Fatherfirstname' },
+            { lblname: 'Father last name', controlType: 'textbox', ngmodel: 'txtspouselastname', parameterValue: 'Fatherlastname' },
+            { lblname: 'Notes about previous marriage', controlType: 'textareaSide', ngmodel: 'txtpreviousmarriage', parameterValue: 'Notesaboutpreviousmarriage' },
             { lblname: 'Family planning', controlType: 'radio', ngmodel: 'rbtspousediverse', arrbind: 'boolType', parameterValue: 'Familyplanning' },
-            { lblname: 'No of children', controlType: 'select', ngmodel: 'ddlspousechidrens', required: true, dataSource: model.noofChldrenAray, parameterValue: 'Noofchildren' },
+            { lblname: 'No of children', controlType: 'select', ngmodel: 'ddlspousechidrens', dataSource: model.noofChldrenAray, parameterValue: 'Noofchildren' },
 
 
         ];
         model.child = [
-            { lblname: 'Name of the child', controlType: 'textbox', ngmodel: 'txtchildname', required: true, parameterValue: 'Nameofthechild' },
-            { lblname: 'Gender of the child', controlType: 'radio', ngmodel: 'rdlgenderchild', ownArray: 'gender', required: true, parameterValue: 'Genderofthechild' },
-            { lblname: 'DOB of the child', controlType: 'date', ngmodel: 'txtdobchild', required: true, parameterValue: 'DOB' },
-            { lblname: 'Child staying with', controlType: 'radio', ngmodel: 'rbtChildstayingWith', ownArray: 'relation', required: true, parameterValue: 'Childstayingwith' },
-            { lblname: 'Child staying with Relation', controlType: 'select', ngmodel: 'ddlrelation', typeofdata: 'childStayingWith', required: true, parameterValue: 'Childstayingwithrelation' },
+            { lblname: 'Name of the child', controlType: 'textbox', ngmodel: 'txtchildname', parameterValue: 'Nameofthechild' },
+            { lblname: 'Gender of the child', controlType: 'radio', ngmodel: 'rdlgenderchild', ownArray: 'gender', parameterValue: 'Genderofthechild' },
+            { lblname: 'DOB of the child', controlType: 'date', ngmodel: 'txtdobchild', parameterValueDate: 'DOB' },
+            { lblname: 'Child staying with', controlType: 'radio', ngmodel: 'rbtChildstayingWith', ownArray: 'relation', parameterValue: 'Childstayingwith' },
+            { lblname: 'Child staying with Relation', controlType: 'select', ngmodel: 'ddlrelation', typeofdata: 'childStayingWith', parameterValue: 'Childstayingwithrelation' },
         ];
         model.gender = [
             { "label": "Male", "title": "Male", "value": 1 },

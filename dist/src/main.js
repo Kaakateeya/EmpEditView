@@ -4,7 +4,7 @@
  */
 
 var editviewapp = angular.module('KaakateeyaEmpEdit', ['ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'ngIdle', 'ngMaterial',
-    'ngMessages', 'ngAria', 'ngPassword', 'jcs-autoValidate', 'angularPromiseButtons', 'oc.lazyLoad', 'ngMdIcons'
+    'ngMessages', 'ngAria', 'ngPassword', 'jcs-autoValidate', 'angularPromiseButtons', 'oc.lazyLoad', 'ngMdIcons', 'ui.date'
 ]);
 editviewapp.apipath = 'http://183.82.0.58:8025/Api/';
 editviewapp.apipathold = 'http://183.82.0.58:8010/Api/';
@@ -1133,7 +1133,8 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                         model.profStateId = item.StateID;
                         model.profDistrictId = item.DistrictID;
                         model.profCityId = item.CityID;
-                        model.profTxtcity = item.CityWorkingIn;
+                        // model.profTxtcity = item.CityWorkingIn;
+                        debugger;
                         model.WorkingForm = commonFactory.convertDateFormat(item.WorkingFromDate, 'DD-MM-YYYY');
                         model.visaStatus = item.VisaTypeID;
                         model.sinceDate = commonFactory.convertDateFormat(item.ResidingSince, 'DD-MM-YYYY');
@@ -1348,11 +1349,11 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 cityParameterValue: 'CityID',
                 cityotherParameterValue: 'OtherCity'
             },
-            { lblname: 'Working from date', controlType: 'date', ngmodel: 'WorkingForm', parameterValue: 'Workingfromdate' },
+            { lblname: 'Working from date', controlType: 'date', ngmodel: 'WorkingForm', parameterValueDate: 'Workingfromdate' },
             { lblname: 'visa status', controlType: 'select', ngmodel: 'visaStatus', typeofdata: 'visastatus', parameterValue: 'visastatus', parentDependecy: 'showHideVisastatus' },
-            { lblname: 'Since date', controlType: 'date', ngmodel: 'sinceDate', parameterValue: 'Sincedate', parentDependecy: 'showHideVisastatus' },
-            { lblname: 'Arrival Date', controlType: 'date', ngmodel: 'arrivalDate', parameterValue: 'ArrivalDate', parentDependecy: 'showHideVisastatus' },
-            { lblname: 'Departure Date', controlType: 'date', ngmodel: 'departureDate', parameterValue: 'DepartureDate', parentDependecy: 'showHideVisastatus' },
+            { lblname: 'Since date', controlType: 'date', ngmodel: 'sinceDate', parameterValueDate: 'Sincedate', parentDependecy: 'showHideVisastatus' },
+            { lblname: 'Arrival Date', controlType: 'date', ngmodel: 'arrivalDate', parameterValueDate: 'ArrivalDate', parentDependecy: 'showHideVisastatus' },
+            { lblname: 'Departure Date', controlType: 'date', ngmodel: 'departureDate', parameterValueDate: 'DepartureDate', parentDependecy: 'showHideVisastatus' },
             { lblname: 'Occupation Details', controlType: 'textarea', ngmodel: 'occupationDetails', parameterValue: 'OccupationDetails' }
 
         ];
@@ -1361,7 +1362,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             { lblname: 'Gender', controlType: 'radio', ngmodel: 'genderId', arrbind: 'gender', parameterValue: 'Gender' },
             { lblname: 'SurName', controlType: 'textbox', ngmodel: 'surName', required: true, parameterValue: 'LastName' },
             { lblname: 'Name', controlType: 'textbox', ngmodel: 'name', required: true, parameterValue: 'FirstName' },
-            { lblname: 'Marital Status', controlType: 'select', ngmodel: 'maritalStatusId', required: true, typeofdata: 'MaritalStatus', parameterValue: 'MaritalStatusID' },
+            { lblname: 'Marital Status', controlType: 'select', ngmodel: 'maritalStatusId', required: true, typeofdata: 'MaritalStatus', parameterValueDate: 'MaritalStatusID' },
             { lblname: 'Date Of Birth', controlType: 'date', ngmodel: 'dob', required: true, parameterValue: 'DateofBirth' },
             { lblname: 'Height', controlType: 'select', ngmodel: 'heightId', required: true, typeofdata: 'heightregistration', parameterValue: 'HeightID' },
             { lblname: 'Complexion', controlType: 'select', ngmodel: 'complexionId', required: true, typeofdata: 'Complexion', parameterValue: 'ComplexionID' },
@@ -4657,14 +4658,14 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
         };
         model.spouse = [
-            { lblname: 'Name', controlType: 'textbox', ngmodel: 'txtSpousename', required: true, parameterValue: 'NAME' },
-            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtSpoueEducation', required: true, parameterValue: 'Education' },
-            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtspouseProfession', required: true, parameterValue: 'Profession' },
-            { lblname: 'House/Flat number', controlType: 'textbox', ngmodel: 'txtHouseFlatnumber', required: true, parameterValue: 'HouseFlatnumber' },
-            { lblname: 'Apartment name', controlType: 'textbox', ngmodel: 'txtApartmentname', required: true, parameterValue: 'Apartmentname' },
-            { lblname: 'Street name', controlType: 'textbox', ngmodel: 'txtStreetname', required: true, parameterValue: 'Streetname' },
-            { lblname: 'Area name', controlType: 'textbox', ngmodel: 'txtAreaname', required: true, parameterValue: 'Areaname' },
-            { lblname: 'Landmark', controlType: 'textbox', ngmodel: 'txtLandmark', required: true, parameterValue: 'Landmark' },
+            { lblname: 'Name', controlType: 'textbox', ngmodel: 'txtSpousename', parameterValue: 'NAME' },
+            { lblname: 'Education', controlType: 'textbox', ngmodel: 'txtSpoueEducation', parameterValue: 'Education' },
+            { lblname: 'Profession', controlType: 'textbox', ngmodel: 'txtspouseProfession', parameterValue: 'Profession' },
+            { lblname: 'House/Flat number', controlType: 'textbox', ngmodel: 'txtHouseFlatnumber', parameterValue: 'HouseFlatnumber' },
+            { lblname: 'Apartment name', controlType: 'textbox', ngmodel: 'txtApartmentname', parameterValue: 'Apartmentname' },
+            { lblname: 'Street name', controlType: 'textbox', ngmodel: 'txtStreetname', parameterValue: 'Streetname' },
+            { lblname: 'Area name', controlType: 'textbox', ngmodel: 'txtAreaname', parameterValue: 'Areaname' },
+            { lblname: 'Landmark', controlType: 'textbox', ngmodel: 'txtLandmark', parameterValue: 'Landmark' },
             {
                 lblname: 'country',
                 controlType: 'country',
@@ -4680,25 +4681,25 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 districtParameterValue: 'District',
                 cityParameterValue: 'City',
             },
-            { lblname: 'Zip', controlType: 'textboxNumber', ngmodel: 'txtLandmark', required: true, maxLength: 8, parameterValue: 'Zip' },
-            { lblname: 'Married on', controlType: 'date', ngmodel: 'txtMarriedon', required: true, parameterValue: 'Marriedon' },
-            { lblname: 'Separated date', controlType: 'date', ngmodel: 'txtSeparateddate', required: true, parameterValue: 'Separateddate' },
+            { lblname: 'Zip', controlType: 'textboxNumber', ngmodel: 'txtLandmark', maxLength: 8, parameterValue: 'Zip' },
+            { lblname: 'Married on', controlType: 'date', ngmodel: 'txtMarriedon', parameterValueDate: 'Marriedon' },
+            { lblname: 'Separated date', controlType: 'date', ngmodel: 'txtSeparateddate', parameterValueDate: 'Separateddate' },
             { lblname: 'Legally divorced', controlType: 'radio', ngmodel: 'rbtspousediverse', arrbind: 'boolType', parameterValue: 'Legallydivorced' },
-            { lblname: 'Legally Divorced date', controlType: 'date', ngmodel: 'txtLegalDivorsedate', required: true, parameterValue: 'Dateoflegaldivorce' },
-            { lblname: 'Father first name', controlType: 'textbox', ngmodel: 'txtspousefather', required: true, parameterValue: 'Fatherfirstname' },
-            { lblname: 'Father last name', controlType: 'textbox', ngmodel: 'txtspouselastname', required: true, parameterValue: 'Fatherlastname' },
-            { lblname: 'Notes about previous marriage', controlType: 'textarea', ngmodel: 'txtpreviousmarriage', required: true, parameterValue: 'Notesaboutpreviousmarriage' },
+            { lblname: 'Legally Divorced date', controlType: 'date', ngmodel: 'txtLegalDivorsedate', parameterValueDate: 'Dateoflegaldivorce' },
+            { lblname: 'Father first name', controlType: 'textbox', ngmodel: 'txtspousefather', parameterValue: 'Fatherfirstname' },
+            { lblname: 'Father last name', controlType: 'textbox', ngmodel: 'txtspouselastname', parameterValue: 'Fatherlastname' },
+            { lblname: 'Notes about previous marriage', controlType: 'textareaSide', ngmodel: 'txtpreviousmarriage', parameterValue: 'Notesaboutpreviousmarriage' },
             { lblname: 'Family planning', controlType: 'radio', ngmodel: 'rbtspousediverse', arrbind: 'boolType', parameterValue: 'Familyplanning' },
-            { lblname: 'No of children', controlType: 'select', ngmodel: 'ddlspousechidrens', required: true, dataSource: model.noofChldrenAray, parameterValue: 'Noofchildren' },
+            { lblname: 'No of children', controlType: 'select', ngmodel: 'ddlspousechidrens', dataSource: model.noofChldrenAray, parameterValue: 'Noofchildren' },
 
 
         ];
         model.child = [
-            { lblname: 'Name of the child', controlType: 'textbox', ngmodel: 'txtchildname', required: true, parameterValue: 'Nameofthechild' },
-            { lblname: 'Gender of the child', controlType: 'radio', ngmodel: 'rdlgenderchild', ownArray: 'gender', required: true, parameterValue: 'Genderofthechild' },
-            { lblname: 'DOB of the child', controlType: 'date', ngmodel: 'txtdobchild', required: true, parameterValue: 'DOB' },
-            { lblname: 'Child staying with', controlType: 'radio', ngmodel: 'rbtChildstayingWith', ownArray: 'relation', required: true, parameterValue: 'Childstayingwith' },
-            { lblname: 'Child staying with Relation', controlType: 'select', ngmodel: 'ddlrelation', typeofdata: 'childStayingWith', required: true, parameterValue: 'Childstayingwithrelation' },
+            { lblname: 'Name of the child', controlType: 'textbox', ngmodel: 'txtchildname', parameterValue: 'Nameofthechild' },
+            { lblname: 'Gender of the child', controlType: 'radio', ngmodel: 'rdlgenderchild', ownArray: 'gender', parameterValue: 'Genderofthechild' },
+            { lblname: 'DOB of the child', controlType: 'date', ngmodel: 'txtdobchild', parameterValueDate: 'DOB' },
+            { lblname: 'Child staying with', controlType: 'radio', ngmodel: 'rbtChildstayingWith', ownArray: 'relation', parameterValue: 'Childstayingwith' },
+            { lblname: 'Child staying with Relation', controlType: 'select', ngmodel: 'ddlrelation', typeofdata: 'childStayingWith', parameterValue: 'Childstayingwithrelation' },
         ];
         model.gender = [
             { "label": "Male", "title": "Male", "value": 1 },
@@ -16914,6 +16915,12 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    <date-picker strdate=\"model[item.ngmodel]\"></date-picker>\r" +
     "\n" +
+    "\r" +
+    "\n" +
+    "                    <!--<custom-datepickeredit ng-model=\"model[item.ngmodel]\" ngClass=\"'dateclass'\" date-options=\"dateOptions\"></custom-datepickeredit>-->\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "                </div>\r" +
     "\n" +
     "                <div ng-if=\"item.controlType==='country'\">\r" +
@@ -17075,6 +17082,42 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "        padding-left: 40%;\r" +
     "\n" +
     "    }*/\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    .datepicker3 {\r" +
+    "\n" +
+    "        background: url(src/images/date_icon.png) no-repeat 98% 44% !important;\r" +
+    "\n" +
+    "        /*height: 35px !important;*/\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    .datepicker3 {\r" +
+    "\n" +
+    "        background: url(src/images/date_icon.png) no-repeat 98% 44% !important;\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    .datepicker4 {\r" +
+    "\n" +
+    "        background: url(src/images/date_icon.png) no-repeat 98% 44% !important;\r" +
+    "\n" +
+    "        background-color: #f0f0cc !important;\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    .dateclass {\r" +
+    "\n" +
+    "        width: 96% !important;\r" +
+    "\n" +
+    "    }\r" +
     "\n" +
     "</style>"
   );
@@ -17828,9 +17871,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
         .module('KaakateeyaEmpEdit')
         .factory('commonFactory', factory)
 
-    factory.$inject = ['SelectBindService'];
+    factory.$inject = ['SelectBindService', '$filter'];
 
-    function factory(SelectBindService) {
+    function factory(SelectBindService, filter) {
         var modalpopupopen;
 
         return {
@@ -18034,7 +18077,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                 return (val !== undefined && val !== null && val !== '') ? true : false;
             },
             convertDateFormat: function(val, format) {
-
+                debugger;
                 format = format || 'DD-MM-YYYY';
                 if (val !== undefined && val !== null && val !== '') {
                     return moment(val, format).format();
@@ -18350,6 +18393,37 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
     angular
         .module('KaakateeyaEmpEdit')
+        .directive('customDatepickeredit', directive);
+
+    function directive() {
+
+        var directive = {
+            link: link,
+            restrict: 'EA',
+            scope: {
+                ngModel: '=',
+                dateOptions: "=",
+                placeholder: "=",
+                id: "=",
+                ngClass: "="
+            },
+            template: '<input id="{{id}}" style="width:96%;" ng-class="ngClass"  placeholder="{{placeholder}}" type="text" ui-date-format="dd/MM/yyyy" class="datepicker3 form-control" ng-model="ngModel" ui-date="dateOptions"/>'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+
+            //  if (scope.strdate !== '' && scope.strdate !== undefined && scope.strdate !== null)
+            // scope.strdate = new Date(scope.strdate);
+        }
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('KaakateeyaEmpEdit')
         .directive('openPopup', directive);
 
     directive.$inject = ['$window'];
@@ -18523,9 +18597,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
         .module('KaakateeyaEmpEdit')
         .directive('slidePopup', directive);
 
-    directive.$inject = ['commonFactory', '$uibModal', 'arrayConstantsEdit', 'SelectBindService', 'popupSvc', 'authSvc', '$stateParams'];
+    directive.$inject = ['commonFactory', '$uibModal', 'arrayConstantsEdit', 'SelectBindService', 'popupSvc', 'authSvc', '$stateParams', '$filter'];
 
-    function directive(commonFactory, uibModal, cons, SelectBindService, popupSvc, authSvc, stateParams) {
+    function directive(commonFactory, uibModal, cons, SelectBindService, popupSvc, authSvc, stateParams, filter) {
 
         var directive = {
             link: link,
@@ -18658,7 +18732,12 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                         parameters[item.parameterValueChk] = commonFactory.listSelectedVal(scope.model[item.ngmodelChk]);
                     } else if (item.controlType === 'astroTimeOfBirth') {
                         parameters.TimeofBirth = scope.model.ddlFromHours + ":" + scope.model.ddlFromMinutes + ":" + scope.model.ddlFromSeconds;
+                    } else if (item.controlType === 'date') {
+                        parameters[item.parameterValueDate] = scope.model[item.ngmodel] !== '' && scope.model[item.ngmodel] !== 'Invalid date' ? filter('date')(scope.model[item.ngmodel], 'yyyy-MM-dd') : '';
+                        // parameters[item.parameterValueDate] = commonFactory.listSelectedVal(scope.model[item.ngmodel]);
+
                     }
+
                 });
 
                 var inputDataObj = {
@@ -18680,7 +18759,13 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
             scope.chkChange = function(chk) {
                 return chk === true ? 'HouseWife' : '';
             };
-
+            scope.dateOptions = {
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-40:+5",
+                dateFormat: 'dd/MM/yyyy'
+                    // dateFormat: 'dd-mm-yy'
+            };
         }
     }
 
@@ -18702,6 +18787,77 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
         }
     }
 })();
+angular.module('ui.date', [])
+
+.constant('uiDateConfig', {})
+
+.directive('uiDate', ['uiDateConfig', '$timeout', function(uiDateConfig, $timeout) {
+    'use strict';
+    var options;
+    options = {};
+    angular.extend(options, uiDateConfig);
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, controller) {
+            var getOptions = function() {
+                return angular.extend({}, uiDateConfig, scope.$eval(attrs.uiDate));
+            };
+            var initDateWidget = function() {
+                var showing = false;
+                var opts = getOptions();
+
+                // If we have a controller (i.e. ngModelController) then wire it up
+                if (controller) {
+
+                    // Set the view value in a $apply block when users selects
+                    // (calling directive user's function too if provided)
+                    var _onSelect = opts.onSelect || angular.noop;
+                    opts.onSelect = function(value, picker) {
+                        scope.$apply(function() {
+                            showing = true;
+                            controller.$setViewValue(element.datepicker("getDate"));
+                            _onSelect(value, picker);
+                            element.blur();
+                        });
+                    };
+                    opts.beforeShow = function() {
+                        showing = true;
+                    };
+                    opts.onClose = function(value, picker) {
+                        showing = false;
+                    };
+                    element.on('blur', function() {
+                        if (!showing) {
+                            scope.$apply(function() {
+                                element.datepicker("setDate", element.datepicker("getDate"));
+                                controller.$setViewValue(element.datepicker("getDate"));
+                            });
+                        }
+                    });
+
+                    // Update the date picker when the model changes
+                    controller.$render = function() {
+                        var date = controller.$viewValue;
+                        // if (angular.isDefined(date) && date !== null && !angular.isDate(date) && date !== "") {
+                        //    throw new Error('ng-Model value must be a Date object - currently it is a ' + typeof date + ' - use ui-date-format to convert it from a string');
+                        // }
+                        element.datepicker("setDate", date);
+                    };
+                }
+                // If we don't destroy the old one it doesn't update properly when the config changes
+                element.datepicker('destroy');
+                // Create the new datepicker widget
+                element.datepicker(opts);
+                if (controller) {
+                    // Force a render to override whatever is in the input text box
+                    controller.$render();
+                }
+            };
+            // Watch for changes to the directives options
+            scope.$watch(getOptions, initDateWidget, true);
+        }
+    };
+}]);
 (function(angular) {
     'use strict';
 

@@ -12040,6 +12040,12 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    <date-picker strdate=\"model[item.ngmodel]\"></date-picker>\r" +
     "\n" +
+    "\r" +
+    "\n" +
+    "                    <!--<custom-datepickeredit ng-model=\"model[item.ngmodel]\" ngClass=\"'dateclass'\" date-options=\"dateOptions\"></custom-datepickeredit>-->\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "                </div>\r" +
     "\n" +
     "                <div ng-if=\"item.controlType==='country'\">\r" +
@@ -12201,6 +12207,42 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "        padding-left: 40%;\r" +
     "\n" +
     "    }*/\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    .datepicker3 {\r" +
+    "\n" +
+    "        background: url(src/images/date_icon.png) no-repeat 98% 44% !important;\r" +
+    "\n" +
+    "        /*height: 35px !important;*/\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    .datepicker3 {\r" +
+    "\n" +
+    "        background: url(src/images/date_icon.png) no-repeat 98% 44% !important;\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    .datepicker4 {\r" +
+    "\n" +
+    "        background: url(src/images/date_icon.png) no-repeat 98% 44% !important;\r" +
+    "\n" +
+    "        background-color: #f0f0cc !important;\r" +
+    "\n" +
+    "    }\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    .dateclass {\r" +
+    "\n" +
+    "        width: 96% !important;\r" +
+    "\n" +
+    "    }\r" +
     "\n" +
     "</style>"
   );

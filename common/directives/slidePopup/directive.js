@@ -5,9 +5,9 @@
         .module('KaakateeyaEmpEdit')
         .directive('slidePopup', directive);
 
-    directive.$inject = ['commonFactory', '$uibModal', 'arrayConstantsEdit', 'SelectBindService', 'popupSvc', 'authSvc', '$stateParams'];
+    directive.$inject = ['commonFactory', '$uibModal', 'arrayConstantsEdit', 'SelectBindService', 'popupSvc', 'authSvc', '$stateParams', '$filter'];
 
-    function directive(commonFactory, uibModal, cons, SelectBindService, popupSvc, authSvc, stateParams) {
+    function directive(commonFactory, uibModal, cons, SelectBindService, popupSvc, authSvc, stateParams, filter) {
 
         var directive = {
             link: link,
@@ -140,7 +140,12 @@
                         parameters[item.parameterValueChk] = commonFactory.listSelectedVal(scope.model[item.ngmodelChk]);
                     } else if (item.controlType === 'astroTimeOfBirth') {
                         parameters.TimeofBirth = scope.model.ddlFromHours + ":" + scope.model.ddlFromMinutes + ":" + scope.model.ddlFromSeconds;
+                    } else if (item.controlType === 'date') {
+                        parameters[item.parameterValueDate] = scope.model[item.ngmodel] !== '' && scope.model[item.ngmodel] !== 'Invalid date' ? filter('date')(scope.model[item.ngmodel], 'yyyy-MM-dd') : '';
+                        // parameters[item.parameterValueDate] = commonFactory.listSelectedVal(scope.model[item.ngmodel]);
+
                     }
+
                 });
 
                 var inputDataObj = {
@@ -162,7 +167,13 @@
             scope.chkChange = function(chk) {
                 return chk === true ? 'HouseWife' : '';
             };
-
+            scope.dateOptions = {
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-40:+5",
+                dateFormat: 'dd/MM/yyyy'
+                    // dateFormat: 'dd-mm-yy'
+            };
         }
     }
 

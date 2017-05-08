@@ -8,7 +8,7 @@
  */
 
 var editviewapp = angular.module('KaakateeyaEmpEdit', ['ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'ngIdle', 'ngMaterial',
-    'ngMessages', 'ngAria', 'ngPassword', 'jcs-autoValidate', 'angularPromiseButtons', 'oc.lazyLoad', 'ngMdIcons'
+    'ngMessages', 'ngAria', 'ngPassword', 'jcs-autoValidate', 'angularPromiseButtons', 'oc.lazyLoad', 'ngMdIcons', 'ui.date'
 ]);
 editviewapp.apipath = 'http://183.82.0.58:8025/Api/';
 editviewapp.apipathold = 'http://183.82.0.58:8010/Api/';
