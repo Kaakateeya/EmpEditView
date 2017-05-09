@@ -63,7 +63,7 @@
             editEducationService.getProfessionData(CustID).then(function(response) {
                 if (commonFactory.checkvals(response.data)) {
                     model.ProfessionSelectArray = response.data;
-                    model.profEmpLastModificationDate = model.ProfessionSelectArray[0].EmpLastModificationDate;
+                    model.profEmpLastModificationDate = model.ProfessionSelectArray ? model.ProfessionSelectArray[0].EmpLastModificationDate : '';
                 }
 
             });
@@ -146,6 +146,7 @@
                         model.visaStatus = item.VisaTypeID;
                         model.sinceDate = commonFactory.convertDateFormat(item.ResidingSince, 'DD-MM-YYYY');
                         model.arrivalDate = commonFactory.convertDateFormat(item.ArrivingDate, 'DD-MM-YYYY');
+
                         model.departureDate = commonFactory.convertDateFormat(item.DepartureDate, 'DD-MM-YYYY');
                         model.occupationDetails = item.OccupationDetails;
                         model.Cust_Profession_ID = item.Cust_Profession_ID;

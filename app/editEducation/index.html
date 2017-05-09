@@ -237,7 +237,7 @@
                                 <h6>
                                     <span id="lblworkfrom" style="font-weight:bold;">Working from date</span></h6>
                                 <h5>
-                                    <span id="lblworkingfrom">{{item.WorkingFromDate}}</span></h5>
+                                    <span id="lblworkingfrom">{{item.WorkingFromDate | date:'dd-MM-yyyy'}}</span></h5>
                             </div>
                         </div>
                         <div id="Div3" class="edit_page_details_item_desc clearfix" ng-hide="item.VisaStatus===null">
@@ -254,7 +254,7 @@
                                 <span id="lblsincedate">Since date</span>
                             </h6>
                             <h5>
-                                <span id="txtsincedate">{{item.ResidingSince}}</span>
+                                <span id="txtsincedate">{{item.ResidingSince | date:'dd-MM-yyyy'}}</span>
                             </h5>
                         </div>
 
@@ -264,7 +264,7 @@
                                 <span id="lblarrival">Arrival Date</span>
                             </h6>
                             <h5>
-                                <span id="txtarrival">{{item.ArrivingDate}}</span>
+                                <span id="txtarrival">{{item.ArrivingDate | date:'dd-MM-yyyy'}}</span>
                             </h5>
                         </div>
                         <div id="Div6" class="edit_page_details_item_desc clearfix" ng-hide="item.DepartureDate===null">
@@ -273,7 +273,7 @@
                                 <span id="lbldepartture">Departure Date</span>
                             </h6>
                             <h5>
-                                <span id="txtdaparture"> {{item.DepartureDate}}</span>
+                                <span id="txtdaparture"> {{item.DepartureDate | date:'dd-MM-yyyy'}}</span>
                             </h5>
                         </div>
                         <div id="Div7" class="edit_page_details_item_desc clearfix" ng-hide="item.OccupationDetails===null">

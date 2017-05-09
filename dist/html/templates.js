@@ -3014,7 +3014,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblworkingfrom\">{{item.WorkingFromDate}}</span></h5>\r" +
+    "                                    <span id=\"lblworkingfrom\">{{item.WorkingFromDate | date:'dd-MM-yyyy'}}</span></h5>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
@@ -3048,7 +3048,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            <h5>\r" +
     "\n" +
-    "                                <span id=\"txtsincedate\">{{item.ResidingSince}}</span>\r" +
+    "                                <span id=\"txtsincedate\">{{item.ResidingSince | date:'dd-MM-yyyy'}}</span>\r" +
     "\n" +
     "                            </h5>\r" +
     "\n" +
@@ -3068,7 +3068,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            <h5>\r" +
     "\n" +
-    "                                <span id=\"txtarrival\">{{item.ArrivingDate}}</span>\r" +
+    "                                <span id=\"txtarrival\">{{item.ArrivingDate | date:'dd-MM-yyyy'}}</span>\r" +
     "\n" +
     "                            </h5>\r" +
     "\n" +
@@ -3086,7 +3086,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            <h5>\r" +
     "\n" +
-    "                                <span id=\"txtdaparture\"> {{item.DepartureDate}}</span>\r" +
+    "                                <span id=\"txtdaparture\"> {{item.DepartureDate | date:'dd-MM-yyyy'}}</span>\r" +
     "\n" +
     "                            </h5>\r" +
     "\n" +
@@ -12010,17 +12010,21 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                </div>\r" +
     "\n" +
-    "                <md-input-container ng-if=\"item.controlType==='radio'\" style=\"font-weight: 700; color: black;\">\r" +
+    "\r" +
     "\n" +
-    "                    <md-radio-group ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\" layout=\"row\" ng-model=\"model[item.ngmodel]\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "                <md-input-container ng-if=\"item.controlType==='radio'\" style=\"font-weight: 700; color: black;margin-top:-1px;\">\r" +
+    "\n" +
+    "                    <md-radio-group ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\" ng-required=\"item.required\" layout=\"row\" ng-model=\"model[item.ngmodel]\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
     "\n" +
     "                        <md-radio-button ng-value=\"rd.value\" ng-repeat=\"rd in item.dataSource\" class=\"md-primary\">{{rd.label}}</md-radio-button>\r" +
     "\n" +
     "                    </md-radio-group>\r" +
     "\n" +
-    "\r" +
+    "                    <!--<div ng-if=\"dynamicForm.$invalid && dynamicForm.$submitted\">\r" +
     "\n" +
-    "\r" +
+    "                        <span style=\"color:red;\">This field is required</span>\r" +
+    "\n" +
+    "                    </div>-->\r" +
     "\n" +
     "                </md-input-container>\r" +
     "\n" +
@@ -12038,13 +12042,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-if=\"item.controlType==='date'\" class=\"pop_controls_right\">\r" +
     "\n" +
-    "                    <date-picker strdate=\"model[item.ngmodel]\"></date-picker>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "                    <!--<custom-datepickeredit ng-model=\"model[item.ngmodel]\" ngClass=\"'dateclass'\" date-options=\"dateOptions\"></custom-datepickeredit>-->\r" +
     "\n" +
-    "\r" +
+    "                    <date-picker strdate=\"model[item.ngmodel]\"></date-picker>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +

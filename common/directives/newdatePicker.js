@@ -17,7 +17,7 @@
                 id: "=",
                 ngClass: "="
             },
-            template: '<input id="{{id}}" style="width:96%;" ng-class="ngClass"  placeholder="{{placeholder}}" type="text" ui-date-format="dd/MM/yyyy" class="datepicker3 form-control" ng-model="ngModel" ui-date="dateOptions"/>'
+            template: '<input id="{{id}}" style="width:96%;" ng-class="ngClass"  placeholder="{{placeholder}}" type="text"  class="datepicker3 form-control" ng-model="ngModel" ui-date="dateOptions"/>'
         };
         return directive;
 

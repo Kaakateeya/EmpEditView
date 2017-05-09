@@ -189,7 +189,7 @@
         model.child = [
             { lblname: 'Name of the child', controlType: 'textbox', ngmodel: 'txtchildname', parameterValue: 'Nameofthechild' },
             { lblname: 'Gender of the child', controlType: 'radio', ngmodel: 'rdlgenderchild', ownArray: 'gender', parameterValue: 'Genderofthechild' },
-            { lblname: 'DOB of the child', controlType: 'date', ngmodel: 'txtdobchild', parameterValueDate: 'DOB' },
+            { lblname: 'DOB of the child', controlType: 'date', required: false, ngmodel: 'txtdobchild', parameterValueDate: 'DOB' },
             { lblname: 'Child staying with', controlType: 'radio', ngmodel: 'rbtChildstayingWith', ownArray: 'relation', parameterValue: 'Childstayingwith' },
             { lblname: 'Child staying with Relation', controlType: 'select', ngmodel: 'ddlrelation', typeofdata: 'childStayingWith', parameterValue: 'Childstayingwithrelation' },
         ];

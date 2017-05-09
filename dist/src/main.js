@@ -1056,7 +1056,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             editEducationService.getProfessionData(CustID).then(function(response) {
                 if (commonFactory.checkvals(response.data)) {
                     model.ProfessionSelectArray = response.data;
-                    model.profEmpLastModificationDate = model.ProfessionSelectArray[0].EmpLastModificationDate;
+                    model.profEmpLastModificationDate = model.ProfessionSelectArray ? model.ProfessionSelectArray[0].EmpLastModificationDate : '';
                 }
 
             });
@@ -1139,6 +1139,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                         model.visaStatus = item.VisaTypeID;
                         model.sinceDate = commonFactory.convertDateFormat(item.ResidingSince, 'DD-MM-YYYY');
                         model.arrivalDate = commonFactory.convertDateFormat(item.ArrivingDate, 'DD-MM-YYYY');
+
                         model.departureDate = commonFactory.convertDateFormat(item.DepartureDate, 'DD-MM-YYYY');
                         model.occupationDetails = item.OccupationDetails;
                         model.Cust_Profession_ID = item.Cust_Profession_ID;
@@ -4697,7 +4698,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.child = [
             { lblname: 'Name of the child', controlType: 'textbox', ngmodel: 'txtchildname', parameterValue: 'Nameofthechild' },
             { lblname: 'Gender of the child', controlType: 'radio', ngmodel: 'rdlgenderchild', ownArray: 'gender', parameterValue: 'Genderofthechild' },
-            { lblname: 'DOB of the child', controlType: 'date', ngmodel: 'txtdobchild', parameterValueDate: 'DOB' },
+            { lblname: 'DOB of the child', controlType: 'date', required: false, ngmodel: 'txtdobchild', parameterValueDate: 'DOB' },
             { lblname: 'Child staying with', controlType: 'radio', ngmodel: 'rbtChildstayingWith', ownArray: 'relation', parameterValue: 'Childstayingwith' },
             { lblname: 'Child staying with Relation', controlType: 'select', ngmodel: 'ddlrelation', typeofdata: 'childStayingWith', parameterValue: 'Childstayingwithrelation' },
         ];
@@ -7889,7 +7890,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblworkingfrom\">{{item.WorkingFromDate}}</span></h5>\r" +
+    "                                    <span id=\"lblworkingfrom\">{{item.WorkingFromDate | date:'dd-MM-yyyy'}}</span></h5>\r" +
     "\n" +
     "                            </div>\r" +
     "\n" +
@@ -7923,7 +7924,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            <h5>\r" +
     "\n" +
-    "                                <span id=\"txtsincedate\">{{item.ResidingSince}}</span>\r" +
+    "                                <span id=\"txtsincedate\">{{item.ResidingSince | date:'dd-MM-yyyy'}}</span>\r" +
     "\n" +
     "                            </h5>\r" +
     "\n" +
@@ -7943,7 +7944,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            <h5>\r" +
     "\n" +
-    "                                <span id=\"txtarrival\">{{item.ArrivingDate}}</span>\r" +
+    "                                <span id=\"txtarrival\">{{item.ArrivingDate | date:'dd-MM-yyyy'}}</span>\r" +
     "\n" +
     "                            </h5>\r" +
     "\n" +
@@ -7961,7 +7962,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                            <h5>\r" +
     "\n" +
-    "                                <span id=\"txtdaparture\"> {{item.DepartureDate}}</span>\r" +
+    "                                <span id=\"txtdaparture\"> {{item.DepartureDate | date:'dd-MM-yyyy'}}</span>\r" +
     "\n" +
     "                            </h5>\r" +
     "\n" +
@@ -16885,17 +16886,21 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                </div>\r" +
     "\n" +
-    "                <md-input-container ng-if=\"item.controlType==='radio'\" style=\"font-weight: 700; color: black;\">\r" +
+    "\r" +
     "\n" +
-    "                    <md-radio-group ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\" layout=\"row\" ng-model=\"model[item.ngmodel]\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
+    "                <md-input-container ng-if=\"item.controlType==='radio'\" style=\"font-weight: 700; color: black;margin-top:-1px;\">\r" +
+    "\n" +
+    "                    <md-radio-group ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\" ng-required=\"item.required\" layout=\"row\" ng-model=\"model[item.ngmodel]\" class=\"md-block\" flex-gt-sm ng-disabled=\"manageakerts\">\r" +
     "\n" +
     "                        <md-radio-button ng-value=\"rd.value\" ng-repeat=\"rd in item.dataSource\" class=\"md-primary\">{{rd.label}}</md-radio-button>\r" +
     "\n" +
     "                    </md-radio-group>\r" +
     "\n" +
-    "\r" +
+    "                    <!--<div ng-if=\"dynamicForm.$invalid && dynamicForm.$submitted\">\r" +
     "\n" +
-    "\r" +
+    "                        <span style=\"color:red;\">This field is required</span>\r" +
+    "\n" +
+    "                    </div>-->\r" +
     "\n" +
     "                </md-input-container>\r" +
     "\n" +
@@ -16913,13 +16918,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-if=\"item.controlType==='date'\" class=\"pop_controls_right\">\r" +
     "\n" +
-    "                    <date-picker strdate=\"model[item.ngmodel]\"></date-picker>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "                    <!--<custom-datepickeredit ng-model=\"model[item.ngmodel]\" ngClass=\"'dateclass'\" date-options=\"dateOptions\"></custom-datepickeredit>-->\r" +
     "\n" +
-    "\r" +
+    "                    <date-picker strdate=\"model[item.ngmodel]\"></date-picker>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -18080,7 +18081,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                 debugger;
                 format = format || 'DD-MM-YYYY';
                 if (val !== undefined && val !== null && val !== '') {
-                    return moment(val, format).format();
+                    return moment(val).format();
                 } else {
                     return '';
                 }
@@ -18407,7 +18408,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                 id: "=",
                 ngClass: "="
             },
-            template: '<input id="{{id}}" style="width:96%;" ng-class="ngClass"  placeholder="{{placeholder}}" type="text" ui-date-format="dd/MM/yyyy" class="datepicker3 form-control" ng-model="ngModel" ui-date="dateOptions"/>'
+            template: '<input id="{{id}}" style="width:96%;" ng-class="ngClass"  placeholder="{{placeholder}}" type="text"  class="datepicker3 form-control" ng-model="ngModel" ui-date="dateOptions"/>'
         };
         return directive;
 
@@ -18733,11 +18734,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                     } else if (item.controlType === 'astroTimeOfBirth') {
                         parameters.TimeofBirth = scope.model.ddlFromHours + ":" + scope.model.ddlFromMinutes + ":" + scope.model.ddlFromSeconds;
                     } else if (item.controlType === 'date') {
-                        parameters[item.parameterValueDate] = scope.model[item.ngmodel] !== '' && scope.model[item.ngmodel] !== 'Invalid date' ? filter('date')(scope.model[item.ngmodel], 'yyyy-MM-dd') : '';
-                        // parameters[item.parameterValueDate] = commonFactory.listSelectedVal(scope.model[item.ngmodel]);
-
+                        parameters[item.parameterValueDate] = scope.model[item.ngmodel];
+                        // scope.model[item.ngmodel] !== '' && scope.model[item.ngmodel] !== 'Invalid date' ? filter('date')(scope.model[item.ngmodel], 'yyyy-MM-dd') : '';
                     }
-
                 });
 
                 var inputDataObj = {
@@ -18763,8 +18762,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                 changeMonth: true,
                 changeYear: true,
                 yearRange: "-40:+5",
-                dateFormat: 'dd/MM/yyyy'
-                    // dateFormat: 'dd-mm-yy'
+                dateFormat: 'dd-mm-yy'
             };
         }
     }
