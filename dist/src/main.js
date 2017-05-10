@@ -1363,8 +1363,8 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             { lblname: 'Gender', controlType: 'radio', ngmodel: 'genderId', arrbind: 'gender', parameterValue: 'Gender' },
             { lblname: 'SurName', controlType: 'textbox', ngmodel: 'surName', required: true, parameterValue: 'LastName' },
             { lblname: 'Name', controlType: 'textbox', ngmodel: 'name', required: true, parameterValue: 'FirstName' },
-            { lblname: 'Marital Status', controlType: 'select', ngmodel: 'maritalStatusId', required: true, typeofdata: 'MaritalStatus', parameterValueDate: 'MaritalStatusID' },
-            { lblname: 'Date Of Birth', controlType: 'date', ngmodel: 'dob', required: true, parameterValue: 'DateofBirth' },
+            { lblname: 'Marital Status', controlType: 'select', ngmodel: 'maritalStatusId', required: true, typeofdata: 'MaritalStatus', parameterValue: 'MaritalStatusID' },
+            { lblname: 'Date Of Birth', controlType: 'date', ngmodel: 'dob', required: true, parameterValueDate: 'DateofBirth' },
             { lblname: 'Height', controlType: 'select', ngmodel: 'heightId', required: true, typeofdata: 'heightregistration', parameterValue: 'HeightID' },
             { lblname: 'Complexion', controlType: 'select', ngmodel: 'complexionId', required: true, typeofdata: 'Complexion', parameterValue: 'ComplexionID' },
             { lblname: 'Religion', controlType: 'select', ngmodel: 'religionId', secondParent: 'motherTongueId', required: true, typeofdata: 'Religion', childName: 'caste', changeApi: 'castedependency', parameterValue: 'ReligionID' },
@@ -4682,7 +4682,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                 districtParameterValue: 'District',
                 cityParameterValue: 'City',
             },
-            { lblname: 'Zip', controlType: 'textboxNumber', ngmodel: 'txtLandmark', maxLength: 8, parameterValue: 'Zip' },
+            { lblname: 'Zip', controlType: 'textboxNumberrestrict', ngmodel: 'txtspouseZip', maxLength: 8, parameterValue: 'Zip' },
             { lblname: 'Married on', controlType: 'date', ngmodel: 'txtMarriedon', parameterValueDate: 'Marriedon' },
             { lblname: 'Separated date', controlType: 'date', ngmodel: 'txtSeparateddate', parameterValueDate: 'Separateddate' },
             { lblname: 'Legally divorced', controlType: 'radio', ngmodel: 'rbtspousediverse', arrbind: 'boolType', parameterValue: 'Legallydivorced' },
@@ -16268,7 +16268,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblFathername\">{{item.FatherFirstName+\" \"+item.FatherLastName}}</span></h5>\r" +
+    "                                    <span id=\"lblFathername\" ng-show=\"item.FatherFirstName\">{{item.FatherFirstName+\" \"+item.FatherLastName}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -16856,6 +16856,20 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                </div>\r" +
     "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='textboxNumberrestrict'\" class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                    <input type=\"text\" ng-model=\"model[item.ngmodel]\" maxlength=\"{{item.maxLength}}\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)))\"\r" +
+    "\n" +
+    "                        class=\"form-control\" ng-required=\"item.required\" />\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "                <div ng-if=\"item.controlType==='textarea'\">\r" +
     "\n" +
     "                    <textarea ng-model=\"model[item.ngmodel]\" maxlength=\"500\" rows=\"4\" cols=\"20\" ng-required=\"item.required\" style=\"max-width:515px;width:100%;\"></textarea>\r" +
@@ -16896,11 +16910,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    </md-radio-group>\r" +
     "\n" +
-    "                    <!--<div ng-if=\"dynamicForm.$invalid && dynamicForm.$submitted\">\r" +
+    "                    <div ng-if=\"dynamicForm.$invalid && dynamicForm.$submitted\">\r" +
     "\n" +
     "                        <span style=\"color:red;\">This field is required</span>\r" +
     "\n" +
-    "                    </div>-->\r" +
+    "                    </div>\r" +
     "\n" +
     "                </md-input-container>\r" +
     "\n" +
@@ -18081,7 +18095,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                 debugger;
                 format = format || 'DD-MM-YYYY';
                 if (val !== undefined && val !== null && val !== '') {
-                    return moment(val).format();
+                    return moment(val, format).format();
                 } else {
                     return '';
                 }

@@ -11392,7 +11392,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblFathername\">{{item.FatherFirstName+\" \"+item.FatherLastName}}</span></h5>\r" +
+    "                                    <span id=\"lblFathername\" ng-show=\"item.FatherFirstName\">{{item.FatherFirstName+\" \"+item.FatherLastName}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -11980,6 +11980,20 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                </div>\r" +
     "\n" +
+    "\r" +
+    "\n" +
+    "                <div ng-if=\"item.controlType==='textboxNumberrestrict'\" class=\"pop_controls_right\">\r" +
+    "\n" +
+    "                    <input type=\"text\" ng-model=\"model[item.ngmodel]\" maxlength=\"{{item.maxLength}}\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)))\"\r" +
+    "\n" +
+    "                        class=\"form-control\" ng-required=\"item.required\" />\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
     "                <div ng-if=\"item.controlType==='textarea'\">\r" +
     "\n" +
     "                    <textarea ng-model=\"model[item.ngmodel]\" maxlength=\"500\" rows=\"4\" cols=\"20\" ng-required=\"item.required\" style=\"max-width:515px;width:100%;\"></textarea>\r" +
@@ -12020,11 +12034,11 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                    </md-radio-group>\r" +
     "\n" +
-    "                    <!--<div ng-if=\"dynamicForm.$invalid && dynamicForm.$submitted\">\r" +
+    "                    <div ng-if=\"dynamicForm.$invalid && dynamicForm.$submitted\">\r" +
     "\n" +
     "                        <span style=\"color:red;\">This field is required</span>\r" +
     "\n" +
-    "                    </div>-->\r" +
+    "                    </div>\r" +
     "\n" +
     "                </md-input-container>\r" +
     "\n" +

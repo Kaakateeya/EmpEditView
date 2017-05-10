@@ -173,7 +173,7 @@
                 districtParameterValue: 'District',
                 cityParameterValue: 'City',
             },
-            { lblname: 'Zip', controlType: 'textboxNumber', ngmodel: 'txtLandmark', maxLength: 8, parameterValue: 'Zip' },
+            { lblname: 'Zip', controlType: 'textboxNumberrestrict', ngmodel: 'txtspouseZip', maxLength: 8, parameterValue: 'Zip' },
             { lblname: 'Married on', controlType: 'date', ngmodel: 'txtMarriedon', parameterValueDate: 'Marriedon' },
             { lblname: 'Separated date', controlType: 'date', ngmodel: 'txtSeparateddate', parameterValueDate: 'Separateddate' },
             { lblname: 'Legally divorced', controlType: 'radio', ngmodel: 'rbtspousediverse', arrbind: 'boolType', parameterValue: 'Legallydivorced' },
