@@ -51,6 +51,7 @@ angular.module('ui.date', [])
                         debugger;
                         var date = controller.$viewValue;
                         if (date) {
+
                             var dateFormat = moment(date).format("DD-MM-YYYY");
                             // if (angular.isDefined(date) && date !== null && !angular.isDate(date) && date !== "") {
                             //    throw new Error('ng-Model value must be a Date object - currently it is a ' + typeof date + ' - use ui-date-format to convert it from a string');

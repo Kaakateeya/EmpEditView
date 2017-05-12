@@ -120,7 +120,8 @@ module.exports = function(grunt) {
                     '!common/directives/datePickerDirective.js',
                     '!common/directives/fileUploadDirective.js',
                     '!common/directives/multiSelectDirective.js',
-                    '!common/directives/accessibleForm.js'
+                    '!common/directives/accessibleForm.js',
+                    '!common/directives/uidate.js'
                 ],
                 dest: 'dist/src/main.js'
             },
