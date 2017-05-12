@@ -73,7 +73,7 @@
                                 <h6>
                                     <span id="Marriedon" font-bold="true">Married on</span></h6>
                                 <h5>
-                                    <span id="lblMarriedon">{{item.MarriageDate}}</span></h5>
+                                    <span id="lblMarriedon">{{item.MarriageDate | date:'dd-MM-yyyy'}}</span></h5>
 
                             </div>
 
@@ -86,7 +86,7 @@
                                     <span id="Separateddate" font-bold="true">Separated date</span></h6>
                                 <h5>
                                     <span id="lblSeparateddate">
-                                {{item.SeperatedDate}}</span></h5>
+                                {{item.SeperatedDate  | date:'dd-MM-yyyy'}}</span></h5>
 
                             </div>
 
@@ -124,7 +124,7 @@
                                 <h6>
                                     <span id="Dateoflegallydivorce" font-bold="true">Date of legally divorce</span></h6>
                                 <h5>
-                                    <span id="lblDateoflegallydivorce">{{item.DateofLegallDivorce}}</span></h5>
+                                    <span id="lblDateoflegallydivorce">{{item.DateofLegallDivorce   | date:'dd-MM-yyyy'}}</span></h5>
 
                             </div>
 

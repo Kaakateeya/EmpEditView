@@ -11230,7 +11230,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblMarriedon\">{{item.MarriageDate}}</span></h5>\r" +
+    "                                    <span id=\"lblMarriedon\">{{item.MarriageDate | date:'dd-MM-yyyy'}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -11256,7 +11256,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                    <span id=\"lblSeparateddate\">\r" +
     "\n" +
-    "                                {{item.SeperatedDate}}</span></h5>\r" +
+    "                                {{item.SeperatedDate  | date:'dd-MM-yyyy'}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -11332,7 +11332,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                                <h5>\r" +
     "\n" +
-    "                                    <span id=\"lblDateoflegallydivorce\">{{item.DateofLegallDivorce}}</span></h5>\r" +
+    "                                    <span id=\"lblDateoflegallydivorce\">{{item.DateofLegallDivorce   | date:'dd-MM-yyyy'}}</span></h5>\r" +
     "\n" +
     "\r" +
     "\n" +
@@ -11958,7 +11958,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-if=\"item.controlType==='textboxNumber'\" class=\"pop_controls_right select-box-my-double\">\r" +
     "\n" +
-    "                    <input type=\"text\" ng-model=\"model[item.ngmodel]\" maxlength=\"{{item.maxLength}}\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)))\"\r" +
+    "                    <input type=\"text\" ng-model=\"model[item.ngmodel]\" ng-change=\"model[item.method]();\" maxlength=\"{{item.maxLength}}\" onkeydown=\"return (((event.keyCode == 8) || (event.keyCode == 46) || (event.keyCode >= 35 && event.keyCode <= 40) || (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)))\"\r" +
     "\n" +
     "                        class=\"form-control\" ng-required=\"item.required\" />\r" +
     "\n" +
@@ -11974,11 +11974,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                        class=\"form-control\" ng-required=\"item.required\" />\r" +
     "\n" +
-    "\r" +
-    "\n" +
     "                </div>\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "                <div ng-if=\"item.controlType==='textarea'\">\r" +
     "\n" +

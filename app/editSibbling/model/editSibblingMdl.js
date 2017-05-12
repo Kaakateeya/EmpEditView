@@ -220,21 +220,21 @@
         };
 
 
-        model.ShousewiseChk = function(item) {
-            if (item.chksisProfession === true) {
-                item.txtsisProfession = 'HouseWife';
-            } else {
-                item.txtsisProfession = '';
-            }
-        };
+        // model.ShousewiseChk = function(item) {
+        //     if (item.chksisProfession === true) {
+        //         item.txtsisProfession = 'HouseWife';
+        //     } else {
+        //         item.txtsisProfession = '';
+        //     }
+        // };
 
-        model.BhousewiseChk = function(item) {
-            if (item.chkboxbrotherwifeprofession === true) {
-                item.txtbrotherwifeprofession = 'HouseWife';
-            } else {
-                item.txtbrotherwifeprofession = '';
-            }
-        };
+        // model.BhousewiseChk = function(item) {
+        //     if (item.chkboxbrotherwifeprofession === true) {
+        //         item.txtbrotherwifeprofession = 'HouseWife';
+        //     } else {
+        //         item.txtbrotherwifeprofession = '';
+        //     }
+        // };
 
         model.checkVal = function(val) {
             return (val !== '' && val !== undefined) ? val : 0;
@@ -408,9 +408,12 @@
         };
 
 
-
-
-
+        model.showHousewifespouse = function(val) {
+            return model.chkspousehousewife === true ? false : true;
+        };
+        model.showHousewifeSis = function(val) {
+            return model.chksishousewife === true ? false : true;
+        };
 
         model.noOfSibblings = [
             { lblname: 'No of Brothers', controlType: 'select', ngmodel: 'noOfBorthersId', ownArray: 'sibCountsBindArr', parameterValue: 'NoOfBrothers' },
@@ -455,8 +458,8 @@
             { lblname: 'Spouse Education', controlType: 'textbox', ngmodel: 'spouseEducation', parameterValue: 'BrowifeEducationDetails', parentDependecy: 'ismarried' },
             { lblname: 'Profession Category', controlType: 'select', ngmodel: 'spouseProfCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'BroSpouseProfessionCategoryID', parentDependecy: 'ismarried' },
             { lblname: 'Spouse Designation', controlType: 'housewife', ngmodelText: 'spouseDesignation', ngmodelChk: 'chkspousehousewife', parameterValueText: 'BroWifeProfessionDetails', parameterValueChk: 'MotherProfessiondetails', parentDependecy: 'ismarried' },
-            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'spouseCompany', parameterValue: 'BroWifeCompanyName', parentDependecy: 'ismarried' },
-            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'spouseJobLocation', parameterValue: 'BroWifeJobLocation', parentDependecy: 'ismarried' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'spouseCompany', parameterValue: 'BroWifeCompanyName', parentDependecy: 'ismarried', parentDependecy: 'showHousewifespouse' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'spouseJobLocation', parameterValue: 'BroWifeJobLocation', parentDependecy: 'ismarried', parentDependecy: 'showHousewifespouse' },
             {
                 controlType: 'contact',
                 emailhide: true,
@@ -502,8 +505,8 @@
             { lblname: 'Education', controlType: 'textbox', ngmodel: 'sisEducation', parameterValue: 'siseducationdetails' },
             { lblname: 'Profession Category', controlType: 'select', ngmodel: 'sisProfessionCatgory', typeofdata: 'newProfessionCatgory', parameterValue: 'SisProfessionCategoryID' },
             { lblname: 'Designationt', controlType: 'housewife', ngmodelText: 'sisDesignation', ngmodelChk: 'chksishousewife', parameterValueText: 'sisprofessiondetails' },
-            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'sisComapnyName', parameterValue: 'SisCompanyName' },
-            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'sisJobLocation', parameterValue: 'SisJobLocation' },
+            { lblname: 'Company Name', controlType: 'textbox', ngmodel: 'sisComapnyName', parameterValue: 'SisCompanyName', parentDependecy: 'showHousewifeSis' },
+            { lblname: 'Job Location', controlType: 'textbox', ngmodel: 'sisJobLocation', parameterValue: 'SisJobLocation', parentDependecy: 'showHousewifeSis' },
             {
                 controlType: 'contact',
                 emailhide: true,
