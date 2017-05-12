@@ -14,8 +14,6 @@
                 <label class="col-lg-12" ng-class="item.classname" ng-if="item.controlType==='bindHtml'">
                <span ng-bind-html="item.html"></span>
                 </label>
-
-
                 <div ng-if="!item.dataSource && item.controlType==='select'" class="pop_controls_right select-box-my input-group">
                     <select multiselectdropdown ng-model="model[item.ngmodel]" typeofdata="item.typeofdata" ng-required="item.required" ng-change="ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)"></select>
                 </div>
@@ -72,8 +70,8 @@
                     </md-checkbox>
                 </div>
                 <div ng-if="item.controlType==='date'" class="pop_controls_right">
-                    <!--<custom-datepickeredit ng-model="model[item.ngmodel]" ngClass="'dateclass'" date-options="dateOptions"></custom-datepickeredit>-->
-                    <date-picker strdate="model[item.ngmodel]"></date-picker>
+                    <custom-datepickeredit ng-model="model[item.ngmodel]" ngClass="'dateclass'" date-options="dateOptions"></custom-datepickeredit>
+                    <!--<date-picker strdate="model[item.ngmodel]"></date-picker>-->
                 </div>
                 <div ng-if="item.controlType==='country'">
                     <country-directive require="item.require" countryshow="item.countryshow" cityshow="item.cityshow" othercity="item.othercity" dcountry="model[item.dcountry]" dstate="model[item.dstate]" ddistrict="model[item.ddistrict]" dcity="model[item.dcity]" strothercity="model[item.strothercity]"></country-directive>

@@ -27,7 +27,7 @@
                 modalpopupopen.close();
             },
             listSelectedVal: function(val) {
-                debugger;
+
                 var str = null;
                 if (val !== undefined && val !== null && val !== '') {
                     if (angular.isString(val)) {
@@ -211,10 +211,10 @@
                 return (val !== undefined && val !== null && val !== '') ? true : false;
             },
             convertDateFormat: function(val, format) {
-                debugger;
+
                 format = format || 'DD-MM-YYYY';
                 if (val !== undefined && val !== null && val !== '') {
-                    return moment(val, format).format();
+                    return moment(val).format(format);
                 } else {
                     return '';
                 }

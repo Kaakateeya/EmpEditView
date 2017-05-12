@@ -334,8 +334,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             editAstroService.generateHoroscope(inputobj).then(function(response) {
                 console.log(response);
                 if (commonFactory.checkvals(response.data.AstroGeneration)) {
+                    // s3obj = { Path: response.data.Path, KeyName: response.data.KeyName };
+                    s3obj = { Path: 'C:\\inetpub\\wwwroot\\access\\Images\\HoroscopeImages\\91022_HaroscopeImage\\91022_HaroscopeImage.html', KeyName: response.data.KeyName };
 
-                    s3obj = { Path: response.data.Path, KeyName: response.data.KeyName };
                     window.open('' + response.data.AstroGeneration + '', '_blank');
                     commonFactory.closepopup();
                     commonFactory.open('RefreshPopup.html', model.scope, uibModal);
@@ -398,6 +399,9 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         model.generatedhoroS3Upload = function() {
             console.log('s3obj');
             console.log(s3obj);
+            //
+
+            // s3obj.Path = s3obj.Path.replace('C:\\inetpub\\wwwroot\\access\\', 'http:\\e.kaakateeya.com\\access\\');
             editAstroService.GenerateHoroS3(s3obj).then(function(response) {
                 console.log(response);
             });
@@ -476,7 +480,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
             },
 
             GenerateHoroS3: function(obj) {
-                return http.get(editviewapp.apipath + 'CustomerPersonalUpdate/getAstroGenerationS3Update', { params: { Path: JSON.stringify(obj.Path), KeyName: JSON.stringify(obj.KeyName) } });
+                return http.get(editviewapp.apipath + 'CustomerPersonalUpdate/getAstroGenerationS3Update', { params: { Path: (obj.Path), KeyName: (obj.KeyName) } });
             }
 
         };
@@ -1135,12 +1139,11 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                         model.profCityId = item.CityID;
                         // model.profTxtcity = item.CityWorkingIn;
                         debugger;
-                        model.WorkingForm = commonFactory.convertDateFormat(item.WorkingFromDate, 'DD-MM-YYYY');
+                        model.WorkingForm = item.WorkingFromDate;
                         model.visaStatus = item.VisaTypeID;
-                        model.sinceDate = commonFactory.convertDateFormat(item.ResidingSince, 'DD-MM-YYYY');
-                        model.arrivalDate = commonFactory.convertDateFormat(item.ArrivingDate, 'DD-MM-YYYY');
-
-                        model.departureDate = commonFactory.convertDateFormat(item.DepartureDate, 'DD-MM-YYYY');
+                        model.sinceDate = item.ResidingSince;
+                        model.arrivalDate = item.ArrivingDate;
+                        model.departureDate = item.DepartureDate;
                         model.occupationDetails = item.OccupationDetails;
                         model.Cust_Profession_ID = item.Cust_Profession_ID;
                     }
@@ -1168,7 +1171,8 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                         model.surName = item.LastName;
                         model.name = item.FirstName;
                         model.maritalStatusId = item.MaritalStatusID;
-                        model.dob = commonFactory.convertDateFormat(item.DateofBirthwithoutAge, 'DD-MM-YYYY');
+
+                        model.dob = item.DateofBirthwithoutAge;
                         model.heightId = item.HeightID;
                         model.complexionId = item.ComplexionID;
                         model.religionId = item.ReligionID;
@@ -4592,7 +4596,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                         model.Cust_Children_ID = item.Cust_Children_ID;
                         model.txtchildname = item.ChildName;
                         model.rdlgenderchild = item.ChildGender;
-                        model.txtdobchild = commonFactory.convertDateFormat(item.ChildDOB, 'DD-MM-YYYY');
+                        model.txtdobchild = item.ChildDOB;
                         model.rbtChildstayingWith = item.ChildStayingWithID;
                         model.ddlrelation = item.ChildStayingWithRelation;
                         commonFactory.open('modelContent.html', model.scope, uibModal);
@@ -9003,10 +9007,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "                                    <h6>\r" +
@@ -9030,12 +9030,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\r" +
     "\n" +
     "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
@@ -16816,10 +16810,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                </label>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "                <div ng-if=\"!item.dataSource && item.controlType==='select'\" class=\"pop_controls_right select-box-my input-group\">\r" +
     "\n" +
     "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" typeofdata=\"item.typeofdata\" ng-required=\"item.required\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
@@ -16932,9 +16922,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-if=\"item.controlType==='date'\" class=\"pop_controls_right\">\r" +
     "\n" +
-    "                    <!--<custom-datepickeredit ng-model=\"model[item.ngmodel]\" ngClass=\"'dateclass'\" date-options=\"dateOptions\"></custom-datepickeredit>-->\r" +
+    "                    <custom-datepickeredit ng-model=\"model[item.ngmodel]\" ngClass=\"'dateclass'\" date-options=\"dateOptions\"></custom-datepickeredit>\r" +
     "\n" +
-    "                    <date-picker strdate=\"model[item.ngmodel]\"></date-picker>\r" +
+    "                    <!--<date-picker strdate=\"model[item.ngmodel]\"></date-picker>-->\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -17908,7 +17898,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                 modalpopupopen.close();
             },
             listSelectedVal: function(val) {
-                debugger;
+
                 var str = null;
                 if (val !== undefined && val !== null && val !== '') {
                     if (angular.isString(val)) {
@@ -18092,10 +18082,10 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                 return (val !== undefined && val !== null && val !== '') ? true : false;
             },
             convertDateFormat: function(val, format) {
-                debugger;
+
                 format = format || 'DD-MM-YYYY';
                 if (val !== undefined && val !== null && val !== '') {
-                    return moment(val, format).format();
+                    return moment(val).format(format);
                 } else {
                     return '';
                 }
@@ -18748,8 +18738,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
                     } else if (item.controlType === 'astroTimeOfBirth') {
                         parameters.TimeofBirth = scope.model.ddlFromHours + ":" + scope.model.ddlFromMinutes + ":" + scope.model.ddlFromSeconds;
                     } else if (item.controlType === 'date') {
-                        parameters[item.parameterValueDate] = scope.model[item.ngmodel];
-                        // scope.model[item.ngmodel] !== '' && scope.model[item.ngmodel] !== 'Invalid date' ? filter('date')(scope.model[item.ngmodel], 'yyyy-MM-dd') : '';
+                        debugger;
+                        //parameters[item.parameterValueDate] = scope.model[item.ngmodel];
+                        parameters[item.parameterValueDate] = scope.model[item.ngmodel] !== '' && scope.model[item.ngmodel] !== 'Invalid date' ? filter('date')(scope.model[item.ngmodel], 'yyyy-MM-dd') : '';
                     }
                 });
 
@@ -18849,11 +18840,15 @@ angular.module('ui.date', [])
 
                     // Update the date picker when the model changes
                     controller.$render = function() {
+                        debugger;
                         var date = controller.$viewValue;
-                        // if (angular.isDefined(date) && date !== null && !angular.isDate(date) && date !== "") {
-                        //    throw new Error('ng-Model value must be a Date object - currently it is a ' + typeof date + ' - use ui-date-format to convert it from a string');
-                        // }
-                        element.datepicker("setDate", date);
+                        if (date) {
+                            var dateFormat = moment(date).format("DD-MM-YYYY");
+                            // if (angular.isDefined(date) && date !== null && !angular.isDate(date) && date !== "") {
+                            //    throw new Error('ng-Model value must be a Date object - currently it is a ' + typeof date + ' - use ui-date-format to convert it from a string');
+                            // }
+                            element.datepicker("setDate", dateFormat);
+                        }
                     };
                 }
                 // If we don't destroy the old one it doesn't update properly when the config changes

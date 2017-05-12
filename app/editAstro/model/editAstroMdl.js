@@ -227,8 +227,9 @@
             editAstroService.generateHoroscope(inputobj).then(function(response) {
                 console.log(response);
                 if (commonFactory.checkvals(response.data.AstroGeneration)) {
+                    // s3obj = { Path: response.data.Path, KeyName: response.data.KeyName };
+                    s3obj = { Path: 'C:\\inetpub\\wwwroot\\access\\Images\\HoroscopeImages\\91022_HaroscopeImage\\91022_HaroscopeImage.html', KeyName: response.data.KeyName };
 
-                    s3obj = { Path: response.data.Path, KeyName: response.data.KeyName };
                     window.open('' + response.data.AstroGeneration + '', '_blank');
                     commonFactory.closepopup();
                     commonFactory.open('RefreshPopup.html', model.scope, uibModal);
@@ -291,6 +292,9 @@
         model.generatedhoroS3Upload = function() {
             console.log('s3obj');
             console.log(s3obj);
+            //
+
+            // s3obj.Path = s3obj.Path.replace('C:\\inetpub\\wwwroot\\access\\', 'http:\\e.kaakateeya.com\\access\\');
             editAstroService.GenerateHoroS3(s3obj).then(function(response) {
                 console.log(response);
             });

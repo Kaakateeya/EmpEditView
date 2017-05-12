@@ -142,12 +142,11 @@
                         model.profCityId = item.CityID;
                         // model.profTxtcity = item.CityWorkingIn;
                         debugger;
-                        model.WorkingForm = commonFactory.convertDateFormat(item.WorkingFromDate, 'DD-MM-YYYY');
+                        model.WorkingForm = item.WorkingFromDate;
                         model.visaStatus = item.VisaTypeID;
-                        model.sinceDate = commonFactory.convertDateFormat(item.ResidingSince, 'DD-MM-YYYY');
-                        model.arrivalDate = commonFactory.convertDateFormat(item.ArrivingDate, 'DD-MM-YYYY');
-
-                        model.departureDate = commonFactory.convertDateFormat(item.DepartureDate, 'DD-MM-YYYY');
+                        model.sinceDate = item.ResidingSince;
+                        model.arrivalDate = item.ArrivingDate;
+                        model.departureDate = item.DepartureDate;
                         model.occupationDetails = item.OccupationDetails;
                         model.Cust_Profession_ID = item.Cust_Profession_ID;
                     }
@@ -175,7 +174,8 @@
                         model.surName = item.LastName;
                         model.name = item.FirstName;
                         model.maritalStatusId = item.MaritalStatusID;
-                        model.dob = commonFactory.convertDateFormat(item.DateofBirthwithoutAge, 'DD-MM-YYYY');
+
+                        model.dob = item.DateofBirthwithoutAge;
                         model.heightId = item.HeightID;
                         model.complexionId = item.ComplexionID;
                         model.religionId = item.ReligionID;

@@ -83,7 +83,7 @@
                         model.Cust_Children_ID = item.Cust_Children_ID;
                         model.txtchildname = item.ChildName;
                         model.rdlgenderchild = item.ChildGender;
-                        model.txtdobchild = commonFactory.convertDateFormat(item.ChildDOB, 'DD-MM-YYYY');
+                        model.txtdobchild = item.ChildDOB;
                         model.rbtChildstayingWith = item.ChildStayingWithID;
                         model.ddlrelation = item.ChildStayingWithRelation;
                         commonFactory.open('modelContent.html', model.scope, uibModal);

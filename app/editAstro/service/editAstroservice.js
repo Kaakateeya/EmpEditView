@@ -17,7 +17,7 @@
             },
 
             GenerateHoroS3: function(obj) {
-                return http.get(editviewapp.apipath + 'CustomerPersonalUpdate/getAstroGenerationS3Update', { params: { Path: JSON.stringify(obj.Path), KeyName: JSON.stringify(obj.KeyName) } });
+                return http.get(editviewapp.apipath + 'CustomerPersonalUpdate/getAstroGenerationS3Update', { params: { Path: (obj.Path), KeyName: (obj.KeyName) } });
             }
 
         };

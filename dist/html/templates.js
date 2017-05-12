@@ -4127,10 +4127,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "                                <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
     "                                    <h6>\r" +
@@ -4154,12 +4150,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\r" +
     "\n" +
     "                            </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
     "\n" +
     "                            <div class=\"edit_page_details_item_desc clearfix\">\r" +
     "\n" +
@@ -11940,10 +11930,6 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                </label>\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "\r" +
-    "\n" +
     "                <div ng-if=\"!item.dataSource && item.controlType==='select'\" class=\"pop_controls_right select-box-my input-group\">\r" +
     "\n" +
     "                    <select multiselectdropdown ng-model=\"model[item.ngmodel]\" typeofdata=\"item.typeofdata\" ng-required=\"item.required\" ng-change=\"ddlChange(model[item.ngmodel],model[item.secondParent],item.childName,item.changeApi)\"></select>\r" +
@@ -12056,9 +12042,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-if=\"item.controlType==='date'\" class=\"pop_controls_right\">\r" +
     "\n" +
-    "                    <!--<custom-datepickeredit ng-model=\"model[item.ngmodel]\" ngClass=\"'dateclass'\" date-options=\"dateOptions\"></custom-datepickeredit>-->\r" +
+    "                    <custom-datepickeredit ng-model=\"model[item.ngmodel]\" ngClass=\"'dateclass'\" date-options=\"dateOptions\"></custom-datepickeredit>\r" +
     "\n" +
-    "                    <date-picker strdate=\"model[item.ngmodel]\"></date-picker>\r" +
+    "                    <!--<date-picker strdate=\"model[item.ngmodel]\"></date-picker>-->\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
