@@ -10,13 +10,13 @@
 var editviewapp = angular.module('KaakateeyaEmpEdit', ['ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'ngIdle', 'ngMaterial',
     'ngMessages', 'ngAria', 'ngPassword', 'jcs-autoValidate', 'angularPromiseButtons', 'oc.lazyLoad', 'ngMdIcons', 'ui.date'
 ]);
-editviewapp.apipath = 'http://183.82.0.58:8025/Api/';
+editviewapp.apipath = 'http://52.66.131.254:8025/Api/';
 editviewapp.apipathold = 'http://183.82.0.58:8010/Api/';
 editviewapp.env = 'dev';
 
 editviewapp.GlobalImgPath = 'http://d16o2fcjgzj2wp.cloudfront.net/';
 ///editviewapp.GlobalImgPathforimage = 'https://s3.ap-south-1.amazonaws.com/kaakateeyaprod/';
-editviewapp.GlobalImgPathforimage = 'https://s3.ap-south-1.amazonaws.com/angularkaknew/';
+editviewapp.GlobalImgPathforimage = 'https://s3.ap-south-1.amazonaws.com/kaakateeyaprod/';
 editviewapp.prefixPath = 'Images/ProfilePics/';
 editviewapp.S3PhotoPath = '';
 editviewapp.Mnoimage = editviewapp.GlobalImgPath + "Images/customernoimages/Mnoimage.jpg";
