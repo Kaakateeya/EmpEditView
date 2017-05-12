@@ -12038,9 +12038,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-if=\"item.controlType==='date'\" class=\"pop_controls_right\">\r" +
     "\n" +
-    "                    <custom-datepickeredit ng-model=\"model[item.ngmodel]\" ngClass=\"'dateclass'\" date-options=\"dateOptions\"></custom-datepickeredit>\r" +
+    "                    <!--<custom-datepickeredit ng-model=\"model[item.ngmodel]\" ngClass=\"'dateclass'\" date-options=\"dateOptions\"></custom-datepickeredit>-->\r" +
     "\n" +
-    "                    <!--<date-picker strdate=\"model[item.ngmodel]\"></date-picker>-->\r" +
+    "                    <date-picker strdate=\"model[item.ngmodel]\"></date-picker>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +

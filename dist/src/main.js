@@ -1139,11 +1139,11 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                         model.profCityId = item.CityID;
                         // model.profTxtcity = item.CityWorkingIn;
                         debugger;
-                        model.WorkingForm = item.WorkingFromDate;
+                        model.WorkingForm = commonFactory.convertDateFormat(item.WorkingFromDate, 'DD-MM-YYYY');
                         model.visaStatus = item.VisaTypeID;
-                        model.sinceDate = item.ResidingSince;
-                        model.arrivalDate = item.ArrivingDate;
-                        model.departureDate = item.DepartureDate;
+                        model.sinceDate = commonFactory.convertDateFormat(item.ResidingSince, 'DD-MM-YYYY');
+                        model.arrivalDate = commonFactory.convertDateFormat(item.ArrivingDate, 'DD-MM-YYYY');
+                        model.departureDate = commonFactory.convertDateFormat(item.DepartureDate, 'DD-MM-YYYY');
                         model.occupationDetails = item.OccupationDetails;
                         model.Cust_Profession_ID = item.Cust_Profession_ID;
                     }
@@ -1171,8 +1171,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                         model.surName = item.LastName;
                         model.name = item.FirstName;
                         model.maritalStatusId = item.MaritalStatusID;
-
-                        model.dob = item.DateofBirthwithoutAge;
+                        model.dob = commonFactory.convertDateFormat(item.DateofBirthwithoutAge, 'DD-MM-YYYY');
                         model.heightId = item.HeightID;
                         model.complexionId = item.ComplexionID;
                         model.religionId = item.ReligionID;
@@ -4576,10 +4575,10 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                         model.ddlspouseDistrict = item.District;
                         model.ddlspouseCity = item.City;
                         model.txtspouseZip = item.Zip;
-                        model.txtMarriedon = item.MarriageDate;
-                        model.txtSeparateddate = item.SeperatedDate;
+                        model.txtMarriedon = commonFactory.convertDateFormat(item.MarriageDate, 'DD-MM-YYYY');
+                        model.txtSeparateddate = commonFactory.convertDateFormat(item.SeperatedDate, 'DD-MM-YYYY');
                         model.rbtspousediverse = item.LeagallyDivorceID;
-                        model.txtLegalDivorsedate = item.DateofLegallDivorce;
+                        model.txtLegalDivorsedate = commonFactory.convertDateFormat(item.DateofLegallDivorce, 'DD-MM-YYYY');
                         model.txtspousefather = item.FatherFirstName;
                         model.txtspouselastname = item.FatherLastName;
                         model.txtpreviousmarriage = item.ReasonforDivorce;
@@ -4599,7 +4598,7 @@ editviewapp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                         model.Cust_Children_ID = item.Cust_Children_ID;
                         model.txtchildname = item.ChildName;
                         model.rdlgenderchild = item.ChildGender;
-                        model.txtdobchild = item.ChildDOB;
+                        model.txtdobchild = commonFactory.convertDateFormat(item.ChildDOB, 'DD-MM-YYYY');
                         model.rbtChildstayingWith = item.ChildStayingWithID;
                         model.ddlrelation = item.ChildStayingWithRelation;
                         commonFactory.open('modelContent.html', model.scope, uibModal);
@@ -16921,9 +16920,9 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
     "\n" +
     "                <div ng-if=\"item.controlType==='date'\" class=\"pop_controls_right\">\r" +
     "\n" +
-    "                    <custom-datepickeredit ng-model=\"model[item.ngmodel]\" ngClass=\"'dateclass'\" date-options=\"dateOptions\"></custom-datepickeredit>\r" +
+    "                    <!--<custom-datepickeredit ng-model=\"model[item.ngmodel]\" ngClass=\"'dateclass'\" date-options=\"dateOptions\"></custom-datepickeredit>-->\r" +
     "\n" +
-    "                    <!--<date-picker strdate=\"model[item.ngmodel]\"></date-picker>-->\r" +
+    "                    <date-picker strdate=\"model[item.ngmodel]\"></date-picker>\r" +
     "\n" +
     "                </div>\r" +
     "\n" +
@@ -18084,7 +18083,7 @@ angular.module('KaakateeyaEmpEdit').run(['$templateCache', function($templateCac
 
                 format = format || 'DD-MM-YYYY';
                 if (val !== undefined && val !== null && val !== '') {
-                    return moment(val).format(format);
+                    return moment(val, format).format();
                 } else {
                     return '';
                 }

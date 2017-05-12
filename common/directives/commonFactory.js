@@ -214,7 +214,7 @@
 
                 format = format || 'DD-MM-YYYY';
                 if (val !== undefined && val !== null && val !== '') {
-                    return moment(val).format(format);
+                    return moment(val, format).format();
                 } else {
                     return '';
                 }

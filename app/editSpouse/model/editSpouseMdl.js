@@ -60,10 +60,10 @@
                         model.ddlspouseDistrict = item.District;
                         model.ddlspouseCity = item.City;
                         model.txtspouseZip = item.Zip;
-                        model.txtMarriedon = item.MarriageDate;
-                        model.txtSeparateddate = item.SeperatedDate;
+                        model.txtMarriedon = commonFactory.convertDateFormat(item.MarriageDate, 'DD-MM-YYYY');
+                        model.txtSeparateddate = commonFactory.convertDateFormat(item.SeperatedDate, 'DD-MM-YYYY');
                         model.rbtspousediverse = item.LeagallyDivorceID;
-                        model.txtLegalDivorsedate = item.DateofLegallDivorce;
+                        model.txtLegalDivorsedate = commonFactory.convertDateFormat(item.DateofLegallDivorce, 'DD-MM-YYYY');
                         model.txtspousefather = item.FatherFirstName;
                         model.txtspouselastname = item.FatherLastName;
                         model.txtpreviousmarriage = item.ReasonforDivorce;
@@ -83,7 +83,7 @@
                         model.Cust_Children_ID = item.Cust_Children_ID;
                         model.txtchildname = item.ChildName;
                         model.rdlgenderchild = item.ChildGender;
-                        model.txtdobchild = item.ChildDOB;
+                        model.txtdobchild = commonFactory.convertDateFormat(item.ChildDOB, 'DD-MM-YYYY');
                         model.rbtChildstayingWith = item.ChildStayingWithID;
                         model.ddlrelation = item.ChildStayingWithRelation;
                         commonFactory.open('modelContent.html', model.scope, uibModal);
